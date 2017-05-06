@@ -4,10 +4,6 @@ use projeto\helpers\Html;
 use yii\helpers\Url;
 use app\models\VisAtributosValores;
 
-$arrCodUsr = explode('|', VisAtributosValores::getDescrOpcao(
-	VisAtributosValores::getTupla('cod-usuario-problema-javascript','cod-usuario'))[0]
-);
-
 ?>
 
 <?php
@@ -20,11 +16,3 @@ if ($m) {
     echo "</footer>";
 }
 ?>
-
-<?php if (!in_array($this->user->id, $arrCodUsr)): ?>
-	<?= \mgcode\sessionWarning\widgets\SessionWarningWidget::widget([
-		'logoutUrl' => Url::to(['/sair']), //  if is set, logout button will be shown before Continue button. Default: null
-		'extendUrl' => Url::to(['/session-warning/extend']), // url where ajax request is sent, when continue button is clicked. Default: ['/session-warning/extend']
-		'warnBefore' => 300, // time in seconds before user is warned about expiring session. Default: 300 (5min)
-	]); ?>
-<?php endif ?>

@@ -43,7 +43,7 @@ class RlcUsuariosPerfis extends \projeto\db\ActiveRecord
             [['txt_login_inclusao'], 'string', 'max' => 150],
             [['txt_sessao'], 'string', 'max' => 40],
             [['txt_tipo_login'], 'string', 'max' => 1],
-            [['cod_usuario_fk', 'cod_perfil_fk'], 'unique', 'targetAttribute' => ['cod_usuario_fk', 'cod_perfil_fk'], 'message' => 'The combination of Cod Usuario Fk and Cod Perfil Fk has already been taken.']
+            [['cod_usuario_fk', 'cod_perfil_fk'], 'unique', 'targetAttribute' => ['cod_usuario_fk', 'cod_perfil_fk'], 'message' => 'The combination of Chave estrangeira da tabela TAB_USUARIOS and Chave estrangeira da tabela TAB_PERFIL has already been taken.']
         ];
     }
 
@@ -53,9 +53,9 @@ class RlcUsuariosPerfis extends \projeto\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'cod_usuario_perfil' => 'Cod Usuario Perfil',
-            'cod_usuario_fk' => 'Cod Usuario Fk',
-            'cod_perfil_fk' => 'Cod Perfil Fk',
+            'cod_usuario_perfil' => 'Chave Primaria',
+            'cod_usuario_fk' => 'Chave estrangeira da tabela TAB_USUARIOS',
+            'cod_perfil_fk' => 'Chave estrangeira da tabela TAB_PERFIL',
             'txt_login_inclusao' => 'Usuário da Inclusão',
             'dte_inclusao' => 'Data da Inclusão',
             'dte_alteracao' => 'Data da Alteração',

@@ -1,117 +1,270 @@
 <?php
 
-use yii\helpers\Url;
-use \projeto\helpers\Html;
-use yii\bootstrap\Modal;
-use app\models\TabParametrosSearch;
-use \app\modules\admin\models\TabModulos;
+use yii\helpers\Html;
+use app\components\MenuLateralModuloWidget;
+use yii\jui\Accordion;
 
-$modulosPorlinha = 3;
-$contadorModulos = 0;
 
-$bloqueadoInterno=[];
-$bloqueadoExterno=[];
-$totBloqueados=0;
-foreach ($modulos as $modulo) {
-	$bloqueadoInterno[$modulo['modulo_id']] = \projeto\base\Module::isModuloBloqueadoAcessoInterno($modulo['modulo_id'], $modulo['cod_usuario_fk']);
-	$bloqueadoExterno[$modulo['modulo_id']] = \projeto\base\Module::isModuloBloqueadoAcessoExterno($modulo['modulo_id'], $modulo['cod_usuario_fk']);
-	
-	if ($bloqueadoInterno[$modulo['modulo_id']]) {
-		$totBloqueados++;
-	}
-	if ($bloqueadoExterno[$modulo['modulo_id']]) {
-		$totBloqueados++;
-	}
-}
-
+$this->params['breadcrumbs'][] = $this->title;
 ?>
+<div class="row">
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-aqua">
+            <div class="inner">
+              <h3>150</h3>
 
+              <p>New Orders</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-bag"></i>
+            </div>
+            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-green">
+            <div class="inner">
+              <h3>53<sup style="font-size: 20px">%</sup></h3>
 
-<?php ## se primeiro acesso do usuario com perfil administrador prestador mostra modal para cadastro de usuario ## ?>
-<?php if (Yii::$app->user->identity->qtd_acesso <= 1 && $txt_perfil_prestador == 1): ?>
-	<?= $this->render('_pergunta_novo_usuario') ?>
-<?php endif; ?>
+              <p>Bounce Rate</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-stats-bars"></i>
+            </div>
+            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-yellow">
+            <div class="inner">
+              <h3>44</h3>
 
-<div class="site-index">
+              <p>User Registrations</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-person-add"></i>
+            </div>
+            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-red">
+            <div class="inner">
+              <h3>65</h3>
 
-	<?php if ($totBloqueados > 0): ?>
-		<div class="alert alert-warning">
-			ATENÇÃO: os módulos abaixo destacados em vermelho se encontram bloqueados para acesso
-		</div>
-	<?php endif ?>
-	
-    <div class="box box-default">
-		<div class="box-header with-border">
-			<?= Html::icon('info-sign') ?>
-            Veja abaixo os módulos que você poderá acessar. 
-            Clique sobre o módulo para obter maiores informações 
-            e também acessar os seus formulários e funcionalidades.
-		</div>
-		<div class="box-body">
-			<div>
-				<div class="row">
-					<?php if (!$modulos || !$modulos[0]['cod_perfil_fk']): ?>
-						<div class="alert alert-info" role="alert">Nenhum módulo disponível para o seu usuário.</div>
-					<?php else: ?>
-						<?php foreach ($modulos as $modulo): ?>
-							<div class="col-md-4 ">
-								<div class="caixa-modulo caixa-modulo-<?= $modulo['modulo_id'] ?>">
-									<div class="box box-danger">
-										<div class="box-header with-border text-center">
-											<?php if ($bloqueadoInterno[$modulo['modulo_id']] || $bloqueadoExterno[$modulo['modulo_id']]): ?>
-												<?= $modulo['nome_modulo'] ?>
-											<?php else: ?>
-												<?= Html::a($modulo['nome_modulo'], Url::toRoute($modulo['modulo_url']), ['style' => ['display' => 'block']]) ?>
-											<?php endif ?>
-										</div>
-										<div class="box-body text-center">
-											<?php
-											$img = Html::img($modulo['modulo_icone'], [
-													'width'	 => '80px',
-													'class'	 => 'img-circle',
-													'height' => '80px',
-												])
-											?>
-											<?php if ($bloqueadoInterno[$modulo['modulo_id']] || $bloqueadoExterno[$modulo['modulo_id']]): ?>
-												<?= Html::a($img, 'javascript://;', ['style' => ['display' => 'block', 'cursor' => 'default']]) ?>
-												<span style="color:red">
-													Módulo bloqueado para acesso 
-													<?php if ($bloqueadoInterno[$modulo['modulo_id']]): ?>interno<?php endif ?>
-													<?php if ($bloqueadoExterno[$modulo['modulo_id']]): ?>externo<?php endif ?>
-												</span>
-											<?php else: ?>
-												<?= Html::a($img, Url::toRoute($modulo['modulo_url']), ['style' => ['display' => 'block']]) ?>
-											<?php endif ?>
-										</div>
-										<div class="box-footer text-center">
-											<?= $modulo['dsc_modulo'] ?>
-										</div>
-										<div class="box-footer text-center">
-                                            <?php
-                                            $m = app\modules\admin\models\TabModulosSearch::getEquipeModuloId($modulo['modulo_id']);
-                                            if ($m) {
-                                                echo "<p><b>{$m['txt_equipe']}</b></p>";
-                                                echo "<p><i class='fa fa-envelope'></i> " . Html::a($m['txt_email_equipe'], 'mailto:' . $m['txt_email_equipe'] . '') . "</p>";
-                                                echo "<p>" . Html::icon('phone-alt', $m['num_fones_equipe']) . "</p>";
-                                            }
-                                            ?>
-										</div>
-									</div>
-								</div>
+              <p>Unique Visitors</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-pie-graph"></i>
+            </div>
+            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <!-- ./col -->
+      </div>
 
-							</div>
-							<?php $contadorModulos++; ?>
-							<?php if ($contadorModulos == $modulosPorlinha): ?>
-								<?php $contadorModulos = 0; ?>
-								</div>
-								<div class="row">
-							<?php endif; ?>
+<?php
+echo yii\bootstrap\Collapse::widget( [
+	'id'	 => 'box' ,
+	'items' => [
+		//DICA
+		[
+			'label'		 => "<i class='fa fa-info-circle'></i> Dicas de como proceder no Controle de Acesso" ,
+			'content'	 =>
+			['<p>
+							O módulo é responsável pelo controle de acesso dos usuários. 
+							Através dele é possível gerenciar todos os Módulos, os Perfis, os Menus, as Ações, as Funcionalidades
+							, os Usuários (que podem ser classificados em MCidades e Prestadores, ou internos e externos). 
+							Este módulo tem o objetivo de proporcionar um melhor gerenciamento dos responsáveis pelo sistema 
+							sem a intervenção da equipe de Tecnologia da Informação e permitir total segurança das informações e facilitar a rastreabilidade das 
+							ações realizadas.
+						</p>'
+			] ,
+			'encode'	 => false,
+			'contentOptions' => ['class' => 'in'] ,
+		// open its content by default
+		] ,
+		
+		//MODULO
+		[
+			'label'		 => "<h5>
+<strong style='color: #DD4B39'>Módulos:</strong> Esta é a principal funcionalidade deste módulo, pois é por meio dela que as informações de perfis, menus, 
+					ações, funcionalidades e usuários são vinculados.</h5>" ,
+			'content'	 =>
+			['<b><i>1 - Consultar:</i></b> Apresenta os módulos cadastrados com a opção de consulta. Para consultar 
+								informe valor para cada coluna apresentada. Nesta página estão disponíveis as opções de incluir, 
+								exibir, alterar, excluir, cadastrar perfil, cadastrar menu e cadastrar funcionalidade.' ,
+				'<b><i>2 - Incluir e Alterar:</i></b> Informe valores para os campos obrigatórios e uma imagem que represente o módulo. 
+								Esta imagem será salva e apresentada posteriormente na página inicial e no menu lateral direito para 
+								possível seleção.' ,
+				'<b><i>3 - Exibir:</i></b> Apresenta todas as informações cadastradas do módulo selecionado, data e usuário de inclusão, 
+								data de alteração. Possibilita a alteração e exclusão do registro, além de voltar para página de consulta.
+		' ,
+				'<b><i>4 - Excluir:</i></b> Clique no botão de exclusão. Por questão de segurança, o sistema solicita uma 
+								confirmação. O usuário tem a opção de confirmar ou cancelar.'
+			] ,
+			'encode'	 => false,
 
-						<?php endforeach; ?>
-					<?php endif; ?>
-				</div> <!-- /div.row -->
-			</div>
-		</div>
-	</div>
-</div>
+		// open its content by default
+		] ,
+		//PERFIS
+		[
+			'label'			 => '<h5>
+<strong style="color: #DD4B39">Perfis:</strong>
+Esta funcionalidade está disponível pela funcionalidade de módulos, clicando no botão de cadastrar perfil na listagem dos módulos. Desta forma todos os perfis apresentados serão do módulo selecionado.</h5>' ,
+			'content'		 => [
+				'<b><i>1 - Consultar:</b></i> Apresenta os perfis cadastrados com a opção de consulta. Para consultar informe valor 
+								para cada coluna apresentada. Nesta página estão disponíveis as opções de incluir, exibir, alterar, 
+								excluir, vincular usuários e vincular menus.' ,
+				'<b><i>2 - Incluir e Alterar:</b></i> Informe valores para os campos obrigatórios.
+						' ,
+				'<b><i>3 - Exibir:</b></i> Apresenta todas as informações cadastradas do perfil selecionado, data e usuário de inclusão, 
+								data de alteração. Possibilita a alteração e exclusão do registro, além de voltar para página de consulta.
+	' ,
+				'<b><i>4 - Excluir:</b></i> Clique no botão de exclusão. Por questão de segurança, o sistema solicita uma confirmação 
+								de exclusão. O usuário tem a opção de confirmar ou cancelar.' ,
+				'<b><i>5 - Vincular Usuários:</b></i> Por meio de um componente bastante intuitivo, o sistema disponibiliza do lado 
+								esquerdo os usuários cadastrados no sistema. Para vincular os usuários ao perfil selecionado, faça uma 
+								pesquisa e em seguida selecione os usuários que deseja vincular. Clique nas setas para vinculação. 
+								Em seguida os usuários vinculados estarão disponíveis na listagem do lado direito. O usuário tem a 
+								opção de vincular todos ou somente os selecionados, assim como desvincular todos ou somente os 
+								selecionados.' ,
+				'<b><i>6 - Vincular Menus:</b></i> Por meio de um componente bastante intuitivo, o sistema disponibiliza do lado 
+								esquerdo os menus cadastrados para o módulo selecionado. Para vincular os menus ao perfil selecionado, 
+								faça uma pesquisa e em seguida selecione os menus que deseja vincular. Clique nas setas para vinculação. 
+								Em seguida os menus vinculados estarão disponíveis na listagem do lado direito. O usuário tem a opção de 
+								vincular todos ou somente os selecionados, assim como desvincular todos ou somente os selecionados.'
+			]
+			,
+			'encode'		 => false ,
+			
+			//'options'		 => [] ,
+		] ,
+		//MENUS
+		[
+			'label'			 => '<h5><strong style="color: #DD4B39">Menus:</strong>			
+					Esta funcionalidade está disponível pela funcionalidade de módulos, clicando no botão de cadastrar menu. Desta forma todos os 
+					menus apresentados são do módulo selecionado.</h5>' ,
+			'content'		 => [
+				'<b><i>1 - Consultar:</b></i> Apresenta os menus cadastrados com a opção de consulta. Para consultar informe valor 
+								para cada coluna apresentada. Nesta página estão disponíveis as opções de incluir, exibir, alterar, 
+								excluir.' ,
+				'<b><i>2 - Incluir e Alterar:</b></i> Informe valores para os campos obrigatórios. Nesta funcionalidade é possível cadastrar 
+								um menu pai e seus filhos (Ex: Relatórios – menu pai, Menus por Módulo – menu filho) ou somente o menu 
+								pai (Ex: Ações). Pensando em otimizar as funcionalidades deste módulo, o sistema permite a vinculação 
+								do menu aos perfis previamente cadastrados.' ,
+				'<b><i>3 - Exibir:</b></i> Apresenta todas as informações cadastradas do menu selecionado, data e usuário de inclusão, 
+								data de alteração. Possibilita a alteração e exclusão do registro, além de voltar para página de consulta.' ,
+				'<b><i>4 - Excluir:</b></i> Clique no botão de exclusão. Por questão de segurança, o sistema solicita uma confirmação 
+								de exclusão. O usuário tem a opção de confirmar ou cancelar.'
+			] ,
+			'contentOptions' => [] ,
+			'encode'		 => false ,
+			'options'		 => [] ,
+			//'footer'		 => '' // the footer label in list-group
+		] ,
+		//ACAO
+		[
+			'label'			 => '<h5><strong style="color: #DD4B39">Ações:</strong>			
+					Esta funcionalidade permite gerenciar as possíveis ações das funcionalidades do sistema. Chamamos aqui de ações: 
+					consultar, incluir, alterar, excluir, vincular, etc. Esta funcionalidade está disponível no menu lateral 
+					esquerdo independente dos módulos, pois uma ação poderá ser utilizada em todas as funcionalidades do sistema.</h5>' ,
+			'content'		 => [
+				'<b><i>1 - Consultar:</b></i> Apresenta as ações cadastrados com a opção de consulta. Para consultar informe valor para 
+								cada coluna apresentada. Nesta página estão disponíveis as opções de incluir, exibir, alterar, excluir.' ,
+				'<b><i>2 - Incluir e Alterar:</b></i> Informe valores para os campos obrigatórios.' ,
+				'<b><i>3 - Exibir:</b></i> Apresenta todas as informações cadastradas da ação selecionada, data e usuário de inclusão, 
+								data de alteração. Possibilita a alteração e exclusão do registro, além de voltar para página de consulta.' ,
+				'<b><i>4 - Excluir:</b></i> Clique no botão de exclusão. Por questão de segurança, o sistema solicita uma confirmação 
+								de exclusão. O usuário tem a opção de confirmar ou cancelar.'
+			] ,
+			'contentOptions' => [] ,
+			'encode'		 => false ,
+			'options'		 => [] ,
+			//'footer'		 => '' // the footer label in list-group
+		] ,
+		//FUNCIONALIDADE
+		[
+			'label'			 => '<h5><strong style="color: #DD4B39">Funcionalidades:</strong>			
+					Esta funcionalidade está disponível pela funcionalidade de módulos, clicando no botão de cadastrar funcionalidade. Desta forma 
+					todos as funcionalidades apresentados são do módulo selecionado.</h5>' ,
+			'content'		 => [
+				'<b><i>1 - Consultar:</b></i> Apresenta as funcionalidades cadastradas com a opção de consulta. Para consultar informe 
+								valor para cada coluna apresentada. Nesta página estão disponíveis as opções de incluir, exibir, alterar, 
+								excluir.' ,
+				'<b><i>2 - Incluir e Alterar:</b></i> Informe valores para os campos obrigatórios. Para estas ações é necessário 
+								informar o menu no qual a funcionalidade estará disponível, quais ações tal funcionalidade irá ter e 
+								os perfis que poderão acessá-la.' ,
+				'<b><i>3 - Exibir:</b></i> Apresenta todas as informações cadastradas da funcionalidade selecionada, data e usuário de 
+								inclusão, data de alteração. Possibilita a alteração e exclusão do registro, além de voltar para página 
+								de consulta.' ,
+				'<b><i>4 - Excluir:</b></i> Clique no botão de exclusão. Por questão de segurança, o sistema solicita uma confirmação 
+								de exclusão. O usuário tem a opção de confirmar ou cancelar.'
+			] ,
+			'contentOptions' => [] ,
+			'encode'		 => false ,
+			'options'		 => [] ,
+			//'footer'		 => '' // the footer label in list-group
+		] ,
+		//Usuários (MCidades)
+		[
+			'label'			 => '<h5><strong style="color: #DD4B39">Usuários (MCidades):</strong>			
+					Esta funcionalidade permite gerenciar os usuários do MCidades e suas restrições. Aqui são apresentados os usuários 
+					administrativos do ministério ou usuários internos. Esta funcionalidade está disponível no menu lateral esquerdo independente dos 
+					módulos, pois um usuário poderá ser vinculado a diversos módulos, com perfis e funcionalidades específicas.	</h5>' ,
+			'content'		 => [
+				'<b><i>1 - Consultar:</b></i> Apresenta os usuários cadastrados com a opção de consulta. Para consultar informe valor 
+								para cada coluna apresentada. Nesta página estão disponíveis as opções de incluir, exibir, alterar, 
+								excluir e restringir acesso.' ,
+				'<b><i>2 - Incluir e Alterar:</b></i> Informe valores para os campos obrigatórios. Ao confirmar a inclusão de um novo 
+								o usuário, este recebe por e-mail os dados para acesso ao sistema, como: usuário, senha e link de acesso.' ,
+				'<b><i>3 - Exibir:</b></i> Apresenta todas as informações cadastradas do usuário selecionado, data e usuário de inclusão, 
+								data de alteração. Possibilita a alteração e exclusão do registro, além de voltar para página de consulta.' ,
+				'<b><i>4 - Excluir:</b></i> Clique no botão de exclusão. Por questão de segurança, o sistema solicita uma confirmação 
+								de exclusão. O usuário tem a opção de confirmar ou cancelar.' ,
+				'<b><i>5 - Restringir Acesso:</b></i> A restrição ocorre sempre para um usuário que está vinculado a um perfil, que por sua vez pertence a um módulo. 
+								Contudo pode ocorrer de um determinado usuário não ter acesso a uma ação específica dentro de uma 
+								funcionalidade. Assim, basta selecionar o módulo/perfil e informar as ações que devem ser restritas para 
+								o usuário selecionado.'
+			] ,
+			'contentOptions' => [] ,
+			'encode'		 => false ,
+			'options'		 => [] ,
+			//'footer'		 => '' // the footer label in list-group
+		] ,
+		//Usuários (Prestadores)
+		[
+			'label'			 => '<h5><strong style="color: #DD4B39">Usuários (Prestadores):</strong>
+					Esta funcionalidade permite gerenciar os usuários que são prestadores ou usuários externos. 
+					Esta funcionalidade está disponível no menu lateral esquerdo independente dos módulos, pois um usuário poderá 
+					ser vinculado a diversos módulos, com perfis e funcionalidades específicas. Contudo, esta funcionalidade poderá 
+					ser acessada somente pelos usuários que possuem o perfil de <i>"Administrador do Prestador"</i>.</h5>' ,
+			'content'		 => [
+				'<b><i>1 - Consultar:</b></i> Apresenta os usuários cadastrados com a opção de consulta. Para consultar informe valor 
+								para cada coluna apresentada. Nesta página estão disponíveis as opções de incluir, exibir, alterar, 
+				excluir.' ,
+				'<b><i>2 - Incluir e Alterar:</b></i> Informe valores para os campos obrigatórios. Ao confirmar a inclusão de um novo 
+				o usuário, este recebe por e-mail os dados para acesso ao sistema, como: usuário, senha e link de acesso. 
+				O usuário sempre será vinculado a um prestador, este sendo um campo obrigatório. É necessário informar 
+				para cada módulo, o perfil e as funcionalidade que o usuário terá acesso.' ,
+				'<b><i>3 - Exibir:</b></i> Apresenta todas as informações cadastradas do usuário selecionado, data e usuário de inclusão, 
+				data de alteração. Possibilita a alteração e exclusão do registro, além de voltar para página de consulta.' ,
+				'<b><i>4 - Excluir:</b></i> Clique no botão de exclusão. Por questão de segurança, o sistema solicita uma confirmação 
+				de exclusão. O usuário tem a opção de confirmar ou cancelar.'
+			] ,
+			'contentOptions' => [] ,
+			'options'		 => [] ,
+			'encode'		 => false ,
+			//'footer'		 => '' // the footer label in list-group
+		] ,
+	]
+] );
+?>
 

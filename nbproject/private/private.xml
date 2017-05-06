@@ -15,5 +15,34 @@
             <file>file:/C:/wamp64/www/esqueleto/modules/admin/views/atributos-valores/index.php</file>
             <file>file:/C:/wamp64/www/esqueleto/modules/admin/views/atributos-valores/create.php</file>
         </group>
+        <group>
+            <file>file:/var/www/scm/modules/posoutorga/views/sici/_form_adicionais_fibra.php</file>
+            <file>file:/var/www/scm/projeto/Util.php</file>
+            <file>file:/var/www/scm/modules/posoutorga/views/sici/_form_adicionais_iem2.php</file>
+            <file>file:/var/www/scm/modules/posoutorga/views/sici/_form_adicionais_iem1.php</file>
+            <file>file:/var/www/scm/modules/posoutorga/models/TabPlanos.php</file>
+            <file>file:/var/www/scm/views/contato/admin.php</file>
+            <file>file:/var/www/scm/modules/posoutorga/views/sici/_form_updade.php</file>
+            <file>file:/var/www/scm/modules/posoutorga/controllers/SiciController.php</file>
+            <file>file:/var/www/scm/modules/posoutorga/views/sici/_form_planos_fisico.php</file>
+            <file>file:/var/www/scm/modules/posoutorga/views/sici/_form_funcionario.php</file>
+            <file>file:/var/www/scm/modules/posoutorga/views/sici/_form_distribuicao_municipio.php</file>
+            <file>file:/var/www/scm/modules/posoutorga/views/sici/_form_planos.php</file>
+            <file>file:/var/www/scm/modules/posoutorga/views/sici/_form_financeiro_receita.php</file>
+            <file>file:/var/www/scm/modules/posoutorga/views/sici/_form_planos_juridico.php</file>
+            <file>file:/var/www/scm/modules/posoutorga/views/sici/create.php</file>
+            <file>file:/var/www/scm/modules/posoutorga/models/TabEmpresaMunicipioSearch.php</file>
+            <file>file:/var/www/scm/modules/posoutorga/models/TabSiciSearch.php</file>
+            <file>file:/var/www/scm/modules/posoutorga/views/sici/_form_financeiro.php</file>
+            <file>file:/var/www/scm/views/contato/_form_cliente.php</file>
+            <file>file:/var/www/scm/modules/posoutorga/views/sici/_form_distribuicao.php</file>
+            <file>file:/var/www/scm/modules/posoutorga/views/sici/_form_financeiro_despesa.php</file>
+            <file>file:/var/www/scm/models/TabAtributosValoresSearch.php</file>
+            <file>file:/var/www/scm/modules/posoutorga/models/TabPlanosSearch.php</file>
+            <file>file:/var/www/scm/modules/posoutorga/views/sici/_form_adicionais.php</file>
+            <file>file:/var/www/scm/modules/posoutorga/views/sici/_form_empresa.php</file>
+            <file>file:/var/www/scm/modules/posoutorga/views/sici/_form_adicionais_cabo.php</file>
+            <file>file:/var/www/scm/modules/posoutorga/models/TabEmpresaMunicipio.php</file>
+        </group>
     </open-files>
 </project-private>

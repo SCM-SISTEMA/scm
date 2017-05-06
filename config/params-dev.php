@@ -12,7 +12,7 @@ return [
 	// habilita/desabilita o caching global manual do sistema
 	'habilitar-cache-global' => false,
 	// Nome do sistema
-	'nome-sistema' => 'SNIS',
+	'nome-sistema' => 'SCM',
 	// Descrição do sistema
 	'descr-sistema' => 'Sistema Nacional de Informações sobre Saneamento',
 ];

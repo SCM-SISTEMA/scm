@@ -30,12 +30,20 @@ if ($this->session->hasAlert()) {
         <?= Html::tag('base', null, ['href' => Url::home()]) ?>
         <?=
         Html::tag('link', null, [
-            'href' => Url::home() . 'favicon.ico',
+            'href' => Url::home() . 'favicon-16x16.png',
             'rel' => 'shortcut icon',
             'type' => 'image/vnd.microsoft.icon'
         ])
         ?>
-    <?php $this->head() ?>
+        <?=
+        Html::tag('link', null, [
+            'href' => Url::home() . 'favicon-32x32.png',
+            'rel' => 'shortcut icon',
+            'type' => 'image/vnd.microsoft.icon'
+        ])
+        ?>
+
+        <?php $this->head() ?>
     </head>
     <?php
     $bodyClass = ['fixed', 'sidebar-mini', 'layout-boxed'];
@@ -44,30 +52,30 @@ if ($this->session->hasAlert()) {
             $bodyClass[] = $this->context->module->info['txt_tema'];
         }
     } else {
-        $bodyClass[] = 'skin-yellow-light';
+        $bodyClass[] = 'skin-yellow';
     }
     if (isset($_COOKIE['menu-aberto']) && $_COOKIE['menu-aberto'] == '0') {
         $bodyClass[] = 'sidebar-collapse';
     }
     ?>
     <body class="<?= implode(' ', $bodyClass) ?>">
-<?php $this->beginBody() ?>
+        <?php $this->beginBody() ?>
 
         <div class="wrapper">
             <?php
             echo $this->render('header.php', ['directoryAsset' => $directoryAsset]);
             if (!Yii::$app->user->isGuest) {
-                $left = isset($this->context->module->info) ? 'left.php' : 'left2.php';
+                $left = 'left.php';
                 echo $this->render($left, ['directoryAsset' => $directoryAsset]);
             }
             ?>
             <?= $this->render('content.php', ['content' => $content, 'directoryAsset' => $directoryAsset]) ?>
             <?= $this->render('right.php', ['directoryAsset' => $directoryAsset]) ?>
-        <?= $this->render('footer.php', ['directoryAsset' => $directoryAsset]) ?>
+            <?= $this->render('footer.php', ['directoryAsset' => $directoryAsset]) ?>
         </div>
         <?php $this->endBody() ?>
 
-<?php /** BOOT JS * */ ?>
+        <?php /** BOOT JS * */ ?>
         <script type="text/javascript">
             if (typeof jQuery == 'undefined') {
                 document.getElementById('msg_no_js_support').style.display = 'block';

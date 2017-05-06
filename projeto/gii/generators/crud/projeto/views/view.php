@@ -18,7 +18,6 @@ use app\components\MenuLateralModuloWidget;
 /* @var $this yii\web\View */
 /* @var $model <?= ltrim($generator->modelClass, '\\') ?> */
 
-$infoModulo = $this->context->module->info;
 
 ?>
 

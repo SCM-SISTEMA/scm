@@ -19,14 +19,14 @@ use Yii;
  * @property string $dte_sessao
  * @property string $txt_login
  * @property string $num_cpf
- * @property string $cod_prestador_fk
+ * @property integer $cod_prestador_fk
  * @property string $nome_perfil
  * @property string $dsc_perfil
  * @property string $nome_modulo
  * @property string $dsc_modulo
- * @property string $cod_usuario_fk
- * @property string $cod_perfil_fk
- * @property string $cod_modulo_fk
+ * @property integer $cod_usuario_fk
+ * @property integer $cod_perfil_fk
+ * @property integer $cod_modulo_fk
  * @property string $modulo_id
  * @property string $modulo_url
  * @property string $modulo_icone
@@ -53,8 +53,9 @@ class VisUsuariosPerfis extends \projeto\db\ActiveRecord
             [['nome_usuario'], 'string', 'max' => 70],
             [['txt_email', 'dsc_perfil', 'dsc_modulo'], 'string', 'max' => 150],
             [['txt_senha'], 'string', 'max' => 60],
-            [['num_fone', 'num_ip'], 'string', 'max' => 15],
+            [['num_fone'], 'string', 'max' => 15],
             [['txt_trocar_senha', 'txt_ativo', 'txt_tipo_login', 'txt_perfil_prestador'], 'string', 'max' => 1],
+            [['num_ip'], 'string', 'max' => 50],
             [['txt_login', 'modulo_icone'], 'string', 'max' => 100],
             [['num_cpf'], 'string', 'max' => 14],
             [['nome_perfil', 'nome_modulo'], 'string', 'max' => 80],

@@ -4,17 +4,17 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\ActiveForm;
 use dosamigos\ckeditor\CKEditor;
-use app\models\VisAtributosValores;
+use app\models\VisAtributosValoresSearch;
 use kartik\select2\Select2;
 use projeto\Util;
 
 $infoModule = $this->context->module->info;
 $model->modulo_fk = $infoModule['cod_modulo'];
 
-$cabecalhos = array_merge(['' => $this->app->params['txt-prompt-select']], VisAtributosValores::getOpcoes('cabecalho-modelo-documento'));
-$rodapes = array_merge(['' => $this->app->params['txt-prompt-select']], VisAtributosValores::getOpcoes('rodape-modelo-documento'));
-$finalidades = array_merge(['' => $this->app->params['txt-prompt-select']], VisAtributosValores::getOpcoes('finalidade-modelo-documento'));
-$tipoDocs = array_merge(['' => $this->app->params['txt-prompt-select']], VisAtributosValores::getOpcoes('tipo-modelo-documento'));
+$cabecalhos = array_merge(['' => $this->app->params['txt-prompt-select']], VisAtributosValoresSearch::getOpcoes('cabecalho-modelo-documento'));
+$rodapes = array_merge(['' => $this->app->params['txt-prompt-select']], VisAtributosValoresSearch::getOpcoes('rodape-modelo-documento'));
+$finalidades = array_merge(['' => $this->app->params['txt-prompt-select']], VisAtributosValoresSearch::getOpcoes('finalidade-modelo-documento'));
+$tipoDocs = array_merge(['' => $this->app->params['txt-prompt-select']], VisAtributosValoresSearch::getOpcoes('tipo-modelo-documento'));
 
 ?>
 

@@ -41,7 +41,7 @@ class RlcPerfisFuncionalidadesAcoes extends \projeto\db\ActiveRecord
             [['cod_perfil_fk', 'cod_funcionalidade_fk', 'cod_acao_fk'], 'integer'],
             [['dte_inclusao', 'dte_alteracao', 'dte_exclusao'], 'safe'],
             [['txt_login_inclusao'], 'string', 'max' => 150],
-            [['cod_perfil_fk', 'cod_funcionalidade_fk', 'cod_acao_fk'], 'unique', 'targetAttribute' => ['cod_perfil_fk', 'cod_funcionalidade_fk', 'cod_acao_fk'], 'message' => 'The combination of Cod Perfil Fk, Cod Funcionalidade Fk and Cod Acao Fk has already been taken.']
+            [['cod_perfil_fk', 'cod_funcionalidade_fk', 'cod_acao_fk'], 'unique', 'targetAttribute' => ['cod_perfil_fk', 'cod_funcionalidade_fk', 'cod_acao_fk'], 'message' => 'The combination of Chave estrangeira da tabela TAB_PERFIL, Chave estrangeira da tabela TAB_FUNCIONALIDADES and Chave estrangeira da tabela TAB_ACOES has already been taken.']
         ];
     }
 
@@ -51,10 +51,10 @@ class RlcPerfisFuncionalidadesAcoes extends \projeto\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'cod_perfil_funcionalidade_acao' => 'Cod Perfil Funcionalidade Acao',
-            'cod_perfil_fk' => 'Cod Perfil Fk',
-            'cod_funcionalidade_fk' => 'Cod Funcionalidade Fk',
-            'cod_acao_fk' => 'Cod Acao Fk',
+            'cod_perfil_funcionalidade_acao' => 'Chave primaria',
+            'cod_perfil_fk' => 'Chave estrangeira da tabela TAB_PERFIL',
+            'cod_funcionalidade_fk' => 'Chave estrangeira da tabela TAB_FUNCIONALIDADES',
+            'cod_acao_fk' => 'Chave estrangeira da tabela TAB_ACOES',
             'txt_login_inclusao' => 'Usuário da Inclusão',
             'dte_inclusao' => 'Data da Inclusão',
             'dte_alteracao' => 'Data da Alteração',

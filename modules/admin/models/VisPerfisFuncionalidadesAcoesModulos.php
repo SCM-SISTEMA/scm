@@ -18,12 +18,12 @@ use Yii;
  * @property string $nome_modulo
  * @property string $modulo_id
  * @property string $dsc_modulo
- * @property string $cod_perfil_fk
- * @property string $cod_funcionalidade_fk
- * @property string $cod_acao_fk
- * @property string $cod_modulo_fk
- * @property string $cod_usuario_fk
- * @property string $cod_perfil_funcionalidade_acao_fk
+ * @property integer $cod_perfil_fk
+ * @property integer $cod_funcionalidade_fk
+ * @property integer $cod_acao_fk
+ * @property integer $cod_modulo_fk
+ * @property integer $cod_usuario_fk
+ * @property integer $cod_perfil_funcionalidade_acao_fk
  */
 class VisPerfisFuncionalidadesAcoesModulos extends \projeto\db\ActiveRecord
 {

@@ -33,14 +33,14 @@ class UsuariosPrestadoresController extends Controller
     {		
 		$searchModel = new TabUsuariosPrestadoresSearch();
 		
-		$perfil = $this->module->getInfo()['usuario-perfil']['cod_perfil_fk'];
+		$perfil = $this->getInfo()['usuario-perfil']['cod_perfil_fk'];
 		$TabPerfisSearch = TabPerfisSearch::find()
 			->select('txt_perfil_prestador')
 			->where('cod_perfil = '.$perfil.'')
 			->one();
 		$codPrestadorFk = null;
 		if ($TabPerfisSearch['txt_perfil_prestador'] != 0) {
-			$usuario = $this->module->getInfo()['usuario-perfil']['cod_usuario_fk'];
+			$usuario = $this->getInfo()['usuario-perfil']['cod_usuario_fk'];
 			
 			$TabUsuariosPrestadoresSearch = TabUsuariosPrestadoresSearch::find()
 				->select('cod_prestador_fk')
@@ -173,14 +173,14 @@ class UsuariosPrestadoresController extends Controller
 		
 		$model->scenario = 'admin';
 		
-		$perfil = $this->module->getInfo()['usuario-perfil']['cod_perfil_fk'];
+		$perfil = $this->getInfo()['usuario-perfil']['cod_perfil_fk'];
 		$TabPerfisSearch = TabPerfisSearch::find()
 			->select('txt_perfil_prestador')
 			->where('cod_perfil = '.$perfil.'')
 			->one();
 		$codPrestadorFk = null;
 		if ($TabPerfisSearch['txt_perfil_prestador'] != 0) {
-			$usuario = $this->module->getInfo()['usuario-perfil']['cod_usuario_fk'];
+			$usuario = $this->getInfo()['usuario-perfil']['cod_usuario_fk'];
 			
 			$TabUsuariosPrestadoresSearch = TabUsuariosPrestadoresSearch::find()
 				->select('cod_prestador_fk')

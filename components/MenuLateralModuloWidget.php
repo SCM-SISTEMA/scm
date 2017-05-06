@@ -22,10 +22,10 @@ class MenuLateralModuloWidget extends Widget
 	
 	public function run() 
 	{
-		$modulo = TabModulosSearch::getInfo($this->modulo_id);
-		$getData = function () use ($modulo) {
-			return VisUsuariosPerfis::findOneAsArray([
-				'cod_modulo_fk' => $modulo['cod_modulo'], 
+		//$modulo = TabModulosSearch::getInfo($this->modulo_id);
+		$getData = function () {
+			return VisUsuariosPerfis::findAllAsArray([
+				//'cod_modulo_fk' => $modulo['cod_modulo'], 
 				'cod_usuario_fk' => $this->user->identity->getId(),
 			]);
 		};
@@ -34,12 +34,11 @@ class MenuLateralModuloWidget extends Widget
 			$cacheKey = [
 				Yii::$app->session->id, 
 				'modulo-usuario',
-				'cod_modulo_fk', $modulo['cod_modulo'], 
 				'cod_usuario_fk', $this->user->identity->getId(),
 			];
-			if (($data = Yii::$app->cache->get($cacheKey)) === false) {
+			if (($data = Yii::$app->session->get($cacheKey)) === false) {
 				$data = $getData();
-				Yii::$app->cache->set($cacheKey, $data);
+				Yii::$app->session->set($cacheKey, $data);
 			}
 			$params = $data;
 		}
@@ -47,7 +46,7 @@ class MenuLateralModuloWidget extends Widget
 			$params = $getData();
 		}
 		
-		
+
 		return $this->render('menu-lateral-modulo.php', [
 			'menus' => TabMenusSearch::montarMenuCache($params, Yii::$app->controller->activeMenu),
 			'modulo_id' => $this->modulo_id

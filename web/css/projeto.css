@@ -501,8 +501,9 @@ body .form-group .help-block {
     border: 1px solid #d2d6de;
     color: #666;
     padding: 20px;
+    border-radius: 5px;
 }
 
 .login-box {
-	width: 750px;
+	width: 380px;
 }

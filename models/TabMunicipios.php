@@ -5,7 +5,7 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "public.tab_municipios".
+ * This is the model class for table "tab_municipios".
  *
  * @property string $cod_municipio
  * @property string $txt_nome
@@ -18,14 +18,13 @@ use Yii;
  * @property string $latitude
  * @property string $longitude
  * @property integer $regiao_hidrografica_fk
+ * @property boolean $bln_critico
  *
- * @property TabMunicipiosAtendidos[] $tabMunicipiosAtendidos
+ * @property TabEndereco $tabEndereco
  * @property TabAtributosValores $tabAtributosValores
  * @property TabEstados $tabEstados
  * @property TabMicrorregioes $tabMicrorregioes
  * @property TabRegioesMetropolitanas $tabRegioesMetropolitanas
- * @property TabMunicipiosPopulacoes[] $tabMunicipiosPopulacoes
- * @property TabPrestadores[] $tabPrestadores
  */
 class TabMunicipios extends \projeto\db\ActiveRecord
 {
@@ -34,7 +33,7 @@ class TabMunicipios extends \projeto\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'public.tab_municipios';
+        return 'tab_municipios';
     }
 
     /**
@@ -44,7 +43,7 @@ class TabMunicipios extends \projeto\db\ActiveRecord
     {
         return [
             [['cod_municipio'], 'required'],
-            [['bln_indicador_capital'], 'boolean'],
+            [['bln_indicador_capital', 'bln_critico'], 'boolean'],
             [['cod_microrregiao_fk', 'cod_ibge', 'cod_regiao_metropolitana_fk', 'regiao_hidrografica_fk'], 'integer'],
             [['area_km2'], 'number'],
             [['cod_municipio'], 'string', 'max' => 6],
@@ -71,15 +70,16 @@ class TabMunicipios extends \projeto\db\ActiveRecord
             'latitude' => 'Latitude',
             'longitude' => 'Longitude',
             'regiao_hidrografica_fk' => 'Regiao Hidrografica Fk',
+            'bln_critico' => 'Bln Critico',
         ];
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getTabMunicipiosAtendidos()
+    public function getTabEndereco()
     {
-        return $this->hasMany(TabMunicipiosAtendidos::className(), ['cod_municipio_fk' => 'cod_municipio']);
+        return $this->hasOne(TabEndereco::className(), ['cod_municipio_fk' => 'cod_municipio']);
     }
 
     /**
@@ -112,22 +112,6 @@ class TabMunicipios extends \projeto\db\ActiveRecord
     public function getTabRegioesMetropolitanas()
     {
         return $this->hasOne(TabRegioesMetropolitanas::className(), ['cod_regiao_metropolitana' => 'cod_regiao_metropolitana_fk']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getTabMunicipiosPopulacoes()
-    {
-        return $this->hasMany(TabMunicipiosPopulacoes::className(), ['municipio_fk' => 'cod_municipio']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getTabPrestadores()
-    {
-        return $this->hasMany(TabPrestadores::className(), ['cod_municipio_fk' => 'cod_municipio']);
     }
 
     /**

@@ -5,7 +5,7 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "public.tab_estados".
+ * This is the model class for table "tab_estados".
  *
  * @property string $sgl_estado
  * @property string $cod_estado
@@ -14,6 +14,9 @@ use Yii;
  * @property integer $qtd_mun_est
  * @property string $vlr_taxa_hab_dom
  * @property integer $cod_regiao_geografica
+ *
+ * @property TabRegioesGeograficas $tabRegioesGeograficas
+ * @property TabMunicipios[] $tabMunicipios
  */
 class TabEstados extends \projeto\db\ActiveRecord
 {
@@ -22,7 +25,7 @@ class TabEstados extends \projeto\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'public.tab_estados';
+        return 'tab_estados';
     }
 
     /**
@@ -54,6 +57,22 @@ class TabEstados extends \projeto\db\ActiveRecord
             'vlr_taxa_hab_dom' => 'TX_HAB_DOM',
             'cod_regiao_geografica' => 'Código da Região Geográfica',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTabRegioesGeograficas()
+    {
+        return $this->hasOne(TabRegioesGeograficas::className(), ['cod_regiao_geografica' => 'cod_regiao_geografica']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTabMunicipios()
+    {
+        return $this->hasMany(TabMunicipios::className(), ['sgl_estado_fk' => 'sgl_estado']);
     }
 
     /**

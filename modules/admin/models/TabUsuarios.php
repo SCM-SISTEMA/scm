@@ -29,7 +29,7 @@ use Yii;
  *
  * @property RlcUsuariosPerfis[] $rlcUsuariosPerfis
  * @property TabRestricoesUsuarios[] $tabRestricoesUsuarios
- * @property TabPrestadores $tabPrestadores
+ * @property TabTipoContrato[] $tabTipoContrato
  */
 class TabUsuarios extends \projeto\db\ActiveRecord
 {
@@ -53,11 +53,11 @@ class TabUsuarios extends \projeto\db\ActiveRecord
             [['txt_nome'], 'string', 'max' => 70],
             [['txt_email', 'txt_login_inclusao'], 'string', 'max' => 150],
             [['txt_senha'], 'string', 'max' => 60],
-            [['num_fone', 'num_ip'], 'string', 'max' => 15],
+            [['num_fone'], 'string', 'max' => 15],
             [['txt_trocar_senha', 'txt_ativo', 'txt_tipo_login'], 'string', 'max' => 1],
             [['txt_imagem', 'txt_login'], 'string', 'max' => 100],
             [['num_cpf'], 'string', 'max' => 14],
-            [['txt_email'], 'unique'],
+            [['num_ip'], 'string', 'max' => 50],
             [['txt_login'], 'unique']
         ];
     }
@@ -109,9 +109,9 @@ class TabUsuarios extends \projeto\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getTabPrestadores()
+    public function getTabTipoContrato()
     {
-        return $this->hasOne(TabPrestadores::className(), ['cod_prestador' => 'cod_prestador_fk']);
+        return $this->hasMany(TabTipoContrato::className(), ['cod_usuario_fk' => 'cod_usuario']);
     }
 
     /**

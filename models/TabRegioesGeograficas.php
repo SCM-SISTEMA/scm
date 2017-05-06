@@ -5,11 +5,13 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "public.tab_regioes_geograficas".
+ * This is the model class for table "tab_regioes_geograficas".
  *
  * @property integer $cod_regiao_geografica
  * @property string $sgl_regiao_geografica
  * @property string $txt_nome
+ *
+ * @property TabEstados[] $tabEstados
  */
 class TabRegioesGeograficas extends \projeto\db\ActiveRecord
 {
@@ -18,7 +20,7 @@ class TabRegioesGeograficas extends \projeto\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'public.tab_regioes_geograficas';
+        return 'tab_regioes_geograficas';
     }
 
     /**
@@ -43,6 +45,14 @@ class TabRegioesGeograficas extends \projeto\db\ActiveRecord
             'sgl_regiao_geografica' => 'Sigla',
             'txt_nome' => 'Nome da Região Geográfica',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTabEstados()
+    {
+        return $this->hasMany(TabEstados::className(), ['cod_regiao_geografica' => 'cod_regiao_geografica']);
     }
 
     /**

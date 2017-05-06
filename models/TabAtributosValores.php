@@ -5,12 +5,20 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "public.tab_atributos_valores".
+ * This is the model class for table "tab_atributos_valores".
  *
  * @property integer $cod_atributos_valores
  * @property integer $fk_atributos_valores_atributos_id
  * @property string $sgl_valor
  * @property string $dsc_descricao
+ *
+ * @property TabAtributos $tabAtributos
+ * @property TabContato[] $tabContato
+ * @property TabModeloDocs[] $tabModeloDocs
+ * @property TabModeloDocs[] $tabModeloDocs0
+ * @property TabModeloDocs[] $tabModeloDocs1
+ * @property TabModeloDocs[] $tabModeloDocs2
+ * @property TabMunicipios[] $tabMunicipios
  */
 class TabAtributosValores extends \projeto\db\ActiveRecord
 {
@@ -19,17 +27,7 @@ class TabAtributosValores extends \projeto\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'public.tab_atributos_valores';
-    }
-    
-    public function afterSave($insert, $changedAttributes)
-    {
-        VisAtributosValores::atualizar();
-    }
-    
-    public function afterDelete()
-    {
-        VisAtributosValores::atualizar();
+        return 'tab_atributos_valores';
     }
 
     /**
@@ -38,12 +36,9 @@ class TabAtributosValores extends \projeto\db\ActiveRecord
     public function rules()
     {
         return [
-            [['fk_atributos_valores_atributos_id', 'sgl_valor', 'dsc_descricao'], 'required'],
             [['fk_atributos_valores_atributos_id'], 'integer'],
             [['sgl_valor'], 'string'],
-            [['dsc_descricao'], 'string', 'max' => 200],
-            [['fk_atributos_valores_atributos_id', 'sgl_valor', 'dsc_descricao'], 'safe'],
-            ['sgl_valor', 'unique', 'targetAttribute' => ['sgl_valor', 'fk_atributos_valores_atributos_id']],
+            [['dsc_descricao'], 'string', 'max' => 200]
         ];
     }
 
@@ -53,11 +48,67 @@ class TabAtributosValores extends \projeto\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'cod_atributos_valores' => 'Código da tabela',
-            'fk_atributos_valores_atributos_id' => 'Atributo pai',
-            'sgl_valor' => 'Identificador único',
-            'dsc_descricao' => 'Descrição',
+            'cod_atributos_valores' => 'Cod Atributos Valores',
+            'fk_atributos_valores_atributos_id' => 'Fk Atributos Valores Atributos ID',
+            'sgl_valor' => 'Sgl Valor',
+            'dsc_descricao' => 'Dsc Descricao',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTabAtributos()
+    {
+        return $this->hasOne(TabAtributos::className(), ['cod_atributos' => 'fk_atributos_valores_atributos_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTabContato()
+    {
+        return $this->hasMany(TabContato::className(), ['tipo' => 'cod_atributos_valores']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTabModeloDocs()
+    {
+        return $this->hasMany(TabModeloDocs::className(), ['cabecalho_fk' => 'cod_atributos_valores']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTabModeloDocs0()
+    {
+        return $this->hasMany(TabModeloDocs::className(), ['rodape_fk' => 'cod_atributos_valores']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTabModeloDocs1()
+    {
+        return $this->hasMany(TabModeloDocs::className(), ['tipo_modelo_documento_fk' => 'cod_atributos_valores']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTabModeloDocs2()
+    {
+        return $this->hasMany(TabModeloDocs::className(), ['finalidade_fk' => 'cod_atributos_valores']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTabMunicipios()
+    {
+        return $this->hasMany(TabMunicipios::className(), ['regiao_hidrografica_fk' => 'cod_atributos_valores']);
     }
 
     /**

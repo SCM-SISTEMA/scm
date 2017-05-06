@@ -5,10 +5,12 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "public.tab_regioes_metropolitanas".
+ * This is the model class for table "tab_regioes_metropolitanas".
  *
  * @property integer $cod_regiao_metropolitana
  * @property string $txt_nome
+ *
+ * @property TabMunicipios[] $tabMunicipios
  */
 class TabRegioesMetropolitanas extends \projeto\db\ActiveRecord
 {
@@ -17,7 +19,7 @@ class TabRegioesMetropolitanas extends \projeto\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'public.tab_regioes_metropolitanas';
+        return 'tab_regioes_metropolitanas';
     }
 
     /**
@@ -41,6 +43,14 @@ class TabRegioesMetropolitanas extends \projeto\db\ActiveRecord
             'cod_regiao_metropolitana' => 'Código da região metropolitana',
             'txt_nome' => 'Nome da Região Metropolitana',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTabMunicipios()
+    {
+        return $this->hasMany(TabMunicipios::className(), ['cod_regiao_metropolitana_fk' => 'cod_regiao_metropolitana']);
     }
 
     /**

@@ -18,13 +18,10 @@ use app\components\MenuLateralModuloWidget;
 /* @var $this yii\web\View */
 /* @var $model <?= ltrim($generator->modelClass, '\\') ?> */
 
-$infoModulo = $this->context->module->info;
-
 ?>
 
 <div class="<?= Inflector::camel2id(StringHelper::basename($generator->modelClass)) ?>-update">
     <?= "<?= " ?>$this->render('_form', [
         'model' => $model,
-        'infoModulo' => $infoModulo,
     ]) ?>
 </div>

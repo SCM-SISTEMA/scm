@@ -47,7 +47,7 @@ class TabFuncionalidades extends \projeto\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'cod_funcionalidade' => 'Cod Funcionalidade',
+            'cod_funcionalidade' => 'Chave Primaria',
             'txt_nome' => 'Nome',
             'dsc_funcionalidade' => 'Descrição',
             'txt_login_inclusao' => 'Usuário da Inclusão',

@@ -10,39 +10,36 @@ use app\models\TabForm;
 /**
  * TabFormSearch represents the model behind the search form about `app\models\TabForm`.
  */
-class TabFormSearch extends TabForm
-{
-    /**
-     * @inheritdoc
-     */ 
-    public function rules()
-    {
+class TabFormSearch extends TabForm {
 
-		$rules =  [
-             //exemplo [['txt_nome', 'cod_modulo_fk'], 'required'],
-        ];
-		
-		return array_merge($rules, parent::rules());
-    }
-	
-	/**
-    * @inheritdoc
-    */
-	public function attributeLabels()
-    {
-
-		$labels = [
-            //exemplo 'campo' => 'label',         
-        ];
-		
-		return array_merge( parent::attributeLabels(), $labels);
-    }
-	
     /**
      * @inheritdoc
      */
-    public function scenarios()
-    {
+    public function rules() {
+
+        $rules = [
+                //exemplo [['txt_nome', 'cod_modulo_fk'], 'required'],
+        ];
+
+        return array_merge($rules, parent::rules());
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels() {
+
+        $labels = [
+                //exemplo 'campo' => 'label',         
+        ];
+
+        return array_merge(parent::attributeLabels(), $labels);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function scenarios() {
         // bypass scenarios() implementation in the parent class
         return Model::scenarios();
     }
@@ -54,8 +51,7 @@ class TabFormSearch extends TabForm
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
-    {
+    public function search($params) {
         $query = TabFormSearch::find();
 
         $dataProvider = new ActiveDataProvider([
@@ -76,11 +72,12 @@ class TabFormSearch extends TabForm
         ]);
 
         $query->andFilterWhere(['ilike', $this->tableName() . '.dsc_form', $this->dsc_form])
-            ->andFilterWhere(['ilike', $this->tableName() . '.dsc_det_form', $this->dsc_det_form])
-            ->andFilterWhere(['ilike', $this->tableName() . '.sgl_form', $this->sgl_form]);
+                ->andFilterWhere(['ilike', $this->tableName() . '.dsc_det_form', $this->dsc_det_form])
+                ->andFilterWhere(['ilike', $this->tableName() . '.sgl_form', $this->sgl_form]);
 
-		// $query->andWhere($this->tableName().'.dte_exclusao IS NULL');
-		
+        // $query->andWhere($this->tableName().'.dte_exclusao IS NULL');
+
         return $dataProvider;
     }
+
 }

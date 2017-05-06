@@ -19,11 +19,20 @@ app\assets\ProjetoAsset::register($this);
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
-    <?= Html::tag('link', null, [
-			'href'	 => Url::home() . 'favicon.ico',
-			'rel'	 => 'shortcut icon',
-			'type'	 => 'image/vnd.microsoft.icon'
-		]) ?>
+     <?=
+        Html::tag('link', null, [
+            'href' => Url::home() . 'favicon-16x16.png',
+            'rel' => 'shortcut icon',
+            'type' => 'image/vnd.microsoft.icon'
+        ])
+        ?>
+        <?=
+        Html::tag('link', null, [
+            'href' => Url::home() . 'favicon-32x32.png',
+            'rel' => 'shortcut icon',
+            'type' => 'image/vnd.microsoft.icon'
+        ])
+        ?>
     <?php $this->head() ?>
 </head>
 <body class="hold-transition pagina-login">

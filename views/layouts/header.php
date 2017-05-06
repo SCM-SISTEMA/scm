@@ -19,8 +19,8 @@ use kartik\widgets\Typeahead;
     }
     echo Html::a(
         '<span class="logo-mini">' 
-            . (YII_ENV_PROD ? $this->app->params['nome-sistema'] : "{$this->app->params['nome-sistema']}")
-            . '</span><span class="logo-lg">'
+            . (YII_ENV_PROD ?  Html::img('@web/img/apple-touch-icon_laranja_32.png') :  Html::img('@web/img/apple-touch-icon_laranja_32.png'))
+            . '</span><span class="logo-lg">' . Html::img('@web/img/apple-touch-icon_laranja_32.png')
             . ($this->app->params['nome-sistema'])
             . '<span style="color: #FF0000;">' . (YII_ENV_PROD ? null : "-" . YII_ENV) . '</span>'
         .'</span>', 
@@ -34,11 +34,7 @@ use kartik\widgets\Typeahead;
 		<a href="javascript://;" class="sidebar-toggle" data-toggle="offcanvas" role="button">
 			<span class="sr-only">Toggle navigation</span>
 		</a>
-		<?php if (isset($this->context->module->info)): ?>
-			<div class="navbar-custom-menu pull-left">
-				<?= MenuBarraTopoModuloWidget::widget(['modulo_id' => $this->app->controller->module->info['cod_modulo']]); ?>
-			</div>
-		<?php endif; ?>
+		
 		
 		<?php if ($this->context->module->id == 'drenagem'): ?>
 			<form class="navbar-form navbar-left" role="search">
@@ -171,12 +167,12 @@ use kartik\widgets\Typeahead;
 
 					<!-- User Account: style can be found in dropdown.less -->
 					<li class="dropdown">
-						<a href="javascript://;" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Ajuda <span class="caret"></span></a>
-						<ul class="dropdown-menu" role="menu">
+						<a href="javascript://;" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Ajuda</a>
+						<!--ul class="dropdown-menu" role="menu">
 							<li>
 								<a href="//www.snis.gov.br/downloads/manuais-atualizados/drenagem/Manual_Preenchimento_DG2015.pdf" target="_blank"><i class="menu-icon fa fa-book"></i> Manual de Preenchimento</a>
 							</li>
-						</ul>
+						</ul-->
 					</li>
 				
 				<?php else: ?>

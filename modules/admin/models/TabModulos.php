@@ -7,7 +7,7 @@ use Yii;
 /**
  * This is the model class for table "acesso.tab_modulos".
  *
- * @property string $cod_modulo
+ * @property integer $cod_modulo
  * @property string $txt_nome
  * @property string $id
  * @property string $dsc_modulo
@@ -25,15 +25,6 @@ use Yii;
  * @property string $flag_inicio_equipe
  *
  * @property TabPerfis[] $tabPerfis
- * @property TabUsuariosOpcoes[] $tabUsuariosOpcoes
- * @property TabAvisosErros[] $tabAvisosErros
- * @property TabBlocoInfo[] $tabBlocoInfo
- * @property TabForm[] $tabForm
- * @property TabGlossarios[] $tabGlossarios
- * @property RlcModulosPrestadores[] $rlcModulosPrestadores
- * @property TabContatos[] $tabContatos
- * @property TabMalaDiretaLog[] $tabMalaDiretaLog
- * @property TabModeloDocs[] $tabModeloDocs
  * @property TabParametros[] $tabParametros
  */
 class TabModulos extends \projeto\db\ActiveRecord
@@ -97,78 +88,6 @@ class TabModulos extends \projeto\db\ActiveRecord
     public function getTabPerfis()
     {
         return $this->hasMany(TabPerfis::className(), ['cod_modulo_fk' => 'cod_modulo']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getTabUsuariosOpcoes()
-    {
-        return $this->hasMany(TabUsuariosOpcoes::className(), ['fk_modulo' => 'cod_modulo']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getTabAvisosErros()
-    {
-        return $this->hasMany(TabAvisosErros::className(), ['fk_modulo' => 'cod_modulo']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getTabBlocoInfo()
-    {
-        return $this->hasMany(TabBlocoInfo::className(), ['servico_fk' => 'cod_modulo']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getTabForm()
-    {
-        return $this->hasMany(TabForm::className(), ['cod_tipo_servico' => 'cod_modulo']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getTabGlossarios()
-    {
-        return $this->hasMany(TabGlossarios::className(), ['fk_attr_servico' => 'cod_modulo']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getRlcModulosPrestadores()
-    {
-        return $this->hasMany(RlcModulosPrestadores::className(), ['cod_modulo_fk' => 'cod_modulo']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getTabContatos()
-    {
-        return $this->hasMany(TabContatos::className(), ['cod_modulo_fk' => 'cod_modulo']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getTabMalaDiretaLog()
-    {
-        return $this->hasMany(TabMalaDiretaLog::className(), ['modulo_fk' => 'cod_modulo']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getTabModeloDocs()
-    {
-        return $this->hasMany(TabModeloDocs::className(), ['modulo_fk' => 'cod_modulo']);
     }
 
     /**

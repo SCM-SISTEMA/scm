@@ -18,7 +18,7 @@ class Mailer extends \yii\swiftmailer\Mailer
 		/**
 		 * @todo pegar o remetente dos parâmetros
 		 */
-		$this->remetente = 'snis.drenagem@cidades.gov.br';
+		$this->remetente = 'brunofileh@gmail.com';
 	}
 	
 	public function emailFinalizarPreenchimento(array $to, array $cc=[])
@@ -88,6 +88,7 @@ class Mailer extends \yii\swiftmailer\Mailer
 	
 	public function redefinirSenha($model)
 	{
+         //   print_r($this->transport); exit;
 		return $this->compose()
 			->setFrom($this->remetente)
 			->setTo([$model->txt_email => $model->txt_nome])
@@ -102,6 +103,8 @@ class Mailer extends \yii\swiftmailer\Mailer
     
 	public function reenviarSenha($model, $txtSenha)
 	{
+            
+            print_r($this->transport); exit;
 		return $this->compose()
 			->setFrom($this->remetente)
 			->setTo($model->txt_email)

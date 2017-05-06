@@ -184,12 +184,12 @@ class MunicipiosController extends Controller
      * ListaUf todos os municipios de uma determinada uf
      * @param string $uf
      */
-    public function actionLista($uf)
+    public function actionLista()
     {
-		
+       $uf = Yii::$app->request->post()['uf'];
        $municipios = TabMunicipiosSearch::find()->where( ['sgl_estado_fk'=> $uf])->asArray()->orderBy( 'txt_nome' )->all();
 	 
-	   if($municipios){
+     if($municipios){
 		   
 		    echo "<option value=''>Selecione o Município</option>";
 			

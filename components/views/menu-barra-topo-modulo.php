@@ -17,14 +17,8 @@ $url = \Yii::$app->urlManager->createUrl("/{$module->id}/{$controller->id}/selec
 <ul class="nav navbar-nav">
 	<?php if(count($modulos) > 1): ?>
 		<li class="dropdown">
-			<a href="<?= Url::toRoute($infoModule['txt_url']) ?>" class="dropdown-toggle titulo-modulo" data-toggle="dropdown" aria-expanded="false"><?= $infoModule['txt_nome'] ?> <span class="caret"></span></a>
-			<ul class="dropdown-menu" role="menu">
-				<?php foreach ($modulos as $module): ?>
-					<?php if($module['cod_modulo_fk'] !== $infoModule['cod_modulo']): ?>
-						<li><a href="<?= Url::to([$module['modulo_url']]) ?>" title="<?= $module['dsc_modulo'] ?>"><?= $module['nome_modulo'] ?></a></li>
-					<?php endif; ?>
-				<?php endforeach; ?>
-			</ul>
+			<?= $infoModule['txt_nome'] ?>
+			
 		</li>
 	<?php else: ?>
 		<li>

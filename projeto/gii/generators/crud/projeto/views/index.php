@@ -20,7 +20,6 @@ use yii\helpers\Url;
 use <?= $generator->indexWidgetType === 'grid' ? "yii\\grid\\GridView" : "yii\\widgets\\ListView" ?>;
 use app\components\MenuLateralModuloWidget;
 
-$infoModulo = $this->context->module->info;
 
 ?>
 

@@ -5,11 +5,14 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "public.tab_microrregioes".
+ * This is the model class for table "tab_microrregioes".
  *
  * @property integer $cod_microrregiao
  * @property integer $fk_mesorregiao
  * @property string $txt_nome
+ *
+ * @property TabMesorregioes $tabMesorregioes
+ * @property TabMunicipios[] $tabMunicipios
  */
 class TabMicrorregioes extends \projeto\db\ActiveRecord
 {
@@ -18,7 +21,7 @@ class TabMicrorregioes extends \projeto\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'public.tab_microrregioes';
+        return 'tab_microrregioes';
     }
 
     /**
@@ -43,6 +46,22 @@ class TabMicrorregioes extends \projeto\db\ActiveRecord
             'fk_mesorregiao' => 'fk_mesorregiao',
             'txt_nome' => 'Nome',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTabMesorregioes()
+    {
+        return $this->hasOne(TabMesorregioes::className(), ['cod_mesorregiao' => 'fk_mesorregiao']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTabMunicipios()
+    {
+        return $this->hasMany(TabMunicipios::className(), ['cod_microrregiao_fk' => 'cod_microrregiao']);
     }
 
     /**

@@ -49,7 +49,7 @@ class SiteController extends Controller
             ->asArray()
             ->one();
         
-		$this->titulo = 'Módulos disponíveis';
+		$this->titulo = 'Seja bem vindo';
 		return $this->render('home', [
 			'modulos' => VisUsuariosPerfisSearch::getModulosPerfisUsuario($this->user->identity->getId()),
             'txt_perfil_prestador' => $perfil['txt_perfil_prestador'],

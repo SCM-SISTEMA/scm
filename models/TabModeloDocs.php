@@ -2,98 +2,117 @@
 
 namespace app\models;
 
-use projeto\Util;
+use Yii;
 
-class TabModeloDocs extends base\TabModeloDocs
+/**
+ * This is the model class for table "tab_modelo_docs".
+ *
+ * @property integer $cod_modelo_doc
+ * @property string $sgl_id
+ * @property integer $modulo_fk
+ * @property integer $cabecalho_fk
+ * @property integer $rodape_fk
+ * @property integer $tipo_modelo_documento_fk
+ * @property integer $finalidade_fk
+ * @property string $txt_descricao
+ * @property string $txt_conteudo
+ * @property string $dte_inclusao
+ * @property string $dte_alteracao
+ * @property string $dte_exclusao
+ * @property string $txt_login_inclusao
+ *
+ * @property TabAtributosValores $tabAtributosValores
+ * @property TabAtributosValores $tabAtributosValores0
+ * @property TabAtributosValores $tabAtributosValores1
+ * @property TabAtributosValores $tabAtributosValores2
+ */
+class TabModeloDocs extends \projeto\db\ActiveRecord
 {
-	public $dsc_cabecalho;
-	public $dsc_rodape;
-	public $dsc_finalidade;
-	public $dsc_tipo_modelo_documento;
-	
-	public $camposChaveAttrVlr = [
-		'cabecalho_fk', 
-		'rodape_fk', 
-		'finalidade_fk', 
-		'tipo_modelo_documento_fk',
-	];
-	
-	public function rules()
-	{
-		$rules = parent::rules();
-		
-		// remove regra de validação do cabeçalho
-		$rules[0] = [['finalidade_fk', 'sgl_id', 'tipo_modelo_documento_fk', 'txt_conteudo'], 'required'];
-		
-		// tira as regras para 'integer' por conta dos campos self::$camposChaveAttrVlr
-		$rules[1] = [['modulo_fk'], 'integer'];
-		
-		// ...
-		$rules[] = [['finalidade_fk', 'rodape_fk', 'cabecalho_fk', 'tipo_modelo_documento_fk'], 'safe'];
-		
-		// altera a regra de validação do cabeçalho
-		$rules[] = [['cabecalho_fk'], 'required', 'when' => function ($model) {
-			return Util::attrVal($model->tipo_modelo_documento_fk) == 'tipo-modelo-documento-pdf';
-		}, 'whenClient' => 'function (attribute, value) {
-			return projeto.util.attrVal($("#tabmodelodocs-tipo_modelo_documento_fk").find("option:selected")) == "tipo-modelo-documento-pdf";
-		}'];
-		
-		// altera a regra de validação do rodapé
-		$rules[] = [['rodape_fk'], 'required', 'when' => function ($model) {
-			return Util::attrVal($model->tipo_modelo_documento_fk) == 'tipo-modelo-documento-pdf';
-		}, 'whenClient' => 'function (attribute, value) {
-			return projeto.util.attrVal($("#tabmodelodocs-tipo_modelo_documento_fk").find("option:selected")) == "tipo-modelo-documento-pdf";
-		}'];
-		
-		return $rules;
-	}
-	
-	public function attributeLabels()
-	{
-		return [
-			'cod_modelo_doc' => 'Código',
-			'modulo_fk' => 'Cód. Módulo',
-			'cabecalho_fk' => 'Cabeçalho',
-			'dsc_cabecalho' => 'Cabeçalho',
-			'rodape_fk' => 'Rodapé',
-			'dsc_rodape' => 'Rodapé',
-			'finalidade_fk' => 'Finalidade',
-			'dsc_finalidade' => 'Finalidade',
-			'tipo_modelo_documento_fk' => 'Tipo do documento',
-			'dsc_tipo_modelo_documento' => 'Tipo do documento',
-			'sgl_id' => 'Identificador',
-			'txt_descricao' => 'Descrição',
-			'txt_conteudo' => 'Conteúdo',
-			'dte_inclusao' => 'Dte Inclusao',
-			'dte_alteracao' => 'Data',
-			'dte_exclusao' => 'Dte Exclusao',
-			'txt_login_inclusao' => 'Login Inclusao',
-		];
-	}
-	
-	public function beforeSave($insert)
-	{
-		$tipoModeloDoc = Util::attrVal($this->tipo_modelo_documento_fk);
-		
-		if (parent::beforeSave($insert)) {
-			if ($tipoModeloDoc == 'tipo-modelo-documento-email') {
-				$this->cabecalho_fk = VisAtributosValores::getTupla('cabecalho-modelo-documento', 'cabecalho-sem');
-				$this->rodape_fk = VisAtributosValores::getTupla('rodape-modelo-documento', 'rodape-sem');
-			}
-			return true;
-		}
-		
-		return false;
-	}
-	
-	public function afterFind()
-	{
-		parent::afterFind();
-		static::carregarDescricaoAtributoValor([
-			'cabecalho_fk' => 'dsc_cabecalho',
-			'rodape_fk' => 'dsc_rodape',
-			'finalidade_fk' => 'dsc_finalidade',
-			'tipo_modelo_documento_fk' => 'dsc_tipo_modelo_documento',
-		]);
-	}
+    /**
+     * @inheritdoc
+     */
+    public static function tableName()
+    {
+        return 'tab_modelo_docs';
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function rules()
+    {
+        return [
+            [['sgl_id', 'cabecalho_fk', 'rodape_fk', 'tipo_modelo_documento_fk', 'finalidade_fk', 'txt_conteudo'], 'required'],
+            [['modulo_fk', 'cabecalho_fk', 'rodape_fk', 'tipo_modelo_documento_fk', 'finalidade_fk'], 'integer'],
+            [['txt_conteudo'], 'string'],
+            [['dte_inclusao', 'dte_alteracao', 'dte_exclusao'], 'safe'],
+            [['sgl_id'], 'string', 'max' => 30],
+            [['txt_descricao'], 'string', 'max' => 100],
+            [['txt_login_inclusao'], 'string', 'max' => 150],
+            [['modulo_fk', 'sgl_id'], 'unique', 'targetAttribute' => ['modulo_fk', 'sgl_id'], 'message' => 'The combination of Sgl ID and Modulo Fk has already been taken.']
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'cod_modelo_doc' => 'Cod Modelo Doc',
+            'sgl_id' => 'Sgl ID',
+            'modulo_fk' => 'Modulo Fk',
+            'cabecalho_fk' => 'Cabecalho Fk',
+            'rodape_fk' => 'Rodape Fk',
+            'tipo_modelo_documento_fk' => 'Tipo Modelo Documento Fk',
+            'finalidade_fk' => 'Finalidade Fk',
+            'txt_descricao' => 'Txt Descricao',
+            'txt_conteudo' => 'Txt Conteudo',
+            'dte_inclusao' => 'Dte Inclusao',
+            'dte_alteracao' => 'Dte Alteracao',
+            'dte_exclusao' => 'Dte Exclusao',
+            'txt_login_inclusao' => 'Txt Login Inclusao',
+        ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTabAtributosValores()
+    {
+        return $this->hasOne(TabAtributosValores::className(), ['cod_atributos_valores' => 'cabecalho_fk']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTabAtributosValores0()
+    {
+        return $this->hasOne(TabAtributosValores::className(), ['cod_atributos_valores' => 'rodape_fk']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTabAtributosValores1()
+    {
+        return $this->hasOne(TabAtributosValores::className(), ['cod_atributos_valores' => 'tipo_modelo_documento_fk']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTabAtributosValores2()
+    {
+        return $this->hasOne(TabAtributosValores::className(), ['cod_atributos_valores' => 'finalidade_fk']);
+    }
+
+    /**
+     * @inheritdoc
+     * @return TabModeloDocsQuery the active query used by this AR class.
+     */
+    public static function find()
+    {
+        return new TabModeloDocsQuery(get_called_class());
+    }
 }

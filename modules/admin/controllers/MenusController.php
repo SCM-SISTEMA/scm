@@ -109,8 +109,8 @@ class MenusController extends Controller
 			$listaPerfis = TabPerfisSearch::find()->where(['cod_modulo_fk' => $perfilMenus[0]['cod_modulo_fk']]);
 
 			$listaMenusPai = VisMenusPerfisSearch::find()->where(
-					"cod_menu_fk <> {$model->cod_menu} AND
-					 cod_modulo_fk =  {$perfilMenus[0]['cod_modulo_fk']}"
+					"cod_menu_fk <> {$model->cod_menu} /*AND
+					 cod_modulo_fk =  {$perfilMenus[0]['cod_modulo_fk']})*/"
 				)->all();
 
 			$modulo = TabModulosSearch::findOne(['cod_modulo' => $perfilMenus[0]['cod_modulo_fk']]);

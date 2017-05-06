@@ -46,7 +46,7 @@ class TabAcoes extends \projeto\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'cod_acao' => 'Cod Acao',
+            'cod_acao' => 'Chave Primaria',
             'txt_nome' => 'Nome',
             'dsc_acao' => 'Descrição',
             'txt_login_inclusao' => 'Usuário da Inclusão',
