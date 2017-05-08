@@ -15,6 +15,8 @@ class TabClienteSearch extends TabCliente {
     /**
      * @inheritdoc
      */
+    public $dadosReceita;
+    
     public function rules() {
         return [
             [['dt_inclusao', 'dt_exclusao'], 'safe'],
@@ -22,7 +24,6 @@ class TabClienteSearch extends TabCliente {
             [['cnpj'], 'string', 'max' => 18],
             [['fantasia', 'razao_social'], 'string', 'max' => 200]
         ];
-
     }
 
     /**
@@ -30,13 +31,13 @@ class TabClienteSearch extends TabCliente {
      */
     public function attributeLabels() {
 
-        $labels =   parent::attributeLabels();
-            $labels['cnpj'] = 'CNPJ';
-            $labels['ie'] = 'Inscrição Estadual';
-            $labels['fantasia'] = 'Fantasia';
-            $labels['razao_social'] =  'Razão Social';
-            $labels['situacao'] = 'Ativo?';
-        
+        $labels = parent::attributeLabels();
+        $labels['cnpj'] = 'CNPJ';
+        $labels['ie'] = 'Inscrição Estadual';
+        $labels['fantasia'] = 'Fantasia';
+        $labels['razao_social'] = 'Razão Social';
+        $labels['situacao'] = 'Ativo?';
+
         return array_merge(parent::attributeLabels(), $labels);
     }
 
@@ -79,6 +80,27 @@ class TabClienteSearch extends TabCliente {
         $query->andWhere($this->tableName() . '.dt_exclusao IS NULL');
 
         return $dataProvider;
+    }
+
+    public function buscaCliente() {
+        $ch = curl_init();
+
+        $nu_cnpj = \projeto\Util::retiraCaracter($this->cnpj);
+        $url = "http://receitaws.com.br/v1/cnpj/" . $nu_cnpj;
+        curl_setopt_array($ch, array
+            (
+            CURLOPT_URL => $url,
+            CURLOPT_RETURNTRANSFER => TRUE
+        ));
+
+
+        $response = curl_exec($ch);
+        curl_close($ch);
+        $dados = json_decode($response);
+
+        $this->razao_social = $dados->nome;
+        $this->fantasia = $dados->fantasia;
+        $this->dadosReceita = $dados;
     }
 
 }

@@ -140,27 +140,32 @@ class TabAtributosValoresSearch extends TabAtributosValores {
      * @param String $valor do índice do array do atributo valor
      * @return String
      */
-    public static function getAtributoValorAtributo($sgl_chave, $valor = null) {
+    public static function getAtributoValorAtributo($sgl_chave, $valor = null, $chave = false) {
         $atributo = TabAtributosSearch::find()->where(['sgl_chave' => $sgl_chave])->asArray()->one();
+        
         $dados = self::find()
                 ->where(['fk_atributos_valores_atributos_id' => $atributo['cod_atributos']])
                 ->asArray()
                 ->all();
 
-
-
         if (!$valor) {
             return $dados;
         } elseif ($dados) {
             foreach ($dados as $key => $value) {
-                if ($valor == $value['sgl_valor']) {
-                    return $value['cod_atributos_valores'];
+                if ($chave) {
+                    if (\projeto\Util::tirarAcentos(strtoupper($valor)) == strtoupper(\projeto\Util::tirarAcentos($value['dsc_descricao']))) {
+                        return $value['cod_atributos_valores'];
+                    }
+                } else {
+       
+                    if ($valor == $value['sgl_valor']) {
+                        return $value['cod_atributos_valores'];
+                    }
                 }
             }
         } else {
             return $dados;
         }
-
     }
 
     public function afterSave($insert, $changedAttributes) {

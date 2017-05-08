@@ -45,6 +45,12 @@ use Yii;
  * @property string $faturamento_de
  * @property string $faturamento_industrial
  * @property string $faturamento_adicionado
+ * @property string $dt_inclusao
+ * @property string $dt_exclusao
+ *
+ * @property TabEmpresaMunicipio[] $tabEmpresaMunicipio
+ * @property TabPlanosMenorMaior[] $tabPlanosMenorMaior
+ * @property TabTipoContrato $tabTipoContrato
  */
 class TabSici extends \projeto\db\ActiveRecord
 {
@@ -65,6 +71,7 @@ class TabSici extends \projeto\db\ActiveRecord
             [['cod_tipo_contrato_fk', 'qtd_funcionarios_fichados', 'qtd_funcionarios_terceirizados', 'num_central_atendimento', 'total_fibra_prestadora', 'total_fibra_terceiros', 'total_crescimento_prestadora', 'total_crescimento_terceiros', 'total_fibra_implantada_prestadora', 'total_fibra_implantada_terceiros', 'total_fibra_crescimento_prop_prestadora', 'total_fibra_crescimento_prop_terceiros'], 'integer'],
             [['receita_bruta', 'despesa_operacao_manutencao', 'despesa_publicidade', 'despesa_vendas', 'despesa_link', 'aliquota_nacional', 'receita_icms', 'receita_pis', 'receita_confins', 'receita_liquida', 'valor_consolidado', 'aplicacao_equipamento', 'total_marketing_propaganda', 'aplicacao_software', 'total_pesquisa_desenvolvimento', 'aplicacao_servico', 'aplicacao_callcenter', 'faturamento_de', 'faturamento_industrial', 'faturamento_adicionado'], 'number'],
             [['obs_receita', 'obs_despesa'], 'string'],
+            [['dt_inclusao', 'dt_exclusao'], 'safe'],
             [['mes_ano_referencia'], 'string', 'max' => 7],
             [['fust'], 'string', 'max' => 30],
             [['responsavel'], 'string', 'max' => 150]
@@ -115,7 +122,33 @@ class TabSici extends \projeto\db\ActiveRecord
             'faturamento_de' => 'Faturamento com prestação do serviço DE telecomunicações da empresa',
             'faturamento_industrial' => 'Faturamento bruto decorrente do provimento de serviços de valor adicionado (não é parceria)',
             'faturamento_adicionado' => 'Faturamento bruto decorrente do provimento de serviços de valor adicionado (não é parceria)',
+            'dt_inclusao' => 'Dt Inclusao',
+            'dt_exclusao' => 'Dt Exclusao',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTabEmpresaMunicipio()
+    {
+        return $this->hasMany(TabEmpresaMunicipio::className(), ['cod_sici_fk' => 'cod_sici']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTabPlanosMenorMaior()
+    {
+        return $this->hasMany(TabPlanosMenorMaior::className(), ['cod_sici_fk' => 'cod_sici']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTabTipoContrato()
+    {
+        return $this->hasOne(TabTipoContrato::className(), ['cod_tipo_contrato' => 'cod_tipo_contrato_fk']);
     }
 
     /**

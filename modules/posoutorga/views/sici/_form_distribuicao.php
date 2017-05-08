@@ -2,8 +2,8 @@
 <?php foreach ($empresas as $key => $empresa) : ?>
     <?php
     $nome = $empresa[0]->cod_municipio_fk;
-    if ($nome) {
 
+    if ($nome) {
         $nome = app\models\TabMunicipiosSearch::find()->where(['cod_municipio' => $nome])->one();
         if (!$nome) {
             $nome = $uf = '';
@@ -30,6 +30,6 @@
         'encodeLabels' => false,
     ])
     ?>
-  
+
     <hr/>
 <?php endforeach; ?>

@@ -23,14 +23,14 @@ class TabPlanosSearch extends TabPlanos {
     public $total_12m_34m;
     public $total_34m;
     public $total;
+    public $tipo_plano_sgl;
 
     public function rules() {
-
-        $rules = [
-                //exemplo [['txt_nome', 'cod_modulo_fk'], 'required'],
+        return [
+            [['valor_512', 'valor_512k_2m', 'valor_2m_12m', 'valor_12m_34m', 'valor_34m'], 'number'],
+            [['obs'], 'string'],
+            [['tipo_plano_fk', 'tipo_plano_sgl'], 'safe']
         ];
-
-        return array_merge($rules, parent::rules());
     }
 
     /**
@@ -86,6 +86,37 @@ class TabPlanosSearch extends TabPlanos {
         $query->andWhere($this->tableName() . '.dt_exclusao IS NULL');
 
         return $dataProvider;
+    }
+
+    public static function getITEM9($cod_sici, $tipo_tabela_fk) {
+        $planos = \app\modules\posoutorga\models\TabPlanosSearch::find()->select(' valor_512, valor_512k_2m, valor_2m_12m, valor_12m_34m, 
+       valor_34m, (SELECT sgl_valor
+  FROM public.tab_atributos_valores
+  where cod_atributos_valores=tipo_plano_fk) as tipo_plano_sgl')->where(['cod_chave' => $cod_sici, 'tipo_tabela_fk' => $tipo_tabela_fk])->orderBy('tipo_plano_sgl')->asArray()->all();
+
+
+        foreach ($planos as $valor) {
+
+            foreach ($valor as $key => $value) {
+                if ($key == 'tipo_plano_sgl')
+                    continue;
+                switch ($key) {
+                    case 'valor_512': $item = 'a';
+                        break;
+                    case 'valor_512k_2m': $item = 'b';
+                        break;
+                    case 'valor_2m_12m': $item = 'c';
+                        break;
+                    case 'valor_12m_34m': $item = 'd';
+                        break;
+                    case 'valor_34m': $item = 'e';
+                        break;
+                }
+
+                $dados[$valor['tipo_plano_sgl']][$item] = $value;
+            }
+        }
+        return $dados;
     }
 
 }

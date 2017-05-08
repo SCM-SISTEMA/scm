@@ -10,39 +10,36 @@ use app\modules\posoutorga\models\TabPlanosMenorMaior;
 /**
  * TabPlanosMenorMaiorSearch represents the model behind the search form about `app\modules\posoutorga\models\TabPlanosMenorMaior`.
  */
-class TabPlanosMenorMaiorSearch extends TabPlanosMenorMaior
-{
-    /**
-     * @inheritdoc
-     */ 
-    public function rules()
-    {
+class TabPlanosMenorMaiorSearch extends TabPlanosMenorMaior {
 
-		$rules =  [
-             //exemplo [['txt_nome', 'cod_modulo_fk'], 'required'],
-        ];
-		
-		return array_merge($rules, parent::rules());
-    }
-	
-	/**
-    * @inheritdoc
-    */
-	public function attributeLabels()
-    {
-
-		$labels = [
-            //exemplo 'campo' => 'label',         
-        ];
-		
-		return array_merge( parent::attributeLabels(), $labels);
-    }
-	
     /**
      * @inheritdoc
      */
-    public function scenarios()
-    {
+    public function rules() {
+
+        $rules = [
+                //exemplo [['txt_nome', 'cod_modulo_fk'], 'required'],
+        ];
+
+        return array_merge($rules, parent::rules());
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels() {
+
+        $labels = [
+                //exemplo 'campo' => 'label',         
+        ];
+
+        return array_merge(parent::attributeLabels(), $labels);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function scenarios() {
         // bypass scenarios() implementation in the parent class
         return Model::scenarios();
     }
@@ -54,8 +51,7 @@ class TabPlanosMenorMaiorSearch extends TabPlanosMenorMaior
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
-    {
+    public function search($params) {
         $query = TabPlanosMenorMaiorSearch::find();
 
         $dataProvider = new ActiveDataProvider([
@@ -73,8 +69,39 @@ class TabPlanosMenorMaiorSearch extends TabPlanosMenorMaior
             $this->tableName() . '.cod_plano_fk' => $this->cod_plano_fk,
         ]);
 
-		$query->andWhere($this->tableName().'.dt_exclusao IS NULL');
-		
+        $query->andWhere($this->tableName() . '.dt_exclusao IS NULL');
+
         return $dataProvider;
     }
+
+    public static function getITEM10($cod_sici) {
+        $planos = \app\modules\posoutorga\models\TabPlanosMenorMaiorSearch::find()->select('valor_menos_1m, valor_menos_1m_ded, valor_maior_1m ,valor_maior_1m_ded 
+       , (SELECT sgl_valor
+  FROM public.tab_atributos_valores
+  where cod_atributos_valores=tipo_plano_fk) as tipo_plano_sgl')->where(['cod_sici_fk' => $cod_sici])->orderBy('tipo_plano_sgl')->asArray()->all();
+
+ 
+        foreach ($planos as $valor) {
+
+            foreach ($valor as $key => $value) {
+                if ($key == 'tipo_plano_sgl')
+                    continue;
+                switch ($key) {
+                    case 'valor_menos_1m': $item = 'a';
+                        break;
+                    case 'valor_menos_1m_ded': $item = 'b';
+                        break;
+                    case 'valor_maior_1m': $item = 'c';
+                        break;
+                    case 'valor_maior_1m_ded': $item = 'd';
+                        break;
+                }
+
+                $dados[$valor['tipo_plano_sgl']][$item] = $value;
+            }
+        }
+ 
+        return $dados;
+    }
+
 }

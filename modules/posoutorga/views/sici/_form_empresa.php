@@ -32,18 +32,24 @@
         <?= $form->field($cliente, 'cnpj')->textInput(['maxlength' => true]) ?>
     </div>
 
-    <div class='col-lg-4'>
-      
-         <?=
-            $form->field($sici, 'mes_ano_referencia')->dropDownList(
-                    yii\helpers\ArrayHelper::map(
-                           \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('mes'), 'cod_atributos_valores', 'dsc_descricao'
-                    ), ['prompt' => $this->app->params['txt-prompt-select'],
-               
-                    ]);
-            ?>
-       
+    <div class='col-lg-2'>
+
+        <?=
+        $form->field($sici, 'mes_ano_referencia')->dropDownList(
+                yii\helpers\ArrayHelper::map(
+                        \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('mes'), 'cod_atributos_valores', 'dsc_descricao'
+                ), ['prompt' => $this->app->params['txt-prompt-select'],
+        ]);
+        ?>
+
     </div>
+
+    <div class='col-lg-2'> 
+
+        <?= $form->field($sici, 'ano')->textInput(['maxlength' => true, 'disabled' => true]) ?>
+
+    </div>
+
     <div class='col-sm-4'>
         <?=
         $form->field($contatoC, 'contato')->widget(\yii\widgets\MaskedInput::className(), [

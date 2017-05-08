@@ -8,41 +8,40 @@ use yii\data\ActiveDataProvider;
 use app\modules\posoutorga\models\TabEmpresaMunicipio;
 
 /**
+ * @property TabMunicipios $tabMunicipios
  * TabEmpresaMunicipioSearch represents the model behind the search form about `app\modules\posoutorga\models\TabEmpresaMunicipio`.
  */
-class TabEmpresaMunicipioSearch extends TabEmpresaMunicipio
-{
-    /**
-     * @inheritdoc
-     */ 
-    public function rules()
-    {
+class TabEmpresaMunicipioSearch extends TabEmpresaMunicipio {
 
-		$rules =  [
-             //exemplo [['txt_nome', 'cod_modulo_fk'], 'required'],
-        ];
-		
-		return array_merge($rules, parent::rules());
-    }
-	
-	/**
-    * @inheritdoc
-    */
-	public function attributeLabels()
-    {
-                $labels = parent::attributeLabels();
-
-		$labels['cod_municipio_fk'] = 'Município';
-                $labels['uf'] = 'UF';
-		
-		return $labels;
-    }
-	
     /**
      * @inheritdoc
      */
-    public function scenarios()
-    {
+    public function rules() {
+
+        $rules = [
+                //exemplo [['txt_nome', 'cod_modulo_fk'], 'required'],
+        ];
+
+        return array_merge($rules, parent::rules());
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels() {
+        $labels = parent::attributeLabels();
+
+        $labels['cod_municipio_fk'] = 'Município';
+        $labels['uf'] = 'UF';
+        $labels['tecnologia_fk'] = 'Tecnologia';
+
+        return $labels;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function scenarios() {
         // bypass scenarios() implementation in the parent class
         return Model::scenarios();
     }
@@ -54,8 +53,7 @@ class TabEmpresaMunicipioSearch extends TabEmpresaMunicipio
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
-    {
+    public function search($params) {
         $query = TabEmpresaMunicipioSearch::find();
 
         $dataProvider = new ActiveDataProvider([
@@ -71,12 +69,110 @@ class TabEmpresaMunicipioSearch extends TabEmpresaMunicipio
         ]);
 
         $query->andFilterWhere(['ilike', $this->tableName() . '.tecnologia', $this->tecnologia])
-            ->andFilterWhere(['ilike', $this->tableName() . '.cod_municipio_fk', $this->cod_municipio_fk])
-            ->andFilterWhere(['ilike', $this->tableName() . '.municipio', $this->municipio])
-            ->andFilterWhere(['ilike', $this->tableName() . '.uf', $this->uf]);
+                ->andFilterWhere(['ilike', $this->tableName() . '.cod_municipio_fk', $this->cod_municipio_fk])
+                ->andFilterWhere(['ilike', $this->tableName() . '.municipio', $this->municipio])
+                ->andFilterWhere(['ilike', $this->tableName() . '.uf', $this->uf]);
 
-		$query->andWhere($this->tableName().'.dt_exclusao IS NULL');
-		
+        $query->andWhere($this->tableName() . '.dt_exclusao IS NULL');
+
         return $dataProvider;
     }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTabMunicipios() {
+        return $this->hasOne(\app\models\TabMunicipios::className(), ['cod_municipio' => 'cod_municipio_fk']);
+    }
+
+    public static function buscaPlanoEmpresasTecnologia($cod_sici) {
+        $empresa_municipio = \app\modules\posoutorga\models\TabEmpresaMunicipioSearch::find()
+                        ->where(['cod_sici_fk' => $cod_sici])->all();
+
+        foreach ($empresa_municipio as $key => $value) {
+
+            $planom = \app\modules\posoutorga\models\TabPlanosSearch::find()
+                    ->select('
+                    valor_512, valor_512k_2m, valor_2m_12m,valor_12m_34m,valor_34m, 
+                    (valor_512+valor_512k_2m+ valor_2m_12m+valor_12m_34m+valor_34m) as total, 
+                    (SELECT sgl_valor FROM public.tab_atributos_valores where cod_atributos_valores=tipo_plano_fk) as tipo_plano_sgl')
+                    ->where(['cod_chave' => $value->cod_empresa_municipio, 'tipo_tabela_fk' => $value->tableName()])
+                    ->orderBy('tipo_plano_sgl')
+                    ->asArray()
+                    ->all();
+
+            foreach ($planom as $pla) {
+                $planoEmpresa[$value->tabMunicipios->cod_ibge][$value->tecnologia_fk][$pla['tipo_plano_sgl']] = $pla;
+            }
+        }
+        return $planoEmpresa;
+    }
+
+    public static function getIPL6IM($cod_sici) {
+        $empresa_municipio = \app\modules\posoutorga\models\TabEmpresaMunicipioSearch::find()
+                        ->where(['cod_sici_fk' => $cod_sici])->all();
+
+        foreach ($empresa_municipio as $munK => $municipio) {
+            $planoEmpresa[$municipio->tabMunicipios->cod_ibge]['capacidade_municipio'] += $municipio->capacidade_municipio;  
+            $planoEmpresa[$municipio->tabMunicipios->cod_ibge]['capacidade_servico'] += $municipio->capacidade_servico;
+        }
+
+        return $planoEmpresa;
+    }
+
+    public static function getQAIPL4SM($cod_sici) {
+        $dados = TabEmpresaMunicipioSearch::buscaPlanoEmpresasTecnologia($cod_sici);
+
+        foreach ($dados as $munK => $municipio) {
+            foreach ($municipio as $tK => $tecnologia) {
+                foreach ($tecnologia as $pk => $pessoa) {
+                    $planos[$munK][$tK]['15'] += $pessoa['valor_512'];
+                    $planos[$munK][$tK]['16'] += $pessoa['valor_512k_2m'];
+                    $planos[$munK][$tK]['17'] += $pessoa['valor_2m_12m'];
+                    $planos[$munK][$tK]['18'] += $pessoa['valor_12m_34m'];
+                    $planos[$munK][$tK]['19'] += $pessoa['valor_34m'];
+                    $planos[$munK][$tK]['total'] += $pessoa['total'];
+                }
+            }
+        }
+
+        return $planos;
+    }
+
+    public static function getIPL3($cod_sici) {
+
+        $dados = TabEmpresaMunicipioSearch::buscaPlanoEmpresasTecnologia($cod_sici);
+
+        foreach ($dados as $munK => $municipio) {
+            foreach ($municipio as $tK => $tecnologia) {
+                foreach ($tecnologia as $pk => $pessoa) {
+                    $planos[$munK][$pk]['valor_512'] += $pessoa['valor_512'];
+                    $planos[$munK][$pk]['valor_512k_2m'] += $pessoa['valor_512k_2m'];
+                    $planos[$munK][$pk]['valor_2m_12m'] += $pessoa['valor_2m_12m'];
+                    $planos[$munK][$pk]['valor_12m_34m'] += $pessoa['valor_12m_34m'];
+                    $planos[$munK][$pk]['valor_34m'] += $pessoa['valor_34m'];
+                    $planos[$munK][$pk]['total'] += $pessoa['total'];
+                }
+            }
+        }
+
+        return $planos;
+    }
+
+    public static function buscaIpl3($cod_sici) {
+
+        $dados = TabEmpresaMunicipioSearch::getIPL3($cod_sici);
+        print_r($dados);
+        exit;
+        foreach ($dados as $munK => $municipio) {
+            foreach ($municipio as $pk => $pessoa) {
+
+                $planos[$munK][$pk] += $pessoa['total'];
+            }
+        }
+        print_r($planos);
+        exit;
+        return $planos;
+    }
+
 }

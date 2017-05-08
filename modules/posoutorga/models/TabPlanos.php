@@ -15,10 +15,8 @@ use Yii;
  * @property string $valor_34m
  * @property integer $tipo_plano_fk
  * @property integer $cod_chave
- * @property integer $tipo_tabela_fk
  * @property string $obs
- *
- * @property TabPlanosMenorMaior[] $tabPlanosMenorMaior
+ * @property string $tipo_tabela_fk
  */
 class TabPlanos extends \projeto\db\ActiveRecord
 {
@@ -37,8 +35,9 @@ class TabPlanos extends \projeto\db\ActiveRecord
     {
         return [
             [['valor_512', 'valor_512k_2m', 'valor_2m_12m', 'valor_12m_34m', 'valor_34m'], 'number'],
-            [['tipo_plano_fk', 'cod_chave', 'tipo_tabela_fk'], 'integer'],
-            [['obs'], 'string']
+            [['tipo_plano_fk', 'cod_chave'], 'integer'],
+            [['obs'], 'string'],
+            [['tipo_tabela_fk'], 'string', 'max' => 100]
         ];
     }
 
@@ -57,18 +56,10 @@ class TabPlanos extends \projeto\db\ActiveRecord
             'tipo_plano_fk' => 'atributos tipo-plano
 pessoa fisica / juridica',
             'cod_chave' => 'Cod Chave',
+            'obs' => 'Observação',
             'tipo_tabela_fk' => 'atributo tipo-cadastro-plano
 se for plano ou por municipio',
-            'obs' => 'Observação',
         ];
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getTabPlanosMenorMaior()
-    {
-        return $this->hasMany(TabPlanosMenorMaior::className(), ['cod_plano_fk' => 'cod_plano']);
     }
 
     /**

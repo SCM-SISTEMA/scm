@@ -19,7 +19,7 @@ class SiciController extends Controller {
      * @return mixed
      */
     public function actionIndex() {
-        $searchModel = new TabSiciSearch();
+        $searchModel = new \app\modules\posoutorga\models\VisSiciClienteSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         $this->titulo = 'Gerenciar Sici';
@@ -77,6 +77,486 @@ class SiciController extends Controller {
         ]);
     }
 
+    public function actionGerar($cod_sici) {
+
+
+        $dom = new \DOMDocument('1.0', "UTF-8");
+
+        $root = $dom->createElement('root');
+
+        $sici = TabSiciSearch::find($cod_sici)->one();
+        $contrato = $sici->tabTipoContrato->tabContrato;
+        $cliente = \app\models\TabClienteSearch::find()->where(['cod_cliente' => $contrato->cod_cliente_fk])->one();
+
+        $uploadSICI = $dom->createElement('UploadSICI');
+        $mes = $dom->createAttribute('mes');
+        $mes->value = substr($sici->mes_ano_referencia, 0, 2);
+        $uploadSICI->appendChild($mes);
+
+        $ano = $dom->createAttribute('ano');
+        $ano->value = substr($sici->mes_ano_referencia, 3, 4);
+        $uploadSICI->appendChild($ano);
+
+        $outorga = $dom->createElement('Outorga');
+        $fistel = $dom->createAttribute('fistel');
+        $fistel->value = $cliente->fistel;
+        $outorga->appendChild($fistel);
+
+        $endereco = \app\models\TabEnderecoSearch::find()->where(['chave_fk' => $cliente->cod_cliente, 'tipo_tabela_fk' => $cliente->tableName()])->one();
+
+        // ITEM4
+        $indicador = $dom->createElement('Indicador');
+        $ITEM4 = $dom->createAttribute('Sigla');
+        $ITEM4->value = 'ITEM4';
+        $indicador->appendChild($ITEM4);
+
+        $conteudo = $dom->createElement('Conteudo');
+        $uf = $dom->createAttribute('uf');
+        $item = $dom->createAttribute('item');
+        $valor = $dom->createAttribute('valor');
+        $uf->value = $endereco->tabMunicipios->sgl_estado_fk;
+        $item->value = 'a';
+        $valor->value = empty($sici->qtd_funcionarios_fichados) ? '0,00' : \projeto\Util::decimalFormatToBank($sici->qtd_funcionarios_fichados);
+        $conteudo->appendChild($uf);
+        $conteudo->appendChild($item);
+        $conteudo->appendChild($valor);
+        $indicador->appendChild($conteudo);
+
+        $outorga->appendChild($indicador);
+
+
+        // ITEM5
+        $indicador = $dom->createElement('Indicador');
+        $ITEM = $dom->createAttribute('Sigla');
+        $ITEM->value = 'ITEM5';
+        $indicador->appendChild($ITEM);
+
+
+        $conteudo = $dom->createElement('Conteudo');
+        $uf = $dom->createAttribute('uf');
+        $item = $dom->createAttribute('item');
+        $valor = $dom->createAttribute('valor');
+        $uf->value = $endereco->tabMunicipios->sgl_estado_fk;
+        $item->value = 'a';
+        $valor->value = empty($sici->qtd_funcionarios_terceirizados) ? '0,00' : \projeto\Util::decimalFormatToBank($sici->qtd_funcionarios_terceirizados);
+        $conteudo->appendChild($uf);
+        $conteudo->appendChild($item);
+        $conteudo->appendChild($valor);
+        $indicador->appendChild($conteudo);
+
+        $outorga->appendChild($indicador);
+
+
+        // ITEM9
+        $planos = \app\modules\posoutorga\models\TabPlanosSearch::getITEM9($sici->cod_sici, $sici->tableName());
+        $indicador = $dom->createElement('Indicador');
+        $ITEM = $dom->createAttribute('Sigla');
+        $ITEM->value = 'ITEM9';
+        $indicador->appendChild($ITEM);
+
+
+        foreach ($planos as $key => $plano) {
+
+            $pessoa = $dom->createElement('Pessoa');
+            $item = $dom->createAttribute('item');
+            $item->value = $key;
+            $pessoa->appendChild($item);
+
+            foreach ($plano as $k => $faixa) {
+
+                $conteudo = $dom->createElement('Conteudo');
+
+                $uf = $dom->createAttribute('uf');
+                $item = $dom->createAttribute('item');
+                $valor = $dom->createAttribute('valor');
+
+                $uf->value = $endereco->tabMunicipios->sgl_estado_fk;
+                $item->value = $k;
+                $valor->value = empty($faixa) ? '0,00' : \projeto\Util::decimalFormatToBank($faixa);
+
+                $conteudo->appendChild($uf);
+                $conteudo->appendChild($item);
+                $conteudo->appendChild($valor);
+
+                $pessoa->appendChild($conteudo);
+            }
+            $indicador->appendChild($pessoa);
+        }
+        $outorga->appendChild($indicador);
+
+
+        // ITEM10
+        $planosMM = \app\modules\posoutorga\models\TabPlanosMenorMaiorSearch::getITEM10($sici->cod_sici);
+        $indicador = $dom->createElement('Indicador');
+        $ITEM = $dom->createAttribute('Sigla');
+        $ITEM->value = 'ITEM10';
+        $indicador->appendChild($ITEM);
+
+
+        foreach ($planosMM as $key => $plano) {
+
+            $pessoa = $dom->createElement('Pessoa');
+            $item = $dom->createAttribute('item');
+            $item->value = $key;
+            $pessoa->appendChild($item);
+
+            foreach ($plano as $k => $faixa) {
+
+                $conteudo = $dom->createElement('Conteudo');
+
+                $uf = $dom->createAttribute('uf');
+                $item = $dom->createAttribute('item');
+                $valor = $dom->createAttribute('valor');
+
+                $uf->value = $endereco->tabMunicipios->sgl_estado_fk;
+                $item->value = $k;
+                $valor->value = empty($faixa) ? '0,00' : \projeto\Util::decimalFormatToBank($faixa);
+
+                $conteudo->appendChild($uf);
+                $conteudo->appendChild($item);
+                $conteudo->appendChild($valor);
+
+                $pessoa->appendChild($conteudo);
+            }
+            $indicador->appendChild($pessoa);
+        }
+        $outorga->appendChild($indicador);
+
+
+        // IPL3
+        $empresa_municipio = \app\modules\posoutorga\models\TabEmpresaMunicipioSearch::getIPL3($cod_sici);
+
+        $indicador = $dom->createElement('Indicador');
+        $ITEM = $dom->createAttribute('Sigla');
+        $ITEM->value = 'IPL3';
+        $indicador->appendChild($ITEM);
+
+        foreach ($empresa_municipio as $item => $valor) {
+            $municipio = $dom->createElement('Municipio');
+            $codmunicipio = $dom->createAttribute('codmunicipio');
+            $codmunicipio->value = $item;
+            $municipio->appendChild($codmunicipio);
+
+            foreach ($valor as $i => $val) {
+                $pessoa = $dom->createElement('Pessoa');
+
+                $pitem = $dom->createAttribute('item');
+                $pitem->value = $i;
+                $pessoa->appendChild($pitem);
+
+                $conteudo = $dom->createElement('Conteudo');
+
+                $citem = $dom->createAttribute('item');
+                $valor = $dom->createAttribute('valor');
+
+                $citem->value = 'a';
+                $valor->value = empty($val['total']) ? '0' : (int) $val['total'];
+
+                $conteudo->appendChild($citem);
+                $conteudo->appendChild($valor);
+
+                $pessoa->appendChild($conteudo);
+
+                $municipio->appendChild($pessoa);
+            }
+            $indicador->appendChild($municipio);
+        }
+        $outorga->appendChild($indicador);
+
+
+
+        // QAIPL4SM
+        $indicador = $dom->createElement('Indicador');
+        $ITEM = $dom->createAttribute('Sigla');
+        $ITEM->value = 'QAIPL4SM';
+        $indicador->appendChild($ITEM);
+
+        $empresa_municipio = \app\modules\posoutorga\models\TabEmpresaMunicipioSearch::getQAIPL4SM($cod_sici);
+        foreach ($empresa_municipio as $item => $valor) {
+            $municipio = $dom->createElement('Municipio');
+            $codmunicipio = $dom->createAttribute('codmunicipio');
+            $codmunicipio->value = $item;
+            $municipio->appendChild($codmunicipio);
+
+            foreach ($valor as $iT => $tecno) {
+                $tec = \app\models\TabAtributosValoresSearch::findOne($iT);
+
+                $tecnologia = $dom->createElement('Tecnologia');
+                $tItem = $dom->createAttribute('item');
+                $tItem->value = strtoupper($tec->sgl_valor);
+                $tecnologia->appendChild($tItem);
+
+                $conteudo = $dom->createElement('Conteudo');
+                $nome = $dom->createAttribute('nome');
+                $valor = $dom->createAttribute('valor');
+                $nome->value = 'QAIPL4SM';
+                $valor->value = empty($tecno['total']) ? '0,00' : \projeto\Util::decimalFormatToBank($tecno['total']);
+
+                $conteudo->appendChild($nome);
+                $conteudo->appendChild($valor);
+
+                $tecnologia->appendChild($tItem);
+
+                foreach ($tecno as $i => $val) {
+
+                    if ($i == 'total') {
+                        $conteudo = $dom->createElement('Conteudo');
+                        $nome = $dom->createAttribute('nome');
+                        $valor = $dom->createAttribute('valor');
+                        $nome->value = $i;
+                        $valor->value = empty($val) ? '0,00' : \projeto\Util::decimalFormatToBank($val);
+
+                        $conteudo->appendChild($nome);
+                        $conteudo->appendChild($valor);
+                    } else {
+
+                        $conteudo = $dom->createElement('Conteudo');
+                        $faixa = $dom->createAttribute('faixa');
+                        $valor = $dom->createAttribute('valor');
+                        $faixa->value = $i;
+                        $valor->value = empty($val) ? '0,00' : \projeto\Util::decimalFormatToBank($val);
+
+                        $conteudo->appendChild($faixa);
+                        $conteudo->appendChild($valor);
+                    }
+                    $tecnologia->appendChild($conteudo);
+                }
+                $municipio->appendChild($tecnologia);
+            }
+
+            $indicador->appendChild($municipio);
+        }
+
+        $outorga->appendChild($indicador);
+
+
+
+        // IPL6IM
+        $indicador = $dom->createElement('Indicador');
+        $ITEM = $dom->createAttribute('Sigla');
+        $ITEM->value = 'IPL6IM';
+        $indicador->appendChild($ITEM);
+
+        $empresa_municipio = \app\modules\posoutorga\models\TabEmpresaMunicipioSearch::getIPL6IM($cod_sici);
+
+        foreach ($empresa_municipio as $key => $value) {
+
+            $conteudo = $dom->createElement('Conteudo');
+            $codmunicipio = $dom->createAttribute('codmunicipio');
+            $valor = $dom->createAttribute('valor');
+            $codmunicipio->value = $key;
+            $valor->value = empty($value['capacidade_municipio']) ? '0,00' : \projeto\Util::decimalFormatToBank($value['capacidade_municipio']);
+
+            $conteudo->appendChild($codmunicipio);
+            $conteudo->appendChild($valor);
+            $indicador->appendChild($conteudo);
+        }
+
+
+        $outorga->appendChild($indicador);
+
+
+        // IAU1
+        $indicador = $dom->createElement('Indicador');
+        $ITEM = $dom->createAttribute('Sigla');
+        $ITEM->value = 'IAU1';
+        $indicador->appendChild($ITEM);
+
+        $conteudo = $dom->createElement('Conteudo');
+        $valor = $dom->createAttribute('valor');
+        $valor->value = empty($sici->num_central_atendimento) ? '0,00' : $sici->num_central_atendimento;
+
+        $conteudo->appendChild($valor);
+        $indicador->appendChild($conteudo);
+
+
+        // IPL1
+        $indicador = $dom->createElement('Indicador');
+        $ITEM = $dom->createAttribute('Sigla');
+        $ITEM->value = 'IPL1';
+        $indicador->appendChild($ITEM);
+
+        foreach ($sici->getIPL1() as $key => $value) {
+            $conteudo = $dom->createElement('Conteudo');
+            $item = $dom->createAttribute('item');
+            $valor = $dom->createAttribute('valor');
+            $item->value = $key;
+            $valor->value = empty($value) ? '0,00' : \projeto\Util::decimalFormatToBank($value);
+
+            $conteudo->appendChild($item);
+            $conteudo->appendChild($valor);
+
+            $indicador->appendChild($conteudo);
+        }
+        $outorga->appendChild($indicador);
+
+
+        // IPL2
+        $indicador = $dom->createElement('Indicador');
+        $ITEM = $dom->createAttribute('Sigla');
+        $ITEM->value = 'IPL2';
+        $indicador->appendChild($ITEM);
+
+        foreach ($sici->getIPL2() as $key => $value) {
+            $conteudo = $dom->createElement('Conteudo');
+            $item = $dom->createAttribute('item');
+            $valor = $dom->createAttribute('valor');
+            $item->value = $key;
+            $valor->value = empty($value) ? '0,00' : \projeto\Util::decimalFormatToBank($value);
+
+            $conteudo->appendChild($item);
+            $conteudo->appendChild($valor);
+
+            $indicador->appendChild($conteudo);
+        }
+        $outorga->appendChild($indicador);
+
+
+
+        // IEM1
+        $indicador = $dom->createElement('Indicador');
+        $ITEM = $dom->createAttribute('Sigla');
+        $ITEM->value = 'IEM1';
+        $indicador->appendChild($ITEM);
+
+        foreach ($sici->getIEM1() as $key => $value) {
+
+            $conteudo = $dom->createElement('Conteudo');
+            $item = $dom->createAttribute('item');
+            $valor = $dom->createAttribute('valor');
+            $item->value = $key;
+
+            $valor->value = empty($value) ? '0,00' : \projeto\Util::decimalFormatToBank($value);
+
+            $conteudo->appendChild($item);
+            $conteudo->appendChild($valor);
+
+            $indicador->appendChild($conteudo);
+        }
+
+        $outorga->appendChild($indicador);
+
+
+        // IEM2
+        $indicador = $dom->createElement('Indicador');
+        $ITEM = $dom->createAttribute('Sigla');
+        $ITEM->value = 'IEM2';
+        $indicador->appendChild($ITEM);
+
+        foreach ($sici->getIEM2() as $key => $value) {
+
+            $conteudo = $dom->createElement('Conteudo');
+            $item = $dom->createAttribute('item');
+            $valor = $dom->createAttribute('valor');
+            $item->value = $key;
+
+            $valor->value = empty($value) ? '0,00' : \projeto\Util::decimalFormatToBank($value);
+
+            $conteudo->appendChild($item);
+            $conteudo->appendChild($valor);
+
+            $indicador->appendChild($conteudo);
+        }
+        $outorga->appendChild($indicador);
+
+        // IEM3
+        $indicador = $dom->createElement('Indicador');
+        $ITEM = $dom->createAttribute('Sigla');
+        $ITEM->value = 'IEM3';
+        $indicador->appendChild($ITEM);
+
+        $conteudo = $dom->createElement('Conteudo');
+        $item = $dom->createAttribute('item');
+        $valor = $dom->createAttribute('valor');
+        $item->value = 'a';
+        $valor->value = empty($sici->valor_consolidado) ? '0,00' : \projeto\Util::decimalFormatToBank($sici->valor_consolidado);
+
+        $conteudo->appendChild($item);
+        $conteudo->appendChild($valor);
+
+        $indicador->appendChild($conteudo);
+        $outorga->appendChild($indicador);
+
+        // IEM6
+        $indicador = $dom->createElement('Indicador');
+        $ITEM = $dom->createAttribute('Sigla');
+        $ITEM->value = 'IEM6';
+        $indicador->appendChild($ITEM);
+
+        $conteudo = $dom->createElement('Conteudo');
+        $item = $dom->createAttribute('item');
+        $valor = $dom->createAttribute('valor');
+        $item->value = 'a';
+        $valor->value = empty($sici->receita_bruta) ? '0,00' : \projeto\Util::decimalFormatToBank($sici->receita_bruta);
+
+        $conteudo->appendChild($item);
+        $conteudo->appendChild($valor);
+
+        $indicador->appendChild($conteudo);
+        $outorga->appendChild($indicador);
+
+        // IEM7
+        $indicador = $dom->createElement('Indicador');
+        $ITEM = $dom->createAttribute('Sigla');
+        $ITEM->value = 'IEM7';
+        $indicador->appendChild($ITEM);
+
+        $conteudo = $dom->createElement('Conteudo');
+        $item = $dom->createAttribute('item');
+        $valor = $dom->createAttribute('valor');
+        $item->value = 'a';
+        $valor->value = empty($sici->receita_liquida) ? '0,00' : \projeto\Util::decimalFormatToBank($sici->receita_liquida);
+
+        $conteudo->appendChild($item);
+        $conteudo->appendChild($valor);
+
+        $indicador->appendChild($conteudo);
+        $outorga->appendChild($indicador);
+
+        // IEM8
+        $indicador = $dom->createElement('Indicador');
+        $ITEM = $dom->createAttribute('Sigla');
+        $ITEM->value = 'IEM8';
+        $indicador->appendChild($ITEM);
+
+        foreach ($sici->getIEM8() as $key => $value) {
+            $conteudo = $dom->createElement('Conteudo');
+            $item = $dom->createAttribute('item');
+            $valor = $dom->createAttribute('valor');
+            $item->value = $key;
+
+            $valor->value = empty($value) ? '0,00' : \projeto\Util::decimalFormatToBank($value);
+
+            $conteudo->appendChild($item);
+            $conteudo->appendChild($valor);
+
+            $indicador->appendChild($conteudo);
+        }
+        $outorga->appendChild($indicador);
+
+
+        $uploadSICI->appendChild($outorga);
+        $root->appendChild($uploadSICI);
+        $dom->appendChild($root);
+
+        $nome = \projeto\Util::retiraCaracter($cliente->cnpj).'_'.$sici->cod_sici.'_'.str_replace('/', '', $sici->mes_ano_referencia).'.xml';
+        $url = sys_get_temp_dir()."/".$nome;
+        $dom->save($url);
+
+        
+        header("Content-Type: application/octet-stream");
+        header("Content-Length:" . filesize($url));
+        header("Content-Disposition: attachment; filename={$nome}");
+        header("Content-Transfer-Encoding: binary");
+        header("Expires: 0");
+        header("Pragma: no-cache");
+        
+        $fp = fopen($url, "r");
+        fpassthru($fp);
+        fclose($fp);
+        
+    }
+
     /**
      * Creates a new TabSici model.
      * If creation is successful, the browser will be redirected to the 'view' page.
@@ -93,12 +573,198 @@ class SiciController extends Controller {
             $dados = \yii\web\UploadedFile::getInstance($model, 'file');
 
             if (array_key_exists('importar', Yii::$app->request->post())) {
-                print_r(Yii::$app->request->post()); exit;
-                $transaction = Yii::$app->db->beginTransaction();
-                //$municipios = \Yii::$app->session->get('dados');
-                $this->session->setFlashProjeto('success', 'update');
 
-                return $this->redirect(['view', 'id' => $model->cod_sici]);
+
+                /*   $municipios = \app\models\TabMunicipiosSearch::find()->all();
+
+                  foreach($municipios as $municipio){
+                  $municipio->txt_nome_sem_acento = strtoupper(\projeto\Util::tirarAcentos($municipio->txt_nome));
+                  $municipio->save();
+                  }
+                  print_r("/(Ç)/"); exit; */
+
+
+
+                $transaction = Yii::$app->db->beginTransaction();
+                try {
+                    $sici = new TabSiciSearch();
+
+                    $cliente = new \app\models\TabClienteSearch;
+
+
+                    $sici->load(Yii::$app->request->post());
+
+
+                    $cliente->load(Yii::$app->request->post());
+                    $cli = \app\models\TabClienteSearch::findOne(['cnpj' => $cliente->cnpj]);
+
+                    $contatoT = new \app\models\TabContatoSearch;
+                    $contatoT->attributes = Yii::$app->request->post()['TabContatoSearchT'];
+
+                    $contatoC = new \app\models\TabContatoSearch;
+                    $contatoC->attributes = Yii::$app->request->post()['TabContatoSearchC'];
+
+                    if (!$cli) {
+
+
+                        $cliente->buscaCliente();
+                        $cliente->save();
+
+                        $contrato = new \app\modules\comercial\models\TabContratoSearch();
+                        $contrato->cod_cliente_fk = $cliente->cod_cliente;
+                        $contrato->save();
+
+                        $tipo_contrato = new \app\modules\comercial\models\TabTipoContrato();
+                        $tipo_contrato->cod_contrato_fk = $contrato->cod_contrato;
+                        $tipo_contrato->save();
+                        $sici->cod_tipo_contrato_fk = $tipo_contrato->cod_tipo_contrato;
+                        $sici->save();
+
+                        if ($cliente->dadosReceita->email) {
+                            $contato = new \app\models\TabContatoSearch;
+                            $contato->tipo = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-contato', 'E');
+                            $contato->contato = $cliente->dadosReceita->email;
+                            $contato->tipo_tabela_fk = $cliente->tableName();
+                            $contato->chave_fk = $cliente->cod_cliente;
+                            $contato->save();
+                        }
+
+                        if ($cliente->dadosReceita->telefone) {
+                            $contato = new \app\models\TabContatoSearch;
+                            $contato->tipo = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-contato', 'T');
+                            $contato->contato = str_replace(' ', '', $cliente->dadosReceita->telefone);
+                            $contato->tipo_tabela_fk = $cliente->tableName();
+                            $contato->chave_fk = $cliente->cod_cliente;
+                            $contato->save();
+                        }
+
+                        if (\projeto\Util::retiraCaracter($contato->contato) != \projeto\Util::retiraCaracter($contatoT->contato)) {
+                            $contatoT->tipo_tabela_fk = $cliente->tableName();
+                            $contatoT->chave_fk = $cliente->cod_cliente;
+                            $contatoT->save();
+                        }
+                        if (\projeto\Util::retiraCaracter($contato->contato) != \projeto\Util::retiraCaracter($contatoC->contato)) {
+
+                            $contatoC->tipo_tabela_fk = $cliente->tableName();
+                            $contatoC->chave_fk = $cliente->cod_cliente;
+                            $contatoC->save();
+                        }
+
+                        $endereco = new \app\models\TabEnderecoSearch();
+                        $endereco->logradouro = $cliente->dadosReceita->logradouro;
+                        $endereco->cep = $cliente->dadosReceita->cep;
+                        $endereco->complemento = $cliente->dadosReceita->complemento;
+                        $endereco->numero = $cliente->dadosReceita->numero;
+                        $endereco->bairro = $cliente->dadosReceita->bairro;
+                        $endereco->buscaCep();
+                        $endereco->tipo_tabela_fk = $cliente->tableName();
+                        $endereco->chave_fk = $cliente->cod_cliente;
+
+                        if (!$endereco->dadosCep->ibge) {
+
+                            $nome = strtoupper(\projeto\Util::tirarAcentos($cliente->dadosReceita->municipio));
+
+                            $uf = null;
+                            if ($cliente->dadosReceita->uf) {
+                                $uf = "AND sgl_estado_fk='{$cliente->dadosReceita->uf}'";
+                            }
+
+                            $municipio = \app\models\TabMunicipiosSearch::find()->where("(upper(txt_nome) ilike '%" . $nome . "%' or upper(txt_nome) ilike '%" . strtoupper($cliente->dadosReceita->municipio) . "%') $uf")->asArray()->one();
+
+                            if ($municipio) {
+                                $endereco->cod_municipio_fk = $municipio['cod_municipio'];
+                            }
+                        } else {
+                            $endereco->cod_municipio_fk = substr($endereco->dadosCep->ibge, 0, 6);
+                        }
+                        $endereco->save();
+                    } else {
+                        $cliente = $cli;
+
+
+                        $contrato = \app\modules\comercial\models\TabContratoSearch::find()->where(['cod_cliente_fk' => $cliente->cod_cliente])->one();
+
+                        $tipo_contrato = \app\modules\comercial\models\TabTipoContrato::find()->where(['cod_contrato_fk' => $contrato->cod_contrato])->one();
+
+                        $sici->cod_tipo_contrato_fk = $tipo_contrato->cod_tipo_contrato;
+                        $sici->save();
+
+                        if (!$contato) {
+                            $contatoT->tipo_tabela_fk = $cliente->tableName();
+                            $contatoT->chave_fk = $cliente->cod_cliente;
+                            $contatoT->save();
+                        }
+
+                        $contato_numero = str_replace(' ', '', $contatoC->contato);
+
+                        $contato = \app\models\TabContatoSearch()->find()->where(['contato' => $contato_numero, 'tipo_tabela_fk' => $cliente->tableName(), 'chave_fk' => $cliente->cod_cliente]);
+
+                        if (!$contato && \projeto\Util::retiraCaracter($contatoT->contato) != \projeto\Util::retiraCaracter($contatoC->contato)) {
+
+                            $contatoC->tipo_tabela_fk = $cliente->tableName();
+                            $contatoC->chave_fk = $cliente->cod_cliente;
+                            $contatoC->save();
+                        }
+                    }
+
+
+
+                    $planof = new \app\modules\posoutorga\models\TabPlanosSearch();
+                    $planof_mn = new \app\modules\posoutorga\models\TabPlanosMenorMaiorSearch();
+
+                    $planoj = new \app\modules\posoutorga\models\TabPlanosSearch();
+                    $planoj_mn = new \app\modules\posoutorga\models\TabPlanosMenorMaiorSearch();
+
+
+                    $planof->attributes = Yii::$app->request->post()['TabPlanosF'];
+                    $planof->tipo_tabela_fk = $sici->tableName();
+                    $planof->cod_chave = $sici->cod_sici;
+                    $planof->save();
+
+
+                    $planof_mn->attributes = Yii::$app->request->post()['TabPlanosMenorMaiorF'];
+                    $planof_mn->cod_sici_fk = $sici->cod_sici;
+                    $planof_mn->save();
+
+                    $planoj->attributes = Yii::$app->request->post()['TabPlanosJ'];
+                    $planoj->tipo_tabela_fk = $sici->tableName();
+                    $planoj->cod_chave = $sici->cod_sici;
+                    $planoj->save();
+
+                    $planoj_mn->attributes = Yii::$app->request->post()['TabPlanosMenorMaiorJ'];
+                    $planoj_mn->cod_sici = $sici->cod_sici;
+                    $planoj_mn->save();
+
+                    foreach (Yii::$app->request->post()['TabEmpresaMunicipioSearch'] as $municipio) {
+                        $empresa = new \app\modules\posoutorga\models\TabEmpresaMunicipioSearch();
+                        $empresa->attributes = $municipio;
+                        $empresa->cod_sici_fk = $sici->cod_sici;
+                        $empresa->save();
+
+                        $planof_municipio = new \app\modules\posoutorga\models\TabPlanosSearch();
+                        $planof_municipio->attributes = $municipio['TabEmpresaMunicipioSearchMF'];
+                        $planof_municipio->tipo_tabela_fk = $empresa->tableName();
+                        $planof_municipio->cod_chave = $empresa->cod_empresa_municipio;
+                        $planof_municipio->save();
+
+                        $planoj_municipio = new \app\modules\posoutorga\models\TabPlanosSearch();
+                        $planoj_municipio->attributes = $municipio['TabEmpresaMunicipioSearchMJ'];
+                        $planoj_municipio->tipo_tabela_fk = $empresa->tableName();
+                        $planoj_municipio->cod_chave = $empresa->cod_empresa_municipio;
+                        $planoj_municipio->save();
+                    }
+                    //$sici->mes_ano_referencia = $dados_sici['mes_ano_referencia'];
+                    $transaction->commit();
+
+                    $this->session->setFlashProjeto('success', 'update');
+
+                    return $this->redirect(['view', 'id' => $sici->cod_sici]);
+                } catch (Exception $e) {
+
+                    $transaction->rollBack();
+                    $this->session->setFlash('danger', 'Erro na importação - ' . $e->getMessage());
+                }
+                //$municipios = \Yii::$app->session->get('dados');
             } else {
 
                 $importacao = $this->importExcel($dados->tempName, Yii::$app->request->post()['TabSiciSearch']);
@@ -170,7 +836,10 @@ class SiciController extends Controller {
 
         $key += 5;
         $cliente->cnpj = $rowData[$key][0][2];
-        $sici->mes_ano_referencia = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('mes', (int) $rowData[$key][0][9]);
+        $sici->mes_ano_referencia = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('mes', str_pad($rowData[$key][0][9], 2, "0", STR_PAD_LEFT));
+;
+        $sici->mes = str_pad($rowData[$key][0][9], 2, "0", STR_PAD_LEFT);
+        $sici->ano = date('Y');
         $contatoC->contato = $rowData[$key][0][16];
         $contatoC->tipo = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-contato', 'C');
         ;
@@ -201,8 +870,6 @@ class SiciController extends Controller {
         $sici->receita_confins = (100 * $rowData[$key][0][7]);
 
         $key += 3;
-        $sici->receita_liquida = $rowData[$key][0][9];
-
         $key += 5;
         $sici->obs_receita = $rowData[$key][0][2];
         $sici->obs_despesa = $rowData[$key][0][13];
@@ -313,6 +980,8 @@ class SiciController extends Controller {
         $planof_mn->valor_maior_1m = $rowData[$key][0][9];
         $planoj_mn->valor_maior_1m = $rowData[$key][0][20];
 
+        $planof_mn->tipo_plano_fk = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-pessoa-plano', 'F');
+        $planoj_mn->tipo_plano_fk = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-pessoa-plano', 'J');
 
         $key += 4;
         $planof->obs = $rowData[$key][0][2];
@@ -329,24 +998,24 @@ class SiciController extends Controller {
 
                 if ($rowData[$i][0][4] && $rowData[$i][0][17]) {
                     $empresa->municipio = $rowData[$i][0][4];
-                    $empresa->tecnologia = strtoupper(str_replace(' ', '', trim(\projeto\Util::retiraAcento(\projeto\Util::tirarAcentos($rowData[$i][0][17])))));
-                
-                    if ($empresa->tecnologia) {
-                        $empresa->tecnologia = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tecnologia', $empresa->tecnologia);
+                    $empresa->tecnologia_fk = strtoupper(str_replace(' ', '', trim(\projeto\Util::retiraAcento(\projeto\Util::tirarAcentos($rowData[$i][0][17])))));
+                    if ($empresa->tecnologia_fk) {
+                        $empresa->tecnologia_fk = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tecnologia', $empresa->tecnologia_fk, true);
                     }
+
                     $i += 3;
                     $empresa->uf = $rowData[$i][0][4];
                     $empresa->cod_municipio_fk = substr($rowData[$i][0][10], 0, 6);
 
                     if (!$empresa->cod_municipio_fk) {
                         $nome = strtoupper(\projeto\Util::tirarAcentos($empresa->municipio));
-
                         $uf = null;
                         if ($empresa->uf) {
                             $uf = "AND sgl_estado_fk='{$empresa->uf}'";
                         }
 
-                        $municipio = \app\models\TabMunicipiosSearch::find()->where("(upper(txt_nome) ilike '%" . strtoupper($empresa->municipio) . "%' or upper(txt_nome) ilike '%" . $nome . "%') $uf")->asArray()->one();
+                        $municipio = \app\models\TabMunicipiosSearch::find()->where("(upper(txt_nome_sem_acento) ilike '%" . $nome . "%' or upper(txt_nome) ilike '%" . strtoupper($empresa->municipio) . "%') $uf")->asArray()->one();
+
                         if ($municipio) {
                             $empresa->cod_municipio_fk = $municipio['cod_municipio'];
                         }

@@ -84,7 +84,7 @@
 <p><b><i>Maior e menor preço por Mbps ofertado e comercializado pela prestadora</i></b></p>
 
 <div class='row'>
-
+<?= $form->field($planoj_mn, 'tipo_plano_fk')->hiddenInput(['id' => 'tabplanosmenormaiorj-tipo_plano_fk', 'name' => 'TabPlanosMenorMaiorJ[tipo_plano_fk]'])->label(false) ?>
     <div class='col-lg-12'>
         <?=
         $form->field($planoj_mn, 'valor_menos_1m_ded')->textInput(['id' => 'tabplanosmenormaiorj-valor_menos_1m_ded', 'name' => 'TabPlanosMenorMaiorJ[valor_menos_1m_ded]'])->widget(\kartik\money\MaskMoney::className(), [

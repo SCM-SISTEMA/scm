@@ -17,6 +17,7 @@ class TabEnderecoSearch extends TabEndereco {
      */
     public $uf;
     public $municipio;
+    public $dadosCep;
 
     public function rules() {
 
@@ -24,7 +25,7 @@ class TabEnderecoSearch extends TabEndereco {
             [['correspondencia', 'ativo'], 'boolean'],
             [['cod_municipio_fk', 'cep', 'logradouro', 'numero'], 'required', 'on' => 'criar'],
             [['chave_fk', 'tipo_usuario'], 'integer'],
-            [['dt_inclusao', 'cod_endereco', 'cod_municipio_fk'], 'safe'],
+            [['dt_inclusao', 'cod_endereco','tipo_tabela_fk', 'cod_municipio_fk'], 'safe'],
             [['logradouro'], 'string', 'max' => 200],
             [['numero'], 'string', 'max' => 20],
             [['complemento'], 'string', 'max' => 100],
@@ -48,7 +49,7 @@ class TabEnderecoSearch extends TabEndereco {
         $labels['cod_municipio'] = 'Município';
         $labels['uf'] = 'UF';
         $labels['ativo'] = 'Ativo?';
-        
+
         return $labels;
     }
 
@@ -109,6 +110,28 @@ class TabEnderecoSearch extends TabEndereco {
 
 
         return $dataProvider;
+    }
+
+    public function buscaCep($cep = null) {
+
+        $cep = (!$cep) ? $this->cep : $cep;
+
+        $cep = \projeto\Util::retiraCaracter($cep);
+
+        $url = 'viacep.com.br/ws/' . $cep . '/json/';
+        $ch = curl_init();
+        curl_setopt_array($ch, array
+            (
+            CURLOPT_URL => $url,
+            CURLOPT_RETURNTRANSFER => TRUE
+        ));
+        $response = curl_exec($ch);
+
+        if ($this->cep) {
+            $this->dadosCep = json_decode($response);
+        } else {
+            return json_decode($response);
+        }
     }
 
 }

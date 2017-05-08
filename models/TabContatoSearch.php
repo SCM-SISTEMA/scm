@@ -8,6 +8,7 @@ use yii\data\ActiveDataProvider;
 use app\models\TabContato;
 
 /**
+ * @property TabCliente $tabCliente
  * TabContatoSearch represents the model behind the search form about `app\models\TabContato`.
  */
 class TabContatoSearch extends TabContato {
@@ -26,7 +27,7 @@ class TabContatoSearch extends TabContato {
             [['ramal'], 'string', 'max' => 5],
             [['contato_email', 'tipo'], 'required', 'on' => 'email'],
             [['contato', 'tipo'], 'required', 'on' => 'telefone'],
-            [['contato_email', 'contato', 'cod_contato', 'ativo'], 'safe'],
+            [['contato_email', 'contato', 'cod_contato', 'ativo', 'tipo'], 'safe'],
             [['contato_email'], 'email'],
         ];
 
@@ -108,6 +109,13 @@ class TabContatoSearch extends TabContato {
 
 
         return $dataProvider;
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTabCliente() {
+        return $this->hasOne(TabClienteSearch::className(), ['cod_cliente' => 'cod_cliente_fk']);
     }
 
 }

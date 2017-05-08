@@ -18,9 +18,11 @@
         <group>
             <file>file:/var/www/scm/modules/posoutorga/views/sici/_form_adicionais_fibra.php</file>
             <file>file:/var/www/scm/projeto/Util.php</file>
+            <file>file:/var/www/scm/models/TabCliente.php</file>
             <file>file:/var/www/scm/modules/posoutorga/views/sici/_form_adicionais_iem2.php</file>
             <file>file:/var/www/scm/modules/posoutorga/views/sici/_form_adicionais_iem1.php</file>
             <file>file:/var/www/scm/modules/posoutorga/models/TabPlanos.php</file>
+            <file>file:/var/www/scm/models/TabEnderecoSearch.php</file>
             <file>file:/var/www/scm/views/contato/admin.php</file>
             <file>file:/var/www/scm/modules/posoutorga/views/sici/_form_updade.php</file>
             <file>file:/var/www/scm/modules/posoutorga/controllers/SiciController.php</file>
@@ -34,15 +36,18 @@
             <file>file:/var/www/scm/modules/posoutorga/models/TabEmpresaMunicipioSearch.php</file>
             <file>file:/var/www/scm/modules/posoutorga/models/TabSiciSearch.php</file>
             <file>file:/var/www/scm/modules/posoutorga/views/sici/_form_financeiro.php</file>
+            <file>file:/var/www/scm/models/TabClienteSearch.php</file>
             <file>file:/var/www/scm/views/contato/_form_cliente.php</file>
             <file>file:/var/www/scm/modules/posoutorga/views/sici/_form_distribuicao.php</file>
             <file>file:/var/www/scm/modules/posoutorga/views/sici/_form_financeiro_despesa.php</file>
             <file>file:/var/www/scm/models/TabAtributosValoresSearch.php</file>
+            <file>file:/var/www/scm/modules/posoutorga/models/TabSici.php</file>
             <file>file:/var/www/scm/modules/posoutorga/models/TabPlanosSearch.php</file>
             <file>file:/var/www/scm/modules/posoutorga/views/sici/_form_adicionais.php</file>
             <file>file:/var/www/scm/modules/posoutorga/views/sici/_form_empresa.php</file>
             <file>file:/var/www/scm/modules/posoutorga/views/sici/_form_adicionais_cabo.php</file>
             <file>file:/var/www/scm/modules/posoutorga/models/TabEmpresaMunicipio.php</file>
+            <file>file:/var/www/scm/models/TabContatoSearch.php</file>
         </group>
     </open-files>
 </project-private>
