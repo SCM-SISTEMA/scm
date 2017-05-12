@@ -120,6 +120,7 @@ class Util {
                 return $string;
             } else {
                 $string = str_replace(',', '.', str_replace('.', '', $string));
+                if(!$string) $string = '0,00';
             }
         } else {
             $string = null;

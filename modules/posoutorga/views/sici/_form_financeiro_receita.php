@@ -1,7 +1,7 @@
 
 <div class='row'>
     <div class='col-lg-6'>
-        <?= $form->field($sici, 'fust')->textInput(['maxlength' => true]) ?>
+        <?= $form->field($sici, 'legenda')->textInput(['maxlength' => true]) ?>
     </div>
 </div>
 <div class='row'>
@@ -109,13 +109,7 @@
 <div class='row'>
     <div class='col-lg-12'>
         <?=
-        $form->field($sici, 'receita_liquida')->textInput()->widget(\kartik\money\MaskMoney::className(), [
-            'pluginOptions' => [
-                'thousands' => '.',
-                'decimal' => ',',
-                'precision' => 2,
-                'allowZero' => false,]
-        ]);
+        $form->field($sici, 'receita_liquida')->textInput(['disabled' => 'disabled']);
         ?>
     </div>
 

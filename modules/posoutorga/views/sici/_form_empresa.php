@@ -1,8 +1,8 @@
-
+<?= $form->field($sici, 'cod_sici')->hiddenInput(['maxlength' => true])->label(false); ?>
 
 <div class='row'>
     <div class='col-lg-4'>
-        <?= $form->field($cliente, 'razao_social')->textInput(['maxlength' => true]) ?>
+        <?= $form->field($cliente, 'razao_social')->textInput(['maxlength' => true, 'disabled'=>(($sici->cod_sici) ? true : false)]) ?>
     </div>
     <div class='col-lg-4'>
         <?= $form->field($sici, 'responsavel')->textInput(['maxlength' => true]) ?>
@@ -29,27 +29,17 @@
 
 <div class='row'>
     <div class='col-lg-4'>
-        <?= $form->field($cliente, 'cnpj')->textInput(['maxlength' => true]) ?>
+        <?= $form->field($cliente, 'cnpj')->textInput(['maxlength' => true,     'disabled'=>(($sici->cod_sici) ? true : false)]) ?>
     </div>
 
-    <div class='col-lg-2'>
+    <div class='col-lg-4'>
 
         <?=
-        $form->field($sici, 'mes_ano_referencia')->dropDownList(
-                yii\helpers\ArrayHelper::map(
-                        \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('mes'), 'cod_atributos_valores', 'dsc_descricao'
-                ), ['prompt' => $this->app->params['txt-prompt-select'],
-        ]);
-        ?>
+        $form->field($sici, 'mes_ano_referencia')->widget(\yii\widgets\MaskedInput::className(), [
+            'mask' => ['99/9999'],
+        ])->textInput(['maxlength' => true]) ?>
 
     </div>
-
-    <div class='col-lg-2'> 
-
-        <?= $form->field($sici, 'ano')->textInput(['maxlength' => true, 'disabled' => true]) ?>
-
-    </div>
-
     <div class='col-sm-4'>
         <?=
         $form->field($contatoC, 'contato')->widget(\yii\widgets\MaskedInput::className(), [

@@ -7,7 +7,7 @@ use app\models\TabContato;
 use app\models\TabContatoSearch;
 use projeto\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
+use yii\filters\VerbFilter; 
 
 /**
  * ContatoController implements the CRUD actions for TabContato model.

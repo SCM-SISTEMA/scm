@@ -25,13 +25,14 @@ class TabSiciSearch extends TabSici {
     public $file;
     public $ano;
     public $mes;
+    public $qntAcesso;
 
     public function rules() {
 
         $rules = [
-            [['file', 'cod_tipo_contrato_fk', 'qtd_funcionarios_fichados', 'qtd_funcionarios_terceirizados', 'num_central_atendimento', 'total_fibra_prestadora', 'total_fibra_terceiros', 'total_crescimento_prestadora', 'total_crescimento_terceiros', 'total_fibra_implantada_prestadora', 'total_fibra_implantada_terceiros', 'total_fibra_crescimento_prop_prestadora', 'total_fibra_crescimento_prop_terceiros',
-            'receita_bruta', 'despesa_operacao_manutencao', 'mes_ano_referencia', 'fust', 'responsavel', 'despesa_publicidade', 'despesa_vendas', 'despesa_link', 'aliquota_nacional', 'receita_icms', 'receita_pis', 'receita_confins', 'receita_liquida', 'valor_consolidado', 'aplicacao_equipamento', 'total_marketing_propaganda', 'aplicacao_software', 'total_pesquisa_desenvolvimento', 'aplicacao_servico', 'aplicacao_callcenter', 'faturamento_de', 'faturamento_industrial', 'faturamento_adicionado'], 'safe'],
-            [['obs_receita', 'obs_despesa'], 'string'],
+            [['file', 'cod_sici', 'cod_tipo_contrato_fk', 'qtd_funcionarios_fichados', 'qtd_funcionarios_terceirizados', 'num_central_atendimento', 'total_fibra_prestadora', 'total_fibra_terceiros', 'total_crescimento_prestadora', 'total_crescimento_terceiros', 'total_fibra_implantada_prestadora', 'total_fibra_implantada_terceiros', 'total_fibra_crescimento_prop_prestadora', 'total_fibra_crescimento_prop_terceiros',
+            'receita_bruta','qntAcesso', 'despesa_operacao_manutencao', 'mes_ano_referencia', 'legenda', 'responsavel', 'despesa_publicidade', 'despesa_vendas', 'despesa_link', 'aliquota_nacional', 'receita_icms', 'receita_pis', 'receita_confins', 'receita_liquida', 'valor_consolidado', 'aplicacao_equipamento', 'total_marketing_propaganda', 'aplicacao_software', 'total_pesquisa_desenvolvimento', 'aplicacao_servico', 'aplicacao_callcenter', 'faturamento_de', 'faturamento_industrial', 'faturamento_adicionado'], 'safe'],
+            [['obs_receita', 'obs_despesa' ], 'string'],
             [['file'], 'file', 'skipOnEmpty' => true, 'extensions' => 'xls, xlsx'],
         ];
 
@@ -90,7 +91,7 @@ class TabSiciSearch extends TabSici {
         ]);
 
         $query->andFilterWhere(['ilike', $this->tableName() . '.mes_ano_referencia', $this->mes_ano_referencia])
-                ->andFilterWhere(['ilike', $this->tableName() . '.fust', $this->fust])
+                ->andFilterWhere(['ilike', $this->tableName() . '.leganda', $this->legenda])
                 ->andFilterWhere(['ilike', $this->tableName() . '.obs_receita', $this->obs_receita])
                 ->andFilterWhere(['ilike', $this->tableName() . '.obs_despesa', $this->obs_despesa]);
 
@@ -108,8 +109,7 @@ class TabSiciSearch extends TabSici {
 
     public function afterFind() {
         parent::afterFind();
-
-        $this->ano = substr($this->mes_ano_referencia, 3, 4);
+        $this->receita_liquida = \projeto\Util::decimalFormatToBank($this->receita_liquida);
 
         return true;
     }
@@ -167,6 +167,16 @@ class TabSiciSearch extends TabSici {
 
 
         return $dados;
+    }
+
+    public function calculaTotais() {
+        $this->total_aliquota = \projeto\Util::decimalFormatToBank(($this->receita_bruta * $this->aliquota_nacional) / 100);
+        $this->total_icms = \projeto\Util::decimalFormatToBank((($this->receita_bruta * $this->receita_icms) / 100) / 100);
+        $this->total_pis = \projeto\Util::decimalFormatToBank((($this->receita_bruta * $this->receita_pis) / 100) / 100);
+        $this->total_confins = \projeto\Util::decimalFormatToBank((($this->receita_bruta * $this->receita_pis) / 100) / 100);
+        $this->total_despesa = \projeto\Util::decimalFormatToBank($this->despesa_link + $this->despesa_operacao_manutencao + $this->despesa_publicidade + $this->despesa_vendas);
+        $this->total_planta = \projeto\Util::decimalFormatToBank($this->aplicacao_callcenter + $this->aplicacao_equipamento + $this->aplicacao_servico + $this->aplicacao_software +
+                        $this->total_marketing_propaganda + $this->total_marketing_propaganda);
     }
 
 }

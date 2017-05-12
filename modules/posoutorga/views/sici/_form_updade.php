@@ -1,5 +1,5 @@
 <?php
-
+$this->registerJsFile("@web/js/app/posoutorga.sici.js?{$this->app->version}", ['position' => $this::POS_END, 'depends' => [\app\assets\ProjetoAsset::className()]]);
 
 
 /* @var $this yii\web\View */
@@ -20,6 +20,10 @@ $planoj_mn = $importacao['planoj_mn'];
 
 $empresas = $importacao['empresas'];
 ?>
+<?php
+$this->registerJsFile("@web/js/app/posoutorga.distribuicao.js?{$this->app->version}", ['position' => $this::POS_END, 'depends' => [\app\assets\ProjetoAsset::className()]]);
+?>
+<?php echo $this->render('_form_distribuicao_add', ['form'=>$form, 'anual' => $importacao['anual']]); ?> 
 
 <?=
 kartik\tabs\TabsX::widget([
@@ -38,11 +42,13 @@ kartik\tabs\TabsX::widget([
             'label' => "<b style=\"color:#337ab7\">Funcionários</b>",
             'content' => $this->render('_form_funcionario', compact('sici', 'form')),
             'active' => false,
+            'visible' => ($importacao['anual']) ? true : false,
         ],
         [
             'label' => "<b style=\"color:#337ab7\">Informações Adicionais</b>",
             'content' => $this->render('_form_adicionais', compact('sici', 'form')),
             'active' => false,
+            'visible' => ($importacao['indicadores']) ? true : false,
         ],
          [
             'label' => "<b style=\"color:#337ab7\">Planos</b>",
@@ -51,8 +57,8 @@ kartik\tabs\TabsX::widget([
         ]
         ,
         [
-            'label' => "<b style=\"color:#337ab7\">Empresa/Região</b>",
-            'content' => $this->render('_form_distribuicao', compact('empresas', 'sici', 'form')),
+            'label' => "<b style=\"color:#337ab7\">Acessos Físicos</b>",
+            'content' => '<div id="acessoFisicoAll">'.$this->render('_form_distribuicao', compact('empresas', 'sici', 'form')).'</div>',
             'active' => false,
         ]
     ],

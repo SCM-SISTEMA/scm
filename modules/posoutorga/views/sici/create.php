@@ -15,9 +15,9 @@ use yii\widgets\Pjax;
     <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
     <div class="box-header with-border">
         <h3 class="box-title"></h3>
-        <div class="box-tools">
-            <?= Html::submitButton('<i class="glyphicon glyphicon-ok"></i> ' . 'Abrir arquivo', ['style' => 'display:' . (($importacao) ? 'none' : 'block'), 'name' => 'abrir', 'class' => 'btn btn-success btn-sm']) ?>
-            <?= Html::submitButton('<i class="glyphicon glyphicon-ok"></i> ' . 'Importar', ['style' => 'display:' . (($importacao) ? 'block' : 'none' ), 'name' => 'importar', 'class' => 'btn btn-primary btn-sm']) ?>
+        <div class="import box-tools">
+            <?= Html::submitButton('<i class="glyphicon glyphicon-ok"></i> ' . 'Carregar Planilha', ['style' => 'display:' . (($importacao) ? 'none' : 'block'), 'name' => 'abrir', 'class' => 'import btn btn-primary  btn-sm']) ?>
+            <?= Html::submitButton('<i class="glyphicon glyphicon-ok"></i> ' . 'Salvar', ['style' => 'display:' . (($importacao) ? 'block' : 'none' ), 'name' => 'importar', 'class' => 'import btn btn-success btn-sm']) ?>
         </div>
         <div class="box-body">
             <div class="row">
@@ -44,9 +44,8 @@ use yii\widgets\Pjax;
         <div class="box-footer">
             <h3 class="box-title"></h3>
             <div class="box-tools pull-right">
-                <?= Html::submitButton('<i class="glyphicon glyphicon-ok"></i> ' . 'Abrir arquivo', ['style' => 'display:' . (($importacao) ? 'none' : 'block'), 'name' => 'abrir', 'class' => 'btn btn-success btn-sm']) ?>
-                <?= Html::submitButton('<i class="glyphicon glyphicon-ok"></i> ' . 'Importar', ['style' => 'display:' . (($importacao) ? 'block' : 'none' ), 'name' => 'importar', 'class' => 'btn btn-primary btn-sm']) ?>
-            </div>
+            <?= Html::submitButton('<i class="glyphicon glyphicon-ok"></i> ' . 'Carregar Planilha', ['style' => 'display:' . (($importacao) ? 'none' : 'block'), 'name' => 'abrir', 'class' => 'import btn btn-primary  btn-sm']) ?>
+            <?= Html::submitButton('<i class="glyphicon glyphicon-ok"></i> ' . 'Salvar', ['style' => 'display:' . (($importacao) ? 'block' : 'none' ), 'name' => 'importar', 'class' => 'import btn btn-success btn-sm']) ?>            </div>
         </div>
         <?php ActiveForm::end(); ?>
 

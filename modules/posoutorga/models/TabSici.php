@@ -10,7 +10,7 @@ use Yii;
  * @property integer $cod_sici
  * @property integer $cod_tipo_contrato_fk
  * @property string $mes_ano_referencia
- * @property string $fust
+ * @property string $legenda
  * @property string $receita_bruta
  * @property string $despesa_operacao_manutencao
  * @property string $despesa_publicidade
@@ -73,7 +73,7 @@ class TabSici extends \projeto\db\ActiveRecord
             [['obs_receita', 'obs_despesa'], 'string'],
             [['dt_inclusao', 'dt_exclusao'], 'safe'],
             [['mes_ano_referencia'], 'string', 'max' => 7],
-            [['fust'], 'string', 'max' => 30],
+            [['legenda'], 'string', 'max' => 30],
             [['responsavel'], 'string', 'max' => 150]
         ];
     }
@@ -87,7 +87,7 @@ class TabSici extends \projeto\db\ActiveRecord
             'cod_sici' => 'Cod Sici',
             'cod_tipo_contrato_fk' => 'Cod Tipo Contrato Fk',
             'mes_ano_referencia' => 'Mês de referência',
-            'fust' => 'FUST',
+            'legenda' => 'Legenda',
             'receita_bruta' => 'Receita operacional bruta com serviço de SCM:',
             'despesa_operacao_manutencao' => 'Despesas envolvendo operação e manutenção:',
             'despesa_publicidade' => 'Despesas envolvendo publicidade',

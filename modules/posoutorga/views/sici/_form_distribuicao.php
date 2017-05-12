@@ -1,35 +1,25 @@
-<?php ?>
-<?php foreach ($empresas as $key => $empresa) : ?>
-    <?php
-    $nome = $empresa[0]->cod_municipio_fk;
 
-    if ($nome) {
-        $nome = app\models\TabMunicipiosSearch::find()->where(['cod_municipio' => $nome])->one();
-        if (!$nome) {
-            $nome = $uf = '';
-        } else {
+<?=
+\projeto\helpers\Html::button('<i class="glyphicon glyphicon-plus"></i> Adicionar acesso físico', [
+    'class' => 'btn btn-success btn-sm',
+    'id' => 'addAcesso',
+    'onclick' => 'adicionar()',
+])
+?>
 
-            $uf = $nome->sgl_estado_fk;
-            $nome = $nome->txt_nome;
-        }
-    } else {
-        $nome = $uf = '';
-    }
-    ?>
-    <?=
-    kartik\tabs\TabsX::widget([
-        'items' => [
-            [
-                'label' => "<b style=\"color:#337ab7\">{$nome} - {$uf}</b>",
-                'content' => $this->render('_form_distribuicao_municipio', compact('empresa', 'sici', 'form', 'key')),
-                'active' => true,
-            ],
-        ],
-        'position' => kartik\tabs\TabsX::POS_ABOVE,
-        'bordered' => true,
-        'encodeLabels' => false,
-    ])
-    ?>
+<div id="acessoFisico">
+    <?php if ($empresas) : ?>
+        <?php foreach ($empresas as $key => $empresa) : ?>
+            <?php echo $this->render('_form_distribuicao_tab', compact('empresa', 'sici', 'form', 'key')); ?>
 
-    <hr/>
-<?php endforeach; ?>
+            <hr/>
+        <?php endforeach; ?>
+    <?php else : ?>
+        <div class='row'>
+            <div class='col-lg-6'>
+                Não existe nenhum acesso cadastrado.
+            </div>
+
+        </div>
+    <?php endif; ?>
+</div>

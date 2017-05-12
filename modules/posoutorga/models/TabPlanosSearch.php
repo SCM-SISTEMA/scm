@@ -24,12 +24,13 @@ class TabPlanosSearch extends TabPlanos {
     public $total_34m;
     public $total;
     public $tipo_plano_sgl;
+    public $tipo_pessoa;
 
     public function rules() {
         return [
             [['valor_512', 'valor_512k_2m', 'valor_2m_12m', 'valor_12m_34m', 'valor_34m'], 'number'],
             [['obs'], 'string'],
-            [['tipo_plano_fk', 'tipo_plano_sgl'], 'safe']
+            [['tipo_plano_fk', 'tipo_plano_sgl', 'cod_plano'], 'safe']
         ];
     }
 
@@ -119,4 +120,9 @@ class TabPlanosSearch extends TabPlanos {
         return $dados;
     }
 
+    
+   
+
+    
+    
 }

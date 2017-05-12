@@ -13,6 +13,17 @@ use app\modules\posoutorga\models\TabEmpresaMunicipio;
  */
 class TabEmpresaMunicipioSearch extends TabEmpresaMunicipio {
 
+    public $total_fisica;
+    public $total_juridica;
+    public $total_512;
+    public $total_512k_2m;
+    public $total_2m_12m;
+    public $total_12m_34m;
+    public $total_34m;
+    public $total;
+    public $tipo_pessoa;
+    public $gridMunicipios;
+
     /**
      * @inheritdoc
      */
@@ -113,7 +124,7 @@ class TabEmpresaMunicipioSearch extends TabEmpresaMunicipio {
                         ->where(['cod_sici_fk' => $cod_sici])->all();
 
         foreach ($empresa_municipio as $munK => $municipio) {
-            $planoEmpresa[$municipio->tabMunicipios->cod_ibge]['capacidade_municipio'] += $municipio->capacidade_municipio;  
+            $planoEmpresa[$municipio->tabMunicipios->cod_ibge]['capacidade_municipio'] += $municipio->capacidade_municipio;
             $planoEmpresa[$municipio->tabMunicipios->cod_ibge]['capacidade_servico'] += $municipio->capacidade_servico;
         }
 
@@ -159,20 +170,55 @@ class TabEmpresaMunicipioSearch extends TabEmpresaMunicipio {
         return $planos;
     }
 
-    public static function buscaIpl3($cod_sici) {
+    public function calculaTotais($planof_municipio = null, $planoj_municipio = null) {
 
-        $dados = TabEmpresaMunicipioSearch::getIPL3($cod_sici);
-        print_r($dados);
-        exit;
-        foreach ($dados as $munK => $municipio) {
-            foreach ($municipio as $pk => $pessoa) {
 
-                $planos[$munK][$pk] += $pessoa['total'];
-            }
-        }
-        print_r($planos);
-        exit;
-        return $planos;
+        $this->total_512 = \projeto\Util::decimalFormatForBank($planof_municipio->valor_512) +
+                \projeto\Util::decimalFormatForBank($planoj_municipio->valor_512)
+        ;
+        
+        $this->total_512k_2m = \projeto\Util::decimalFormatForBank($planof_municipio->valor_512k_2m) +
+                \projeto\Util::decimalFormatForBank($planoj_municipio->valor_512k_2m)
+        ;
+        $this->total_2m_12m = \projeto\Util::decimalFormatForBank($planof_municipio->valor_2m_12m) +
+                \projeto\Util::decimalFormatForBank($planoj_municipio->valor_2m_12m)
+        ;
+
+        $this->total_12m_34m = \projeto\Util::decimalFormatForBank($planof_municipio->valor_12m_34m) +
+                \projeto\Util::decimalFormatForBank($planoj_municipio->valor_12m_34m)
+        ;
+        $this->total_34m = \projeto\Util::decimalFormatForBank($planof_municipio->valor_34m) +
+                \projeto\Util::decimalFormatForBank($planoj_municipio->valor_34m)
+        ;
+
+        $this->total_fisica = \projeto\Util::decimalFormatForBank($planof_municipio->valor_512) +
+                \projeto\Util::decimalFormatForBank($planof_municipio->valor_512k_2m) +
+                \projeto\Util::decimalFormatForBank($planof_municipio->valor_2m_12m) +
+                \projeto\Util::decimalFormatForBank($planof_municipio->valor_12m_34m) +
+                \projeto\Util::decimalFormatForBank($planof_municipio->valor_34m)
+        ;
+
+        $this->total_juridica = \projeto\Util::decimalFormatForBank($planoj_municipio->valor_512) +
+                \projeto\Util::decimalFormatForBank($planoj_municipio->valor_512k_2m) +
+                \projeto\Util::decimalFormatForBank($planoj_municipio->valor_2m_12m) +
+                \projeto\Util::decimalFormatForBank($planoj_municipio->valor_12m_34m) +
+                \projeto\Util::decimalFormatForBank($planoj_municipio->valor_34m)
+        ;
+
+        $this->total = \projeto\Util::decimalFormatForBank($this->total_juridica) +
+                \projeto\Util::decimalFormatForBank($this->total_fisica)
+        ;
+      
+
+        return $totais = [
+            'valor_512' => $this->total_512,
+            'valor_512k_2m' => $this->total_512k_2m,
+            'valor_2m_12m' => $this->total_2m_12m,
+            'valor_12m_34m' => $this->total_12m_34m,
+            'valor_34m' => $this->total_34m,
+            'total' => $this->total,
+            
+        ];
     }
 
 }
