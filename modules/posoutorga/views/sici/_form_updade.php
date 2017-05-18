@@ -19,11 +19,14 @@ $planof_mn = $importacao['planof_mn'];
 $planoj_mn = $importacao['planoj_mn'];
 
 $empresas = $importacao['empresas'];
+$tipo_sici = \app\models\TabAtributosValoresSearch::find()->where(['cod_atributos_valores'=>$sici->tipo_sici_fk])->one()->sgl_valor;
+
+$anual = ($tipo_sici=='S' || $tipo_sici=='A') ? true : false;
 ?>
 <?php
 $this->registerJsFile("@web/js/app/posoutorga.distribuicao.js?{$this->app->version}", ['position' => $this::POS_END, 'depends' => [\app\assets\ProjetoAsset::className()]]);
 ?>
-<?php echo $this->render('_form_distribuicao_add', ['form'=>$form, 'anual' => $importacao['anual']]); ?> 
+<?php echo $this->render('_form_distribuicao_add', ['form'=>$form, 'anual' => $anual]); ?> 
 
 <?=
 kartik\tabs\TabsX::widget([
@@ -42,13 +45,13 @@ kartik\tabs\TabsX::widget([
             'label' => "<b style=\"color:#337ab7\">Funcionários</b>",
             'content' => $this->render('_form_funcionario', compact('sici', 'form')),
             'active' => false,
-            'visible' => ($importacao['anual']) ? true : false,
+            'visible' => ($tipo_sici=='S' || $tipo_sici=='A') ? true : false,
         ],
         [
             'label' => "<b style=\"color:#337ab7\">Informações Adicionais</b>",
             'content' => $this->render('_form_adicionais', compact('sici', 'form')),
             'active' => false,
-            'visible' => ($importacao['indicadores']) ? true : false,
+            'visible' => ($tipo_sici=='A') ? true : false,
         ],
          [
             'label' => "<b style=\"color:#337ab7\">Planos</b>",

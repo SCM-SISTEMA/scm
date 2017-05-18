@@ -31,8 +31,11 @@ class TabSiciSearch extends TabSici {
 
         $rules = [
             [['file', 'cod_sici', 'cod_tipo_contrato_fk', 'qtd_funcionarios_fichados', 'qtd_funcionarios_terceirizados', 'num_central_atendimento', 'total_fibra_prestadora', 'total_fibra_terceiros', 'total_crescimento_prestadora', 'total_crescimento_terceiros', 'total_fibra_implantada_prestadora', 'total_fibra_implantada_terceiros', 'total_fibra_crescimento_prop_prestadora', 'total_fibra_crescimento_prop_terceiros',
-            'receita_bruta','qntAcesso', 'despesa_operacao_manutencao', 'mes_ano_referencia', 'legenda', 'responsavel', 'despesa_publicidade', 'despesa_vendas', 'despesa_link', 'aliquota_nacional', 'receita_icms', 'receita_pis', 'receita_confins', 'receita_liquida', 'valor_consolidado', 'aplicacao_equipamento', 'total_marketing_propaganda', 'aplicacao_software', 'total_pesquisa_desenvolvimento', 'aplicacao_servico', 'aplicacao_callcenter', 'faturamento_de', 'faturamento_industrial', 'faturamento_adicionado'], 'safe'],
-            [['obs_receita', 'obs_despesa' ], 'string'],
+            'receita_bruta', 'qntAcesso', 'tipo_sici_fk', 'despesa_operacao_manutencao', 'mes_ano_referencia', 'legenda', 'responsavel', 'despesa_publicidade', 'despesa_vendas', 'despesa_link', 'aliquota_nacional', 'receita_icms', 'receita_pis', 'receita_confins', 'receita_liquida', 'valor_consolidado', 'aplicacao_equipamento', 'total_marketing_propaganda', 'aplicacao_software', 'total_pesquisa_desenvolvimento', 'aplicacao_servico', 'aplicacao_callcenter', 'faturamento_de', 'faturamento_industrial', 'faturamento_adicionado'], 'safe'],
+            [['obs_receita', 'obs_despesa'], 'string'],
+            [['mes_ano_referencia'], 'required'],
+            [['file'], 'required', 'on' => 'importar'],
+            [['mes_ano_referencia', 'cod_tipo_contrato_fk'], 'unique', 'targetAttribute' => ['mes_ano_referencia', 'cod_tipo_contrato_fk']],
             [['file'], 'file', 'skipOnEmpty' => true, 'extensions' => 'xls, xlsx'],
         ];
 
@@ -45,7 +48,8 @@ class TabSiciSearch extends TabSici {
     public function attributeLabels() {
 
         $labels = [
-                //exemplo 'campo' => 'label',         
+            'file' => 'Selecione a planilha ou XML',
+            'tipo_sici_fk' => 'Tipo SICI',
         ];
 
         return array_merge(parent::attributeLabels(), $labels);

@@ -253,7 +253,7 @@ $empresa->calculaTotais($empresaMunicF, $empresaMunicJ);
                 ],
             ])->label(false);
             ?>
-        </div>
+        </div>  
         <div class='col-sm-1' id='tabempresamunicipiosearch-total_juridica'>
             <b><?= $empresa->total_juridica ?></b>
         </div>
@@ -303,8 +303,8 @@ $empresa->calculaTotais($empresaMunicF, $empresaMunicJ);
         </div>
     </div>
     <?php endif; ?>
-    <?= $form->field($empresa, 'cod_empresa_municipio')->hiddenInput(['id' => 'tabplanossearchmj-cod_plano', 'name' => 'TabEmpresaMunicipioSearch[0][TabEmpresaMunicipioSearchMF][cod_plano]]'])->label(false); ?>
-    <?= $form->field($empresa, 'cod_empresa_municipio')->hiddenInput(['id' => 'tabplanossearchmj-cod_plano', 'name' => 'TabEmpresaMunicipioSearch[0][TabEmpresaMunicipioSearchMJ][cod_plano]]'])->label(false); ?>
+    <?= $form->field($empresaMunicF, 'cod_plano')->hiddenInput(['id' => 'tabplanossearchmf-cod_plano', 'name' => 'TabEmpresaMunicipioSearch[0][TabEmpresaMunicipioSearchMF][cod_plano]]'])->label(false); ?>
+    <?= $form->field($empresaMunicJ, 'cod_plano')->hiddenInput(['id' => 'tabplanossearchmj-cod_plano', 'name' => 'TabEmpresaMunicipioSearch[0][TabEmpresaMunicipioSearchMJ][cod_plano]]'])->label(false); ?>
     <?= $form->field($empresa, 'cod_empresa_municipio')->hiddenInput(['id' => 'tabempresamunicipiosearch-cod_empresa_municipio', 'name' => 'TabEmpresaMunicipioSearch[0][cod_empresa_municipio]]'])->label(false); ?>
 </div>
 

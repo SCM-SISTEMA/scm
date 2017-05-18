@@ -23,6 +23,7 @@ class VisSiciClienteSearch extends VisSiciCliente {
     public function attributeLabels() {
 
         $labels = [
+                'usuario_inclusao_sici'=> 'Usuário'
                 //exemplo 'campo' => 'label',         
         ];
 
@@ -51,6 +52,7 @@ class VisSiciClienteSearch extends VisSiciCliente {
 
         $query->andFilterWhere(['ilike', $this->tableName() . '.razao_social', $this->razao_social])
                 ->andFilterWhere(['ilike', $this->tableName() . '.cnpj', $this->cnpj])
+                ->andFilterWhere(['ilike', $this->tableName() . 'usuario_inclusao_sici', $this->usuario_inclusao_sici])
                 ->andFilterWhere(['ilike', $this->tableName() . '.fistel', $this->fistel])
                 ->andFilterWhere(['ilike', $this->tableName() . '.mes_ano_referencia', $this->mes_ano_referencia]);
 

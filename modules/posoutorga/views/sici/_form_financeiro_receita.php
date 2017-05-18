@@ -45,7 +45,7 @@
     </div>
     <div class='col-lg-6'>
         <?=
-        $form->field($sici, 'total_aliquota')->textInput(['disabled' => 'disabled']);
+        $form->field($sici, 'total_aliquota')->textInput(['readonly' => 'readonly']);
         ?>
     </div>
 </div>
@@ -64,7 +64,7 @@
     </div>
     <div class='col-lg-6'>
         <?=
-        $form->field($sici, 'total_icms')->textInput(['disabled' => 'disabled']);
+        $form->field($sici, 'total_icms')->textInput(['readonly' => 'readonly']);
         ?>
     </div>
 </div>
@@ -83,7 +83,7 @@
     </div>
     <div class='col-lg-6'>
         <?=
-        $form->field($sici, 'total_pis')->textInput(['disabled' => 'disabled']);
+        $form->field($sici, 'total_pis')->textInput(['readonly' => 'readonly']);
         ?>
     </div>
 </div>
@@ -102,14 +102,14 @@
     </div>
     <div class='col-lg-6'>
         <?=
-        $form->field($sici, 'total_confins')->textInput(['disabled' => 'disabled']);
+        $form->field($sici, 'total_confins')->textInput(['readonly' => 'readonly']);
         ?>
     </div>
 </div>
 <div class='row'>
     <div class='col-lg-12'>
         <?=
-        $form->field($sici, 'receita_liquida')->textInput(['disabled' => 'disabled']);
+        $form->field($sici, 'receita_liquida')->textInput(['readonly' => 'readonly']);
         ?>
     </div>
 

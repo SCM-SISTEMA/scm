@@ -1,4 +1,4 @@
-<?= $form->field($planof, 'tipo_plano_fk')->hiddenInput(['id' => 'tabplanosj-tipo_plano_fk', 'name' => 'TabPlanosJ[tipo_plano_fk]'])->label(false) ?>
+<?= $form->field($planoj, 'tipo_plano_fk')->hiddenInput(['id' => 'tabplanosj-tipo_plano_fk', 'name' => 'TabPlanosJ[tipo_plano_fk]'])->label(false) ?>
 <div class='row'>
     <div class='col-lg-12'>
         <?=

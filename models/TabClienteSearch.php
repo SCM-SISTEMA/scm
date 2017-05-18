@@ -22,6 +22,8 @@ class TabClienteSearch extends TabCliente {
             [['dt_inclusao', 'dt_exclusao'], 'safe'],
             [['situacao'], 'boolean'],
             [['cnpj'], 'string', 'max' => 18],
+            [['cnpj', 'razao_social'], 'required'],
+            [['cnpj'], '\projeto\validators\CnpjValidator'],
             [['fantasia', 'razao_social'], 'string', 'max' => 200]
         ];
     }

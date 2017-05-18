@@ -7,9 +7,26 @@ Projeto.prototype.sici = new (Projeto.extend({
 
         this.mudaBotaoImportacao();
         this.validaAjaxImportacao();
+        this.verificaCnpj();
 
     },
+    verificaCnpj: function () {
+        $('#tabclientesearch-cnpj').blur(function ( ) {
 
+            var urlInclusao = $('base').attr('href') + 'posoutorga/sici/verifica-cnpj';
+
+            var selecao = {dados: $('#tabclientesearch-cnpj').val()};
+
+            projeto.ajax.post(urlInclusao, selecao, function (response) {
+                var ds = $.parseJSON(response);
+                $('#tabclientesearch-razao_social').val(ds.razao_social);
+                $('#tabcontatosearcht-contato').val(ds.contatoT);
+                $('#tabcontatosearchc-contato').val(ds.contatoC);
+            });
+
+
+        });
+    },
     mudaBotaoImportacao: function () {
         $("#tabsicisearch-file").change(function () {
             $("#importacao").hide();
