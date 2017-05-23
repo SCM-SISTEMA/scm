@@ -2,12 +2,13 @@ Projeto.prototype.sici = new (Projeto.extend({
     init: function () {
         this.totaisReceitas();
         this.totaisDespesas();
-        // this.totaisAcessoFisico();
-        // this.addAcesso();
+        this.mudaTipoSici();
 
         this.mudaBotaoImportacao();
         this.validaAjaxImportacao();
         this.verificaCnpj();
+        this.somenteNumero();
+        this.totaisPlanos();
 
     },
     verificaCnpj: function () {
@@ -20,6 +21,7 @@ Projeto.prototype.sici = new (Projeto.extend({
             projeto.ajax.post(urlInclusao, selecao, function (response) {
                 var ds = $.parseJSON(response);
                 $('#tabclientesearch-razao_social').val(ds.razao_social);
+                $('#tabclientesearch-fistel').val(ds.fistel);
                 $('#tabcontatosearcht-contato').val(ds.contatoT);
                 $('#tabcontatosearchc-contato').val(ds.contatoC);
             });
@@ -27,8 +29,39 @@ Projeto.prototype.sici = new (Projeto.extend({
 
         });
     },
+    somenteNumero: function () {
+
+        $(".somenteNumero").keyup(function (e) {
+            e.preventDefault();
+            var expre = /[^\d]/g;
+            $(this).val($(this).val().replace(expre, ''));
+        });
+    },
+
     mudaBotaoImportacao: function () {
         $("#tabsicisearch-file").change(function () {
+            $("#importacao").hide();
+            $("button.import.btn.btn-primary").show();
+            $("button.import.btn.btn-success").hide();
+        });
+    },
+    mudaTipoSici: function () {
+        $("#tabsicisearch-tipo_sici_fk").change(function () {
+            $('#siciTab a[href="#informacoes-adicionais"]').hide();
+            $('#siciTab a[href="#funcionarios"]').hide();
+            if ($("#tabsicisearch-tipo_sici_fk  :selected").text() == 'Anual' || $("#tabsicisearch-tipo_sici_fk  :selected").text() == 'Semestral') {
+
+                if ($("#tabsicisearch-tipo_sici_fk  :selected").text() == 'Anual') {
+                    $('#siciTab a[href="#informacoes-adicionais"]').show();
+
+                }
+
+                $('#siciTab a[href="#funcionarios"]').show();
+            } else {
+                $('#siciTab a[href="#informacoes-adicionais"]').hide();
+                $('#siciTab a[href="#funcionarios"]').hide();
+
+            }
             $("#importacao").hide();
             $("button.import.btn.btn-primary").show();
             $("button.import.btn.btn-success").hide();
@@ -52,6 +85,20 @@ Projeto.prototype.sici = new (Projeto.extend({
                     parseFloat($('#tabsicisearch-despesa_vendas').val()) + parseFloat($('#tabsicisearch-despesa_link').val())
                     );
             $('#tabsicisearch-total_despesa').val(Projeto.prototype.util.colocaFormatoMoeda(total));
+
+        });
+
+
+    },
+    totaisPlanos: function () {
+        $('#tabsicisearch-total_marketing_propaganda, #tabsicisearch-aplicacao_equipamento, #tabsicisearch-aplicacao_software, #tabsicisearch-total_pesquisa_desenvolvimento, #tabsicisearch-aplicacao_servico, #tabsicisearch-aplicacao_callcenter').change(function () {
+
+            var total = (
+                    parseFloat($('#tabsicisearch-total_marketing_propaganda').val()) + parseFloat($('#tabsicisearch-aplicacao_equipamento').val()) +
+                    parseFloat($('#tabsicisearch-aplicacao_software').val()) + parseFloat($('#tabsicisearch-total_pesquisa_desenvolvimento').val()) +
+                    parseFloat($('#tabsicisearch-aplicacao_servico').val()) + parseFloat($('#tabsicisearch-aplicacao_callcenter').val())
+                    );
+            $('#tabsicisearch-total_planta').val(Projeto.prototype.util.colocaFormatoMoeda(total));
 
         });
 

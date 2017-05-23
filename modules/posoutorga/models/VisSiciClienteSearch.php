@@ -55,7 +55,7 @@ class VisSiciClienteSearch extends VisSiciCliente {
                 ->andFilterWhere(['ilike', $this->tableName() . 'usuario_inclusao_sici', $this->usuario_inclusao_sici])
                 ->andFilterWhere(['ilike', $this->tableName() . '.fistel', $this->fistel])
                 ->andFilterWhere(['ilike', $this->tableName() . '.mes_ano_referencia', $this->mes_ano_referencia]);
-
+        $query->orderBy('mes_ano_referencia desc, cnpj');
         return $dataProvider;
     }
 

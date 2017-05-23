@@ -43,7 +43,7 @@ class Mailer extends \yii\swiftmailer\Mailer
 		return $this->compose()
 			->setFrom($this->remetente)
 			->setTo($model->txt_email)
-			->setSubject('[SNIS] Registro de novo usuário')
+			->setSubject('[SISSCM] Registro de novo usuário')
 			->setHtmlBody(ModeloDoc::gerarEmail('confirma-registro-novo-usuario', [
 				'nome-usuario' => $model->txt_nome,
 				'login-usuario' => $model->txt_login,

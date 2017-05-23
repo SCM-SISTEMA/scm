@@ -105,73 +105,30 @@ $empresa->calculaTotais($empresaMunicF, $empresaMunicJ);
             <?= $form->field($empresaMunicF, 'tipo_plano_fk')->hiddenInput(['id' => 'tabplanossearchmf-tipo_plano_fk', 'name' => 'TabEmpresaMunicipioSearch[0][TabEmpresaMunicipioSearchMF][tipo_plano_fk]'])->label(false) ?>
         </div>
         <div class='col-sm-2'>
+            
+            
             <?=
-            $form->field($empresaMunicF, 'valor_512')->textInput(['id' => 'tabplanossearchmf-valor_512', 'name' => 'TabEmpresaMunicipioSearch[0][TabEmpresaMunicipioSearchMF][valor_512]]'])->widget(\kartik\money\MaskMoney::className(), [
-                'pluginOptions' => [
-                    'thousands' => '.',
-                    'decimal' => ',',
-                    'precision' => 2,
-                    'allowZero' => false,],
-                'options' => [
-                    'class' => 'form-control', 'id' => 'tabplanossearchmf-valor_512', 'name' => 'TabEmpresaMunicipioSearch[0][TabEmpresaMunicipioSearchMF][valor_512]]'
-                ],
-            ])->label(false);
+            $form->field($empresaMunicF, 'valor_512')->textInput(['id' => 'tabplanossearchmf-valor_512', 'name' => 'TabEmpresaMunicipioSearch[0][TabEmpresaMunicipioSearchMF][valor_512]]', 'class'=>'form-control somenteNumero'])->label(false);
             ?>
         </div>
         <div class='col-sm-2'>
             <?=
-            $form->field($empresaMunicF, 'valor_512k_2m')->textInput(['id' => 'tabplanossearchmf-valor_512k_2m', 'name' => 'TabEmpresaMunicipioSearch[0][TabEmpresaMunicipioSearchMF][valor_512k_2m]]'])->widget(\kartik\money\MaskMoney::className(), [
-                'pluginOptions' => [
-                    'thousands' => '.',
-                    'decimal' => ',',
-                    'precision' => 2,
-                    'allowZero' => false,],
-                'options' => [
-                    'class' => 'form-control', 'id' => 'tabplanossearchmf-valor_512k_2m', 'name' => 'TabEmpresaMunicipioSearch[0][TabEmpresaMunicipioSearchMF][valor_512k_2m]]'
-                ],
-            ])->label(false);
+            $form->field($empresaMunicF, 'valor_512k_2m')->textInput(['id' => 'tabplanossearchmf-valor_512k_2m', 'name' => 'TabEmpresaMunicipioSearch[0][TabEmpresaMunicipioSearchMF][valor_512k_2m]]', 'class'=>'form-control somenteNumero'])->label(false);
             ?>
         </div>
         <div class='col-sm-2'>
             <?=
-            $form->field($empresaMunicF, 'valor_2m_12m')->textInput(['id' => 'tabplanossearchmf-valor_2m_12m', 'name' => 'TabEmpresaMunicipioSearch[0][TabEmpresaMunicipioSearchMF][valor_2m_12m]]'])->widget(\kartik\money\MaskMoney::className(), [
-                'pluginOptions' => [
-                    'thousands' => '.',
-                    'decimal' => ',',
-                    'precision' => 2,
-                    'allowZero' => false,],
-                'options' => [
-                    'class' => 'form-control', 'id' => 'tabplanossearchmf-valor_2m_12m', 'name' => 'TabEmpresaMunicipioSearch[0][TabEmpresaMunicipioSearchMF][valor_2m_12m]]'
-                ],
-            ])->label(false);
+            $form->field($empresaMunicF, 'valor_2m_12m')->textInput(['id' => 'tabplanossearchmf-valor_2m_12m', 'name' => 'TabEmpresaMunicipioSearch[0][TabEmpresaMunicipioSearchMF][valor_2m_12m]]', 'class'=>'form-control somenteNumero'])->label(false);
             ?>
         </div>
         <div class='col-sm-2'>
             <?=
-            $form->field($empresaMunicF, 'valor_12m_34m')->textInput(['id' => 'tabplanossearchmf-valor_12m_34m', 'name' => 'TabEmpresaMunicipioSearch[0][TabEmpresaMunicipioSearchMF][valor_12m_34m]]'])->widget(\kartik\money\MaskMoney::className(), [
-                'pluginOptions' => [
-                    'thousands' => '.',
-                    'decimal' => ',',
-                    'precision' => 2,
-                    'allowZero' => false,],
-                'options' => [
-                    'class' => 'form-control', 'id' => 'tabplanossearchmf-valor_12m_34m', 'name' => 'TabEmpresaMunicipioSearch[0][TabEmpresaMunicipioSearchMF][valor_12m_34m]]'
-                ],
-            ])->label(false);
+            $form->field($empresaMunicF, 'valor_12m_34m')->textInput(['id' => 'tabplanossearchmf-valor_12m_34m', 'name' => 'TabEmpresaMunicipioSearch[0][TabEmpresaMunicipioSearchMF][valor_12m_34m]]', 'class'=>'form-control somenteNumero'])->label(false);
             ?>
         </div>
         <div class='col-sm-2'>
             <?=
-            $form->field($empresaMunicF, 'valor_34m')->textInput(['id' => 'tabplanossearchmf-valor_34m', 'name' => 'TabEmpresaMunicipioSearch[0][TabEmpresaMunicipioSearchMF][valor_34m]]'])->widget(\kartik\money\MaskMoney::className(), [
-                'pluginOptions' => [
-                    'thousands' => '.',
-                    'decimal' => ',',
-                    'precision' => 2,
-                    'allowZero' => false,],
-                'options' => [
-                    'class' => 'form-control', 'id' => 'tabplanossearchmf-valor_34m', 'name' => 'TabEmpresaMunicipioSearch[0][TabEmpresaMunicipioSearchMF][valor_34m]]'
-                ],
-            ])->label(false);
+            $form->field($empresaMunicF, 'valor_34m')->textInput(['id' => 'tabplanossearchmf-valor_34m', 'name' => 'TabEmpresaMunicipioSearch[0][TabEmpresaMunicipioSearchMF][valor_34m]]', 'class'=>'form-control somenteNumero'])->label(false);
             ?>
         </div>
         <div class='col-sm-1' id='tabempresamunicipiosearch-total_fisica'><b>
@@ -186,72 +143,27 @@ $empresa->calculaTotais($empresaMunicF, $empresaMunicJ);
         </div>
         <div class='col-sm-2'>
             <?=
-            $form->field($empresaMunicJ, 'valor_512')->textInput(['id' => 'tabplanossearchmj-valor_512', 'name' => 'TabEmpresaMunicipioSearch[0][TabEmpresaMunicipioSearchMJ][valor_512]]'])->widget(\kartik\money\MaskMoney::className(), [
-                'pluginOptions' => [
-                    'thousands' => '.',
-                    'decimal' => ',',
-                    'precision' => 2,
-                    'allowZero' => false,],
-                'options' => [
-                    'class' => 'form-control', 'id' => 'tabplanossearchmj-valor_512', 'name' => 'TabEmpresaMunicipioSearch[0][TabEmpresaMunicipioSearchMJ][valor_512]]'
-                ],
-            ])->label(false);
+            $form->field($empresaMunicJ, 'valor_512')->textInput(['id' => 'tabplanossearchmj-valor_512', 'name' => 'TabEmpresaMunicipioSearch[0][TabEmpresaMunicipioSearchMJ][valor_512]]', 'class'=>'form-control somenteNumero'])->label(false);
             ?>
         </div>
         <div class='col-sm-2'>
             <?=
-            $form->field($empresaMunicJ, 'valor_512k_2m')->textInput(['id' => 'tabplanossearchmj-valor_512k_2m', 'name' => 'TabEmpresaMunicipioSearch[0][TabEmpresaMunicipioSearchMJ][valor_512k_2m]]'])->widget(\kartik\money\MaskMoney::className(), [
-                'pluginOptions' => [
-                    'thousands' => '.',
-                    'decimal' => ',',
-                    'precision' => 2,
-                    'allowZero' => false,],
-                'options' => [
-                    'class' => 'form-control', 'id' => 'tabplanossearchmj-valor_512k_2m', 'name' => 'TabEmpresaMunicipioSearch[0][TabEmpresaMunicipioSearchMJ][valor_512k_2m]]'
-                ],
-            ])->label(false);
+            $form->field($empresaMunicJ, 'valor_512k_2m')->textInput(['id' => 'tabplanossearchmj-valor_512k_2m', 'name' => 'TabEmpresaMunicipioSearch[0][TabEmpresaMunicipioSearchMJ][valor_512k_2m]]', 'class'=>'form-control somenteNumero'])->label(false);
             ?>
         </div>
         <div class='col-sm-2'>
             <?=
-            $form->field($empresaMunicJ, 'valor_2m_12m')->textInput(['id' => 'tabplanossearchmj-valor_2m_12m', 'name' => 'TabEmpresaMunicipioSearch[0][TabEmpresaMunicipioSearchMJ][valor_2m_12m]]'])->widget(\kartik\money\MaskMoney::className(), [
-                'pluginOptions' => [
-                    'thousands' => '.',
-                    'decimal' => ',',
-                    'precision' => 2,
-                    'allowZero' => false,],
-                'options' => [
-                    'class' => 'form-control', 'id' => 'tabplanossearchmj-valor_2m_12m', 'name' => 'TabEmpresaMunicipioSearch[0][TabEmpresaMunicipioSearchMJ][valor_2m_12m]]'
-                ],
-            ])->label(false);
+            $form->field($empresaMunicJ, 'valor_2m_12m')->textInput(['id' => 'tabplanossearchmj-valor_2m_12m', 'name' => 'TabEmpresaMunicipioSearch[0][TabEmpresaMunicipioSearchMJ][valor_2m_12m]]', 'class'=>'form-control somenteNumero'])->label(false);
             ?>
         </div>
         <div class='col-sm-2'>
             <?=
-            $form->field($empresaMunicJ, 'valor_12m_34m')->textInput(['id' => 'tabplanossearchmj-valor_12m_34m', 'name' => 'TabEmpresaMunicipioSearch[0][TabEmpresaMunicipioSearchMJ][valor_12m_34m]]'])->widget(\kartik\money\MaskMoney::className(), [
-                'pluginOptions' => [
-                    'thousands' => '.',
-                    'decimal' => ',',
-                    'precision' => 2,
-                    'allowZero' => false,],
-                'options' => [
-                    'class' => 'form-control', 'id' => 'tabplanossearchmj-valor_12m_34m', 'name' => 'TabEmpresaMunicipioSearch[0][TabEmpresaMunicipioSearchMJ][valor_12m_34m]]'
-                ],
-            ])->label(false);
+            $form->field($empresaMunicJ, 'valor_12m_34m')->textInput(['id' => 'tabplanossearchmj-valor_12m_34m', 'name' => 'TabEmpresaMunicipioSearch[0][TabEmpresaMunicipioSearchMJ][valor_12m_34m]]', 'class'=>'form-control somenteNumero'])->label(false);
             ?>
         </div>
         <div class='col-sm-2'>
             <?=
-            $form->field($empresaMunicJ, 'valor_34m')->textInput(['id' => 'tabplanossearchmj-valor_34m', 'name' => 'TabEmpresaMunicipioSearch[0][TabEmpresaMunicipioSearchMJ][valor_34m]]'])->widget(\kartik\money\MaskMoney::className(), [
-                'pluginOptions' => [
-                    'thousands' => '.',
-                    'decimal' => ',',
-                    'precision' => 2,
-                    'allowZero' => false,],
-                'options' => [
-                    'class' => 'form-control', 'id' => 'tabplanossearchmj-valor_34m', 'name' => 'TabEmpresaMunicipioSearch[0][TabEmpresaMunicipioSearchMJ][valor_34m]]'
-                ],
-            ])->label(false);
+            $form->field($empresaMunicJ, 'valor_34m')->textInput(['id' => 'tabplanossearchmj-valor_34m', 'name' => 'TabEmpresaMunicipioSearch[0][TabEmpresaMunicipioSearchMJ][valor_34m]]', 'class'=>'form-control somenteNumero'])->label(false);
             ?>
         </div>  
         <div class='col-sm-1' id='tabempresamunicipiosearch-total_juridica'>
@@ -293,12 +205,12 @@ $empresa->calculaTotais($empresaMunicF, $empresaMunicJ);
 
         <div class='col-sm-6'>
             <?=
-            $form->field($empresa, 'capacidade_municipio')->textInput(['id' => 'tabempresamunicipiosearch-capacidade_municipio', 'name' => 'TabEmpresaMunicipioSearch[0][capacidade_municipio]']);
+            $form->field($empresa, 'capacidade_municipio')->textInput(['id' => 'tabempresamunicipiosearch-capacidade_municipio', 'name' => 'TabEmpresaMunicipioSearch[0][capacidade_municipio]', 'class'=>'form-control somenteNumero']);
             ?>
         </div>
         <div class='col-sm-6'>
             <?=
-            $form->field($empresa, 'capacidade_servico')->textInput(['id' => 'tabempresamunicipiosearch-capacidade_servico', 'name' => 'TabEmpresaMunicipioSearch[0][capacidade_servico]']);
+            $form->field($empresa, 'capacidade_servico')->textInput(['id' => 'tabempresamunicipiosearch-capacidade_servico', 'name' => 'TabEmpresaMunicipioSearch[0][capacidade_servico]', 'class'=>'form-control somenteNumero']);
             ?>
         </div>
     </div>

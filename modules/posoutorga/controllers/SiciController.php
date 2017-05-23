@@ -88,10 +88,12 @@ class SiciController extends Controller {
         if ($id) {
 
             $sici = $this->findModel($id);
+
             $sici->calculaTotais();
             $tc = \app\modules\comercial\models\TabTipoContratoSearch::findOne($sici->cod_tipo_contrato_fk);
 
             $c = \app\modules\comercial\models\TabContratoSearch::findOne($tc->cod_contrato_fk);
+
             $cliente = \app\models\TabClienteSearch::findOne($c->cod_cliente_fk);
 
             $acao = 'update';
@@ -111,6 +113,7 @@ class SiciController extends Controller {
                 ->where(['ativo' => true, 'tipo_tabela_fk' => $cliente->tableName(), 'chave_fk' => $cliente->cod_cliente, 'tipo' => \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-contato', 'T')])
                 ->orderBy('cod_contato desc')
                 ->one();
+
 
         if (!$contatoT)
             $contatoT = new \app\models\TabContatoSearch();
@@ -146,10 +149,31 @@ class SiciController extends Controller {
             try {
 
                 $post = Yii::$app->request->post();
+                $trataErros = function($erros) {
+                    if ($erros) {
+                        $erro = [];
+                        foreach ($erros as $value) {
+
+                            foreach ($value as $val) {
+                                if (array_search($val, $erro) === false) {
+                                    $erro[] = $val;
+                                }
+                            }
+                        }
+                    }
+
+                    return implode('<br />', $erro);
+                };
 
                 unset($post['TabSiciSearch']['cod_sici']);
                 $sici->attributes = $post['TabSiciSearch'];
-                $sici->save();
+                if (!$sici->save()) {
+                    if ($sici->errors) {
+                        $erro = $trataErros($sici->errors);
+                    }
+
+                    $this->session->setFlash('danger', 'Erro na importação: <br/>' . $erro);
+                }
 
                 $cliente->load($post);
 
@@ -161,7 +185,15 @@ class SiciController extends Controller {
                 if (!$cli) {
 
                     $cliente->buscaCliente();
-                    $cliente->save();
+
+                    if (!$cliente->save()) {
+
+                        if ($cliente->errors) {
+                            $erro = $trataErros($cliente->errors);
+                        }
+
+                        $this->session->setFlash('danger', 'Erro na importação: <br/>' . $erro);
+                    }
 
                     $contrato = new \app\modules\comercial\models\TabContratoSearch();
                     $contrato->cod_cliente_fk = $cliente->cod_cliente;
@@ -169,9 +201,19 @@ class SiciController extends Controller {
                     $tipo_contrato = new \app\modules\comercial\models\TabTipoContrato();
                     $tipo_contrato->cod_contrato_fk = $contrato->cod_contrato;
                     $tipo_contrato->save();
-                                        
+
                     $sici->cod_tipo_contrato_fk = $tipo_contrato->cod_tipo_contrato;
                     $sici->save();
+
+                    if (!$sici->save()) {
+
+                        if ($sici->errors) {
+                            $erro = $trataErros($sici->errors);
+                        }
+
+                        $this->session->setFlash('danger', 'Erro na importação: <br/>' . $erro);
+                        return $this->redirect(['importar']);
+                    }
 
                     if ($cliente->dadosReceita->email) {
                         $contato = new \app\models\TabContatoSearch;
@@ -192,14 +234,15 @@ class SiciController extends Controller {
                     }
 
                     if (\projeto\Util::retiraCaracter($contato->contato) != \projeto\Util::retiraCaracter($contatoT->contato)) {
+                        $contatoT->tipo = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-contato', 'T');
                         $contatoT->tipo_tabela_fk = $cliente->tableName();
                         $contatoT->chave_fk = $cliente->cod_cliente;
                         $contatoT->save();
                     }
                     if (\projeto\Util::retiraCaracter($contato->contato) != \projeto\Util::retiraCaracter($contatoC->contato)) {
-
                         $contatoC->tipo_tabela_fk = $cliente->tableName();
                         $contatoC->chave_fk = $cliente->cod_cliente;
+                        $contatoC->tipo = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-contato', 'C');
                         $contatoC->save();
                     }
 
@@ -262,19 +305,23 @@ class SiciController extends Controller {
 
                 $planof->attributes = $post['TabPlanosF'];
                 $planof->tipo_tabela_fk = $sici->tableName();
+                $planof->tipo_plano_fk = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-pessoa-plano', 'F');
                 $planof->cod_chave = $sici->cod_sici;
                 $planof->save();
 
                 $planof_mn->attributes = $post['TabPlanosMenorMaiorF'];
+                $planof_mn->tipo_plano_fk = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-pessoa-plano', 'F');
                 $planof_mn->cod_sici_fk = $sici->cod_sici;
                 $planof_mn->save();
 
                 $planoj->attributes = $post['TabPlanosJ'];
                 $planoj->tipo_tabela_fk = $sici->tableName();
+                $planoj->tipo_plano_fk = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-pessoa-plano', 'J');
                 $planoj->cod_chave = $sici->cod_sici;
                 $planoj->save();
 
                 $planoj_mn->attributes = $post['TabPlanosMenorMaiorJ'];
+                $planoj_mn->tipo_plano_fk = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-pessoa-plano', 'J');
                 $planoj_mn->cod_sici_fk = $sici->cod_sici;
                 $planoj_mn->save();
 
@@ -316,7 +363,7 @@ class SiciController extends Controller {
                 //$sici->mes_ano_referencia = $dados_sici['mes_ano_referencia'];
                 $transaction->commit();
 
-                
+
                 $this->session->setFlashProjeto('success', $acao);
 
                 return $this->redirect(['update', 'id' => $sici->cod_sici]);
@@ -405,7 +452,7 @@ class SiciController extends Controller {
 // ITEM4
         $indicador = $dom->createElement('Indicador');
         $ITEM4 = $dom->createAttribute('Sigla');
-        $ITEM4->value = 'ITEM4';
+        $ITEM4->value = 'IEM4';
         $indicador->appendChild($ITEM4);
 
         $conteudo = $dom->createElement('Conteudo');
@@ -414,7 +461,7 @@ class SiciController extends Controller {
         $valor = $dom->createAttribute('valor');
         $uf->value = $endereco->tabMunicipios->sgl_estado_fk;
         $item->value = 'a';
-        $valor->value = empty($sici->qtd_funcionarios_fichados) ? '0,00' : \projeto\Util::decimalFormatToBank($sici->qtd_funcionarios_fichados);
+        $valor->value = empty($sici->qtd_funcionarios_fichados) ? '0' : \projeto\Util::decimalFormatToBank($sici->qtd_funcionarios_fichados);
         $conteudo->appendChild($uf);
         $conteudo->appendChild($item);
         $conteudo->appendChild($valor);
@@ -426,7 +473,7 @@ class SiciController extends Controller {
 // ITEM5
         $indicador = $dom->createElement('Indicador');
         $ITEM = $dom->createAttribute('Sigla');
-        $ITEM->value = 'ITEM5';
+        $ITEM->value = 'IEM5';
         $indicador->appendChild($ITEM);
 
 
@@ -436,7 +483,7 @@ class SiciController extends Controller {
         $valor = $dom->createAttribute('valor');
         $uf->value = $endereco->tabMunicipios->sgl_estado_fk;
         $item->value = 'a';
-        $valor->value = empty($sici->qtd_funcionarios_terceirizados) ? '0,00' : \projeto\Util::decimalFormatToBank($sici->qtd_funcionarios_terceirizados);
+        $valor->value = empty($sici->qtd_funcionarios_terceirizados) ? '0' : \projeto\Util::decimalFormatToBank($sici->qtd_funcionarios_terceirizados);
         $conteudo->appendChild($uf);
         $conteudo->appendChild($item);
         $conteudo->appendChild($valor);
@@ -449,7 +496,7 @@ class SiciController extends Controller {
         $planos = \app\modules\posoutorga\models\TabPlanosSearch::getITEM9($sici->cod_sici, $sici->tableName());
         $indicador = $dom->createElement('Indicador');
         $ITEM = $dom->createAttribute('Sigla');
-        $ITEM->value = 'ITEM9';
+        $ITEM->value = 'IEM9';
         $indicador->appendChild($ITEM);
 
 
@@ -487,7 +534,7 @@ class SiciController extends Controller {
         $planosMM = \app\modules\posoutorga\models\TabPlanosMenorMaiorSearch::getITEM10($sici->cod_sici);
         $indicador = $dom->createElement('Indicador');
         $ITEM = $dom->createAttribute('Sigla');
-        $ITEM->value = 'ITEM10';
+        $ITEM->value = 'IEM10';
         $indicador->appendChild($ITEM);
 
 
@@ -508,7 +555,7 @@ class SiciController extends Controller {
 
                 $uf->value = $endereco->tabMunicipios->sgl_estado_fk;
                 $item->value = $k;
-                $valor->value = empty($faixa) ? '0,00' : \projeto\Util::decimalFormatToBank($faixa);
+                $valor->value = empty($faixa) ? '0,00' : str_replace('.', '', \projeto\Util::decimalFormatToBank($faixa));
 
                 $conteudo->appendChild($uf);
                 $conteudo->appendChild($item);
@@ -528,105 +575,106 @@ class SiciController extends Controller {
         $ITEM = $dom->createAttribute('Sigla');
         $ITEM->value = 'IPL3';
         $indicador->appendChild($ITEM);
+        if ($empresa_municipio) {
+            foreach ($empresa_municipio as $item => $valor) {
+                $municipio = $dom->createElement('Municipio');
+                $codmunicipio = $dom->createAttribute('codmunicipio');
+                $codmunicipio->value = $item;
+                $municipio->appendChild($codmunicipio);
 
-        foreach ($empresa_municipio as $item => $valor) {
-            $municipio = $dom->createElement('Municipio');
-            $codmunicipio = $dom->createAttribute('codmunicipio');
-            $codmunicipio->value = $item;
-            $municipio->appendChild($codmunicipio);
+                foreach ($valor as $i => $val) {
+                    $pessoa = $dom->createElement('Pessoa');
 
-            foreach ($valor as $i => $val) {
-                $pessoa = $dom->createElement('Pessoa');
+                    $pitem = $dom->createAttribute('item');
+                    $pitem->value = $i;
+                    $pessoa->appendChild($pitem);
 
-                $pitem = $dom->createAttribute('item');
-                $pitem->value = $i;
-                $pessoa->appendChild($pitem);
+                    $conteudo = $dom->createElement('Conteudo');
 
-                $conteudo = $dom->createElement('Conteudo');
+                    $citem = $dom->createAttribute('item');
+                    $valor = $dom->createAttribute('valor');
 
-                $citem = $dom->createAttribute('item');
-                $valor = $dom->createAttribute('valor');
+                    $citem->value = 'a';
+                    $valor->value = empty($val['total']) ? '0' : (int) $val['total'];
 
-                $citem->value = 'a';
-                $valor->value = empty($val['total']) ? '0' : (int) $val['total'];
+                    $conteudo->appendChild($citem);
+                    $conteudo->appendChild($valor);
 
-                $conteudo->appendChild($citem);
-                $conteudo->appendChild($valor);
+                    $pessoa->appendChild($conteudo);
 
-                $pessoa->appendChild($conteudo);
-
-                $municipio->appendChild($pessoa);
+                    $municipio->appendChild($pessoa);
+                }
+                $indicador->appendChild($municipio);
             }
-            $indicador->appendChild($municipio);
+            $outorga->appendChild($indicador);
         }
-        $outorga->appendChild($indicador);
 
 
-
-// QAIPL4SM
+        // QAIPL4SM
         $indicador = $dom->createElement('Indicador');
         $ITEM = $dom->createAttribute('Sigla');
         $ITEM->value = 'QAIPL4SM';
         $indicador->appendChild($ITEM);
 
         $empresa_municipio = \app\modules\posoutorga\models\TabEmpresaMunicipioSearch::getQAIPL4SM($cod_sici);
-        foreach ($empresa_municipio as $item => $valor) {
-            $municipio = $dom->createElement('Municipio');
-            $codmunicipio = $dom->createAttribute('codmunicipio');
-            $codmunicipio->value = $item;
-            $municipio->appendChild($codmunicipio);
+        if ($empresa_municipio) {
+            foreach ($empresa_municipio as $item => $valor) {
+                $municipio = $dom->createElement('Municipio');
+                $codmunicipio = $dom->createAttribute('codmunicipio');
+                $codmunicipio->value = $item;
+                $municipio->appendChild($codmunicipio);
 
-            foreach ($valor as $iT => $tecno) {
-                $tec = \app\models\TabAtributosValoresSearch::findOne($iT);
+                foreach ($valor as $iT => $tecno) {
+                    $tec = \app\models\TabAtributosValoresSearch::findOne($iT);
 
-                $tecnologia = $dom->createElement('Tecnologia');
-                $tItem = $dom->createAttribute('item');
-                $tItem->value = strtoupper($tec->sgl_valor);
-                $tecnologia->appendChild($tItem);
+                    $tecnologia = $dom->createElement('Tecnologia');
+                    $tItem = $dom->createAttribute('item');
+                    $tItem->value = strtoupper($tec->sgl_valor);
+                    $tecnologia->appendChild($tItem);
 
-                $conteudo = $dom->createElement('Conteudo');
-                $nome = $dom->createAttribute('nome');
-                $valor = $dom->createAttribute('valor');
-                $nome->value = 'QAIPL4SM';
-                $valor->value = empty($tecno['total']) ? '0,00' : \projeto\Util::decimalFormatToBank($tecno['total']);
+                    $conteudo = $dom->createElement('Conteudo');
+                    $nome = $dom->createAttribute('nome');
+                    $valor = $dom->createAttribute('valor');
+                    $nome->value = 'QAIPL4SM';
+                    $valor->value = empty($tecno['total']) ? '0' : ($tecno['total']);
 
-                $conteudo->appendChild($nome);
-                $conteudo->appendChild($valor);
+                    $conteudo->appendChild($nome);
+                    $conteudo->appendChild($valor);
 
-                $tecnologia->appendChild($tItem);
+                    $tecnologia->appendChild($tItem);
 
-                foreach ($tecno as $i => $val) {
+                    foreach ($tecno as $i => $val) {
 
-                    if ($i == 'total') {
-                        $conteudo = $dom->createElement('Conteudo');
-                        $nome = $dom->createAttribute('nome');
-                        $valor = $dom->createAttribute('valor');
-                        $nome->value = $i;
-                        $valor->value = empty($val) ? '0,00' : \projeto\Util::decimalFormatToBank($val);
+                        if ($i == 'total') {
+                            $conteudo = $dom->createElement('Conteudo');
+                            $nome = $dom->createAttribute('nome');
+                            $valor = $dom->createAttribute('valor');
+                            $nome->value = $i;
+                            $valor->value = empty($val) ? '0' : $val;
 
-                        $conteudo->appendChild($nome);
-                        $conteudo->appendChild($valor);
-                    } else {
+                            $conteudo->appendChild($nome);
+                            $conteudo->appendChild($valor);
+                        } else {
 
-                        $conteudo = $dom->createElement('Conteudo');
-                        $faixa = $dom->createAttribute('faixa');
-                        $valor = $dom->createAttribute('valor');
-                        $faixa->value = $i;
-                        $valor->value = empty($val) ? '0,00' : \projeto\Util::decimalFormatToBank($val);
+                            $conteudo = $dom->createElement('Conteudo');
+                            $faixa = $dom->createAttribute('faixa');
+                            $valor = $dom->createAttribute('valor');
+                            $faixa->value = $i;
+                            $valor->value = empty($val) ? '0' : $val;
 
-                        $conteudo->appendChild($faixa);
-                        $conteudo->appendChild($valor);
+                            $conteudo->appendChild($faixa);
+                            $conteudo->appendChild($valor);
+                        }
+                        $tecnologia->appendChild($conteudo);
                     }
-                    $tecnologia->appendChild($conteudo);
+                    $municipio->appendChild($tecnologia);
                 }
-                $municipio->appendChild($tecnologia);
+
+                $indicador->appendChild($municipio);
             }
 
-            $indicador->appendChild($municipio);
+            $outorga->appendChild($indicador);
         }
-
-        $outorga->appendChild($indicador);
-
 
 
 // IPL6IM
@@ -636,23 +684,23 @@ class SiciController extends Controller {
         $indicador->appendChild($ITEM);
 
         $empresa_municipio = \app\modules\posoutorga\models\TabEmpresaMunicipioSearch::getIPL6IM($cod_sici);
+        if ($empresa_municipio) {
+            foreach ($empresa_municipio as $key => $value) {
 
-        foreach ($empresa_municipio as $key => $value) {
+                $conteudo = $dom->createElement('Conteudo');
+                $codmunicipio = $dom->createAttribute('codmunicipio');
+                $valor = $dom->createAttribute('valor');
+                $codmunicipio->value = $key;
+                $valor->value = empty($value['capacidade_municipio']) ? '0' : $value['capacidade_municipio'];
 
-            $conteudo = $dom->createElement('Conteudo');
-            $codmunicipio = $dom->createAttribute('codmunicipio');
-            $valor = $dom->createAttribute('valor');
-            $codmunicipio->value = $key;
-            $valor->value = empty($value['capacidade_municipio']) ? '0,00' : \projeto\Util::decimalFormatToBank($value['capacidade_municipio']);
+                $conteudo->appendChild($codmunicipio);
+                $conteudo->appendChild($valor);
+                $indicador->appendChild($conteudo);
+            }
 
-            $conteudo->appendChild($codmunicipio);
-            $conteudo->appendChild($valor);
-            $indicador->appendChild($conteudo);
+
+            $outorga->appendChild($indicador);
         }
-
-
-        $outorga->appendChild($indicador);
-
 
 // IAU1
         $indicador = $dom->createElement('Indicador');
@@ -662,11 +710,11 @@ class SiciController extends Controller {
 
         $conteudo = $dom->createElement('Conteudo');
         $valor = $dom->createAttribute('valor');
-        $valor->value = empty($sici->num_central_atendimento) ? '0,00' : $sici->num_central_atendimento;
+        $valor->value = empty($sici->num_central_atendimento) ? '0' : $sici->num_central_atendimento;
 
         $conteudo->appendChild($valor);
         $indicador->appendChild($conteudo);
-
+        $outorga->appendChild($indicador);
 
 // IPL1
         $indicador = $dom->createElement('Indicador');
@@ -679,7 +727,7 @@ class SiciController extends Controller {
             $item = $dom->createAttribute('item');
             $valor = $dom->createAttribute('valor');
             $item->value = $key;
-            $valor->value = empty($value) ? '0,00' : \projeto\Util::decimalFormatToBank($value);
+            $valor->value = empty($value) ? '0,00' : str_replace('.', '', \projeto\Util::decimalFormatToBank($value));
 
             $conteudo->appendChild($item);
             $conteudo->appendChild($valor);
@@ -700,7 +748,7 @@ class SiciController extends Controller {
             $item = $dom->createAttribute('item');
             $valor = $dom->createAttribute('valor');
             $item->value = $key;
-            $valor->value = empty($value) ? '0,00' : \projeto\Util::decimalFormatToBank($value);
+            $valor->value = empty($value) ? '0,00' : str_replace('.', '', \projeto\Util::decimalFormatToBank($value));
 
             $conteudo->appendChild($item);
             $conteudo->appendChild($valor);
@@ -724,7 +772,7 @@ class SiciController extends Controller {
             $valor = $dom->createAttribute('valor');
             $item->value = $key;
 
-            $valor->value = empty($value) ? '0,00' : \projeto\Util::decimalFormatToBank($value);
+            $valor->value = empty($value) ? '0,00' : str_replace('.', '', \projeto\Util::decimalFormatToBank($value));
 
             $conteudo->appendChild($item);
             $conteudo->appendChild($valor);
@@ -748,7 +796,7 @@ class SiciController extends Controller {
             $valor = $dom->createAttribute('valor');
             $item->value = $key;
 
-            $valor->value = empty($value) ? '0,00' : \projeto\Util::decimalFormatToBank($value);
+            $valor->value = empty($value) ? '0,00' : str_replace('.', '', \projeto\Util::decimalFormatToBank($value));
 
             $conteudo->appendChild($item);
             $conteudo->appendChild($valor);
@@ -767,7 +815,7 @@ class SiciController extends Controller {
         $item = $dom->createAttribute('item');
         $valor = $dom->createAttribute('valor');
         $item->value = 'a';
-        $valor->value = empty($sici->valor_consolidado) ? '0,00' : \projeto\Util::decimalFormatToBank($sici->valor_consolidado);
+        $valor->value = empty($sici->valor_consolidado) ? '0,00' : str_replace('.', '', \projeto\Util::decimalFormatToBank($sici->valor_consolidado));
 
         $conteudo->appendChild($item);
         $conteudo->appendChild($valor);
@@ -785,7 +833,7 @@ class SiciController extends Controller {
         $item = $dom->createAttribute('item');
         $valor = $dom->createAttribute('valor');
         $item->value = 'a';
-        $valor->value = empty($sici->receita_bruta) ? '0,00' : \projeto\Util::decimalFormatToBank($sici->receita_bruta);
+        $valor->value = empty($sici->receita_bruta) ? '0,00' : str_replace('.', '', \projeto\Util::decimalFormatToBank($sici->receita_bruta));
 
         $conteudo->appendChild($item);
         $conteudo->appendChild($valor);
@@ -799,12 +847,13 @@ class SiciController extends Controller {
         $ITEM->value = 'IEM7';
         $indicador->appendChild($ITEM);
 
+
         $conteudo = $dom->createElement('Conteudo');
         $item = $dom->createAttribute('item');
         $valor = $dom->createAttribute('valor');
         $item->value = 'a';
-        $valor->value = empty($sici->receita_liquida) ? '0,00' : \projeto\Util::decimalFormatToBank($sici->receita_liquida);
 
+        $valor->value = empty($sici->receita_liquida) ? '0,00' : str_replace('.', '', $sici->receita_liquida);
         $conteudo->appendChild($item);
         $conteudo->appendChild($valor);
 
@@ -823,7 +872,7 @@ class SiciController extends Controller {
             $valor = $dom->createAttribute('valor');
             $item->value = $key;
 
-            $valor->value = empty($value) ? '0,00' : \projeto\Util::decimalFormatToBank($value);
+            $valor->value = empty($value) ? '0,00' : str_replace('.', '', \projeto\Util::decimalFormatToBank($value));
 
             $conteudo->appendChild($item);
             $conteudo->appendChild($valor);
@@ -882,17 +931,18 @@ class SiciController extends Controller {
                     unset($post['TabSiciSearch']['cod_sici']);
                     $sici->attributes = $post['TabSiciSearch'];
 
-                    $cliente->load($post);
+                    $cliente->attributes = $post['TabClienteSearch'];
 
                     $cli = \app\models\TabClienteSearch::findOne(['cnpj' => $cliente->cnpj]);
+
                     $contatoT = new \app\models\TabContatoSearch;
                     $contatoT->attributes = $post['TabContatoSearchT'];
 
                     $contatoC = new \app\models\TabContatoSearch;
                     $contatoC->attributes = $post['TabContatoSearchC'];
 
-
                     if (!$cli) {
+
 
                         $cliente->buscaCliente();
                         $cliente->save();
@@ -1020,12 +1070,12 @@ class SiciController extends Controller {
                     $planoj_mn->save();
 
                     $municipios = \Yii::$app->session->get('empresasSessao');
-
                     if ($municipios) {
                         foreach ($municipios as $municipio) {
 
                             $empresa = new \app\modules\posoutorga\models\TabEmpresaMunicipioSearch();
                             $empresa->attributes = $municipio[0];
+
                             $empresa->cod_sici_fk = $sici->cod_sici;
                             $empresa->save();
 
@@ -1096,11 +1146,6 @@ class SiciController extends Controller {
 
             $rowDatas = $sheet->rangeToArray('A' . $row . ':' . $highestColumn . $row, NULL, TRUE, FALSE);
 
-            /*
-              if ($teste==false && strtoupper(trim(\projeto\Util::tirarAcentos($rowDatas[0][1]))) != 'INFORMACOES DA EMPRESA') {
-              continue;
-              }
-              $teste = true; */
             $rowData[] = $rowDatas;
 
             if ($row == 600) {
@@ -1111,7 +1156,6 @@ class SiciController extends Controller {
         $sici = new TabSiciSearch();
 
         $cliente = new \app\models\TabClienteSearch;
-
         $contatoC = new \app\models\TabContatoSearch;
         $contatoT = new \app\models\TabContatoSearch;
 
@@ -1133,6 +1177,18 @@ class SiciController extends Controller {
         $key += 5;
         $cliente->cnpj = \projeto\Util::retiraCaracter($rowData[$key][0][2]);
         $cliente->cnpj = str_pad($cliente->cnpj, 14, '0', 0);
+        $dadosCliente = \app\models\TabClienteSearch::find()->where("cnpj = '{$cliente->cnpj}' "
+                        . " OR replace(replace(replace(cnpj, '.', ''), '-', ''), '/', '')='{$cliente->cnpj}'")->one();
+
+
+        if ($dadosCliente) {
+            $cliente = $dadosCliente;
+            $clienteContrato = \app\modules\posoutorga\models\VisSiciCliente::findOne(['cnpj' => $cliente->cnpj]);
+            if ($clienteContrato) {
+                $sici->cod_tipo_contrato_fk = $clienteContrato->cod_tipo_contrato;
+            }
+        }
+
         $dt_referencia = ( \PHPExcel_Style_NumberFormat::toFormattedString($rowData[$key][0][9], 'MM/YYYY'));
 
 
@@ -1147,8 +1203,10 @@ class SiciController extends Controller {
 //INFORMAÇÕES FINANCEIRAS
         $key = 2;
         $sici->legenda = $rowData[$key][0][9];
+        $key += 2;
 
-        $key += 3;
+        if (!$rowData[$key][0][1])
+            $key += 1;
         $anual = false;
         $sici->tipo_sici_fk = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-sici', 'M');
         if (strpos(strtoupper($rowData[$key][0][1]), 'BRUTA') === false) {
@@ -1159,22 +1217,25 @@ class SiciController extends Controller {
         }
 
 
+
         $sici->receita_bruta = $rowData[$key][0][9];
         $sici->despesa_operacao_manutencao = $rowData[$key][0][20];
         $key += 3;
-        $sici->aliquota_nacional = (100 * $rowData[$key][0][7]);
+        $mult = ((100 * $rowData[$key][0][7]) > 100) ? 1 : 100;
+
+        $sici->aliquota_nacional = ($mult * $rowData[$key][0][7]);
 
         $sici->despesa_publicidade = $rowData[$key][0][20];
 
         $key += 3;
-        $sici->receita_icms = (100 * $rowData[$key][0][7]);
+        $sici->receita_icms = ($mult * $rowData[$key][0][7]);
         $sici->despesa_vendas = $rowData[$key][0][20];
         $key += 3;
-        $sici->receita_pis = (100 * $rowData[$key][0][7]);
+        $sici->receita_pis = ($mult * $rowData[$key][0][7]);
         $sici->despesa_link = $rowData[$key][0][20];
 
         $key += 3;
-        $sici->receita_confins = (100 * $rowData[$key][0][7]);
+        $sici->receita_confins = ($mult * $rowData[$key][0][7]);
 
         $key += 3;
         $key += 5;
@@ -1311,7 +1372,7 @@ class SiciController extends Controller {
         $planof->obs = $rowData[$key][0][2];
         $planoj->obs = $rowData[$key][0][13];
 
-//DISTRIBUIÇÃO DO QUANTITATIVO DE ACESSOS FÍSICOS EM SERVIÇO
+        //DISTRIBUIÇÃO DO QUANTITATIVO DE ACESSOS FÍSICOS EM SERVIÇO
         $rowData = $this->retornaImportacao($rowData, 'ACESSO', true);
         $key = 3;
 
@@ -1323,6 +1384,7 @@ class SiciController extends Controller {
 
                 if ($rowData[$i][0][4] && $rowData[$i][0][17]) {
                     $empresa->municipio = $rowData[$i][0][4];
+
                     $empresa->tecnologia_fk = strtoupper(str_replace(' ', '', trim(\projeto\Util::retiraAcento(\projeto\Util::tirarAcentos($rowData[$i][0][17])))));
                     if ($empresa->tecnologia_fk) {
                         $empresa->tecnologia_fk = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tecnologia', $empresa->tecnologia_fk, true);
@@ -1352,6 +1414,7 @@ class SiciController extends Controller {
                     $planof_municipio->valor_2m_12m = $rowData[$i][0][10];
                     $planof_municipio->valor_12m_34m = $rowData[$i][0][13];
                     $planof_municipio->valor_34m = $rowData[$i][0][16];
+
                     $planof_municipio->tipo_plano_fk = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-pessoa-plano', 'F');
                     $arrayF = $planof_municipio->attributes;
                     $arrayF['tipo_pessoa'] = 'Física';
@@ -1374,8 +1437,8 @@ class SiciController extends Controller {
                     $arrayJ['total'] = $empresa->total_juridica;
 
                     $i += 5;
-                    $empresa->capacidade_municipio = $rowData[$i][0][7];
-                    $empresa->capacidade_servico = $rowData[$i][0][20];
+                    $empresa->capacidade_municipio = (int) $rowData[$i][0][7];
+                    $empresa->capacidade_servico = (int) $rowData[$i][0][20];
                     $i += 4;
 
                     $empresa->gridMunicipios[] = $arrayF;
@@ -1405,8 +1468,35 @@ class SiciController extends Controller {
             }
         }
         \Yii::$app->session->set('empresasSessao', $empresasSessao);
+
         $cliente->validate();
+
         $sici->validate();
+        $erro = [];
+        if ($sici->errors) {
+            foreach ($sici->errors as $value) {
+
+                foreach ($value as $val) {
+                    if (array_search($val, $erro) === false) {
+                        $erro[] = $val;
+                    }
+                }
+            }
+        }
+
+        if ($cliente->errors) {
+            foreach ($cliente->errors as $value) {
+
+                foreach ($value as $val) {
+                    if (array_search($val, $erro) === false) {
+                        $erro[] = $val;
+                    }
+                }
+            }
+        }
+        if ($erro) {
+            $this->session->setFlash('danger', 'Erro encontrados: <br/>' . implode('<br/>', $erro));
+        }
         return compact('sici', 'cliente', 'contatoC', 'contatoT', 'planof', 'planof_mn', 'planoj', 'planoj_mn', 'empresas', 'anual', 'indicadores');
     }
 
@@ -1566,7 +1656,7 @@ class SiciController extends Controller {
                     if ($value[0]['cod_empresa_municipio'] == $post['TabEmpresaMunicipioSearch'][0]['cod_empresa_municipio']) {
                         $empresa = new \app\modules\posoutorga\models\TabEmpresaMunicipioSearch();
                         $empresa->attributes = $post['TabEmpresaMunicipioSearch'][0];
-                        $empresa->cod_empresa_municipio = $post['TabEmpresaMunicipioSearch'][0]['cod_empresa_municipio'];
+                        $empresa->cod_empresa_municipio = $empresa->cod_empresa_municipio = 'N_' . rand(100000000, 999999999);
 
                         $planof_municipio = new \app\modules\posoutorga\models\TabPlanosSearch();
                         $planof_municipio->attributes = $post['TabEmpresaMunicipioSearch'][0]['TabEmpresaMunicipioSearchMF'];

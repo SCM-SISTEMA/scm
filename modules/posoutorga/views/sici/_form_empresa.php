@@ -1,7 +1,7 @@
 <?= $form->field($sici, 'cod_sici')->hiddenInput(['maxlength' => true])->label(false); ?>
 
 <div class='row'>
-    <div class='col-lg-4'>
+    <div class='col-lg-2'>
         <?=
         $form->field($cliente, 'cnpj')->widget(\yii\widgets\MaskedInput::className(), [
             'mask' => ['99.999.999/9999-99'],
@@ -11,6 +11,10 @@
         ])->textInput(['maxlength' => true, 'disabled' => (($sici->cod_sici) ? true : false)])
         ?>
     </div>
+        <div class='col-lg-2'>
+        <?= $form->field($cliente, 'fistel')->textInput(['maxlength' => true, 'class'=>'form-control somenteNumero', 'disabled' => (($sici->cod_sici) ? true : false)]) ?>
+    </div>
+
     <div class='col-lg-4'>
         <?= $form->field($sici, 'responsavel')->textInput(['maxlength' => true]) ?>
     </div>

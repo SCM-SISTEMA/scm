@@ -1,4 +1,5 @@
 <?php
+
 $this->registerJsFile("@web/js/app/posoutorga.sici.js?{$this->app->version}", ['position' => $this::POS_END, 'depends' => [\app\assets\ProjetoAsset::className()]]);
 
 
@@ -19,49 +20,58 @@ $planof_mn = $importacao['planof_mn'];
 $planoj_mn = $importacao['planoj_mn'];
 
 $empresas = $importacao['empresas'];
-$tipo_sici = \app\models\TabAtributosValoresSearch::find()->where(['cod_atributos_valores'=>$sici->tipo_sici_fk])->one()->sgl_valor;
+$tipo_sici = \app\models\TabAtributosValoresSearch::find()->where(['cod_atributos_valores' => $sici->tipo_sici_fk])->one()->sgl_valor;
 
-$anual = ($tipo_sici=='S' || $tipo_sici=='A') ? true : false;
+$anual = ($tipo_sici == 'S' || $tipo_sici == 'A') ? true : false;
 ?>
 <?php
+
 $this->registerJsFile("@web/js/app/posoutorga.distribuicao.js?{$this->app->version}", ['position' => $this::POS_END, 'depends' => [\app\assets\ProjetoAsset::className()]]);
 ?>
-<?php echo $this->render('_form_distribuicao_add', ['form'=>$form, 'anual' => $anual]); ?> 
+<?php echo $this->render('_form_distribuicao_add', ['form' => $form, 'anual' => $anual]); ?> 
 
 <?=
+
 kartik\tabs\TabsX::widget([
+    'id' => 'siciTab',
     'items' => [
         [
             'label' => "<b style=\"color:#337ab7\">Empresa</b>",
             'content' => $this->render('_form_empresa', compact('sici', 'form', 'cliente', 'contatoT', 'contatoC')),
             'active' => true,
+            'options' => ['id' => 'empresa'],
         ],
         [
             'label' => "<b style=\"color:#337ab7\">Financeiro</b>",
             'content' => $this->render('_form_financeiro', compact('sici', 'form')),
             'active' => false,
+            'options' => ['id' => 'financeiro'],
         ],
         [
             'label' => "<b style=\"color:#337ab7\">Funcionários</b>",
             'content' => $this->render('_form_funcionario', compact('sici', 'form')),
             'active' => false,
-            'visible' => ($tipo_sici=='S' || $tipo_sici=='A') ? true : false,
+  
+            'options' => ['id' => 'funcionarios'],
         ],
         [
             'label' => "<b style=\"color:#337ab7\">Informações Adicionais</b>",
             'content' => $this->render('_form_adicionais', compact('sici', 'form')),
             'active' => false,
-            'visible' => ($tipo_sici=='A') ? true : false,
+  
+            'options' => ['id' => 'informacoes-adicionais'],
         ],
-         [
+        [
             'label' => "<b style=\"color:#337ab7\">Planos</b>",
+            'options' => ['id' => 'planos'],
             'content' => $this->render('_form_planos', compact('planoj', 'planof', 'planof_mn', 'planoj_mn', 'form')),
             'active' => false,
         ]
         ,
         [
             'label' => "<b style=\"color:#337ab7\">Acessos Físicos</b>",
-            'content' => '<div id="acessoFisicoAll">'.$this->render('_form_distribuicao', compact('empresas', 'sici', 'form')).'</div>',
+            'options' => ['id' => 'acessos-fisicos'],
+            'content' => '<div id="acessoFisicoAll">' . $this->render('_form_distribuicao', compact('empresas', 'sici', 'form')) . '</div>',
             'active' => false,
         ]
     ],
@@ -69,4 +79,26 @@ kartik\tabs\TabsX::widget([
     'bordered' => true,
     'encodeLabels' => false,
 ])
+?>
+<?php
+
+if ($tipo_sici == 'S' || $tipo_sici == 'A') {
+
+
+    if ($tipo_sici == 'A') {
+        $js = "$('#siciTab a[href=\"#informacoes-adicionais\"]').show();";
+    }
+    $js .= "$('#siciTab a[href=\"#funcionarios\"]').show();";
+    
+}
+
+
+$this->registerJs("
+            $('#siciTab a[href=\"#informacoes-adicionais\"]').hide();
+            $('#siciTab a[href=\"#funcionarios\"]').hide();
+            {$js}    
+                
+                
+                ", \projeto\web\View::POS_READY, 'jsTipoSici'
+);
 ?>

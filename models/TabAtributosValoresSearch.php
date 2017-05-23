@@ -153,7 +153,7 @@ class TabAtributosValoresSearch extends TabAtributosValores {
         } elseif ($dados) {
             foreach ($dados as $key => $value) {
                 if ($chave) {
-                    if (\projeto\Util::tirarAcentos(strtoupper($valor)) == strtoupper(\projeto\Util::tirarAcentos($value['dsc_descricao']))) {
+                    if (\projeto\Util::tirarAcentos(strtoupper($valor)) == str_replace(' ', '',  strtoupper(\projeto\Util::tirarAcentos($value['dsc_descricao'])))) {
                         return $value['cod_atributos_valores'];
                     }
                 } else {

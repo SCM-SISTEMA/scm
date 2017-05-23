@@ -157,7 +157,7 @@ class UsuariosController extends Controller {
 							}
 						}
 						// garantir q salvou antes de enviar o email
-						//$this->app->mailer->registroNovoUsuario($model, $txtSenha);
+						$this->app->mailer->registroNovoUsuario($model, $txtSenha);
 					}
 					$transaction->commit();
 					\yii::$app->session->set('perfil-modulo', []);

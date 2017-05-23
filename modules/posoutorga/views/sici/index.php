@@ -7,7 +7,7 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\GridView;
 
-$btIncluir = Html::a('<i class="glyphicon glyphicon-plus"></i> Incluir novo registro', [], ['class' => 'btn btn-success btn-sm']);
+$btIncluir = Html::a('<i class="glyphicon glyphicon-plus"></i> Incluir novo registro', ['update'], ['class' => 'btn btn-success btn-sm']);
 $btImportar = Html::a('<i class="fa fa-file-excel-o"></i> Importar Planilha ', ['importar'], ['class' => 'btn btn-default btn-sm']);
 ?>
 

@@ -35,7 +35,7 @@ class TabSiciSearch extends TabSici {
             [['obs_receita', 'obs_despesa'], 'string'],
             [['mes_ano_referencia'], 'required'],
             [['file'], 'required', 'on' => 'importar'],
-            [['mes_ano_referencia', 'cod_tipo_contrato_fk'], 'unique', 'targetAttribute' => ['mes_ano_referencia', 'cod_tipo_contrato_fk']],
+            [['mes_ano_referencia', 'cod_tipo_contrato_fk'], 'unique', 'targetAttribute' => ['mes_ano_referencia', 'cod_tipo_contrato_fk'], 'message'=>'Já existe Mês de referência para esse cliente'],
             [['file'], 'file', 'skipOnEmpty' => true, 'extensions' => 'xls, xlsx'],
         ];
 

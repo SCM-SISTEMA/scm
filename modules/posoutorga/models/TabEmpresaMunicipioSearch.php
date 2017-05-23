@@ -103,16 +103,16 @@ class TabEmpresaMunicipioSearch extends TabEmpresaMunicipio {
         foreach ($empresa_municipio as $key => $value) {
 
             $planom = \app\modules\posoutorga\models\TabPlanosSearch::find()
-                    ->select('
-                    valor_512, valor_512k_2m, valor_2m_12m,valor_12m_34m,valor_34m, 
-                    (valor_512+valor_512k_2m+ valor_2m_12m+valor_12m_34m+valor_34m) as total, 
-                    (SELECT sgl_valor FROM public.tab_atributos_valores where cod_atributos_valores=tipo_plano_fk) as tipo_plano_sgl')
+                    ->select("
+                    valor_512, valor_512k_2m, valor_2m_12m,valor_12m_34m,valor_34m,
+                    (SELECT sgl_valor FROM public.tab_atributos_valores where cod_atributos_valores=tipo_plano_fk) as tipo_plano_sgl")
                     ->where(['cod_chave' => $value->cod_empresa_municipio, 'tipo_tabela_fk' => $value->tableName()])
                     ->orderBy('tipo_plano_sgl')
                     ->asArray()
                     ->all();
 
-            foreach ($planom as $pla) {
+            foreach ($planom as $key => $pla) {
+                $pla['total'] = (int) $pla['valor_512'] + (int) $pla['valor_512k_2m'] + (int) $pla['valor_2m_12m'] + (int) $pla['valor_12m_34m'] + (int) $pla['valor_34m'];
                 $planoEmpresa[$value->tabMunicipios->cod_ibge][$value->tecnologia_fk][$pla['tipo_plano_sgl']] = $pla;
             }
         }
@@ -133,39 +133,44 @@ class TabEmpresaMunicipioSearch extends TabEmpresaMunicipio {
 
     public static function getQAIPL4SM($cod_sici) {
         $dados = TabEmpresaMunicipioSearch::buscaPlanoEmpresasTecnologia($cod_sici);
+        $planos = [];
+        if ($dados) {
+            foreach ($dados as $munK => $municipio) {
+                foreach ($municipio as $tK => $tecnologia) {
+                    foreach ($tecnologia as $pk => $pessoa) {
 
-        foreach ($dados as $munK => $municipio) {
-            foreach ($municipio as $tK => $tecnologia) {
-                foreach ($tecnologia as $pk => $pessoa) {
-                    $planos[$munK][$tK]['15'] += $pessoa['valor_512'];
-                    $planos[$munK][$tK]['16'] += $pessoa['valor_512k_2m'];
-                    $planos[$munK][$tK]['17'] += $pessoa['valor_2m_12m'];
-                    $planos[$munK][$tK]['18'] += $pessoa['valor_12m_34m'];
-                    $planos[$munK][$tK]['19'] += $pessoa['valor_34m'];
-                    $planos[$munK][$tK]['total'] += $pessoa['total'];
+                        $planos[$munK][$tK]['15'] += $pessoa['valor_512'];
+                        $planos[$munK][$tK]['16'] += $pessoa['valor_512k_2m'];
+                        $planos[$munK][$tK]['17'] += $pessoa['valor_2m_12m'];
+                        $planos[$munK][$tK]['18'] += $pessoa['valor_12m_34m'];
+                        $planos[$munK][$tK]['19'] += $pessoa['valor_34m'];
+                        $planos[$munK][$tK]['total'] += $pessoa['total'];
+                    }
                 }
             }
         }
-
         return $planos;
     }
 
     public static function getIPL3($cod_sici) {
 
         $dados = TabEmpresaMunicipioSearch::buscaPlanoEmpresasTecnologia($cod_sici);
-
-        foreach ($dados as $munK => $municipio) {
-            foreach ($municipio as $tK => $tecnologia) {
-                foreach ($tecnologia as $pk => $pessoa) {
-                    $planos[$munK][$pk]['valor_512'] += $pessoa['valor_512'];
-                    $planos[$munK][$pk]['valor_512k_2m'] += $pessoa['valor_512k_2m'];
-                    $planos[$munK][$pk]['valor_2m_12m'] += $pessoa['valor_2m_12m'];
-                    $planos[$munK][$pk]['valor_12m_34m'] += $pessoa['valor_12m_34m'];
-                    $planos[$munK][$pk]['valor_34m'] += $pessoa['valor_34m'];
-                    $planos[$munK][$pk]['total'] += $pessoa['total'];
+        $planos = [];
+        if ($dados) {
+            foreach ($dados as $munK => $municipio) {
+                foreach ($municipio as $tK => $tecnologia) {
+                    foreach ($tecnologia as $pk => $pessoa) {
+                        $planos[$munK][$pk]['valor_512'] += $pessoa['valor_512'];
+                        $planos[$munK][$pk]['valor_512k_2m'] += $pessoa['valor_512k_2m'];
+                        $planos[$munK][$pk]['valor_2m_12m'] += $pessoa['valor_2m_12m'];
+                        $planos[$munK][$pk]['valor_12m_34m'] += $pessoa['valor_12m_34m'];
+                        $planos[$munK][$pk]['valor_34m'] += $pessoa['valor_34m'];
+                        $planos[$munK][$pk]['total'] += $pessoa['total'];
+                    }
                 }
             }
         }
+
 
         return $planos;
     }
@@ -176,7 +181,7 @@ class TabEmpresaMunicipioSearch extends TabEmpresaMunicipio {
         $this->total_512 = \projeto\Util::decimalFormatForBank($planof_municipio->valor_512) +
                 \projeto\Util::decimalFormatForBank($planoj_municipio->valor_512)
         ;
-        
+
         $this->total_512k_2m = \projeto\Util::decimalFormatForBank($planof_municipio->valor_512k_2m) +
                 \projeto\Util::decimalFormatForBank($planoj_municipio->valor_512k_2m)
         ;
@@ -208,7 +213,7 @@ class TabEmpresaMunicipioSearch extends TabEmpresaMunicipio {
         $this->total = \projeto\Util::decimalFormatForBank($this->total_juridica) +
                 \projeto\Util::decimalFormatForBank($this->total_fisica)
         ;
-      
+
 
         return $totais = [
             'valor_512' => $this->total_512,
@@ -217,7 +222,6 @@ class TabEmpresaMunicipioSearch extends TabEmpresaMunicipio {
             'valor_12m_34m' => $this->total_12m_34m,
             'valor_34m' => $this->total_34m,
             'total' => $this->total,
-            
         ];
     }
 

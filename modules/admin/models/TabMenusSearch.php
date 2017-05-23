@@ -162,7 +162,7 @@ class TabMenusSearch extends TabMenus {
         $inicio = Array
             (
             'label' => 'Início',
-            'url' => Array('/admin/inicio'),
+            'url' => Array('#'),
             'icon' => 'home'
         );
         array_unshift($data, $inicio);

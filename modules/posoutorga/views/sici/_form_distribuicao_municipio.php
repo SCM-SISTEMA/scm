@@ -80,9 +80,9 @@ yii\grid\GridView::widget([
             'label' => 'até 512 Kbps',
             'content' => function ($model, $key, $index) {
                 if ($key == 2) {
-                    return '<b>' . projeto\Util::decimalFormatToBank($model['valor_512']) . '</b>';
+                    return '<b>' . $model['valor_512'] . '</b>';
                 }
-                return projeto\Util::decimalFormatToBank($model['valor_512']);
+                return $model['valor_512'];
             },
         ],
         [
@@ -90,9 +90,9 @@ yii\grid\GridView::widget([
             'label' => '512 Kbps à 2 Mbps',
             'content' => function ($model, $key, $index) {
                 if ($key == 2) {
-                    return '<b>' . projeto\Util::decimalFormatToBank($model['valor_512k_2m']) . '</b>';
+                    return '<b>' . $model['valor_512k_2m'] . '</b>';
                 }
-                return projeto\Util::decimalFormatToBank($model['valor_512k_2m']);
+                return $model['valor_512k_2m'];
             },
         ],
         [
@@ -100,9 +100,9 @@ yii\grid\GridView::widget([
             'label' => '2 Mbps à 12 Mbps',
             'content' => function ($model, $key, $index) {
                 if ($key == 2) {
-                    return '<b>' . projeto\Util::decimalFormatToBank($model['valor_2m_12m']) . '</b>';
+                    return '<b>' . $model['valor_2m_12m'] . '</b>';
                 }
-                return projeto\Util::decimalFormatToBank($model['valor_2m_12m']);
+                return $model['valor_2m_12m'];
             },
         ],
         [
@@ -110,9 +110,9 @@ yii\grid\GridView::widget([
             'label' => '12 Mbps à 34 Mbps',
             'content' => function ($model, $key, $index) {
                 if ($key == 2) {
-                    return '<b>' . projeto\Util::decimalFormatToBank($model['valor_12m_34m']) . '</b>';
+                    return '<b>' . $model['valor_12m_34m'] . '</b>';
                 }
-                return projeto\Util::decimalFormatToBank($model['valor_12m_34m']);
+                return $model['valor_12m_34m'];
             },
         ],
         [
@@ -120,9 +120,9 @@ yii\grid\GridView::widget([
             'label' => 'ACIMA DE 34 Mbps',
             'content' => function ($model, $key, $index) {
                 if ($key == 2) {
-                    return '<b>' . projeto\Util::decimalFormatToBank($model['valor_34m']) . '</b>';
+                    return '<b>' . $model['valor_34m'] . '</b>';
                 }
-                return projeto\Util::decimalFormatToBank($model['valor_34m']);
+                return $model['valor_34m'];
             },
         ],
         [
@@ -131,7 +131,7 @@ yii\grid\GridView::widget([
             'contentOptions' => ['style' => 'font-weight:bold'],
             'content' => function ($model, $key, $index) {
 
-                return projeto\Util::decimalFormatToBank($model['total']);
+                return $model['total'];
             },
         ],
     ],

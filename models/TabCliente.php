@@ -34,6 +34,7 @@ class TabCliente extends \projeto\db\ActiveRecord
         return [
             [['ie'], 'integer'],
             [['dt_inclusao', 'dt_exclusao'], 'safe'],
+             [['cnpj', 'fistel', 'razao_social'], 'required'],
             [['situacao'], 'boolean'],
             [['cnpj'], 'string', 'max' => 18],
             [['fantasia', 'razao_social'], 'string', 'max' => 200]

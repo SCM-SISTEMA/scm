@@ -41,58 +41,57 @@ Projeto.prototype.distribuicao = new (Projeto.extend({
 
         $("input[id^='tabplanossearchm']").change(function () {
 
-            if ($(this).attr('id').indexOf("disp") < 0) {
-                var result = $(this).attr('id').split('-');
+            var result = $(this).attr('id').split('-');
 
 
-                if ((result[0] == 'tabplanossearchmf')) {
-                    var nome_total = '-total_fisica';
-                    var nome_outro = 'tabplanossearchmj-';
-                } else {
-                    var nome_total = '-total_juridica';
-                    var nome_outro = 'tabplanossearchmf-';
-                }
-
-                var valorThis = (!$(this).val()) ? 0.00 : parseFloat($(this).val());
-                var totalOutro = (!$('#' + nome_outro + result[1]).val()) ? 0.00 : parseFloat($('#' + nome_outro + result[1]).val());
-                var total = valorThis + totalOutro;
-
-                $('#tabempresamunicipiosearch-' + result[1].replace('valor', 'total')).html(
-                        '<b>' +
-                        Projeto.prototype.util.colocaFormatoMoeda(total)
-                        + '</b>'
-                        );
-
-                var total_outro = 0;
-                $.each($("input[id^='" + result[0] + "']"), function () {
-                    if ($(this).attr('id').indexOf("disp") < 0 && $(this).attr('id').indexOf("tipo_plano_fk") < 0) {
-
-                        var valorThis = (!$(this).val()) ? 0.00 : parseFloat($(this).val());
-                        total_outro = parseFloat(total_outro) + valorThis;
-                    }
-                });
-
-                $("#tabempresamunicipiosearch" + nome_total).html(
-                        '<b>' +
-                        Projeto.prototype.util.colocaFormatoMoeda(total_outro)
-                        + '</b>'
-                        );
-
-
-                $("#tabempresamunicipiosearch-total").html(
-                        '<b>' +
-                        Projeto.prototype.util.colocaFormatoMoeda(
-                                parseFloat(
-                                        Projeto.prototype.util.retiraFormatoMoeda($("#tabempresamunicipiosearch-total_fisica").html().replace('<b>', '').replace('<b/>', ''))
-                                        ) +
-                                parseFloat(
-                                        Projeto.prototype.util.retiraFormatoMoeda($("#tabempresamunicipiosearch-total_juridica").html().replace('<b>', '').replace('<b/>', ''))
-                                        )
-
-                                )
-                        + '</b>'
-                        )
+            if ((result[0] == 'tabplanossearchmf')) {
+                var nome_total = '-total_fisica';
+                var nome_outro = 'tabplanossearchmj-';
+            } else {
+                var nome_total = '-total_juridica';
+                var nome_outro = 'tabplanossearchmf-';
             }
+
+            var valorThis = (!$(this).val()) ? 0.00 : parseFloat($(this).val());
+            var totalOutro = (!$('#' + nome_outro + result[1]).val()) ? 0.00 : parseFloat($('#' + nome_outro + result[1]).val());
+            var total = valorThis + totalOutro;
+
+            $('#tabempresamunicipiosearch-' + result[1].replace('valor', 'total')).html(
+                    '<b>' +
+                    Projeto.prototype.util.colocaFormatoMoeda(total)
+                    + '</b>'
+                    );
+
+            var total_outro = 0;
+            $.each($("input[id^='" + result[0] + "']"), function () {
+                if ($(this).attr('id').indexOf("tipo_plano_fk") < 0) {
+
+                    var valorThis = (!$(this).val()) ? 0.00 : parseFloat($(this).val());
+                    total_outro = parseFloat(total_outro) + valorThis;
+                }
+            });
+
+            $("#tabempresamunicipiosearch" + nome_total).html(
+                    '<b>' +
+                    Projeto.prototype.util.colocaFormatoMoeda(total_outro)
+                    + '</b>'
+                    );
+
+
+            $("#tabempresamunicipiosearch-total").html(
+                    '<b>' +
+                    Projeto.prototype.util.colocaFormatoMoeda(
+                            parseFloat(
+                                    Projeto.prototype.util.retiraFormatoMoeda($("#tabempresamunicipiosearch-total_fisica").html().replace('<b>', '').replace('<b/>', ''))
+                                    ) +
+                            parseFloat(
+                                    Projeto.prototype.util.retiraFormatoMoeda($("#tabempresamunicipiosearch-total_juridica").html().replace('<b>', '').replace('<b/>', ''))
+                                    )
+
+                            )
+                    + '</b>'
+                    )
+
 
         });
     },
@@ -167,19 +166,19 @@ Projeto.prototype.distribuicao = new (Projeto.extend({
         $('#tabempresamunicipiosearch-cod_empresa_municipio').val(dados[0].cod_empresa_municipio);
 
         $('#tabempresamunicipiosearch-tecnologia_fk').val(dados[0].tecnologia_fk);
-        $('#tabplanossearchmf-valor_512-disp').val(Projeto.prototype.util.colocaFormatoMoeda(dados[1].valor_512)).change();
-        $('#tabplanossearchmf-valor_512k_2m-disp').val(Projeto.prototype.util.colocaFormatoMoeda(dados[1].valor_512k_2m)).change();
-        $('#tabplanossearchmf-valor_2m_12m-disp').val(Projeto.prototype.util.colocaFormatoMoeda(dados[1].valor_2m_12m)).change();
-        $('#tabplanossearchmf-valor_12m_34m-disp').val(Projeto.prototype.util.colocaFormatoMoeda(dados[1].valor_12m_34m)).change();
-        $('#tabplanossearchmf-valor_34m-disp').val(Projeto.prototype.util.colocaFormatoMoeda(dados[1].valor_34m)).change();
+        $('#tabplanossearchmf-valor_512').val(dados[1].valor_512).change();
+        $('#tabplanossearchmf-valor_512k_2m').val(dados[1].valor_512k_2m).change();
+        $('#tabplanossearchmf-valor_2m_12m').val(dados[1].valor_2m_12m).change();
+        $('#tabplanossearchmf-valor_12m_34m').val(dados[1].valor_12m_34m).change();
+        $('#tabplanossearchmf-valor_34m').val(dados[1].valor_34m).change();
         $('#tabplanossearchmf-tipo_plano_fk').val(dados[1].tipo_plano_fk).change();
         $('#tabplanossearchmf-cod_plano').val(dados[1].cod_plano);
 
-        $('#tabplanossearchmj-valor_512-disp').val(Projeto.prototype.util.colocaFormatoMoeda(dados[2].valor_512)).change();
-        $('#tabplanossearchmj-valor_512k_2m-disp').val(Projeto.prototype.util.colocaFormatoMoeda(dados[2].valor_512k_2m)).change();
-        $('#tabplanossearchmj-valor_2m_12m-disp').val(Projeto.prototype.util.colocaFormatoMoeda(dados[2].valor_2m_12m)).change();
-        $('#tabplanossearchmj-valor_12m_34m-disp').val(Projeto.prototype.util.colocaFormatoMoeda(dados[2].valor_12m_34m)).change();
-        $('#tabplanossearchmj-valor_34m-disp').val(Projeto.prototype.util.colocaFormatoMoeda(dados[2].valor_34m)).change();
+        $('#tabplanossearchmj-valor_512').val(dados[2].valor_512).change();
+        $('#tabplanossearchmj-valor_512k_2m').val(dados[2].valor_512k_2m).change();
+        $('#tabplanossearchmj-valor_2m_12m').val(dados[2].valor_2m_12m).change();
+        $('#tabplanossearchmj-valor_12m_34m').val(dados[2].valor_12m_34m).change();
+        $('#tabplanossearchmj-valor_34m').val(dados[2].valor_34m).change();
         $('#tabplanossearchmj-tipo_plano_fk').val(dados[1].tipo_plano_fk).change();
         $('#tabplanossearchmj-cod_plano').val(dados[2].cod_plano);
 

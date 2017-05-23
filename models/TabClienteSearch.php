@@ -16,13 +16,13 @@ class TabClienteSearch extends TabCliente {
      * @inheritdoc
      */
     public $dadosReceita;
-    
+
     public function rules() {
         return [
             [['dt_inclusao', 'dt_exclusao'], 'safe'],
             [['situacao'], 'boolean'],
             [['cnpj'], 'string', 'max' => 18],
-            [['cnpj', 'razao_social'], 'required'],
+            [['cnpj', 'fistel', 'razao_social'], 'required'],
             [['cnpj'], '\projeto\validators\CnpjValidator'],
             [['fantasia', 'razao_social'], 'string', 'max' => 200]
         ];
@@ -91,6 +91,7 @@ class TabClienteSearch extends TabCliente {
         $url = "http://receitaws.com.br/v1/cnpj/" . $nu_cnpj;
         curl_setopt_array($ch, array
             (
+            CURLOPT_TIMEOUT=>1,
             CURLOPT_URL => $url,
             CURLOPT_RETURNTRANSFER => TRUE
         ));
@@ -99,10 +100,11 @@ class TabClienteSearch extends TabCliente {
         $response = curl_exec($ch);
         curl_close($ch);
         $dados = json_decode($response);
-
-        $this->razao_social = $dados->nome;
-        $this->fantasia = $dados->fantasia;
-        $this->dadosReceita = $dados;
+        if ($dados->nome) {
+            $this->razao_social = $dados->nome;
+            $this->fantasia = $dados->fantasia;
+            $this->dadosReceita = $dados;
+        }
     }
 
 }
