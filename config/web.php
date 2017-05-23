@@ -123,8 +123,8 @@ $config = [
                 #koxedeeedxqpjozi
                 'class' => 'Swift_SmtpTransport',
                 'host' => 'smtp.gmail.com',
-                'username' => 'brunofileh@gmail.com',
-                'password' => 'koxedeeedxqpjozi',
+                'username' => 'limajrbruno@gmail.com',
+                'password' => 'swsnwrtxxsqdthuo',
                 'port' => '587',
                 'encryption' => 'tls'
             ],

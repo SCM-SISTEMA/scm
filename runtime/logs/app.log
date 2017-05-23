@@ -89144,3 +89144,176 @@ $_SERVER = [
     'REQUEST_TIME_FLOAT' => 1495513074.124
     'REQUEST_TIME' => 1495513074
 ]
+2017-05-23 10:28:44 [127.0.0.1][1][n9aof5khc26ip0eo7fccghd9q1][error][Swift_TransportException] Swift_TransportException: Expected response code 250 but got code "535", with message "535-5.7.8 Username and Password not accepted. Learn more at
+535 5.7.8  https://support.google.com/mail/?p=BadCredentials e70sm462545qkj.28 - gsmtp
+" in /var/www/scm/vendor/swiftmailer/swiftmailer/lib/classes/Swift/Transport/AbstractSmtpTransport.php:383
+Stack trace:
+#0 /var/www/scm/vendor/swiftmailer/swiftmailer/lib/classes/Swift/Transport/AbstractSmtpTransport.php(281): Swift_Transport_AbstractSmtpTransport->_assertResponseCode('535-5.7.8 Usern...', Array)
+#1 /var/www/scm/vendor/swiftmailer/swiftmailer/lib/classes/Swift/Transport/EsmtpTransport.php(270): Swift_Transport_AbstractSmtpTransport->executeCommand('RSET\r\n', Array, Array)
+#2 /var/www/scm/vendor/swiftmailer/swiftmailer/lib/classes/Swift/Transport/Esmtp/Auth/XOAuth2Authenticator.php(55): Swift_Transport_EsmtpTransport->executeCommand('RSET\r\n', Array)
+#3 /var/www/scm/vendor/swiftmailer/swiftmailer/lib/classes/Swift/Transport/Esmtp/AuthHandler.php(176): Swift_Transport_Esmtp_Auth_XOAuth2Authenticator->authenticate(Object(Swift_SmtpTransport), 'limajrbruno@gma...', 'koxedeeedxqpjoz...')
+#4 /var/www/scm/vendor/swiftmailer/swiftmailer/lib/classes/Swift/Transport/EsmtpTransport.php(332): Swift_Transport_Esmtp_AuthHandler->afterEhlo(Object(Swift_SmtpTransport))
+#5 /var/www/scm/vendor/swiftmailer/swiftmailer/lib/classes/Swift/Transport/AbstractSmtpTransport.php(118): Swift_Transport_EsmtpTransport->_doHeloCommand()
+#6 /var/www/scm/vendor/swiftmailer/swiftmailer/lib/classes/Swift/Mailer.php(79): Swift_Transport_AbstractSmtpTransport->start()
+#7 /var/www/scm/vendor/yiisoft/yii2-swiftmailer/Mailer.php(146): Swift_Mailer->send(Object(Swift_Message))
+#8 /var/www/scm/vendor/yiisoft/yii2/mail/BaseMailer.php(262): yii\swiftmailer\Mailer->sendMessage(Object(projeto\swiftmailer\Message))
+#9 /var/www/scm/vendor/yiisoft/yii2/mail/BaseMessage.php(48): yii\mail\BaseMailer->send(Object(projeto\swiftmailer\Message))
+#10 /var/www/scm/projeto/swiftmailer/Mailer.php(100): yii\mail\BaseMessage->send()
+#11 /var/www/scm/modules/admin/controllers/LoginController.php(300): projeto\swiftmailer\Mailer->redefinirSenha(Object(app\modules\admin\models\TabUsuariosSearch))
+#12 [internal function]: app\modules\admin\controllers\LoginController->actionRecuperarSenha(NULL)
+#13 /var/www/scm/vendor/yiisoft/yii2/base/InlineAction.php(57): call_user_func_array(Array, Array)
+#14 /var/www/scm/vendor/yiisoft/yii2/base/Controller.php(156): yii\base\InlineAction->runWithParams(Array)
+#15 /var/www/scm/vendor/yiisoft/yii2/base/Module.php(523): yii\base\Controller->runAction('recuperar-senha', Array)
+#16 /var/www/scm/vendor/yiisoft/yii2/web/Application.php(102): yii\base\Module->runAction('admin/login/rec...', Array)
+#17 /var/www/scm/vendor/yiisoft/yii2/base/Application.php(380): yii\web\Application->handleRequest(Object(yii\web\Request))
+#18 /var/www/scm/web/index.php(27): yii\base\Application->run()
+#19 {main}
+2017-05-23 10:28:38 [127.0.0.1][1][n9aof5khc26ip0eo7fccghd9q1][info][application] $_POST = [
+    '_csrf' => 'Rkg1R2ltZ1AZDQMqEQ4yO3UsXy8oPgAPLhdDLT4cHyU0cEEIUSNUGw=='
+    'TabUsuariosSearch' => [
+        'txt_email' => 'brunofileh@gmail.com'
+        'txt_email_confirma' => 'brunofileh@gmail.com'
+    ]
+    'register-button' => ''
+]
+
+$_COOKIE = [
+    'projeto_dev' => 'n9aof5khc26ip0eo7fccghd9q1'
+    '_csrf' => '1f59ef2ab169b88a9e57b441f4c241a329b1723fd6c07ad4803438a9dbcdbdeca:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"_E6mxcUk3djhASg_h_vjWqxur8tO8N3K\";}'
+    '__swuid' => '1'
+    '__swto' => '1495553199'
+]
+
+$_SESSION = [
+    '__flash' => []
+    'sessao-expirada' => '/scm/web/'
+    '__returnUrl' => '/scm/web/'
+    '__id' => 1
+]
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'localhost'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:53.0) Gecko/20100101 Firefox/53.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.5'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'CONTENT_TYPE' => 'application/x-www-form-urlencoded'
+    'CONTENT_LENGTH' => '204'
+    'HTTP_REFERER' => 'http://localhost/scm/web/recuperar-senha'
+    'HTTP_COOKIE' => 'projeto_dev=n9aof5khc26ip0eo7fccghd9q1; _csrf=1f59ef2ab169b88a9e57b441f4c241a329b1723fd6c07ad4803438a9dbcdbdeca%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22_E6mxcUk3djhASg_h_vjWqxur8tO8N3K%22%3B%7D; __swuid=1; __swto=1495553199'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.25 (Ubuntu) Server at localhost Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.25 (Ubuntu)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/var/www'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www'
+    'SERVER_ADMIN' => 'webmaster@localhost'
+    'SCRIPT_FILENAME' => '/var/www/scm/web/index.php'
+    'REMOTE_PORT' => '52228'
+    'REDIRECT_URL' => '/scm/web/recuperar-senha'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/scm/web/recuperar-senha'
+    'SCRIPT_NAME' => '/scm/web/index.php'
+    'PHP_SELF' => '/scm/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1495546118.255
+    'REQUEST_TIME' => 1495546118
+]
+2017-05-23 10:35:08 [127.0.0.1][1][n9aof5khc26ip0eo7fccghd9q1][error][Swift_TransportException] Swift_TransportException: Expected response code 250 but got code "535", with message "535-5.7.8 Username and Password not accepted. Learn more at
+535 5.7.8  https://support.google.com/mail/?p=BadCredentials k10sm448424qke.3 - gsmtp
+" in /var/www/scm/vendor/swiftmailer/swiftmailer/lib/classes/Swift/Transport/AbstractSmtpTransport.php:383
+Stack trace:
+#0 /var/www/scm/vendor/swiftmailer/swiftmailer/lib/classes/Swift/Transport/AbstractSmtpTransport.php(281): Swift_Transport_AbstractSmtpTransport->_assertResponseCode('535-5.7.8 Usern...', Array)
+#1 /var/www/scm/vendor/swiftmailer/swiftmailer/lib/classes/Swift/Transport/EsmtpTransport.php(270): Swift_Transport_AbstractSmtpTransport->executeCommand('RSET\r\n', Array, Array)
+#2 /var/www/scm/vendor/swiftmailer/swiftmailer/lib/classes/Swift/Transport/Esmtp/Auth/XOAuth2Authenticator.php(55): Swift_Transport_EsmtpTransport->executeCommand('RSET\r\n', Array)
+#3 /var/www/scm/vendor/swiftmailer/swiftmailer/lib/classes/Swift/Transport/Esmtp/AuthHandler.php(176): Swift_Transport_Esmtp_Auth_XOAuth2Authenticator->authenticate(Object(Swift_SmtpTransport), 'limajrbruno@gma...', 'Khumba@7')
+#4 /var/www/scm/vendor/swiftmailer/swiftmailer/lib/classes/Swift/Transport/EsmtpTransport.php(332): Swift_Transport_Esmtp_AuthHandler->afterEhlo(Object(Swift_SmtpTransport))
+#5 /var/www/scm/vendor/swiftmailer/swiftmailer/lib/classes/Swift/Transport/AbstractSmtpTransport.php(118): Swift_Transport_EsmtpTransport->_doHeloCommand()
+#6 /var/www/scm/vendor/swiftmailer/swiftmailer/lib/classes/Swift/Mailer.php(79): Swift_Transport_AbstractSmtpTransport->start()
+#7 /var/www/scm/vendor/yiisoft/yii2-swiftmailer/Mailer.php(146): Swift_Mailer->send(Object(Swift_Message))
+#8 /var/www/scm/vendor/yiisoft/yii2/mail/BaseMailer.php(262): yii\swiftmailer\Mailer->sendMessage(Object(projeto\swiftmailer\Message))
+#9 /var/www/scm/vendor/yiisoft/yii2/mail/BaseMessage.php(48): yii\mail\BaseMailer->send(Object(projeto\swiftmailer\Message))
+#10 /var/www/scm/projeto/swiftmailer/Mailer.php(100): yii\mail\BaseMessage->send()
+#11 /var/www/scm/modules/admin/controllers/LoginController.php(300): projeto\swiftmailer\Mailer->redefinirSenha(Object(app\modules\admin\models\TabUsuariosSearch))
+#12 [internal function]: app\modules\admin\controllers\LoginController->actionRecuperarSenha(NULL)
+#13 /var/www/scm/vendor/yiisoft/yii2/base/InlineAction.php(57): call_user_func_array(Array, Array)
+#14 /var/www/scm/vendor/yiisoft/yii2/base/Controller.php(156): yii\base\InlineAction->runWithParams(Array)
+#15 /var/www/scm/vendor/yiisoft/yii2/base/Module.php(523): yii\base\Controller->runAction('recuperar-senha', Array)
+#16 /var/www/scm/vendor/yiisoft/yii2/web/Application.php(102): yii\base\Module->runAction('admin/login/rec...', Array)
+#17 /var/www/scm/vendor/yiisoft/yii2/base/Application.php(380): yii\web\Application->handleRequest(Object(yii\web\Request))
+#18 /var/www/scm/web/index.php(27): yii\base\Application->run()
+#19 {main}
+2017-05-23 10:35:02 [127.0.0.1][1][n9aof5khc26ip0eo7fccghd9q1][info][application] $_POST = [
+    '_csrf' => 'Rkg1R2ltZ1AZDQMqEQ4yO3UsXy8oPgAPLhdDLT4cHyU0cEEIUSNUGw=='
+    'TabUsuariosSearch' => [
+        'txt_email' => 'brunofileh@gmail.com'
+        'txt_email_confirma' => 'brunofileh@gmail.com'
+    ]
+    'register-button' => ''
+]
+
+$_COOKIE = [
+    'projeto_dev' => 'n9aof5khc26ip0eo7fccghd9q1'
+    '_csrf' => '1f59ef2ab169b88a9e57b441f4c241a329b1723fd6c07ad4803438a9dbcdbdeca:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"_E6mxcUk3djhASg_h_vjWqxur8tO8N3K\";}'
+    '__swuid' => '1'
+    '__swto' => '1495553225'
+]
+
+$_SESSION = [
+    '__flash' => []
+    'sessao-expirada' => '/scm/web/'
+    '__returnUrl' => '/scm/web/'
+    '__id' => 1
+]
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'localhost'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:53.0) Gecko/20100101 Firefox/53.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.5'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'CONTENT_TYPE' => 'application/x-www-form-urlencoded'
+    'CONTENT_LENGTH' => '204'
+    'HTTP_REFERER' => 'http://localhost/scm/web/recuperar-senha'
+    'HTTP_COOKIE' => 'projeto_dev=n9aof5khc26ip0eo7fccghd9q1; _csrf=1f59ef2ab169b88a9e57b441f4c241a329b1723fd6c07ad4803438a9dbcdbdeca%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22_E6mxcUk3djhASg_h_vjWqxur8tO8N3K%22%3B%7D; __swuid=1; __swto=1495553225'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.25 (Ubuntu) Server at localhost Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.25 (Ubuntu)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/var/www'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www'
+    'SERVER_ADMIN' => 'webmaster@localhost'
+    'SCRIPT_FILENAME' => '/var/www/scm/web/index.php'
+    'REMOTE_PORT' => '52380'
+    'REDIRECT_URL' => '/scm/web/recuperar-senha'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/scm/web/recuperar-senha'
+    'SCRIPT_NAME' => '/scm/web/index.php'
+    'PHP_SELF' => '/scm/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1495546502.505
+    'REQUEST_TIME' => 1495546502
+]
