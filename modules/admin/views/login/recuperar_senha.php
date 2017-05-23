@@ -17,7 +17,7 @@ use dmstr\widgets\Alert;
         <?php
         $img  = Html::img('@web/img/layout/head_logo1.png', [
                 'class' => 'img-circle',
-                'alt'   => 'SNIS - Sistema Nacional de Informações sobre Saneamento'
+                'alt'   => 'SISSCM - SCM Engenharia'
         ]);
         echo Html::a($img, Url::base(), ['class' => 'logo']);
         ?>

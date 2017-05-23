@@ -2,9 +2,9 @@
 
 return [
     'class' => 'yii\db\Connection',
-    'dsn' => 'pgsql:host=boavista;dbname=projeto_prod', 
-    'username' => 'snsa',
-    'password' => 'snsa',
+    'dsn' => 'pgsql:host=boavista;dbname=sisscm', 
+    'username' => 'postgres',
+    'password' => 'postgres',
     'charset' => 'utf8',
     
     'schemaMap' => [

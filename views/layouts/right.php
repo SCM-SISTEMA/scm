@@ -35,8 +35,8 @@ use app\components\MenuBarraTopoModuloWidget;
 					<a href="javascript::;">
 						<i class="menu-icon fa fa-info bg-green"></i>
 						<div class="menu-info">
-							<h4 class="control-sidebar-subheading">Sobre o SNIS</h4>
-							<p>Sobre o SNIS</p>
+							<h4 class="control-sidebar-subheading">Sobre o SCM</h4>
+							<p>Sobre o SCM</p>
 						</div>
 					</a>
 				</li>

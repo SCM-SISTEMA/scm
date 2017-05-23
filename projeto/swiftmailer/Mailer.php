@@ -29,7 +29,7 @@ class Mailer extends \yii\swiftmailer\Mailer
 			->setFrom($this->remetente)
 			->setTo($to)
 			->setCC($cc)
-			->setSubject("[SNIS] Finalização da Coleta de Dados {$params['ano-ref']}")
+			->setSubject("[SISSCM] Finalização da Coleta de Dados {$params['ano-ref']}")
 			->setHtmlBody(ModeloDoc::gerarEmail('email-finalizacao-coleta', [
 				'ano-ref' => $params['ano-ref'],
 				'data-extenso' => \projeto\Util::humanDate(),
@@ -59,7 +59,7 @@ class Mailer extends \yii\swiftmailer\Mailer
 		return $this->compose()
 			->setFrom($this->remetente)
 			->setTo($model->txt_email)
-			->setSubject('[SNIS] Alteração na situação do contato '.$model->cod_contato)
+			->setSubject('[SISSCM] Alteração na situação do contato '.$model->cod_contato)
 			->setHtmlBody(ModeloDoc::gerarEmail('email-alteracao-situacao-conta', [
 				'nome-usuario' => $model->txt_nome,
 				'cod_contato' => $model->cod_contato,
@@ -74,7 +74,7 @@ class Mailer extends \yii\swiftmailer\Mailer
 		return $this->compose()
 			->setFrom($this->remetente)
 			->setTo($model->txt_email)
-			->setSubject('[SNIS] Registro de novo usuário - Águas Pluviais')
+			->setSubject('[SISSCM] Registro de novo usuário - Águas Pluviais')
 			->setHtmlBody(ModeloDoc::gerarEmail('boas-vindas-novo-usuario', [
 				'nome-usuario' => $model->txt_nome,
 				'nome-administrador' => \Yii::$app->user->identity->txt_nome,
@@ -92,7 +92,7 @@ class Mailer extends \yii\swiftmailer\Mailer
 		return $this->compose()
 			->setFrom($this->remetente)
 			->setTo([$model->txt_email => $model->txt_nome])
-			->setSubject('[SNIS] Solicitação de recuperação de senha')
+			->setSubject('[SISSCM] Solicitação de recuperação de senha')
 			->setHtmlBody(ModeloDoc::gerarEmail('e-mail-recuperacao-senha-usr', [
 				'nome-usuario' => $model->txt_nome,
 				'link' => Url::to(['/recuperar-senha', 'token' => $model->cod_usuario], true),
@@ -108,7 +108,7 @@ class Mailer extends \yii\swiftmailer\Mailer
 		return $this->compose()
 			->setFrom($this->remetente)
 			->setTo($model->txt_email)
-			->setSubject('[SNIS] Reenvio de senha para usuário')
+			->setSubject('[SISSCM] Reenvio de senha para usuário')
 			->setHtmlBody(ModeloDoc::gerarEmail('reenvio-senha-usuario', [
 				'nome-usuario' => $model->txt_nome,
 				'login-usuario' => $model->txt_login,
@@ -145,7 +145,7 @@ class Mailer extends \yii\swiftmailer\Mailer
         $message->setTo($to);
         $message->setCC($cc);
         
-        $message->setSubject('[SNIS] Reenvio: Início da Coleta de Dados SNIS - Águas Pluviais');
+        $message->setSubject('[SISSCM] Reenvio: Início da Coleta de Dados SISSCM - Águas Pluviais');
         
         $message->setHtmlBody(ModeloDoc::gerarEmail('email-reenvio-inicio-coleta', [
             'txt_mandatario_nome' => $contatos['txt_mandatario_nome'],

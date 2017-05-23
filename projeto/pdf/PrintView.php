@@ -38,8 +38,8 @@ class PrintView extends Pdf
 		
 		$this->content = $topo . $this->content;
 		$this->methods = [
-			'SetHeader' => 'SNIS - Sistema Nacional de Informações sobre Saneamento||'.$descAmbiente.'',
-			'SetFooter' => 'Ministério das Cidades | Página {PAGENO} de {nbpg} | Emitido em: {DATE j/m/Y}',
+			'SetHeader' => 'SNIS - SCM Engenharia||'.$descAmbiente.'',
+			'SetFooter' => 'SCM | Página {PAGENO} de {nbpg} | Emitido em: {DATE j/m/Y}',
 		];
 
 		if (!is_dir(Yii::getAlias("@runtime/tmp/"))) {

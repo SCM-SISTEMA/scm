@@ -2,9 +2,9 @@
 
 return [
     'class' => 'yii\db\Connection',
-    'dsn' => 'pgsql:host=mansidao;dbname=projeto_hmg', 
-    'username' => 'snsa',
-    'password' => 'snsa',
+    'dsn' => 'pgsql:host=mansidao;dbname=sisscm_hmg', 
+    'username' => 'postgres',
+    'password' => 'postgres',
     'charset' => 'utf8',
     
     'schemaMap' => [

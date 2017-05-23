@@ -51,7 +51,7 @@ use app\modules\drenagem\models\TabParticipacoes;
 		</noscript>
 		
 		<div id="msg_no_js_support" style="display:none" class="alert alert-error">
-			<p><strong>ATENÇÃO! Parece que você está utilizando um navegador desatualizado ou incompatível com o SNIS</strong></p>
+			<p><strong>ATENÇÃO! Parece que você está utilizando um navegador desatualizado ou incompatível com o SCM</strong></p>
 			<p>Para uma melhor experiência utilize um navegador atualizado. Sugerimos que você baixe  e instale a última versão de algum dos abaixo sugeridos:</p>
 			<br>
 			<table>
