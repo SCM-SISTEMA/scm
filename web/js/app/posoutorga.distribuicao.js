@@ -58,7 +58,7 @@ Projeto.prototype.distribuicao = new (Projeto.extend({
 
             $('#tabempresamunicipiosearch-' + result[1].replace('valor', 'total')).html(
                     '<b>' +
-                    Projeto.prototype.util.colocaFormatoMoeda(total)
+                   total
                     + '</b>'
                     );
 
@@ -73,7 +73,7 @@ Projeto.prototype.distribuicao = new (Projeto.extend({
 
             $("#tabempresamunicipiosearch" + nome_total).html(
                     '<b>' +
-                    Projeto.prototype.util.colocaFormatoMoeda(total_outro)
+                   total_outro
                     + '</b>'
                     );
 
@@ -82,10 +82,10 @@ Projeto.prototype.distribuicao = new (Projeto.extend({
                     '<b>' +
                     Projeto.prototype.util.colocaFormatoMoeda(
                             parseFloat(
-                                    Projeto.prototype.util.retiraFormatoMoeda($("#tabempresamunicipiosearch-total_fisica").html().replace('<b>', '').replace('<b/>', ''))
+                                    $("#tabempresamunicipiosearch-total_fisica").html().replace('<b>', '').replace('<b/>', '')
                                     ) +
                             parseFloat(
-                                    Projeto.prototype.util.retiraFormatoMoeda($("#tabempresamunicipiosearch-total_juridica").html().replace('<b>', '').replace('<b/>', ''))
+                                    $("#tabempresamunicipiosearch-total_juridica").html().replace('<b>', '').replace('<b/>', '')
                                     )
 
                             )

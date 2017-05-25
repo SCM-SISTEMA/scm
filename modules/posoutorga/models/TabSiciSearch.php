@@ -34,9 +34,10 @@ class TabSiciSearch extends TabSici {
             'receita_bruta', 'qntAcesso', 'tipo_sici_fk', 'despesa_operacao_manutencao', 'mes_ano_referencia', 'legenda', 'responsavel', 'despesa_publicidade', 'despesa_vendas', 'despesa_link', 'aliquota_nacional', 'receita_icms', 'receita_pis', 'receita_confins', 'receita_liquida', 'valor_consolidado', 'aplicacao_equipamento', 'total_marketing_propaganda', 'aplicacao_software', 'total_pesquisa_desenvolvimento', 'aplicacao_servico', 'aplicacao_callcenter', 'faturamento_de', 'faturamento_industrial', 'faturamento_adicionado'], 'safe'],
             [['obs_receita', 'obs_despesa'], 'string'],
             [['mes_ano_referencia'], 'required'],
+            [['receita_bruta', 'despesa_operacao_manutencao', 'despesa_publicidade', 'despesa_vendas', 'despesa_link', 'aliquota_nacional', 'receita_icms', 'receita_pis', 'receita_confins', 'valor_consolidado', 'aplicacao_equipamento', 'total_marketing_propaganda', 'aplicacao_software', 'total_pesquisa_desenvolvimento', 'aplicacao_servico', 'aplicacao_callcenter', 'faturamento_de', 'faturamento_industrial', 'faturamento_adicionado'], 'number'],
             [['file'], 'required', 'on' => 'importar'],
-            [['mes_ano_referencia', 'cod_tipo_contrato_fk'], 'unique', 'targetAttribute' => ['mes_ano_referencia', 'cod_tipo_contrato_fk'], 'message'=>'Já existe Mês de referência para esse cliente'],
-            [['file'], 'file', 'skipOnEmpty' => true, 'extensions' => 'xls, xlsx'],
+            [['mes_ano_referencia', 'cod_tipo_contrato_fk'], 'unique', 'targetAttribute' => ['mes_ano_referencia', 'cod_tipo_contrato_fk'], 'message' => 'Já existe Mês de referência para esse cliente'],
+            [['file'], 'file', 'skipOnEmpty' => true, 'extensions' => 'xls, xlsx, xml'],
         ];
 
         return $rules;

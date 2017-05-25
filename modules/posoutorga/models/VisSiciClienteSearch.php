@@ -23,13 +23,15 @@ class VisSiciClienteSearch extends VisSiciCliente {
     public function attributeLabels() {
 
         $labels = [
-                'usuario_inclusao_sici'=> 'Usuário'
+            'usuario_inclusao_sici' => 'Usuário',
+            'cnpj' => 'CNPJ',
+            'razao_social' => 'Razão Social',
+            'mes_ano_referencia' => 'Mês de referência'
                 //exemplo 'campo' => 'label',         
         ];
 
         return array_merge(parent::attributeLabels(), $labels);
     }
-
 
     /**
      * Creates data provider instance with search query applied
@@ -55,7 +57,7 @@ class VisSiciClienteSearch extends VisSiciCliente {
                 ->andFilterWhere(['ilike', $this->tableName() . 'usuario_inclusao_sici', $this->usuario_inclusao_sici])
                 ->andFilterWhere(['ilike', $this->tableName() . '.fistel', $this->fistel])
                 ->andFilterWhere(['ilike', $this->tableName() . '.mes_ano_referencia', $this->mes_ano_referencia]);
-        $query->orderBy('mes_ano_referencia desc, cnpj');
+        $query->orderBy('ordem desc, cnpj');
         return $dataProvider;
     }
 

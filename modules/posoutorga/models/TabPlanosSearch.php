@@ -120,9 +120,39 @@ class TabPlanosSearch extends TabPlanos {
         return $dados;
     }
 
-    
-   
+    public function setIEM9($dom, $tipo_plano_sgl) {
 
-    
-    
+        foreach ($dom->getElementsByTagName('Pessoa') as $pessoa) {
+
+            if ($pessoa->getAttribute('item') == $tipo_plano_sgl) {
+                $this->tipo_plano_fk = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-pessoa-plano', $tipo_plano_sgl);
+                foreach ($pessoa->getElementsByTagName('Conteudo') as $conteudo) {
+                    $key = $conteudo->getAttribute('item');
+                    switch ($key) {
+                        case 'a': $this->valor_512 = \projeto\Util::decimalFormatForBank($conteudo->getAttribute('valor'));
+                            break;
+                        case 'b': $this->valor_512k_2m = \projeto\Util::decimalFormatForBank($conteudo->getAttribute('valor'));
+                            break;
+                        case 'c': $this->valor_2m_12m = \projeto\Util::decimalFormatForBank($conteudo->getAttribute('valor'));
+                            break;
+                        case 'd': $this->valor_12m_34m = \projeto\Util::decimalFormatForBank($conteudo->getAttribute('valor'));
+                            break;
+                        case 'e': $this->valor_34m = \projeto\Util::decimalFormatForBank($conteudo->getAttribute('valor'));
+                            break;
+                    }
+                }
+            }
+        }
+    }
+
+  
+
+    public function numerico() {
+        $this->valor_512 = (int) $this->valor_512;
+        $this->valor_512k_2m = (int) $this->valor_512k_2m;
+        $this->valor_2m_12m = (int) $this->valor_2m_12m;
+        $this->valor_12m_34m = (int) $this->valor_12m_34m;
+        $this->valor_34m = (int) $this->valor_34m;
+    }
+
 }

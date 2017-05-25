@@ -131,6 +131,31 @@ class TabEmpresaMunicipioSearch extends TabEmpresaMunicipio {
         return $planoEmpresa;
     }
 
+    public function setQAIPL4SM($dom) {
+
+        foreach ($dom->getElementsByTagName('Conteudo') as $conteudo) {
+            $key = $conteudo->getAttribute('faixa');
+            
+            switch ($key) {
+                case '15': $this->total_512 = ($conteudo->getAttribute('valor'));
+                    break;
+                case '16': $this->total_512k_2m = ($conteudo->getAttribute('valor'));
+                    break;
+                case '17': $this->total_2m_12m = ($conteudo->getAttribute('valor'));
+                    break;
+                case '18': $this->total_12m_34m = ($conteudo->getAttribute('valor'));
+                    break;
+                case '19': $this->total_34m = ($conteudo->getAttribute('valor'));
+             
+            }
+            
+            if($conteudo->getAttribute('nome')=='total'){
+                $this->total = ($conteudo->getAttribute('valor'));
+            }
+        }
+        
+    }
+
     public static function getQAIPL4SM($cod_sici) {
         $dados = TabEmpresaMunicipioSearch::buscaPlanoEmpresasTecnologia($cod_sici);
         $planos = [];

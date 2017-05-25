@@ -74,7 +74,7 @@ class TabPlanosMenorMaiorSearch extends TabPlanosMenorMaior {
         return $dataProvider;
     }
 
-    public static function getITEM10($cod_sici) {
+    public static function getIEM10($cod_sici) {
         $planos = \app\modules\posoutorga\models\TabPlanosMenorMaiorSearch::find()->select('valor_menos_1m, valor_menos_1m_ded, valor_maior_1m ,valor_maior_1m_ded 
        , (SELECT sgl_valor
   FROM public.tab_atributos_valores
@@ -104,4 +104,30 @@ class TabPlanosMenorMaiorSearch extends TabPlanosMenorMaior {
         return $dados;
     }
 
+       public function setIEM10($dom, $tipo_plano_sgl) {
+
+        foreach ($dom->getElementsByTagName('Pessoa') as $pessoa) {
+
+            if ($pessoa->getAttribute('item') == $tipo_plano_sgl) {
+                $this->tipo_plano_fk = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-pessoa-plano', $tipo_plano_sgl);
+                foreach ($pessoa->getElementsByTagName('Conteudo') as $conteudo) {
+                    $key = $conteudo->getAttribute('item');
+                    switch ($key) {
+                        case 'a': $this->valor_menos_1m = \projeto\Util::decimalFormatForBank($conteudo->getAttribute('valor'));
+                            break;
+                        case 'b': $this->valor_menos_1m_ded = \projeto\Util::decimalFormatForBank($conteudo->getAttribute('valor'));
+                            break;
+                        case 'c': $this->valor_maior_1m = \projeto\Util::decimalFormatForBank($conteudo->getAttribute('valor'));
+                            break;
+                        case 'd': $this->valor_maior_1m_ded = \projeto\Util::decimalFormatForBank($conteudo->getAttribute('valor'));
+                            break;
+                        
+                    }
+                }
+            }
+        }
+    }
+
+
+    
 }

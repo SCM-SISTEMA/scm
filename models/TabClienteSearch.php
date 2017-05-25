@@ -11,7 +11,7 @@ use app\models\TabCliente;
  * TabClienteSearch represents the model behind the search form about `app\models\TabCliente`.
  */
 class TabClienteSearch extends TabCliente {
-
+public $file;
     /**
      * @inheritdoc
      */

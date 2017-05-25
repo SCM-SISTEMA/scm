@@ -16,27 +16,10 @@
             <file>file:/C:/wamp64/www/esqueleto/modules/admin/views/atributos-valores/create.php</file>
         </group>
         <group>
-            <file>file:/var/www/scm/modules/posoutorga/views/sici/index.php</file>
-            <file>file:/var/www/scm/modules/posoutorga/models/TabEmpresaMunicipioSearch.php</file>
-            <file>file:/var/www/scm/modules/posoutorga/views/sici/_form_distribuicao_add.php</file>
-            <file>file:/var/www/scm/modules/posoutorga/models/TabSiciSearch.php</file>
-            <file>file:/var/www/scm/web/js/app/posoutorga.distribuicao.js</file>
-            <file>file:/var/www/scm/projeto/Util.php</file>
-            <file>file:/var/www/scm/models/TabClienteSearch.php</file>
-            <file>file:/var/www/scm/web/js/projeto/util.js</file>
-            <file>file:/var/www/scm/modules/posoutorga/models/TabSici.php</file>
-            <file>file:/var/www/scm/modules/posoutorga/views/sici/_form_distribuicao.php</file>
-            <file>file:/var/www/scm/modules/posoutorga/models/TabPlanosSearch.php</file>
-            <file>file:/var/www/scm/modules/posoutorga/views/sici/update.php</file>
-            <file>file:/var/www/scm/modules/posoutorga/views/sici/_form_updade.php</file>
             <file>file:/var/www/scm/modules/posoutorga/controllers/SiciController.php</file>
-            <file>file:/var/www/scm/web/js/app/posoutorga.sici.js</file>
-            <file>file:/var/www/scm/modules/posoutorga/views/sici/_form_empresa.php</file>
-            <file>file:/var/www/scm/modules/posoutorga/views/sici/_form_distribuicao_municipio.php</file>
-            <file>file:/var/www/scm/modules/posoutorga/views/sici/importar.php</file>
-            <file>file:/var/www/scm/modules/posoutorga/views/sici/_form_distribuicao_tab.php</file>
-            <file>file:/var/www/scm/web/js/app/admin.cliente.js</file>
-            <file>file:/var/www/scm/controllers/ContatoController.php</file>
+            <file>file:/var/www/scm/modules/posoutorga/models/TabSiciSearch.php</file>
+            <file>file:/var/www/scm/modules/posoutorga/models/TabSici.php</file>
+            <file>file:/var/www/scm/modules/admin/controllers/ClienteController.php</file>
         </group>
     </open-files>
 </project-private>
