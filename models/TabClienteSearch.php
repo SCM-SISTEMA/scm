@@ -91,7 +91,7 @@ public $file;
         $url = "http://receitaws.com.br/v1/cnpj/" . $nu_cnpj;
         curl_setopt_array($ch, array
             (
-            CURLOPT_TIMEOUT=>1,
+            CURLOPT_TIMEOUT=>40,
             CURLOPT_URL => $url,
             CURLOPT_RETURNTRANSFER => TRUE
         ));

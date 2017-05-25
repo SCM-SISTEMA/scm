@@ -94776,3 +94776,653 @@ $_SERVER = [
     'REQUEST_TIME_FLOAT' => 1495722621.674
     'REQUEST_TIME' => 1495722621
 ]
+2017-05-25 18:16:45 [127.0.0.1][1][7tiiotenocus2prduhsb61qs83][error][yii\base\ErrorException:2] yii\base\ErrorException: Invalid argument supplied for foreach() in /var/www/scm/modules/posoutorga/controllers/SiciController.php:2242
+Stack trace:
+#0 /var/www/scm/modules/posoutorga/controllers/SiciController.php(2242): yii\base\ErrorHandler->handleError(2, 'Invalid argumen...', '/var/www/scm/mo...', 2242, Array)
+#1 /var/www/scm/modules/posoutorga/controllers/SiciController.php(1604): app\modules\posoutorga\controllers\SiciController->retornaImportacao(NULL, 'RECEITA')
+#2 /var/www/scm/modules/posoutorga/controllers/SiciController.php(1114): app\modules\posoutorga\controllers\SiciController->importExcel('/tmp/phpyRbeNS', Array)
+#3 [internal function]: app\modules\posoutorga\controllers\SiciController->actionImportar()
+#4 /var/www/scm/vendor/yiisoft/yii2/base/InlineAction.php(57): call_user_func_array(Array, Array)
+#5 /var/www/scm/vendor/yiisoft/yii2/base/Controller.php(156): yii\base\InlineAction->runWithParams(Array)
+#6 /var/www/scm/vendor/yiisoft/yii2/base/Module.php(523): yii\base\Controller->runAction('importar', Array)
+#7 /var/www/scm/vendor/yiisoft/yii2/web/Application.php(102): yii\base\Module->runAction('posoutorga/sici...', Array)
+#8 /var/www/scm/vendor/yiisoft/yii2/base/Application.php(380): yii\web\Application->handleRequest(Object(yii\web\Request))
+#9 /var/www/scm/web/index.php(27): yii\base\Application->run()
+#10 {main}
+2017-05-25 18:16:42 [127.0.0.1][1][7tiiotenocus2prduhsb61qs83][info][application] $_POST = [
+    '_csrf' => 'ZE1nQkpvMWo7CFEvMgxkAVcpDSoLPFY1DBIRKB0eSR8WdRMNciECIQ=='
+    'TabSiciSearch' => [
+        'file' => ''
+    ]
+    'abrir' => ''
+]
+
+$_FILES = [
+    'TabSiciSearch' => [
+        'name' => [
+            'file' => 'Relatório TOTAL Clientes.xlsx'
+        ]
+        'type' => [
+            'file' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+        ]
+        'tmp_name' => [
+            'file' => '/tmp/phpyRbeNS'
+        ]
+        'error' => [
+            'file' => 0
+        ]
+        'size' => [
+            'file' => 667482
+        ]
+    ]
+]
+
+$_COOKIE = [
+    'projeto_dev' => '7tiiotenocus2prduhsb61qs83'
+    '_csrf' => '1f59ef2ab169b88a9e57b441f4c241a329b1723fd6c07ad4803438a9dbcdbdeca:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"_E6mxcUk3djhASg_h_vjWqxur8tO8N3K\";}'
+    '__swuid' => '1'
+    '__swto' => '1495754088'
+]
+
+$_SESSION = [
+    '__flash' => []
+    'sessao-expirada' => '/scm/web/posoutorga/sici/importar'
+    '__returnUrl' => '/scm/web/posoutorga/sici/importar'
+    '__id' => 1
+    'empresasSessao' => null
+]
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'localhost'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:53.0) Gecko/20100101 Firefox/53.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.5'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'CONTENT_TYPE' => 'multipart/form-data; boundary=---------------------------54965829718196993311751715667'
+    'CONTENT_LENGTH' => '668192'
+    'HTTP_REFERER' => 'http://localhost/scm/web/posoutorga/sici/importar'
+    'HTTP_COOKIE' => 'projeto_dev=7tiiotenocus2prduhsb61qs83; _csrf=1f59ef2ab169b88a9e57b441f4c241a329b1723fd6c07ad4803438a9dbcdbdeca%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22_E6mxcUk3djhASg_h_vjWqxur8tO8N3K%22%3B%7D; __swuid=1; __swto=1495754088'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.25 (Ubuntu) Server at localhost Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.25 (Ubuntu)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/var/www'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www'
+    'SERVER_ADMIN' => 'webmaster@localhost'
+    'SCRIPT_FILENAME' => '/var/www/scm/web/index.php'
+    'REMOTE_PORT' => '55630'
+    'REDIRECT_URL' => '/scm/web/posoutorga/sici/importar'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/scm/web/posoutorga/sici/importar'
+    'SCRIPT_NAME' => '/scm/web/index.php'
+    'PHP_SELF' => '/scm/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1495747002.61
+    'REQUEST_TIME' => 1495747002
+]
+2017-05-25 18:29:13 [127.0.0.1][1][7tiiotenocus2prduhsb61qs83][error][yii\base\ErrorException:2] yii\base\ErrorException: array_search() expects parameter 2 to be array, null given in /var/www/scm/modules/posoutorga/controllers/SiciController.php:1034
+Stack trace:
+#0 [internal function]: yii\base\ErrorHandler->handleError(2, 'array_search() ...', '/var/www/scm/mo...', 1034, Array)
+#1 /var/www/scm/modules/posoutorga/controllers/SiciController.php(1034): array_search('J\xC3\xA1 existe M\xC3\xAAs...', NULL)
+#2 [internal function]: app\modules\posoutorga\controllers\SiciController->actionImportar()
+#3 /var/www/scm/vendor/yiisoft/yii2/base/InlineAction.php(57): call_user_func_array(Array, Array)
+#4 /var/www/scm/vendor/yiisoft/yii2/base/Controller.php(156): yii\base\InlineAction->runWithParams(Array)
+#5 /var/www/scm/vendor/yiisoft/yii2/base/Module.php(523): yii\base\Controller->runAction('importar', Array)
+#6 /var/www/scm/vendor/yiisoft/yii2/web/Application.php(102): yii\base\Module->runAction('posoutorga/sici...', Array)
+#7 /var/www/scm/vendor/yiisoft/yii2/base/Application.php(380): yii\web\Application->handleRequest(Object(yii\web\Request))
+#8 /var/www/scm/web/index.php(27): yii\base\Application->run()
+#9 {main}
+2017-05-25 18:29:13 [127.0.0.1][1][7tiiotenocus2prduhsb61qs83][info][application] $_POST = [
+    '_csrf' => 'RlNuaTB4REIZFlgESBsRKXU3BAFxKyMdLgwYA2cJPDc0axomCDZ3CQ=='
+    'TabSiciSearch' => [
+        'file' => ''
+        'cod_sici' => ''
+        'responsavel' => 'Luciana Lucas Marques de Lima'
+        'mes_ano_referencia' => '04/2017'
+        'tipo_sici_fk' => '514'
+        'legenda' => ''
+        'valor_consolidado' => ''
+        'receita_bruta' => '10200'
+        'aliquota_nacional' => '6'
+        'total_aliquota' => '612,00'
+        'receita_icms' => '0'
+        'total_icms' => '0'
+        'receita_pis' => '0'
+        'total_pis' => '0'
+        'receita_confins' => '0'
+        'total_confins' => '0'
+        'receita_liquida' => '9.588,00'
+        'obs_receita' => ''
+        'despesa_operacao_manutencao' => '5880'
+        'despesa_publicidade' => '0'
+        'despesa_vendas' => '0'
+        'despesa_link' => '10000'
+        'obs_despesa' => ''
+        'qtd_funcionarios_fichados' => ''
+        'qtd_funcionarios_terceirizados' => ''
+        'num_central_atendimento' => ''
+        'total_fibra_prestadora' => ''
+        'total_fibra_terceiros' => ''
+        'total_fibra_crescimento_prop_prestadora' => ''
+        'total_fibra_crescimento_prop_terceiros' => ''
+        'total_fibra_implantada_prestadora' => ''
+        'total_fibra_implantada_terceiros' => ''
+        'total_crescimento_prestadora' => ''
+        'total_crescimento_terceiros' => ''
+        'total_marketing_propaganda' => ''
+        'aplicacao_equipamento' => ''
+        'aplicacao_software' => ''
+        'total_pesquisa_desenvolvimento' => ''
+        'aplicacao_servico' => ''
+        'aplicacao_callcenter' => ''
+        'faturamento_de' => ''
+        'faturamento_adicionado' => ''
+        'faturamento_industrial' => ''
+    ]
+    'TabEmpresaMunicipioSearch' => [
+        0 => [
+            'uf' => ''
+            'cod_municipio_fk' => ''
+            'tecnologia_fk' => ''
+            'TabEmpresaMunicipioSearchMF' => [
+                'tipo_plano_fk' => ''
+                'valor_512' => ''
+                'valor_512k_2m' => ''
+                'valor_2m_12m' => ''
+                'valor_12m_34m' => ''
+                'valor_34m' => ''
+                'cod_plano' => ''
+            ]
+            'TabEmpresaMunicipioSearchMJ' => [
+                'tipo_plano_fk' => ''
+                'valor_512' => ''
+                'valor_512k_2m' => ''
+                'valor_2m_12m' => ''
+                'valor_12m_34m' => ''
+                'valor_34m' => ''
+                'cod_plano' => ''
+            ]
+            'cod_empresa_municipio' => ''
+        ]
+    ]
+    'TabClienteSearch' => [
+        'cnpj' => '12.058.144/0001-88'
+        'fistel' => '888'
+        'razao_social' => 'Rafael Lucas Rodrigues-ME'
+    ]
+    'TabContatoSearchT' => [
+        'contato' => '(84) 3289-0093'
+        'tipo' => '465'
+    ]
+    'TabContatoSearchC' => [
+        'contato' => '(84) 98829-1786'
+        'tipo' => '464'
+    ]
+    'tabsicisearch-valor_consolidado-disp' => '0,00'
+    'tabsicisearch-receita_bruta-disp' => '10.200,00'
+    'tabsicisearch-aliquota_nacional-disp' => '6,00'
+    'tabsicisearch-receita_icms-disp' => '0,00'
+    'tabsicisearch-receita_pis-disp' => '0,00'
+    'tabsicisearch-receita_confins-disp' => '0,00'
+    'tabsicisearch-despesa_operacao_manutencao-disp' => '5.880,00'
+    'tabsicisearch-despesa_publicidade-disp' => ''
+    'tabsicisearch-despesa_vendas-disp' => ''
+    'tabsicisearch-despesa_link-disp' => '10.000,00'
+    'tabsicisearch-total_marketing_propaganda-disp' => '0,00'
+    'tabsicisearch-aplicacao_equipamento-disp' => '0,00'
+    'tabsicisearch-aplicacao_software-disp' => '0,00'
+    'tabsicisearch-total_pesquisa_desenvolvimento-disp' => '0,00'
+    'tabsicisearch-aplicacao_servico-disp' => '0,00'
+    'tabsicisearch-aplicacao_callcenter-disp' => '0,00'
+    'tabsicisearch-faturamento_de-disp' => '0,00'
+    'tabsicisearch-faturamento_adicionado-disp' => '0,00'
+    'tabsicisearch-faturamento_industrial-disp' => '0,00'
+    'TabPlanosF' => [
+        'tipo_plano_fk' => '468'
+        'valor_512' => '42'
+        'valor_512k_2m' => '60'
+        'valor_2m_12m' => '120'
+        'valor_12m_34m' => ''
+        'valor_34m' => ''
+        'obs' => ''
+    ]
+    'tabplanosf-valor_512-disp' => '42,00'
+    'tabplanosf-valor_512k_2m-disp' => '60,00'
+    'tabplanosf-valor_2m_12m-disp' => '120,00'
+    'tabplanosf-valor_12m_34m-disp' => '0,00'
+    'tabplanosf-valor_34m-disp' => '0,00'
+    'TabPlanosMenorMaiorF' => [
+        'tipo_plano_fk' => '468'
+        'valor_menos_1m_ded' => '18'
+        'valor_menos_1m' => ''
+        'valor_maior_1m_ded' => '6'
+        'valor_maior_1m' => ''
+    ]
+    'tabplanosmenormaiorf-valor_menos_1m_ded-disp' => '18,00'
+    'tabplanosmenormaiorf-valor_menos_1m-disp' => '0,00'
+    'tabplanosmenormaiorf-valor_maior_1m_ded-disp' => '6,00'
+    'tabplanosmenormaiorf-valor_maior_1m-disp' => '0,00'
+    'TabPlanosJ' => [
+        'tipo_plano_fk' => '469'
+        'valor_512' => ''
+        'valor_512k_2m' => ''
+        'valor_2m_12m' => ''
+        'valor_12m_34m' => ''
+        'valor_34m' => ''
+        'obs' => ''
+    ]
+    'tabplanosj-valor_512-disp' => '0,00'
+    'tabplanosj-valor_512k_2m-disp' => '0,00'
+    'tabplanosj-valor_2m_12m-disp' => '0,00'
+    'tabplanosj-valor_12m_34m-disp' => '0,00'
+    'tabplanosj-valor_34m-disp' => '0,00'
+    'TabPlanosMenorMaiorJ' => [
+        'tipo_plano_fk' => '469'
+        'valor_menos_1m_ded' => ''
+        'valor_menos_1m' => ''
+        'valor_maior_1m_ded' => ''
+        'valor_maior_1m' => ''
+    ]
+    'tabplanosmenormaiorj-valor_menos_1m_ded-disp' => '0,00'
+    'tabplanosmenormaiorj-valor_menos_1m-disp' => '0,00'
+    'tabplanosmenormaiorj-valor_maior_1m_ded-disp' => '0,00'
+    'tabplanosmenormaiorj-valor_maior_1m-disp' => '0,00'
+    'importar' => ''
+]
+
+$_FILES = [
+    'TabSiciSearch' => [
+        'name' => [
+            'file' => ''
+        ]
+        'type' => [
+            'file' => ''
+        ]
+        'tmp_name' => [
+            'file' => ''
+        ]
+        'error' => [
+            'file' => 4
+        ]
+        'size' => [
+            'file' => 0
+        ]
+    ]
+]
+
+$_COOKIE = [
+    'projeto_dev' => '7tiiotenocus2prduhsb61qs83'
+    '_csrf' => '1f59ef2ab169b88a9e57b441f4c241a329b1723fd6c07ad4803438a9dbcdbdeca:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"_E6mxcUk3djhASg_h_vjWqxur8tO8N3K\";}'
+    '__swuid' => '1'
+    '__swto' => '1495754569'
+]
+
+$_SESSION = [
+    '__flash' => []
+    'sessao-expirada' => '/scm/web/posoutorga/sici/importar'
+    '__returnUrl' => '/scm/web/posoutorga/sici/importar'
+    '__id' => 1
+    'empresasSessao' => [
+        'N_472766153' => [
+            0 => [
+                'cod_empresa_municipio' => 'N_472766153'
+                'cod_municipio_fk' => '241330'
+                'municipio' => 'Serra de São Bento'
+                'uf' => 'RN'
+                'capacidade_municipio' => 0
+                'capacidade_servico' => 0
+                'cod_sici_fk' => null
+                'tecnologia_fk' => 489
+            ]
+            1 => [
+                'cod_plano' => null
+                'valor_512' => 0
+                'valor_512k_2m' => 87
+                'valor_2m_12m' => 40
+                'valor_12m_34m' => 0
+                'valor_34m' => 0
+                'tipo_plano_fk' => 468
+                'cod_chave' => null
+                'obs' => null
+                'tipo_tabela_fk' => null
+            ]
+            2 => [
+                'cod_plano' => null
+                'valor_512' => 0
+                'valor_512k_2m' => 0
+                'valor_2m_12m' => 0
+                'valor_12m_34m' => 0
+                'valor_34m' => 0
+                'tipo_plano_fk' => 469
+                'cod_chave' => null
+                'obs' => null
+                'tipo_tabela_fk' => null
+            ]
+        ]
+        'N_897720955' => [
+            0 => [
+                'cod_empresa_municipio' => 'N_897720955'
+                'cod_municipio_fk' => '241480'
+                'municipio' => 'Vera Cruz'
+                'uf' => 'RN'
+                'capacidade_municipio' => 0
+                'capacidade_servico' => 0
+                'cod_sici_fk' => null
+                'tecnologia_fk' => 494
+            ]
+            1 => [
+                'cod_plano' => null
+                'valor_512' => 0
+                'valor_512k_2m' => 52
+                'valor_2m_12m' => 18
+                'valor_12m_34m' => 0
+                'valor_34m' => 0
+                'tipo_plano_fk' => 468
+                'cod_chave' => null
+                'obs' => null
+                'tipo_tabela_fk' => null
+            ]
+            2 => [
+                'cod_plano' => null
+                'valor_512' => 0
+                'valor_512k_2m' => 0
+                'valor_2m_12m' => 0
+                'valor_12m_34m' => 0
+                'valor_34m' => 0
+                'tipo_plano_fk' => 469
+                'cod_chave' => null
+                'obs' => null
+                'tipo_tabela_fk' => null
+            ]
+        ]
+        'N_577217748' => [
+            0 => [
+                'cod_empresa_municipio' => 'N_577217748'
+                'cod_municipio_fk' => '240830'
+                'municipio' => 'Nova Cruz'
+                'uf' => 'RN'
+                'capacidade_municipio' => 0
+                'capacidade_servico' => 0
+                'cod_sici_fk' => null
+                'tecnologia_fk' => 489
+            ]
+            1 => [
+                'cod_plano' => null
+                'valor_512' => 0
+                'valor_512k_2m' => 79
+                'valor_2m_12m' => 64
+                'valor_12m_34m' => 26
+                'valor_34m' => 0
+                'tipo_plano_fk' => 468
+                'cod_chave' => null
+                'obs' => null
+                'tipo_tabela_fk' => null
+            ]
+            2 => [
+                'cod_plano' => null
+                'valor_512' => 0
+                'valor_512k_2m' => 0
+                'valor_2m_12m' => 0
+                'valor_12m_34m' => 0
+                'valor_34m' => 0
+                'tipo_plano_fk' => 469
+                'cod_chave' => null
+                'obs' => null
+                'tipo_tabela_fk' => null
+            ]
+        ]
+    ]
+]
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'localhost'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:53.0) Gecko/20100101 Firefox/53.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.5'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'CONTENT_TYPE' => 'multipart/form-data; boundary=---------------------------931883640165110164190678907'
+    'CONTENT_LENGTH' => '19545'
+    'HTTP_REFERER' => 'http://localhost/scm/web/posoutorga/sici/importar'
+    'HTTP_COOKIE' => 'projeto_dev=7tiiotenocus2prduhsb61qs83; _csrf=1f59ef2ab169b88a9e57b441f4c241a329b1723fd6c07ad4803438a9dbcdbdeca%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22_E6mxcUk3djhASg_h_vjWqxur8tO8N3K%22%3B%7D; __swuid=1; __swto=1495754569'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.25 (Ubuntu) Server at localhost Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.25 (Ubuntu)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/var/www'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www'
+    'SERVER_ADMIN' => 'webmaster@localhost'
+    'SCRIPT_FILENAME' => '/var/www/scm/web/index.php'
+    'REMOTE_PORT' => '56460'
+    'REDIRECT_URL' => '/scm/web/posoutorga/sici/importar'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/scm/web/posoutorga/sici/importar'
+    'SCRIPT_NAME' => '/scm/web/index.php'
+    'PHP_SELF' => '/scm/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1495747753.764
+    'REQUEST_TIME' => 1495747753
+]
+2017-05-25 18:43:15 [127.0.0.1][1][7tiiotenocus2prduhsb61qs83][error][ParseError] ParseError: syntax error, unexpected '"', expecting identifier (T_STRING) or variable (T_VARIABLE) or number (T_NUM_STRING) in /var/www/scm/projeto/Util.php:265
+Stack trace:
+#0 [internal function]: yii\BaseYii::autoload('projeto\\Util')
+#1 /var/www/scm/config/web.php(166): spl_autoload_call('projeto\\Util')
+#2 [internal function]: {closure}(Object(yii\base\Event))
+#3 /var/www/scm/vendor/yiisoft/yii2/base/Component.php(545): call_user_func(Object(Closure), Object(yii\base\Event))
+#4 /var/www/scm/vendor/yiisoft/yii2/base/Application.php(377): yii\base\Component->trigger('beforeRequest')
+#5 /var/www/scm/web/index.php(27): yii\base\Application->run()
+#6 {main}
+2017-05-25 18:43:15 [127.0.0.1][1][7tiiotenocus2prduhsb61qs83][info][application] $_POST = [
+    '_csrf' => 'TjZhY1g3UWcRc1cOIFQEDH1SCwsZZDY4JmkXCQ9GKRI8DhUsYHliLA=='
+    'TabSiciSearch' => [
+        'file' => ''
+    ]
+    'abrir' => ''
+]
+
+$_FILES = [
+    'TabSiciSearch' => [
+        'name' => [
+            'file' => 'planilhaAbril(1).xlsx'
+        ]
+        'type' => [
+            'file' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+        ]
+        'tmp_name' => [
+            'file' => '/tmp/phpuPKPa1'
+        ]
+        'error' => [
+            'file' => 0
+        ]
+        'size' => [
+            'file' => 70581
+        ]
+    ]
+]
+
+$_COOKIE = [
+    'projeto_dev' => '7tiiotenocus2prduhsb61qs83'
+    '_csrf' => '1f59ef2ab169b88a9e57b441f4c241a329b1723fd6c07ad4803438a9dbcdbdeca:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"_E6mxcUk3djhASg_h_vjWqxur8tO8N3K\";}'
+    '__swuid' => '1'
+    '__swto' => '1495755037'
+]
+
+$_SESSION = [
+    '__flash' => []
+    'sessao-expirada' => '/scm/web/posoutorga/sici/importar'
+    '__returnUrl' => '/scm/web/posoutorga/sici/importar'
+    '__id' => 1
+    'empresasSessao' => [
+        'N_955704132' => [
+            0 => [
+                'cod_empresa_municipio' => 'N_955704132'
+                'cod_municipio_fk' => '241330'
+                'municipio' => 'Serra de São Bento'
+                'uf' => 'RN'
+                'capacidade_municipio' => 0
+                'capacidade_servico' => 0
+                'cod_sici_fk' => null
+                'tecnologia_fk' => 489
+            ]
+            1 => [
+                'cod_plano' => null
+                'valor_512' => 0
+                'valor_512k_2m' => 87
+                'valor_2m_12m' => 40
+                'valor_12m_34m' => 0
+                'valor_34m' => 0
+                'tipo_plano_fk' => 468
+                'cod_chave' => null
+                'obs' => null
+                'tipo_tabela_fk' => null
+            ]
+            2 => [
+                'cod_plano' => null
+                'valor_512' => 0
+                'valor_512k_2m' => 0
+                'valor_2m_12m' => 0
+                'valor_12m_34m' => 0
+                'valor_34m' => 0
+                'tipo_plano_fk' => 469
+                'cod_chave' => null
+                'obs' => null
+                'tipo_tabela_fk' => null
+            ]
+        ]
+        'N_977238855' => [
+            0 => [
+                'cod_empresa_municipio' => 'N_977238855'
+                'cod_municipio_fk' => '241480'
+                'municipio' => 'Vera Cruz'
+                'uf' => 'RN'
+                'capacidade_municipio' => 0
+                'capacidade_servico' => 0
+                'cod_sici_fk' => null
+                'tecnologia_fk' => 494
+            ]
+            1 => [
+                'cod_plano' => null
+                'valor_512' => 0
+                'valor_512k_2m' => 52
+                'valor_2m_12m' => 18
+                'valor_12m_34m' => 0
+                'valor_34m' => 0
+                'tipo_plano_fk' => 468
+                'cod_chave' => null
+                'obs' => null
+                'tipo_tabela_fk' => null
+            ]
+            2 => [
+                'cod_plano' => null
+                'valor_512' => 0
+                'valor_512k_2m' => 0
+                'valor_2m_12m' => 0
+                'valor_12m_34m' => 0
+                'valor_34m' => 0
+                'tipo_plano_fk' => 469
+                'cod_chave' => null
+                'obs' => null
+                'tipo_tabela_fk' => null
+            ]
+        ]
+        'N_155865022' => [
+            0 => [
+                'cod_empresa_municipio' => 'N_155865022'
+                'cod_municipio_fk' => '240830'
+                'municipio' => 'Nova Cruz'
+                'uf' => 'RN'
+                'capacidade_municipio' => 0
+                'capacidade_servico' => 0
+                'cod_sici_fk' => null
+                'tecnologia_fk' => 489
+            ]
+            1 => [
+                'cod_plano' => null
+                'valor_512' => 0
+                'valor_512k_2m' => 79
+                'valor_2m_12m' => 64
+                'valor_12m_34m' => 26
+                'valor_34m' => 0
+                'tipo_plano_fk' => 468
+                'cod_chave' => null
+                'obs' => null
+                'tipo_tabela_fk' => null
+            ]
+            2 => [
+                'cod_plano' => null
+                'valor_512' => 0
+                'valor_512k_2m' => 0
+                'valor_2m_12m' => 0
+                'valor_12m_34m' => 0
+                'valor_34m' => 0
+                'tipo_plano_fk' => 469
+                'cod_chave' => null
+                'obs' => null
+                'tipo_tabela_fk' => null
+            ]
+        ]
+    ]
+]
+
+$_SERVER = [
+    'REDIRECT_STATUS' => '200'
+    'HTTP_HOST' => 'localhost'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:53.0) Gecko/20100101 Firefox/53.0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.5'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'CONTENT_TYPE' => 'multipart/form-data; boundary=---------------------------178467108979658496134512219'
+    'CONTENT_LENGTH' => '71272'
+    'HTTP_REFERER' => 'http://localhost/scm/web/posoutorga/sici/importar'
+    'HTTP_COOKIE' => 'projeto_dev=7tiiotenocus2prduhsb61qs83; _csrf=1f59ef2ab169b88a9e57b441f4c241a329b1723fd6c07ad4803438a9dbcdbdeca%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22_E6mxcUk3djhASg_h_vjWqxur8tO8N3K%22%3B%7D; __swuid=1; __swto=1495755037'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.25 (Ubuntu) Server at localhost Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.25 (Ubuntu)'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => '/var/www'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www'
+    'SERVER_ADMIN' => 'webmaster@localhost'
+    'SCRIPT_FILENAME' => '/var/www/scm/web/index.php'
+    'REMOTE_PORT' => '56616'
+    'REDIRECT_URL' => '/scm/web/posoutorga/sici/importar'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/scm/web/posoutorga/sici/importar'
+    'SCRIPT_NAME' => '/scm/web/index.php'
+    'PHP_SELF' => '/scm/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1495748595.807
+    'REQUEST_TIME' => 1495748595
+]

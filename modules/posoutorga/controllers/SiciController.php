@@ -1022,11 +1022,29 @@ class SiciController extends Controller {
                         $cliente = $cli;
 
                         $contrato = \app\modules\comercial\models\TabContratoSearch::find()->where(['cod_cliente_fk' => $cliente->cod_cliente])->one();
-
                         $tipo_contrato = \app\modules\comercial\models\TabTipoContrato::find()->where(['cod_contrato_fk' => $contrato->cod_contrato])->one();
 
                         $sici->cod_tipo_contrato_fk = $tipo_contrato->cod_tipo_contrato;
                         $sici->save();
+                        
+                        if ($sici->errors) {
+                            $erro =[];
+                            foreach ($sici->errors as $value) {
+
+                                foreach ($value as $val) {
+                                    if (array_search($val, $erro) === false) {
+                                        $erro[] = $val;
+                                    }
+                                }
+                            }
+                             $transaction->rollBack();
+                            $this->session->setFlash('danger', 'Erro na importação - ' . implode('<br />', $erro));
+                              \Yii::$app->session->set('empresasSessao', null);
+                            return $this->render('importar', [
+                                        'model' => $model,
+                                        'importacao' => $importacao
+                            ]);
+                        }
 
                         $contato = \app\models\TabContatoSearch::find()->where(['contato' => $post['TabContatoSearchT']['contato'], 'chave_fk' => $cliente->cod_cliente, 'tipo_tabela_fk' => $cliente->tableName()])->one();
 
@@ -1177,7 +1195,8 @@ class SiciController extends Controller {
                             }
                         }
                     }
-                            print_r($empresasSessao); exit;
+                    print_r($empresasSessao);
+                    exit;
                     $planof_mn->setIEM10($indicador, 'F');
                     $planoj_mn->setIEM10($indicador, 'J');
             }
@@ -1581,7 +1600,6 @@ class SiciController extends Controller {
         $cliente->cnpj = str_pad($cliente->cnpj, 14, '0', 0);
         $dadosCliente = \app\models\TabClienteSearch::find()->where("cnpj = '{$cliente->cnpj}' "
                         . " OR replace(replace(replace(cnpj, '.', ''), '-', ''), '/', '')='{$cliente->cnpj}'")->one();
-
 
         if ($dadosCliente) {
             $cliente = $dadosCliente;

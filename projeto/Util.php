@@ -220,7 +220,7 @@ class Util {
         if (!$vlr) {
             return '';
         } else {
-            return str_replace(['-', '_', '(', ')', '/', '.'], '', $vlr);
+            return str_replace(['-', '_', '(', ')', '/', '.', '|', "\\"], '', $vlr);
         }
     }
 
