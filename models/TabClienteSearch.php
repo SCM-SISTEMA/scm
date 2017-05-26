@@ -91,14 +91,16 @@ public $file;
         $url = "http://receitaws.com.br/v1/cnpj/" . $nu_cnpj;
         curl_setopt_array($ch, array
             (
-            CURLOPT_TIMEOUT=>40,
+            CURLOPT_TIMEOUT=>28,
             CURLOPT_URL => $url,
             CURLOPT_RETURNTRANSFER => TRUE
         ));
 
 
-        $response = curl_exec($ch);
-        curl_close($ch);
+        if($response = curl_exec($ch)){;
+            curl_close($ch);
+        }
+        
         $dados = json_decode($response);
         if ($dados->nome) {
             $this->razao_social = $dados->nome;
