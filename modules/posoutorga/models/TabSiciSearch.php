@@ -31,7 +31,7 @@ class TabSiciSearch extends TabSici {
 
         $rules = [
             [['file', 'cod_sici', 'cod_tipo_contrato_fk', 'qtd_funcionarios_fichados', 'qtd_funcionarios_terceirizados', 'num_central_atendimento', 'total_fibra_prestadora', 'total_fibra_terceiros', 'total_crescimento_prestadora', 'total_crescimento_terceiros', 'total_fibra_implantada_prestadora', 'total_fibra_implantada_terceiros', 'total_fibra_crescimento_prop_prestadora', 'total_fibra_crescimento_prop_terceiros',
-            'receita_bruta', 'qntAcesso', 'tipo_sici_fk', 'despesa_operacao_manutencao', 'mes_ano_referencia', 'legenda', 'responsavel', 'despesa_publicidade', 'despesa_vendas', 'despesa_link', 'aliquota_nacional', 'receita_icms', 'receita_pis', 'receita_confins', 'receita_liquida', 'valor_consolidado', 'aplicacao_equipamento', 'total_marketing_propaganda', 'aplicacao_software', 'total_pesquisa_desenvolvimento', 'aplicacao_servico', 'aplicacao_callcenter', 'faturamento_de', 'faturamento_industrial', 'faturamento_adicionado'], 'safe'],
+            'receita_bruta', 'qntAcesso', 'tipo_entrada_fk', 'tipo_sici_fk', 'despesa_operacao_manutencao', 'mes_ano_referencia', 'legenda', 'responsavel', 'despesa_publicidade', 'despesa_vendas', 'despesa_link', 'aliquota_nacional', 'receita_icms', 'receita_pis', 'receita_confins', 'receita_liquida', 'valor_consolidado', 'aplicacao_equipamento', 'total_marketing_propaganda', 'aplicacao_software', 'total_pesquisa_desenvolvimento', 'aplicacao_servico', 'aplicacao_callcenter', 'faturamento_de', 'faturamento_industrial', 'faturamento_adicionado'], 'safe'],
             [['obs_receita', 'obs_despesa'], 'string'],
             [['mes_ano_referencia'], 'required'],
             [['receita_bruta', 'despesa_operacao_manutencao', 'despesa_publicidade', 'despesa_vendas', 'despesa_link', 'aliquota_nacional', 'receita_icms', 'receita_pis', 'receita_confins', 'valor_consolidado', 'aplicacao_equipamento', 'total_marketing_propaganda', 'aplicacao_software', 'total_pesquisa_desenvolvimento', 'aplicacao_servico', 'aplicacao_callcenter', 'faturamento_de', 'faturamento_industrial', 'faturamento_adicionado'], 'number'],
@@ -135,6 +135,33 @@ class TabSiciSearch extends TabSici {
         return $dados;
     }
 
+    public function setIEM1($dom) {
+
+
+        foreach ($dom->getElementsByTagName('Conteudo') as $conteudo) {
+            $key = strtoupper($conteudo->getAttribute('item'));
+            switch ($key) {
+                case 'A': $this->total_planta = \projeto\Util::decimalFormatForBank(($conteudo->getAttribute('valor')));
+                    break;
+                case 'B': $this->total_marketing_propaganda = \projeto\Util::decimalFormatForBank(($conteudo->getAttribute('valor')));
+                    break;
+                case 'C': $this->aplicacao_equipamento = \projeto\Util::decimalFormatForBank(($conteudo->getAttribute('valor')));
+                    break;
+                case 'D': $this->aplicacao_software = \projeto\Util::decimalFormatForBank(($conteudo->getAttribute('valor')));
+                    break;
+                case 'E': $this->total_pesquisa_desenvolvimento = (\projeto\Util::decimalFormatForBank($conteudo->getAttribute('valor')));
+                    break;
+                case 'F': $this->aplicacao_servico = \projeto\Util::decimalFormatForBank(($conteudo->getAttribute('valor')));
+                    break;
+                case 'G': $this->aplicacao_callcenter = \projeto\Util::decimalFormatForBank(($conteudo->getAttribute('valor')));
+                    break;
+            }
+        }
+    }
+    
+    
+    
+    
     public function getIEM2() {
         $dados['a'] = $this->faturamento_de;
         $dados['b'] = $this->faturamento_industrial;
@@ -142,6 +169,22 @@ class TabSiciSearch extends TabSici {
 
 
         return $dados;
+    }
+
+    public function setIEM2($dom) {
+
+
+        foreach ($dom->getElementsByTagName('Conteudo') as $conteudo) {
+            $key = strtoupper($conteudo->getAttribute('item'));
+            switch ($key) {
+                case 'A': $this->faturamento_de = \projeto\Util::decimalFormatForBank(($conteudo->getAttribute('valor')));
+                    break;
+                case 'B': $this->faturamento_industrial = \projeto\Util::decimalFormatForBank(($conteudo->getAttribute('valor')));
+                    break;
+                case 'C': $this->faturamento_adicionado = \projeto\Util::decimalFormatForBank(($conteudo->getAttribute('valor')));
+                    break;
+            }
+        }
     }
 
     public function getIEM8() {
@@ -154,6 +197,26 @@ class TabSiciSearch extends TabSici {
         return $dados;
     }
 
+    public function setIEM8($dom) {
+
+
+        foreach ($dom->getElementsByTagName('Conteudo') as $conteudo) {
+            $key = strtoupper($conteudo->getAttribute('item'));
+            switch ($key) {
+                case 'A': $this->total_despesa = \projeto\Util::decimalFormatToBank($conteudo->getAttribute('valor'));
+                    break;
+                case 'B': $this->despesa_operacao_manutencao = \projeto\Util::decimalFormatForBank($conteudo->getAttribute('valor'));
+                    break;
+                case 'C': $this->despesa_publicidade = \projeto\Util::decimalFormatForBank($conteudo->getAttribute('valor'));
+                    break;
+                case 'D': $this->despesa_vendas = \projeto\Util::decimalFormatForBank($conteudo->getAttribute('valor'));
+                    break;
+                case 'E': $this->despesa_link = \projeto\Util::decimalFormatForBank($conteudo->getAttribute('valor'));
+                    break;
+            }
+        }
+    }
+
     public function getIPL1() {
         $dados['A'] = $this->total_fibra_prestadora;
         $dados['B'] = $this->total_fibra_terceiros;
@@ -164,6 +227,24 @@ class TabSiciSearch extends TabSici {
         return $dados;
     }
 
+    public function setIPL1($dom) {
+
+
+        foreach ($dom->getElementsByTagName('Conteudo') as $conteudo) {
+            $key = strtoupper($conteudo->getAttribute('item'));
+            switch ($key) {
+                case 'A': $this->total_fibra_prestadora = \projeto\Util::decimalFormatForBank($conteudo->getAttribute('valor'));
+                    break;
+                case 'B': $this->total_fibra_terceiros = \projeto\Util::decimalFormatForBank($conteudo->getAttribute('valor'));
+                    break;
+                case 'C': $this->total_fibra_crescimento_prop_prestadora = \projeto\Util::decimalFormatForBank($conteudo->getAttribute('valor'));
+                    break;
+                case 'D': $this->total_fibra_crescimento_prop_terceiros = \projeto\Util::decimalFormatForBank($conteudo->getAttribute('valor'));
+                    break;
+            }
+        }
+    }
+
     public function getIPL2() {
         $dados['A'] = $this->total_fibra_implantada_prestadora;
         $dados['B'] = $this->total_fibra_implantada_terceiros;
@@ -172,6 +253,24 @@ class TabSiciSearch extends TabSici {
 
 
         return $dados;
+    }
+
+    public function setIPL2($dom) {
+
+
+        foreach ($dom->getElementsByTagName('Conteudo') as $conteudo) {
+            $key = strtoupper($conteudo->getAttribute('item'));
+            switch ($key) {
+                case 'A': $this->total_fibra_implantada_prestadora = \projeto\Util::decimalFormatForBank($conteudo->getAttribute('valor'));
+                    break;
+                case 'B': $this->total_fibra_implantada_terceiros = \projeto\Util::decimalFormatForBank($conteudo->getAttribute('valor'));
+                    break;
+                case 'C': $this->total_crescimento_prestadora = \projeto\Util::decimalFormatForBank($conteudo->getAttribute('valor'));
+                    break;
+                case 'D': $this->total_crescimento_terceiros = \projeto\Util::decimalFormatForBank($conteudo->getAttribute('valor'));
+                    break;
+            }
+        }
     }
 
     public function calculaTotais() {

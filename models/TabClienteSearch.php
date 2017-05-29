@@ -102,6 +102,7 @@ public $file;
         }
         
         $dados = json_decode($response);
+        
         if ($dados->nome) {
             $this->razao_social = $dados->nome;
             $this->fantasia = $dados->fantasia;

@@ -1,6 +1,7 @@
 <div id="acessoFisicoTecnologia-<?= $empresa->cod_empresa_municipio ?>">
 
     <?php
+
     $nome = $empresa->cod_municipio_fk;
     if ($nome) {
         $nome = app\models\TabMunicipiosSearch::find()->where(['cod_municipio' => $nome])->one();

@@ -1,5 +1,4 @@
 <?php
-
 use yii\helpers\ArrayHelper; ?>
 <div class='row'>
     <div class='col-lg-12'>
@@ -63,7 +62,6 @@ use yii\helpers\ArrayHelper; ?>
 
     </div>
 </div>
-
 
 <?=
 yii\grid\GridView::widget([

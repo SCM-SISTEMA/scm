@@ -1,4 +1,5 @@
 <?= $form->field($sici, 'cod_sici')->hiddenInput(['maxlength' => true])->label(false); ?>
+<?= $form->field($sici, 'tipo_entrada_fk')->hiddenInput(['maxlength' => true])->label(false); ?>
 
 <div class='row'>
     <div class='col-lg-2'>

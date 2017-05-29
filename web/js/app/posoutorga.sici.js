@@ -21,7 +21,9 @@ Projeto.prototype.sici = new (Projeto.extend({
             projeto.ajax.post(urlInclusao, selecao, function (response) {
                 var ds = $.parseJSON(response);
                 $('#tabclientesearch-razao_social').val(ds.razao_social);
-                $('#tabclientesearch-fistel').val(ds.fistel);
+                if (!$('#tabclientesearch-fistel').val()) {
+                    $('#tabclientesearch-fistel').val(ds.fistel);
+                }
                 $('#tabcontatosearcht-contato').val(ds.contatoT);
                 $('#tabcontatosearchc-contato').val(ds.contatoC);
             });

@@ -13,13 +13,6 @@ use app\modules\posoutorga\models\TabEmpresaMunicipio;
  */
 class TabEmpresaMunicipioSearch extends TabEmpresaMunicipio {
 
-    public $total_fisica;
-    public $total_juridica;
-    public $total_512;
-    public $total_512k_2m;
-    public $total_2m_12m;
-    public $total_12m_34m;
-    public $total_34m;
     public $total;
     public $tipo_pessoa;
     public $gridMunicipios;
@@ -30,7 +23,7 @@ class TabEmpresaMunicipioSearch extends TabEmpresaMunicipio {
     public function rules() {
 
         $rules = [
-                //exemplo [['txt_nome', 'cod_modulo_fk'], 'required'],
+            [['total_512', 'total_512k_2m', 'total_2m_12m', 'total_12m_34m', 'total_34m', 'total_fisica', 'total_juridica', 'txt_nome', 'cod_modulo_fk'], 'safe'],
         ];
 
         return array_merge($rules, parent::rules());
@@ -102,6 +95,20 @@ class TabEmpresaMunicipioSearch extends TabEmpresaMunicipio {
 
         foreach ($empresa_municipio as $key => $value) {
 
+            $totais['total_512'] = (int) $value->total_512;
+            $totais['total_512k_2m'] = (int) $value->total_512k_2m;
+            $totais['total_2m_12m'] = (int) $value->total_2m_12m;
+            $totais['total_12m_34m'] = (int) $value->total_12m_34m;
+            $totais['total_34m'] = (int) $value->total_34m;
+            $totais['total_fisica'] = (int) $value->total_fisica;
+            $totais['total_juridica'] = (int) $value->total_juridica;
+            $totais['total'] = (int) $value->total = (int) $value->total_512 +
+                    (int) $value->total_34m +
+                    (int) $value->total_512k_2m +
+                    (int) $value->total_2m_12m +
+                    (int) $value->total_12m_34m;
+
+
             $planom = \app\modules\posoutorga\models\TabPlanosSearch::find()
                     ->select("
                     valor_512, valor_512k_2m, valor_2m_12m,valor_12m_34m,valor_34m,
@@ -113,9 +120,14 @@ class TabEmpresaMunicipioSearch extends TabEmpresaMunicipio {
 
             foreach ($planom as $key => $pla) {
                 $pla['total'] = (int) $pla['valor_512'] + (int) $pla['valor_512k_2m'] + (int) $pla['valor_2m_12m'] + (int) $pla['valor_12m_34m'] + (int) $pla['valor_34m'];
-                $planoEmpresa[$value->tabMunicipios->cod_ibge][$value->tecnologia_fk][$pla['tipo_plano_sgl']] = $pla;
+
+
+                $planoEmpresa[$value->tabMunicipios->cod_ibge]['tecnologia'][$value->tecnologia_fk][$pla['tipo_plano_sgl']] = $pla;
             }
+            $planoEmpresa[$value->tabMunicipios->cod_ibge]['capacidade_servico'] = $value->capacidade_servico;
+            $planoEmpresa[$value->tabMunicipios->cod_ibge]['totais'] = $totais;
         }
+
         return $planoEmpresa;
     }
 
@@ -135,7 +147,7 @@ class TabEmpresaMunicipioSearch extends TabEmpresaMunicipio {
 
         foreach ($dom->getElementsByTagName('Conteudo') as $conteudo) {
             $key = $conteudo->getAttribute('faixa');
-            
+
             switch ($key) {
                 case '15': $this->total_512 = ($conteudo->getAttribute('valor'));
                     break;
@@ -146,34 +158,53 @@ class TabEmpresaMunicipioSearch extends TabEmpresaMunicipio {
                 case '18': $this->total_12m_34m = ($conteudo->getAttribute('valor'));
                     break;
                 case '19': $this->total_34m = ($conteudo->getAttribute('valor'));
-             
             }
-            
-            if($conteudo->getAttribute('nome')=='total'){
+
+            if ($conteudo->getAttribute('nome') == 'total') {
                 $this->total = ($conteudo->getAttribute('valor'));
             }
+
+            if (strtoupper($conteudo->getAttribute('nome')) == 'QAIPL5SM') {
+                $this->capacidade_servico = ($conteudo->getAttribute('valor'));
+            }
         }
-        
     }
 
     public static function getQAIPL4SM($cod_sici) {
         $dados = TabEmpresaMunicipioSearch::buscaPlanoEmpresasTecnologia($cod_sici);
+        $tec = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tecnologia');
+
         $planos = [];
         if ($dados) {
             foreach ($dados as $munK => $municipio) {
-                foreach ($municipio as $tK => $tecnologia) {
-                    foreach ($tecnologia as $pk => $pessoa) {
+                foreach ($municipio['tecnologia'] as $tK => $tecnologia) {
+                    foreach ($tec as $k => $t) {
 
-                        $planos[$munK][$tK]['15'] += $pessoa['valor_512'];
-                        $planos[$munK][$tK]['16'] += $pessoa['valor_512k_2m'];
-                        $planos[$munK][$tK]['17'] += $pessoa['valor_2m_12m'];
-                        $planos[$munK][$tK]['18'] += $pessoa['valor_12m_34m'];
-                        $planos[$munK][$tK]['19'] += $pessoa['valor_34m'];
-                        $planos[$munK][$tK]['total'] += $pessoa['total'];
+                        if ($tK == $t['cod_atributos_valores']) {
+                            $planos[$munK][$tK]['QAIPL5SM'] = $municipio['capacidade_servico'];
+         
+                            $pessoa = $municipio['totais'];
+                            $planos[$munK][$tK]['total'] = $pessoa['total'];
+                            $planos[$munK][$tK]['15'] = $pessoa['total_512'];
+                            $planos[$munK][$tK]['16'] = $pessoa['total_512k_2m'];
+                            $planos[$munK][$tK]['17'] = $pessoa['total_2m_12m'];
+                            $planos[$munK][$tK]['18'] = $pessoa['total_12m_34m'];
+                            $planos[$munK][$tK]['19'] = $pessoa['total_34m'];
+                        } else {
+
+                            $planos[$munK][$t['cod_atributos_valores']]['QAIPL5SM'] = 0;
+                            $planos[$munK][$t['cod_atributos_valores']]['total'] = 0;
+                            $planos[$munK][$t['cod_atributos_valores']]['15'] = 0;
+                            $planos[$munK][$t['cod_atributos_valores']]['16'] = 0;
+                            $planos[$munK][$t['cod_atributos_valores']]['17'] = 0;
+                            $planos[$munK][$t['cod_atributos_valores']]['18'] = 0;
+                            $planos[$munK][$t['cod_atributos_valores']]['19'] = 0;
+                        }
                     }
                 }
             }
         }
+
         return $planos;
     }
 
@@ -183,16 +214,22 @@ class TabEmpresaMunicipioSearch extends TabEmpresaMunicipio {
         $planos = [];
         if ($dados) {
             foreach ($dados as $munK => $municipio) {
-                foreach ($municipio as $tK => $tecnologia) {
-                    foreach ($tecnologia as $pk => $pessoa) {
-                        $planos[$munK][$pk]['valor_512'] += $pessoa['valor_512'];
-                        $planos[$munK][$pk]['valor_512k_2m'] += $pessoa['valor_512k_2m'];
-                        $planos[$munK][$pk]['valor_2m_12m'] += $pessoa['valor_2m_12m'];
-                        $planos[$munK][$pk]['valor_12m_34m'] += $pessoa['valor_12m_34m'];
-                        $planos[$munK][$pk]['valor_34m'] += $pessoa['valor_34m'];
-                        $planos[$munK][$pk]['total'] += $pessoa['total'];
-                    }
-                }
+                $planos[$munK]['F']['total'] += $municipio['totais']['total_fisica'];
+                $planos[$munK]['J']['total'] += $municipio['totais']['total_juridica'];
+                /* foreach ($municipio as $tK => $tecnologia) {
+                  print_r($tecnologia); exit;
+
+                  foreach ($tecnologia as $pk => $pessoa) {
+                  if ($pk == 'capacidade_servico')
+                  continue;
+                  $planos[$munK][$pk]['valor_512'] += $pessoa['valor_512'];
+                  $planos[$munK][$pk]['valor_512k_2m'] += $pessoa['valor_512k_2m'];
+                  $planos[$munK][$pk]['valor_2m_12m'] += $pessoa['valor_2m_12m'];
+                  $planos[$munK][$pk]['valor_12m_34m'] += $pessoa['valor_12m_34m'];
+                  $planos[$munK][$pk]['valor_34m'] += $pessoa['valor_34m'];
+                  $planos[$munK][$pk]['total'] += $pessoa['total'];
+                  }
+                  } */
             }
         }
 
@@ -200,45 +237,58 @@ class TabEmpresaMunicipioSearch extends TabEmpresaMunicipio {
         return $planos;
     }
 
-    public function calculaTotais($planof_municipio = null, $planoj_municipio = null) {
+    public function calculaTotais($planof_municipio = null, $planoj_municipio = null, $excel = true) {
 
+        if ($excel) {
+            $this->total_512 = \projeto\Util::decimalFormatForBank($planof_municipio->valor_512) +
+                    \projeto\Util::decimalFormatForBank($planoj_municipio->valor_512)
+            ;
 
-        $this->total_512 = \projeto\Util::decimalFormatForBank($planof_municipio->valor_512) +
-                \projeto\Util::decimalFormatForBank($planoj_municipio->valor_512)
-        ;
+            $this->total_512k_2m = \projeto\Util::decimalFormatForBank($planof_municipio->valor_512k_2m) +
+                    \projeto\Util::decimalFormatForBank($planoj_municipio->valor_512k_2m)
+            ;
+            $this->total_2m_12m = \projeto\Util::decimalFormatForBank($planof_municipio->valor_2m_12m) +
+                    \projeto\Util::decimalFormatForBank($planoj_municipio->valor_2m_12m)
+            ;
 
-        $this->total_512k_2m = \projeto\Util::decimalFormatForBank($planof_municipio->valor_512k_2m) +
-                \projeto\Util::decimalFormatForBank($planoj_municipio->valor_512k_2m)
-        ;
-        $this->total_2m_12m = \projeto\Util::decimalFormatForBank($planof_municipio->valor_2m_12m) +
-                \projeto\Util::decimalFormatForBank($planoj_municipio->valor_2m_12m)
-        ;
+            $this->total_12m_34m = \projeto\Util::decimalFormatForBank($planof_municipio->valor_12m_34m) +
+                    \projeto\Util::decimalFormatForBank($planoj_municipio->valor_12m_34m)
+            ;
+            $this->total_34m = \projeto\Util::decimalFormatForBank($planof_municipio->valor_34m) +
+                    \projeto\Util::decimalFormatForBank($planoj_municipio->valor_34m)
+            ;
 
-        $this->total_12m_34m = \projeto\Util::decimalFormatForBank($planof_municipio->valor_12m_34m) +
-                \projeto\Util::decimalFormatForBank($planoj_municipio->valor_12m_34m)
-        ;
-        $this->total_34m = \projeto\Util::decimalFormatForBank($planof_municipio->valor_34m) +
-                \projeto\Util::decimalFormatForBank($planoj_municipio->valor_34m)
-        ;
+            $this->total_fisica = \projeto\Util::decimalFormatForBank($planof_municipio->valor_512) +
+                    \projeto\Util::decimalFormatForBank($planof_municipio->valor_512k_2m) +
+                    \projeto\Util::decimalFormatForBank($planof_municipio->valor_2m_12m) +
+                    \projeto\Util::decimalFormatForBank($planof_municipio->valor_12m_34m) +
+                    \projeto\Util::decimalFormatForBank($planof_municipio->valor_34m)
+            ;
 
-        $this->total_fisica = \projeto\Util::decimalFormatForBank($planof_municipio->valor_512) +
-                \projeto\Util::decimalFormatForBank($planof_municipio->valor_512k_2m) +
-                \projeto\Util::decimalFormatForBank($planof_municipio->valor_2m_12m) +
-                \projeto\Util::decimalFormatForBank($planof_municipio->valor_12m_34m) +
-                \projeto\Util::decimalFormatForBank($planof_municipio->valor_34m)
-        ;
+            $this->total_juridica = \projeto\Util::decimalFormatForBank($planoj_municipio->valor_512) +
+                    \projeto\Util::decimalFormatForBank($planoj_municipio->valor_512k_2m) +
+                    \projeto\Util::decimalFormatForBank($planoj_municipio->valor_2m_12m) +
+                    \projeto\Util::decimalFormatForBank($planoj_municipio->valor_12m_34m) +
+                    \projeto\Util::decimalFormatForBank($planoj_municipio->valor_34m)
+            ;
 
-        $this->total_juridica = \projeto\Util::decimalFormatForBank($planoj_municipio->valor_512) +
-                \projeto\Util::decimalFormatForBank($planoj_municipio->valor_512k_2m) +
-                \projeto\Util::decimalFormatForBank($planoj_municipio->valor_2m_12m) +
-                \projeto\Util::decimalFormatForBank($planoj_municipio->valor_12m_34m) +
-                \projeto\Util::decimalFormatForBank($planoj_municipio->valor_34m)
-        ;
+            $this->total = \projeto\Util::decimalFormatForBank($this->total_juridica) +
+                    \projeto\Util::decimalFormatForBank($this->total_fisica)
+            ;
+        } else {
 
-        $this->total = \projeto\Util::decimalFormatForBank($this->total_juridica) +
-                \projeto\Util::decimalFormatForBank($this->total_fisica)
-        ;
-
+            $this->total = \projeto\Util::decimalFormatForBank($this->total_juridica) +
+                    \projeto\Util::decimalFormatForBank($this->total_fisica)
+            ;
+            $this->total_juridica = (int) $this->total_juridica;
+            $this->total_fisica = (int) $this->total_fisica;
+            $this->total_512 = (int) $this->total_512;
+            $this->total_512k_2m = (int) $this->total_512k_2m;
+            $this->total_2m_12m = (int) $this->total_2m_12m;
+            $this->total_12m_34m = (int) $this->total_12m_34m;
+            $this->total_34m = (int) $this->total_34m;
+            $this->total = (int) $this->total;
+        }
 
         return $totais = [
             'valor_512' => $this->total_512,

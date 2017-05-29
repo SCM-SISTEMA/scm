@@ -107,8 +107,9 @@ class SiciController extends Controller {
             $this->subTitulo = '';
             $sici->mes_ano_referencia = str_pad((date('m') - 1), 2, '0', 0) . '/' . date('Y');
             $cliente = new \app\models\TabClienteSearch();
+            $sici->tipo_entrada_fk = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-entrada', 'S');
         }
-
+        
         $contatoT = \app\models\TabContatoSearch::find()
                 ->where(['ativo' => true, 'tipo_tabela_fk' => $cliente->tableName(), 'chave_fk' => $cliente->cod_cliente, 'tipo' => \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-contato', 'T')])
                 ->orderBy('cod_contato desc')
@@ -389,7 +390,7 @@ class SiciController extends Controller {
                 $arrayJ = $planoj_municipio->attributes;
                 $arrayJ['tipo_pessoa'] = 'Juridica';
 
-                $totais = $empresa->calculaTotais($planof_municipio, $planoj_municipio);
+                $totais = $empresa->calculaTotais($planof_municipio, $planoj_municipio, false);
 
                 $totais['tipo_pessoa'] = 'Totais';
                 $arrayF['total'] = $empresa->total_fisica;
@@ -431,8 +432,11 @@ class SiciController extends Controller {
 
         $root = $dom->createElement('root');
 
-        $sici = TabSiciSearch::find($cod_sici)->one();
-        $contrato = $sici->tabTipoContrato->tabContrato;
+        $sici = TabSiciSearch::findOne(['cod_sici' => $cod_sici]);
+        $tipo_contrato = \app\modules\comercial\models\TabTipoContratoSearch::findOne(['cod_tipo_contrato' => $sici->cod_tipo_contrato_fk]);
+
+        $contrato = \app\modules\comercial\models\TabContratoSearch::findOne(['cod_contrato' => $tipo_contrato->cod_contrato_fk]);
+
         $cliente = \app\models\TabClienteSearch::find()->where(['cod_cliente' => $contrato->cod_cliente_fk])->one();
 
         $uploadSICI = $dom->createElement('UploadSICI');
@@ -617,16 +621,18 @@ class SiciController extends Controller {
         $ITEM = $dom->createAttribute('Sigla');
         $ITEM->value = 'QAIPL4SM';
         $indicador->appendChild($ITEM);
-
         $empresa_municipio = \app\modules\posoutorga\models\TabEmpresaMunicipioSearch::getQAIPL4SM($cod_sici);
         if ($empresa_municipio) {
+
             foreach ($empresa_municipio as $item => $valor) {
+
                 $municipio = $dom->createElement('Municipio');
                 $codmunicipio = $dom->createAttribute('codmunicipio');
                 $codmunicipio->value = $item;
                 $municipio->appendChild($codmunicipio);
 
                 foreach ($valor as $iT => $tecno) {
+
                     $tec = \app\models\TabAtributosValoresSearch::findOne($iT);
 
                     $tecnologia = $dom->createElement('Tecnologia');
@@ -647,7 +653,7 @@ class SiciController extends Controller {
 
                     foreach ($tecno as $i => $val) {
 
-                        if ($i == 'total') {
+                        if ($i == 'total' || $i == 'QAIPL5SM') {
                             $conteudo = $dom->createElement('Conteudo');
                             $nome = $dom->createAttribute('nome');
                             $valor = $dom->createAttribute('valor');
@@ -942,7 +948,6 @@ class SiciController extends Controller {
 
                     $contatoC = new \app\models\TabContatoSearch;
                     $contatoC->attributes = $post['TabContatoSearchC'];
-
                     if (!$cli) {
 
                         $cliente->buscaCliente();
@@ -1026,9 +1031,9 @@ class SiciController extends Controller {
 
                         $sici->cod_tipo_contrato_fk = $tipo_contrato->cod_tipo_contrato;
                         $sici->save();
-                        
+
                         if ($sici->errors) {
-                            $erro =[];
+                            $erro = [];
                             foreach ($sici->errors as $value) {
 
                                 foreach ($value as $val) {
@@ -1037,9 +1042,9 @@ class SiciController extends Controller {
                                     }
                                 }
                             }
-                             $transaction->rollBack();
+                            $transaction->rollBack();
                             $this->session->setFlash('danger', 'Erro na importação - ' . implode('<br />', $erro));
-                              \Yii::$app->session->set('empresasSessao', null);
+                            \Yii::$app->session->set('empresasSessao', null);
                             return $this->render('importar', [
                                         'model' => $model,
                                         'importacao' => $importacao
@@ -1111,6 +1116,7 @@ class SiciController extends Controller {
                             $planoj_municipio->tipo_tabela_fk = $empresa->tableName();
                             $planoj_municipio->cod_chave = $empresa->cod_empresa_municipio;
                             $planoj_municipio->save();
+
                         }
                     }
                     //$sici->mes_ano_referencia = $dados_sici['mes_ano_referencia'];
@@ -1150,13 +1156,29 @@ class SiciController extends Controller {
 
         $dom = new \DOMDocument();
         $dom->load($inputFiles);
+
+        if ($dom->getElementsByTagName('UploadSICI')->item(0)->getAttribute('mes') == 1) {
+            $anual = true;
+            $sici->tipo_sici_fk = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-sici', 'A');
+        } elseif ($dom->getElementsByTagName('UploadSICI')->item(0)->getAttribute('mes') == '7') {
+            $indicadores = true;
+            $sici->tipo_sici_fk = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-sici', 'S');
+        } else {
+
+            $sici->tipo_sici_fk = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-sici', 'M');
+        }
         $sici->mes_ano_referencia = $dom->getElementsByTagName('UploadSICI')->item(0)->getAttribute('mes') . '/' . $dom->getElementsByTagName('UploadSICI')->item(0)->getAttribute('ano');
         $outorga = $dom->getElementsByTagName('Outorga')->item(0);
         $fistel = $outorga->getAttribute('fistel');
-        $cliente = \app\models\TabClienteSearch::findOne(['fistel' => $fistel]);
 
+        $cliente = \app\models\TabClienteSearch::findOne(['fistel' => $fistel]);
+        $contrato = \app\modules\comercial\models\TabContratoSearch::findOne(['cod_cliente_fk' => $cliente->cod_cliente]);
+        $tipo_contrato = \app\modules\comercial\models\TabTipoContratoSearch::findOne(['cod_contrato_fk' => $contrato->cod_contrato]);
+
+        $sici->cod_tipo_contrato_fk = $tipo_contrato->cod_tipo_contrato;
         if (!$cliente) {
             $cliente = new \app\models\TabClienteSearch;
+            $cliente->fistel = $fistel;
         }
 
         $planof = new \app\modules\posoutorga\models\TabPlanosSearch();
@@ -1167,9 +1189,16 @@ class SiciController extends Controller {
 
         foreach ($outorga->getElementsByTagName('Indicador') as $indicador) {
             switch ($indicador->getAttribute('Sigla')) {
-                //  case 'IEM4' :  $sici->qtd_funcionarios_fichados = $indicador->getElementsByTagName('Conteudo')->item(0)->getAttribute('valor'); break;
-                // case 'IEM5' :  $sici->qtd_funcionarios_terceirizados = $indicador->getElementsByTagName('Conteudo')->item(0)->getAttribute('valor'); break;
-                // case 'IEM9' :  $planof->setIEM9($indicador, 'F'); $planoj->setIEM9($indicador, 'J'); 
+                case 'IEM4' : $sici->qtd_funcionarios_fichados = $indicador->getElementsByTagName('Conteudo')->item(0)->getAttribute('valor');
+                    break;
+                case 'IEM5' : $sici->qtd_funcionarios_terceirizados = $indicador->getElementsByTagName('Conteudo')->item(0)->getAttribute('valor');
+                    break;
+                case 'IEM9' : $planof->setIEM9($indicador, 'F');
+                    $planoj->setIEM9($indicador, 'J');
+                    break;
+                case 'IEM10' : $planof_mn->setIEM10($indicador, 'F');
+                    $planoj_mn->setIEM10($indicador, 'J');
+                    break;
                 case 'QAIPL4SM' :
 
                     foreach ($outorga->getElementsByTagName('Municipio') as $mun) {
@@ -1189,330 +1218,150 @@ class SiciController extends Controller {
 
                                 $empresa->cod_empresa_municipio = 'N_' . rand(100000000, 999999999);
                                 if ((int) $empresa->total > 0) {
+                                    $planos = new \app\modules\posoutorga\models\TabPlanosSearch();
 
-                                    $empresasSessao[$empresa->cod_empresa_municipio] = [$empresa->attributes, [], []];
+                                    $empresasSessao[$empresa->cod_empresa_municipio] = [$empresa->attributes, $planos->attributes, $planos->attributes];
                                 }
                             }
                         }
                     }
-                    print_r($empresasSessao);
-                    exit;
-                    $planof_mn->setIEM10($indicador, 'F');
-                    $planoj_mn->setIEM10($indicador, 'J');
-            }
-        }
-        \Yii::$app->session->set('empresasSessao', $municipios);
-        print_r($planoj_mn->attributes);
-        exit;
+                    break;
+
+                case 'IPL6IM' :
 
 
-
-
-//INFORMAÇÕES DA EMPRESA
-
-        $rowData = $this->retornaImportacao($rowData, 'INFORMACOES DA EMPRESA');
-        $key = 4;
-        $cliente->razao_social = $rowData[$key][0][2];
-        $sici->responsavel = $rowData[$key][0][9];
-        $contatoT->contato = $rowData[$key][0][16];
-        $contatoT->tipo = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-contato', 'T');
-        $key += 5;
-        $cliente->cnpj = \projeto\Util::retiraCaracter($rowData[$key][0][2]);
-        $cliente->cnpj = str_pad($cliente->cnpj, 14, '0', 0);
-        $dadosCliente = \app\models\TabClienteSearch::find()->where("cnpj = '{$cliente->cnpj}' "
-                        . " OR replace(replace(replace(cnpj, '.', ''), '-', ''), '/', '')='{$cliente->cnpj}'")->one();
-
-
-        if ($dadosCliente) {
-            $cliente = $dadosCliente;
-            $clienteContrato = \app\modules\posoutorga\models\VisSiciCliente::findOne(['cnpj' => $cliente->cnpj]);
-            if ($clienteContrato) {
-                $sici->cod_tipo_contrato_fk = $clienteContrato->cod_tipo_contrato;
-            }
-        }
-
-        $dt_referencia = ( \PHPExcel_Style_NumberFormat::toFormattedString($rowData[$key][0][9], 'MM/YYYY'));
-
-
-        $sici->mes_ano_referencia = $dt_referencia;
-
-        $contatoC->contato = $rowData[$key][0][16];
-        $contatoC->tipo = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-contato', 'C');
-        ;
-
-
-        $rowData = $this->retornaImportacao($rowData, 'RECEITA');
-//INFORMAÇÕES FINANCEIRAS
-        $key = 2;
-        $sici->legenda = $rowData[$key][0][9];
-        $key += 2;
-
-        if (!$rowData[$key][0][1])
-            $key += 1;
-        $anual = false;
-        $sici->tipo_sici_fk = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-sici', 'M');
-        if (strpos(strtoupper($rowData[$key][0][1]), 'BRUTA') === false) {
-            $anual = true;
-            $sici->valor_consolidado = $rowData[$key][0][9];
-            $sici->tipo_sici_fk = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-sici', 'S');
-            $key += 3;
-        }
-
-
-
-        $sici->receita_bruta = $rowData[$key][0][9];
-        $sici->despesa_operacao_manutencao = $rowData[$key][0][20];
-        $key += 3;
-        $mult = ((100 * $rowData[$key][0][7]) > 100) ? 1 : 100;
-
-        $sici->aliquota_nacional = ($mult * $rowData[$key][0][7]);
-
-        $sici->despesa_publicidade = $rowData[$key][0][20];
-
-        $key += 3;
-        $sici->receita_icms = ($mult * $rowData[$key][0][7]);
-        $sici->despesa_vendas = $rowData[$key][0][20];
-        $key += 3;
-        $sici->receita_pis = ($mult * $rowData[$key][0][7]);
-        $sici->despesa_link = $rowData[$key][0][20];
-
-        $key += 3;
-        $sici->receita_confins = ($mult * $rowData[$key][0][7]);
-
-        $key += 3;
-        $key += 5;
-        $sici->obs_receita = $rowData[$key][0][2];
-        $sici->obs_despesa = $rowData[$key][0][13];
-        $renda_bruta = \projeto\Util::decimalFormatForBank($sici->receita_bruta);
-        $sici->total_aliquota = \projeto\Util::decimalFormatToBank($renda_bruta * \projeto\Util::decimalFormatForBank($sici->aliquota_nacional) / 100);
-        $sici->total_icms = \projeto\Util::decimalFormatToBank($renda_bruta * ( \projeto\Util::decimalFormatForBank($sici->receita_icms) / 100) / 100);
-        $sici->total_pis = \projeto\Util::decimalFormatToBank($renda_bruta * ( \projeto\Util::decimalFormatForBank($sici->receita_pis) / 100) / 100);
-        $sici->total_confins = \projeto\Util::decimalFormatToBank($renda_bruta * ( \projeto\Util::decimalFormatForBank($sici->receita_confins) / 100) / 100);
-
-        $sici->receita_liquida = \projeto\Util::decimalFormatToBank($renda_bruta - (\projeto\Util::decimalFormatForBank($sici->total_aliquota) ));
-        $sici->total_despesa = \projeto\Util::decimalFormatToBank(\projeto\Util::decimalFormatForBank($sici->despesa_publicidade) +
-                        \projeto\Util::decimalFormatForBank($sici->despesa_operacao_manutencao) +
-                        \projeto\Util::decimalFormatForBank($sici->despesa_vendas) +
-                        \projeto\Util::decimalFormatForBank($sici->despesa_link));
-
-        if ($anual) {
-//QUANTITATIVO DE FUNCIONÁRIOS
-            $rowDataA = $this->retornaImportacao($rowData, 'QUANTITATIVO', TRUE);
-
-            if ($rowDataA) {
-                $key = 3;
-                $sici->qtd_funcionarios_fichados = $rowDataA[$key][0][7];
-                $sici->qtd_funcionarios_terceirizados = $rowDataA[$key][0][19];
-
-                $key += 3;
-                $sici->num_central_atendimento = $rowDataA[$key][0][14];
-            }
-//INFORMAÇÕES ADICIONAIS - INDICADORES
-            $rowDataA = $this->retornaImportacao($rowDataA, 'INDICADORES', TRUE);
-
-            $indicadores = false;
-            if ($rowDataA) {
-                $sici->tipo_sici_fk = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-sici', 'A');
-                $indicadores = true;
-                $key = 4;
-
-                $sici->total_fibra_prestadora = $rowDataA[$key][0][7];
-                $sici->total_fibra_terceiros = $rowDataA[$key][0][19];
-
-                $key += 3;
-                $sici->total_fibra_crescimento_prop_prestadora = $rowDataA[$key][0][7];
-                $sici->total_fibra_crescimento_prop_terceiros = $rowDataA[$key][0][19];
-
-                $key += 5;
-                $sici->total_fibra_implantada_prestadora = $rowDataA[$key][0][7];
-                $sici->total_fibra_implantada_terceiros = $rowDataA[$key][0][19];
-
-                $key += 3;
-                $sici->total_crescimento_prestadora = $rowDataA[$key][0][7];
-                $sici->total_crescimento_terceiros = $rowDataA[$key][0][19];
-
-
-                $key += 5;
-                $sici->total_marketing_propaganda = $rowDataA[$key][0][19];
-
-                $key += 3;
-                $sici->aplicacao_equipamento = $rowDataA[$key][0][7];
-                $sici->aplicacao_software = $rowDataA[$key][0][19];
-
-                $key += 3;
-                $sici->total_pesquisa_desenvolvimento = $rowDataA[$key][0][7];
-                $sici->aplicacao_servico = $rowDataA[$key][0][19];
-
-                $key += 3;
-                $sici->aplicacao_callcenter = $rowDataA[$key][0][7];
-
-                $sici->total_planta = \projeto\Util::decimalFormatToBank(\projeto\Util::decimalFormatForBank($sici->total_marketing_propaganda) +
-                                \projeto\Util::decimalFormatForBank($sici->aplicacao_equipamento) +
-                                \projeto\Util::decimalFormatForBank($sici->aplicacao_software) +
-                                \projeto\Util::decimalFormatForBank($sici->total_pesquisa_desenvolvimento) +
-                                \projeto\Util::decimalFormatForBank($sici->aplicacao_servico) +
-                                \projeto\Util::decimalFormatForBank($sici->aplicacao_callcenter));
-//QUANTITATIVO DE FUNCIONÁRIOS
-
-                $key += 5;
-                $sici->faturamento_de = $rowDataA[$key][0][7];
-                $sici->faturamento_industrial = $rowDataA[$key][0][19];
-
-                $key += 3;
-                $sici->faturamento_adicionado = $rowDataA[$key][0][7];
-                $rowData = $rowDataA;
-            }
-        }
-
-        $rowData = $this->retornaImportacao($rowData, 'MENOR OU IGUAL', true);
-
-//INFORMAÇÕES DO PLANO
-        $key = 0;
-        $planof->valor_512 = $rowData[$key][0][9];
-        $planoj->valor_512 = $rowData[$key][0][20];
-
-        $key += 3;
-        $planof->valor_512k_2m = $rowData[$key][0][9];
-        $planoj->valor_512k_2m = $rowData[$key][0][20];
-
-        $key += 3;
-        $planof->valor_2m_12m = $rowData[$key][0][9];
-        $planoj->valor_2m_12m = $rowData[$key][0][20];
-
-        $key += 3;
-        $planof->valor_12m_34m = $rowData[$key][0][9];
-        $planoj->valor_12m_34m = $rowData[$key][0][20];
-
-        $key += 3;
-        $planof->valor_34m = $rowData[$key][0][9];
-        $planoj->valor_34m = $rowData[$key][0][20];
-
-        $planof->tipo_plano_fk = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-pessoa-plano', 'F');
-        $planoj->tipo_plano_fk = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-pessoa-plano', 'J');
-
-//INFORMAÇÕES DO PLANO Menor Maior
-        $key += 5;
-        $planof_mn->valor_menos_1m_ded = $rowData[$key][0][9];
-        $planoj_mn->valor_menos_1m_ded = $rowData[$key][0][20];
-
-        $key += 2;
-        $planof_mn->valor_menos_1m = $rowData[$key][0][9];
-        $planoj_mn->valor_menos_1m = $rowData[$key][0][20];
-
-        $key += 2;
-        $planof_mn->valor_maior_1m_ded = $rowData[$key][0][9];
-        $planoj_mn->valor_maior_1m_ded = $rowData[$key][0][20];
-
-        $key += 2;
-        $planof_mn->valor_maior_1m = $rowData[$key][0][9];
-        $planoj_mn->valor_maior_1m = $rowData[$key][0][20];
-
-        $planof_mn->tipo_plano_fk = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-pessoa-plano', 'F');
-        $planoj_mn->tipo_plano_fk = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-pessoa-plano', 'J');
-
-        $key += 4;
-        $planof->obs = $rowData[$key][0][2];
-        $planoj->obs = $rowData[$key][0][13];
-
-        //DISTRIBUIÇÃO DO QUANTITATIVO DE ACESSOS FÍSICOS EM SERVIÇO
-        $rowData = $this->retornaImportacao($rowData, 'ACESSO', true);
-        $key = 3;
-
-        for ($i = $key; $i < count($rowData); $i++) {
-
-
-            if (strpos(strtoupper($rowData[$i][0][1]), 'MUNICÍPIO') !== false) {
-                $empresa = new \app\modules\posoutorga\models\TabEmpresaMunicipioSearch();
-
-                if ($rowData[$i][0][4] && $rowData[$i][0][17]) {
-                    $empresa->municipio = $rowData[$i][0][4];
-
-                    $empresa->tecnologia_fk = strtoupper(str_replace(' ', '', trim(\projeto\Util::retiraAcento(\projeto\Util::tirarAcentos($rowData[$i][0][17])))));
-                    if ($empresa->tecnologia_fk) {
-                        $empresa->tecnologia_fk = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tecnologia', $empresa->tecnologia_fk, true);
+                    foreach ($indicador->getElementsByTagName('Conteudo') as $mun) {
+                        $capacidades[$mun->getAttribute('codmunicipio')] = $mun->getAttribute('valor');
                     }
+                    break;
 
-                    $i += 3;
-                    $empresa->uf = $rowData[$i][0][4];
-                    $empresa->cod_municipio_fk = substr($rowData[$i][0][10], 0, 6);
+                case 'IPL3' :
 
-                    if (!$empresa->cod_municipio_fk) {
-                        $nome = strtoupper(\projeto\Util::tirarAcentos($empresa->municipio));
-                        $uf = null;
-                        if ($empresa->uf) {
-                            $uf = "AND sgl_estado_fk='{$empresa->uf}'";
-                        }
-
-                        $municipio = \app\models\TabMunicipiosSearch::find()->where("(upper(txt_nome_sem_acento) ilike '%" . $nome . "%' or upper(txt_nome) ilike '%" . strtoupper($empresa->municipio) . "%') $uf")->asArray()->one();
-
-                        if ($municipio) {
-                            $empresa->cod_municipio_fk = $municipio['cod_municipio'];
+                    foreach ($indicador->getElementsByTagName('Municipio') as $mun) {
+                        foreach ($mun->getElementsByTagName('Pessoa') as $pes) {
+                            $ipl3[$mun->getAttribute('codmunicipio')][$pes->getAttribute('item')] = $pes->getElementsByTagName('Conteudo')->item(0)->getAttribute('valor');
                         }
                     }
-                    $i += 5;
-                    $planof_municipio = new \app\modules\posoutorga\models\TabPlanosSearch();
-                    $planof_municipio->valor_512 = $rowData[$i][0][4];
-                    $planof_municipio->valor_512k_2m = $rowData[$i][0][7];
-                    $planof_municipio->valor_2m_12m = $rowData[$i][0][10];
-                    $planof_municipio->valor_12m_34m = $rowData[$i][0][13];
-                    $planof_municipio->valor_34m = $rowData[$i][0][16];
+                    break;
 
-                    $planof_municipio->tipo_plano_fk = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-pessoa-plano', 'F');
-                    $arrayF = $planof_municipio->attributes;
-                    $arrayF['tipo_pessoa'] = 'Física';
 
-                    $i += 2;
-                    $planoj_municipio = new \app\modules\posoutorga\models\TabPlanosSearch();
-                    $planoj_municipio->valor_512 = $rowData[$i][0][4];
-                    $planoj_municipio->valor_512k_2m = $rowData[$i][0][7];
-                    $planoj_municipio->valor_2m_12m = $rowData[$i][0][10];
-                    $planoj_municipio->valor_12m_34m = $rowData[$i][0][13];
-                    $planoj_municipio->valor_34m = $rowData[$i][0][16];
-                    $planoj_municipio->tipo_plano_fk = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-pessoa-plano', 'J');
-                    $arrayJ = $planoj_municipio->attributes;
-                    $arrayJ['tipo_pessoa'] = 'Juridica';
+                case 'IAU1' :
+                    $sici->num_central_atendimento = $indicador->getElementsByTagName('Conteudo')->item(0)->getAttribute('valor');
+                    break;
 
-                    $totais = $empresa->calculaTotais($planof_municipio, $planoj_municipio);
 
-                    $totais['tipo_pessoa'] = 'Totais';
-                    $arrayF['total'] = $empresa->total_fisica;
-                    $arrayJ['total'] = $empresa->total_juridica;
+                case 'IPL1' :
 
-                    $i += 5;
-                    $empresa->capacidade_municipio = (int) $rowData[$i][0][7];
-                    $empresa->capacidade_servico = (int) $rowData[$i][0][20];
-                    $i += 4;
+                    $sici->setIPL1($indicador);
+                    break;
+                case 'IPL2' :
 
-                    $empresa->gridMunicipios[] = $arrayF;
-                    $empresa->gridMunicipios[] = $arrayJ;
-                    $empresa->gridMunicipios[] = $totais;
+                    $sici->setIPL2($indicador);
+                    break;
+                case 'IEM1' :
 
-                    $empresa->gridMunicipios = new \yii\data\ArrayDataProvider([
-                        'id' => 'grid_lista_acesso-' . $key,
-                        'allModels' => $empresa->gridMunicipios,
-                        'sort' => false,
-                        'pagination' => ['pageSize' => 10],
-                    ]);
+                    $sici->setIEM1($indicador);
+                    break;
+                case 'IEM2' :
 
-                    $empresa->cod_empresa_municipio = 'N_' . rand(100000000, 999999999);
+                    $sici->setIEM2($indicador);
+                    break;
+                case 'IEM3' :
+                    $sici->valor_consolidado = \projeto\Util::decimalFormatForBank($indicador->getElementsByTagName('Conteudo')->item(0)->getAttribute('valor'));
 
-                    $empresas[] = $empresa;
+                    break;
+                case 'IEM6' :
 
-                    $empresasSessao[$empresa->cod_empresa_municipio] = [$empresa->attributes, $planof_municipio->attributes, $planoj_municipio->attributes];
-                } else {
-                    //só de sacanagem..rsrs
-                    $i += 3;
-                    $i += 5;
-                    $i += 2;
-                    $i += 5;
-                    $i += 5;
+                    $sici->receita_bruta = \projeto\Util::decimalFormatForBank($indicador->getElementsByTagName('Conteudo')->item(0)->getAttribute('valor'));
+                   
+                    break;
+                case 'IEM7' :
+
+                    $sici->receita_liquida = \projeto\Util::decimalFormatToBank($indicador->getElementsByTagName('Conteudo')->item(0)->getAttribute('valor'));
+                    break;
+                case 'IEM8' :
+                    $sici->setIEM8($indicador);
+                    break;
+            }
+        }
+
+
+        foreach ($empresasSessao as $key => $emp) {
+            $empresa = new \app\modules\posoutorga\models\TabEmpresaMunicipioSearch();
+            $empresa->attributes = $emp[0];
+            $empresa->cod_empresa_municipio = $emp[0]['cod_empresa_municipio'];
+
+            foreach ($capacidades as $ckey => $cap) {
+
+
+                if (substr($ckey, 0, 6) == $empresa->cod_municipio_fk) {
+                    $empresa->capacidade_municipio = $cap;
                 }
             }
+
+            foreach ($ipl3 as $ikey => $ip) {
+
+                if (substr($ikey, 0, 6) == $empresa->cod_municipio_fk) {
+                    $empresa->total_fisica = $isp['F'];
+                    $empresa->total_juridica = $ip['J'];
+                }
+            }
+
+            $empresas[] = $empresa;
+            $planos = new \app\modules\posoutorga\models\TabPlanosSearch();
+            $planos->tipo_plano_fk = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-pessoa-plano', 'F');
+            $arrayF = $planos->attributes;
+            $arrayF['tipo_pessoa'] = 'Física';
+
+            $planos->tipo_plano_fk = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-pessoa-plano', 'J');
+            
+            $arrayJ = $planos->attributes;
+            $arrayJ['tipo_pessoa'] = 'Juridica';
+            
+            $totais = $empresa->calculaTotais($planos, $planos, false);
+            $totais['tipo_pessoa'] = 'Totais';
+            $totais['total'] = $empresa->total_fisica+ $empresa->total_juridica;
+            
+            $arrayF['total'] = $empresa->total_fisica;
+            $arrayJ['total'] = $empresa->total_juridica;
+
+            $empresa->gridMunicipios[] = $arrayF;
+            $empresa->gridMunicipios[] = $arrayJ;
+            $empresa->gridMunicipios[] = $totais;
+
+
+            $empresa->gridMunicipios = new \yii\data\ArrayDataProvider([
+                'id' => 'grid_lista_acesso-' . $key,
+                'allModels' => $empresa->gridMunicipios,
+                'sort' => false,
+                'pagination' => ['pageSize' => 10],
+            ]);
+
+
+
+            $empresasSessao[$empresa->cod_empresa_municipio] = [$empresa->attributes, $arrayF, $arrayJ];
         }
+
+        $contatoC = \app\models\TabContatoSearch::find()
+                ->where(['ativo' => true, 'tipo_tabela_fk' => $cliente->tableName(), 'chave_fk' => $cliente->cod_cliente, 'tipo' => \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-contato', 'C')])
+                ->orderBy('cod_contato desc')
+                ->one();
+
+        if (!$contatoC)
+            $contatoC = new \app\models\TabContatoSearch();
+
+
+        $contatoT = \app\models\TabContatoSearch::find()
+                ->where(['ativo' => true, 'tipo_tabela_fk' => $cliente->tableName(), 'chave_fk' => $cliente->cod_cliente, 'tipo' => \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-contato', 'C')])
+                ->orderBy('cod_contato desc')
+                ->one();
+
+        if (!$contatoT)
+            $contatoT = new \app\models\TabContatoSearch();
         \Yii::$app->session->set('empresasSessao', $empresasSessao);
 
         $cliente->validate();
-
+        $sici->tipo_entrada_fk = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-entrada', 'X');
         $sici->validate();
         $erro = [];
         if ($sici->errors) {
@@ -1539,6 +1388,7 @@ class SiciController extends Controller {
         if ($erro) {
             $this->session->setFlash('danger', 'Erro encontrados: <br/>' . implode('<br/>', $erro));
         }
+
         return compact('sici', 'cliente', 'contatoC', 'contatoT', 'planof', 'planof_mn', 'planoj', 'planoj_mn', 'empresas', 'anual', 'indicadores');
     }
 
@@ -1890,7 +1740,7 @@ class SiciController extends Controller {
         \Yii::$app->session->set('empresasSessao', $empresasSessao);
 
         $cliente->validate();
-
+        $sici->tipo_entrada_fk = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-entrada', 'E');
         $sici->validate();
         $erro = [];
         if ($sici->errors) {
@@ -2278,6 +2128,7 @@ class SiciController extends Controller {
     }
 
     public function actionVerificaCnpj() {
+
         $this->module->module->layout = null;
         $post = Yii::$app->request->post();
 
@@ -2299,6 +2150,15 @@ class SiciController extends Controller {
                     ->one();
 
             $dados['contatoC'] = $contatoC->contato;
+        } else {
+            $cliente = new \app\models\TabClienteSearch();
+            $cliente->cnpj = $post['dados'];
+            $cliente->buscaCliente();
+            $dados = $cliente->attributes;
+            $tel = explode('/', $cliente->dadosReceita->telefone);
+            if ($tel[0]) {
+                $dados['contatoT'] = trim($tel[0]);
+            }
         }
 
         return \yii\helpers\Json::encode($dados);
