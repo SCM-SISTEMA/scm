@@ -12,7 +12,10 @@ use yii\helpers\Url;
 
 $btSave = Html::submitButton('<i class="glyphicon glyphicon-ok"></i> ' . 'Salvar', ['name' => 'abrir', 'class' => 'btn btn-success btn-sm']);
 $btVoltar = Html::a('<i class="glyphicon glyphicon-arrow-left"></i> Voltar', Yii::$app->request->referrer, ['class' => 'btn btn-primary btn-sm']);
-$btXml = Html::a('<i class="fa fa-code"></i> Gerar XML', Url::to(['sici/gerar', 'cod_sici' => $importacao['sici']->cod_sici]), ['class' => 'btn btn-default btn-sm']);
+
+if (!$importacao['sici']->isNewRecord) {
+    $btXml = Html::a('<i class="fa fa-code"></i> Gerar XML', Url::to(['sici/gerar', 'cod_sici' => $importacao['sici']->cod_sici]), ['class' => 'btn btn-default btn-sm']);
+}
 ?>
 
 <div class="tab-acoes-form box box-default">
@@ -37,9 +40,9 @@ $btXml = Html::a('<i class="fa fa-code"></i> Gerar XML', Url::to(['sici/gerar', 
         <div class="box-footer">
             <h3 class="box-title"></h3>
             <div class="box-tools pull-right">
-            <?= $btSave; ?>
-            <?= $btXml ?>
-            <?= $btVoltar ?>
+                <?= $btSave; ?>
+                <?= $btXml ?>
+                <?= $btVoltar ?>
             </div>
         </div>
         <?php ActiveForm::end(); ?>

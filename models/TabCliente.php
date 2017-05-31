@@ -15,6 +15,13 @@ use Yii;
  * @property string $dt_exclusao
  * @property integer $cod_cliente
  * @property boolean $situacao
+ * @property string $fistel
+ * @property string $obs
+ * @property string $responsavel
+ *
+ * @property TabContrato[] $tabContrato
+ * @property TabSocios[] $tabSocios
+ * @property TabAtividade[] $tabAtividade
  */
 class TabCliente extends \projeto\db\ActiveRecord
 {
@@ -34,10 +41,12 @@ class TabCliente extends \projeto\db\ActiveRecord
         return [
             [['ie'], 'integer'],
             [['dt_inclusao', 'dt_exclusao'], 'safe'],
-             [['cnpj', 'fistel', 'razao_social'], 'required'],
             [['situacao'], 'boolean'],
+            [['obs'], 'string'],
             [['cnpj'], 'string', 'max' => 18],
-            [['fantasia', 'razao_social'], 'string', 'max' => 200]
+            [['fantasia', 'razao_social'], 'string', 'max' => 200],
+            [['fistel'], 'string', 'max' => 15],
+            [['responsavel'], 'string', 'max' => 150]
         ];
     }
 
@@ -56,7 +65,34 @@ class TabCliente extends \projeto\db\ActiveRecord
             'cod_cliente' => 'Cod Cliente',
             'situacao' => 'true - ativo
 false - inativo',
+            'fistel' => 'Fistel',
+            'obs' => 'Observação',
+            'responsavel' => 'Responsavel',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTabContrato()
+    {
+        return $this->hasMany(TabContrato::className(), ['cod_cliente_fk' => 'cod_cliente']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTabSocios()
+    {
+        return $this->hasMany(TabSocios::className(), ['cod_cliente_fk' => 'cod_cliente']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTabAtividade()
+    {
+        return $this->hasMany(TabAtividade::className(), ['cod_cliente_fk' => 'cod_cliente']);
     }
 
     /**

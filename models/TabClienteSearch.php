@@ -88,10 +88,11 @@ public $file;
         $ch = curl_init();
 
         $nu_cnpj = \projeto\Util::retiraCaracter($this->cnpj);
+        
         $url = "http://receitaws.com.br/v1/cnpj/" . $nu_cnpj;
         curl_setopt_array($ch, array
             (
-            CURLOPT_TIMEOUT=>28,
+            CURLOPT_TIMEOUT=>7,
             CURLOPT_URL => $url,
             CURLOPT_RETURNTRANSFER => TRUE
         ));

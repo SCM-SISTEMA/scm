@@ -16,6 +16,7 @@ use Yii;
  * @property string $orgao_uf
  * @property string $cpf
  * @property integer $cod_cliente_fk
+ * @property string $qual
  *
  * @property TabCliente $tabCliente
  */
@@ -41,7 +42,8 @@ class TabSocios extends \projeto\db\ActiveRecord
             [['profissao'], 'string', 'max' => 100],
             [['rg'], 'string', 'max' => 30],
             [['orgao_uf'], 'string', 'max' => 10],
-            [['cpf'], 'string', 'max' => 14]
+            [['cpf'], 'string', 'max' => 14],
+            [['qual'], 'string', 'max' => 159]
         ];
     }
 
@@ -60,6 +62,7 @@ class TabSocios extends \projeto\db\ActiveRecord
             'orgao_uf' => 'Orgao Uf',
             'cpf' => 'Cpf',
             'cod_cliente_fk' => 'Cod Cliente Fk',
+            'qual' => 'Qual',
         ];
     }
 

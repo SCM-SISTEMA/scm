@@ -373,8 +373,6 @@ class ClienteController extends \app\controllers\ClienteController {
                     $contatoC->attributes = $post['TabContatoSearchC'];
 
                     if (!$cli) {
-
-
                         $cliente->buscaCliente();
                         $cliente->save();
 
@@ -568,7 +566,7 @@ class ClienteController extends \app\controllers\ClienteController {
         $highestColumn = $sheet->getHighestColumn();
 
 
-        $transaction = Yii::$app->db->beginTransaction();
+
         try {
             for ($row = 2; $row <= $highestRow; ++$row) {
 
@@ -576,79 +574,208 @@ class ClienteController extends \app\controllers\ClienteController {
                 $rowDatas = $sheet->rangeToArray('A' . $row . ':' . $highestColumn . $row, NULL, TRUE, FALSE);
 
                 $cliente = TabClienteSearch::findOne(['cnpj' => $rowDatas[0][2]]);
-                if (!$cliente) {
+
+                if (!$cliente && $rowDatas[0][2]) {
+                    $transaction = Yii::$app->db->beginTransaction();
+
                     $cliente = new TabClienteSearch();
                     $cliente->cod_cliente = $rowDatas[0][0];
                     $cliente->cnpj = $rowDatas[0][2];
-                }
-                $cliente->razao_social = $rowDatas[0][1];
-                $cliente->setScenario('admin');
-                $cliente->save(false);
+                    $cliente->razao_social = $rowDatas[0][1];
+                    $cliente->fantasia = $rowDatas[0][1];
+                    $cliente->responsavel = $rowDatas[0][5];
 
-                $emails = explode(';', str_replace(';', ';', str_replace(',', ';', $rowDatas[0][3])));
-                if ($emails) {
-                    foreach ($emails as $email) {
+                    $cliente->buscaCliente();
+                    if (!$cliente->fantasia)
+                        $cliente->fantasia = $cliente->razao_social;
+                    $cliente->save(false);
 
-                        $contato = \app\models\TabContatoSearch::find()->where(['contato' => strtolower($email), 'chave_fk' => $cliente->cod_cliente, 'tipo_tabela_fk' => $cliente->tableName()])->one();
+                    $emails = explode(';', str_replace(';', ';', str_replace(',', ';', $rowDatas[0][3])));
+                    if ($emails) {
+                        foreach ($emails as $email) {
+
+                            $contato = \app\models\TabContatoSearch::find()->where(['contato' => strtolower($email), 'chave_fk' => $cliente->cod_cliente, 'tipo_tabela_fk' => $cliente->tableName()])->one();
+                            if (!$contato) {
+                                $contato = new \app\models\TabContatoSearch;
+                                $contato->tipo = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-contato', 'E');
+                                $contato->contato = strtolower($email);
+                                $contato->tipo_tabela_fk = $cliente->tableName();
+                                $contato->chave_fk = $cliente->cod_cliente;
+                                $contato->save();
+                            }
+                        }
+                    }
+
+
+                    $contatosT = explode(';', str_replace('/', ';', str_replace(':', ';', str_replace(',', ';', $rowDatas[0][4]))));
+
+                    if ($contatosT) {
+                        foreach ($contatosT as $contatos) {
+                            $tel = trim($contatos);
+
+                            $contato = \app\models\TabContatoSearch::find()->where(['contato' => strtolower($contatos), 'chave_fk' => $cliente->cod_cliente, 'tipo_tabela_fk' => $cliente->tableName()])->one();
+                            if (!$contato) {
+                                $contato = new \app\models\TabContatoSearch;
+                                $contato->tipo = ($tel[0] == 8 || $tel[0] == 9) ? \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-contato', 'C') : \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-contato', 'T');
+                                $contato->contato = strtolower($tel);
+                                $contato->tipo_tabela_fk = $cliente->tableName();
+                                $contato->chave_fk = $cliente->cod_cliente;
+                                $contato->save();
+                            }
+                        }
+                    }
+
+
+
+                    if (trim($rowDatas[0][6])) {
+                        $contato = \app\models\TabContatoSearch::find()->where(['contato' => strtolower($rowDatas[0][6]), 'chave_fk' => $cliente->cod_cliente, 'tipo_tabela_fk' => $cliente->tableName()])->one();
                         if (!$contato) {
+
                             $contato = new \app\models\TabContatoSearch;
-                            $contato->tipo = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-contato', 'E');
-                            $contato->contato = strtolower($email);
+                            $contato->tipo = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-contato', 'S');
+                            $contato->contato = strtolower($rowDatas[0][6]);
                             $contato->tipo_tabela_fk = $cliente->tableName();
                             $contato->chave_fk = $cliente->cod_cliente;
                             $contato->save();
                         }
                     }
-                }
 
 
-                $contatosT = explode(';', str_replace('/', ';', str_replace(':', ';', str_replace(',', ';', $rowDatas[0][4]))));
+                    if ($cliente->dadosReceita) {
+                        foreach ($cliente->dadosReceita->atividade_principal as $value) {
+                            $atividade = new \app\models\TabAtividadeSearch();
+                            $atividade->descricao = $value->text;
+                            $atividade->codigo = $value->code;
+                            $atividade->primario = true;
+                            $atividade->cod_cliente_fk = $cliente->cod_cliente;
+                            $atividade->save();
+                        }
+                        if ($cliente->dadosReceita->atividades_secundarias) {
+                            foreach ($cliente->dadosReceita->atividades_secundarias as $value) {
+                                $atividade = new \app\models\TabAtividadeSearch();
+                                $atividade->descricao = $value->text;
+                                $atividade->codigo = $value->code;
+                                $atividade->primario = false;
+                                $atividade->cod_cliente_fk = $cliente->cod_cliente;
+                                $atividade->save();
+                            }
+                        }
 
-                if ($contatosT) {
-                    foreach ($contatosT as $contatos) {
-                        $tel = trim($contatos);
 
-                        $contato = \app\models\TabContatoSearch::find()->where(['contato' => strtolower($contatos), 'chave_fk' => $cliente->cod_cliente, 'tipo_tabela_fk' => $cliente->tableName()])->one();
-                        if (!$contato) {
-                            $contato = new \app\models\TabContatoSearch;
-                            $contato->tipo = ($tel[0] == 8 || $tel[0] == 9) ? \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-contato', 'C') : \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-contato', 'T');
-                            $contato->contato = strtolower($tel);
-                            $contato->tipo_tabela_fk = $cliente->tableName();
-                            $contato->chave_fk = $cliente->cod_cliente;
-                            $contato->save();
+                        if ($cliente->dadosReceita->qsa) {
+                            foreach ($cliente->dadosReceita->qsa as $value) {
+                                $socio = new \app\modules\comercial\models\TabSociosSearch();
+                                $socio->qual = $value->qual;
+                                $socio->nome = $value->nome;
+                                $socio->cod_cliente_fk = $cliente->cod_cliente;
+                                $socio->save();
+                            }
+                        }
+                        $cliente->natureza_juridica = $cliente->dadosReceita->natureza_juridica;
+                        $cliente->razao_social = $cliente->dadosReceita->nome;
+                        $cliente->fantasia = $cliente->dadosReceita->fantasia;
+
+                        if ($cliente->dadosReceita->email) {
+                            $contato = \app\models\TabContatoSearch::find()->where(['contato' => $cliente->dadosReceita->email, 'chave_fk' => $cliente->cod_cliente, 'tipo_tabela_fk' => $cliente->tableName()])->one();
+                            if (!$contato) {
+                                $contato = new \app\models\TabContatoSearch;
+                                $contato->tipo = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-contato', 'E');
+                                $contato->contato = $cliente->dadosReceita->email;
+                                $contato->tipo_tabela_fk = $cliente->tableName();
+                                $contato->chave_fk = $cliente->cod_cliente;
+                                $contato->save();
+                            }
+                        }
+                        if ($cliente->dadosReceita->telefone) {
+                            $contato = \app\models\TabContatoSearch::find()->where(['contato' => $cliente->dadosReceita->telefone, 'chave_fk' => $cliente->cod_cliente, 'tipo_tabela_fk' => $cliente->tableName()])->one();
+                            if (!$contato) {
+                                $contato = new \app\models\TabContatoSearch;
+                                $contato->tipo = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-contato', 'T');
+                                $contato->contato = str_replace(' ', '', $cliente->dadosReceita->telefone);
+                                $contato->tipo_tabela_fk = $cliente->tableName();
+                                $contato->chave_fk = $cliente->cod_cliente;
+                                $contato->save();
+                            }
+                        }
+
+
+                        if ($cliente->dadosReceita->logradouro) {
+                            $endereco = \app\models\TabEnderecoSearch::find()->where(['logradouro' => $cliente->dadosReceita->logradouro, 'chave_fk' => $cliente->cod_cliente, 'tipo_tabela_fk' => $cliente->tableName()])->one();
+                            if (!$endereco) {
+                                $endereco = new \app\models\TabEnderecoSearch();
+                                $endereco->logradouro = $cliente->dadosReceita->logradouro;
+                                $endereco->cep = $cliente->dadosReceita->cep;
+                                $endereco->complemento = $cliente->dadosReceita->complemento;
+                                $endereco->numero = $cliente->dadosReceita->numero;
+                                $endereco->bairro = $cliente->dadosReceita->bairro;
+                                $endereco->buscaCep();
+                                $endereco->tipo_tabela_fk = $cliente->tableName();
+                                $endereco->chave_fk = $cliente->cod_cliente;
+
+
+                                if (!$endereco->dadosCep->ibge) {
+
+                                    $nome = trim(strtoupper(\projeto\Util::tirarAcentos($rowDatas[0][11])));
+                                    $uf = null;
+                                    if (trim($rowDatas[0][12])) {
+                                        $uf = "AND sgl_estado_fk='" . strtoupper(trim($rowDatas[0][12])) . "'";
+                                    }
+
+                                    $municipio = \app\models\TabMunicipiosSearch::find()->where("(upper(txt_nome_sem_acento) ilike $$%" . $nome . "%$$ or upper(txt_nome) ilike $$%" . $nome . "%$$ or upper(txt_nome) ilike $$%" . strtoupper($rowDatas[0][11]) . "%$$) $uf")->asArray()->one();
+
+                                    if ($municipio) {
+                                        $endereco->cod_municipio_fk = $municipio['cod_municipio'];
+                                    }
+                                } else {
+
+                                    $endereco->cod_municipio_fk = substr($endereco->dadosCep->ibge, 0, 6);
+                                }
+                                if ($endereco->validate()) {
+                                    $endereco->save();
+                                }
+                            }
+                        }
+                    } else {
+                        $endereco = new \app\models\TabEnderecoSearch();
+                        $endereco->logradouro = $rowDatas[0][9];
+                        $endereco->cep = $rowDatas[0][13];
+                        $endereco->bairro = $rowDatas[0][10];
+                        $endereco->buscaCep();
+                        $endereco->tipo_tabela_fk = $cliente->tableName();
+                        $endereco->chave_fk = $cliente->cod_cliente;
+
+
+                        if (!$endereco->dadosCep->ibge) {
+
+                            $nome = trim(strtoupper(\projeto\Util::tirarAcentos($rowDatas[0][11])));
+                            $uf = null;
+                            if (trim($rowDatas[0][12])) {
+                                $uf = "AND sgl_estado_fk='" . strtoupper(trim($rowDatas[0][12])) . "'";
+                            }
+                            $municipio = \app\models\TabMunicipiosSearch::find()->where("(upper(txt_nome_sem_acento) ilike $$%" . $nome . "%$$ or upper(txt_nome) ilike $$%" . $nome . "%$$ or upper(txt_nome) ilike $$%" . strtoupper($rowDatas[0][11]) . "%$$) $uf")->asArray()->one();
+
+                            if ($municipio) {
+                                $endereco->cod_municipio_fk = $municipio['cod_municipio'];
+                            }
+                        } else {
+
+                            $endereco->cod_municipio_fk = substr($endereco->dadosCep->ibge, 0, 6);
+                        }
+                        if ($endereco->validate()) {
+                            $endereco->save();
                         }
                     }
+
+                    $cliente->save();
+
+                    $transaction->commit();
                 }
-
-                $cliente->responsavel = $rowDatas[0][5];
-
-                if (trim($rowDatas[0][5])) {
-                    $contato = \app\models\TabContatoSearch::find()->where(['contato' => strtolower($rowDatas[0][5]), 'chave_fk' => $cliente->cod_cliente, 'tipo_tabela_fk' => $cliente->tableName()])->one();
-                    if (!$contato) {
-
-                        $contato = new \app\models\TabContatoSearch;
-                        $contato->tipo = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-contato', 'S');
-                        $contato->contato = strtolower($rowDatas[0][5]);
-                        $contato->tipo_tabela_fk = $cliente->tableName();
-                        $contato->chave_fk = $cliente->cod_cliente;
-                        $contato->save();
-                        print_r($contato->attributes);
-                        exit;
-                    }
-                }
-                $rowData[] = $rowDatas;
-                print_r('sdaf');
-                exit;
-                if ($row == 600) {
-                    break;
-                }
-
-                $transaction->rollBack();
-
-                $this->session->setFlashProjeto('success', 'create');
-
-                return $this->redirect(['update', 'id' => $sici->cod_sici]);
             }
+
+
+            $this->session->setFlashProjeto('success', 'create');
+
+            return $this->redirect(['importar']);
         } catch (Exception $e) {
             $transaction->rollBack();
             $this->session->setFlash('danger', 'Erro na importação - ' . $e->getMessage());
@@ -656,6 +783,118 @@ class ClienteController extends \app\controllers\ClienteController {
 
 
         return compact('cliente');
+    }
+
+    public function actionVerificaCnpj() {
+
+        $this->module->module->layout = null;
+        $post = Yii::$app->request->post();
+
+        $cliente = \app\models\TabClienteSearch::findOne(['cnpj' => $post['dados']]);
+
+        if ($cliente) {
+            
+        } else {
+            $cliente = new \app\models\TabClienteSearch();
+            $cliente->cnpj = $post['dados'];
+            \Yii::$app->session->set('endereco', []);
+            \Yii::$app->session->set('contato', []);
+            $cliente->buscaCliente();
+            $grids = $gridCont = $gridEnd = [];
+
+            if ($cliente->dadosReceita) {
+
+                $this->dadosCliente($cliente, $grids);
+
+                if ($grids['itens'])
+                    $gridCont = ['grid' => $this->renderAjax('@app/views/contato/_grid_cliente', ['msg' => $msg])];
+
+                if ($grids['itensE'])
+                    $gridEnd = ['grid' => $this->renderAjax('@app/views/endereco/_grid_cliente', ['msg' => $msg])];
+            }
+        }
+        $cliente = $cliente->attributes;
+        return \yii\helpers\Json::encode(['cliente' => $cliente, 'gridCont' => $gridCont, 'gridEnd' => $gridEnd]);
+    }
+
+    public function dadosCliente($cliente, &$grids) {
+
+        if ($cliente->dadosReceita->email) {
+            $emails = explode('/', $cliente->dadosReceita->email);
+            foreach ($emails as $ema) {
+
+                $contato = new \app\models\TabContatoSearch;
+                $contato->tipo = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-contato', 'E');
+                $contato->contato = $ema;
+                $contato->ativo = 1;
+                $contato->cod_contato = 'novo-' . rand('100000000', '999999999');
+                $contato->setScenario('email');
+                $itens[$contato->cod_contato] = $contato->attributes + ['contato_email' => $ema];
+            }
+        }
+
+
+
+        if ($cliente->dadosReceita->telefone) {
+            $telefones = explode('/', $cliente->dadosReceita->telefone);
+            foreach ($telefones as $tel) {
+
+                $contato = new \app\models\TabContatoSearch;
+                $contato->tipo = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-contato', 'T');
+                $contato->contato = str_replace(' ', '', $tel);
+                $contato->ativo = 1;
+                $contato->cod_contato = 'novo-' . rand('100000000', '999999999');
+                $contato->setScenario('telefone');
+                $itens[$contato->cod_contato] = $contato->attributes + ['contato_email' => $contato->contato_email];
+            }
+        }
+
+        \Yii::$app->session->set('contato', $itens);
+
+
+        if ($cliente->dadosReceita->logradouro) {
+            $itensE = [];
+            $endereco = new \app\models\TabEnderecoSearch();
+            $endereco->logradouro = $cliente->dadosReceita->logradouro;
+            $endereco->cep = $cliente->dadosReceita->cep;
+            $endereco->complemento = $cliente->dadosReceita->complemento;
+            $endereco->uf = $cliente->dadosReceita->uf;
+            $endereco->numero = $cliente->dadosReceita->numero;
+            $endereco->bairro = $cliente->dadosReceita->bairro;
+            $endereco->correspondencia = 1;
+            $endereco->cod_endereco = 'novo-' . rand('100000000', '999999999');
+            if ($endereco->cep) {
+                $endereco->buscaCep();
+            }
+
+            if (!$endereco->dadosCep->ibge) {
+
+                $nome = strtoupper(\projeto\Util::tirarAcentos($cliente->dadosReceita->municipio));
+
+                $uf = null;
+                if ($cliente->dadosReceita->uf) {
+                    $uf = "AND sgl_estado_fk='{$cliente->dadosReceita->uf}'";
+                }
+
+                $municipio = \app\models\TabMunicipiosSearch::find()->where("(upper(txt_nome) ilike '%" . $nome . "%' or upper(txt_nome) ilike '%" . strtoupper($cliente->dadosReceita->municipio) . "%') $uf")->asArray()->one();
+
+                if ($municipio) {
+                    $endereco->cod_municipio_fk = $municipio['cod_municipio'];
+                }
+            } else {
+                $endereco->cod_municipio_fk = substr($endereco->dadosCep->ibge, 0, 6);
+            }
+
+            $endereco->cod_endereco = 'novo-' . rand('100000000', '999999999');
+            $endereco->ativo = 1;
+            $endereco->municipio = \app\models\TabMunicipiosSearch::findOneAsArray(['cod_municipio' => $endereco->cod_municipio_fk])['txt_nome'];
+            $itensE[$endereco->cod_endereco] = $endereco->attributes + ['uf' => $endereco->uf, 'municipio' => $endereco->municipio];
+
+            \Yii::$app->session->set('endereco', $itensE);
+
+
+            $grids = ['itens' => $itens, 'itensE' => $itensE];
+        }
     }
 
 }

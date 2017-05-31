@@ -6,7 +6,41 @@ Projeto.prototype.cliente = new (Projeto.extend({
         this.incluirNovo('Contato');
         this.carregaMunicipio();
         this.alterarContato();
+        this.verificaCnpj();
     },
+    verificaCnpj: function () {
+        $('#tabclientesearch-cnpj').blur(function ( ) {
+
+            var urlInclusao = $('base').attr('href') + 'admin/cliente/verifica-cnpj';
+
+            var selecao = {dados: $('#tabclientesearch-cnpj').val()};
+
+            projeto.ajax.post(urlInclusao, selecao, function (response) {
+                var ds = $.parseJSON(response);
+                if (ds.cliente.razao_social) {
+                    
+                    $('#tabclientesearch-razao_social').val(ds.cliente.razao_social);
+                    if (!$('#tabclientesearch-fistel').val()) {
+                        $('#tabclientesearch-fistel').val(ds.cliente.fistel);
+                    }
+                    $('#tabclientesearch-fantasia').val(ds.cliente.fantasia);
+                    $('#divGridEndereco').html(ds.gridEnd.grid);
+                    $('#divGridContato').html(ds.gridCont.grid);
+                } else {
+                    $('#tabclientesearch-razao_social').val('');
+
+                    $('#tabclientesearch-fistel').val('');
+
+                    $('#tabclientesearch-fantasia').val('');
+                    $('#divGridEndereco').html('');
+                    $('#divGridContato').html('');
+                }
+            });
+
+
+        });
+    },
+
     incluirNovo: function (valor) {
         $('#incluir' + valor).click(function () {
 
@@ -133,6 +167,7 @@ Projeto.prototype.cliente = new (Projeto.extend({
             $('#tabenderecosearch-correspondencia').val('');
             $('#tabenderecosearch-cod_municipio_fk').val('');
             $('#tabenderecosearch-uf').val('');
+            $('#tabenderecosearch-bairro').val('');
         } else {
             $('#tabcontatosearch-cod_contato').val('');
             $('#tabcontatosearch-contato').val('');
@@ -155,6 +190,7 @@ Projeto.prototype.cliente = new (Projeto.extend({
             $('#tabenderecosearch-complemento').val(dados.complemento);
             $('#tabenderecosearch-cep').val(dados.cep);
             $('#tabenderecosearch-correspondencia').val(dados.correspondencia);
+            $('#tabenderecosearch-bairro').val(dados.bairro);
             Projeto.prototype.cliente.buscaMunicipio(dados.uf);
 
             setTimeout(function () {

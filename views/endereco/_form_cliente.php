@@ -15,7 +15,7 @@ Modal::begin([
     'header' => '<h3><div id="tituloInfra">Incluir Endereço</div><h3>',
     'id' => 'modalEndereco',
     'closeButton' => false,
-    'size' => 'modal-lg',
+    'size' => 'modal-md',
     'footer' =>
     Html::a('Fechar', '#', ['class' => 'btn btn-default', 'id' => 'botaoFechar', 'data-dismiss' => 'modal'])
     . PHP_EOL .
@@ -35,17 +35,16 @@ $model = new app\models\TabEnderecoSearch();
 <div id="formEndereco">
     <?= $form->field($model, 'cod_endereco')->hiddenInput(['maxlength' => true])->label(false); ?>
     <div class='row'>
-        <div class='col-lg-6'>
-                    <?=
-        $form->field($model, 'cep')->widget(\yii\widgets\MaskedInput::className(), [
-            'mask' => '99.999-999',
-        ])->textInput(['class' => 'form-control','maxlength' => true]);
-        ?>
-           
+        <div class='col-lg-4'>
+            <?=
+            $form->field($model, 'cep')->widget(\yii\widgets\MaskedInput::className(), [
+                'mask' => '99.999-999',
+            ])->textInput(['class' => 'form-control', 'maxlength' => true]);
+            ?>
+
         </div>
-    </div>
-    <div class='row'>
-        <div class='col-lg-6'>
+
+        <div class='col-lg-4'>
             <?=
             $form->field($model, 'uf')->dropDownList(
                     ArrayHelper::map(
@@ -55,7 +54,7 @@ $model = new app\models\TabEnderecoSearch();
             ]);
             ?>
         </div>
-        <div class='col-lg-6'>
+        <div class='col-lg-4'>
             <?=
             $form->field($model, 'cod_municipio_fk')->dropDownList(
                     [], ['prompt' => $this->app->params['txt-prompt-select'],
@@ -65,17 +64,22 @@ $model = new app\models\TabEnderecoSearch();
         </div>
     </div>
     <div class='row'>
-        <div class='col-lg-12'>
+        <div class='col-lg-6'>
             <?= $form->field($model, 'logradouro')->textInput(['maxlength' => true]) ?>
         </div>
-    </div>
-    <div class='row'>
         <div class='col-lg-6'>
             <?= $form->field($model, 'numero')->textInput(['maxlength' => true]) ?>
         </div>
+    </div>
+    <div class='row'>
+
 
         <div class='col-lg-6'>
             <?= $form->field($model, 'complemento')->textInput(['maxlength' => true]) ?>
+        </div>
+
+        <div class='col-lg-6'>
+            <?= $form->field($model, 'bairro')->textInput(['maxlength' => true]) ?>
         </div>
     </div>
 
@@ -84,7 +88,7 @@ $model = new app\models\TabEnderecoSearch();
             <?= $form->field($model, 'correspondencia')->checkbox() ?>
         </div>
     </div>
-     <div class='row' id="ativo-check">
+    <div class='row' id="ativo-check">
         <div class='col-lg-6'>
             <?= $form->field($model, 'ativo')->checkbox() ?>
         </div>

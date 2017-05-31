@@ -117,5 +117,7 @@ class TabContatoSearch extends TabContato {
     public function getTabCliente() {
         return $this->hasOne(TabClienteSearch::className(), ['cod_cliente' => 'cod_cliente_fk']);
     }
+    
+    
 
 }
