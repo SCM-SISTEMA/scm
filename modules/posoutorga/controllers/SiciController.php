@@ -199,9 +199,12 @@ class SiciController extends Controller {
 
                     $contrato = new \app\modules\comercial\models\TabContratoSearch();
                     $contrato->cod_cliente_fk = $cliente->cod_cliente;
+                    $contrato->tipo_contrato_fk = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-contrato', 'pos-outorga-flex-scm');
                     $contrato->save();
+                    
                     $tipo_contrato = new \app\modules\comercial\models\TabTipoContrato();
                     $tipo_contrato->cod_contrato_fk = $contrato->cod_contrato;
+                    $tipo_contrato->tipo_produto_fk = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-produto', 'CM');
                     $tipo_contrato->save();
 
                     $sici->cod_tipo_contrato_fk = $tipo_contrato->cod_tipo_contrato;
@@ -955,11 +958,12 @@ class SiciController extends Controller {
                         $cliente->save();
 
                         $contrato = new \app\modules\comercial\models\TabContratoSearch();
-                        $contrato->tipo_contrato_fk = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-produto', 'CM');
+                        $contrato->tipo_contrato_fk = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-contrato', 'pos-outorga-flex-scm');
                         $contrato->cod_cliente_fk = $cliente->cod_cliente;
                         $contrato->save();
                         $tipo_contrato = new \app\modules\comercial\models\TabTipoContrato();
                         $tipo_contrato->cod_contrato_fk = $contrato->cod_contrato;
+                        $tipo_contrato->tipo_produto_fk = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-produto', 'CM');
                         $tipo_contrato->save();
                         $sici->cod_tipo_contrato_fk = $tipo_contrato->cod_tipo_contrato;
                         $sici->save();
@@ -1072,16 +1076,17 @@ class SiciController extends Controller {
 
                         if (!$contrato) {
                             $contrato = new \app\modules\comercial\models\TabContratoSearch();
-                            $contrato->tipo_contrato_fk = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-produto', 'CM');
+                            $contrato->tipo_contrato_fk = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-contrato', 'pos-outorga-flex-scm');
                             $contrato->cod_cliente_fk = $cliente->cod_cliente;
                             $contrato->save();
                         }
 
                         $tipo_contrato = \app\modules\comercial\models\TabTipoContrato::find()->where(['cod_contrato_fk' => $contrato->cod_contrato])->one();
-
-                        if (!$contrato) {
+                        
+                        if (!$tipo_contrato) {
                             $tipo_contrato = new \app\modules\comercial\models\TabTipoContrato();
                             $tipo_contrato->cod_contrato_fk = $contrato->cod_contrato;
+                            $tipo_contrato->tipo_produto_fk = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-produto', 'CM');
                             $tipo_contrato->save();
                         }
                         $sici->cod_tipo_contrato_fk = $tipo_contrato->cod_tipo_contrato;
@@ -1495,12 +1500,12 @@ class SiciController extends Controller {
 
         $rowData = $this->retornaImportacao($rowData, 'INFORMACOES DA EMPRESA');
         $key = 4;
-        $cliente->razao_social = $rowData[$key][0][2];
-        $sici->responsavel = $rowData[$key][0][9];
-        $contatoT->contato = $rowData[$key][0][16];
+        $cliente->razao_social = trim($rowData[$key][0][2]);
+        $sici->responsavel = trim($rowData[$key][0][9]);
+        $contatoT->contato = trim($rowData[$key][0][16]);
         $contatoT->tipo = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-contato', 'T');
         $key += 5;
-        $cliente->cnpj = \projeto\Util::retiraCaracter($rowData[$key][0][2]);
+        $cliente->cnpj = \projeto\Util::retiraCaracter(trim($rowData[$key][0][2]));
         $cliente->cnpj = str_pad($cliente->cnpj, 14, '0', 0);
         $dadosCliente = \app\models\TabClienteSearch::find()->where("cnpj = '{$cliente->cnpj}' "
                         . " OR replace(replace(replace(cnpj, '.', ''), '-', ''), '/', '')='{$cliente->cnpj}'")->one();
@@ -1513,12 +1518,12 @@ class SiciController extends Controller {
             }
         }
 
-        $dt_referencia = ( \PHPExcel_Style_NumberFormat::toFormattedString($rowData[$key][0][9], 'MM/YYYY'));
+        $dt_referencia = ( \PHPExcel_Style_NumberFormat::toFormattedString(trim($rowData[$key][0][9]), 'MM/YYYY'));
 
 
         $sici->mes_ano_referencia = $dt_referencia;
 
-        $contatoC->contato = $rowData[$key][0][16];
+        $contatoC->contato = trim($rowData[$key][0][16]);
         $contatoC->tipo = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-contato', 'C');
         ;
 
@@ -1526,45 +1531,45 @@ class SiciController extends Controller {
         $rowData = $this->retornaImportacao($rowData, 'RECEITA');
 //INFORMAÇÕES FINANCEIRAS
         $key = 2;
-        $sici->legenda = $rowData[$key][0][9];
+        $sici->legenda = trim($rowData[$key][0][9]);
         $key += 2;
 
-        if (!$rowData[$key][0][1])
+        if (!trim($rowData[$key][0][1]))
             $key += 1;
         $anual = false;
         $sici->tipo_sici_fk = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-sici', 'M');
-        if (strpos(strtoupper($rowData[$key][0][1]), 'BRUTA') === false) {
+        if (strpos(strtoupper(trim($rowData[$key][0][1])), 'BRUTA') === false) {
             $anual = true;
-            $sici->valor_consolidado = $rowData[$key][0][9];
+            $sici->valor_consolidado = trim($rowData[$key][0][9]);
             $sici->tipo_sici_fk = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-sici', 'S');
             $key += 3;
         }
 
 
 
-        $sici->receita_bruta = $rowData[$key][0][9];
-        $sici->despesa_operacao_manutencao = $rowData[$key][0][20];
+        $sici->receita_bruta = trim($rowData[$key][0][9]);
+        $sici->despesa_operacao_manutencao = trim($rowData[$key][0][20]);
         $key += 3;
-        $mult = ((100 * $rowData[$key][0][7]) > 100) ? 1 : 100;
+        $mult = ((100 * trim($rowData[$key][0][7])) > 100) ? 1 : 100;
 
-        $sici->aliquota_nacional = ($mult * $rowData[$key][0][7]);
+        $sici->aliquota_nacional = ($mult * trim($rowData[$key][0][7]));
 
-        $sici->despesa_publicidade = $rowData[$key][0][20];
-
-        $key += 3;
-        $sici->receita_icms = ($mult * $rowData[$key][0][7]);
-        $sici->despesa_vendas = $rowData[$key][0][20];
-        $key += 3;
-        $sici->receita_pis = ($mult * $rowData[$key][0][7]);
-        $sici->despesa_link = $rowData[$key][0][20];
+        $sici->despesa_publicidade = trim($rowData[$key][0][20]);
 
         $key += 3;
-        $sici->receita_confins = ($mult * $rowData[$key][0][7]);
+        $sici->receita_icms = ($mult * trim($rowData[$key][0][7]));
+        $sici->despesa_vendas = trim($rowData[$key][0][20]);
+        $key += 3;
+        $sici->receita_pis = ($mult * trim($rowData[$key][0][7]));
+        $sici->despesa_link = trim($rowData[$key][0][20]);
+
+        $key += 3;
+        $sici->receita_confins = ($mult * trim($rowData[$key][0][7]));
 
         $key += 3;
         $key += 5;
-        $sici->obs_receita = $rowData[$key][0][2];
-        $sici->obs_despesa = $rowData[$key][0][13];
+        $sici->obs_receita = trim($rowData[$key][0][2]);
+        $sici->obs_despesa = trim($rowData[$key][0][13]);
         $renda_bruta = \projeto\Util::decimalFormatForBank($sici->receita_bruta);
         $sici->total_aliquota = \projeto\Util::decimalFormatToBank($renda_bruta * \projeto\Util::decimalFormatForBank($sici->aliquota_nacional) / 100);
         $sici->total_icms = \projeto\Util::decimalFormatToBank($renda_bruta * ( \projeto\Util::decimalFormatForBank($sici->receita_icms) / 100) / 100);
@@ -1583,11 +1588,11 @@ class SiciController extends Controller {
 
             if ($rowDataA) {
                 $key = 3;
-                $sici->qtd_funcionarios_fichados = $rowDataA[$key][0][7];
-                $sici->qtd_funcionarios_terceirizados = $rowDataA[$key][0][19];
+                $sici->qtd_funcionarios_fichados = trim($rowDataA[$key][0][7]);
+                $sici->qtd_funcionarios_terceirizados = trim($rowDataA[$key][0][19]);
 
                 $key += 3;
-                $sici->num_central_atendimento = $rowDataA[$key][0][14];
+                $sici->num_central_atendimento = trim($rowDataA[$key][0][14]);
             }
 //INFORMAÇÕES ADICIONAIS - INDICADORES
             $rowDataA = $this->retornaImportacao($rowDataA, 'INDICADORES', TRUE);
@@ -1598,35 +1603,35 @@ class SiciController extends Controller {
                 $indicadores = true;
                 $key = 4;
 
-                $sici->total_fibra_prestadora = $rowDataA[$key][0][7];
-                $sici->total_fibra_terceiros = $rowDataA[$key][0][19];
+                $sici->total_fibra_prestadora = trim($rowDataA[$key][0][7]);
+                $sici->total_fibra_terceiros = trim($rowDataA[$key][0][19]);
 
                 $key += 3;
-                $sici->total_fibra_crescimento_prop_prestadora = $rowDataA[$key][0][7];
-                $sici->total_fibra_crescimento_prop_terceiros = $rowDataA[$key][0][19];
+                $sici->total_fibra_crescimento_prop_prestadora = trim($rowDataA[$key][0][7]);
+                $sici->total_fibra_crescimento_prop_terceiros = trim($rowDataA[$key][0][19]);
 
                 $key += 5;
-                $sici->total_fibra_implantada_prestadora = $rowDataA[$key][0][7];
-                $sici->total_fibra_implantada_terceiros = $rowDataA[$key][0][19];
+                $sici->total_fibra_implantada_prestadora = trim($rowDataA[$key][0][7]);
+                $sici->total_fibra_implantada_terceiros = trim($rowDataA[$key][0][19]);
 
                 $key += 3;
-                $sici->total_crescimento_prestadora = $rowDataA[$key][0][7];
-                $sici->total_crescimento_terceiros = $rowDataA[$key][0][19];
+                $sici->total_crescimento_prestadora = trim($rowDataA[$key][0][7]);
+                $sici->total_crescimento_terceiros = trim($rowDataA[$key][0][19]);
 
 
                 $key += 5;
-                $sici->total_marketing_propaganda = $rowDataA[$key][0][19];
+                $sici->total_marketing_propaganda = trim($rowDataA[$key][0][19]);
 
                 $key += 3;
-                $sici->aplicacao_equipamento = $rowDataA[$key][0][7];
-                $sici->aplicacao_software = $rowDataA[$key][0][19];
+                $sici->aplicacao_equipamento = trim($rowDataA[$key][0][7]);
+                $sici->aplicacao_software = trim($rowDataA[$key][0][19]);
 
                 $key += 3;
-                $sici->total_pesquisa_desenvolvimento = $rowDataA[$key][0][7];
-                $sici->aplicacao_servico = $rowDataA[$key][0][19];
+                $sici->total_pesquisa_desenvolvimento = trim($rowDataA[$key][0][7]);
+                $sici->aplicacao_servico = trim($rowDataA[$key][0][19]);
 
                 $key += 3;
-                $sici->aplicacao_callcenter = $rowDataA[$key][0][7];
+                $sici->aplicacao_callcenter = trim($rowDataA[$key][0][7]);
 
                 $sici->total_planta = \projeto\Util::decimalFormatToBank(\projeto\Util::decimalFormatForBank($sici->total_marketing_propaganda) +
                                 \projeto\Util::decimalFormatForBank($sici->aplicacao_equipamento) +
@@ -1637,11 +1642,11 @@ class SiciController extends Controller {
 //QUANTITATIVO DE FUNCIONÁRIOS
 
                 $key += 5;
-                $sici->faturamento_de = $rowDataA[$key][0][7];
-                $sici->faturamento_industrial = $rowDataA[$key][0][19];
+                $sici->faturamento_de = trim($rowDataA[$key][0][7]);
+                $sici->faturamento_industrial = trim($rowDataA[$key][0][19]);
 
                 $key += 3;
-                $sici->faturamento_adicionado = $rowDataA[$key][0][7];
+                $sici->faturamento_adicionado = trim($rowDataA[$key][0][7]);
                 $rowData = $rowDataA;
             }
         }
@@ -1650,51 +1655,51 @@ class SiciController extends Controller {
 
 //INFORMAÇÕES DO PLANO
         $key = 0;
-        $planof->valor_512 = $rowData[$key][0][9];
-        $planoj->valor_512 = $rowData[$key][0][20];
+        $planof->valor_512 = trim($rowData[$key][0][9]);
+        $planoj->valor_512 = trim($rowData[$key][0][20]);
 
         $key += 3;
-        $planof->valor_512k_2m = $rowData[$key][0][9];
-        $planoj->valor_512k_2m = $rowData[$key][0][20];
+        $planof->valor_512k_2m = trim($rowData[$key][0][9]);
+        $planoj->valor_512k_2m = trim($rowData[$key][0][20]);
 
         $key += 3;
-        $planof->valor_2m_12m = $rowData[$key][0][9];
-        $planoj->valor_2m_12m = $rowData[$key][0][20];
+        $planof->valor_2m_12m = trim($rowData[$key][0][9]);
+        $planoj->valor_2m_12m = trim($rowData[$key][0][20]);
 
         $key += 3;
-        $planof->valor_12m_34m = $rowData[$key][0][9];
-        $planoj->valor_12m_34m = $rowData[$key][0][20];
+        $planof->valor_12m_34m = trim($rowData[$key][0][9]);
+        $planoj->valor_12m_34m = trim($rowData[$key][0][20]);
 
         $key += 3;
-        $planof->valor_34m = $rowData[$key][0][9];
-        $planoj->valor_34m = $rowData[$key][0][20];
+        $planof->valor_34m = trim($rowData[$key][0][9]);
+        $planoj->valor_34m = trim($rowData[$key][0][20]);
 
         $planof->tipo_plano_fk = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-pessoa-plano', 'F');
         $planoj->tipo_plano_fk = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-pessoa-plano', 'J');
 
 //INFORMAÇÕES DO PLANO Menor Maior
         $key += 5;
-        $planof_mn->valor_menos_1m_ded = $rowData[$key][0][9];
-        $planoj_mn->valor_menos_1m_ded = $rowData[$key][0][20];
+        $planof_mn->valor_menos_1m_ded = trim($rowData[$key][0][9]);
+        $planoj_mn->valor_menos_1m_ded = trim($rowData[$key][0][20]);
 
         $key += 2;
-        $planof_mn->valor_menos_1m = $rowData[$key][0][9];
-        $planoj_mn->valor_menos_1m = $rowData[$key][0][20];
+        $planof_mn->valor_menos_1m = trim($rowData[$key][0][9]);
+        $planoj_mn->valor_menos_1m = trim($rowData[$key][0][20]);
 
         $key += 2;
-        $planof_mn->valor_maior_1m_ded = $rowData[$key][0][9];
-        $planoj_mn->valor_maior_1m_ded = $rowData[$key][0][20];
+        $planof_mn->valor_maior_1m_ded = trim($rowData[$key][0][9]);
+        $planoj_mn->valor_maior_1m_ded = trim($rowData[$key][0][20]);
 
         $key += 2;
-        $planof_mn->valor_maior_1m = $rowData[$key][0][9];
-        $planoj_mn->valor_maior_1m = $rowData[$key][0][20];
+        $planof_mn->valor_maior_1m = trim($rowData[$key][0][9]);
+        $planoj_mn->valor_maior_1m = trim($rowData[$key][0][20]);
 
         $planof_mn->tipo_plano_fk = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-pessoa-plano', 'F');
         $planoj_mn->tipo_plano_fk = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-pessoa-plano', 'J');
 
         $key += 4;
-        $planof->obs = $rowData[$key][0][2];
-        $planoj->obs = $rowData[$key][0][13];
+        $planof->obs = trim($rowData[$key][0][2]);
+        $planoj->obs = trim($rowData[$key][0][13]);
 
         //DISTRIBUIÇÃO DO QUANTITATIVO DE ACESSOS FÍSICOS EM SERVIÇO
         $rowData = $this->retornaImportacao($rowData, 'ACESSO', true);
@@ -1703,20 +1708,20 @@ class SiciController extends Controller {
         for ($i = $key; $i < count($rowData); $i++) {
 
 
-            if (strpos(strtoupper($rowData[$i][0][1]), 'MUNICÍPIO') !== false) {
+            if (strpos(strtoupper(trim($rowData[$i][0][1])), 'MUNICÍPIO') !== false) {
                 $empresa = new \app\modules\posoutorga\models\TabEmpresaMunicipioSearch();
 
-                if ($rowData[$i][0][4] && $rowData[$i][0][17]) {
-                    $empresa->municipio = $rowData[$i][0][4];
+                if (trim($rowData[$i][0][4]) && trim($rowData[$i][0][17])) {
+                    $empresa->municipio = trim($rowData[$i][0][4]);
 
-                    $empresa->tecnologia_fk = strtoupper(str_replace(' ', '', trim(\projeto\Util::retiraAcento(\projeto\Util::tirarAcentos($rowData[$i][0][17])))));
+                    $empresa->tecnologia_fk = strtoupper(str_replace(' ', '', trim(\projeto\Util::retiraAcento(\projeto\Util::tirarAcentos(trim($rowData[$i][0][17]))))));
                     if ($empresa->tecnologia_fk) {
                         $empresa->tecnologia_fk = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tecnologia', $empresa->tecnologia_fk, true);
                     }
 
                     $i += 3;
-                    $empresa->uf = $rowData[$i][0][4];
-                    $empresa->cod_municipio_fk = substr($rowData[$i][0][10], 0, 6);
+                    $empresa->uf = trim($rowData[$i][0][4]);
+                    $empresa->cod_municipio_fk = substr(trim($rowData[$i][0][10]), 0, 6);
 
                     if (!$empresa->cod_municipio_fk) {
                         $nome = strtoupper(\projeto\Util::tirarAcentos($empresa->municipio));
@@ -1733,11 +1738,11 @@ class SiciController extends Controller {
                     }
                     $i += 5;
                     $planof_municipio = new \app\modules\posoutorga\models\TabPlanosSearch();
-                    $planof_municipio->valor_512 = $rowData[$i][0][4];
-                    $planof_municipio->valor_512k_2m = $rowData[$i][0][7];
-                    $planof_municipio->valor_2m_12m = $rowData[$i][0][10];
-                    $planof_municipio->valor_12m_34m = $rowData[$i][0][13];
-                    $planof_municipio->valor_34m = $rowData[$i][0][16];
+                    $planof_municipio->valor_512 = trim($rowData[$i][0][4]);
+                    $planof_municipio->valor_512k_2m = trim($rowData[$i][0][7]);
+                    $planof_municipio->valor_2m_12m = trim($rowData[$i][0][10]);
+                    $planof_municipio->valor_12m_34m = trim($rowData[$i][0][13]);
+                    $planof_municipio->valor_34m = trim($rowData[$i][0][16]);
 
                     $planof_municipio->tipo_plano_fk = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-pessoa-plano', 'F');
                     $arrayF = $planof_municipio->attributes;
@@ -1745,11 +1750,11 @@ class SiciController extends Controller {
 
                     $i += 2;
                     $planoj_municipio = new \app\modules\posoutorga\models\TabPlanosSearch();
-                    $planoj_municipio->valor_512 = $rowData[$i][0][4];
-                    $planoj_municipio->valor_512k_2m = $rowData[$i][0][7];
-                    $planoj_municipio->valor_2m_12m = $rowData[$i][0][10];
-                    $planoj_municipio->valor_12m_34m = $rowData[$i][0][13];
-                    $planoj_municipio->valor_34m = $rowData[$i][0][16];
+                    $planoj_municipio->valor_512 = trim($rowData[$i][0][4]);
+                    $planoj_municipio->valor_512k_2m = trim($rowData[$i][0][7]);
+                    $planoj_municipio->valor_2m_12m = trim($rowData[$i][0][10]);
+                    $planoj_municipio->valor_12m_34m = trim($rowData[$i][0][13]);
+                    $planoj_municipio->valor_34m = trim($rowData[$i][0][16]);
                     $planoj_municipio->tipo_plano_fk = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-pessoa-plano', 'J');
                     $arrayJ = $planoj_municipio->attributes;
                     $arrayJ['tipo_pessoa'] = 'Juridica';
@@ -1761,8 +1766,8 @@ class SiciController extends Controller {
                     $arrayJ['total'] = $empresa->total_juridica;
 
                     $i += 5;
-                    $empresa->capacidade_municipio = (int) $rowData[$i][0][7];
-                    $empresa->capacidade_servico = (int) $rowData[$i][0][20];
+                    $empresa->capacidade_municipio = (int) trim($rowData[$i][0][7]);
+                    $empresa->capacidade_servico = (int) trim($rowData[$i][0][20]);
                     $i += 4;
 
                     $empresa->gridMunicipios[] = $arrayF;
