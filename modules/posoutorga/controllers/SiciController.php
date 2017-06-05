@@ -1072,7 +1072,7 @@ class SiciController extends Controller {
                         $cliente = $cli;
                         $cm = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-produto', 'CM');
                         $cj = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-produto', 'CJ');
-                        $contrato = \app\modules\comercial\models\TabContratoSearch::find()->where("(cod_contrato_fk in ($cm, $cj)) and cod_cliente_fk = $cliente->cod_cliente")->one();
+                        $contrato = \app\modules\comercial\models\TabContratoSearch::find()->where("ativo is true and cod_cliente_fk = $cliente->cod_cliente")->one();
 
                         if (!$contrato) {
                             $contrato = new \app\modules\comercial\models\TabContratoSearch();
@@ -1081,7 +1081,7 @@ class SiciController extends Controller {
                             $contrato->save();
                         }
 
-                        $tipo_contrato = \app\modules\comercial\models\TabTipoContrato::find()->where(['cod_contrato_fk' => $contrato->cod_contrato])->one();
+                        $tipo_contrato = \app\modules\comercial\models\TabTipoContrato::find()->where("ativo is true and (tipo_produto_fk in ({$cm}, {$cj})) and cod_contrato_fk = $contrato->cod_contrato")->one();
                         
                         if (!$tipo_contrato) {
                             $tipo_contrato = new \app\modules\comercial\models\TabTipoContrato();
@@ -1156,10 +1156,10 @@ class SiciController extends Controller {
                     $municipios = \Yii::$app->session->get('empresasSessao');
                     if ($municipios) {
                         foreach ($municipios as $municipio) {
-
                             $empresa = new \app\modules\posoutorga\models\TabEmpresaMunicipioSearch();
+                            
+                            unset($municipio[0]['cod_empresa_municipio']);
                             $empresa->attributes = $municipio[0];
-
                             $empresa->cod_sici_fk = $sici->cod_sici;
                             $empresa->save();
 
