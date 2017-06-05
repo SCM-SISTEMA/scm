@@ -71,6 +71,9 @@ use Yii;
  * @property string $faturamento_de
  * @property string $faturamento_industrial
  * @property string $faturamento_adicionado
+ * @property string $cod_protocolo
+ * @property string $usuario_inclusao_sici
+ * @property string $ordem
  */
 class VisSiciCliente extends \projeto\db\ActiveRecord
 {
@@ -91,14 +94,16 @@ class VisSiciCliente extends \projeto\db\ActiveRecord
             [['cod_tipo_contrato', 'cod_usuario_fk', 'cod_contrato_fk', 'ie', 'cod_cliente', 'cod_contrato', 'tipo_contrato_fk', 'dia_vencimento', 'qnt_parcelas', 'responsavel_fk', 'qnt_clientes', 'cod_sici', 'cod_tipo_contrato_fk', 'qtd_funcionarios_fichados', 'qtd_funcionarios_terceirizados', 'num_central_atendimento', 'total_fibra_prestadora', 'total_fibra_terceiros', 'total_crescimento_prestadora', 'total_crescimento_terceiros', 'total_fibra_implantada_prestadora', 'total_fibra_implantada_terceiros', 'total_fibra_crescimento_prop_prestadora', 'total_fibra_crescimento_prop_terceiros'], 'integer'],
             [['situacao', 'operando', 'link', 'zero800', 'parceiria', 'consultoria_scm', 'engenheiro_tecnico'], 'boolean'],
             [['valor_contrato', 'receita_bruta', 'despesa_operacao_manutencao', 'despesa_publicidade', 'despesa_vendas', 'despesa_link', 'aliquota_nacional', 'receita_icms', 'receita_pis', 'receita_confins', 'receita_liquida', 'valor_consolidado', 'aplicacao_equipamento', 'total_marketing_propaganda', 'aplicacao_software', 'total_pesquisa_desenvolvimento', 'aplicacao_servico', 'aplicacao_callcenter', 'faturamento_de', 'faturamento_industrial', 'faturamento_adicionado'], 'number'],
-            [['dt_prazo', 'dt_vencimento', 'usuario_inclusao_sici'], 'safe'],
-            [['obs_receita', 'obs_despesa', 'usuario_inclusao_sici'], 'string'],
+            [['dt_prazo', 'dt_vencimento'], 'safe'],
+            [['obs_receita', 'obs_despesa', 'ordem'], 'string'],
             [['cnpj'], 'string', 'max' => 18],
             [['fantasia', 'razao_social'], 'string', 'max' => 200],
             [['fistel'], 'string', 'max' => 15],
             [['contador', 'responsavel'], 'string', 'max' => 150],
             [['mes_ano_referencia'], 'string', 'max' => 7],
-            [['fust'], 'string', 'max' => 30]
+            [['fust'], 'string', 'max' => 30],
+            [['cod_protocolo'], 'string', 'max' => 50],
+            [['usuario_inclusao_sici'], 'string', 'max' => 100]
         ];
     }
 
@@ -172,6 +177,9 @@ class VisSiciCliente extends \projeto\db\ActiveRecord
             'faturamento_de' => 'Faturamento De',
             'faturamento_industrial' => 'Faturamento Industrial',
             'faturamento_adicionado' => 'Faturamento Adicionado',
+            'cod_protocolo' => 'Cod Protocolo',
+            'usuario_inclusao_sici' => 'Usuario Inclusao Sici',
+            'ordem' => 'Ordem',
         ];
     }
 

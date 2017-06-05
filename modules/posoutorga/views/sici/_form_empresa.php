@@ -12,11 +12,15 @@
         ])->textInput(['maxlength' => true, 'disabled' => (($sici->cod_sici) ? true : false)])
         ?>
     </div>
-        <div class='col-lg-2'>
-        <?= $form->field($cliente, 'fistel')->textInput(['maxlength' => true, 'class'=>'form-control somenteNumero', 'disabled' => (($sici->cod_sici) ? true : false)]) ?>
+    <div class='col-lg-2'>
+        <?= $form->field($cliente, 'fistel')->textInput(['maxlength' => true, 'class' => 'form-control somenteNumero', 'disabled' => (($sici->cod_sici) ? true : false)]) ?>
     </div>
-
-    <div class='col-lg-4'>
+    <?php if (!$sici->isNewRecord) : ?>
+        <div class='col-lg-2'>
+            <?= $form->field($sici, 'cod_protocolo')->textInput(['maxlength' => true]) ?>
+        </div>
+    <?php endif; ?>
+    <div class='col-lg-<?= ($sici->isNewRecord) ? '4' : '2' ?>'>
         <?= $form->field($sici, 'responsavel')->textInput(['maxlength' => true]) ?>
     </div>
 
@@ -57,7 +61,6 @@
 
         <?=
         $form->field($sici, 'tipo_sici_fk')->dropDownList(
-                
                 yii\helpers\ArrayHelper::map(
                         app\models\TabAtributosValoresSearch::find()->where(['fk_atributos_valores_atributos_id' =>
                             app\models\TabAtributosSearch::find()->where(['sgl_chave' => 'tipo-sici'])->one()['cod_atributos']

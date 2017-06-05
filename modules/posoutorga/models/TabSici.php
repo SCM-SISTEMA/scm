@@ -47,6 +47,10 @@ use Yii;
  * @property string $faturamento_adicionado
  * @property string $dt_inclusao
  * @property string $dt_exclusao
+ * @property integer $tipo_sici_fk
+ * @property integer $inclusao_usuario_fk
+ * @property integer $tipo_entrada_fk
+ * @property string $cod_protocolo
  *
  * @property TabEmpresaMunicipio[] $tabEmpresaMunicipio
  * @property TabPlanosMenorMaior[] $tabPlanosMenorMaior
@@ -68,13 +72,14 @@ class TabSici extends \projeto\db\ActiveRecord
     public function rules()
     {
         return [
-            [['cod_tipo_contrato_fk', 'qtd_funcionarios_fichados', 'qtd_funcionarios_terceirizados', 'num_central_atendimento', 'total_fibra_prestadora', 'total_fibra_terceiros', 'total_crescimento_prestadora', 'total_crescimento_terceiros', 'total_fibra_implantada_prestadora', 'total_fibra_implantada_terceiros', 'total_fibra_crescimento_prop_prestadora', 'total_fibra_crescimento_prop_terceiros'], 'integer'],
+            [['cod_tipo_contrato_fk', 'qtd_funcionarios_fichados', 'qtd_funcionarios_terceirizados', 'num_central_atendimento', 'total_fibra_prestadora', 'total_fibra_terceiros', 'total_crescimento_prestadora', 'total_crescimento_terceiros', 'total_fibra_implantada_prestadora', 'total_fibra_implantada_terceiros', 'total_fibra_crescimento_prop_prestadora', 'total_fibra_crescimento_prop_terceiros', 'tipo_sici_fk', 'inclusao_usuario_fk', 'tipo_entrada_fk'], 'integer'],
             [['receita_bruta', 'despesa_operacao_manutencao', 'despesa_publicidade', 'despesa_vendas', 'despesa_link', 'aliquota_nacional', 'receita_icms', 'receita_pis', 'receita_confins', 'receita_liquida', 'valor_consolidado', 'aplicacao_equipamento', 'total_marketing_propaganda', 'aplicacao_software', 'total_pesquisa_desenvolvimento', 'aplicacao_servico', 'aplicacao_callcenter', 'faturamento_de', 'faturamento_industrial', 'faturamento_adicionado'], 'number'],
             [['obs_receita', 'obs_despesa'], 'string'],
             [['dt_inclusao', 'dt_exclusao'], 'safe'],
             [['mes_ano_referencia'], 'string', 'max' => 7],
             [['legenda'], 'string', 'max' => 30],
-            [['responsavel'], 'string', 'max' => 150]
+            [['responsavel'], 'string', 'max' => 150],
+            [['cod_protocolo'], 'string', 'max' => 50]
         ];
     }
 
@@ -124,6 +129,10 @@ class TabSici extends \projeto\db\ActiveRecord
             'faturamento_adicionado' => 'Faturamento bruto decorrente do provimento de serviços de valor adicionado (não é parceria)',
             'dt_inclusao' => 'Dt Inclusao',
             'dt_exclusao' => 'Dt Exclusao',
+            'tipo_sici_fk' => 'Tipo Sici Fk',
+            'inclusao_usuario_fk' => 'Usuário',
+            'tipo_entrada_fk' => 'tipo de entrada -> atributo tipo-entrada ',
+            'cod_protocolo' => 'Protocolo',
         ];
     }
 

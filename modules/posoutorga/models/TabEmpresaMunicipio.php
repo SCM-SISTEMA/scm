@@ -15,6 +15,13 @@ use Yii;
  * @property integer $capacidade_servico
  * @property integer $cod_sici_fk
  * @property integer $tecnologia_fk
+ * @property string $total_512
+ * @property string $total_512k_2m
+ * @property string $total_2m_12m
+ * @property string $total_12m_34m
+ * @property string $total_34m
+ * @property string $total_fisica
+ * @property string $total_juridica
  *
  * @property TabSici $tabSici
  * @property TabMunicipios $tabMunicipios
@@ -36,6 +43,7 @@ class TabEmpresaMunicipio extends \projeto\db\ActiveRecord
     {
         return [
             [['capacidade_municipio', 'capacidade_servico', 'cod_sici_fk', 'tecnologia_fk'], 'integer'],
+            [['total_512', 'total_512k_2m', 'total_2m_12m', 'total_12m_34m', 'total_34m', 'total_fisica', 'total_juridica'], 'number'],
             [['cod_municipio_fk'], 'string', 'max' => 6],
             [['municipio'], 'string', 'max' => 45],
             [['uf'], 'string', 'max' => 2]
@@ -56,6 +64,13 @@ class TabEmpresaMunicipio extends \projeto\db\ActiveRecord
             'capacidade_servico' => 'Capacidade total do sistema implantada e em serviço em Mbps',
             'cod_sici_fk' => 'Cod Sici Fk',
             'tecnologia_fk' => 'tecnologia -> atributos',
+            'total_512' => 'Total 512',
+            'total_512k_2m' => 'Total 512k 2m',
+            'total_2m_12m' => 'Total 2m 12m',
+            'total_12m_34m' => 'Total 12m 34m',
+            'total_34m' => 'Total 34m',
+            'total_fisica' => 'Total Fisica',
+            'total_juridica' => 'Total Juridica',
         ];
     }
 

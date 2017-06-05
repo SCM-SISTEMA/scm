@@ -18,19 +18,21 @@ use Yii;
  * @property string $obs
  * @property string $tipo_tabela_fk
  */
-class TabPlanos extends \projeto\db\ActiveRecord {
-
+class TabPlanos extends \projeto\db\ActiveRecord
+{
     /**
      * @inheritdoc
      */
-    public static function tableName() {
+    public static function tableName()
+    {
         return 'pos_outorga.tab_planos';
     }
 
     /**
      * @inheritdoc
      */
-    public function rules() {
+    public function rules()
+    {
         return [
             [['valor_512', 'valor_512k_2m', 'valor_2m_12m', 'valor_12m_34m', 'valor_34m'], 'number'],
             [['tipo_plano_fk', 'cod_chave'], 'integer'],
@@ -42,7 +44,8 @@ class TabPlanos extends \projeto\db\ActiveRecord {
     /**
      * @inheritdoc
      */
-    public function attributeLabels() {
+    public function attributeLabels()
+    {
         return [
             'cod_plano' => 'Cod Plano',
             'valor_512' => 'Menor ou igual a 521Kbps',
@@ -63,8 +66,8 @@ se for plano ou por municipio',
      * @inheritdoc
      * @return TabPlanosQuery the active query used by this AR class.
      */
-    public static function find() {
+    public static function find()
+    {
         return new TabPlanosQuery(get_called_class());
     }
-
 }
