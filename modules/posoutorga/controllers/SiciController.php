@@ -469,6 +469,7 @@ class SiciController extends Controller {
         $uf = $dom->createAttribute('uf');
         $item = $dom->createAttribute('item');
         $valor = $dom->createAttribute('valor');
+
         $uf->value = $endereco->tabMunicipios->sgl_estado_fk;
         $item->value = 'a';
         $valor->value = empty($sici->qtd_funcionarios_fichados) ? '0' : (int) $sici->qtd_funcionarios_fichados;
@@ -1710,7 +1711,7 @@ class SiciController extends Controller {
         $key = 3;
 
         for ($i = $key; $i < count($rowData); $i++) {
-
+            
 
             if (strpos(strtoupper(trim($rowData[$i][0][1])), 'MUNICÍPIO') !== false) {
                 $empresa = new \app\modules\posoutorga\models\TabEmpresaMunicipioSearch();
@@ -1772,7 +1773,7 @@ class SiciController extends Controller {
                     $i += 5;
                     $empresa->capacidade_municipio = (int) trim($rowData[$i][0][7]);
                     $empresa->capacidade_servico = (int) trim($rowData[$i][0][20]);
-                    $i += 4;
+                    //$i += 4;
 
                     $empresa->gridMunicipios[] = $arrayF;
                     $empresa->gridMunicipios[] = $arrayJ;
@@ -1790,16 +1791,10 @@ class SiciController extends Controller {
                     $empresas[] = $empresa;
 
                     $empresasSessao[$empresa->cod_empresa_municipio] = [$empresa->attributes, $planof_municipio->attributes, $planoj_municipio->attributes];
-                } else {
-                    //só de sacanagem..rsrs
-                    $i += 3;
-                    $i += 5;
-                    $i += 2;
-                    $i += 5;
-                    $i += 5;
-                }
+                } 
             }
         }
+        
         \Yii::$app->session->set('empresasSessao', $empresasSessao);
 
         $cliente->validate();
