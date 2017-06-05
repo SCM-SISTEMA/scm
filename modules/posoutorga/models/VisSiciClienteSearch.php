@@ -41,7 +41,7 @@ class VisSiciClienteSearch extends VisSiciCliente {
      *
      * @return ActiveDataProvider
      */
-    public function search($params, $ordem = 'cod_sici') {
+    public function search($params, $ordem = 'cod_sici desc') {
         $query = VisSiciClienteSearch::find();
 
         $dataProvider = new \yii\data\ActiveDataProvider([
