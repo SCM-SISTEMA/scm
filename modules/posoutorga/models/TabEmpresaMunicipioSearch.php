@@ -182,29 +182,30 @@ class TabEmpresaMunicipioSearch extends TabEmpresaMunicipio {
 
                         if ($tK == $t['cod_atributos_valores']) {
                             $planos[$munK][$tK]['QAIPL5SM'] = $municipio['capacidade_servico'];
-         
-                            $pessoa = $municipio['totais'];
-                            $planos[$munK][$tK]['total'] = $pessoa['total'];
-                            $planos[$munK][$tK]['15'] = $pessoa['total_512'];
-                            $planos[$munK][$tK]['16'] = $pessoa['total_512k_2m'];
-                            $planos[$munK][$tK]['17'] = $pessoa['total_2m_12m'];
-                            $planos[$munK][$tK]['18'] = $pessoa['total_12m_34m'];
-                            $planos[$munK][$tK]['19'] = $pessoa['total_34m'];
-                        } else {
 
-                            $planos[$munK][$t['cod_atributos_valores']]['QAIPL5SM'] = 0;
-                            $planos[$munK][$t['cod_atributos_valores']]['total'] = 0;
-                            $planos[$munK][$t['cod_atributos_valores']]['15'] = 0;
-                            $planos[$munK][$t['cod_atributos_valores']]['16'] = 0;
-                            $planos[$munK][$t['cod_atributos_valores']]['17'] = 0;
-                            $planos[$munK][$t['cod_atributos_valores']]['18'] = 0;
-                            $planos[$munK][$t['cod_atributos_valores']]['19'] = 0;
+                            $pessoa = $municipio['totais'];
+                            $planos[$munK][$t['cod_atributos_valores']]['total'] = $pessoa['total'];
+                            $planos[$munK][$t['cod_atributos_valores']]['15'] = $pessoa['total_512'];
+                            $planos[$munK][$t['cod_atributos_valores']]['16'] = $pessoa['total_512k_2m'];
+                            $planos[$munK][$t['cod_atributos_valores']]['17'] = $pessoa['total_2m_12m'];
+                            $planos[$munK][$t['cod_atributos_valores']]['18'] = $pessoa['total_12m_34m'];
+                            $planos[$munK][$t['cod_atributos_valores']]['19'] = $pessoa['total_34m'];
+                        } else {
+                            if (!$planos[$munK][$t['cod_atributos_valores']]['total']) {
+                                $planos[$munK][$t['cod_atributos_valores']]['QAIPL5SM'] = 0;
+                                $planos[$munK][$t['cod_atributos_valores']]['total'] = 0;
+                                $planos[$munK][$t['cod_atributos_valores']]['15'] = 0;
+                                $planos[$munK][$t['cod_atributos_valores']]['16'] = 0;
+                                $planos[$munK][$t['cod_atributos_valores']]['17'] = 0;
+                                $planos[$munK][$t['cod_atributos_valores']]['18'] = 0;
+                                $planos[$munK][$t['cod_atributos_valores']]['19'] = 0;
+                            }
                         }
                     }
                 }
             }
         }
-
+        
         return $planos;
     }
 
