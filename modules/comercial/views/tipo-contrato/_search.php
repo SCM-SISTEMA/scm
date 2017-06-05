@@ -26,6 +26,10 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'cod_contrato_fk') ?>
 
+    <?= $form->field($model, 'tipo_produto_fk') ?>
+
+    <?= $form->field($model, 'ativo')->checkbox() ?>
+
 
     <?php ActiveForm::end(); ?>
 

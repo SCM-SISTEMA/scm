@@ -71,7 +71,21 @@ class TabContratoSearch extends TabContrato
             $this->tableName() . '.dia_vencimento' => $this->dia_vencimento,
             $this->tableName() . '.qnt_parcelas' => $this->qnt_parcelas,
             $this->tableName() . '.dt_prazo' => $this->dt_prazo,
+            $this->tableName() . '.dt_inclusao' => $this->dt_inclusao,
+            $this->tableName() . '.dt_vencimento' => $this->dt_vencimento,
+            $this->tableName() . '.responsavel_fk' => $this->responsavel_fk,
+            $this->tableName() . '.operando' => $this->operando,
+            $this->tableName() . '.qnt_clientes' => $this->qnt_clientes,
+            $this->tableName() . '.link' => $this->link,
+            $this->tableName() . '.zero800' => $this->zero800,
+            $this->tableName() . '.parceiria' => $this->parceiria,
+            $this->tableName() . '.consultoria_scm' => $this->consultoria_scm,
+            $this->tableName() . '.engenheiro_tecnico' => $this->engenheiro_tecnico,
+            $this->tableName() . '.cod_cliente_fk' => $this->cod_cliente_fk,
+            $this->tableName() . '.ativo' => $this->ativo,
         ]);
+
+        $query->andFilterWhere(['ilike', $this->tableName() . '.contador', $this->contador]);
 
 		$query->andWhere($this->tableName().'.dt_exclusao IS NULL');
 		

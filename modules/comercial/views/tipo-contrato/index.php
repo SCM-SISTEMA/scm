@@ -29,6 +29,8 @@ use app\components\MenuLateralModuloWidget;
         'columns' => [
             'cod_usuario_fk',
             'cod_contrato_fk',
+            'tipo_produto_fk',
+            'ativo:boolean',
             ['class' => 'projeto\grid\ActionColumn'],
         ],
     ]); ?>

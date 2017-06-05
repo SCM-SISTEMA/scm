@@ -32,6 +32,32 @@ use yii\widgets\ActiveForm;
 
     <?php // echo $form->field($model, 'dt_prazo') ?>
 
+    <?php // echo $form->field($model, 'dt_inclusao') ?>
+
+    <?php // echo $form->field($model, 'dt_vencimento') ?>
+
+    <?php // echo $form->field($model, 'contador') ?>
+
+    <?php // echo $form->field($model, 'responsavel_fk') ?>
+
+    <?php // echo $form->field($model, 'operando')->checkbox() ?>
+
+    <?php // echo $form->field($model, 'qnt_clientes') ?>
+
+    <?php // echo $form->field($model, 'link')->checkbox() ?>
+
+    <?php // echo $form->field($model, 'zero800')->checkbox() ?>
+
+    <?php // echo $form->field($model, 'parceiria')->checkbox() ?>
+
+    <?php // echo $form->field($model, 'consultoria_scm')->checkbox() ?>
+
+    <?php // echo $form->field($model, 'engenheiro_tecnico')->checkbox() ?>
+
+    <?php // echo $form->field($model, 'cod_cliente_fk') ?>
+
+    <?php // echo $form->field($model, 'ativo')->checkbox() ?>
+
 
     <?php ActiveForm::end(); ?>
 

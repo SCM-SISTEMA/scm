@@ -18,8 +18,11 @@
         <group>
             <file>file:/var/www/scm/modules/posoutorga/controllers/SiciController.php</file>
             <file>file:/var/www/scm/modules/posoutorga/models/TabSiciSearch.php</file>
+            <file>file:/var/www/scm/models/TabClienteSearch.php</file>
+            <file>file:/var/www/scm/models/TabEnderecoSearch.php</file>
             <file>file:/var/www/scm/modules/posoutorga/models/TabSici.php</file>
             <file>file:/var/www/scm/modules/admin/controllers/ClienteController.php</file>
+            <file>file:/var/www/scm/modules/posoutorga/views/sici/update.php</file>
         </group>
     </open-files>
 </project-private>

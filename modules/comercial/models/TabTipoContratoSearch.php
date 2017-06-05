@@ -68,6 +68,8 @@ class TabTipoContratoSearch extends TabTipoContrato
             $this->tableName() . '.cod_tipo_contrato' => $this->cod_tipo_contrato,
             $this->tableName() . '.cod_usuario_fk' => $this->cod_usuario_fk,
             $this->tableName() . '.cod_contrato_fk' => $this->cod_contrato_fk,
+            $this->tableName() . '.tipo_produto_fk' => $this->tipo_produto_fk,
+            $this->tableName() . '.ativo' => $this->ativo,
         ]);
 
 		$query->andWhere($this->tableName().'.dt_exclusao IS NULL');

@@ -25,6 +25,9 @@ use yii\helpers\ArrayHelper;
             $this->render('_form', compact('model', 'form')
             )
             ?>
+            <?=
+            $this->render('_guia_contrato', compact('model', 'form', 'contratos'));
+            ?>
         </div>
         <div class="box-footer">
             <h3 class="box-title"></h3>

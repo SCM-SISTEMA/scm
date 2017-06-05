@@ -34,6 +34,8 @@ use app\components\MenuLateralModuloWidget;
             'cod_tipo_contrato',
             'cod_usuario_fk',
             'cod_contrato_fk',
+            'tipo_produto_fk',
+            'ativo:boolean',
         ],
     ]) ?>
 	</div>    
