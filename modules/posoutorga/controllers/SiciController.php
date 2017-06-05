@@ -1069,7 +1069,11 @@ class SiciController extends Controller {
                                 $cliente->fantasia = $cliente->razao_social;
                         }
                     } else {
+                        if(!$cli->fistel){
+                            $cli->fistel = $cliente->fistel;
+                        }
                         $cliente = $cli;
+                        $cliente->save();
                         $cm = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-produto', 'CM');
                         $cj = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-produto', 'CJ');
                         $contrato = \app\modules\comercial\models\TabContratoSearch::find()->where("ativo is true and cod_cliente_fk = $cliente->cod_cliente")->one();
