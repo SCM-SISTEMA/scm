@@ -27,7 +27,7 @@ class VisSiciClienteSearch extends VisSiciCliente {
             'cnpj' => 'CNPJ',
             'razao_social' => 'Razão Social',
             'razao_social' => 'Razão Social',
-            'cod_protocolo' => 'Protocolo'
+           // 'cod_protocolo' => 'Protocolo'
                 //exemplo 'campo' => 'label',         
         ];
 

@@ -4,7 +4,7 @@
         'items' => [
             [
                 'label' => "<b style=\"color:#337ab7\">Contrato</b>",
-                'content' => $this->render('_form_contrato', compact('model', 'form')),
+                'content' => $this->render('/comercial/contrato/_form_contrato', compact('model', 'form')),
                 'active' => true,
             ],
            
