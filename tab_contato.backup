@@ -1,0 +1,68 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 9.6.2
+-- Dumped by pg_dump version 9.6.2
+
+-- Started on 2017-06-05 00:33:21 -03
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+SET row_security = off;
+
+SET search_path = public, pg_catalog;
+
+--
+-- TOC entry 2548 (class 0 OID 157379)
+-- Dependencies: 253
+-- Data for Name: tab_contato; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO tab_contato (cod_contato, contato, ramal, ativo, dt_inclusao, tipo, chave_fk, tipo_tabela_fk) VALUES (20575, '(99)3663-0080', NULL, true, '2017-06-01', 465, 190, 'tab_cliente');
+INSERT INTO tab_contato (cod_contato, contato, ramal, ativo, dt_inclusao, tipo, chave_fk, tipo_tabela_fk) VALUES (20576, '(99) 3663-0080', NULL, true, '2017-06-01', 465, 190, 'tab_cliente');
+INSERT INTO tab_contato (cod_contato, contato, ramal, ativo, dt_inclusao, tipo, chave_fk, tipo_tabela_fk) VALUES (20577, '', NULL, true, '2017-06-01', 464, 190, 'tab_cliente');
+INSERT INTO tab_contato (cod_contato, contato, ramal, ativo, dt_inclusao, tipo, chave_fk, tipo_tabela_fk) VALUES (20578, '(53)3273-6868', NULL, true, '2017-06-01', 465, 191, 'tab_cliente');
+INSERT INTO tab_contato (cod_contato, contato, ramal, ativo, dt_inclusao, tipo, chave_fk, tipo_tabela_fk) VALUES (20579, '(53) 3228-9431', NULL, true, '2017-06-01', 465, 191, 'tab_cliente');
+INSERT INTO tab_contato (cod_contato, contato, ramal, ativo, dt_inclusao, tipo, chave_fk, tipo_tabela_fk) VALUES (20580, '(53) 98116-5896', NULL, true, '2017-06-01', 464, 191, 'tab_cliente');
+INSERT INTO tab_contato (cod_contato, contato, ramal, ativo, dt_inclusao, tipo, chave_fk, tipo_tabela_fk) VALUES (20581, 'contato@sjnetwork.com.br', NULL, true, '2017-06-01', 467, 192, 'tab_cliente');
+INSERT INTO tab_contato (cod_contato, contato, ramal, ativo, dt_inclusao, tipo, chave_fk, tipo_tabela_fk) VALUES (20582, '(21)3646-3951', NULL, true, '2017-06-01', 465, 192, 'tab_cliente');
+INSERT INTO tab_contato (cod_contato, contato, ramal, ativo, dt_inclusao, tipo, chave_fk, tipo_tabela_fk) VALUES (20583, '(21) 3646-3951', NULL, true, '2017-06-01', 465, 192, 'tab_cliente');
+INSERT INTO tab_contato (cod_contato, contato, ramal, ativo, dt_inclusao, tipo, chave_fk, tipo_tabela_fk) VALUES (20584, '(21) 99897-5688', NULL, true, '2017-06-01', 464, 192, 'tab_cliente');
+INSERT INTO tab_contato (cod_contato, contato, ramal, ativo, dt_inclusao, tipo, chave_fk, tipo_tabela_fk) VALUES (20585, 'orteccontabilidade@yahoo.com.br', NULL, true, '2017-06-01', 467, 193, 'tab_cliente');
+INSERT INTO tab_contato (cod_contato, contato, ramal, ativo, dt_inclusao, tipo, chave_fk, tipo_tabela_fk) VALUES (20586, '(63)3602-1935/(63)3361-1710', NULL, true, '2017-06-01', 465, 193, 'tab_cliente');
+INSERT INTO tab_contato (cod_contato, contato, ramal, ativo, dt_inclusao, tipo, chave_fk, tipo_tabela_fk) VALUES (20587, '(63) 3602-1935', NULL, true, '2017-06-01', 465, 193, 'tab_cliente');
+INSERT INTO tab_contato (cod_contato, contato, ramal, ativo, dt_inclusao, tipo, chave_fk, tipo_tabela_fk) VALUES (20588, '(63) 99205-8618', NULL, true, '2017-06-01', 464, 193, 'tab_cliente');
+INSERT INTO tab_contato (cod_contato, contato, ramal, ativo, dt_inclusao, tipo, chave_fk, tipo_tabela_fk) VALUES (20589, 'financeiro@mpinformatica.net', NULL, true, '2017-06-02', 467, 194, 'tab_cliente');
+INSERT INTO tab_contato (cod_contato, contato, ramal, ativo, dt_inclusao, tipo, chave_fk, tipo_tabela_fk) VALUES (20590, '(27)3251-0492', NULL, true, '2017-06-02', 465, 194, 'tab_cliente');
+INSERT INTO tab_contato (cod_contato, contato, ramal, ativo, dt_inclusao, tipo, chave_fk, tipo_tabela_fk) VALUES (20591, '(27) 3251-4994', NULL, true, '2017-06-02', 465, 194, 'tab_cliente');
+INSERT INTO tab_contato (cod_contato, contato, ramal, ativo, dt_inclusao, tipo, chave_fk, tipo_tabela_fk) VALUES (20592, '(27) 99868-5325', NULL, true, '2017-06-02', 464, 194, 'tab_cliente');
+INSERT INTO tab_contato (cod_contato, contato, ramal, ativo, dt_inclusao, tipo, chave_fk, tipo_tabela_fk) VALUES (20593, 'fernandorsgobi@yahoo.com.br', NULL, true, '2017-06-02', 467, 195, 'tab_cliente');
+INSERT INTO tab_contato (cod_contato, contato, ramal, ativo, dt_inclusao, tipo, chave_fk, tipo_tabela_fk) VALUES (20594, '(19)3044-0190/(19)8183-5827', NULL, true, '2017-06-02', 465, 195, 'tab_cliente');
+INSERT INTO tab_contato (cod_contato, contato, ramal, ativo, dt_inclusao, tipo, chave_fk, tipo_tabela_fk) VALUES (20595, '(19) 3044-0190', NULL, true, '2017-06-02', 465, 195, 'tab_cliente');
+INSERT INTO tab_contato (cod_contato, contato, ramal, ativo, dt_inclusao, tipo, chave_fk, tipo_tabela_fk) VALUES (20596, '(58) 27818-3199', NULL, true, '2017-06-02', 464, 195, 'tab_cliente');
+INSERT INTO tab_contato (cod_contato, contato, ramal, ativo, dt_inclusao, tipo, chave_fk, tipo_tabela_fk) VALUES (20597, 'suarino.filho@gmail.com', NULL, true, '2017-06-02', 467, 196, 'tab_cliente');
+INSERT INTO tab_contato (cod_contato, contato, ramal, ativo, dt_inclusao, tipo, chave_fk, tipo_tabela_fk) VALUES (20598, '(61)3631-2057', NULL, true, '2017-06-02', 465, 196, 'tab_cliente');
+INSERT INTO tab_contato (cod_contato, contato, ramal, ativo, dt_inclusao, tipo, chave_fk, tipo_tabela_fk) VALUES (20599, '(61) 3631-2057', NULL, true, '2017-06-02', 465, 196, 'tab_cliente');
+
+
+--
+-- TOC entry 2554 (class 0 OID 0)
+-- Dependencies: 254
+-- Name: tab_contato_cod_contato_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('tab_contato_cod_contato_seq', 20600, true);
+
+
+-- Completed on 2017-06-05 00:33:22 -03
+
+--
+-- PostgreSQL database dump complete
+--
+
