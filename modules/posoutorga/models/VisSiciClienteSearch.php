@@ -41,7 +41,7 @@ class VisSiciClienteSearch extends VisSiciCliente {
      *
      * @return ActiveDataProvider
      */
-    public function search($params) {
+    public function search($params, $ordem = 'cod_sici') {
         $query = VisSiciClienteSearch::find();
 
         $dataProvider = new \yii\data\ActiveDataProvider([
@@ -58,7 +58,8 @@ class VisSiciClienteSearch extends VisSiciCliente {
                 ->andFilterWhere(['ilike', $this->tableName() . 'usuario_inclusao_sici', $this->usuario_inclusao_sici])
                 ->andFilterWhere(['ilike', $this->tableName() . '.fistel', $this->fistel])
                 ->andFilterWhere(['ilike', $this->tableName() . '.mes_ano_referencia', $this->mes_ano_referencia]);
-        $query->orderBy('ordem desc, cnpj');
+        
+        $query->orderBy($ordem);
         return $dataProvider;
     }
 
