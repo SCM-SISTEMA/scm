@@ -272,7 +272,7 @@ class SiciController extends Controller {
                                 $uf = "AND sgl_estado_fk='{$cliente->dadosReceita->uf}'";
                             }
 
-                            $municipio = \app\models\TabMunicipiosSearch::find()->where("(upper(txt_nome_sem_acento) ilike '%" . $nome . "%' or (upper(txt_nome) ilike '%" . $nome . "%' or upper(txt_nome) ilike '%" . strtoupper($cliente->dadosReceita->municipio) . "%') $uf")->asArray()->one();
+                            $municipio = \app\models\TabMunicipiosSearch::find()->where("(upper(txt_nome_sem_acento) ilike $$%" . $nome . "%$$ or (upper(txt_nome) ilike $$%" . $nome . "%$$ or upper(txt_nome) ilike $$%" . strtoupper($cliente->dadosReceita->municipio) . "%$$) $uf")->asArray()->one();
 
                             if ($municipio) {
                                 $endereco->cod_municipio_fk = $municipio['cod_municipio'];
@@ -1735,7 +1735,7 @@ class SiciController extends Controller {
                             $uf = "AND sgl_estado_fk='{$empresa->uf}'";
                         }
 
-                        $municipio = \app\models\TabMunicipiosSearch::find()->where("(upper(txt_nome_sem_acento) ilike '%" . $nome . "%' or upper(txt_nome) ilike '%" . strtoupper($empresa->municipio) . "%') $uf")->asArray()->one();
+                        $municipio = \app\models\TabMunicipiosSearch::find()->where("(upper(txt_nome_sem_acento) ilike $$%" . $nome . "%$$ or upper(txt_nome) ilike $$%" . strtoupper($empresa->municipio) . "%$$) $uf")->asArray()->one();
 
                         if ($municipio) {
                             $empresa->cod_municipio_fk = $municipio['cod_municipio'];
