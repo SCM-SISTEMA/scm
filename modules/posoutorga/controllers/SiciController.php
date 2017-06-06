@@ -201,7 +201,7 @@ class SiciController extends Controller {
                     $contrato->cod_cliente_fk = $cliente->cod_cliente;
                     $contrato->tipo_contrato_fk = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-contrato', 'pos-outorga-flex-scm');
                     $contrato->save();
-                    
+
                     $tipo_contrato = new \app\modules\comercial\models\TabTipoContrato();
                     $tipo_contrato->cod_contrato_fk = $contrato->cod_contrato;
                     $tipo_contrato->tipo_produto_fk = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-produto', 'CM');
@@ -265,8 +265,8 @@ class SiciController extends Controller {
 
                         if (!$endereco->dadosCep->ibge) {
 
-                            $nome = strtoupper(\projeto\Util::tirarAcentos($cliente->dadosReceita->municipio));
-
+                            $nome = str_replace("'", ' ', $cliente->dadosReceita->municipio);
+                            $nome = strtoupper(\projeto\Util::tirarAcentos($nome));
                             $uf = null;
                             if ($cliente->dadosReceita->uf) {
                                 $uf = "AND sgl_estado_fk='{$cliente->dadosReceita->uf}'";
@@ -1070,7 +1070,7 @@ class SiciController extends Controller {
                                 $cliente->fantasia = $cliente->razao_social;
                         }
                     } else {
-                        if(!$cli->fistel){
+                        if (!$cli->fistel) {
                             $cli->fistel = $cliente->fistel;
                         }
                         $cliente = $cli;
@@ -1087,7 +1087,7 @@ class SiciController extends Controller {
                         }
 
                         $tipo_contrato = \app\modules\comercial\models\TabTipoContrato::find()->where("ativo is true and (tipo_produto_fk in ({$cm}, {$cj})) and cod_contrato_fk = $contrato->cod_contrato")->one();
-                        
+
                         if (!$tipo_contrato) {
                             $tipo_contrato = new \app\modules\comercial\models\TabTipoContrato();
                             $tipo_contrato->cod_contrato_fk = $contrato->cod_contrato;
@@ -1162,7 +1162,7 @@ class SiciController extends Controller {
                     if ($municipios) {
                         foreach ($municipios as $municipio) {
                             $empresa = new \app\modules\posoutorga\models\TabEmpresaMunicipioSearch();
-                            
+
                             unset($municipio[0]['cod_empresa_municipio']);
                             $empresa->attributes = $municipio[0];
                             $empresa->cod_sici_fk = $sici->cod_sici;
@@ -1711,7 +1711,7 @@ class SiciController extends Controller {
         $key = 3;
 
         for ($i = $key; $i < count($rowData); $i++) {
-            
+
 
             if (strpos(strtoupper(trim($rowData[$i][0][1])), 'MUNICÍPIO') !== false) {
                 $empresa = new \app\modules\posoutorga\models\TabEmpresaMunicipioSearch();
@@ -1729,7 +1729,9 @@ class SiciController extends Controller {
                     $empresa->cod_municipio_fk = substr(trim($rowData[$i][0][10]), 0, 6);
 
                     if (!$empresa->cod_municipio_fk) {
-                        $nome = strtoupper(\projeto\Util::tirarAcentos($empresa->municipio));
+                        $nome = str_replace("'", ' ', $empresa->municipio);
+                        $nome = strtoupper(\projeto\Util::tirarAcentos($nome));
+                        //$nome = strtoupper(\projeto\Util::tirarAcentos($empresa->municipio));
                         $uf = null;
                         if ($empresa->uf) {
                             $uf = "AND sgl_estado_fk='{$empresa->uf}'";
@@ -1791,10 +1793,10 @@ class SiciController extends Controller {
                     $empresas[] = $empresa;
 
                     $empresasSessao[$empresa->cod_empresa_municipio] = [$empresa->attributes, $planof_municipio->attributes, $planoj_municipio->attributes];
-                } 
+                }
             }
         }
-        
+
         \Yii::$app->session->set('empresasSessao', $empresasSessao);
 
         $cliente->validate();
