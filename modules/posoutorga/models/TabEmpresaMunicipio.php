@@ -22,6 +22,13 @@ use Yii;
  * @property string $total_34m
  * @property string $total_fisica
  * @property string $total_juridica
+ * @property boolean $cod_municipio_fk_check
+ * @property boolean $capacidade_municipio_check
+ * @property boolean $capacidade_servico_check
+ * @property boolean $tecnologia_fk_check
+ * @property boolean $total_check
+ * @property boolean $total_fisica_check
+ * @property boolean $total_juridica_check
  *
  * @property TabSici $tabSici
  * @property TabMunicipios $tabMunicipios
@@ -44,6 +51,7 @@ class TabEmpresaMunicipio extends \projeto\db\ActiveRecord
         return [
             [['capacidade_municipio', 'capacidade_servico', 'cod_sici_fk', 'tecnologia_fk'], 'integer'],
             [['total_512', 'total_512k_2m', 'total_2m_12m', 'total_12m_34m', 'total_34m', 'total_fisica', 'total_juridica'], 'number'],
+            [['cod_municipio_fk_check', 'capacidade_municipio_check', 'capacidade_servico_check', 'tecnologia_fk_check', 'total_check', 'total_fisica_check', 'total_juridica_check'], 'boolean'],
             [['cod_municipio_fk'], 'string', 'max' => 6],
             [['municipio'], 'string', 'max' => 45],
             [['uf'], 'string', 'max' => 2]
@@ -71,6 +79,13 @@ class TabEmpresaMunicipio extends \projeto\db\ActiveRecord
             'total_34m' => 'Total 34m',
             'total_fisica' => 'Total Fisica',
             'total_juridica' => 'Total Juridica',
+            'cod_municipio_fk_check' => 'Cod Municipio Fk Check',
+            'capacidade_municipio_check' => 'Check Capacidade total do sistema implantada em Mb por municipio onde tem pop',
+            'capacidade_servico_check' => 'Check Capacidade total do sistema implantada e em serviço em Mbps',
+            'tecnologia_fk_check' => 'Check tecnologia -> atributos',
+            'total_check' => 'Total Check',
+            'total_fisica_check' => 'Total Fisica Check',
+            'total_juridica_check' => 'Total Juridica Check',
         ];
     }
 

@@ -71,7 +71,6 @@ use Yii;
  * @property string $faturamento_de
  * @property string $faturamento_industrial
  * @property string $faturamento_adicionado
- * @property string $cod_protocolo
  * @property string $usuario_inclusao_sici
  * @property string $ordem
  */
@@ -102,7 +101,6 @@ class VisSiciCliente extends \projeto\db\ActiveRecord
             [['contador', 'responsavel'], 'string', 'max' => 150],
             [['mes_ano_referencia'], 'string', 'max' => 7],
             [['fust'], 'string', 'max' => 30],
-            [['cod_protocolo'], 'string', 'max' => 50],
             [['usuario_inclusao_sici'], 'string', 'max' => 100]
         ];
     }
@@ -177,7 +175,6 @@ class VisSiciCliente extends \projeto\db\ActiveRecord
             'faturamento_de' => 'Faturamento De',
             'faturamento_industrial' => 'Faturamento Industrial',
             'faturamento_adicionado' => 'Faturamento Adicionado',
-            'cod_protocolo' => 'Cod Protocolo',
             'usuario_inclusao_sici' => 'Usuario Inclusao Sici',
             'ordem' => 'Ordem',
         ];

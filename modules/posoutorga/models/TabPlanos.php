@@ -17,6 +17,11 @@ use Yii;
  * @property integer $cod_chave
  * @property string $obs
  * @property string $tipo_tabela_fk
+ * @property boolean $valor_512_check
+ * @property boolean $valor_512k_2m_check
+ * @property boolean $valor_2m_12m_check
+ * @property boolean $valor_12m_34m_check
+ * @property boolean $valor_34m_check
  */
 class TabPlanos extends \projeto\db\ActiveRecord
 {
@@ -37,6 +42,7 @@ class TabPlanos extends \projeto\db\ActiveRecord
             [['valor_512', 'valor_512k_2m', 'valor_2m_12m', 'valor_12m_34m', 'valor_34m'], 'number'],
             [['tipo_plano_fk', 'cod_chave'], 'integer'],
             [['obs'], 'string'],
+            [['valor_512_check', 'valor_512k_2m_check', 'valor_2m_12m_check', 'valor_12m_34m_check', 'valor_34m_check'], 'boolean'],
             [['tipo_tabela_fk'], 'string', 'max' => 100]
         ];
     }
@@ -59,6 +65,11 @@ pessoa fisica / juridica',
             'obs' => 'Observação',
             'tipo_tabela_fk' => 'atributo tipo-cadastro-plano
 se for plano ou por municipio',
+            'valor_512_check' => 'Check Menor ou igual a 521Kbps',
+            'valor_512k_2m_check' => 'Check Entre 512 Kbps e 2 Mbps',
+            'valor_2m_12m_check' => 'Check Entre 2 Mbps e 12 Mbps',
+            'valor_12m_34m_check' => 'Check Entre 12 Mbps e 34 Mbps',
+            'valor_34m_check' => 'Check Acima de 34 Mbps',
         ];
     }
 

@@ -50,7 +50,38 @@ use Yii;
  * @property integer $tipo_sici_fk
  * @property integer $inclusao_usuario_fk
  * @property integer $tipo_entrada_fk
- * @property string $cod_protocolo
+ * @property integer $situacao_fk
+ * @property boolean $receita_bruta_check
+ * @property boolean $despesa_operacao_manutencao_check
+ * @property boolean $despesa_publicidade_check
+ * @property boolean $despesa_vendas_check
+ * @property boolean $despesa_link_check
+ * @property boolean $aliquota_nacional_check
+ * @property boolean $receita_icms_check
+ * @property boolean $receita_pis_check
+ * @property boolean $receita_confins_check
+ * @property boolean $receita_liquida_check
+ * @property boolean $valor_consolidado_check
+ * @property boolean $qtd_funcionarios_fichados_check
+ * @property boolean $qtd_funcionarios_terceirizados_check
+ * @property boolean $num_central_atendimento_check
+ * @property boolean $total_fibra_prestadora_check
+ * @property boolean $total_fibra_terceiros_check
+ * @property boolean $total_crescimento_prestadora_check
+ * @property boolean $total_crescimento_terceiros_check
+ * @property boolean $total_fibra_implantada_prestadora_check
+ * @property boolean $total_fibra_implantada_terceiros_check
+ * @property boolean $total_fibra_crescimento_prop_prestadora_check
+ * @property boolean $total_fibra_crescimento_prop_terceiros_check
+ * @property boolean $aplicacao_equipamento_check
+ * @property boolean $total_marketing_propaganda_check
+ * @property boolean $aplicacao_software_check
+ * @property boolean $total_pesquisa_desenvolvimento_check
+ * @property boolean $aplicacao_servico_check
+ * @property boolean $aplicacao_callcenter_check
+ * @property boolean $faturamento_de_check
+ * @property boolean $faturamento_industrial_check
+ * @property boolean $faturamento_adicionado_check
  *
  * @property TabEmpresaMunicipio[] $tabEmpresaMunicipio
  * @property TabPlanosMenorMaior[] $tabPlanosMenorMaior
@@ -72,14 +103,14 @@ class TabSici extends \projeto\db\ActiveRecord
     public function rules()
     {
         return [
-            [['cod_tipo_contrato_fk', 'qtd_funcionarios_fichados', 'qtd_funcionarios_terceirizados', 'num_central_atendimento', 'total_fibra_prestadora', 'total_fibra_terceiros', 'total_crescimento_prestadora', 'total_crescimento_terceiros', 'total_fibra_implantada_prestadora', 'total_fibra_implantada_terceiros', 'total_fibra_crescimento_prop_prestadora', 'total_fibra_crescimento_prop_terceiros', 'tipo_sici_fk', 'inclusao_usuario_fk', 'tipo_entrada_fk'], 'integer'],
+            [['cod_tipo_contrato_fk', 'qtd_funcionarios_fichados', 'qtd_funcionarios_terceirizados', 'num_central_atendimento', 'total_fibra_prestadora', 'total_fibra_terceiros', 'total_crescimento_prestadora', 'total_crescimento_terceiros', 'total_fibra_implantada_prestadora', 'total_fibra_implantada_terceiros', 'total_fibra_crescimento_prop_prestadora', 'total_fibra_crescimento_prop_terceiros', 'tipo_sici_fk', 'inclusao_usuario_fk', 'tipo_entrada_fk', 'situacao_fk'], 'integer'],
             [['receita_bruta', 'despesa_operacao_manutencao', 'despesa_publicidade', 'despesa_vendas', 'despesa_link', 'aliquota_nacional', 'receita_icms', 'receita_pis', 'receita_confins', 'receita_liquida', 'valor_consolidado', 'aplicacao_equipamento', 'total_marketing_propaganda', 'aplicacao_software', 'total_pesquisa_desenvolvimento', 'aplicacao_servico', 'aplicacao_callcenter', 'faturamento_de', 'faturamento_industrial', 'faturamento_adicionado'], 'number'],
             [['obs_receita', 'obs_despesa'], 'string'],
             [['dt_inclusao', 'dt_exclusao'], 'safe'],
+            [['receita_bruta_check', 'despesa_operacao_manutencao_check', 'despesa_publicidade_check', 'despesa_vendas_check', 'despesa_link_check', 'aliquota_nacional_check', 'receita_icms_check', 'receita_pis_check', 'receita_confins_check', 'receita_liquida_check', 'valor_consolidado_check', 'qtd_funcionarios_fichados_check', 'qtd_funcionarios_terceirizados_check', 'num_central_atendimento_check', 'total_fibra_prestadora_check', 'total_fibra_terceiros_check', 'total_crescimento_prestadora_check', 'total_crescimento_terceiros_check', 'total_fibra_implantada_prestadora_check', 'total_fibra_implantada_terceiros_check', 'total_fibra_crescimento_prop_prestadora_check', 'total_fibra_crescimento_prop_terceiros_check', 'aplicacao_equipamento_check', 'total_marketing_propaganda_check', 'aplicacao_software_check', 'total_pesquisa_desenvolvimento_check', 'aplicacao_servico_check', 'aplicacao_callcenter_check', 'faturamento_de_check', 'faturamento_industrial_check', 'faturamento_adicionado_check'], 'boolean'],
             [['mes_ano_referencia'], 'string', 'max' => 7],
             [['legenda'], 'string', 'max' => 30],
-            [['responsavel'], 'string', 'max' => 150],
-            [['cod_protocolo'], 'string', 'max' => 50]
+            [['responsavel'], 'string', 'max' => 150]
         ];
     }
 
@@ -132,7 +163,38 @@ class TabSici extends \projeto\db\ActiveRecord
             'tipo_sici_fk' => 'Tipo Sici Fk',
             'inclusao_usuario_fk' => 'Usuário',
             'tipo_entrada_fk' => 'tipo de entrada -> atributo tipo-entrada ',
-            'cod_protocolo' => 'Protocolo',
+            'situacao_fk' => 'Situação',
+            'receita_bruta_check' => 'Check Receita operacional bruta com serviço de SCM:',
+            'despesa_operacao_manutencao_check' => 'Check Despesas envolvendo operação e manutenção:',
+            'despesa_publicidade_check' => 'Check Despesas envolvendo publicidade',
+            'despesa_vendas_check' => 'Check Despesas envolvendo vendas',
+            'despesa_link_check' => 'Check Despesas envolvendo interconexão (link)',
+            'aliquota_nacional_check' => 'Check Alíquota do simples nacional',
+            'receita_icms_check' => 'Check ICMS',
+            'receita_pis_check' => 'Check PIS',
+            'receita_confins_check' => 'Check CONFINS',
+            'receita_liquida_check' => 'Check Receita operacional líquida',
+            'valor_consolidado_check' => 'Check Dado semestral - valor consolidado do investimento realizado',
+            'qtd_funcionarios_fichados_check' => 'Check Quantidade de empregados contratados diretamente na empresa (Fichados)',
+            'qtd_funcionarios_terceirizados_check' => 'Check Quantidade de empregados de empresas terceirizadas (terceiros)',
+            'num_central_atendimento_check' => 'Check Número do Centro de Atendimento Telefônico (0800 ou numero a cobrar)',
+            'total_fibra_prestadora_check' => 'Check Total de cabo de fibra otica de propriedade da Prestadora em KM',
+            'total_fibra_terceiros_check' => 'Check Total de cabo de fibra otica de propriedade de Terceiros em KM',
+            'total_crescimento_prestadora_check' => 'Check Crescimento previsto do cabo de fibra otica de propriedade da Prestadora em KM',
+            'total_crescimento_terceiros_check' => 'Check Crescimento previsto do cabo de fibra otica de propriedade de Terceiros em KM',
+            'total_fibra_implantada_prestadora_check' => 'Check Total de fibra otica implantada pela Prestadora em KM',
+            'total_fibra_implantada_terceiros_check' => 'Check Total de fibra otica implantada por Terceiros em KM',
+            'total_fibra_crescimento_prop_prestadora_check' => 'Check Crescimento previsto de cabo de fibra otica da Prestadora em KM',
+            'total_fibra_crescimento_prop_terceiros_check' => 'Check Crescimento previsto de cabo de fibra otica de Terceiros em KM',
+            'aplicacao_equipamento_check' => 'Check Aplicação em Equipamento',
+            'total_marketing_propaganda_check' => 'Check Valor total em reais de capital aplicado em Marketing/Propaganda',
+            'aplicacao_software_check' => 'Check Aplicação em Software',
+            'total_pesquisa_desenvolvimento_check' => 'Check Valor total em Reais de capital aplicado em P&D (Pesquisa e Desenvolvimento)',
+            'aplicacao_servico_check' => 'Check Aplicação em Serviços',
+            'aplicacao_callcenter_check' => 'Check Valor total em Reais de capital aplicado em Call-Center ou qualquer tipo de central de atendimento',
+            'faturamento_de_check' => 'Check Faturamento com prestação do serviço DE telecomunicações da empresa',
+            'faturamento_industrial_check' => 'Check Faturamento bruto decorrente do provimento de serviços de valor adicionado (não é parceria)',
+            'faturamento_adicionado_check' => 'Check Faturamento bruto decorrente do provimento de serviços de valor adicionado (não é parceria)',
         ];
     }
 
