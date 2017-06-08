@@ -97,19 +97,8 @@ class TabEmpresaMunicipioSearch extends TabEmpresaMunicipio {
                         ->where(['cod_sici_fk' => $cod_sici])->all();
 
         foreach ($empresa_municipio as $key => $value) {
-
-            $totais['total_512'] = (int) $value->total_512;
-            $totais['total_512k_2m'] = (int) $value->total_512k_2m;
-            $totais['total_2m_12m'] = (int) $value->total_2m_12m;
-            $totais['total_12m_34m'] = (int) $value->total_12m_34m;
-            $totais['total_34m'] = (int) $value->total_34m;
-            $totais['total_fisica'] = (int) $value->total_fisica;
-            $totais['total_juridica'] = (int) $value->total_juridica;
-            $totais['total'] = (int) $value->total = (int) $value->total_512 +
-                    (int) $value->total_34m +
-                    (int) $value->total_512k_2m +
-                    (int) $value->total_2m_12m +
-                    (int) $value->total_12m_34m;
+            
+           
 
 
             $planom = \app\modules\posoutorga\models\TabPlanosSearch::find()
@@ -128,7 +117,22 @@ class TabEmpresaMunicipioSearch extends TabEmpresaMunicipio {
                 $planoEmpresa[$value->tabMunicipios->cod_ibge]['tecnologia'][$value->tecnologia_fk][$pla['tipo_plano_sgl']] = $pla;
             }
             $planoEmpresa[$value->tabMunicipios->cod_ibge]['capacidade_servico'] = $value->capacidade_servico;
-            $planoEmpresa[$value->tabMunicipios->cod_ibge]['totais'] = $totais;
+            
+            $totais[$value->tabMunicipios->cod_ibge]['total_512'] += (int) $value->total_512;
+            $totais[$value->tabMunicipios->cod_ibge]['total_512k_2m'] += (int) $value->total_512k_2m;
+            $totais[$value->tabMunicipios->cod_ibge]['total_2m_12m'] += (int) $value->total_2m_12m;
+            $totais[$value->tabMunicipios->cod_ibge]['total_12m_34m'] += (int) $value->total_12m_34m;
+            $totais[$value->tabMunicipios->cod_ibge]['total_34m'] += (int) $value->total_34m;
+            $totais[$value->tabMunicipios->cod_ibge]['total_fisica'] += (int) $value->total_fisica;
+            $totais[$value->tabMunicipios->cod_ibge]['total_juridica'] += (int) $value->total_juridica;
+            $totais[$value->tabMunicipios->cod_ibge]['total'] += (int) $value->total = (int) $value->total_512 +
+                    (int) $value->total_34m +
+                    (int) $value->total_512k_2m +
+                    (int) $value->total_2m_12m +
+                    (int) $value->total_12m_34m;
+            
+            $planoEmpresa[$value->tabMunicipios->cod_ibge]['totais'] = $totais[$value->tabMunicipios->cod_ibge];
+
         }
 
         return $planoEmpresa;
@@ -215,11 +219,13 @@ class TabEmpresaMunicipioSearch extends TabEmpresaMunicipio {
     public static function getIPL3($cod_sici) {
 
         $dados = TabEmpresaMunicipioSearch::buscaPlanoEmpresasTecnologia($cod_sici);
+
         $planos = [];
         if ($dados) {
+          
             foreach ($dados as $munK => $municipio) {
-                $planos[$munK]['F']['total'] += $municipio['totais']['total_fisica'];
-                $planos[$munK]['J']['total'] += $municipio['totais']['total_juridica'];
+                $planos[$munK]['F']['total'] = $municipio['totais']['total_fisica'];
+                $planos[$munK]['J']['total'] = $municipio['totais']['total_juridica'];
                 /* foreach ($municipio as $tK => $tecnologia) {
                   print_r($tecnologia); exit;
 
@@ -236,8 +242,6 @@ class TabEmpresaMunicipioSearch extends TabEmpresaMunicipio {
                   } */
             }
         }
-
-
         return $planos;
     }
 
