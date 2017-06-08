@@ -30,7 +30,9 @@ class TabPlanosSearch extends TabPlanos {
         return [
             [['valor_512', 'valor_512k_2m', 'valor_2m_12m', 'valor_12m_34m', 'valor_34m'], 'number'],
             [['obs'], 'string'],
-            [['tipo_plano_fk', 'tipo_plano_sgl', 'cod_plano'], 'safe']
+            [['tipo_plano_fk', 'tipo_plano_sgl', 'cod_plano', 'valor_512_check',
+            'valor_512k_2m_check', 'valor_2m_12m_check', 'valor_12m_34m_check',
+            'valor_34m_check'], 'safe']
         ];
     }
 
@@ -144,8 +146,6 @@ class TabPlanosSearch extends TabPlanos {
             }
         }
     }
-
-  
 
     public function numerico() {
         $this->valor_512 = (int) $this->valor_512;

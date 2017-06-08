@@ -23,7 +23,10 @@ class TabEmpresaMunicipioSearch extends TabEmpresaMunicipio {
     public function rules() {
 
         $rules = [
-            [['total_512', 'total_512k_2m', 'total_2m_12m', 'total_12m_34m', 'total_34m', 'total_fisica', 'total_juridica', 'txt_nome', 'cod_modulo_fk'], 'safe'],
+            [['total_512', 'total_512k_2m', 'total_2m_12m', 'total_12m_34m', 'total_34m',
+            'total_fisica', 'total_juridica', 'txt_nome', 'cod_modulo_fk', 'cod_municipio_fk_check', 'capacidade_municipio_check', 'capacidade_servico_check',
+            'tecnologia_fk_check', 'total_check', 'total_fisica_check', 'total_juridica_check',
+            'uf_check'], 'safe'],
         ];
 
         return array_merge($rules, parent::rules());
@@ -95,14 +98,14 @@ class TabEmpresaMunicipioSearch extends TabEmpresaMunicipio {
 
         foreach ($empresa_municipio as $key => $value) {
 
-            $totais['total_512'] += (int) $value->total_512;
-            $totais['total_512k_2m'] += (int) $value->total_512k_2m;
-            $totais['total_2m_12m'] += (int) $value->total_2m_12m;
-            $totais['total_12m_34m'] += (int) $value->total_12m_34m;
-            $totais['total_34m'] += (int) $value->total_34m;
-            $totais['total_fisica'] += (int) $value->total_fisica;
-            $totais['total_juridica'] += (int) $value->total_juridica;
-            $totais['total'] += (int) $value->total = (int) $value->total_512 +
+            $totais['total_512'] = (int) $value->total_512;
+            $totais['total_512k_2m'] = (int) $value->total_512k_2m;
+            $totais['total_2m_12m'] = (int) $value->total_2m_12m;
+            $totais['total_12m_34m'] = (int) $value->total_12m_34m;
+            $totais['total_34m'] = (int) $value->total_34m;
+            $totais['total_fisica'] = (int) $value->total_fisica;
+            $totais['total_juridica'] = (int) $value->total_juridica;
+            $totais['total'] = (int) $value->total = (int) $value->total_512 +
                     (int) $value->total_34m +
                     (int) $value->total_512k_2m +
                     (int) $value->total_2m_12m +
@@ -175,7 +178,7 @@ class TabEmpresaMunicipioSearch extends TabEmpresaMunicipio {
         $tec = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tecnologia');
 
         $planos = [];
-    
+
         if ($dados) {
             foreach ($dados as $munK => $municipio) {
                 foreach ($municipio['tecnologia'] as $tK => $tecnologia) {
@@ -185,12 +188,12 @@ class TabEmpresaMunicipioSearch extends TabEmpresaMunicipio {
                             $planos[$munK][$tK]['QAIPL5SM'] = $municipio['capacidade_servico'];
 
                             $pessoa = $municipio['totais'];
-                            $planos[$munK][$t['cod_atributos_valores']]['total'] = $tecnologia['F']['total']+$tecnologia['J']['total'];
-                            $planos[$munK][$t['cod_atributos_valores']]['15'] = $tecnologia['F']['valor_512']+$tecnologia['J']['valor_512'];
-                            $planos[$munK][$t['cod_atributos_valores']]['16'] = $tecnologia['F']['valor_512k_2m']+$tecnologia['J']['valor_512k_2m'];
-                            $planos[$munK][$t['cod_atributos_valores']]['17'] = $tecnologia['F']['valor_2m_12m']+$tecnologia['J']['valor_2m_12m'];
-                            $planos[$munK][$t['cod_atributos_valores']]['18'] = $tecnologia['F']['valor_12m_34m']+$tecnologia['J']['valor_12m_34m'];
-                            $planos[$munK][$t['cod_atributos_valores']]['19'] = $tecnologia['F']['valor_34m']+$tecnologia['J']['valor_34m'];
+                            $planos[$munK][$t['cod_atributos_valores']]['total'] = $tecnologia['F']['total'] + $tecnologia['J']['total'];
+                            $planos[$munK][$t['cod_atributos_valores']]['15'] = $tecnologia['F']['valor_512'] + $tecnologia['J']['valor_512'];
+                            $planos[$munK][$t['cod_atributos_valores']]['16'] = $tecnologia['F']['valor_512k_2m'] + $tecnologia['J']['valor_512k_2m'];
+                            $planos[$munK][$t['cod_atributos_valores']]['17'] = $tecnologia['F']['valor_2m_12m'] + $tecnologia['J']['valor_2m_12m'];
+                            $planos[$munK][$t['cod_atributos_valores']]['18'] = $tecnologia['F']['valor_12m_34m'] + $tecnologia['J']['valor_12m_34m'];
+                            $planos[$munK][$t['cod_atributos_valores']]['19'] = $tecnologia['F']['valor_34m'] + $tecnologia['J']['valor_34m'];
                         } else {
                             if (!$planos[$munK][$t['cod_atributos_valores']]['total']) {
                                 $planos[$munK][$t['cod_atributos_valores']]['QAIPL5SM'] = 0;

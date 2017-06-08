@@ -18,7 +18,8 @@ class TabPlanosMenorMaiorSearch extends TabPlanosMenorMaior {
     public function rules() {
 
         $rules = [
-                //exemplo [['txt_nome', 'cod_modulo_fk'], 'required'],
+             [['valor_menos_1m_ded_check', 
+       'valor_menos_1m_check', 'valor_maior_1m_ded_check', 'valor_maior_1m_check'], 'safe'],
         ];
 
         return array_merge($rules, parent::rules());
