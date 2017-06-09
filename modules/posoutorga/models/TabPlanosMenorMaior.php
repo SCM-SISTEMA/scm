@@ -14,6 +14,10 @@ use Yii;
  * @property string $valor_maior_1m
  * @property integer $cod_sici_fk
  * @property integer $tipo_plano_fk
+ * @property boolean $valor_menos_1m_ded_check
+ * @property boolean $valor_menos_1m_check
+ * @property boolean $valor_maior_1m_ded_check
+ * @property boolean $valor_maior_1m_check
  *
  * @property TabSici $tabSici
  */
@@ -34,7 +38,8 @@ class TabPlanosMenorMaior extends \projeto\db\ActiveRecord
     {
         return [
             [['valor_menos_1m_ded', 'valor_menos_1m', 'valor_maior_1m_ded', 'valor_maior_1m'], 'number'],
-            [['cod_sici_fk', 'tipo_plano_fk'], 'integer']
+            [['cod_sici_fk', 'tipo_plano_fk'], 'integer'],
+            [['valor_menos_1m_ded_check', 'valor_menos_1m_check', 'valor_maior_1m_ded_check', 'valor_maior_1m_check'], 'boolean']
         ];
     }
 
@@ -52,6 +57,10 @@ class TabPlanosMenorMaior extends \projeto\db\ActiveRecord
             'cod_sici_fk' => 'Cod Sici Fk',
             'tipo_plano_fk' => 'atributos tipo-plano
 pessoa fisica / juridica',
+            'valor_menos_1m_ded_check' => 'check Menor preço por 1 Mbps (Dedicado)',
+            'valor_menos_1m_check' => 'check Menor preço por 1 Mbps (não dedicado)',
+            'valor_maior_1m_ded_check' => 'check Maior preço por 1 Mbps (dedicado)',
+            'valor_maior_1m_check' => 'check Maior preço por 1 Mbps (não dedicado)',
         ];
     }
 

@@ -29,6 +29,7 @@ use Yii;
  * @property boolean $total_check
  * @property boolean $total_fisica_check
  * @property boolean $total_juridica_check
+ * @property boolean $uf_check
  *
  * @property TabSici $tabSici
  * @property TabMunicipios $tabMunicipios
@@ -51,7 +52,7 @@ class TabEmpresaMunicipio extends \projeto\db\ActiveRecord
         return [
             [['capacidade_municipio', 'capacidade_servico', 'cod_sici_fk', 'tecnologia_fk'], 'integer'],
             [['total_512', 'total_512k_2m', 'total_2m_12m', 'total_12m_34m', 'total_34m', 'total_fisica', 'total_juridica'], 'number'],
-            [['cod_municipio_fk_check', 'capacidade_municipio_check', 'capacidade_servico_check', 'tecnologia_fk_check', 'total_check', 'total_fisica_check', 'total_juridica_check'], 'boolean'],
+            [['cod_municipio_fk_check', 'capacidade_municipio_check', 'capacidade_servico_check', 'tecnologia_fk_check', 'total_check', 'total_fisica_check', 'total_juridica_check', 'uf_check'], 'boolean'],
             [['cod_municipio_fk'], 'string', 'max' => 6],
             [['municipio'], 'string', 'max' => 45],
             [['uf'], 'string', 'max' => 2]
@@ -86,6 +87,7 @@ class TabEmpresaMunicipio extends \projeto\db\ActiveRecord
             'total_check' => 'Total Check',
             'total_fisica_check' => 'Total Fisica Check',
             'total_juridica_check' => 'Total Juridica Check',
+            'uf_check' => 'Uf Check',
         ];
     }
 
