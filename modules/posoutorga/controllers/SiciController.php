@@ -84,7 +84,6 @@ class SiciController extends Controller {
      * @return mixed
      */
     public function actionUpdate($id = null) {
-
         if ($id) {
 
             $sici = $this->findModel($id);
@@ -133,24 +132,29 @@ class SiciController extends Controller {
         if (!$planof)
             $planof = new \app\modules\posoutorga\models\TabPlanosSearch();
 
+        $planof_mn = \app\modules\posoutorga\models\TabPlanosMenorMaiorSearch::find()->where(['cod_sici_fk' => $sici->cod_sici, 'tipo_plano_fk' => \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-pessoa-plano', 'F')])->one();
+        if (!$planof_mn)
+            $planof_mn = new \app\modules\posoutorga\models\TabPlanosMenorMaiorSearch();
+
         $planoj = \app\modules\posoutorga\models\TabPlanosSearch::find()->where(['tipo_tabela_fk' => $sici->tableName(), 'cod_chave' => $sici->cod_sici, 'tipo_plano_fk' => \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-pessoa-plano', 'J')])->one();
         if (!$planoj)
             $planoj = new \app\modules\posoutorga\models\TabPlanosSearch();
 
-        $planof_mn = \app\modules\posoutorga\models\TabPlanosMenorMaiorSearch::find()->where(['cod_sici_fk' => $sici->cod_sici, 'tipo_plano_fk' => \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-pessoa-plano', 'F')])->one();
-        if (!$planof_mn)
-            $planof_mn = new \app\modules\posoutorga\models\TabPlanosMenorMaiorSearch();
+
         $planoj_mn = \app\modules\posoutorga\models\TabPlanosMenorMaiorSearch::find()->where(['cod_sici_fk' => $sici->cod_sici, 'tipo_plano_fk' => \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-pessoa-plano', 'J')])->one();
         if (!$planoj_mn)
             $planoj_mn = new \app\modules\posoutorga\models\TabPlanosMenorMaiorSearch();
 
-        if (Yii::$app->request->post()) {
 
+        if (Yii::$app->request->post()) {
             $transaction = Yii::$app->db->beginTransaction();
+
             try {
 
                 $post = Yii::$app->request->post();
+
                 $trataErros = function($erros) {
+
                     if ($erros) {
                         $erro = [];
                         foreach ($erros as $value) {
@@ -168,6 +172,8 @@ class SiciController extends Controller {
 
                 unset($post['TabSiciSearch']['cod_sici']);
                 $sici->attributes = $post['TabSiciSearch'];
+                $sici->validate();
+
                 if (!$sici->save()) {
                     if ($sici->errors) {
                         $erro = $trataErros($sici->errors);
@@ -208,6 +214,8 @@ class SiciController extends Controller {
                     $tipo_contrato->save();
 
                     $sici->cod_tipo_contrato_fk = $tipo_contrato->cod_tipo_contrato;
+                    $sici->calculaTotais();
+
                     $sici->save();
 
                     if (!$sici->save()) {
@@ -312,19 +320,21 @@ class SiciController extends Controller {
                 $planof->tipo_tabela_fk = $sici->tableName();
                 $planof->tipo_plano_fk = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-pessoa-plano', 'F');
                 $planof->cod_chave = $sici->cod_sici;
+
                 $planof->save();
+
 
                 $planof_mn->attributes = $post['TabPlanosMenorMaiorF'];
                 $planof_mn->tipo_plano_fk = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-pessoa-plano', 'F');
                 $planof_mn->cod_sici_fk = $sici->cod_sici;
                 $planof_mn->save();
 
+
                 $planoj->attributes = $post['TabPlanosJ'];
                 $planoj->tipo_tabela_fk = $sici->tableName();
                 $planoj->tipo_plano_fk = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-pessoa-plano', 'J');
                 $planoj->cod_chave = $sici->cod_sici;
                 $planoj->save();
-
                 $planoj_mn->attributes = $post['TabPlanosMenorMaiorJ'];
                 $planoj_mn->tipo_plano_fk = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-pessoa-plano', 'J');
                 $planoj_mn->cod_sici_fk = $sici->cod_sici;
@@ -899,7 +909,10 @@ class SiciController extends Controller {
         $root->appendChild($uploadSICI);
         $dom->appendChild($root);
 
-        $nome = \projeto\Util::retiraCaracter($cliente->cnpj) . '_' . $sici->cod_sici . '_' . str_replace('/', '', $sici->mes_ano_referencia) . '.xml';
+        $nome = 'SICI-' . str_replace('/', '', $sici->mes_ano_referencia) . '-' . str_replace(' ', '_', \projeto\Util::tirarAcentos($cliente->razao_social)). '-' . $sici->cod_sici . '.xml';
+       
+        
+        
         $url = sys_get_temp_dir() . "/" . $nome;
         $dom->save($url);
 
@@ -1575,17 +1588,7 @@ class SiciController extends Controller {
         $key += 5;
         $sici->obs_receita = trim($rowData[$key][0][2]);
         $sici->obs_despesa = trim($rowData[$key][0][13]);
-        $renda_bruta = \projeto\Util::decimalFormatForBank($sici->receita_bruta);
-        $sici->total_aliquota = \projeto\Util::decimalFormatToBank($renda_bruta * \projeto\Util::decimalFormatForBank($sici->aliquota_nacional) / 100);
-        $sici->total_icms = \projeto\Util::decimalFormatToBank($renda_bruta * ( \projeto\Util::decimalFormatForBank($sici->receita_icms) / 100) / 100);
-        $sici->total_pis = \projeto\Util::decimalFormatToBank($renda_bruta * ( \projeto\Util::decimalFormatForBank($sici->receita_pis) / 100) / 100);
-        $sici->total_confins = \projeto\Util::decimalFormatToBank($renda_bruta * ( \projeto\Util::decimalFormatForBank($sici->receita_confins) / 100) / 100);
 
-        $sici->receita_liquida = \projeto\Util::decimalFormatToBank($renda_bruta - (\projeto\Util::decimalFormatForBank($sici->total_aliquota) ));
-        $sici->total_despesa = \projeto\Util::decimalFormatToBank(\projeto\Util::decimalFormatForBank($sici->despesa_publicidade) +
-                        \projeto\Util::decimalFormatForBank($sici->despesa_operacao_manutencao) +
-                        \projeto\Util::decimalFormatForBank($sici->despesa_vendas) +
-                        \projeto\Util::decimalFormatForBank($sici->despesa_link));
 
         if ($anual) {
 //QUANTITATIVO DE FUNCIONÁRIOS
@@ -1801,6 +1804,8 @@ class SiciController extends Controller {
 
         $cliente->validate();
         $sici->tipo_entrada_fk = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-entrada', 'E');
+        $sici->calculaTotais();
+        
         $sici->validate();
         $erro = [];
         if ($sici->errors) {
