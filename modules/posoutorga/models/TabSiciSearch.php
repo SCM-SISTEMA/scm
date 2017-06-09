@@ -109,7 +109,7 @@ class TabSiciSearch extends TabSici {
     }
 
     public function beforeSave($insert) {
-        $this->verificarChecks();
+       // $this->verificarChecks();
         $this->receita_liquida = \projeto\Util::decimalFormatForBank($this->receita_liquida);
 
         return parent::beforeSave($insert);
