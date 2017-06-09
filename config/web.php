@@ -5,7 +5,7 @@ $db = require(__DIR__ . '/db-' . YII_ENV . '.php');
 
 $config = [
     'id' => 'sisscm',
-    'version' => '2017.003',
+    'version' => '2017.004',
     'name' => 'SCM Engenharia',
     'charset' => 'UTF-8',
     'language' => 'pt-BR',
