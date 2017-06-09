@@ -9,6 +9,79 @@ Projeto.prototype.sici = new (Projeto.extend({
         this.verificaCnpj();
         this.somenteNumero();
         this.totaisPlanos();
+        //// this.submitCheck();
+//        this.clickCheck();
+//        this.checkInicial();
+
+
+    }, checkInicial: function () {
+
+        $.each($("[id*=_check]"), function () {
+            if ($(this).val()) {
+                var divs = $(this).parent().parent().find("span");
+                divs.removeClass('checado_vermelho').addClass('checado_verde');
+
+            }
+        })
+
+
+
+    }
+    , submitCheck: function () {
+        $('#salvarSici').click(function (e) {
+            var $form = $('form');
+
+            if ($form.find("span[class='checado_vermelho']").length > 0) {
+
+                projeto.confirm('<div align="justify">O dados não estão totalmente checados.<br />Deseja realmente salvar?</div>', function () {
+                    $form.submit();
+                }, function () {
+                    return false;
+                });
+
+            } else {
+                $form.submit();
+            }
+            return false;
+        });
+
+
+    }
+    , clickCheck: function () {
+
+        $('.checado_vermelho a, checado_verde a').click(function ( ) {
+            var classes = $(this).parent().parent().parent().attr('class').split(' ');
+
+            var cl = classes[1].split('-');
+            if ($(this).parent().attr('class').indexOf('checado_vermelho') >= 0) {
+                $(this).parent().removeClass('checado_vermelho').addClass('checado_verde');
+                $('#' + cl[1] + '-' + cl[2] + '_check').val(1);
+
+            } else {
+                $('#' + cl[1] + '-' + cl[2] + '_check').val(0);
+                $(this).parent().removeClass('checado_verde').addClass('checado_vermelho');
+            }
+
+
+        });
+
+        $('.checado_vermelho_grid a, checado_verde_grid a').click(function ( ) {
+            var classes = $(this).parent().parent().parent().attr('class').split(' ');
+
+            var cl = classes[1].split('-');
+            if ($(this).parent().attr('class').indexOf('checado_vermelho') >= 0) {
+                $(this).parent().removeClass('checado_vermelho').addClass('checado_verde');
+                $('#' + cl[1] + '-' + cl[2] + '_check').val(1);
+
+            } else {
+                $('#' + cl[1] + '-' + cl[2] + '_check').val(0);
+                $(this).parent().removeClass('checado_verde').addClass('checado_vermelho');
+            }
+
+
+        });
+
+
 
     },
     verificaCnpj: function () {
@@ -111,8 +184,14 @@ Projeto.prototype.sici = new (Projeto.extend({
 
             var total = ($('#tabsicisearch-receita_bruta').val() * $('#tabsicisearch-aliquota_nacional').val()) / 100;
             $('#tabsicisearch-total_aliquota').val(Projeto.prototype.util.colocaFormatoMoeda(total));
-
-            var total = $('#tabsicisearch-receita_bruta').val() - Projeto.prototype.util.retiraFormatoMoeda($('#tabsicisearch-total_aliquota').val())
+            
+             if ( $('#tabsicisearch-aliquota_nacional').val() > 0) {
+                var total = $('#tabsicisearch-receita_bruta').val() - Projeto.prototype.util.retiraFormatoMoeda($('#tabsicisearch-total_aliquota').val())
+            } else {
+                
+                var total = $('#tabsicisearch-receita_bruta').val() - Projeto.prototype.util.retiraFormatoMoeda($('#tabsicisearch-total_pis').val())
+                        - Projeto.prototype.util.retiraFormatoMoeda($('#tabsicisearch-total_icms').val()) - Projeto.prototype.util.retiraFormatoMoeda($('#tabsicisearch-total_confins').val())
+            }
             $('#tabsicisearch-receita_liquida').val(Projeto.prototype.util.colocaFormatoMoeda(total));
 
         });
@@ -121,18 +200,36 @@ Projeto.prototype.sici = new (Projeto.extend({
 
             var total = (($('#tabsicisearch-receita_bruta').val() * $('#tabsicisearch-receita_icms').val()) / 100) / 100;
             $('#tabsicisearch-total_icms').val(Projeto.prototype.util.colocaFormatoMoeda(total));
+            if (!$('#tabsicisearch-aliquota_nacional').val() || $('#tabsicisearch-aliquota_nacional').val() <= 0) {
+                var total = $('#tabsicisearch-receita_bruta').val() - Projeto.prototype.util.retiraFormatoMoeda($('#tabsicisearch-total_pis').val())
+                        - Projeto.prototype.util.retiraFormatoMoeda($('#tabsicisearch-total_icms').val()) - Projeto.prototype.util.retiraFormatoMoeda($('#tabsicisearch-total_confins').val())
+                $('#tabsicisearch-receita_liquida').val(Projeto.prototype.util.colocaFormatoMoeda(total));
+            }
         });
 
         $('#tabsicisearch-receita_pis').change(function () {
 
             var total = (($('#tabsicisearch-receita_bruta').val() * $('#tabsicisearch-receita_pis').val()) / 100) / 100;
             $('#tabsicisearch-total_pis').val(Projeto.prototype.util.colocaFormatoMoeda(total));
+            if (!$('#tabsicisearch-aliquota_nacional').val() || $('#tabsicisearch-aliquota_nacional').val() <= 0) {
+                var total = $('#tabsicisearch-receita_bruta').val() - Projeto.prototype.util.retiraFormatoMoeda($('#tabsicisearch-total_pis').val())
+                        - Projeto.prototype.util.retiraFormatoMoeda($('#tabsicisearch-total_icms').val()) - Projeto.prototype.util.retiraFormatoMoeda($('#tabsicisearch-total_confins').val())
+
+                $('#tabsicisearch-receita_liquida').val(Projeto.prototype.util.colocaFormatoMoeda(total));
+            }
         });
 
         $('#tabsicisearch-receita_confins').change(function () {
 
             var total = (($('#tabsicisearch-receita_bruta').val() * $('#tabsicisearch-receita_confins').val()) / 100) / 100;
             $('#tabsicisearch-total_confins').val(Projeto.prototype.util.colocaFormatoMoeda(total));
+
+            if (!$('#tabsicisearch-aliquota_nacional').val() || $('#tabsicisearch-aliquota_nacional').val() <= 0) {
+                var total = $('#tabsicisearch-receita_bruta').val() - Projeto.prototype.util.retiraFormatoMoeda($('#tabsicisearch-total_pis').val())
+                        - Projeto.prototype.util.retiraFormatoMoeda($('#tabsicisearch-total_icms').val()) - Projeto.prototype.util.retiraFormatoMoeda($('#tabsicisearch-total_confins').val())
+
+                $('#tabsicisearch-receita_liquida').val(Projeto.prototype.util.colocaFormatoMoeda(total));
+            }
         });
 
         $('#tabsicisearch-receita_bruta').change(function () {
@@ -140,7 +237,12 @@ Projeto.prototype.sici = new (Projeto.extend({
             $('#tabsicisearch-receita_icms').change();
             $('#tabsicisearch-receita_pis').change();
             $('#tabsicisearch-receita_confins').change();
-            var total = $('#tabsicisearch-receita_bruta').val() - Projeto.prototype.util.retiraFormatoMoeda($('#tabsicisearch-total_aliquota').val())
+           if ($('#tabsicisearch-aliquota_nacional').val() > 0) {
+                var total = $('#tabsicisearch-receita_bruta').val() - Projeto.prototype.util.retiraFormatoMoeda($('#tabsicisearch-total_aliquota').val())
+            } else {
+                var total = $('#tabsicisearch-receita_bruta').val() - Projeto.prototype.util.retiraFormatoMoeda($('#tabsicisearch-total_pis').val())
+                        - Projeto.prototype.util.retiraFormatoMoeda($('#tabsicisearch-total_icms').val()) - Projeto.prototype.util.retiraFormatoMoeda($('#tabsicisearch-total_confins').val())
+            }
             $('#tabsicisearch-receita_liquida').val(Projeto.prototype.util.colocaFormatoMoeda(total));
         });
     },
