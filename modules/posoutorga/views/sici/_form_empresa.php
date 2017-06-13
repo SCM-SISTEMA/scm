@@ -9,8 +9,11 @@
             'options' => [
                 'class' => 'form-control'
             ],
-        ])->textInput(['maxlength' => true, 'disabled' => (($sici->cod_sici) ? true : false)])
+        ])->textInput([
+            
+            'maxlength' => true, 'disabled' => (($sici->cod_sici) ? true : false)])
         ?>
+       
     </div>
     <div class='col-lg-2'>
         <?= $form->field($cliente, 'fistel')->textInput(['maxlength' => true, 'class' => 'form-control somenteNumero', 'disabled' => (($sici->cod_sici) ? true : false)]) ?>

@@ -58,7 +58,7 @@ Projeto.prototype.distribuicao = new (Projeto.extend({
 
             $('#tabempresamunicipiosearch-' + result[1].replace('valor', 'total')).html(
                     '<b>' +
-                   total
+                    total
                     + '</b>'
                     );
 
@@ -73,7 +73,7 @@ Projeto.prototype.distribuicao = new (Projeto.extend({
 
             $("#tabempresamunicipiosearch" + nome_total).html(
                     '<b>' +
-                   total_outro
+                    total_outro
                     + '</b>'
                     );
 
@@ -116,6 +116,22 @@ Projeto.prototype.distribuicao = new (Projeto.extend({
                 $('#errorAuxiliares').hide();
                 $("#acessoFisicoAll").html(dados);
                 $('#modalAcessoFisico').modal('hide');
+                
+                $('#acessos-fisicos .checado_vermelho a,#acessos-fisicos  checado_verde a').click(function ( ) {
+                    var classes = $(this).parent().parent().parent().attr('class').split(' ');
+
+                    var cl = classes[1].split('-');
+                    if ($(this).parent().attr('class').indexOf('checado_vermelho') >= 0) {
+                        $(this).parent().removeClass('checado_vermelho').addClass('checado_verde');
+                        $('#' + cl[1] + '-' + cl[2] + '_check').val(1);
+
+                    } else {
+                        $('#' + cl[1] + '-' + cl[2] + '_check').val(0);
+                        $(this).parent().removeClass('checado_verde').addClass('checado_vermelho');
+                    }
+
+
+                });
 
             });
 

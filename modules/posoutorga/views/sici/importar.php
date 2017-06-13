@@ -3,23 +3,32 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\widgets\Pjax;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\admin\models\TabAcoes */
 /* @var $form yii\widgets\ActiveForm */
 
 //$this->registerJsFile("@web/js/app/posoutorga.sici.js?{$this->app->version}", ['position' => $this::POS_END, 'depends' => [\app\assets\SinisaAsset::className()]]);
+
+$btSave = Html::a('<i class="glyphicon glyphicon-ok"></i> Salvar', '#', ['id' => 'salvarSici', 'name' => 'importar', 'class' => 'btn btn-success btn-sm', 'style' => 'display:' . (($importacao) ? 'block' : 'none')]);
+$btSave2 = Html::a('<i class="glyphicon glyphicon-ok"></i> Salvar', '#', ['id' => 'salvarSici2', 'name' => 'importar', 'class' => 'btn btn-success btn-sm', 'style' => 'display:' . (($importacao) ? 'block' : 'none')]);
+$btVoltar = Html::a('<i class="glyphicon glyphicon-arrow-left"></i> Voltar', Url::to(['sici/index']), ['class' => 'btn btn-primary btn-sm']);
 ?>
 
 <div class="tab-acoes-form box box-default">
-    <?php $form = ActiveForm::begin([
-        'options' => ['enctype' => 'multipart/form-data']
-        ]); ?>
+    <?php
+    $form = ActiveForm::begin([
+                'options' => ['enctype' => 'multipart/form-data']
+    ]);
+    ?>
     <div class="box-header with-border">
         <h3 class="box-title"></h3>
         <div class="import box-tools">
+            <?= $btSave ?>
+
             <?= Html::submitButton('<i class="glyphicon glyphicon-ok"></i> ' . 'Carregar Planilha', ['style' => 'display:' . (($importacao) ? 'none' : 'block'), 'name' => 'abrir', 'class' => 'import btn btn-primary  btn-sm']) ?>
-            <?= Html::submitButton('<i class="glyphicon glyphicon-ok"></i> ' . 'Salvar', ['style' => 'display:' . (($importacao) ? 'block' : 'none' ), 'name' => 'importar', 'class' => 'import btn btn-success btn-sm']) ?>
+
         </div>
         <div class="box-body">
             <div class="row">
@@ -46,10 +55,13 @@ use yii\widgets\Pjax;
         <div class="box-footer">
             <h3 class="box-title"></h3>
             <div class="box-tools pull-right">
-            <?= Html::submitButton('<i class="glyphicon glyphicon-ok"></i> ' . 'Carregar Planilha', ['style' => 'display:' . (($importacao) ? 'none' : 'block'), 'name' => 'abrir', 'class' => 'import btn btn-primary  btn-sm']) ?>
-            <?= Html::submitButton('<i class="glyphicon glyphicon-ok"></i> ' . 'Salvar', ['style' => 'display:' . (($importacao) ? 'block' : 'none' ), 'name' => 'importar', 'class' => 'import btn btn-success btn-sm']) ?>            </div>
-        </div>
-        <?php ActiveForm::end(); ?>
+                <?= $btSave ?>
+                <?= Html::submitButton('<i class="glyphicon glyphicon-ok"></i> ' . 'Carregar Planilha', ['style' => 'display:' . (($importacao) ? 'none' : 'block'), 'name' => 'abrir', 'class' => 'import btn btn-primary  btn-sm']) ?>
+               
+            </div>
+            
 
+        </div>
     </div>
-</div>
+        <?php ActiveForm::end(); ?>
+  </div>

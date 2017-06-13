@@ -53,7 +53,7 @@ class ClienteController extends \app\controllers\ClienteController {
         if ($id) {
 
             $model = $this->findModel($id);
-            $contratos = \app\modules\comercial\models\TabContratoSearch::find()->where(['cod_cliente_fk'=>$model->cod_cliente])->all();
+            $contratos = \app\modules\comercial\models\TabContratoSearch::find()->where(['cod_cliente_fk' => $model->cod_cliente])->all();
             $acao = 'update';
             $this->titulo = 'Alterar Cliente';
             $this->subTitulo = '';
@@ -110,7 +110,7 @@ class ClienteController extends \app\controllers\ClienteController {
         }
 
         return $this->render('admin', [
-                    'model' => $model,$contratos, 'contratos'
+                    'model' => $model, $contratos, 'contratos'
         ]);
     }
 
@@ -574,8 +574,7 @@ class ClienteController extends \app\controllers\ClienteController {
 
                 $rowDatas = $sheet->rangeToArray('A' . $row . ':' . $highestColumn . $row, NULL, TRUE, FALSE);
 
-                $cliente = TabClienteSearch::findOne(['cnpj' => $rowDatas[0][2]]);
-
+                $cliente = TabClienteSearch::findOne(['cnpj' => trim($rowDatas[0][2])]);
                 if (!$cliente && $rowDatas[0][2]) {
                     $transaction = Yii::$app->db->beginTransaction();
 
@@ -770,6 +769,81 @@ class ClienteController extends \app\controllers\ClienteController {
                     $cliente->save();
 
                     $transaction->commit();
+                } else {
+                    if ($cliente) {
+                        $endereco = \app\models\TabEnderecoSearch::find()->where(['chave_fk' => $cliente->cod_cliente, 'tipo_tabela_fk' => $cliente->tableName()])->one();
+
+                        if (!$endereco) {
+                            $cliente->buscaCliente();
+
+                            if ($cliente->dadosReceita->logradouro) {
+                                $transaction = Yii::$app->db->beginTransaction();
+
+                                $endereco = new \app\models\TabEnderecoSearch();
+                                $endereco->logradouro = $cliente->dadosReceita->logradouro;
+                                $endereco->cep = $cliente->dadosReceita->cep;
+                                $endereco->complemento = $cliente->dadosReceita->complemento;
+                                $endereco->numero = $cliente->dadosReceita->numero;
+                                $endereco->bairro = $cliente->dadosReceita->bairro;
+                                $endereco->buscaCep();
+                                $endereco->tipo_tabela_fk = $cliente->tableName();
+                                $endereco->chave_fk = $cliente->cod_cliente;
+
+
+                                if (!$endereco->dadosCep->ibge) {
+
+                                    $nome = strtoupper(\projeto\Util::tirarAcentos($cliente->dadosReceita->municipio));
+
+                                    $uf = null;
+                                    if ($cliente->dadosReceita->uf) {
+                                        $uf = "AND sgl_estado_fk='{$cliente->dadosReceita->uf}'";
+                                    }
+
+                                    $municipio = \app\models\TabMunicipiosSearch::find()->where("(upper(txt_nome) ilike '%" . $nome . "%' or upper(txt_nome) ilike '%" . strtoupper($cliente->dadosReceita->municipio) . "%') $uf")->asArray()->one();
+
+                                    if ($municipio) {
+                                        $endereco->cod_municipio_fk = $municipio['cod_municipio'];
+                                    }
+                                } else {
+                                    $endereco->cod_municipio_fk = substr($endereco->dadosCep->ibge, 0, 6);
+                                }
+                                $endereco->save();
+                                $transaction->commit();
+                            } else {
+                                $transaction = Yii::$app->db->beginTransaction();
+
+                                $endereco = new \app\models\TabEnderecoSearch();
+                                $endereco->logradouro = $rowDatas[0][9];
+                                $endereco->cep = $rowDatas[0][13];
+                                $endereco->bairro = $rowDatas[0][10];
+                                $endereco->buscaCep();
+                                $endereco->tipo_tabela_fk = $cliente->tableName();
+                                $endereco->chave_fk = $cliente->cod_cliente;
+
+                                if (!$endereco->dadosCep->ibge) {
+
+                                    $nome = strtoupper(\projeto\Util::tirarAcentos($cliente->dadosReceita->municipio));
+
+                                    $uf = null;
+                                    if ($cliente->dadosReceita->uf) {
+                                        $uf = "AND sgl_estado_fk='{$cliente->dadosReceita->uf}'";
+                                    }
+
+                                    $municipio = \app\models\TabMunicipiosSearch::find()->where("(upper(txt_nome) ilike '%" . $nome . "%' or upper(txt_nome) ilike '%" . strtoupper($cliente->dadosReceita->municipio) . "%') $uf")->asArray()->one();
+
+                                    if ($municipio) {
+                                        $endereco->cod_municipio_fk = $municipio['cod_municipio'];
+                                    }
+                                } else {
+                                    $endereco->cod_municipio_fk = substr($endereco->dadosCep->ibge, 0, 6);
+                                }
+                                $endereco->save();
+                                $transaction->commit();
+                                
+                            }
+                        }
+                    }
+                    // $cliente->save();
                 }
             }
 

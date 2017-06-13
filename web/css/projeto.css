@@ -438,51 +438,51 @@ body .form-group .help-block {
  * Cabeçalho da coleta e informações sobre preenchimento
  */
 .forms-coleta .info-box {
-	min-height: 50px;
-	min-width: 50px;
+    min-height: 50px;
+    min-width: 50px;
 }
 .forms-coleta .info-box-icon {	
-	height: 50px;
-	width: 50px;
-	min-height: 50px;
-	line-height: 50px;
-	font-size: 22px;
+    height: 50px;
+    width: 50px;
+    min-height: 50px;
+    line-height: 50px;
+    font-size: 22px;
 }
 .forms-coleta .info-box-content {	
-	padding: 0px 10px 0px 10px;	
-	margin: 0px 0px 0px 50px;
+    padding: 0px 10px 0px 10px;	
+    margin: 0px 0px 0px 50px;
 }
 .forms-coleta .info-box-content-titulo {
-	padding: 10px;
-	margin: 0px 0px 0px 50px;
+    padding: 10px;
+    margin: 0px 0px 0px 50px;
 }
 .forms-coleta .info-box-number {
-	font-size: 15px;
+    font-size: 15px;
 }
 .forms-coleta .info-box-number-titulo {
-	font-size: 20px;
+    font-size: 20px;
 }
 .forms-coleta .info-box-text {
-	font-size: 13px;
+    font-size: 13px;
 }
 .forms-coleta .form-control-info {
-	background-color: #fff;
-	background-image: none;
-	border: 1px solid #ccc;
-	border-radius: 2px;
-	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
-	color: #555;
-	display: block;
-	font-size: 14px;
-	height: 50px;
-	line-height: 1.42857;
-	padding: 0px 12px;
-	transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
-	width: 100%;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+    color: #555;
+    display: block;
+    font-size: 14px;
+    height: 50px;
+    line-height: 1.42857;
+    padding: 0px 12px;
+    transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+    width: 100%;
 }
 .forms-coleta .box-cabecalho {
-	padding-right: 2px;
-	padding-left: 2px;
+    padding-right: 2px;
+    padding-left: 2px;
 }
 /**
  * END - Cabeçalho da coleta e informações sobre preenchimento
@@ -505,5 +505,26 @@ body .form-group .help-block {
 }
 
 .login-box {
-	width: 380px;
+    width: 380px;
+}
+
+.checado_vermelho i{
+    
+    font-size: 18px;
+    color: #dd4b39;
+}
+
+.checado_verde i{
+    padding: 0px;
+    font-size: 18px;
+    color: #00a65a;
+}
+
+.checado_vermelho, .checado_verde{
+    padding: 0px;
+
+}
+.addonlink{
+    padding: 6px 12px;
+    text-align: center;
 }

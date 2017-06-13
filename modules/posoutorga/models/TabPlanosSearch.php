@@ -155,4 +155,6 @@ class TabPlanosSearch extends TabPlanos {
         $this->valor_34m = (int) $this->valor_34m;
     }
 
+   
+
 }

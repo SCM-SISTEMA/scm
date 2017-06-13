@@ -7,7 +7,7 @@
             'items' => [
                 [
                     'label' => "<b style=\"color:#337ab7\">FÍSICA</b>",
-                    'content' => $this->render('_form_planos_fisico', compact('planoj', 'planof', 'planof_mn', 'planoj_mn', 'form')),
+                    'content' => $this->render('_form_planos_fisico', compact('planoj', 'planof', 'planof_mn', 'planoj_mn', 'form', 'addon')),
                     'active' => true,
                 ],
             ],
@@ -26,7 +26,7 @@
             'items' => [
                 [
                     'label' => "<b style=\"color:#337ab7\">JURÍDICA</b>",
-                    'content' => $this->render('_form_planos_juridico', compact('planoj', 'planof', 'planof_mn', 'planoj_mn', 'form')),
+                    'content' => $this->render('_form_planos_juridico', compact('planoj', 'planof', 'planof_mn', 'planoj_mn', 'form', 'addon')),
                     'active' => true,
                 ],
             ],

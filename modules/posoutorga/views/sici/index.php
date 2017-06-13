@@ -34,7 +34,18 @@ $btImportar = Html::a('<i class="fa fa-file-excel-o"></i> Importar Planilha ', [
                 'fistel',
                 'mes_ano_referencia',
                 'usuario_inclusao_sici',
+
+              [
+					'attribute' => 'dsc_situacao',
+					'content' => function($data) {
+                                                $cor = ($data->situacao_fk == \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('situacao-sici', 'C')) ? 'text-green' : 'text-yellow';
+						return  "<div class='{$cor}'>".$data->dsc_situacao.'</div>';
+					},
+					
+					'filter' => app\models\TabAtributosValoresSearch::getAtributoValor(\app\models\TabAtributosSearch::findOne(['sgl_chave'=>'situacao-sici'])->cod_atributos),
+				],
                 ['class' => 'projeto\grid\ActionColumn',
+                    'headerOptions' => ['style' => 'width:60px;'],
                     'template' => '{update} {delete} {gerar}',
                     'buttons' => [
                         'view' => function ($action, $model, $key) {
@@ -67,12 +78,13 @@ $btImportar = Html::a('<i class="fa fa-file-excel-o"></i> Importar Planilha ', [
                             ]);
                         },
                         'gerar' => function ($action, $model, $key) {
-
-                            return Html::a('<span class="fa fa-file-excel-o"></span>', Url::to(['sici/gerar', 'cod_sici' => $model->cod_sici]), [
-                                        'data-method' => 'post',
-                                        'data-toggle' => 'tooltip',
-                                        'title' => 'Gerar XML',
-                            ]);
+                            if ($model->situacao_fk == \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('situacao-sici', 'C')) {
+                                return Html::a('<span class="fa fa-file-excel-o"></span>', Url::to(['sici/gerar', 'cod_sici' => $model->cod_sici]), [
+                                            'data-method' => 'post',
+                                            'data-toggle' => 'tooltip',
+                                            'title' => 'Gerar XML',
+                                ]);
+                            }
                         },
                     ]
                 ],

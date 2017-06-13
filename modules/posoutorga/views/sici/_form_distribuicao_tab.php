@@ -20,8 +20,8 @@
     kartik\tabs\TabsX::widget([
         'items' => [
             [
-                'label' => "<b style=\"color:#337ab7\">{$nome} - {$uf}</b>",
-                'content' => '<div id="acessoFisico">'.$this->render('_form_distribuicao_municipio', compact('empresa', 'form')).'</div>',
+                'label' => "<b style=\"color:#337ab7\">{$i} - {$nome}/{$uf}</b>",
+                'content' => '<div id="acessoFisico">'.$this->render('_form_distribuicao_municipio', compact('empresa', 'form', 'addon')).'</div>',
                 'active' => true,
             ],
         ],

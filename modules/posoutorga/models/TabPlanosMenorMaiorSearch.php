@@ -18,8 +18,8 @@ class TabPlanosMenorMaiorSearch extends TabPlanosMenorMaior {
     public function rules() {
 
         $rules = [
-             [['valor_menos_1m_ded_check', 
-       'valor_menos_1m_check', 'valor_maior_1m_ded_check', 'valor_maior_1m_check'], 'safe'],
+            [['valor_menos_1m_ded_check',
+            'valor_menos_1m_check', 'valor_maior_1m_ded_check', 'valor_maior_1m_check'], 'safe'],
         ];
 
         return array_merge($rules, parent::rules());
@@ -81,7 +81,7 @@ class TabPlanosMenorMaiorSearch extends TabPlanosMenorMaior {
   FROM public.tab_atributos_valores
   where cod_atributos_valores=tipo_plano_fk) as tipo_plano_sgl')->where(['cod_sici_fk' => $cod_sici])->orderBy('tipo_plano_sgl')->asArray()->all();
 
- 
+
         foreach ($planos as $valor) {
 
             foreach ($valor as $key => $value) {
@@ -101,11 +101,11 @@ class TabPlanosMenorMaiorSearch extends TabPlanosMenorMaior {
                 $dados[$valor['tipo_plano_sgl']][$item] = $value;
             }
         }
- 
+
         return $dados;
     }
 
-       public function setIEM10($dom, $tipo_plano_sgl) {
+    public function setIEM10($dom, $tipo_plano_sgl) {
 
         foreach ($dom->getElementsByTagName('Pessoa') as $pessoa) {
 
@@ -122,7 +122,6 @@ class TabPlanosMenorMaiorSearch extends TabPlanosMenorMaior {
                             break;
                         case 'd': $this->valor_maior_1m_ded = \projeto\Util::decimalFormatForBank($conteudo->getAttribute('valor'));
                             break;
-                        
                     }
                 }
             }
@@ -130,5 +129,5 @@ class TabPlanosMenorMaiorSearch extends TabPlanosMenorMaior {
     }
 
 
-    
+
 }

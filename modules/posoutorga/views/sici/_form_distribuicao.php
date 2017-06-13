@@ -5,14 +5,16 @@
     'id' => 'addAcesso',
     'onclick' => 'adicionar()',
 ])
+      
 ?>
-
+<?php  $i=1; ?>
 <div id="acessoFisico">
     <?php if ($empresas) : ?>
         <?php foreach ($empresas as $key => $empresa) : ?>
-            <?php echo $this->render('_form_distribuicao_tab', compact('empresa', 'sici', 'form', 'key')); ?>
+            <?php echo $this->render('_form_distribuicao_tab', compact('empresa', 'sici', 'form', 'key', 'addon', 'i')); ?>
 
             <hr/>
+            <?php  $i++; ?>
         <?php endforeach; ?>
     <?php else : ?>
         <div class='row'>

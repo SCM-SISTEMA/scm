@@ -97,8 +97,8 @@ class TabEmpresaMunicipioSearch extends TabEmpresaMunicipio {
                         ->where(['cod_sici_fk' => $cod_sici])->all();
 
         foreach ($empresa_municipio as $key => $value) {
-            
-           
+
+
 
 
             $planom = \app\modules\posoutorga\models\TabPlanosSearch::find()
@@ -117,7 +117,7 @@ class TabEmpresaMunicipioSearch extends TabEmpresaMunicipio {
                 $planoEmpresa[$value->tabMunicipios->cod_ibge]['tecnologia'][$value->tecnologia_fk][$pla['tipo_plano_sgl']] = $pla;
             }
             $planoEmpresa[$value->tabMunicipios->cod_ibge]['capacidade_servico'] = $value->capacidade_servico;
-            
+
             $totais[$value->tabMunicipios->cod_ibge]['total_512'] += (int) $value->total_512;
             $totais[$value->tabMunicipios->cod_ibge]['total_512k_2m'] += (int) $value->total_512k_2m;
             $totais[$value->tabMunicipios->cod_ibge]['total_2m_12m'] += (int) $value->total_2m_12m;
@@ -130,9 +130,8 @@ class TabEmpresaMunicipioSearch extends TabEmpresaMunicipio {
                     (int) $value->total_512k_2m +
                     (int) $value->total_2m_12m +
                     (int) $value->total_12m_34m;
-            
-            $planoEmpresa[$value->tabMunicipios->cod_ibge]['totais'] = $totais[$value->tabMunicipios->cod_ibge];
 
+            $planoEmpresa[$value->tabMunicipios->cod_ibge]['totais'] = $totais[$value->tabMunicipios->cod_ibge];
         }
 
         return $planoEmpresa;
@@ -222,7 +221,7 @@ class TabEmpresaMunicipioSearch extends TabEmpresaMunicipio {
 
         $planos = [];
         if ($dados) {
-          
+
             foreach ($dados as $munK => $municipio) {
                 $planos[$munK]['F']['total'] = $municipio['totais']['total_fisica'];
                 $planos[$munK]['J']['total'] = $municipio['totais']['total_juridica'];

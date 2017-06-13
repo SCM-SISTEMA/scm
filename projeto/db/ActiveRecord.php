@@ -38,9 +38,8 @@ class ActiveRecord extends \yii\db\ActiveRecord {
         if ($this->getTableSchema()->columns) {
             foreach ($this->getTableSchema()->columns as $key => $value) {
                 if ($value->type == 'date' && $this->$key) {
-                   
+
                     $this->$key = self::formataDataDoBanco($this->$key);
-                    
                 }
             }
         }
@@ -51,19 +50,18 @@ class ActiveRecord extends \yii\db\ActiveRecord {
 
         if ($this->getTableSchema()->columns) {
             foreach ($this->getTableSchema()->columns as $key => $value) {
-                
-                if($value->name=='inclusao_usuario_fk'){
+
+                if ($value->name == 'inclusao_usuario_fk') {
                     $this->$key = $this->user->identity->getId();
                 }
-                
+
                 if ($value->type == 'date' && $this->$key) {
-                    
-                   ;// $this->$key = self::formataDataParaBanco($this->$key);
-                    
+
+                    ; // $this->$key = self::formataDataParaBanco($this->$key);
                 }
             }
         }
-        
+
         return parent::beforeSave($insert);
     }
 
@@ -124,6 +122,30 @@ class ActiveRecord extends \yii\db\ActiveRecord {
             ;
             $this->$attrDsc = $r['dsc_descricao'];
         }
+    }
+
+    public function verificarChecks($checado = true) {
+
+        $checar = function ($vals, $checado) {
+
+            foreach ($vals as $key => $val) {
+                
+                if (strpos($key, '_check') !== false) {
+                    
+                    if(!$checado){
+                        $this->$key = true;
+                    }
+                    
+                    if ($this->$key == false) {
+                        return false;
+                    }
+                }
+            }
+
+            return true;
+        };
+
+        return $checar($this->attributes, $checado);
     }
 
 }

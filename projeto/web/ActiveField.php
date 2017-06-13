@@ -9,7 +9,7 @@ class ActiveField extends \kartik\form\ActiveField {
 	use \projeto\Atalhos;
 
 	public $options = ['class' => 'form-group has-default-2'];
-	public $template = "{label}\n{input}\n{error}\n{hint}";
+	public $template = "{label}\n{input} - \n{error}\n{hint}";
 	public $marginRightError = '15px';
 
 	//public $hintOptions		 = ['class' => 'hint-block alert alert-info'];

@@ -10,10 +10,13 @@ use yii\helpers\Url;
 
 //$this->registerJsFile("@web/js/app/posoutorga.sici.js?{$this->app->version}", ['position' => $this::POS_END, 'depends' => [\app\assets\SinisaAsset::className()]]);
 
-$btSave = Html::submitButton('<i class="glyphicon glyphicon-ok"></i> ' . 'Salvar', ['name' => 'abrir', 'class' => 'btn btn-success btn-sm']);
-$btVoltar = Html::a('<i class="glyphicon glyphicon-arrow-left"></i> Voltar', Yii::$app->request->referrer, ['class' => 'btn btn-primary btn-sm']);
+//$btSave = Html::submitButton('<i class="glyphicon glyphicon-ok"></i> ' . 'Salvar', ['name' => 'abrir', 'class' => 'btn btn-success btn-sm']);
 
-if (!$importacao['sici']->isNewRecord) {
+$btSave = Html::a('<i class="glyphicon glyphicon-ok"></i> Salvar','#', ['id'=>'salvarSici','name' => 'salvarSici', 'class' => 'btn btn-success btn-sm']);
+$btSave2 = Html::a('<i class="glyphicon glyphicon-ok"></i> Salvar','#', ['id'=>'salvarSici2','name' => 'salvarSici2', 'class' => 'btn btn-success btn-sm']);
+$btVoltar = Html::a('<i class="glyphicon glyphicon-arrow-left"></i> Voltar',Url::to(['sici/index']), ['class' => 'btn btn-primary btn-sm']);
+
+if (!$importacao['sici']->isNewRecord && $importacao['sici']->situacao_fk == \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('situacao-sici', 'C')) {
     $btXml = Html::a('<i class="fa fa-code"></i> Gerar XML', Url::to(['sici/gerar', 'cod_sici' => $importacao['sici']->cod_sici]), ['class' => 'btn btn-default btn-sm']);
 }
 ?>
@@ -40,7 +43,7 @@ if (!$importacao['sici']->isNewRecord) {
         <div class="box-footer">
             <h3 class="box-title"></h3>
             <div class="box-tools pull-right">
-                <?= $btSave; ?>
+                <?= $btSave2; ?>
                 <?= $btXml ?>
                 <?= $btVoltar ?>
             </div>

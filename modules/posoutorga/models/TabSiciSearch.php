@@ -33,7 +33,15 @@ class TabSiciSearch extends TabSici {
             [['file', 'cod_sici', 'cod_tipo_contrato_fk', 'qtd_funcionarios_fichados', 'qtd_funcionarios_terceirizados', 'num_central_atendimento', 'total_fibra_prestadora', 'total_fibra_terceiros', 'total_crescimento_prestadora', 'total_crescimento_terceiros', 'total_fibra_implantada_prestadora', 'total_fibra_implantada_terceiros', 'total_fibra_crescimento_prop_prestadora', 'total_fibra_crescimento_prop_terceiros',
             'receita_bruta', 'qntAcesso', 'tipo_entrada_fk', 'tipo_sici_fk', 'despesa_operacao_manutencao', 'mes_ano_referencia', 'legenda', 'responsavel', 'despesa_publicidade', 'despesa_vendas', 'despesa_link', 'aliquota_nacional', 'receita_icms', 'receita_pis', 'receita_confins', 'receita_liquida', 'valor_consolidado', 'aplicacao_equipamento', 'total_marketing_propaganda', 'aplicacao_software', 'total_pesquisa_desenvolvimento', 'aplicacao_servico', 'aplicacao_callcenter', 'faturamento_de', 'faturamento_industrial', 'faturamento_adicionado'
             , 'tipo_sici_fk', 'inclusao_usuario_fk', 'tipo_entrada_fk', 'situacao_fk'
-            , 'receita_bruta_check', 'despesa_operacao_manutencao_check', 'despesa_publicidade_check', 'despesa_vendas_check', 'despesa_link_check', 'aliquota_nacional_check', 'receita_icms_check', 'receita_pis_check', 'receita_confins_check', 'receita_liquida_check', 'valor_consolidado_check', 'qtd_funcionarios_fichados_check', 'qtd_funcionarios_terceirizados_check', 'num_central_atendimento_check', 'total_fibra_prestadora_check', 'total_fibra_terceiros_check', 'total_crescimento_prestadora_check', 'total_crescimento_terceiros_check', 'total_fibra_implantada_prestadora_check', 'total_fibra_implantada_terceiros_check', 'total_fibra_crescimento_prop_prestadora_check', 'total_fibra_crescimento_prop_terceiros_check', 'aplicacao_equipamento_check', 'total_marketing_propaganda_check', 'aplicacao_software_check', 'total_pesquisa_desenvolvimento_check', 'aplicacao_servico_check', 'aplicacao_callcenter_check', 'faturamento_de_check', 'faturamento_industrial_check', 'faturamento_adicionado_check'
+            , 'receita_bruta_check', 'despesa_operacao_manutencao_check', 'despesa_publicidade_check', 'despesa_vendas_check',
+            'despesa_link_check', 'aliquota_nacional_check', 'receita_icms_check', 'receita_pis_check', 'receita_confins_check',
+            'receita_liquida_check', 'valor_consolidado_check', 'qtd_funcionarios_fichados_check', 'qtd_funcionarios_terceirizados_check',
+            'num_central_atendimento_check', 'total_fibra_prestadora_check', 'total_fibra_terceiros_check', 'total_fibra_crescimento_prop_terceiros_check',
+            'total_crescimento_prestadora_check', 'total_crescimento_terceiros_check',
+            'total_fibra_implantada_terceiros_check', 'total_fibra_crescimento_prop_prestadora_check',
+            'aplicacao_equipamento_check', 'total_marketing_propaganda_check',
+            'aplicacao_software_check', 'total_pesquisa_desenvolvimento_check', 'aplicacao_servico_check', 'total_fibra_implantada_prestadora_check',
+            'aplicacao_callcenter_check', 'faturamento_de_check', 'faturamento_industrial_check', 'faturamento_adicionado_check'
                 ], 'safe'],
             [['obs_receita', 'obs_despesa'], 'string'],
             [['mes_ano_referencia'], 'required'],
@@ -109,7 +117,6 @@ class TabSiciSearch extends TabSici {
     }
 
     public function beforeSave($insert) {
-       // $this->verificarChecks();
         $this->receita_liquida = \projeto\Util::decimalFormatForBank($this->receita_liquida);
 
         return parent::beforeSave($insert);
@@ -315,7 +322,7 @@ class TabSiciSearch extends TabSici {
                         $this->total_marketing_propaganda + $this->total_marketing_propaganda);
     }
 
-    public function verificarChecks() {
+    public function verificarChecks($checado = true) {
         $mensal = ['receita_bruta_check', 'despesa_operacao_manutencao_check', 'despesa_publicidade_check', 'despesa_vendas_check', 'despesa_link_check', 'aliquota_nacional_check',
             'receita_icms_check', 'receita_pis_check', 'receita_confins_check', 'receita_liquida_check', 'valor_consolidado_check'];
 
@@ -330,13 +337,19 @@ class TabSiciSearch extends TabSici {
         $tipo_sici_fk = \app\models\TabAtributosValoresSearch::findOne(['cod_atributos_valores' => $this->tipo_sici_fk]);
 
 
-        $checar = function ($vals) {
+        $checar = function ($vals, $checado) {
             foreach ($vals as $val) {
+                
+                if (!$checado) {
+                    $this->$val = true;
+                }
+                
                 if ($this->$val == false) {
-                    $this->situacao_fk = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('situacao-sici', 'S');
+                    $this->situacao_fk = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('situacao-sici', 'P');
                     return false;
                 }
             }
+
             $this->situacao_fk = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('situacao-sici', 'C');
             return true;
         };
@@ -352,8 +365,7 @@ class TabSiciSearch extends TabSici {
                 $ver = $mensal;
                 break;
         }
-
-        return $checar($ver);
+        return $checar($ver, $checado);
     }
 
 }

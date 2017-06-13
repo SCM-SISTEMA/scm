@@ -5,7 +5,7 @@
 <div class='row'>
     <div class='col-lg-12'>
         <?=
-        $form->field($planof, 'valor_512')->textInput(['id' => 'tabplanosf-valor_512', 'name' => 'TabPlanosF[valor_512]'])->widget(\kartik\money\MaskMoney::className(), [
+        $form->field($planof, 'valor_512', $addon)->textInput(['id' => 'tabplanosf-valor_512', 'name' => 'TabPlanosF[valor_512]'])->widget(\kartik\money\MaskMoney::className(), [
             'pluginOptions' => [
                 'thousands' => '.',
                 'decimal' => ',',
@@ -16,12 +16,13 @@
             ],
         ]);
         ?>
+        <?= $form->field($planof, 'valor_512_check')->hiddenInput(['id' => 'tabplanosf-valor_512_check', 'name' => 'TabPlanosF[valor_512_check]'])->label(false); ?>
     </div>
 </div>
 <div class='row'>
     <div class='col-lg-12'>
         <?=
-        $form->field($planof, 'valor_512k_2m')->textInput(['id' => 'tabplanosf-valor_512k_2m', 'name' => 'TabPlanosF[valor_512k_2m]'])->widget(\kartik\money\MaskMoney::className(), [
+        $form->field($planof, 'valor_512k_2m', $addon)->textInput(['id' => 'tabplanosf-valor_512k_2m', 'name' => 'TabPlanosF[valor_512k_2m]'])->widget(\kartik\money\MaskMoney::className(), [
             'pluginOptions' => [
                 'thousands' => '.',
                 'decimal' => ',',
@@ -32,12 +33,13 @@
             ],
         ]);
         ?>
+        <?= $form->field($planof, 'valor_512k_2m_check')->hiddenInput(['id' => 'tabplanosf-valor_512k_2m_check', 'name' => 'TabPlanosF[valor_512k_2m_check]'])->label(false); ?>
     </div>
 </div>
 <div class='row'>
     <div class='col-lg-12'>
         <?=
-        $form->field($planof, 'valor_2m_12m')->textInput(['id' => 'tabplanosf-valor_2m_12m', 'name' => 'TabPlanosF[valor_2m_12m]'])->widget(\kartik\money\MaskMoney::className(), [
+        $form->field($planof, 'valor_2m_12m', $addon)->textInput(['id' => 'tabplanosf-valor_2m_12m', 'name' => 'TabPlanosF[valor_2m_12m]'])->widget(\kartik\money\MaskMoney::className(), [
             'pluginOptions' => [
                 'thousands' => '.',
                 'decimal' => ',',
@@ -48,12 +50,13 @@
             ],
         ]);
         ?>
+         <?= $form->field($planof, 'valor_2m_12m_check')->hiddenInput(['id' => 'tabplanosf-valor_2m_12m_check', 'name' => 'TabPlanosF[valor_2m_12m_check]'])->label(false); ?>
     </div>
 </div>
 <div class='row'>
     <div class='col-lg-12'>
         <?=
-        $form->field($planof, 'valor_12m_34m')->textInput(['id' => 'tabplanosf-valor_12m_34m', 'name' => 'TabPlanosF[valor_12m_34m]'])->widget(\kartik\money\MaskMoney::className(), [
+        $form->field($planof, 'valor_12m_34m', $addon)->textInput(['id' => 'tabplanosf-valor_12m_34m', 'name' => 'TabPlanosF[valor_12m_34m]'])->widget(\kartik\money\MaskMoney::className(), [
             'pluginOptions' => [
                 'thousands' => '.',
                 'decimal' => ',',
@@ -64,12 +67,13 @@
             ],
         ]);
         ?>
+        <?= $form->field($planof, 'valor_12m_34m_check')->hiddenInput(['id' => 'tabplanosf-valor_12m_34m_check', 'name' => 'TabPlanosF[valor_12m_34m_check]'])->label(false); ?>
     </div>
 </div>
 <div class='row'>
     <div class='col-lg-12'>
         <?=
-        $form->field($planof, 'valor_34m')->textInput(['id' => 'tabplanosf-valor_34m', 'name' => 'TabPlanosF[valor_34m]'])->widget(\kartik\money\MaskMoney::className(), [
+        $form->field($planof, 'valor_34m', $addon)->textInput(['id' => 'tabplanosf-valor_34m', 'name' => 'TabPlanosF[valor_34m]'])->widget(\kartik\money\MaskMoney::className(), [
             'pluginOptions' => [
                 'thousands' => '.',
                 'decimal' => ',',
@@ -80,6 +84,7 @@
             ],
         ]);
         ?>
+          <?= $form->field($planof, 'valor_34m_check')->hiddenInput(['id' => 'tabplanosf-valor_34m_check', 'name' => 'TabPlanosF[valor_34m_check]'])->label(false); ?>
     </div>
 </div>
 
@@ -94,7 +99,7 @@
 
     <div class='col-lg-12'>
         <?=
-        $form->field($planof_mn, 'valor_menos_1m_ded')->textInput(['id' => 'tabplanosmenormaiorf-valor_menos_1m_ded', 'name' => 'TabPlanosMenorMaiorF[valor_menos_1m_ded]'])->widget(\kartik\money\MaskMoney::className(), [
+        $form->field($planof_mn, 'valor_menos_1m_ded', $addon)->textInput(['id' => 'tabplanosmenormaiorf-valor_menos_1m_ded', 'name' => 'TabPlanosMenorMaiorF[valor_menos_1m_ded]'])->widget(\kartik\money\MaskMoney::className(), [
             'pluginOptions' => [
                 'thousands' => '.',
                 'decimal' => ',',
@@ -105,13 +110,14 @@
             ],
         ]);
         ?>
+        <?= $form->field($planof_mn, 'valor_menos_1m_ded_check')->hiddenInput(['id' => 'tabplanosmenormaiorf-valor_menos_1m_ded_check', 'name' => 'TabPlanosMenorMaiorF[valor_menos_1m_ded_check]'])->label(false); ?>
     </div>
 </div>
 <div class='row'>
 
     <div class='col-lg-12'>
         <?=
-        $form->field($planof_mn, 'valor_menos_1m')->textInput(['id' => 'tabplanosmenormaiorf-valor_menos_1m', 'name' => 'TabPlanosMenorMaiorF[valor_menos_1m]'])->widget(\kartik\money\MaskMoney::className(), [
+        $form->field($planof_mn, 'valor_menos_1m', $addon)->textInput(['id' => 'tabplanosmenormaiorf-valor_menos_1m', 'name' => 'TabPlanosMenorMaiorF[valor_menos_1m]'])->widget(\kartik\money\MaskMoney::className(), [
             'pluginOptions' => [
                 'thousands' => '.',
                 'decimal' => ',',
@@ -122,12 +128,13 @@
             ],
         ]);
         ?>
+          <?= $form->field($planof_mn, 'valor_menos_1m_check')->hiddenInput(['id' => 'tabplanosmenormaiorf-valor_menos_1m_check', 'name' => 'TabPlanosMenorMaiorF[valor_menos_1m_check]'])->label(false); ?>
     </div>
 </div>
 <div class='row'>
     <div class='col-lg-12'>
         <?=
-        $form->field($planof_mn, 'valor_maior_1m_ded')->textInput(['id' => 'tabplanosmenormaiorf-valor_maior_1m_ded', 'name' => 'TabPlanosMenorMaiorF[valor_maior_1m_ded]'])->widget(\kartik\money\MaskMoney::className(), [
+        $form->field($planof_mn, 'valor_maior_1m_ded', $addon)->textInput(['id' => 'tabplanosmenormaiorf-valor_maior_1m_ded', 'name' => 'TabPlanosMenorMaiorF[valor_maior_1m_ded]'])->widget(\kartik\money\MaskMoney::className(), [
             'pluginOptions' => [
                 'thousands' => '.',
                 'decimal' => ',',
@@ -138,12 +145,13 @@
             ],
         ]);
         ?>
+        <?= $form->field($planof_mn, 'valor_maior_1m_ded_check')->hiddenInput(['id' => 'tabplanosmenormaiorf-valor_maior_1m_ded_check', 'name' => 'TabPlanosMenorMaiorF[valor_maior_1m_ded_check]'])->label(false); ?>
     </div>
 </div>
 <div class='row'>
     <div class='col-lg-12'>
         <?=
-        $form->field($planof_mn, 'valor_maior_1m')->textInput(['id' => 'tabplanosmenormaiorf-valor_maior_1m', 'name' => 'TabPlanosMenorMaiorF[valor_maior_1m]'])->widget(\kartik\money\MaskMoney::className(), [
+        $form->field($planof_mn, 'valor_maior_1m', $addon)->textInput(['id' => 'tabplanosmenormaiorf-valor_maior_1m', 'name' => 'TabPlanosMenorMaiorF[valor_maior_1m]'])->widget(\kartik\money\MaskMoney::className(), [
             'pluginOptions' => [
                 'thousands' => '.',
                 'decimal' => ',',
@@ -154,6 +162,7 @@
             ],
         ]);
         ?>
+          <?= $form->field($planof_mn, 'valor_maior_1m_check')->hiddenInput(['id' => 'tabplanosmenormaiorf-valor_maior_1m_check', 'name' => 'TabPlanosMenorMaiorF[valor_maior_1m_check]'])->label(false); ?>
     </div>
 </div>
 
