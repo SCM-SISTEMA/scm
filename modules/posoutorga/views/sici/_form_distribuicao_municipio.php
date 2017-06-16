@@ -13,7 +13,7 @@ $labelAddon[] = $empresa->cod_empresa_municipio;
 
 
 
-$addon = (Yii::$app->request->get() || $this->context->module->module->controller->action->id == 'importar') ? ["template" => "{label}\n
+$addon = (Yii::$app->request->get() || $this->context->module->module->controller->action->id=='importar' ||  $this->context->module->module->controller->action->id=='create') ? ["template" => "{label}\n
                 <div class='input-group'>
                   <span class='input-group-addon checado_vermelho'>
                    
@@ -168,7 +168,7 @@ yii\grid\GridView::widget([
         [
             'attribute' => 'tipo_pessoa',
             'label' => '',
-            'visible' => (Yii::$app->request->get() || $this->context->module->module->controller->action->id == 'importar') ? true : false,
+            'visible' => ((Yii::$app->request->get() && $this->context->module->module->controller->action->id=='update' ) || $this->context->module->module->controller->action->id=='importar') ? true : false,
             'content' => function ($model, $key, $index) {
                 $nome = ( (strtolower($model['tipo_pessoa']) == 'totais') ? '' : '_' . strtolower(projeto\Util::tirarAcentos($model['tipo_pessoa'])) );
                 $addon = \Yii::$app->session->get('addon');

@@ -47,10 +47,12 @@ class VisSiciClienteSearch extends VisSiciCliente {
         $dataProvider = new \yii\data\ActiveDataProvider([
             'query' => $query,
         ]);
-
+        $this->load($params);
 
         $query->andFilterWhere([
             $this->tableName() . '.cod_cliente' => $this->cod_cliente,
+       
+            $this->tableName() . '.situacao_sigla' => $this->dsc_situacao,
         ]);
 
         $query->andFilterWhere(['ilike', $this->tableName() . '.razao_social', $this->razao_social])
@@ -60,6 +62,8 @@ class VisSiciClienteSearch extends VisSiciCliente {
                 ->andFilterWhere(['ilike', $this->tableName() . '.mes_ano_referencia', $this->mes_ano_referencia]);
         
         $query->orderBy($ordem);
+        
+
         return $dataProvider;
     }
 

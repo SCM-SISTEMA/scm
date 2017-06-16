@@ -1,6 +1,6 @@
 <?php
 
-$addon = (Yii::$app->request->get() || $this->context->module->module->controller->action->id=='importar') ? ["template" => "{label}\n
+$addon = ((Yii::$app->request->get() && $this->context->module->module->controller->action->id!='create')|| $this->context->module->module->controller->action->id=='importar') ? ["template" => "{label}\n
                 <div class='input-group'>
                   <span class='input-group-addon checado_vermelho'>
                    

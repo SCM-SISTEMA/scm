@@ -19,7 +19,7 @@
         <?= $form->field($cliente, 'fistel')->textInput(['maxlength' => true, 'class' => 'form-control somenteNumero', 'disabled' => (($sici->cod_sici) ? true : false)]) ?>
     </div>
     <div class='col-lg-4'>
-        <?= $form->field($sici, 'responsavel')->textInput(['maxlength' => true]) ?>
+        <?= $form->field($cliente, 'responsavel')->textInput(['maxlength' => true]) ?>
     </div>
 
 

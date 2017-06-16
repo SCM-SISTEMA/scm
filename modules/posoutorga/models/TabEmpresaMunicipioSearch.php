@@ -179,7 +179,6 @@ class TabEmpresaMunicipioSearch extends TabEmpresaMunicipio {
     public static function getQAIPL4SM($cod_sici) {
         $dados = TabEmpresaMunicipioSearch::buscaPlanoEmpresasTecnologia($cod_sici);
         $tec = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tecnologia');
-
         $planos = [];
 
         if ($dados) {
@@ -188,15 +187,25 @@ class TabEmpresaMunicipioSearch extends TabEmpresaMunicipio {
                     foreach ($tec as $k => $t) {
 
                         if ($tK == $t['cod_atributos_valores']) {
+
                             $planos[$munK][$tK]['QAIPL5SM'] = $municipio['capacidade_servico'];
 
                             $pessoa = $municipio['totais'];
                             $planos[$munK][$t['cod_atributos_valores']]['total'] = $tecnologia['F']['total'] + $tecnologia['J']['total'];
-                            $planos[$munK][$t['cod_atributos_valores']]['15'] = $tecnologia['F']['valor_512'] + $tecnologia['J']['valor_512'];
-                            $planos[$munK][$t['cod_atributos_valores']]['16'] = $tecnologia['F']['valor_512k_2m'] + $tecnologia['J']['valor_512k_2m'];
-                            $planos[$munK][$t['cod_atributos_valores']]['17'] = $tecnologia['F']['valor_2m_12m'] + $tecnologia['J']['valor_2m_12m'];
-                            $planos[$munK][$t['cod_atributos_valores']]['18'] = $tecnologia['F']['valor_12m_34m'] + $tecnologia['J']['valor_12m_34m'];
-                            $planos[$munK][$t['cod_atributos_valores']]['19'] = $tecnologia['F']['valor_34m'] + $tecnologia['J']['valor_34m'];
+                            if ($planos[$munK][$t['cod_atributos_valores']]['total'] == 0) {
+                                $planos[$munK][$t['cod_atributos_valores']]['total'] = $municipio['totais']['total'];
+                                $planos[$munK][$t['cod_atributos_valores']]['15'] = $municipio['totais']['total_512'];
+                                $planos[$munK][$t['cod_atributos_valores']]['16'] = $municipio['totais']['total_512k_2m'];
+                                $planos[$munK][$t['cod_atributos_valores']]['17'] = $municipio['totais']['total_2m_12m'];
+                                $planos[$munK][$t['cod_atributos_valores']]['18'] = $municipio['totais']['total_12m_34m'];
+                                $planos[$munK][$t['cod_atributos_valores']]['19'] = $municipio['totais']['total_34m'];
+                            } else {
+                                $planos[$munK][$t['cod_atributos_valores']]['15'] = $tecnologia['F']['valor_512'] + $tecnologia['J']['valor_512'];
+                                $planos[$munK][$t['cod_atributos_valores']]['16'] = $tecnologia['F']['valor_512k_2m'] + $tecnologia['J']['valor_512k_2m'];
+                                $planos[$munK][$t['cod_atributos_valores']]['17'] = $tecnologia['F']['valor_2m_12m'] + $tecnologia['J']['valor_2m_12m'];
+                                $planos[$munK][$t['cod_atributos_valores']]['18'] = $tecnologia['F']['valor_12m_34m'] + $tecnologia['J']['valor_12m_34m'];
+                                $planos[$munK][$t['cod_atributos_valores']]['19'] = $tecnologia['F']['valor_34m'] + $tecnologia['J']['valor_34m'];
+                            }
                         } else {
                             if (!$planos[$munK][$t['cod_atributos_valores']]['total']) {
                                 $planos[$munK][$t['cod_atributos_valores']]['QAIPL5SM'] = 0;
@@ -212,6 +221,7 @@ class TabEmpresaMunicipioSearch extends TabEmpresaMunicipio {
                 }
             }
         }
+
         return $planos;
     }
 

@@ -38,8 +38,7 @@ $btImportar = Html::a('<i class="fa fa-file-excel-o"></i> Importar Planilha ', [
               [
 					'attribute' => 'dsc_situacao',
 					'content' => function($data) {
-                                                $cor = ($data->situacao_fk == \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('situacao-sici', 'C')) ? 'text-green' : 'text-yellow';
-						return  "<div class='{$cor}'>".$data->dsc_situacao.'</div>';
+						return  "<div class='{$data->situacao_cor}'>".$data->dsc_situacao.'</div>';
 					},
 					
 					'filter' => app\models\TabAtributosValoresSearch::getAtributoValor(\app\models\TabAtributosSearch::findOne(['sgl_chave'=>'situacao-sici'])->cod_atributos),
