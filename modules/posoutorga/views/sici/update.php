@@ -16,9 +16,9 @@ $btSave = Html::a('<i class="glyphicon glyphicon-ok"></i> Salvar','#', ['id'=>'s
 $btSave2 = Html::a('<i class="glyphicon glyphicon-ok"></i> Salvar','#', ['id'=>'salvarSici2','name' => 'salvarSici2', 'class' => 'btn btn-success btn-sm']);
 $btVoltar = Html::a('<i class="glyphicon glyphicon-arrow-left"></i> Voltar',Url::to(['sici/index']), ['class' => 'btn btn-primary btn-sm']);
 
-//if (!$importacao['sici']->isNewRecord && $importacao['sici']->situacao_fk == \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('situacao-sici', 'C')) {
+if (!$importacao['sici']->isNewRecord && $importacao['sici']->situacao_fk == \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('situacao-sici', 'C')) {
     $btXml = Html::a('<i class="fa fa-code"></i> Gerar XML', Url::to(['sici/gerar', 'cod_sici' => $importacao['sici']->cod_sici]), ['class' => 'btn btn-default btn-sm']);
-//}
+}
 ?>
 
 <div class="tab-acoes-form box box-default">

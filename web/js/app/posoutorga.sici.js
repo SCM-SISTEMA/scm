@@ -75,7 +75,7 @@ Projeto.prototype.sici = new (Projeto.extend({
             var $form = $('form');
 
             if ($form.find("span[class*='checado_vermelho']").length > 0) {
-                projeto.confirm('<div align="justify">O dados não estão totalmente checados.<br />Deseja realmente salvar?</div>', function () {
+                projeto.confirm('<div align="justify">O dados não estão totalmente checados, não será permitido imprimir o XML!<br />Deseja realmente salvar?</div>', function () {
                     projeto.ajax.defaultBlockUI();
                     $form.submit();
                 }, function () {

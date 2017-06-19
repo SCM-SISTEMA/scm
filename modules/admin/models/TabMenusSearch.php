@@ -162,7 +162,7 @@ class TabMenusSearch extends TabMenus {
         $inicio = Array
             (
             'label' => 'Início',
-            'url' => Array('#'),
+            'url' => \yii\helpers\Url::toRoute('/'.Yii::$app->controller->module->id),
             'icon' => 'home'
         );
         array_unshift($data, $inicio);

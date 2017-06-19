@@ -1456,9 +1456,14 @@ class SiciController extends Controller {
                     if ($municipios) {
                         foreach ($municipios as $municipio) {
                             $empresa = new \app\modules\posoutorga\models\TabEmpresaMunicipioSearch();
-
+                            
                             unset($municipio[0]['cod_empresa_municipio']);
                             $empresa->attributes = $municipio[0];
+                          
+                            if(!$empresa->cod_municipio_fk){
+                                $erroMunicipio[] = $municipio[0];
+                                continue;
+                            }
                             $empresa->cod_sici_fk = $sici->cod_sici;
                             $empresa->save();
                             if (!$empresa->verificarChecks())
@@ -1491,7 +1496,10 @@ class SiciController extends Controller {
 
                     //$sici->mes_ano_referencia = $dados_sici['mes_ano_referencia'];
                     $transaction->commit();
-
+                    if($erroMunicipio){
+                        
+                         $this->session->setFlash('warning', count($erroMunicipio).' Acesso(s) não incluido(s)');
+                    }
                     $this->session->setFlashProjeto('success', 'create');
 
                     return $this->redirect(['update', 'id' => $sici->cod_sici]);
@@ -2281,10 +2289,10 @@ class SiciController extends Controller {
                 $empresasSessao[$empresa->cod_empresa_municipio] = [$empresa->attributes, $planof_municipio->attributes, $planoj_municipio->attributes];
             }
         } else {
+            
             if ($post['TabEmpresaMunicipioSearch'][0]['cod_empresa_municipio']) {
 
                 foreach ($empresasSessao as $key => $value) {
-
                     if ($value[0]['cod_empresa_municipio'] == $post['TabEmpresaMunicipioSearch'][0]['cod_empresa_municipio']) {
                         $empresa = new \app\modules\posoutorga\models\TabEmpresaMunicipioSearch();
                         $empresa->attributes = $post['TabEmpresaMunicipioSearch'][0];
@@ -2297,6 +2305,7 @@ class SiciController extends Controller {
                         $planoj_municipio = new \app\modules\posoutorga\models\TabPlanosSearch();
                         $planoj_municipio->attributes = $post['TabEmpresaMunicipioSearch'][0]['TabEmpresaMunicipioSearchMJ'];
                         $planoj_municipio->tipo_plano_fk = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-pessoa-plano', 'J');
+                        $a = true;
                     } else {
                         $empresa = new \app\modules\posoutorga\models\TabEmpresaMunicipioSearch();
                         $empresa->attributes = $value[0];
@@ -2309,10 +2318,13 @@ class SiciController extends Controller {
                         $planoj_municipio = new \app\modules\posoutorga\models\TabPlanosSearch();
                         $planoj_municipio->attributes = $value[2];
                         $planoj_municipio->tipo_plano_fk = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-pessoa-plano', 'J');
+                        $a = false;
                     }
 
-                    $empresasDados[] = [$empresa, $planof_municipio, $planoj_municipio];
+
+                    $empresasDados[] = [$empresa, $planof_municipio, $planoj_municipio, $a];
                 }
+        
                 $empresasSessao = NULL;
             } else {
 
@@ -2328,7 +2340,7 @@ class SiciController extends Controller {
                 $planoj_municipio->attributes = $post['TabEmpresaMunicipioSearch'][0]['TabEmpresaMunicipioSearchMJ'];
                 $planoj_municipio->tipo_plano_fk = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-pessoa-plano', 'J');
 
-                $empresasDados[] = [$empresa, $planof_municipio, $planoj_municipio];
+                $empresasDados[] = [$empresa, $planof_municipio, $planoj_municipio, true];
 
                 foreach ($empresasSessao as $key => $value) {
 
@@ -2346,7 +2358,7 @@ class SiciController extends Controller {
                     $planoj_municipio->tipo_plano_fk = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-pessoa-plano', 'J');
 
 
-                    $empresasDados[] = [$empresa, $planof_municipio, $planoj_municipio];
+                    $empresasDados[] = [$empresa, $planof_municipio, $planoj_municipio, false];
                 }
                 $empresasSessao = NULL;
             }
@@ -2354,6 +2366,7 @@ class SiciController extends Controller {
             foreach ($empresasDados as $key => $emp) {
 
                 $empresa = $emp[0];
+              
                 $planof_municipio = $emp[1];
                 $planoj_municipio = $emp[2];
                 $arrayF = $planof_municipio->attributes;
@@ -2362,7 +2375,7 @@ class SiciController extends Controller {
                 $arrayJ = $planoj_municipio->attributes;
                 $arrayJ['tipo_pessoa'] = 'Juridica';
 
-                $totais = $empresa->calculaTotais($planof_municipio, $planoj_municipio);
+                $totais = $empresa->calculaTotais($planof_municipio, $planoj_municipio, $emp[3]);
 
                 $totais['tipo_pessoa'] = 'Totais';
                 $arrayF['total'] = $empresa->total_fisica;
@@ -2382,6 +2395,7 @@ class SiciController extends Controller {
                 $empresas[] = $empresa;
                 $empresasSessao[$empresa->cod_empresa_municipio] = [$empresa->attributes, $planof_municipio->attributes, $planoj_municipio->attributes];
             }
+   
         }
 
         \Yii::$app->session->set('empresasSessao', $empresasSessao);
