@@ -1,5 +1,5 @@
 <div class='row'>
-    <div class='col-lg-10'>
+    <div class='col-lg-6'>
         <?=
         \projeto\helpers\Html::button('<i class="glyphicon glyphicon-plus"></i> Adicionar acesso físico', [
             'class' => 'btn btn-success btn-sm',
@@ -8,7 +8,7 @@
         ])
         ?>
     </div>
-    <div class='col-lg-2'><b>
+    <div class='col-lg-6'  style=" text-align:right"><b>
         <?= 'Total de acesso(s): '.count($empresas);
         
         ?></b>
