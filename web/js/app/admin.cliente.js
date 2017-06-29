@@ -4,6 +4,9 @@ Projeto.prototype.cliente = new (Projeto.extend({
         this.salvarContato();
         this.incluirNovo('Endereco');
         this.incluirNovo('Contato');
+       // this.incluirTipoContrato('TipoContrato');
+        this.salvarTipoContrato();
+        //this.incluirTipoContrato('Contrato');
         this.carregaMunicipio();
         this.alterarContato();
         this.verificaCnpj();
@@ -18,7 +21,7 @@ Projeto.prototype.cliente = new (Projeto.extend({
             projeto.ajax.post(urlInclusao, selecao, function (response) {
                 var ds = $.parseJSON(response);
                 if (ds.cliente.razao_social) {
-                    
+
                     $('#tabclientesearch-razao_social').val(ds.cliente.razao_social);
                     if (!$('#tabclientesearch-fistel').val()) {
                         $('#tabclientesearch-fistel').val(ds.cliente.fistel);
@@ -46,6 +49,14 @@ Projeto.prototype.cliente = new (Projeto.extend({
 
             Projeto.prototype.cliente.openModal(valor);
             Projeto.prototype.cliente.limpaForm(valor);
+        });
+    },
+    incluirTipoContrato: function (valor) {
+        $('#incluir' + valor).click(function () {
+            $(this).attr( 'contrato' );
+            
+            Projeto.prototype.cliente.openModalTipoContrato(valor,  $(this).attr( 'contrato' ));
+            Projeto.prototype.cliente.limpaFormTipoContrato(valor);
         });
     },
     salvarEndereco: function () {
@@ -124,6 +135,44 @@ Projeto.prototype.cliente = new (Projeto.extend({
         });
 
     },
+    salvarTipoContrato: function () {
+        $('#botaoSalvarTipoContrato').click(function ( ) {
+
+            var form = $('#formCliente');
+            var formAuxiliar = $('#formTipoContrato');
+            if (formAuxiliar.find('.has-error').length) {
+                return false;
+            }
+
+            var urlInclusao = $('base').attr('href') + 'admin/cliente/incluir-tipo-contrato';
+
+            projeto.ajax.post(urlInclusao, form.serialize( ), function (response) {
+                var dados = $.parseJSON(response);
+
+                if (!dados)
+                {
+                    $.each(dados, function (index, value) {
+                        var obj = form.find('.field-tabcontatosearch-' + index);
+                        obj.removeClass('has-success');
+                        obj.addClass('has-error');
+                        var msgBlock = obj.find('.help-block');
+                        msgBlock.html(value);
+                    });
+                } else {
+
+                    $('#divGuiaTipoContrato').html(dados);
+                    //$('#errorAuxiliares').hide();
+                    $('#modalTipoContrato').modal('hide');
+
+                }
+            });
+
+
+
+            return false;
+        });
+
+    },
     openModal: function (valor) {
         setTimeout(function () {
             if (valor == 'Endereco') {
@@ -147,6 +196,46 @@ Projeto.prototype.cliente = new (Projeto.extend({
         }
 
         $('#modal' + valor).modal('show').find('#modalContent').load( );
+    },
+    openModalTipoContrato: function (valor, cod_contrato) {
+        setTimeout(function () {
+            if (valor == 'TipoContrato') {
+                $('#tabtipocontratosearch-cod_contrato_fk').val(cod_contrato);
+                $('#tabtipocontratosearch-cod_usuario_fk').focus();
+            } else {
+
+                $('#tabtipocontratosearch-cod_contrato_fk').focus();
+            }
+
+        }, 750);
+
+//        if (valor == 'Endereco') {
+//
+//            $('#ativo-check').hide();
+//        } else {
+//
+//            $('#divContatoAtivo').hide();
+//
+//
+//        }
+
+        $('#modal' + valor).modal('show').find('#modalContent').load( );
+    },
+    limpaFormTipoContrato: function (valor) {
+        if (valor == 'TipoContrato') {
+            $('#tabtipocontratosearch-cod_usuario_fk').val('');
+            $('#tabtipocontratosearch-tipo_produto_fk').val('');
+
+        } else {
+            $('#tabcontratosearch-tipo_contrato_fk').val('');
+            $('#tabcontratosearch-valor_contrato-disp').val('');
+            $('#tabcontratosearch-dt_prazo').val('');
+            $('#tabcontratosearch-qnt_parcelas-disp').val('');
+            $('#tabcontratosearch-dia_vencimento-disp').val('');
+            $('#tabtipo-contratosearch-cod_usuario_fk').val('');
+            $('#tabtipo-contratosearch-tipo_produto_fk').val('');
+        }
+
     },
     bloqueaForm: function (valor) {
         $('input[id^=\"itensmovimentacaosearch\"]').attr('disabled', valor);
@@ -312,3 +401,22 @@ Projeto.prototype.cliente = new (Projeto.extend({
     }
 
 }));
+
+function adicionarTipoContrato(contrato) {
+
+        Projeto.prototype.cliente.openModalTipoContrato('TipoContrato',  contrato);
+            Projeto.prototype.cliente.limpaFormTipoContrato('TipoContrato');
+
+
+    return false;
+}
+
+
+function adicionarContrato(contrato) {
+
+        Projeto.prototype.cliente.openModalTipoContrato('Contrato',  contrato);
+            Projeto.prototype.cliente.limpaFormTipoContrato('Contrato');
+
+
+    return false;
+}

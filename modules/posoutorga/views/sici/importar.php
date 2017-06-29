@@ -11,9 +11,9 @@ use yii\helpers\Url;
 
 //$this->registerJsFile("@web/js/app/posoutorga.sici.js?{$this->app->version}", ['position' => $this::POS_END, 'depends' => [\app\assets\SinisaAsset::className()]]);
 
-$btSave = Html::a('<i class="glyphicon glyphicon-ok"></i> Salvar', '#', ['id' => 'salvarSici', 'name' => 'importar', 'class' => 'btn btn-success btn-sm', 'style' => 'display:' . (($importacao) ? 'block' : 'none')]);
-$btSave2 = Html::a('<i class="glyphicon glyphicon-ok"></i> Salvar', '#', ['id' => 'salvarSici2', 'name' => 'importar', 'class' => 'btn btn-success btn-sm', 'style' => 'display:' . (($importacao) ? 'block' : 'none')]);
-$btVoltar = Html::a('<i class="glyphicon glyphicon-arrow-left"></i> Voltar', Url::to(['sici/index']), ['class' => 'btn btn-primary btn-sm']);
+$btSave = Html::a('<i class="glyphicon glyphicon-ok"></i> Salvar', '#', ['id' => 'salvarSici', 'name' => 'importar', 'class' => 'import btn btn-success btn-sm', 'style' => 'display:' . (($importacao) ? 'block' : 'none')]);
+$btSave2 = Html::a('<i class="glyphicon glyphicon-ok"></i> Salvar', '#', ['id' => 'salvarSici2', 'name' => 'importar', 'class' => 'import btn btn-success btn-sm', 'style' => 'display:' . (($importacao) ? 'block' : 'none')]);
+$btVoltar = Html::a('<i class="glyphicon glyphicon-arrow-left"></i> Voltar', Url::to(['sici/index']), ['class' => 'importar btn btn-primary btn-sm']);
 ?>
 
 <div class="tab-acoes-form box box-default">

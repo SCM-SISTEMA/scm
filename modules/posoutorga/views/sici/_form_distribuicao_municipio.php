@@ -13,7 +13,9 @@ $labelAddon[] = $empresa->cod_empresa_municipio;
 
 
 
-$addon = (Yii::$app->request->get() || $this->context->module->module->controller->action->id=='importar' ||  $this->context->module->module->controller->action->id=='create') ? ["template" => "{label}\n
+$addon = ( (Yii::$app->request->get() && $this->context->module->module->controller->action->id=='update') ||	
+                ($this->context->module->module->controller->action->id=='importar' 
+        || $this->context->module->module->controller->action->id=='incluir-acesso')) ? ["template" => "{label}\n
                 <div class='input-group'>
                   <span class='input-group-addon checado_vermelho'>
                    

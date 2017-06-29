@@ -12,7 +12,7 @@ Projeto.prototype.sici = new (Projeto.extend({
         this.submitCheck();
         this.clickCheck();
         this.checkInicial();
-
+        
 
     }, checkInicial: function () {
         if (location.href.indexOf('importar') >= 0 || document.location.search) {
@@ -143,8 +143,8 @@ Projeto.prototype.sici = new (Projeto.extend({
     mudaBotaoImportacao: function () {
         $("#tabsicisearch-file").change(function () {
             $("#importacao").hide();
-            $("button.import.btn.btn-primary").show();
-            $("button.import.btn.btn-success").hide();
+            $(".import.btn.btn-primary.btn-sm").show();
+            $(".import.btn.btn-success.btn-sm").hide();
         });
     },
     mudaTipoSici: function () {
