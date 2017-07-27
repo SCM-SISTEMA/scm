@@ -5,25 +5,28 @@ use yii\helpers\Url;
 use yii\web\JsExpression;
 use kartik\widgets\Typeahead;
 
- $mes = date('m');
-        if($mes == 1){
-            $ano = date('Y')-1;
-            $mes = '12';
-        }else{
-            $ano = date('Y');
-            $mes = date('m')-1;
-        }
-        $mesano = str_pad($mes, 2, '0', 0).'/'.$ano;
-  
+$mes = date('m');
+if ($mes == 1) {
+    $ano = date('Y') - 1;
+    $mes = '12';
+} else {
+    $ano = date('Y');
+    $mes = date('m') - 1;
+}
+$mesano = str_pad($mes, 2, '0', 0) . '/' . $ano;
 
- $total = \app\modules\posoutorga\models\TabSiciSearch::find()->where(['mes_ano_referencia'=>$mesano, 'situacao_fk'=>\app\models\TabAtributosValoresSearch::getAtributoValorAtributo('situacao-sici', 'E')])->count();
- $totalDesc = $totalE.' novo(s) SICI enviado(s)';
- $url = Url::toRoute(['/posoutorga/sici/index', 'VisSiciClienteSearch[dsc_situacao]'=>'E']);
+
+
+$total = \app\modules\posoutorga\models\TabSiciSearch::find()->where(['situacao_fk' => \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('situacao-sici', 'E')])->count();
+$totalDesc = $totalE . ' novo(s) SICI enviado(s)';
+$url = Url::toRoute(['/posoutorga/sici/index', 'VisSiciClienteSearch[dsc_situacao]' => 'E']);
 ?>
 
 <header class="main-header">
     <?php
-    $modulos = \app\modules\admin\models\VisUsuariosPerfisSearch::getModulosPerfisUsuario($this->user->identity->getId());
+    if (!Yii::$app->user->isGuest) {
+        $modulos = \app\modules\admin\models\VisUsuariosPerfisSearch::getModulosPerfisUsuario($this->user->identity->getId());
+    }
     $opt = [];
     $opt['class'] = 'logo';
     if (count($modulos) <= 1) {
@@ -137,12 +140,12 @@ use kartik\widgets\Typeahead;
             <ul class="nav navbar-nav">
                 <?php if (!Yii::$app->user->isGuest): ?>
                     <li class="dropdown notifications-menu">
-               
+
                         <a href="<?= $url ?>" class="dropdown-toggle">
                             <i class="fa fa-bell-o"></i>
                             <span class="label label-danger"><?= $total ?></span>
                         </a>
-                 
+
                     </li>
 
                     <li class="dropdown user user-menu">
@@ -200,7 +203,7 @@ use kartik\widgets\Typeahead;
                                 </li>
                         </ul-->
                     </li>
-
+                <?php elseif($this->context->module->module->controller->action->id=='create' && $this->context->module->module->controller->id=='sici'): ?>    
                 <?php else: ?>
                     <li><?= Html::a('Entrar', Url::toRoute('/entrar')) ?></li>
                 <?php endif; ?>

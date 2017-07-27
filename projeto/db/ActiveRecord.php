@@ -16,6 +16,7 @@ class ActiveRecord extends \yii\db\ActiveRecord {
     const AUDIT_CAMPO_ALTERACAO = 'dt_alteracao';
     // usuário última alteração
     const AUDIT_CAMPO_USUARIO = 'txt_login_inclusao';
+    const AUDIT_CAMPO_USUARIO_ALTERACAO = 'txt_login_alteracao';
 
     public function init() {
 
@@ -50,9 +51,15 @@ class ActiveRecord extends \yii\db\ActiveRecord {
 
         if ($this->getTableSchema()->columns) {
             foreach ($this->getTableSchema()->columns as $key => $value) {
-
-                if ($value->name == 'inclusao_usuario_fk') {
+                
+                if ($this->isNewRecord && $value->name == 'txt_login_inclusao' && !\Yii::$app->user->isGuest) {
+                    
                     $this->$key = $this->user->identity->getId();
+                    $this->txt_login_alteracao = $this->user->identity->getId();
+                    
+                }elseif(!$this->isNewRecord && $value->name == 'txt_login_alteracao'){
+                    $this->$key = $this->user->identity->getId();
+                    $this->dt_alteracao = date('Y-m-d');
                 }
 
                 if ($value->type == 'date' && $this->$key) {

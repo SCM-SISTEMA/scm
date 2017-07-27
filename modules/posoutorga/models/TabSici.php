@@ -48,7 +48,6 @@ use Yii;
  * @property string $dt_inclusao
  * @property string $dt_exclusao
  * @property integer $tipo_sici_fk
- * @property integer $inclusao_usuario_fk
  * @property integer $tipo_entrada_fk
  * @property integer $situacao_fk
  * @property boolean $receita_bruta_check
@@ -82,6 +81,9 @@ use Yii;
  * @property boolean $faturamento_de_check
  * @property boolean $faturamento_industrial_check
  * @property boolean $faturamento_adicionado_check
+ * @property string $txt_login_inclusao
+ * @property string $txt_login_alteracao
+ * @property string $dt_alteracao
  *
  * @property TabEmpresaMunicipio[] $tabEmpresaMunicipio
  * @property TabPlanosMenorMaior[] $tabPlanosMenorMaior
@@ -103,14 +105,14 @@ class TabSici extends \projeto\db\ActiveRecord
     public function rules()
     {
         return [
-            [['cod_tipo_contrato_fk', 'qtd_funcionarios_fichados', 'qtd_funcionarios_terceirizados', 'num_central_atendimento', 'total_fibra_prestadora', 'total_fibra_terceiros', 'total_crescimento_prestadora', 'total_crescimento_terceiros', 'total_fibra_implantada_prestadora', 'total_fibra_implantada_terceiros', 'total_fibra_crescimento_prop_prestadora', 'total_fibra_crescimento_prop_terceiros', 'tipo_sici_fk', 'inclusao_usuario_fk', 'tipo_entrada_fk', 'situacao_fk'], 'integer'],
+            [['cod_tipo_contrato_fk', 'qtd_funcionarios_fichados', 'qtd_funcionarios_terceirizados',  'total_fibra_prestadora', 'total_fibra_terceiros', 'total_crescimento_prestadora', 'total_crescimento_terceiros', 'total_fibra_implantada_prestadora', 'total_fibra_implantada_terceiros', 'total_fibra_crescimento_prop_prestadora', 'total_fibra_crescimento_prop_terceiros', 'tipo_sici_fk', 'tipo_entrada_fk', 'situacao_fk'], 'integer'],
             [['receita_bruta', 'despesa_operacao_manutencao', 'despesa_publicidade', 'despesa_vendas', 'despesa_link', 'aliquota_nacional', 'receita_icms', 'receita_pis', 'receita_confins', 'receita_liquida', 'valor_consolidado', 'aplicacao_equipamento', 'total_marketing_propaganda', 'aplicacao_software', 'total_pesquisa_desenvolvimento', 'aplicacao_servico', 'aplicacao_callcenter', 'faturamento_de', 'faturamento_industrial', 'faturamento_adicionado'], 'number'],
-            [['obs_receita', 'obs_despesa'], 'string'],
-            [['dt_inclusao', 'dt_exclusao'], 'safe'],
+            [['obs_receita', 'obs_despesa', 'num_central_atendimento'], 'string'],
+            [['dt_inclusao', 'dt_exclusao', 'dt_alteracao'], 'safe'],
             [['receita_bruta_check', 'despesa_operacao_manutencao_check', 'despesa_publicidade_check', 'despesa_vendas_check', 'despesa_link_check', 'aliquota_nacional_check', 'receita_icms_check', 'receita_pis_check', 'receita_confins_check', 'receita_liquida_check', 'valor_consolidado_check', 'qtd_funcionarios_fichados_check', 'qtd_funcionarios_terceirizados_check', 'num_central_atendimento_check', 'total_fibra_prestadora_check', 'total_fibra_terceiros_check', 'total_crescimento_prestadora_check', 'total_crescimento_terceiros_check', 'total_fibra_implantada_prestadora_check', 'total_fibra_implantada_terceiros_check', 'total_fibra_crescimento_prop_prestadora_check', 'total_fibra_crescimento_prop_terceiros_check', 'aplicacao_equipamento_check', 'total_marketing_propaganda_check', 'aplicacao_software_check', 'total_pesquisa_desenvolvimento_check', 'aplicacao_servico_check', 'aplicacao_callcenter_check', 'faturamento_de_check', 'faturamento_industrial_check', 'faturamento_adicionado_check'], 'boolean'],
             [['mes_ano_referencia'], 'string', 'max' => 7],
             [['legenda'], 'string', 'max' => 30],
-            [['responsavel'], 'string', 'max' => 150]
+            [['responsavel', 'txt_login_inclusao', 'txt_login_alteracao'], 'string', 'max' => 150]
         ];
     }
 
@@ -161,7 +163,6 @@ class TabSici extends \projeto\db\ActiveRecord
             'dt_inclusao' => 'Dt Inclusao',
             'dt_exclusao' => 'Dt Exclusao',
             'tipo_sici_fk' => 'Tipo Sici Fk',
-            'inclusao_usuario_fk' => 'Usuário',
             'tipo_entrada_fk' => 'tipo de entrada -> atributo tipo-entrada ',
             'situacao_fk' => 'Situação',
             'receita_bruta_check' => 'Check Receita operacional bruta com serviço de SCM:',
@@ -195,6 +196,9 @@ class TabSici extends \projeto\db\ActiveRecord
             'faturamento_de_check' => 'Check Faturamento com prestação do serviço DE telecomunicações da empresa',
             'faturamento_industrial_check' => 'Check Faturamento bruto decorrente do provimento de serviços de valor adicionado (não é parceria)',
             'faturamento_adicionado_check' => 'Check Faturamento bruto decorrente do provimento de serviços de valor adicionado (não é parceria)',
+            'txt_login_inclusao' => 'Usuário da Inclusão',
+            'txt_login_alteracao' => 'Usuário da Alteração',
+            'dt_alteracao' => 'Dt Alteracao',
         ];
     }
 

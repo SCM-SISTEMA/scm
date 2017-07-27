@@ -30,6 +30,10 @@ use Yii;
  * @property boolean $total_fisica_check
  * @property boolean $total_juridica_check
  * @property boolean $uf_check
+ * @property string $txt_login_inclusao
+ * @property string $txt_login_alteracao
+ * @property string $dt_inclusao
+ * @property string $dt_alteracao
  *
  * @property TabSici $tabSici
  * @property TabMunicipios $tabMunicipios
@@ -53,9 +57,11 @@ class TabEmpresaMunicipio extends \projeto\db\ActiveRecord
             [['capacidade_municipio', 'capacidade_servico', 'cod_sici_fk', 'tecnologia_fk'], 'integer'],
             [['total_512', 'total_512k_2m', 'total_2m_12m', 'total_12m_34m', 'total_34m', 'total_fisica', 'total_juridica'], 'number'],
             [['cod_municipio_fk_check', 'capacidade_municipio_check', 'capacidade_servico_check', 'tecnologia_fk_check', 'total_check', 'total_fisica_check', 'total_juridica_check', 'uf_check'], 'boolean'],
+            [['dt_inclusao', 'dt_alteracao'], 'safe'],
             [['cod_municipio_fk'], 'string', 'max' => 6],
             [['municipio'], 'string', 'max' => 45],
-            [['uf'], 'string', 'max' => 2]
+            [['uf'], 'string', 'max' => 2],
+            [['txt_login_inclusao', 'txt_login_alteracao'], 'string', 'max' => 150]
         ];
     }
 
@@ -88,6 +94,10 @@ class TabEmpresaMunicipio extends \projeto\db\ActiveRecord
             'total_fisica_check' => 'Total Fisica Check',
             'total_juridica_check' => 'Total Juridica Check',
             'uf_check' => 'Uf Check',
+            'txt_login_inclusao' => 'Usuário da Inclusão',
+            'txt_login_alteracao' => 'Usuário da Alteração',
+            'dt_inclusao' => 'Dt Inclusao',
+            'dt_alteracao' => 'Dt Alteracao',
         ];
     }
 

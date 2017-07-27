@@ -118,18 +118,20 @@ class AccessControl extends ActionFilter
 	 */
 	public function beforeAction($action)
 	{
+    
 		$user	 = $this->user;
+
 		if ($user->getIsGuest()) {
-			if($action->controller->id=='login' && $action->id=='index'){
+			if(($action->controller->id=='login' && $action->id=='index' ) || $action->controller->id=='sici'){
 				return true;
 			}
 			$this->denyAccess($user);
 			return false;
 			
 		}
-		elseif( (strpos($action->id, 'lista') === false || strpos($action->id, 'combo') === false)) {
+		elseif( (strpos($action->id, 'lista') === false || strpos($action->id, 'combo') === false) || strpos($action->id, 'create')) {
 			return true;
-		}
+                }
 
 		$codUsuario	 = $this->user->identity->getId();
 		$moduloID	 = $action->controller->module->id;

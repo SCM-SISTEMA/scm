@@ -22,6 +22,10 @@ use Yii;
  * @property boolean $valor_2m_12m_check
  * @property boolean $valor_12m_34m_check
  * @property boolean $valor_34m_check
+ * @property string $txt_login_inclusao
+ * @property string $txt_login_alteracao
+ * @property string $dt_inclusao
+ * @property string $dt_alteracao
  */
 class TabPlanos extends \projeto\db\ActiveRecord
 {
@@ -43,7 +47,9 @@ class TabPlanos extends \projeto\db\ActiveRecord
             [['tipo_plano_fk', 'cod_chave'], 'integer'],
             [['obs'], 'string'],
             [['valor_512_check', 'valor_512k_2m_check', 'valor_2m_12m_check', 'valor_12m_34m_check', 'valor_34m_check'], 'boolean'],
-            [['tipo_tabela_fk'], 'string', 'max' => 100]
+            [['dt_inclusao', 'dt_alteracao'], 'safe'],
+            [['tipo_tabela_fk'], 'string', 'max' => 100],
+            [['txt_login_inclusao', 'txt_login_alteracao'], 'string', 'max' => 150]
         ];
     }
 
@@ -70,6 +76,10 @@ se for plano ou por municipio',
             'valor_2m_12m_check' => 'Check Entre 2 Mbps e 12 Mbps',
             'valor_12m_34m_check' => 'Check Entre 12 Mbps e 34 Mbps',
             'valor_34m_check' => 'Check Acima de 34 Mbps',
+            'txt_login_inclusao' => 'Usuário da Inclusão',
+            'txt_login_alteracao' => 'Usuário da Alteração',
+            'dt_inclusao' => 'Dt Inclusao',
+            'dt_alteracao' => 'Dt Alteracao',
         ];
     }
 

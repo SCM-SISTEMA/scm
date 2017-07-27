@@ -18,6 +18,10 @@ use Yii;
  * @property boolean $valor_menos_1m_check
  * @property boolean $valor_maior_1m_ded_check
  * @property boolean $valor_maior_1m_check
+ * @property string $txt_login_inclusao
+ * @property string $txt_login_alteracao
+ * @property string $dt_inclusao
+ * @property string $dt_alteracao
  *
  * @property TabSici $tabSici
  */
@@ -39,7 +43,9 @@ class TabPlanosMenorMaior extends \projeto\db\ActiveRecord
         return [
             [['valor_menos_1m_ded', 'valor_menos_1m', 'valor_maior_1m_ded', 'valor_maior_1m'], 'number'],
             [['cod_sici_fk', 'tipo_plano_fk'], 'integer'],
-            [['valor_menos_1m_ded_check', 'valor_menos_1m_check', 'valor_maior_1m_ded_check', 'valor_maior_1m_check'], 'boolean']
+            [['valor_menos_1m_ded_check', 'valor_menos_1m_check', 'valor_maior_1m_ded_check', 'valor_maior_1m_check'], 'boolean'],
+            [['dt_inclusao', 'dt_alteracao'], 'safe'],
+            [['txt_login_inclusao', 'txt_login_alteracao'], 'string', 'max' => 150]
         ];
     }
 
@@ -61,6 +67,10 @@ pessoa fisica / juridica',
             'valor_menos_1m_check' => 'check Menor preço por 1 Mbps (não dedicado)',
             'valor_maior_1m_ded_check' => 'check Maior preço por 1 Mbps (dedicado)',
             'valor_maior_1m_check' => 'check Maior preço por 1 Mbps (não dedicado)',
+            'txt_login_inclusao' => 'Usuário da Inclusão',
+            'txt_login_alteracao' => 'Usuário da Alteração',
+            'dt_inclusao' => 'Dt Inclusao',
+            'dt_alteracao' => 'Dt Alteracao',
         ];
     }
 

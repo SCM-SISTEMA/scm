@@ -25,9 +25,14 @@ use Yii;
  * @property boolean $consultoria_scm
  * @property boolean $engenheiro_tecnico
  * @property integer $cod_cliente_fk
+ * @property boolean $ativo
+ * @property string $txt_login_inclusao
+ * @property string $txt_login_alteracao
+ * @property string $dt_alteracao
  *
  * @property TabUsuarios $tabUsuarios
  * @property TabCliente $tabCliente
+ * @property TabContratoParcelas[] $tabContratoParcelas
  * @property TabTipoContrato[] $tabTipoContrato
  */
 class TabContrato extends \projeto\db\ActiveRecord
@@ -48,9 +53,9 @@ class TabContrato extends \projeto\db\ActiveRecord
         return [
             [['tipo_contrato_fk', 'dia_vencimento', 'qnt_parcelas', 'responsavel_fk', 'qnt_clientes', 'cod_cliente_fk'], 'integer'],
             [['valor_contrato'], 'number'],
-            [['dt_prazo', 'dt_inclusao', 'dt_vencimento'], 'safe'],
-            [['operando', 'link', 'zero800', 'parceiria', 'consultoria_scm', 'engenheiro_tecnico'], 'boolean'],
-            [['contador'], 'string', 'max' => 150]
+            [['dt_prazo', 'dt_inclusao', 'dt_vencimento', 'dt_alteracao'], 'safe'],
+            [['operando', 'link', 'zero800', 'parceiria', 'consultoria_scm', 'engenheiro_tecnico', 'ativo'], 'boolean'],
+            [['contador', 'txt_login_inclusao', 'txt_login_alteracao'], 'string', 'max' => 150]
         ];
     }
 
@@ -78,6 +83,10 @@ class TabContrato extends \projeto\db\ActiveRecord
             'consultoria_scm' => 'Paga consutoria SCM mensal?',
             'engenheiro_tecnico' => 'Possui engenheiro ou técnico responsável?',
             'cod_cliente_fk' => 'Cod Cliente Fk',
+            'ativo' => 'Ativo',
+            'txt_login_inclusao' => 'Usuário da Inclusão',
+            'txt_login_alteracao' => 'Usuário da Alteração',
+            'dt_alteracao' => 'Dt Alteracao',
         ];
     }
 
@@ -100,6 +109,14 @@ class TabContrato extends \projeto\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
+    public function getTabContratoParcelas()
+    {
+        return $this->hasMany(TabContratoParcelas::className(), ['cod_contrato_fk' => 'cod_contrato']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
     public function getTabTipoContrato()
     {
         return $this->hasMany(TabTipoContrato::className(), ['cod_contrato_fk' => 'cod_contrato']);
@@ -107,10 +124,10 @@ class TabContrato extends \projeto\db\ActiveRecord
 
     /**
      * @inheritdoc
-     * @return TabContratoQuery the active query used by this AR class.
+     * @return \app\modules\posoutorga\models\TabContratoQuery the active query used by this AR class.
      */
     public static function find()
     {
-        return new TabContratoQuery(get_called_class());
+        return new \app\modules\posoutorga\models\TabContratoQuery(get_called_class());
     }
 }

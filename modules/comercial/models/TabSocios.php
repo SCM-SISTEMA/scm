@@ -17,6 +17,10 @@ use Yii;
  * @property string $cpf
  * @property integer $cod_cliente_fk
  * @property string $qual
+ * @property string $txt_login_inclusao
+ * @property string $txt_login_alteracao
+ * @property string $dt_inclusao
+ * @property string $dt_alteracao
  *
  * @property TabCliente $tabCliente
  */
@@ -37,13 +41,15 @@ class TabSocios extends \projeto\db\ActiveRecord
     {
         return [
             [['estado_civil_fk', 'cod_cliente_fk'], 'integer'],
+            [['dt_inclusao', 'dt_alteracao'], 'safe'],
             [['nome'], 'string', 'max' => 200],
             [['nacionalidade'], 'string', 'max' => 50],
             [['profissao'], 'string', 'max' => 100],
             [['rg'], 'string', 'max' => 30],
             [['orgao_uf'], 'string', 'max' => 10],
             [['cpf'], 'string', 'max' => 14],
-            [['qual'], 'string', 'max' => 159]
+            [['qual'], 'string', 'max' => 159],
+            [['txt_login_inclusao', 'txt_login_alteracao'], 'string', 'max' => 150]
         ];
     }
 
@@ -63,6 +69,10 @@ class TabSocios extends \projeto\db\ActiveRecord
             'cpf' => 'Cpf',
             'cod_cliente_fk' => 'Cod Cliente Fk',
             'qual' => 'Qual',
+            'txt_login_inclusao' => 'Usuário da Inclusão',
+            'txt_login_alteracao' => 'Usuário da Alteração',
+            'dt_inclusao' => 'Dt Inclusao',
+            'dt_alteracao' => 'Dt Alteracao',
         ];
     }
 
@@ -76,10 +86,10 @@ class TabSocios extends \projeto\db\ActiveRecord
 
     /**
      * @inheritdoc
-     * @return TabSociosQuery the active query used by this AR class.
+     * @return \app\modules\posoutorga\models\TabSociosQuery the active query used by this AR class.
      */
     public static function find()
     {
-        return new TabSociosQuery(get_called_class());
+        return new \app\modules\posoutorga\models\TabSociosQuery(get_called_class());
     }
 }

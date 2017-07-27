@@ -302,12 +302,12 @@ class TabSiciSearch extends TabSici {
         $this->receita_pis = $tunca($this->receita_pis);
         $this->receita_icms = $tunca($this->receita_icms);
         $this->receita_confins = $tunca($this->receita_confins);
-
-
+        
         $this->total_aliquota = \projeto\Util::decimalFormatToBank(number_format(($this->receita_bruta * $this->aliquota_nacional) / 100, 2, ".", ""));
-        $this->total_icms = \projeto\Util::decimalFormatToBank(number_format((($this->receita_bruta * $this->receita_icms) / 100) / 100, 2, ".", ""));
-        $this->total_pis = \projeto\Util::decimalFormatToBank(number_format((($this->receita_bruta * $this->receita_pis) / 100) / 100, 2, ".", ""));
-        $this->total_confins = \projeto\Util::decimalFormatToBank(number_format((($this->receita_bruta * $this->receita_pis) / 100) / 100, 2, ".", ""));
+        
+        $this->total_icms = \projeto\Util::decimalFormatToBank(number_format((($this->receita_bruta * $this->receita_icms) / 100), 2, ".", ""));
+        $this->total_pis = \projeto\Util::decimalFormatToBank(number_format((($this->receita_bruta * $this->receita_pis) / 100), 2, ".", ""));
+        $this->total_confins = \projeto\Util::decimalFormatToBank(number_format((($this->receita_bruta * $this->receita_confins) / 100), 2, ".", ""));
         $this->total_despesa = \projeto\Util::decimalFormatToBank($this->despesa_link + $this->despesa_operacao_manutencao + $this->despesa_publicidade + $this->despesa_vendas);
 
         $this->receita_liquida = ($this->aliquota_nacional > 0) ?

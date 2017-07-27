@@ -19,10 +19,10 @@ public $file;
 
     public function rules() {
         return [
-            [['dt_inclusao', 'dt_exclusao'], 'safe'],
+            [['dt_inclusao','responsavel', 'ie', 'fistel','dt_exclusao'], 'safe'],
             [['situacao'], 'boolean'],
             [['cnpj'], 'string', 'max' => 18],
-            [['cnpj', 'fistel', 'razao_social'], 'required'],
+           // [['responsavel'], 'required'],
             [['cnpj'], '\projeto\validators\CnpjValidator'],
             [['fantasia', 'razao_social'], 'string', 'max' => 200]
         ];

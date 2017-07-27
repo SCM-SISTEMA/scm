@@ -34,7 +34,9 @@ use app\components\MenuLateralModuloWidget;
             'dt_inclusao',
             'dt_exclusao',
             'situacao:boolean',
-            ['class' => 'projeto\grid\ActionColumn'],
+            ['class' => 'projeto\grid\ActionColumn',
+             'template' => '{view} {admin} {delete}',
+                ],
         ],
     ]); ?>
 	</div>

@@ -117,7 +117,33 @@ class TabContatoSearch extends TabContato {
     public function getTabCliente() {
         return $this->hasOne(TabClienteSearch::className(), ['cod_cliente' => 'cod_cliente_fk']);
     }
-    
-    
+
+    public static function salvarContatos($contato, $model) {
+
+
+        foreach ($contato as $key => $value) {
+
+            if (strpos($value['cod_contato'], 'novo') !== false) {
+
+                unset($value['cod_contato']);
+                $modelCon = new \app\models\TabContatoSearch();
+                $modelCon->attributes = $value;
+                $modelCon->chave_fk = $model->cod_cliente;
+                $modelCon->tipo_tabela_fk = $model->tableName();
+                $modelCon->save();
+                $naoExcluir[] = $modelCon->cod_contato;
+            } else {
+                $modelCon = \app\models\TabContatoSearch::find()->where(['cod_contato' => $value['cod_contato']])->one();
+                $modelCon->attributes = $value;
+                $modelCon->save();
+                $naoExcluir[] = $modelCon->cod_contato;
+            }
+
+            if ($naoExcluir) {
+
+                TabContatoSearch::deleteAll("chave_fk = {$model->cod_cliente} and tipo_tabela_fk = '{$model->tableName()}' and cod_contato not in (" . implode(',', $naoExcluir) . ")");
+            }
+        }
+    }
 
 }

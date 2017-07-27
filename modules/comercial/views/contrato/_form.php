@@ -8,6 +8,7 @@ use yii\helpers\ArrayHelper;
 /* @var $this yii\web\View */
 /* @var $model app\modules\comercial\models\TabContrato */
 /* @var $form yii\widgets\ActiveForm */
+
 ?>
 
 <div class="tab-contrato-form box box-default">

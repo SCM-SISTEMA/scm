@@ -7,7 +7,7 @@ Projeto.prototype.sici = new (Projeto.extend({
         this.mudaBotaoImportacao();
         this.validaAjaxImportacao();
         this.verificaCnpj();
-        this.somenteNumero();
+ 
         this.totaisPlanos();
         this.submitCheck();
         this.clickCheck();
@@ -131,14 +131,7 @@ Projeto.prototype.sici = new (Projeto.extend({
 
         });
     },
-    somenteNumero: function () {
-
-        $(".somenteNumero").keyup(function (e) {
-            e.preventDefault();
-            var expre = /[^\d]/g;
-            $(this).val($(this).val().replace(expre, ''));
-        });
-    },
+    
 
     mudaBotaoImportacao: function () {
         $("#tabsicisearch-file").change(function () {

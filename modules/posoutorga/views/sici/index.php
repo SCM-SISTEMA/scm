@@ -33,7 +33,7 @@ $btImportar = Html::a('<i class="fa fa-file-excel-o"></i> Importar Planilha ', [
                 'razao_social',
                 'fistel',
                 'mes_ano_referencia',
-                'usuario_inclusao_sici',
+                'txt_login_alteracao',
 
               [
 					'attribute' => 'dsc_situacao',

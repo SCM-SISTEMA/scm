@@ -1,61 +1,64 @@
 <?php
 
 use yii\helpers\Html;
-use yii\helpers\Url;
-use yii\widgets\ActiveForm;
+use yii\bootstrap\Modal;
 use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
-/* @var $model app\modules\comercial\models\TabTipoContrato */
+/* @var $model app\models\TabContato */
 /* @var $form yii\widgets\ActiveForm */
+
+Modal::begin([
+    'headerOptions' => [
+        'id' => 'modalHeader'
+    ],
+    'header' => '<h3><div id="tituloTipoContrato">Incluir Serviço</div><h3>',
+    'id' => 'modalTipoContrato',
+    'closeButton' => false,
+    'size' => 'modal-sm',
+    'footer' =>
+    Html::a('Fechar', '#', ['class' => 'btn btn-default', 'id' => 'botaoFechar', 'data-dismiss' => 'modal'])
+    . PHP_EOL .
+    Html::button('Incluir Tipo Contrato', [
+        'id' => 'botaoSalvarTipoContrato',
+        'class' => 'btn btn-primary',
+    ]),
+    'clientOptions' => [
+        'backdrop' => 'static',
+        'keyboard' => FALSE
+    ]
+]);
+$tipo_contrato = new \app\modules\comercial\models\TabTipoContratoSearch();
 ?>
 
-<div class="tab-tipo-contrato-form box box-default">
-    <?php $form = ActiveForm::begin(); ?>
-
-    <div class="box-header with-border">
-		<h3 class="box-title"></h3>
-		<div class="box-tools">
-			<?= Html::submitButton('<i class="glyphicon glyphicon-ok"></i> '. ($model->isNewRecord ? 'Incluir registro' : 'Alterar registro'), ['class' => ($model->isNewRecord ? 'btn btn-success btn-sm' : 'btn btn-primary btn-sm')]) ?>
-			<?= Html::a('<i class="glyphicon glyphicon-arrow-left"></i> Cancelar',  Yii::$app->request->referrer, ['class' => 'btn btn-default btn-sm']) ?>
-		</div>
-    </div>
-	
-	<div class="box-body">
+<div id="formTipoContrato">
     <div class='row'>
-<div class='col-lg-6'>
-    <?= $form->field($model, 'cod_usuario_fk')->dropDownList(
-								ArrayHelper::map(
-												app\modules\comercial\models\TabUsuarios::find()->all(), 
-												'cod_usuario', 
-												'txt_nome'
-												),
-								['prompt' => $this->app->params['txt-prompt-select'], 
-								'class' => 'chosen-select'
-							]); ?>
-    </div>
-</div>
+        <div class='col-lg-12'>
+            <?= $form->field($tipo_contrato, 'cod_contrato_fk')->hiddenInput(['id' => 'tabtipocontratosearchservico-cod_contrato_fk', 'name' => 'TabTipoContratoSearchServico[cod_contrato_fk]'])->label(false); ?>
+            <?=
+            $form->field($tipo_contrato, 'cod_usuario_fk')->dropDownList(
+                    yii\helpers\ArrayHelper::map(
+                            app\modules\admin\models\VisUsuariosPerfisSearch::find()->where(['modulo_id' => 'comercial'])->all(), 'cod_usuario_fk', 'txt_login'
+                    ), ['prompt' => $this->app->params['txt-prompt-select'], 'id' => 'tabtipocontratosearchservico-cod_usuario_fk', 'name' => 'TabTipoContratoSearchServico[cod_usuario_fk]'
+            ]);
+            ?>
+        </div>    </div>
     <div class='row'>
-<div class='col-lg-6'>
-    <?= $form->field($model, 'cod_contrato_fk')->dropDownList(
-								ArrayHelper::map(
-												app\modules\comercial\models\TabContrato::find()->all(), 
-												'cod_contrato', 
-												'txt_nome'
-												),
-								['prompt' => $this->app->params['txt-prompt-select'], 
-								'class' => 'chosen-select'
-							]); ?>
-    </div>
-</div>
-    </div>
+        <div class='col-lg-12'>
 
-	<div class="box-footer">
-		<h3 class="box-title"></h3>
-		<div class="box-tools pull-right">
-			<?= Html::submitButton('<i class="glyphicon glyphicon-ok"></i> '. ($model->isNewRecord ? 'Incluir registro' : 'Alterar registro'), ['class' => ($model->isNewRecord ? 'btn btn-success btn-sm' : 'btn btn-primary btn-sm')]) ?>
-			<?= Html::a('<i class="glyphicon glyphicon-arrow-left"></i> Cancelar',  Yii::$app->request->referrer, ['class' => 'btn btn-default btn-sm']) ?>
-		</div>
+            <?=
+            $form->field($tipo_contrato, 'tipo_produto_fk')->dropDownList(
+                    yii\helpers\ArrayHelper::map(
+                            app\models\TabAtributosValoresSearch::find()->where(['fk_atributos_valores_atributos_id' =>
+                                app\models\TabAtributosSearch::find()->where(['sgl_chave' => 'tipo-produto'])->one()['cod_atributos']
+                            ])->all(), 'cod_atributos_valores', 'dsc_descricao'
+                    ), ['prompt' => $this->app->params['txt-prompt-select'], 'id' => 'tabtipocontratosearchservico-tipo_produto_fk', 'name' => 'TabTipoContratoSearchServico[tipo_produto_fk]'
+            ]);
+            ?>
+
+
+        </div>
     </div>
-    <?php ActiveForm::end(); ?>
 </div>
+
+<?php Modal::end(); ?>

@@ -44,6 +44,26 @@ class ClienteController extends \app\controllers\ClienteController {
         ]);
     }
 
+    public function montaArrayContratos($contrato = []) {
+        if ($contrato) {
+            foreach ($contrato as $cont) {
+
+                $tipo_contrato = \app\modules\comercial\models\TabTipoContratoSearch::find()->where(['cod_contrato_fk' => $cont->cod_contrato])->all();
+
+                $tipo_contratos = null;
+                if ($tipo_contrato) {
+                    foreach ($tipo_contrato as $tp_cont) {
+                        $tipo_contratos[] = $tp_cont->attributes;
+                    }
+                }
+
+                $parcelas = \app\modules\comercial\models\TabContratoParcelasSearch::find()->where(['cod_contrato_fk' => $cont->cod_contrato])->asArray()->orderBy('numero')->all();
+                $contratos[] = ['attributes' => $cont->attributes, 'tipo_contratos' => $tipo_contratos, 'parcelas' => $parcelas];
+            }
+        }
+        return $contratos;
+    }
+
     /**
      * Creates e Updates a new TabCliente  model.
      * If creation is successful, the browser will be redirected to the 'view' page.
@@ -53,7 +73,13 @@ class ClienteController extends \app\controllers\ClienteController {
         if ($id) {
 
             $model = $this->findModel($id);
-            $contratos = \app\modules\comercial\models\TabContratoSearch::find()->where(['cod_cliente_fk' => $model->cod_cliente])->all();
+            $contrato = \app\modules\comercial\models\TabContratoSearch::find()->where(['cod_cliente_fk' => $model->cod_cliente])->all();
+            $contato = \app\models\TabContatoSearch::find()->where(['chave_fk' => $model->cod_cliente, 'tipo_tabela_fk' => $model->tableName()])->indexBy('cod_contato')->asArray()->all();
+            $endereco = \app\models\TabEnderecoSearch::find()->where(['chave_fk' => $model->cod_cliente, 'tipo_tabela_fk' => $model->tableName()])->indexBy('cod_endereco')->asArray()->all();
+            $contratos = $this->montaArrayContratos($contrato);
+
+
+
             $acao = 'update';
             $this->titulo = 'Alterar Cliente';
             $this->subTitulo = '';
@@ -61,9 +87,16 @@ class ClienteController extends \app\controllers\ClienteController {
 
             $acao = 'create';
             $model = new TabClienteSearch();
+            $cont = new \app\modules\comercial\models\TabContratoSearch();
+            $tipo_contratos = new \app\modules\comercial\models\TabTipoContratoSearch();
+            $cont->cod_contrato = 'N_' . rand(100000000, 999999999);
+            $contratos = [];
+
             $this->titulo = 'Incluir Cliente';
             $this->subTitulo = '';
         }
+
+
 
         if ($model->load(Yii::$app->request->post())) {
             $transaction = Yii::$app->db->beginTransaction();
@@ -73,44 +106,34 @@ class ClienteController extends \app\controllers\ClienteController {
 
                 $endereco = \Yii::$app->session->get('endereco');
                 $contato = \Yii::$app->session->get('contato');
+                $contratos = \Yii::$app->session->get('contratos');
+
                 $model->save();
                 if ($endereco) {
-                    foreach ($endereco as $key => $value) {
-
-                        if (strpos($value['cod_endereco'], 'novo') !== false) {
-                            $value['cod_endereco'] = null;
-                            $modelEnd = new \app\models\TabEnderecoSearch();
-                            $modelEnd->attributes = $value;
-                            $modelEnd->chave_fk = $modelEnd->save();
-                        }
-                    }
+                    \app\models\TabEnderecoSearch::salvarEnderecos($endereco, $model);
                 }
-
                 if ($contato) {
-                    foreach ($contato as $key => $value) {
 
-                        if (strpos($value['cod_endereco'], 'novo') !== false) {
-                            $value['cod_contato'] = null;
-                            $modelCon = new \app\models\TabEnderecoSearch();
-                            $modelCon->attributes = $value;
-                            $modelCon->save();
-                        }
-                    }
+                    \app\models\TabContatoSearch::salvarContatos($contato, $model);
                 }
+                if ($contratos) {
 
-                print_r($model->attributes);
-                exit;
-
+                    \app\modules\comercial\models\TabContratoSearch::salvarContratos($contratos, $model);
+                }
+                $transaction->commit();
                 $this->session->setFlashProjeto('success', $acao);
-                return $this->redirect(['view', 'id' => $model->cod_cliente]);
+                return $this->redirect(['admin', 'id' => $model->cod_cliente]);
             } catch (\Exception $e) {
                 $transaction->rollBack();
                 throw $e;
             }
         }
 
+        \Yii::$app->session->set('endereco', $endereco);
+        \Yii::$app->session->set('contato', $contato);
+        \Yii::$app->session->set('contratos', $contratos);
         return $this->render('admin', [
-                    'model' => $model, $contratos, 'contratos'
+                    'model' => $model, 'contratos' => $contratos
         ]);
     }
 
@@ -211,6 +234,7 @@ class ClienteController extends \app\controllers\ClienteController {
             $model = new \app\models\TabEnderecoSearch();
             $model->load($post);
             $model->uf = $post['TabEnderecoSearch']['uf'];
+            $str = 'Alteração';
 
             $model->municipio = \app\models\TabMunicipiosSearch::findOneAsArray(['cod_municipio' => $model->cod_municipio_fk])['txt_nome'];
         } else {
@@ -220,6 +244,8 @@ class ClienteController extends \app\controllers\ClienteController {
             $model->cod_endereco = 'novo-' . rand('100000000', '999999999');
             $model->uf = $post['TabEnderecoSearch']['uf'];
             $model->ativo = 1;
+            $str = 'Inclusão';
+
             $model->municipio = \app\models\TabMunicipiosSearch::findOneAsArray(['cod_municipio' => $model->cod_municipio_fk])['txt_nome'];
         }
 
@@ -233,7 +259,6 @@ class ClienteController extends \app\controllers\ClienteController {
             $itens[$model->cod_endereco] = $model->attributes + ['uf' => $model->uf, 'municipio' => $model->municipio];
             \Yii::$app->session->set('endereco', $itens);
 
-            $str = 'Inclusão com sucesso';
 
             $msg['tipo'] = 'success';
             $msg['msg'] = $str . ' efetivada com sucesso.';
@@ -280,6 +305,7 @@ class ClienteController extends \app\controllers\ClienteController {
             $model->attributes = $post['TabContatoSearch'];
             $model->tipo = $post['TabContatoSearch']['tipo'];
             $model->ativo = (($post['TabContatoSearch']['ativo'] === '0') ? '0' : '1');
+            $str = 'Alteração';
         } else {
 
             $model = new \app\models\TabContatoSearch();
@@ -288,6 +314,7 @@ class ClienteController extends \app\controllers\ClienteController {
             $model->cod_contato = 'novo-' . rand('100000000', '999999999');
             $model->contato_email = $post['TabContatoSearch']['contato_email'];
             $model->ativo = 1;
+            $str = 'Inclusão';
         }
         if ($model->contato_email) {
             $model->setScenario('email');
@@ -303,8 +330,6 @@ class ClienteController extends \app\controllers\ClienteController {
 
             $itens[$model->cod_contato] = $model->attributes + ['contato_email' => $model->contato_email];
             \Yii::$app->session->set('contato', $itens);
-
-            $str = 'Inclusão com sucesso';
 
             $msg['tipo'] = 'success';
             $msg['msg'] = $str . ' efetivada com sucesso.';
@@ -839,7 +864,6 @@ class ClienteController extends \app\controllers\ClienteController {
                                 }
                                 $endereco->save();
                                 $transaction->commit();
-                                
                             }
                         }
                     }
@@ -970,6 +994,149 @@ class ClienteController extends \app\controllers\ClienteController {
 
             $grids = ['itens' => $itens, 'itensE' => $itensE];
         }
+    }
+
+    public function actionIncluirTipoContrato() {
+        $this->module->module->layout = null;
+
+        $contratoSessao = (\Yii::$app->session->get('contratos')) ? \Yii::$app->session->get('contratos') : [];
+        $post = Yii::$app->request->post();
+
+        if (strpos($post['TabTipoContratoSearchServico']['cod_contrato_fk'], 'N') === false) {
+            $str = 'Inclusão';
+            foreach ($contratoSessao as $key => $contrato) {
+
+                if ($contrato['attributes']['cod_contrato'] == $post['TabTipoContratoSearchServico']['cod_contrato_fk']) {
+                    $servico = new \app\modules\comercial\models\TabTipoContratoSearch();
+                    //$servico->cod_tipo_contrato = 'N' . rand('100000000', '999999999');
+                    $servico->attributes = $post['TabTipoContratoSearchServico'];
+                    $servico->save();
+                    array_unshift($contratoSessao[$key]['tipo_contratos'], $servico->attributes);
+
+                    $cont = $contratoSessao[$key];
+                }
+            }
+        } else {
+            $str = 'Alteração';
+            foreach ($contratoSessao as $key => $contrato) {
+
+                if ($contrato['attributes']['cod_contrato'] == $post['TabTipoContratoSearchServico']['cod_contrato_fk']) {
+                    $servico = new \app\modules\comercial\models\TabTipoContratoSearch();
+                    $servico->cod_tipo_contrato = 'N' . rand('100000000', '999999999');
+                    $servico->attributes = $post['TabTipoContratoSearchServico'];
+
+                    array_unshift($contratoSessao[$key]['tipo_contratos'], $servico->attributes);
+                    $cont = $contratoSessao[$key];
+                }
+            }
+        }
+
+        \Yii::$app->session->set('contratos', $contratoSessao);
+        $form = \yii\widgets\ActiveForm::begin();
+        $contrato = $cont;
+
+
+        if ($servico && $servico->getErrors()) {
+            $dados = $servico->getErrors();
+            $msgT['tipo'] = 'error';
+            $msgT['msg'] = 'Erro na solicitacao.';
+            $msgT['icon'] = 'check';
+        } else {
+
+            $msgT['tipo'] = 'success';
+            $msgT['msg'] = $str . ' efetivada com sucesso.';
+            $msgT['icon'] = 'check';
+        }
+
+        Yii::$app->controller->action->id = 'index';
+
+        $dados = ['html' => $this->render('@app/modules/comercial/views/contrato/_guia_tipo_contrato', compact('form', 'contrato', 'msgT')), 'cod_contrato' => $post['TabTipoContratoSearchServico']['cod_contrato_fk']];
+
+        return \yii\helpers\Json::encode($dados);
+    }
+
+    public function actionIncluirContrato() {
+        $this->module->module->layout = null;
+
+        $contratoSessao = (\Yii::$app->session->get('contratos')) ? \Yii::$app->session->get('contratos') : [];
+        $post = Yii::$app->request->post();
+        if (!$post['TabContratoSearch']['cod_contrato']) {
+            $str = 'Inclusão';
+
+            $contrato = new \app\modules\comercial\models\TabContratoSearch();
+            $contrato->attributes = $post['TabContratoSearch'];
+            $contrato->cod_contrato = 'N' . rand('100000000', '999999999');
+
+            if ($post['TabContratoSearch']['valor_contrato']) {
+                $i = 0;
+                $nparcela = ($post['TabContratoSearch']['qnt_parcelas']) ? $post['TabContratoSearch']['qnt_parcelas'] : 1;
+                $valor = (float) $post['TabContratoSearch']['valor_contrato'] / (int) $nparcela;
+                $dataArray = explode('/', $post['TabContratoSearch']['dt_vencimento']);
+
+                while ($i < $nparcela) {
+                    $parcela = new \app\modules\comercial\models\TabContratoParcelasSearch();
+                    $parcela->cod_contrato_fk = $contrato->cod_contrato;
+                    $parcela->numero = $i + 1;
+                    $parcela->valor = number_format($valor, 2, ".", "");
+                    $parcela->dt_vencimento = $dataArray[0] . '/' . str_pad($dataArray[1] + $i, '2', '0', 0) . '/' . $dataArray[2];
+                    $percelas[] = $parcela->attributes;
+                    $i++;
+                    $total += $parcela->valor;
+                }
+
+                $percelas[0]['valor'] = number_format($percelas[0]['valor'] - number_format($total - $post['TabContratoSearch']['valor_contrato'], 2, ".", ""), 2, ".", "");
+            }
+            $servicos = \app\modules\comercial\models\TabContratoTipoContrato::find()->where(['cod_contrato_fk' => $contrato->tipo_contrato_fk])->asArray()->all();
+            $sers = [];
+            if ($servicos) {
+                foreach ($servicos as $key => $ser) {
+
+                    $servico = new \app\modules\comercial\models\TabTipoContratoSearch();
+                    $servico->cod_tipo_contrato = 'N' . rand('100000000', '999999999');
+                    $servico->cod_usuario_fk = $post['TabTipoContratoSearch']['cod_usuario_fk'];
+                    $servico->cod_contrato_fk = $contrato->cod_contrato;
+                    $servico->tipo_produto_fk = $ser['cod_tipo_contrato_fk'];
+
+                    $sers[] = $servico->attributes;
+                }
+            }
+
+            array_unshift($contratoSessao, ['attributes' => $contrato->attributes, 'tipo_contratos' => $sers, 'parcelas' => $percelas]);
+        } else {
+            $str = 'Alteração';
+            foreach ($contratoSessao as $key => $contrato) {
+
+                if ($contrato['attributes']['cod_contrato'] == $post['TabContratoSearch']['cod_contrato']) {
+                    $contrato = new \app\modules\comercial\models\TabContratoSearch();
+                    $contrato->attributes = $post['TabContratoSearch'];
+                    $contratoSessao[$key]['TabContratoSearch'] = $contrato->attributes;
+                }
+            }
+        }
+
+        \Yii::$app->session->set('contratos', $contratoSessao);
+
+        if ($contrato && $contrato->getErrors()) {
+            $dados = $contrato->getErrors();
+            $msg['tipo'] = 'error';
+            $msg['msg'] = 'Erro na solicitacao.';
+            $msg['icon'] = 'check';
+        } else {
+
+            $msg['tipo'] = 'success';
+            $msg['msg'] = $str . ' efetivada com sucesso.';
+            $msg['icon'] = 'check';
+        }
+        Yii::$app->controller->action->id = 'index';
+
+        $form = \yii\widgets\ActiveForm::begin();
+
+        $dados = $this->render('@app/modules/comercial/views/contrato/_guia_contratos', compact('form', 'msg'));
+
+
+
+
+        return \yii\helpers\Json::encode($dados);
     }
 
 }

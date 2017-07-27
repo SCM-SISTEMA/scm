@@ -2,6 +2,12 @@
  * Funções utilitárias de uso geral
  */
 Projeto.prototype.util = new (Projeto.extend({
+      init: function () {
+  
+        this.somenteNumero();
+        
+
+    },
     jr: function (seletor) {
         return $(seletor).val();
     },
@@ -71,7 +77,14 @@ Projeto.prototype.util = new (Projeto.extend({
     scrollTop: function () {
         $("html, body").animate({scrollTop: 0}, 2000);
     },
+    somenteNumero: function () {
 
+        $(".somenteNumero").keyup(function (e) {
+            e.preventDefault();
+            var expre = /[^\d]/g;
+            $(this).val($(this).val().replace(expre, ''));
+        });
+    },
     buscaMunicipio: function (ufs) {
         var urlInclusao = $('base').attr('href') + 'municipios/lista';
 

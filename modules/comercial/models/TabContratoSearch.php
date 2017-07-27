@@ -10,39 +10,36 @@ use app\modules\comercial\models\TabContrato;
 /**
  * TabContratoSearch represents the model behind the search form about `app\modules\comercial\models\TabContrato`.
  */
-class TabContratoSearch extends TabContrato
-{
-    /**
-     * @inheritdoc
-     */ 
-    public function rules()
-    {
+class TabContratoSearch extends TabContrato {
 
-		$rules =  [
-             //exemplo [['txt_nome', 'cod_modulo_fk'], 'required'],
-        ];
-		
-		return array_merge($rules, parent::rules());
-    }
-	
-	/**
-    * @inheritdoc
-    */
-	public function attributeLabels()
-    {
-
-		$labels = [
-            //exemplo 'campo' => 'label',         
-        ];
-		
-		return array_merge( parent::attributeLabels(), $labels);
-    }
-	
     /**
      * @inheritdoc
      */
-    public function scenarios()
-    {
+    public function rules() {
+        return [
+            [['valor_contrato'], 'number'],
+            [['dt_prazo', 'dt_inclusao', 'dt_vencimento', 'tipo_contrato_fk', 'dia_vencimento', 'qnt_parcelas', 'responsavel_fk', 'qnt_clientes', 'cod_cliente_fk'], 'safe'],
+            [['operando', 'link', 'zero800', 'parceiria', 'consultoria_scm', 'engenheiro_tecnico'], 'boolean'],
+            [['contador'], 'string', 'max' => 150]
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels() {
+
+        $labels = [
+                //exemplo 'campo' => 'label',         
+        ];
+
+        return array_merge(parent::attributeLabels(), $labels);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function scenarios() {
         // bypass scenarios() implementation in the parent class
         return Model::scenarios();
     }
@@ -54,8 +51,7 @@ class TabContratoSearch extends TabContrato
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
-    {
+    public function search($params) {
         $query = TabContratoSearch::find();
 
         $dataProvider = new ActiveDataProvider([
@@ -87,8 +83,56 @@ class TabContratoSearch extends TabContrato
 
         $query->andFilterWhere(['ilike', $this->tableName() . '.contador', $this->contador]);
 
-		$query->andWhere($this->tableName().'.dt_exclusao IS NULL');
-		
+        $query->andWhere($this->tableName() . '.dt_exclusao IS NULL');
+
         return $dataProvider;
     }
+
+    public static function salvarContratos($contratos, $model) {
+
+        if ($contratos) {
+            foreach ($contratos as $key => $cont) {
+                $modelCon = new \app\modules\comercial\models\TabContratoSearch();
+
+                if (strpos($cont['attributes']['cod_contrato'], 'N') !== false) {
+
+
+                    unset($cont['attributes']['cod_contrato']);
+
+                    $modelCon->attributes = $cont['attributes'];
+                    $modelCon->cod_cliente_fk = $model->cod_cliente;
+                    $modelCon->save();
+
+                    if ($cont['tipo_contratos']) {
+                        TabTipoContratoSearch::salvarTipoContratos($cont['tipo_contratos'], $modelCon);
+                    }
+
+
+                    if ($cont['parcelas']) {
+                        \app\modules\comercial\models\TabContratoParcelasSearch::salvarContratoParcelas($cont['parcelas'], $modelCon);
+                    }
+                } else {
+                    $modelCon = TabContratoSearch::find()->where(['cod_contrato' => $value['cod_contrato']])->one();
+                    $modelCon->attributes = $value;
+                    $modelCon->save();
+                    $naoExcluir[] = $modelCon->cod_contrato;
+                    
+                     if ($cont['tipo_contratos']) {
+                        TabTipoContratoSearch::salvarTipoContratos($cont['tipo_contratos'], $modelCon);
+                    }
+
+
+                    if ($cont['parcelas']) {
+                        \app\modules\comercial\models\TabContratoParcelasSearch::salvarContratoParcelas($cont['parcelas'], $modelCon);
+                    }
+                }
+
+                if ($naoExcluir) {
+
+                    TabContratoSearch::updateAll(['ativo' => false], "cod_cliente_fk = {$model->cod_cliente} and cod_contrato not in (" . implode(',', $naoExcluir) . ")");
+                }
+            }
+        }
+    }
+
 }

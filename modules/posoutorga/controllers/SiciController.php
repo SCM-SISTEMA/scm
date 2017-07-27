@@ -1900,7 +1900,6 @@ class SiciController extends Controller {
    
 
 
-
         $sici->receita_bruta = trim($rowData[$key][0][9]);
         $sici->despesa_operacao_manutencao = trim($rowData[$key][0][20]);
         $key += 3;
@@ -1928,6 +1927,7 @@ class SiciController extends Controller {
         
         $rowData = $this->retornaImportacao($rowData, 'INVESTIMENTO', TRUE);
         $key = 4;
+
         
         $tipoSici = 'mensal';
         $sici->tipo_sici_fk = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-sici', 'M');

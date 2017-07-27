@@ -26,7 +26,7 @@ class TabEnderecoSearch extends TabEndereco {
             [['cod_municipio_fk', 'cep', 'logradouro', 'numero'], 'required', 'on' => 'criar'],
             [['cod_municipio_fk', 'cep', 'logradouro'], 'required'],
             [['chave_fk', 'tipo_usuario'], 'integer'],
-            [['dt_inclusao', 'cod_endereco','tipo_tabela_fk', 'cod_municipio_fk'], 'safe'],
+            [['dt_inclusao', 'cod_endereco', 'tipo_tabela_fk', 'cod_municipio_fk'], 'safe'],
             [['logradouro'], 'string', 'max' => 200],
             [['numero'], 'string', 'max' => 20],
             [['complemento'], 'string', 'max' => 100],
@@ -120,20 +120,46 @@ class TabEnderecoSearch extends TabEndereco {
         $cep = \projeto\Util::retiraCaracter($cep);
 
         $url = 'viacep.com.br/ws/' . $cep . '/json/';
-        
+
         $ch = curl_init();
         curl_setopt_array($ch, array
             (
-             CURLOPT_TIMEOUT=>7,
+            CURLOPT_TIMEOUT => 7,
             CURLOPT_URL => $url,
             CURLOPT_RETURNTRANSFER => TRUE
         ));
         $response = curl_exec($ch);
         if ($this->cep) {
             $this->dadosCep = json_decode($response);
-
         } else {
             return json_decode($response);
+        }
+    }
+
+    public static function salvarEnderecos($endereco, $model) {
+        foreach ($endereco as $key => $value) {
+
+            if (strpos($value['cod_endereco'], 'novo') !== false) {
+                unset($value['cod_endereco']);
+                $modelEnd = new \app\models\TabEnderecoSearch();
+                $modelEnd->attributes = $value;
+                $modelEnd->chave_fk = $model->cod_cliente;
+                $modelEnd->tipo_tabela_fk = $model->tableName();
+
+                $modelEnd->save();
+                $naoExcluir[] = $modelEnd->cod_endereco;
+            } else {
+                $modelEnd = \app\models\TabEnderecoSearch::find()->where(['cod_endereco' => $value['cod_endereco']])->one();
+                $modelEnd->attributes = $value;
+                $modelEnd->save();
+
+                $naoExcluir[] = $modelEnd->cod_endereco;
+            }
+
+            if ($naoExcluir) {
+                
+                TabEnderecoSearch::deleteAll("chave_fk = {$model->cod_cliente} and tipo_tabela_fk = '{$model->tableName()}' and cod_endereco not in (" . implode(',', $naoExcluir).")");
+            }
         }
     }
 

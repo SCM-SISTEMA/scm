@@ -1,3 +1,4 @@
+
 <div class='row'>
     <div class='col-lg-3'>
         <?=
@@ -12,9 +13,13 @@
     <div class='col-lg-3'>
         <?= $form->field($model, 'fistel')->textInput(['maxlength' => true, 'class' => 'form-control somenteNumero']) ?>
     </div>
-    <div class='col-lg-6'>
+    <div class='col-lg-3'>
         <?= $form->field($model, 'ie')->textInput(['maxlength' => true, 'class' => 'form-control somenteNumero']) ?>
-        ?>
+   
+    </div>
+        <div class='col-lg-3'>
+        <?= $form->field($model, 'responsavel')->textInput(['maxlength' => true]) ?>
+   
     </div>
 </div>
 <div class='row'>
