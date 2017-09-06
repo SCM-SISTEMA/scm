@@ -122,7 +122,7 @@ Projeto.prototype.sici = new (Projeto.extend({
                 $('#tabclientesearch-razao_social').val(ds.razao_social);
                 if (!$('#tabclientesearch-fistel').val()) {
                     $('#tabclientesearch-fistel').val(ds.fistel);
-                    $('#tabclientesearch-fistel').val(ds.responsavel);
+                    $('#tabclientesearch-responsavel').val(ds.responsavel);
                 }
                 $('#tabcontatosearcht-contato').val(ds.contatoT);
                 $('#tabcontatosearchc-contato').val(ds.contatoC);
