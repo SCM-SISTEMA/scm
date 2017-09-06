@@ -132,9 +132,9 @@ class ActiveRecord extends \yii\db\ActiveRecord {
     }
 
     public function verificarChecks($checado = true) {
-
+        
         $checar = function ($vals, $checado) {
-
+            
             foreach ($vals as $key => $val) {
                 
                 if (strpos($key, '_check') !== false) {
@@ -151,7 +151,7 @@ class ActiveRecord extends \yii\db\ActiveRecord {
 
             return true;
         };
-
+        
         return $checar($this->attributes, $checado);
     }
 
