@@ -1103,7 +1103,7 @@ class ClienteController extends \app\controllers\ClienteController {
 
             array_unshift($contratoSessao, ['attributes' => $contrato->attributes, 'tipo_contratos' => $sers, 'parcelas' => $percelas]);
         } else {
-            $str = 'AlteraÃ§Ã£o';
+            $str = 'Alteração';
             foreach ($contratoSessao as $key => $contrato) {
 
                 if ($contrato['attributes']['cod_contrato'] == $post['TabContratoSearch']['cod_contrato']) {
