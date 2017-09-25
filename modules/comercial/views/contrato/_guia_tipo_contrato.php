@@ -12,7 +12,7 @@
     
     <div class='col-lg-12'  style=" text-align:right">
             <?=
-            \projeto\helpers\Html::button('<i class="glyphicon glyphicon-plus"></i> Novo Produto', [
+            \projeto\helpers\Html::button('<i class="glyphicon glyphicon-plus"></i> Novo Serviço', [
                 'class' => 'btn btn-success btn-sm',
                 'id' => 'incluirTipoContrato',
               
@@ -22,7 +22,7 @@
     </div>
 </div> 
 <?php 
-//print_r($contrato['tipo_contratos']); exit;
+
 if ($contrato['tipo_contratos']) : ?>
 
     <?php foreach ($contrato['tipo_contratos'] as $key => $tipo_contrato): ?>
@@ -32,6 +32,7 @@ if ($contrato['tipo_contratos']) : ?>
         <?php
 
         $guias[] = [
+          
             'label' => "<b style=\"color:#337ab7\">{$contratoNome}</b>",
             'content' =>$contratoNome ,
             'active' => false,
@@ -43,6 +44,7 @@ if ($contrato['tipo_contratos']) : ?>
     <?=
 
     kartik\tabs\TabsX::widget([
+        'id' => 'box-servico-' . $contrato['attributes']['cod_contrato'],
         'items' => $guias
         
             

@@ -16,20 +16,17 @@
             <file>file:/C:/wamp64/www/esqueleto/modules/admin/views/atributos-valores/create.php</file>
         </group>
         <group>
-            <file>file:/var/www/scm/modules/posoutorga/models/TabSiciSearch.php</file>
-            <file>file:/var/www/scm/modules/admin/views/cliente/admin.php</file>
-            <file>file:/var/www/scm/models/TabClienteSearch.php</file>
+            <file>file:/var/www/scm/web/js/app/comercial.andamento.js</file>
+            <file>file:/var/www/scm/models/TabAndamento.php</file>
+            <file>file:/var/www/scm/controllers/AndamentoController.php</file>
             <file>file:/var/www/scm/models/TabEnderecoSearch.php</file>
-            <file>file:/var/www/scm/modules/comercial/views/contrato/_guia_contrato.php</file>
-            <file>file:/var/www/scm/modules/posoutorga/models/TabSici.php</file>
-            <file>file:/var/www/scm/modules/comercial/views/contrato/_guia_contratos.php</file>
-            <file>file:/var/www/scm/modules/admin/controllers/ClienteController.php</file>
-            <file>file:/var/www/scm/modules/posoutorga/views/sici/update.php</file>
-            <file>file:/var/www/scm/modules/comercial/views/contrato/_guia_tipo_contrato.php</file>
-            <file>file:/var/www/scm/modules/posoutorga/controllers/SiciController.php</file>
-            <file>file:/var/www/scm/modules/admin/views/inicio/index.php</file>
+            <file>file:/var/www/scm/views/andamento/_form_andamento_add.php</file>
             <file>file:/var/www/scm/web/js/app/admin.cliente.js</file>
-            <file>file:/var/www/scm/modules/posoutorga/controllers/InicioController.php</file>
+            <file>file:/var/www/scm/controllers/EnderecoController.php</file>
+            <file>file:/var/www/scm/modules/admin/controllers/ClienteController.php</file>
+            <file>file:/var/www/scm/views/andamento/_lista_andamento.php</file>
+            <file>file:/var/www/scm/models/TabAndamentoSearch.php</file>
+            <file>file:/var/www/scm/views/andamento/_form_andamento.php</file>
         </group>
     </open-files>
 </project-private>

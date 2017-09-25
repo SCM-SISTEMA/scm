@@ -97,10 +97,10 @@ class TabTipoContrato extends \projeto\db\ActiveRecord
 
     /**
      * @inheritdoc
-     * @return \app\modules\posoutorga\models\TabTipoContratoQuery the active query used by this AR class.
+     * @return TabTipoContratoQuery the active query used by this AR class.
      */
     public static function find()
     {
-        return new \app\modules\posoutorga\models\TabTipoContratoQuery(get_called_class());
+        return new TabTipoContratoQuery(get_called_class());
     }
 }

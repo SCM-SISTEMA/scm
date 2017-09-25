@@ -162,4 +162,48 @@ class EnderecoController extends Controller {
     }
 
 
+    
+    
+    public function actionVerificaCnpj() {
+
+        $this->module->module->layout = null;
+        $post = Yii::$app->request->post();
+
+        $cliente = \app\models\TabClienteSearch::findOne(['cnpj' => $post['dados']]);
+
+        if ($cliente) {
+            
+        } else {
+            $cliente = new \app\models\TabClienteSearch();
+            $cliente->cnpj = $post['dados'];
+            \Yii::$app->session->set('endereco', []);
+            \Yii::$app->session->set('contato', []);
+            $cliente->buscaCliente();
+            $grids = $gridCont = $gridEnd = [];
+
+            if ($cliente->dadosReceita) {
+
+                $this->dadosCliente($cliente, $grids);
+
+                if ($grids['itens'])
+                    $gridCont = ['grid' => $this->renderAjax('@app/views/contato/_grid_cliente', ['msg' => $msg])];
+
+                if ($grids['itensE'])
+                    $gridEnd = ['grid' => $this->renderAjax('@app/views/endereco/_grid_cliente', ['msg' => $msg])];
+            }
+        }
+        $cliente = $cliente->attributes;
+        return \yii\helpers\Json::encode(['cliente' => $cliente, 'gridCont' => $gridCont, 'gridEnd' => $gridEnd]);
+    }
+    public function actionVerificaCep() {
+
+        $post = Yii::$app->request->post();
+
+        $endereco = \app\models\TabEnderecoSearch::buscaCep($post['dados']);
+        
+        $this->module->module->layout = null;
+        
+        return \yii\helpers\Json::encode($endereco);
+    }
+
 }

@@ -28,12 +28,12 @@ class TabContratoParcelasSearch extends TabContratoParcelas {
      * @inheritdoc
      */
     public function attributeLabels() {
-
-        $labels = [
-                //exemplo 'campo' => 'label',         
-        ];
-
-        return array_merge(parent::attributeLabels(), $labels);
+            $labels = parent::attributeLabels();
+            $labels['numero'] = 'Número';
+            $labels['valor'] = 'Valor';
+            $labels['dt_vencimento'] = 'Data Vencimento';
+            
+        return $labels;
     }
 
     /**

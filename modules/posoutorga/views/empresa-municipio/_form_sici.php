@@ -12,7 +12,7 @@ Modal::begin([
     'headerOptions' => [
         'id' => 'modalHeader'
     ],
-    'header' => '<h3><div id="tituloInfra">Incluir Acesso</div><h3>',
+    'header' => '<h3><div id="tituloAcesso">Incluir Acesso</div></h3>',
     'id' => 'modalAcesso',
     'closeButton' => false,
     'size' => 'modal-sm',

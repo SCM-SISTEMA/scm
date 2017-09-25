@@ -28,12 +28,16 @@ class TabContratoSearch extends TabContrato {
      * @inheritdoc
      */
     public function attributeLabels() {
-
-        $labels = [
-                //exemplo 'campo' => 'label',         
-        ];
-
-        return array_merge(parent::attributeLabels(), $labels);
+        $labels = parent::attributeLabels();
+        
+        $labels['tipo_contrato_fk'] = 'Tipo Contrato';
+        $labels['dt_prazo'] = 'Prazo';
+        $labels['dt_vencimento'] = 'Vencimento';
+        $labels['responsavel_fk'] = 'Usuário Responsável';
+        $labels['qnt_parcelas'] = 'Qnt de Parcelas';
+         
+        return $labels
+                ;
     }
 
     /**
@@ -124,6 +128,15 @@ class TabContratoSearch extends TabContrato {
 
                     if ($cont['parcelas']) {
                         \app\modules\comercial\models\TabContratoParcelasSearch::salvarContratoParcelas($cont['parcelas'], $modelCon);
+                    }
+                    
+                    if($modelCon->isNewRecord){
+                        $andamento = new \app\models\TabAndamentoSearch();
+                        $andamento->cod_usuario_inclusao_fk = $this->user->identity->getId();
+                        $andamento->cod_assunto_fk = "535";
+                        $andamento->cod_contrato_fk = $modelCon->cod_contrato;
+                        $andamento->cod_modulo_fk = 1;
+                        $andamento->save();
                     }
                 }
 

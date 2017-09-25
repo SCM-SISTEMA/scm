@@ -5,6 +5,7 @@ use yii\helpers\Url;
 use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 
+$this->registerJsFile("@web/js/app/comercial.andamento.js?{$this->app->version}", ['position' => $this::POS_END, 'depends' => [\app\assets\ProjetoAsset::className()]]);
 /* @var $this yii\web\View */
 /* @var $model app\models\Cliente */
 ?>
@@ -21,9 +22,6 @@ use yii\helpers\ArrayHelper;
             </div>
         </div>
         <div class="box-body">
-
-
-
 
 
             <?php
@@ -56,7 +54,7 @@ use yii\helpers\ArrayHelper;
                     [
                         'label' => "<i class='fa fa-book'></i> Contratos",
                         'content' => ['<div id="divGuiaContrato">' .
-                            $this->render('@app/modules/comercial/views/contrato/_guia_contratos', compact('form')) .
+                            $this->render('@app/modules/comercial/views/contrato/_guia_contratos', compact('form', 'model')) .
                             '</div>'],
                         'encode' => false,
                         'contentOptions' => ['class' => 'in'],
@@ -79,6 +77,7 @@ use yii\helpers\ArrayHelper;
         </div>
         <?php echo $this->render('@app/modules/comercial/views/tipo-contrato/_form_tipo_contrato_add', ['form' => $form]); ?> 
         <?php echo $this->render('@app/modules/comercial/views/contrato/_form_contrato_add', ['form' => $form]); ?> 
+        <?php echo $this->render('@app/views/andamento/_form_andamento_add', ['form' => $form]); ?> 
 
         <?php ActiveForm::end(); ?>
     </div>

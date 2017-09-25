@@ -86,10 +86,10 @@ class TabSocios extends \projeto\db\ActiveRecord
 
     /**
      * @inheritdoc
-     * @return \app\modules\posoutorga\models\TabSociosQuery the active query used by this AR class.
+     * @return TabSociosQuery the active query used by this AR class.
      */
     public static function find()
     {
-        return new \app\modules\posoutorga\models\TabSociosQuery(get_called_class());
+        return new TabSociosQuery(get_called_class());
     }
 }

@@ -1,5 +1,5 @@
-
 <div class='row'>
+    <?= $form->field($model, 'cod_cliente')->hiddenInput()->label(false); ?>
     <div class='col-lg-3'>
         <?=
         $form->field($model, 'cnpj')->widget(\yii\widgets\MaskedInput::className(), [
@@ -7,7 +7,7 @@
             'options' => [
                 'class' => 'form-control'
             ],
-        ])->textInput(['maxlength' => true])
+        ])->textInput(['maxlength' => true, 'disabled'=>($model->cod_cliente && $model->cnpj)])
         ?>
     </div>
     <div class='col-lg-3'>
@@ -33,6 +33,14 @@
 
 <div class='row'>
     <div class='col-lg-6' id='situacaoCliente' style="display: <?= ($model->isNewRecord) ? 'none' : 'block' ?>">
-        <?= $form->field($model, 'situacao')->checkbox() ?>
+         <?=
+            $form->field($model, 'situacao')->dropDownList(
+                    yii\helpers\ArrayHelper::map(
+                    app\models\TabAtributosValores::find()->where(['fk_atributos_valores_atributos_id'=>
+                            app\models\TabAtributos::find()->where(['sgl_chave'=>'opt-sim-nao'])->one()->cod_atributos]
+                            )->asArray()->all(), 'cod_atributos_valores', 'dsc_descricao'
+                    ));
+            ?>
+       
     </div>
 </div>

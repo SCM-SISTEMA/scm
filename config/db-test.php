@@ -2,7 +2,7 @@
 
 return [
     'class' => 'yii\db\Connection',
-    'dsn' => 'pgsql:host=mansidao;dbname=sisscm_hmg', 
+    'dsn' => 'pgsql:host=mansidao;dbname=sisscm_dev', 
     'username' => 'postgres',
     'password' => 'postgres',
     'charset' => 'utf8',

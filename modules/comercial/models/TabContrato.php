@@ -29,6 +29,9 @@ use Yii;
  * @property string $txt_login_inclusao
  * @property string $txt_login_alteracao
  * @property string $dt_alteracao
+ * @property integer $status
+ * @property string $nome_responsavel
+ * @property integer $contrato
  *
  * @property TabUsuarios $tabUsuarios
  * @property TabCliente $tabCliente
@@ -51,11 +54,12 @@ class TabContrato extends \projeto\db\ActiveRecord
     public function rules()
     {
         return [
-            [['tipo_contrato_fk', 'dia_vencimento', 'qnt_parcelas', 'responsavel_fk', 'qnt_clientes', 'cod_cliente_fk'], 'integer'],
+            [['tipo_contrato_fk', 'dia_vencimento', 'qnt_parcelas', 'responsavel_fk', 'qnt_clientes', 'cod_cliente_fk', 'status', 'contrato'], 'integer'],
             [['valor_contrato'], 'number'],
             [['dt_prazo', 'dt_inclusao', 'dt_vencimento', 'dt_alteracao'], 'safe'],
             [['operando', 'link', 'zero800', 'parceiria', 'consultoria_scm', 'engenheiro_tecnico', 'ativo'], 'boolean'],
-            [['contador', 'txt_login_inclusao', 'txt_login_alteracao'], 'string', 'max' => 150]
+            [['contador', 'txt_login_inclusao', 'txt_login_alteracao'], 'string', 'max' => 150],
+            [['nome_responsavel'], 'string', 'max' => 200]
         ];
     }
 
@@ -87,6 +91,9 @@ class TabContrato extends \projeto\db\ActiveRecord
             'txt_login_inclusao' => 'Usuário da Inclusão',
             'txt_login_alteracao' => 'Usuário da Alteração',
             'dt_alteracao' => 'Dt Alteracao',
+            'status' => 'attributo valor',
+            'nome_responsavel' => 'Nome Responsavel',
+            'contrato' => 'attributo valor',
         ];
     }
 
@@ -124,10 +131,10 @@ class TabContrato extends \projeto\db\ActiveRecord
 
     /**
      * @inheritdoc
-     * @return \app\modules\posoutorga\models\TabContratoQuery the active query used by this AR class.
+     * @return TabContratoQuery the active query used by this AR class.
      */
     public static function find()
     {
-        return new \app\modules\posoutorga\models\TabContratoQuery(get_called_class());
+        return new TabContratoQuery(get_called_class());
     }
 }

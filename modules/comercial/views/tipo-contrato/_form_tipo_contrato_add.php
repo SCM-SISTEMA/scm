@@ -12,7 +12,7 @@ Modal::begin([
     'headerOptions' => [
         'id' => 'modalHeader'
     ],
-    'header' => '<h3><div id="tituloTipoContrato">Incluir Serviço</div><h3>',
+    'header' => '<h3><div id="tituloTipoContrato">Incluir Serviço</div></h3>',
     'id' => 'modalTipoContrato',
     'closeButton' => false,
     'size' => 'modal-sm',

@@ -28,11 +28,7 @@ use app\components\MenuLateralModuloWidget;
         'filterModel' => $searchModel,
         'columns' => [
             'cnpj',
-            'ie',
             'fantasia',
-            'razao_social',
-            'dt_inclusao',
-            'dt_exclusao',
             'situacao:boolean',
             ['class' => 'projeto\grid\ActionColumn',
              'template' => '{view} {admin} {delete}',

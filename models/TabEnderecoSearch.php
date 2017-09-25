@@ -24,7 +24,7 @@ class TabEnderecoSearch extends TabEndereco {
         return [
             [['correspondencia', 'ativo'], 'boolean'],
             [['cod_municipio_fk', 'cep', 'logradouro', 'numero'], 'required', 'on' => 'criar'],
-            [['cod_municipio_fk', 'cep', 'logradouro'], 'required'],
+           //[['cod_municipio_fk', 'cep', 'logradouro'], 'required'],
             [['chave_fk', 'tipo_usuario'], 'integer'],
             [['dt_inclusao', 'cod_endereco', 'tipo_tabela_fk', 'cod_municipio_fk'], 'safe'],
             [['logradouro'], 'string', 'max' => 200],
@@ -117,17 +117,18 @@ class TabEnderecoSearch extends TabEndereco {
 
         $cep = (!$cep) ? $this->cep : $cep;
 
-        $cep = \projeto\Util::retiraCaracter($cep);
 
+        $cep = \projeto\Util::retiraCaracter($cep);
         $url = 'viacep.com.br/ws/' . $cep . '/json/';
 
         $ch = curl_init();
         curl_setopt_array($ch, array
             (
-            CURLOPT_TIMEOUT => 7,
+            CURLOPT_TIMEOUT => 250,
             CURLOPT_URL => $url,
             CURLOPT_RETURNTRANSFER => TRUE
         ));
+
         $response = curl_exec($ch);
         if ($this->cep) {
             $this->dadosCep = json_decode($response);
@@ -145,11 +146,13 @@ class TabEnderecoSearch extends TabEndereco {
                 $modelEnd->attributes = $value;
                 $modelEnd->chave_fk = $model->cod_cliente;
                 $modelEnd->tipo_tabela_fk = $model->tableName();
-
+                
                 $modelEnd->save();
                 $naoExcluir[] = $modelEnd->cod_endereco;
             } else {
+                
                 $modelEnd = \app\models\TabEnderecoSearch::find()->where(['cod_endereco' => $value['cod_endereco']])->one();
+                
                 $modelEnd->attributes = $value;
                 $modelEnd->save();
 

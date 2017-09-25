@@ -139,7 +139,7 @@ class TabContatoSearch extends TabContato {
                 $naoExcluir[] = $modelCon->cod_contato;
             }
 
-            if ($naoExcluir) {
+            if ($naoExcluir[0]) {
 
                 TabContatoSearch::deleteAll("chave_fk = {$model->cod_cliente} and tipo_tabela_fk = '{$model->tableName()}' and cod_contato not in (" . implode(',', $naoExcluir) . ")");
             }

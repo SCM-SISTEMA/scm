@@ -12,7 +12,7 @@ Modal::begin([
     'headerOptions' => [
         'id' => 'modalHeader'
     ],
-    'header' => '<h3><div id="tituloInfra">Incluir Endereço</div><h3>',
+    'header' => '<h3><div id="tituloEndereco">Incluir Endereço</div></h3>',
     'id' => 'modalEndereco',
     'closeButton' => false,
     'size' => 'modal-md',

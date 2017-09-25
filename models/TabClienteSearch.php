@@ -20,8 +20,8 @@ public $file;
     public function rules() {
         return [
             [['dt_inclusao','responsavel', 'ie', 'fistel','dt_exclusao'], 'safe'],
-            [['situacao'], 'boolean'],
             [['cnpj'], 'string', 'max' => 18],
+            [['cnpj'], 'unique'],
            // [['responsavel'], 'required'],
             [['cnpj'], '\projeto\validators\CnpjValidator'],
             [['fantasia', 'razao_social'], 'string', 'max' => 200]
@@ -38,9 +38,10 @@ public $file;
         $labels['ie'] = 'Inscrição Estadual';
         $labels['fantasia'] = 'Fantasia';
         $labels['razao_social'] = 'Razão Social';
+        $labels['responsavel'] = 'Responsável';
         $labels['situacao'] = 'Ativo?';
 
-        return array_merge(parent::attributeLabels(), $labels);
+        return $labels;
     }
 
     /**
@@ -82,6 +83,13 @@ public $file;
         $query->andWhere($this->tableName() . '.dt_exclusao IS NULL');
 
         return $dataProvider;
+    }
+    
+    public function beforeSave($insert) {
+        
+        $this->situacao = ($this->situacao=='S') ? true : false;
+        
+        return parent::beforeSave($insert);
     }
 
     public function buscaCliente() {

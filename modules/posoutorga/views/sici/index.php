@@ -34,15 +34,13 @@ $btImportar = Html::a('<i class="fa fa-file-excel-o"></i> Importar Planilha ', [
                 'fistel',
                 'mes_ano_referencia',
                 'txt_login_alteracao',
-
-              [
-					'attribute' => 'dsc_situacao',
-					'content' => function($data) {
-						return  "<div class='{$data->situacao_cor}'>".$data->dsc_situacao.'</div>';
-					},
-					
-					'filter' => app\models\TabAtributosValoresSearch::getAtributoValor(\app\models\TabAtributosSearch::findOne(['sgl_chave'=>'situacao-sici'])->cod_atributos),
-				],
+                [
+                    'attribute' => 'dsc_situacao',
+                    'content' => function($data) {
+                        return "<div class='{$data->situacao_cor}'>" . $data->dsc_situacao . '</div>';
+                    },
+                    'filter' => app\models\TabAtributosValoresSearch::getAtributoValor(\app\models\TabAtributosSearch::findOne(['sgl_chave' => 'situacao-sici'])->cod_atributos),
+                ],
                 ['class' => 'projeto\grid\ActionColumn',
                     'headerOptions' => ['style' => 'width:60px;'],
                     'template' => '{update} {delete} {gerar}',
@@ -95,7 +93,7 @@ $btImportar = Html::a('<i class="fa fa-file-excel-o"></i> Importar Planilha ', [
     <div class="box-footer">
         <h3 class="box-title"></h3>
         <div class="box-tools pull-right">
-            <?= $btIncluir ?>
+<?= $btIncluir ?>
             <?= $btImportar ?>
         </div>
     </div>

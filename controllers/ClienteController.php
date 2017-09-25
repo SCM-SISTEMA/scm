@@ -173,7 +173,7 @@ class ClienteController extends Controller
      */
     protected function findModel($id)
     {
-        if (($model = TabCliente::findOne($id)) !== null) {
+        if (($model = TabClienteSearch::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

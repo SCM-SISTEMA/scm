@@ -9,33 +9,89 @@ Projeto.prototype.cliente = new (Projeto.extend({
         this.carregaMunicipio();
         this.alterarContato();
         this.verificaCnpj();
+        this.verificaCep();
     },
-    verificaCnpj: function () {
-        $('#tabclientesearch-cnpj').blur(function ( ) {
+    verificaCep: function () {
+        $('#tabenderecosearch-cep').blur(function ( ) {
 
-            var urlInclusao = $('base').attr('href') + 'admin/cliente/verifica-cnpj';
+            var urlInclusao = $('base').attr('href') + 'endereco/verifica-cep';
 
-            var selecao = {dados: $('#tabclientesearch-cnpj').val()};
+            var selecao = {dados: $('#tabenderecosearch-cep').val()};
 
             projeto.ajax.post(urlInclusao, selecao, function (response) {
                 var ds = $.parseJSON(response);
-                if (ds.cliente.razao_social) {
+                console.log(ds);
+//                if (ds.cliente.razao_social) {
+//
+//                    $('#tabclientesearch-razao_social').val(ds.cliente.razao_social);
+//                    if (!$('#tabclientesearch-fistel').val()) {
+//                        $('#tabclientesearch-fistel').val(ds.cliente.fistel);
+//                    }
+//                    $('#tabclientesearch-fantasia').val(ds.cliente.fantasia);
+//                    $('#divGridEndereco').html(ds.gridEnd.grid);
+//                    $('#divGridContato').html(ds.gridCont.grid);
+//                } else {ds/;/                    $('#tabclientesearch-razao_social').val('');
+//
+//                    $('#tabclientesearch-fistel').val('');
+//
+//                    $('#tabclientesearch-fantasia').val('');
+//                    $('#divGridEndereco').html('');
+//                    $('#divGridContato').html('');
+//                }
+            });
 
-                    $('#tabclientesearch-razao_social').val(ds.cliente.razao_social);
-                    if (!$('#tabclientesearch-fistel').val()) {
-                        $('#tabclientesearch-fistel').val(ds.cliente.fistel);
-                    }
-                    $('#tabclientesearch-fantasia').val(ds.cliente.fantasia);
-                    $('#divGridEndereco').html(ds.gridEnd.grid);
-                    $('#divGridContato').html(ds.gridCont.grid);
+
+        });
+    },
+
+    verificaCnpj: function () {
+        
+        $('#tabclientesearch-cnpj').blur(function ( ) {
+
+            var urlInclusao = $('base').attr('href') + 'admin/cliente/verifica-cnpj';
+            
+            var selecao = {dados: $('#tabclientesearch-cnpj').val(), cliente: $('#tabclientesearch-cod_cliente').val()};
+
+            projeto.ajax.post(urlInclusao, selecao, function (response) {
+
+                var ds = $.parseJSON(response);
+
+                if (ds.existe) {
+                    
+                    var msg = ($('#tabclientesearch-cod_cliente').val())
+                        ? "CNPJ já cadastrado! Deseja carregar/migrar os dados existentes?" :
+                          "CNPJ já cadastrato! Deseja carragar dados existentes?"
+                    
+                    
+                    projeto.confirm('<div align="justify">'+msg+'</div>', function () {
+                        projeto.ajax.defaultBlockUI();
+                        var urlInclusao = $('base').attr('href') + 'admin/cliente/admin?id='+ds.cliente.cod_cliente+'&migrar='+$('#tabclientesearch-cod_cliente').val();
+                        
+                        $(location).attr('href', urlInclusao);
+                        
+                        return false;
+                    }, function () {
+                        return false;
+                    });
                 } else {
-                    $('#tabclientesearch-razao_social').val('');
+                    if (ds.cliente.razao_social) {
 
-                    $('#tabclientesearch-fistel').val('');
+                        $('#tabclientesearch-razao_social').val(ds.cliente.razao_social);
+                        if (!$('#tabclientesearch-fistel').val()) {
+                            $('#tabclientesearch-fistel').val(ds.cliente.fistel);
+                        }
+                        $('#tabclientesearch-fantasia').val(ds.cliente.fantasia);
+                        $('#divGridEndereco').html(ds.gridEnd.grid);
+                        $('#divGridContato').html(ds.gridCont.grid);
+                    } else {
+                        $('#tabclientesearch-razao_social').val('');
 
-                    $('#tabclientesearch-fantasia').val('');
-                    $('#divGridEndereco').html('');
-                    $('#divGridContato').html('');
+                        $('#tabclientesearch-fistel').val('');
+
+                        $('#tabclientesearch-fantasia').val('');
+                        $('#divGridEndereco').html('');
+                        $('#divGridContato').html('');
+                    }
                 }
             });
 
@@ -52,9 +108,9 @@ Projeto.prototype.cliente = new (Projeto.extend({
     },
     incluirTipoContrato: function (valor) {
         $('#incluir' + valor).click(function () {
-            $(this).attr( 'contrato' );
-            
-            Projeto.prototype.cliente.openModalTipoContrato(valor,  $(this).attr( 'contrato' ));
+            $(this).attr('contrato');
+
+            Projeto.prototype.cliente.openModalTipoContrato(valor, $(this).attr('contrato'));
             Projeto.prototype.cliente.limpaFormTipoContrato(valor);
         });
     },
@@ -134,7 +190,7 @@ Projeto.prototype.cliente = new (Projeto.extend({
         });
 
     },
-    
+
     salvarTipoContrato: function () {
         $('#botaoSalvarTipoContrato').click(function ( ) {
 
@@ -160,7 +216,7 @@ Projeto.prototype.cliente = new (Projeto.extend({
                     });
                 } else {
 
-                    $('#divGuiaTipoContrato-'+dados.cod_contrato).html(dados.html);
+                    $('#divGuiaTipoContrato-' + dados.cod_contrato).html(dados.html);
                     //$('#errorAuxiliares').hide();
                     $('#modalTipoContrato').modal('hide');
 
@@ -441,8 +497,8 @@ Projeto.prototype.cliente = new (Projeto.extend({
 
 function adicionarTipoContrato(contrato) {
 
-        Projeto.prototype.cliente.openModalTipoContrato('TipoContrato',  contrato);
-            Projeto.prototype.cliente.limpaFormTipoContrato('TipoContrato');
+    Projeto.prototype.cliente.openModalTipoContrato('TipoContrato', contrato);
+    Projeto.prototype.cliente.limpaFormTipoContrato('TipoContrato');
 
 
     return false;
@@ -451,8 +507,8 @@ function adicionarTipoContrato(contrato) {
 
 function adicionarContrato(contrato) {
 
-        Projeto.prototype.cliente.openModalTipoContrato('Contrato',  contrato);
-            Projeto.prototype.cliente.limpaFormTipoContrato('Contrato');
+    Projeto.prototype.cliente.openModalTipoContrato('Contrato', contrato);
+    Projeto.prototype.cliente.limpaFormTipoContrato('Contrato');
 
 
     return false;

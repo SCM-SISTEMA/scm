@@ -87,10 +87,10 @@ class TabTipoContratoResponsavel extends \projeto\db\ActiveRecord
 
     /**
      * @inheritdoc
-     * @return \app\modules\posoutorga\models\TabTipoContratoResponsavelQuery the active query used by this AR class.
+     * @return TabTipoContratoResponsavelQuery the active query used by this AR class.
      */
     public static function find()
     {
-        return new \app\modules\posoutorga\models\TabTipoContratoResponsavelQuery(get_called_class());
+        return new TabTipoContratoResponsavelQuery(get_called_class());
     }
 }

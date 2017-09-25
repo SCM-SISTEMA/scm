@@ -70,10 +70,10 @@ class TabContratoParcelas extends \projeto\db\ActiveRecord
 
     /**
      * @inheritdoc
-     * @return \app\modules\posoutorga\models\TabContratoParcelasQuery the active query used by this AR class.
+     * @return TabContratoParcelasQuery the active query used by this AR class.
      */
     public static function find()
     {
-        return new \app\modules\posoutorga\models\TabContratoParcelasQuery(get_called_class());
+        return new TabContratoParcelasQuery(get_called_class());
     }
 }

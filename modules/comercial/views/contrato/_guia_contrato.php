@@ -1,4 +1,5 @@
 
+
 <?php
 
 use yii\helpers\Html;
@@ -20,42 +21,45 @@ $cont->attributes = $contrato['attributes'];
 
     <div id='divGuiaTipoContrato-<?= $contrato['attributes']['cod_contrato'] ?>'>
 
-        <?php
-        echo yii\bootstrap\Collapse::widget([
-            'id' => 'box-servico-'.$contrato['attributes']['cod_contrato'] ,
+        <?=
+        kartik\tabs\TabsX::widget([
+            'id' => 'box-contrato-' . $contrato['attributes']['cod_contrato'],
             'items' => [
-                //DICA
                 [
-                    'label' => "Serviços",
-                    'content' => [$this->render('_guia_tipo_contrato', compact('form', 'contrato'))],
-                    'encode' => false,
-                    'contentOptions' => ($key == 0) ? ['class' => 'in'] : [],
-                // open its content by default
+                    'label' => "<b>"."Serviços"."</b>",
+                    'content' => $this->render('_guia_tipo_contrato', compact('form', 'contrato')),
+                    'active' => true,
                 ],
-            ]
-        ]);
+                [
+                    'label' => "<b>"."Parcelas"."</b>",
+                    'content' => $this->render('@app/modules/comercial/views/contrato-parcelas/_lista_parcelas', compact('form', 'contrato')),
+                    'active' => false,
+                ],
+                [
+                    'label' => "<b>"."Andamento"."</b>",
+                    'content' => $this->render('@app/views/andamento/_form_andamento', compact('form', 'contrato')),
+                    'active' => false,
+                    'visible' => ((strpos('N', $cont->cod_contrato)===false)) ? true : false,
+                ],
+            ],
+            'position' => kartik\tabs\TabsX::POS_ABOVE,
+            'bordered' => true,
+            'encodeLabels' => false,
+        ])
         ?>
 
-    </div>
-    
-    <div id='divGuiaContratoParcelas-<?= $contrato['attributes']['cod_contrato'] ?>'>
-
-        <?php
-        echo yii\bootstrap\Collapse::widget([
-            'id' => 'box-parcela-'.$contrato['attributes']['cod_contrato'] ,
-            'items' => [
-                //DICA
-                [
-                    'label' => "Parcelas",
-                    'content' => [$this->render('@app/modules/comercial/views/contrato-parcelas/_lista_parcelas', compact('form', 'contrato'))],
-                    'encode' => false,
-                    //'contentOptions' => ($key == 0) ? ['class' => 'in'] : [],
-                // open its content by default
-                ],
-            ]
-        ]);
-        ?>
-    </div>
-
+      </div>
 
 </div>
+
+<div class='row'>
+
+    <div class='col-sm-12'>
+        <?=
+        \projeto\helpers\Html::button('<i class="glyphicon glyphicon-trash"></i> Excluir Contrato', [
+            'class' => 'btn btn-danger btn-sm',
+            'onclick' => "excluirContratoParcelas('{$contrato['attributes']['cod_contrato']}')",
+        ])
+        ?>
+    </div>
+</div> 

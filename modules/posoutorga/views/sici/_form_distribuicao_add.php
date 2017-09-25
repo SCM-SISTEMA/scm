@@ -12,7 +12,7 @@ Modal::begin([
     'headerOptions' => [
         'id' => 'modalHeader'
     ],
-    'header' => '<h3><div id="tituloInfra">Incluir Acesso Físico</div><h3>',
+    'header' => '<h3><div id="tituloAcessoFisico">Incluir Acesso Físico</div></h3>',
     'id' => 'modalAcessoFisico',
     'closeButton' => false,
     'size' => 'modal-lg',
