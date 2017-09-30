@@ -35,6 +35,11 @@ class TabAtributosSearch extends TabAtributos {
     const TIPO_AVISO_ERRO = 48; // Tipo de aviso e erro
     const TIPO_UNIDADE_INDICADOR = 76; // Tipo de unidade do indicador
 
+    const TIPO_CONTRATO = 84; // Tipo de contrato (PLANO)
+    const TIPO_PRODUTO = 87; // Tipo de produto
+
+    const STATUS_CONTRATO = 89; // Status do contrato
+
     /**
      * @inheritdoc
      */
