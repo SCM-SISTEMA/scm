@@ -7,7 +7,7 @@ namespace app\models;
  *
  * @see TabSetores
  */
-class TabAndamentoQuery extends \projeto\db\ActiveQuery
+class TabSetoresQuery extends \projeto\db\ActiveQuery
 {
     /*public function active()
     {

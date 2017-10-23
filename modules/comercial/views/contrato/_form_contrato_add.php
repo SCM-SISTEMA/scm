@@ -83,7 +83,7 @@ $tipo_contrato = new \app\modules\comercial\models\TabTipoContratoSearch();
             ?>
         </div>
         <div class='col-lg-4'>
-             
+
             <?=
             $form->field($contrato, 'dt_vencimento')->textInput()->widget(
                     \dosamigos\datepicker\DatePicker::className(), [
@@ -94,8 +94,21 @@ $tipo_contrato = new \app\modules\comercial\models\TabTipoContratoSearch();
                 ]
             ]);
             ?>
-   
+
         </div>
+        <div class='col-lg-4'>
+            <div id="div-status">
+                <?=
+                $form->field($contrato, 'status')->dropDownList(
+                        yii\helpers\ArrayHelper::map(
+                                app\models\TabAtributosValoresSearch::find()->where(['fk_atributos_valores_atributos_id' =>
+                                    app\models\TabAtributosSearch::find()->where(['sgl_chave' => 'status-contrato'])->one()['cod_atributos']
+                                ])->orderBy('dsc_descricao')->all(), 'cod_atributos_valores', 'dsc_descricao'
+                        ), ['prompt' => $this->app->params['txt-prompt-select']
+                ]);
+                ?>
+            </div>  
+        </div>  
     </div>
     <div class='row'>
         <div class='col-lg-12'>
@@ -109,6 +122,6 @@ $tipo_contrato = new \app\modules\comercial\models\TabTipoContratoSearch();
             ?>
         </div>   
     </div>
-
+    <?= $form->field($contrato, 'cod_contrato')->hiddenInput()->label(false); ?>
 </div>
 <?php Modal::end(); ?>

@@ -5,14 +5,13 @@ namespace app\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\TabAndamento;
+use app\models\TabSetores;
 
 /**
- * TabAndamentoSearch represents the model behind the search form about `app\models\TabAndamento`.
+ * TabSetoresSearch represents the model behind the search form about `app\models\TabSetores`.
  */
-class TabAndamentoSearch extends TabAndamento
+class TabSetoresSearch extends TabSetores
 {
-    public $cod_contrato;
     /**
      * @inheritdoc
      */ 
@@ -20,7 +19,7 @@ class TabAndamentoSearch extends TabAndamento
     {
 
 		$rules =  [
-             [['cod_contrato'], 'safe'],
+             //exemplo [['txt_nome', 'cod_modulo_fk'], 'required'],
         ];
 		
 		return array_merge($rules, parent::rules());
@@ -32,12 +31,11 @@ class TabAndamentoSearch extends TabAndamento
 	public function attributeLabels()
     {
 
-		$labels = parent::attributeLabels();
-		$labels['txt_notificacao'] = 'Andamento';
-                $labels['dt_retorno'] = 'Dt. retorno';
-                
-                
-		return $labels;
+		$labels = [
+            //exemplo 'campo' => 'label',         
+        ];
+		
+		return array_merge( parent::attributeLabels(), $labels);
     }
 	
     /**
@@ -58,7 +56,7 @@ class TabAndamentoSearch extends TabAndamento
      */
     public function search($params)
     {
-        $query = TabAndamentoSearch::find();
+        $query = TabSetoresSearch::find();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -67,15 +65,13 @@ class TabAndamentoSearch extends TabAndamento
         $this->load($params);
 
         $query->andFilterWhere([
-            $this->tableName() . '.cod_andamento' => $this->cod_andamento,
+            $this->tableName() . '.cod_setor' => $this->cod_setor,
+            $this->tableName() . '.cod_tipo_contrato_fk' => $this->cod_tipo_contrato_fk,
+            $this->tableName() . '.cod_usuario_responsavel_fk' => $this->cod_usuario_responsavel_fk,
+            $this->tableName() . '.cod_tipo_setor_fk' => $this->cod_tipo_setor_fk,
             $this->tableName() . '.dt_inclusao' => $this->dt_inclusao,
             $this->tableName() . '.dt_exclusao' => $this->dt_exclusao,
-            $this->tableName() . '.dt_retorno' => $this->dt_retorno,
-            $this->tableName() . '.cod_usuario_inclusao_fk' => $this->cod_usuario_inclusao_fk,
-            $this->tableName() . '.cod_setor_fk' => $this->cod_setor_fk,
         ]);
-
-        $query->andFilterWhere(['ilike', $this->tableName() . '.txt_notificacao', $this->txt_notificacao]);
 
 		$query->andWhere($this->tableName().'.dt_exclusao IS NULL');
 		

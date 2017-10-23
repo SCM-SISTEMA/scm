@@ -1,4 +1,4 @@
-<div class='row'>
+    <div class='row'>
     <?php if (isset($msg)) { ?>
         <div class="col-md-12">
             <div class="alert-<?= $msg['tipo'] ?> alert fade in">
@@ -21,10 +21,10 @@
 <br/>
 <div class='row'>
     <div class='col-lg-12'>
-        <?php $contratos = \Yii::$app->session->get('contratos'); ?>
+        <?php $conts = \Yii::$app->session->get('contratos'); ?>
         
-        <?php if ($contratos) : ?>
-            <?php foreach ($contratos as $key => $contrato): ?>
+        <?php if ($conts) : ?>
+            <?php foreach ($conts as $key => $contrato): ?>
 
         
                 <?php

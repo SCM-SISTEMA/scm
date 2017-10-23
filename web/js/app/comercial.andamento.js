@@ -5,11 +5,23 @@ Projeto.prototype.andamento = new (Projeto.extend({
         this.salvarAndamento();
     },
 
-    openModalAndamento: function (cod_contrato) {
-        
-        $('#tabandamentosearch-cod_contrato_fk').val(cod_contrato);
-        $('#tabandamentosearch-cod_modulo_fk').val('1');
+    openModalAndamento: function (cod_setor, cod_contrato) {
+
+        var urlInclusao = $('base').attr('href') + 'andamento/carregar-andamento';
+        var selecao = {cod_setor_fk: cod_setor};
+        $('#tabandamentosearch-cod_setor_fk').val(cod_setor);
+        $('#tabandamentosearch-cod_contrato').val(cod_contrato);
+        projeto.ajax.post(urlInclusao, selecao, function (response) {
+            var dados = $.parseJSON(response);
+
+            $('#gridModalAndamento').html(dados);
+            //$('#errorAuxiliares').hide();
+
+        });
+
         $('#modalAndamento').modal('show').find('#modalContent').load( );
+
+        $('#divGuiaAndamento').html();
     },
 
     limpaFormAndamento: function () {
@@ -37,30 +49,16 @@ Projeto.prototype.andamento = new (Projeto.extend({
                 return false;
             }
 
-            var urlInclusao = $('base').attr('href') + 'andamento/incluir-andamento';
+            var urlInclusao = $('base').attr('href') + 'comercial/andamento/incluir-andamento';
 
             projeto.ajax.post(urlInclusao, form.serialize( ), function (response) {
                 var dados = $.parseJSON(response);
                 
-                if (!dados.lista)
-                {
-                    $.each(dados, function (index, value) {
-                        var obj = form.find('.field-tabandamentosearch-' + index);
-                        obj.removeClass('has-success');
-                        obj.addClass('has-error');
-                        var msgBlock = obj.find('.help-block');
-                        msgBlock.html(value);
-                    });
-                } else {
+                $('#divGuiaContrato').html(dados);
 
-                    $('#divGuiaAndamento').html(dados.lista);
-                    //$('#errorAuxiliares').hide();
-                    $('#modalAndamento').modal('hide');
-
-                }
             });
 
-
+            $('#modalAndamento').modal('hide');
 
             return false;
         });
@@ -69,10 +67,39 @@ Projeto.prototype.andamento = new (Projeto.extend({
 
 }));
 
-function adicionarAndamentoContrato(contrato) {
-
+function adicionarAndamentoContrato(setor, contrato) {
+    $('#divGuiaAndamento').html();
     Projeto.prototype.andamento.limpaFormAndamento();
-    Projeto.prototype.andamento.openModalAndamento(contrato);
+    Projeto.prototype.andamento.openModalAndamento(setor, contrato);
+
+
+    return false;
+}
+
+
+function excluirAndamento(result) {
+
+    var post = {'id': result}
+    var urlInclusao = $('base').attr('href') + 'comercial/andamento/excluir-andamentos';
+
+
+    projeto.confirm('<div align="center"><h2>Deseja excluir andamento?</h2></div>', function () {
+        projeto.ajax.defaultBlockUI();
+        projeto.ajax.post(urlInclusao, post, function (response) {
+
+            var dados = $.parseJSON(response);
+
+
+            $('#gridModalAndamento').html(dados);
+
+        });
+        return false;
+    }, function () {
+        return false;
+    })
+
+
+//    Projeto.prototype.cliente.openModal();
 
 
     return false;

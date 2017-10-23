@@ -17,7 +17,6 @@ use Yii;
  *
  * @property TabAtributosValores $tabAtributosValores
  * @property TabAtributosValores $tabAtributosValores0
- * @property TabAndamento[] $tabAndamento
  */
 class TabContratoTipoContrato extends \projeto\db\ActiveRecord
 {
@@ -71,14 +70,6 @@ class TabContratoTipoContrato extends \projeto\db\ActiveRecord
     public function getTabAtributosValores0()
     {
         return $this->hasOne(TabAtributosValores::className(), ['cod_atributos_valores' => 'cod_tipo_contrato_fk']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getTabAndamento()
-    {
-        return $this->hasMany(TabAndamento::className(), ['cod_tipo_contrato_fk' => 'cod_contrato_tipo_contrato']);
     }
 
     /**

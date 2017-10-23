@@ -59,12 +59,12 @@ class ActiveRecord extends \yii\db\ActiveRecord {
                     
                 }elseif(!$this->isNewRecord && $value->name == 'txt_login_alteracao'){
                     $this->$key = $this->user->identity->getId();
-                    $this->dt_alteracao = date('Y-m-d');
+                    $this->dt_alteracao = date('d/m/Y');
                 }
 
                 if ($value->type == 'date' && $this->$key) {
 
-                    ; // $this->$key = self::formataDataParaBanco($this->$key);
+                    $this->$key = self::formataDataParaBanco($this->$key);
                 }
             }
         }

@@ -118,7 +118,7 @@ class TabFuncionalidadesSearch extends TabFuncionalidades
         $query->andFilterWhere([
             ''.$this->tableName().'.cod_funcionalidade' => $this->cod_funcionalidade,
             ''.$this->tableName().'.dte_inclusao' => $this->dte_inclusao,
-            ''.$this->tableName().'.dte_alteracao' => $this->dte_alteracao,			
+            ''.$this->tableName().'.dt_alteracao' => $this->dt_alteracao,			
         ]);
 		
         $query->andFilterWhere(['ilike', $this->tableName().'.txt_nome', $this->txt_nome])

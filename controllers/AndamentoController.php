@@ -164,7 +164,6 @@ class AndamentoController extends Controller {
     public function actionIncluirAndamento() {
 
         $post = Yii::$app->request->post();
-
         $msg = $new = null;
 
         $model = new \app\models\TabAndamentoSearch();
@@ -173,8 +172,8 @@ class AndamentoController extends Controller {
         $model->attributes = $post['TabAndamentoSearch'];
         $model->cod_usuario_inclusao_fk = $this->user->identity->getId();
         $str = 'Inclusão';
-
         $model->save();
+
 
         if ($model && $model->getErrors()) {
             $dados = $model->getErrors();
@@ -182,25 +181,10 @@ class AndamentoController extends Controller {
             $msg['tipo'] = 'success';
             $msg['msg'] = $str . ' efetivada com sucesso.';
             $msg['icon'] = 'check';
-
-            $find = \app\models\TabAndamentoSearch::find()->where(['cod_contrato_fk'=>$model->cod_contrato_fk])->orderBy('cod_andamento desc')->all();
             
-            if ($find) {
-                    
-                foreach($find as $cont) {
-                    
-                    $conts[] = $cont->attributes;
-                    
-                }
-                
-            }
-            
-            $contrato['andamentos']['contrato'] = $conts;
-            
+            $form = \yii\widgets\ActiveForm::begin();
 
-            $dados = ['lista' => $this->renderAjax('@app/views/andamento/_lista_andamento', ['msg' => $msg, 'contrato' => $contrato])];
-
-
+            $dados = $this->render('@app/modules/comercial/views/contrato/_lista_contratos', ['cod_cliente' => $post['TabClienteSearch']['cod_cliente_fk'], 'form' => $form, 'msg' => $msg]);
         }
 
 
@@ -220,6 +204,16 @@ class AndamentoController extends Controller {
 
 
         $dados = ['grid' => $this->renderAjax('@app/views/contato/_grid_cliente', ['msg' => $msg])];
+
+        return \yii\helpers\Json::encode($dados);
+    }
+
+    public function actionCarregarAndamento() {
+
+
+        $andamento = TabAndamentoSearch::find()->where(['cod_setor_fk' => Yii::$app->request->post()['cod_setor_fk']])->orderBy('cod_andamento desc');
+
+        $dados = $this->renderAjax('@app/views/andamento/_lista_andamento', ['andamento' => $andamento]);
 
         return \yii\helpers\Json::encode($dados);
     }

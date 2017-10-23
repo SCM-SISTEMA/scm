@@ -199,7 +199,7 @@ Projeto.prototype.distribuicao = new (Projeto.extend({
         $('#tabplanossearchmj-cod_plano').val(dados[2].cod_plano);
 
         $('#tabempresamunicipiosearch-capacidade_servico').val(dados[0].capacidade_servico);
-        $('#tabempresamunicipiosearch-capacidade_municipio  ').val(dados[0].capacidade_municipio);
+        $('#tabempresamunicipiosearch-capacidade_municipio').val(dados[0].capacidade_municipio);
 
         setTimeout(function () {
             $('#tabempresamunicipiosearch-cod_municipio_fk').val(dados[0].cod_municipio_fk);

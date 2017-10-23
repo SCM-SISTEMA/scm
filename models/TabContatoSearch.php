@@ -133,17 +133,23 @@ class TabContatoSearch extends TabContato {
                 $modelCon->save();
                 $naoExcluir[] = $modelCon->cod_contato;
             } else {
-                $modelCon = \app\models\TabContatoSearch::find()->where(['cod_contato' => $value['cod_contato']])->one();
-                $modelCon->attributes = $value;
-                $modelCon->save();
-                $naoExcluir[] = $modelCon->cod_contato;
+                $modelCon = \app\models\TabContatoSearch::find()->where(['cod_contato' => (int) $value['cod_contato']])->one();
+
+                if ($modelCon) {
+
+                    $modelCon->attributes = $value;
+                    $modelCon->save();
+                }
+                $naoExcluir[] = $value['cod_contato'];
             }
+
 
             if ($naoExcluir[0]) {
 
                 TabContatoSearch::deleteAll("chave_fk = {$model->cod_cliente} and tipo_tabela_fk = '{$model->tableName()}' and cod_contato not in (" . implode(',', $naoExcluir) . ")");
             }
         }
+        
     }
 
 }

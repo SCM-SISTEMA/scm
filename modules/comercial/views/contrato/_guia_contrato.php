@@ -39,7 +39,7 @@ $cont->attributes = $contrato['attributes'];
                     'label' => "<b>"."Andamento"."</b>",
                     'content' => $this->render('@app/views/andamento/_form_andamento', compact('form', 'contrato')),
                     'active' => false,
-                    'visible' => ((strpos('N', $cont->cod_contrato)===false)) ? true : false,
+                    'visible' => ((strpos('N', $contrato['attributes']['cod_contrato'])===false)) ? TRUE : FALSE,
                 ],
             ],
             'position' => kartik\tabs\TabsX::POS_ABOVE,

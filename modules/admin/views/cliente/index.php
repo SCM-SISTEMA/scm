@@ -27,8 +27,10 @@ use app\components\MenuLateralModuloWidget;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
+            'cod_cliente',
             'cnpj',
             'fantasia',
+            'responsavel',
             'situacao:boolean',
             ['class' => 'projeto\grid\ActionColumn',
              'template' => '{view} {admin} {delete}',

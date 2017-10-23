@@ -11,7 +11,9 @@ use app\models\TabCliente;
  * TabClienteSearch represents the model behind the search form about `app\models\TabCliente`.
  */
 class TabClienteSearch extends TabCliente {
-public $file;
+
+    public $file;
+
     /**
      * @inheritdoc
      */
@@ -19,10 +21,10 @@ public $file;
 
     public function rules() {
         return [
-            [['dt_inclusao','responsavel', 'ie', 'fistel','dt_exclusao'], 'safe'],
+            [['dt_inclusao', 'responsavel', 'ie', 'fistel', 'dt_exclusao'], 'safe'],
             [['cnpj'], 'string', 'max' => 18],
             [['cnpj'], 'unique'],
-           // [['responsavel'], 'required'],
+            // [['responsavel'], 'required'],
             [['cnpj'], '\projeto\validators\CnpjValidator'],
             [['fantasia', 'razao_social'], 'string', 'max' => 200]
         ];
@@ -78,17 +80,18 @@ public $file;
 
         $query->andFilterWhere(['ilike', $this->tableName() . '.cnpj', $this->cnpj])
                 ->andFilterWhere(['ilike', $this->tableName() . '.fantasia', $this->fantasia])
+                ->andFilterWhere(['ilike', $this->tableName() . '.responsavel', $this->responsavel])
                 ->andFilterWhere(['ilike', $this->tableName() . '.razao_social', $this->razao_social]);
 
         $query->andWhere($this->tableName() . '.dt_exclusao IS NULL');
 
         return $dataProvider;
     }
-    
+
     public function beforeSave($insert) {
-        
-        $this->situacao = ($this->situacao=='S') ? true : false;
-        
+
+        $this->situacao = ($this->situacao == 'S') ? true : false;
+
         return parent::beforeSave($insert);
     }
 
@@ -96,22 +99,23 @@ public $file;
         $ch = curl_init();
 
         $nu_cnpj = \projeto\Util::retiraCaracter($this->cnpj);
-        
+
         $url = "http://receitaws.com.br/v1/cnpj/" . $nu_cnpj;
         curl_setopt_array($ch, array
             (
-            CURLOPT_TIMEOUT=>7,
+            CURLOPT_TIMEOUT => 7,
             CURLOPT_URL => $url,
             CURLOPT_RETURNTRANSFER => TRUE
         ));
 
 
-        if($response = curl_exec($ch)){;
+        if ($response = curl_exec($ch)) {
+;
             curl_close($ch);
         }
-        
+
         $dados = json_decode($response);
-        
+
         if ($dados->nome) {
             $this->razao_social = $dados->nome;
             $this->fantasia = $dados->fantasia;

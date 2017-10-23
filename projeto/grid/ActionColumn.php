@@ -26,7 +26,7 @@ class ActionColumn extends \yii\grid\ActionColumn
 
 		$this->configAtalhos();
 		$this->initDefaultButtons();
-		$this->verificaPermissao();
+		//$this->verificaPermissao();
 	}
 
 	/**
@@ -84,8 +84,8 @@ class ActionColumn extends \yii\grid\ActionColumn
 
 	protected function verificaPermissao()
 	{
-		$dados = $this->app->controller->module->getInfo();
 
+		$dados = \yii::$app->controller->module->getInfo();
 		if (isset($dados['funcionalidade-acao'])) {
 
 			if (!isset($dados['funcionalidade-acao'][$this->app->controller->id])) {

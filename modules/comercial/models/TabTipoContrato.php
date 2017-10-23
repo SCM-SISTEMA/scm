@@ -18,6 +18,7 @@ use Yii;
  * @property TabTipoContratoResponsavel[] $tabTipoContratoResponsavel
  * @property TabBoleto[] $tabBoleto
  * @property TabSici[] $tabSici
+ * @property TabSetores[] $tabSetores
  */
 class TabTipoContrato extends \projeto\db\ActiveRecord
 {
@@ -93,6 +94,14 @@ class TabTipoContrato extends \projeto\db\ActiveRecord
     public function getTabSici()
     {
         return $this->hasMany(TabSici::className(), ['cod_tipo_contrato_fk' => 'cod_tipo_contrato']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTabSetores()
+    {
+        return $this->hasMany(TabSetores::className(), ['cod_tipo_contrato_fk' => 'cod_tipo_contrato']);
     }
 
     /**

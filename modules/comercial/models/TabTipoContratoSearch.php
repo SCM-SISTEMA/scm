@@ -22,16 +22,13 @@ class TabTipoContratoSearch extends TabTipoContrato {
         ];
     }
 
-    /**
-     * @inheritdoc
-     */
     public function attributeLabels() {
+        $labels = parent::attributeLabels();
+        $labels['cod_usuario_fk'] = 'Usuário Responsável';
 
-        $labels = [
-                //exemplo 'campo' => 'label',         
-        ];
 
-        return array_merge(parent::attributeLabels(), $labels);
+        return $labels
+        ;
     }
 
     /**
@@ -93,6 +90,7 @@ class TabTipoContratoSearch extends TabTipoContrato {
 
                 $naoExcluir[] = $servico->cod_tipo_contrato;
             } else {
+
                 $servico = TabTipoContratoSearch::find()->where(['cod_tipo_contrato' => $ser['cod_tipo_contrato']])->one();
                 $servico->attributes = $ser;
                 $servico->save();

@@ -148,7 +148,7 @@ class ContratoController extends Controller
     {
 		
 		$model = $this->findModel($id);
-		$model->dte_exclusao = 'NOW()';
+		$model->dt_exclusao = 'NOW()';
 		
 		if ($model->save())
 		{
@@ -178,5 +178,48 @@ class ContratoController extends Controller
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+    }
+    
+    public function actionCarregarContrato() {
+
+        $this->module->module->layout = null;
+        $contrato = \app\modules\comercial\models\ViewContratosSearch::find()->where(['cod_contrato' => Yii::$app->request->post()['cod']])->asArray()->all();
+        
+        return \yii\helpers\Json::encode($contrato);
+    }
+    
+    public function actionCarregarGridContrato() {
+        $post = Yii::$app->request->post();
+        
+        $form = \yii\widgets\ActiveForm::begin();
+        $this->module->module->layout = null;
+        $dados = $this->render('@app/modules/comercial/views/contrato/_lista_contratos', ['cod_cliente' => $post['id'], 'form' => $form, 'msg' => $msg]);
+
+        return \yii\helpers\Json::encode($dados);
+        
+    }
+    
+    
+    public function actionExcluirContrato() {
+        $post = Yii::$app->request->post();
+    
+        $contrato = \app\modules\comercial\models\TabContratoSearch::find()->where(['cod_contrato'=>$post['id']])->one();
+
+        if($contrato){
+            $contrato->ativo = false;
+            $contrato->save();
+        }
+
+        $str = 'Exclusão efetuada com sucesso';
+        
+        $msg['tipo'] = 'success';
+        $msg['msg'] = $str;
+        $msg['icon'] = 'check';
+
+        $form = \yii\widgets\ActiveForm::begin();
+        $this->module->module->layout = null;
+        $dados = $this->render('@app/modules/comercial/views/contrato/_lista_contratos', ['cod_cliente' => $contrato->cod_cliente_fk, 'form' => $form, 'msg' => $msg]);
+
+        return \yii\helpers\Json::encode($dados);
     }
 }

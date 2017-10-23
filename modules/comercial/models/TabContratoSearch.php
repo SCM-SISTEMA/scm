@@ -18,7 +18,7 @@ class TabContratoSearch extends TabContrato {
     public function rules() {
         return [
             [['valor_contrato'], 'number'],
-            [['dt_prazo', 'dt_inclusao', 'dt_vencimento', 'tipo_contrato_fk', 'dia_vencimento', 'qnt_parcelas', 'responsavel_fk', 'qnt_clientes', 'cod_cliente_fk'], 'safe'],
+            [['cod_contrato', 'dt_prazo', 'dt_inclusao', 'dt_vencimento', 'tipo_contrato_fk', 'dia_vencimento', 'qnt_parcelas', 'responsavel_fk', 'qnt_clientes', 'cod_cliente_fk'], 'safe'],
             [['operando', 'link', 'zero800', 'parceiria', 'consultoria_scm', 'engenheiro_tecnico'], 'boolean'],
             [['contador'], 'string', 'max' => 150]
         ];
@@ -29,15 +29,15 @@ class TabContratoSearch extends TabContrato {
      */
     public function attributeLabels() {
         $labels = parent::attributeLabels();
-        
+
         $labels['tipo_contrato_fk'] = 'Tipo Contrato';
         $labels['dt_prazo'] = 'Prazo';
         $labels['dt_vencimento'] = 'Vencimento';
         $labels['responsavel_fk'] = 'Usuário Responsável';
         $labels['qnt_parcelas'] = 'Qnt de Parcelas';
-         
+
         return $labels
-                ;
+        ;
     }
 
     /**
@@ -115,13 +115,25 @@ class TabContratoSearch extends TabContrato {
                     if ($cont['parcelas']) {
                         \app\modules\comercial\models\TabContratoParcelasSearch::salvarContratoParcelas($cont['parcelas'], $modelCon);
                     }
+
+                    $andamento = new \app\models\TabAndamentoSearch();
+                    $andamento->cod_usuario_inclusao_fk = \Yii::$app->user->identity->getId();
+                    $andamento->cod_assunto_fk = "535";
+                    $andamento->cod_contrato_fk = $modelCon->cod_contrato;
+                    $andamento->cod_modulo_fk = \app\modules\admin\models\TabModulosSearch::find()->where(['id'=>Yii::$app->controller->module->id])->one()->cod_modulo;
+                    $andamento->txt_notificacao = 'Inclusao de Contrato';
+                    $andamento->save();
+                    
+                    
                 } else {
+                    
                     $modelCon = TabContratoSearch::find()->where(['cod_contrato' => $value['cod_contrato']])->one();
                     $modelCon->attributes = $value;
                     $modelCon->save();
-                    $naoExcluir[] = $modelCon->cod_contrato;
                     
-                     if ($cont['tipo_contratos']) {
+                    $naoExcluir[] = $modelCon->cod_contrato;
+
+                    if ($cont['tipo_contratos']) {
                         TabTipoContratoSearch::salvarTipoContratos($cont['tipo_contratos'], $modelCon);
                     }
 
@@ -129,7 +141,6 @@ class TabContratoSearch extends TabContrato {
                     if ($cont['parcelas']) {
                         \app\modules\comercial\models\TabContratoParcelasSearch::salvarContratoParcelas($cont['parcelas'], $modelCon);
                     }
-                    
                     if($modelCon->isNewRecord){
                         $andamento = new \app\models\TabAndamentoSearch();
                         $andamento->cod_usuario_inclusao_fk = $this->user->identity->getId();

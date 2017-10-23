@@ -14,7 +14,7 @@ Modal::begin([
     'header' => '<h3><div id="tituloAndamento">Incluir Andamento</div></h3>',
     'id' => 'modalAndamento',
     'closeButton' => false,
-    'size' => 'modal-md',
+    'size' => 'modal-lg',
     'footer' =>
     Html::a('Fechar', '#', ['class' => 'btn btn-default', 'id' => 'botaoFechar', 'data-dismiss' => 'modal'])
     . PHP_EOL .
@@ -39,17 +39,6 @@ $model = new \app\models\TabAndamentoSearch();
     <div class='row'>
         <div class='col-lg-6'>
             <?=
-            $form->field($model, 'cod_assunto_fk')->dropDownList(
-                    yii\helpers\ArrayHelper::map(
-                            app\models\TabAtributosValoresSearch::find()->where(['fk_atributos_valores_atributos_id' =>
-                                app\models\TabAtributosSearch::find()->where(['sgl_chave' => 'tipo-assunto-notificacao'])->one()['cod_atributos']
-                            ])->orderBy('dsc_descricao')->all(), 'cod_atributos_valores', 'dsc_descricao'
-                    ), ['prompt' => $this->app->params['txt-prompt-select']
-            ]);
-            ?>
-        </div>
-        <div class='col-lg-6'>
-            <?=
             $form->field($model, 'dt_retorno')->widget(
                     \dosamigos\datepicker\DatePicker::className(), [
                 'language' => 'pt-BR',
@@ -68,9 +57,12 @@ $model = new \app\models\TabAndamentoSearch();
         </div>
     </div>
 
-    <?= $form->field($model, 'cod_modulo_fk')->hiddenInput()->label(false); ?>
-    <?= $form->field($model, 'cod_contrato_fk')->hiddenInput()->label(false); ?>
-    <?= $form->field($model, 'cod_tipo_contrato_fk')->hiddenInput()->label(false); ?>
+    <?= $form->field($model, 'cod_setor_fk')->hiddenInput()->label(false); ?>
+    <?= $form->field($model, 'cod_contrato')->hiddenInput()->label(false); ?>
+
+    <div id="gridModalAndamento">
+
+    </div>
 
 </div>
 <?php Modal::end(); ?>

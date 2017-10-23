@@ -45,58 +45,59 @@ Projeto.prototype.cliente = new (Projeto.extend({
     },
 
     verificaCnpj: function () {
-        
+
         $('#tabclientesearch-cnpj').blur(function ( ) {
+            if ($('#tabclientesearch-cnpj').val()) {
+                var urlInclusao = $('base').attr('href') + 'admin/cliente/verifica-cnpj';
 
-            var urlInclusao = $('base').attr('href') + 'admin/cliente/verifica-cnpj';
-            
-            var selecao = {dados: $('#tabclientesearch-cnpj').val(), cliente: $('#tabclientesearch-cod_cliente').val()};
+                var selecao = {dados: $('#tabclientesearch-cnpj').val(), cliente: $('#tabclientesearch-cod_cliente').val()};
 
-            projeto.ajax.post(urlInclusao, selecao, function (response) {
+                projeto.ajax.post(urlInclusao, selecao, function (response) {
 
-                var ds = $.parseJSON(response);
+                    var ds = $.parseJSON(response);
 
-                if (ds.existe) {
-                    
-                    var msg = ($('#tabclientesearch-cod_cliente').val())
-                        ? "CNPJ já cadastrado! Deseja carregar/migrar os dados existentes?" :
-                          "CNPJ já cadastrato! Deseja carragar dados existentes?"
-                    
-                    
-                    projeto.confirm('<div align="justify">'+msg+'</div>', function () {
-                        projeto.ajax.defaultBlockUI();
-                        var urlInclusao = $('base').attr('href') + 'admin/cliente/admin?id='+ds.cliente.cod_cliente+'&migrar='+$('#tabclientesearch-cod_cliente').val();
-                        
-                        $(location).attr('href', urlInclusao);
-                        
-                        return false;
-                    }, function () {
-                        return false;
-                    });
-                } else {
-                    if (ds.cliente.razao_social) {
+                    if (ds.existe) {
 
-                        $('#tabclientesearch-razao_social').val(ds.cliente.razao_social);
-                        if (!$('#tabclientesearch-fistel').val()) {
-                            $('#tabclientesearch-fistel').val(ds.cliente.fistel);
-                        }
-                        $('#tabclientesearch-fantasia').val(ds.cliente.fantasia);
-                        $('#divGridEndereco').html(ds.gridEnd.grid);
-                        $('#divGridContato').html(ds.gridCont.grid);
+                        var msg = ($('#tabclientesearch-cod_cliente').val())
+                                ? "CNPJ já cadastrado! Deseja carregar/migrar os dados existentes?" :
+                                "CNPJ já cadastrato! Deseja carragar dados existentes?"
+
+
+                        projeto.confirm('<div align="justify">' + msg + '</div>', function () {
+                            projeto.ajax.defaultBlockUI();
+                            var urlInclusao = $('base').attr('href') + 'comercial/cliente/migrar?id=' + ds.cliente.cod_cliente + '&migrar=' + $('#tabclientesearch-cod_cliente').val();
+
+                            $(location).attr('href', urlInclusao);
+
+                            return false;
+                        }, function () {
+                            return false;
+                        });
                     } else {
-                        $('#tabclientesearch-razao_social').val('');
+                        if (ds.cliente.razao_social) {
 
-                        $('#tabclientesearch-fistel').val('');
+                            $('#tabclientesearch-razao_social').val(ds.cliente.razao_social);
+                            if (!$('#tabclientesearch-fistel').val()) {
+                                $('#tabclientesearch-fistel').val(ds.cliente.fistel);
+                            }
+                            $('#tabclientesearch-fantasia').val(ds.cliente.fantasia);
+                            $('#divGridEndereco').html(ds.gridEnd.grid);
+                            $('#divGridContato').html(ds.gridCont.grid);
+                        } else {
+                            $('#tabclientesearch-razao_social').val('');
 
-                        $('#tabclientesearch-fantasia').val('');
-                        $('#divGridEndereco').html('');
-                        $('#divGridContato').html('');
+                            $('#tabclientesearch-fistel').val('');
+
+                            $('#tabclientesearch-fantasia').val('');
+                            $('#divGridEndereco').html('');
+                            $('#divGridContato').html('');
+                        }
                     }
-                }
-            });
+                });
 
-
+            }
         });
+
     },
 
     incluirNovo: function (valor) {
@@ -200,7 +201,7 @@ Projeto.prototype.cliente = new (Projeto.extend({
                 return false;
             }
 
-            var urlInclusao = $('base').attr('href') + 'admin/cliente/incluir-tipo-contrato';
+            var urlInclusao = $('base').attr('href') + 'comercial/cliente/incluir-tipo-contrato';
 
             projeto.ajax.post(urlInclusao, form.serialize( ), function (response) {
                 var dados = $.parseJSON(response);
@@ -238,7 +239,7 @@ Projeto.prototype.cliente = new (Projeto.extend({
                 return false;
             }
 
-            var urlInclusao = $('base').attr('href') + 'admin/cliente/incluir-contrato';
+            var urlInclusao = $('base').attr('href') + 'comercial/cliente/incluir-contrato';
 
             projeto.ajax.post(urlInclusao, form.serialize( ), function (response) {
                 var dados = $.parseJSON(response);
@@ -291,13 +292,15 @@ Projeto.prototype.cliente = new (Projeto.extend({
         $('#modal' + valor).modal('show').find('#modalContent').load( );
     },
     openModalTipoContrato: function (valor, cod_contrato) {
+       $('#tabcontratosearch-tipo_contrato_fk').removeAttr('disabled');
         setTimeout(function () {
             if (valor == 'TipoContrato') {
                 $('#tabtipocontratosearchservico-cod_contrato_fk').val(cod_contrato);
                 $('#tabtipocontratosearchservico-cod_usuario_fk').focus();
+                
             } else {
-
                 $('#tabtipocontratosearch-cod_contrato_fk').focus();
+                $('#div-status').hide();
             }
 
         }, 750);
@@ -472,6 +475,21 @@ Projeto.prototype.cliente = new (Projeto.extend({
         });
     },
 
+    preencheFormContrato: function (dados) {
+        
+        
+        $('#tabcontratosearch-cod_contrato').val(dados[0]['cod_contrato']);
+        $('#tabcontratosearch-tipo_contrato_fk').val(dados[0]['tipo_contrato_fk']);
+        
+        $('#tabcontratosearch-valor_contrato-disp').val(Projeto.prototype.util.colocaFormatoMoeda(dados[0]['valor_contrato']));
+        $('#tabcontratosearch-dt_prazo').val(dados[0]['dt_prazo']);
+        $('#tabcontratosearch-qnt_parcelas').val(dados[0]['qnt_parcelas']);
+        $('#tabcontratosearch-status').val(dados[0]['atributos_status']);
+        $('#tabcontratosearch-dt_vencimento').val(dados[0]['dt_vencimento']);
+        $('#tabtipo-contratosearch-cod_usuario_fk').val(dados[0]['cod_usuario_responsavel_fk']);
+
+    },
+
     mudarInputContato: function () {
         if ($('#tabcontatosearch-tipo').find('option:selected').text() == 'E-mail') {
             $('#divContatoEmail').show();
@@ -509,6 +527,60 @@ function adicionarContrato(contrato) {
 
     Projeto.prototype.cliente.openModalTipoContrato('Contrato', contrato);
     Projeto.prototype.cliente.limpaFormTipoContrato('Contrato');
+    
+
+    return false;
+}
+
+
+function editarContrato(result) {
+
+    var post = {'cod': result}
+    var urlInclusao = $('base').attr('href') + 'comercial/contrato/carregar-contrato';
+
+    projeto.ajax.post(urlInclusao, post, function (response) {
+
+        var dados = $.parseJSON(response);
+
+        Projeto.prototype.cliente.openModalTipoContrato('Contrato', result);
+        $('#div-status').show();
+        
+        $('#tabcontratosearch-tipo_contrato_fk').attr('disabled', 'disabled');
+        Projeto.prototype.cliente.limpaFormTipoContrato('Contrato');
+        Projeto.prototype.cliente.preencheFormContrato(dados);
+
+    });
+
+//    Projeto.prototype.cliente.openModal();
+
+
+    return false;
+}
+
+
+function excluirContrato(result) {
+
+    var post = {'id': result}
+    var urlInclusao = $('base').attr('href') + 'comercial/contrato/excluir-contrato';
+
+
+    projeto.confirm('<div align="center"><h2>Deseja excluir contrato?</h2></div>', function () {
+        projeto.ajax.defaultBlockUI();
+        projeto.ajax.post(urlInclusao, post, function (response) {
+
+            var dados = $.parseJSON(response);
+
+
+            $('#divGuiaContrato').html(dados);
+
+        });
+        return false;
+    }, function () {
+        return false;
+    })
+
+
+//    Projeto.prototype.cliente.openModal();
 
 
     return false;

@@ -5,27 +5,27 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "tab_andamento".
+ * This is the model class for table "tab_setores_usuarios_andamento".
  *
- * @property integer $cod_andamento
+ * @property integer $cod_setor_usuario_antamento
+ * @property integer $cod_andamento_fk
+ * @property integer $cod_setor_fk
  * @property string $dt_inclusao
  * @property string $dt_exclusao
- * @property string $txt_notificacao
- * @property string $dt_retorno
  * @property integer $cod_usuario_inclusao_fk
- * @property integer $cod_setor_fk
  *
  * @property TabUsuarios $tabUsuarios
+ * @property TabAndamento $tabAndamento
  * @property TabSetores $tabSetores
  */
-class TabAndamento extends \projeto\db\ActiveRecord
+class TabSetoresUsuariosAndamento extends \projeto\db\ActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'tab_andamento';
+        return 'tab_setores_usuarios_andamento';
     }
 
     /**
@@ -34,9 +34,8 @@ class TabAndamento extends \projeto\db\ActiveRecord
     public function rules()
     {
         return [
-            [['dt_inclusao', 'dt_exclusao', 'dt_retorno'], 'safe'],
-            [['txt_notificacao'], 'string'],
-            [['cod_usuario_inclusao_fk', 'cod_setor_fk'], 'integer']
+            [['cod_andamento_fk', 'cod_setor_fk', 'cod_usuario_inclusao_fk'], 'integer'],
+            [['dt_inclusao', 'dt_exclusao'], 'safe']
         ];
     }
 
@@ -46,13 +45,12 @@ class TabAndamento extends \projeto\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'cod_andamento' => 'Cod Andamento',
+            'cod_setor_usuario_antamento' => 'Cod Setor Usuario Antamento',
+            'cod_andamento_fk' => 'Cod Andamento Fk',
+            'cod_setor_fk' => 'Cod Setor Fk',
             'dt_inclusao' => 'Dt Inclusao',
             'dt_exclusao' => 'Dt Exclusao',
-            'txt_notificacao' => 'Txt Notificacao',
-            'dt_retorno' => 'Dt Retorno',
             'cod_usuario_inclusao_fk' => 'Cod Usuario Inclusao Fk',
-            'cod_setor_fk' => 'Cod Setor Fk',
         ];
     }
 
@@ -67,6 +65,14 @@ class TabAndamento extends \projeto\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
+    public function getTabAndamento()
+    {
+        return $this->hasOne(TabAndamento::className(), ['cod_andamento' => 'cod_andamento_fk']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
     public function getTabSetores()
     {
         return $this->hasOne(TabSetores::className(), ['cod_setor' => 'cod_setor_fk']);
@@ -74,10 +80,10 @@ class TabAndamento extends \projeto\db\ActiveRecord
 
     /**
      * @inheritdoc
-     * @return TabAndamentoQuery the active query used by this AR class.
+     * @return TabSetoresUsuariosAndamentoQuery the active query used by this AR class.
      */
     public static function find()
     {
-        return new TabAndamentoQuery(get_called_class());
+        return new TabSetoresUsuariosAndamentoQuery(get_called_class());
     }
 }

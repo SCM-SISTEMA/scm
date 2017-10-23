@@ -148,7 +148,7 @@ class Module extends \yii\base\Module
 
 	public function getInfo()
 	{
-		$moduleID = $this->id;
+		$moduleID = $this->id;                
 		// informações sobre o menu em questão
 
 		$info = TabModulosSearch::getInfo($moduleID);

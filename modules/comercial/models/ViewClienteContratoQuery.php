@@ -1,13 +1,13 @@
 <?php
 
-namespace app\models;
+namespace app\modules\comercial\models;
 
 /**
- * This is the ActiveQuery class for [[TabSetores]].
+ * This is the ActiveQuery class for [[ViewClienteContrato]].
  *
- * @see TabSetores
+ * @see ViewClienteContrato
  */
-class TabAndamentoQuery extends \projeto\db\ActiveQuery
+class ViewClienteContratoQuery extends \projeto\db\ActiveQuery
 {
     /*public function active()
     {
@@ -17,7 +17,7 @@ class TabAndamentoQuery extends \projeto\db\ActiveQuery
 
     /**
      * @inheritdoc
-     * @return TabSetores[]|array
+     * @return ViewClienteContrato[]|array
      */
     public function all($db = null)
     {
@@ -26,7 +26,7 @@ class TabAndamentoQuery extends \projeto\db\ActiveQuery
 
     /**
      * @inheritdoc
-     * @return TabSetores|array|null
+     * @return ViewClienteContrato|array|null
      */
     public function one($db = null)
     {

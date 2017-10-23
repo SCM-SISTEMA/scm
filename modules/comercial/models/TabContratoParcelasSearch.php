@@ -28,11 +28,11 @@ class TabContratoParcelasSearch extends TabContratoParcelas {
      * @inheritdoc
      */
     public function attributeLabels() {
-            $labels = parent::attributeLabels();
-            $labels['numero'] = 'Número';
-            $labels['valor'] = 'Valor';
-            $labels['dt_vencimento'] = 'Data Vencimento';
-            
+        $labels = parent::attributeLabels();
+        $labels['numero'] = 'Número';
+        $labels['valor'] = 'Valor';
+        $labels['dt_vencimento'] = 'Data Vencimento';
+
         return $labels;
     }
 
@@ -90,5 +90,48 @@ class TabContratoParcelasSearch extends TabContratoParcelas {
             $parcelas->save();
         }
     }
-    
+
+    public static function atualizarParcelas($cod_contrato, $post) {
+        TabContratoParcelasSearch::deleteAll('cod_contrato_fk=' . $cod_contrato);
+
+        $i = 0;
+        $nparcela = ($post['qnt_parcelas']) ? $post['qnt_parcelas'] : 1;
+
+        $valor = (float) $post['valor_contrato'] / (int) $nparcela;
+        $dataArray = explode('/', $post['dt_vencimento']);
+
+        while ($i < $nparcela) {
+            
+            $parcela = new \app\modules\comercial\models\TabContratoParcelasSearch();
+            $parcela->cod_contrato_fk = $cod_contrato;
+            $parcela->numero = $i + 1;
+            
+            $parcela->valor = number_format($valor, 2, ".", "");
+            
+            if (str_pad($dataArray[1] + 1, '2', '0', 0) > 12) {
+                $dia = $dataArray[0];
+                $dataArray[1] = 1;
+                $dataArray[2] = $dataArray[2] + 1;
+        
+            }elseif(str_pad($dataArray[1] + 1, '2', '0', 0)=='02' && str_pad($dataArray[0] + $i, '2', '0', 0)>28){
+                   
+                $dia = 28;
+                $dataArray[1] = $dataArray[1] + 1;
+                                
+            }else{
+                $dataArray[1] = $dataArray[1] + 1;
+                $dia = $dataArray[0];
+            }
+            
+            $parcela->dt_vencimento = $dia . '/' . str_pad($dataArray[1], '2', '0', 0) . '/' . $dataArray[2];
+
+            $parcela->save();
+
+            $i++;
+
+            $total += $parcela->valor;
+        }
+        
+    }
+
 }

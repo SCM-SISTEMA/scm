@@ -1,6 +1,6 @@
 <?php
 
-namespace app\modules\admin\controllers;
+namespace app\modules\comercial\controllers;
 
 use Yii;
 use app\models\TabCliente;
@@ -18,7 +18,7 @@ class ClienteController extends \app\controllers\ClienteController {
      */
     public function actionIndex() {
 
-        $searchModel = new TabClienteSearch();
+        $searchModel = new \app\modules\comercial\models\ViewClienteContratoSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         $this->titulo = 'Gerenciar Cliente';
@@ -53,27 +53,28 @@ class ClienteController extends \app\controllers\ClienteController {
                 $tipo_contratos = null;
                 if ($tipo_contrato) {
                     foreach ($tipo_contrato as $tp_cont) {
-                        $andamento[$tp_cont->cod_tipo_contrato] = \app\models\TabAndamentoSearch::findAllAsArray([
-                                    'cod_assunto_fk' => \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-assunto-notificacao', '1'),
-                                    'cod_tipo_contrato_fk' => $tp_cont->cod_tipo_contrato,
-                                    'cod_modulo_fk' => '1']);
+//                        $andamento[$tp_cont->cod_tipo_contrato] = \app\models\TabAndamentoSearch::findAllAsArray([
+//                                    'cod_assunto_fk' => \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-assunto-notificacao', '1'),
+//                                    'cod_tipo_contrato_fk' => $tp_cont->cod_tipo_contrato,
+//                                    'cod_modulo_fk' => '1']);
 
                         $tipo_contratos[] = $tp_cont->attributes;
                     }
                 }
 
-                if (!$cont->isNewRecord) {
+                /*  if (!$cont->isNewRecord) {
 
-                    $andamento['contrato'] = \app\models\TabAndamentoSearch::find()->where([
-                                'cod_assunto_fk' => \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-assunto-notificacao', '1'),
-                                'cod_contrato_fk' => $cont->cod_contrato,
-                                'cod_modulo_fk' => '1'])->asArray()->orderBy('cod_andamento desc')->all();
-                }
-
+                  $andamento['contrato'] = \app\models\TabAndamentoSearch::find()->where([
+                  'cod_assunto_fk' => \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-assunto-notificacao', '1'),
+                  'cod_contrato_fk' => $cont->cod_contrato,
+                  'cod_modulo_fk' => \app\modules\admin\models\TabModulosSearch::find()->where(['id' => Yii::$app->controller->module->id])->one()->cod_modulo])->asArray()->orderBy('cod_andamento desc')->all();
+                  }
+                 */
                 $parcelas = \app\modules\comercial\models\TabContratoParcelasSearch::find()->where(['cod_contrato_fk' => $cont->cod_contrato])->asArray()->orderBy('numero')->all();
-                $contratos[] = ['attributes' => $cont->attributes, 'tipo_contratos' => $tipo_contratos, 'parcelas' => $parcelas, $contrato, 'andamentos' => $andamento];
+                $contratos[] = ['attributes' => $cont->attributes, 'tipo_contratos' => $tipo_contratos, 'parcelas' => $parcelas, 'andamentos' => $andamento];
             }
         }
+
         return $contratos;
     }
 
@@ -82,15 +83,17 @@ class ClienteController extends \app\controllers\ClienteController {
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionAdmin($id = null, $migrar=null) {
+    public function actionAdmin($id = null, $migrar = null) {
+         
         if ($id) {
 
             $model = $this->findModel($id);
-            $contrato = \app\modules\comercial\models\TabContratoSearch::find()->where(['cod_cliente_fk' => $model->cod_cliente, 'ativo'=>true])->all();
+            $contrato = \app\modules\comercial\models\TabContratoSearch::find()->where(['cod_cliente_fk' => $model->cod_cliente, 'ativo' => true])->all();
             $contato = \app\models\TabContatoSearch::find()->where(['chave_fk' => $model->cod_cliente, 'tipo_tabela_fk' => $model->tableName()])->indexBy('cod_contato')->asArray()->all();
             $endereco = \app\models\TabEnderecoSearch::find()->where(['chave_fk' => $model->cod_cliente, 'tipo_tabela_fk' => $model->tableName()])->indexBy('cod_endereco')->asArray()->all();
 
             $contratos = $this->montaArrayContratos($contrato);
+
             $acao = 'update';
             $this->titulo = 'Alterar Cliente';
             $this->subTitulo = '';
@@ -106,7 +109,6 @@ class ClienteController extends \app\controllers\ClienteController {
             $this->titulo = 'Incluir Cliente';
             $this->subTitulo = '';
         }
-
 
 
         if ($model->load(Yii::$app->request->post())) {
@@ -131,7 +133,7 @@ class ClienteController extends \app\controllers\ClienteController {
 
                         \app\modules\comercial\models\TabContratoSearch::salvarContratos($contratos, $model);
                     }
-                    
+
                     $transaction->commit();
                     $this->session->setFlashProjeto('success', $acao);
                     return $this->redirect(['admin', 'id' => $model->cod_cliente]);
@@ -150,6 +152,7 @@ class ClienteController extends \app\controllers\ClienteController {
         \Yii::$app->session->set('endereco', $endereco);
         \Yii::$app->session->set('contato', $contato);
         \Yii::$app->session->set('contratos', $contratos);
+
         return $this->render('admin', [
                     'model' => $model, 'contratos' => $contratos
         ]);
@@ -160,8 +163,8 @@ class ClienteController extends \app\controllers\ClienteController {
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionMigrar($id,$migrar) {
-        
+    public function actionMigrar($id, $migrar) {
+
         if ($migrar & $migrar != $id) {
             $cliente = \app\models\TabClienteSearch::find()->where(['cod_cliente' => $migrar])->one();
 
@@ -177,7 +180,7 @@ class ClienteController extends \app\controllers\ClienteController {
                     $value->cod_cliente_fk = $id;
                     $value->save();
                 }
-            }
+            }$conts = \Yii::$app->session->get('contratos');
             if ($contato) {
                 foreach ($contato as $value) {
                     $value->chave_fk = $id;
@@ -230,7 +233,8 @@ class ClienteController extends \app\controllers\ClienteController {
     public function actionDelete($id) {
 
         $model = $this->findModel($id);
-        $model->dte_exclusao = 'NOW()';
+        $model->dt_exclusao = date('d/m/Y');
+        $model->situacao = false;
 
         if ($model->save()) {
 
@@ -1098,65 +1102,108 @@ class ClienteController extends \app\controllers\ClienteController {
     }
 
     public function actionIncluirContrato() {
-
-        $contratoSessao = (\Yii::$app->session->get('contratos')) ? \Yii::$app->session->get('contratos') : [];
+        Yii::$app->controller->action->id = 'index';
 
         $post = Yii::$app->request->post();
+
         if (!$post['TabContratoSearch']['cod_contrato']) {
-            $str = 'Inclusão';
-            $contrato = new \app\modules\comercial\models\TabContratoSearch();
-            $contrato->attributes = $post['TabContratoSearch'];
-            $contrato->cod_contrato = 'N' . rand('100000000', '999999999');
+            $transaction = Yii::$app->db->beginTransaction();
 
+            try {
 
-            if ($post['TabContratoSearch']['valor_contrato']) {
-                $i = 0;
-                $nparcela = ($post['TabContratoSearch']['qnt_parcelas']) ? $post['TabContratoSearch']['qnt_parcelas'] : 1;
-                $valor = (float) $post['TabContratoSearch']['valor_contrato'] / (int) $nparcela;
-                $dataArray = explode('/', $post['TabContratoSearch']['dt_vencimento']);
+                $str = 'Inclusão';
+                $contrato = new \app\modules\comercial\models\TabContratoSearch();
+                unset($post['TabContratoSearch']['cod_contrato']);
+                $contrato->attributes = $post['TabContratoSearch'];
+                $contrato->status = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('status-contrato', '1');
+                $contrato->cod_cliente_fk = $post['TabClienteSearch']['cod_cliente'];
+                $contrato->save();
 
-                while ($i < $nparcela) {
-                    $parcela = new \app\modules\comercial\models\TabContratoParcelasSearch();
-                    $parcela->cod_contrato_fk = $contrato->cod_contrato;
-                    $parcela->numero = $i + 1;
-                    $parcela->valor = number_format($valor, 2, ".", "");
-                    $parcela->dt_vencimento = $dataArray[0] . '/' . str_pad($dataArray[1] + $i, '2', '0', 0) . '/' . $dataArray[2];
-                    $percelas[] = $parcela->attributes;
-                    $i++;
-                    $total += $parcela->valor;
+                if ($post['TabContratoSearch']['valor_contrato']) {
+                    $i = 0;
+                    $nparcela = ($post['TabContratoSearch']['qnt_parcelas']) ? $post['TabContratoSearch']['qnt_parcelas'] : 1;
+                    $valor = (float) $post['TabContratoSearch']['valor_contrato'] / (int) $nparcela;
+                    $dataArray = explode('/', $post['TabContratoSearch']['dt_vencimento']);
+
+                    while ($i < $nparcela) {
+                        $parcela = new \app\modules\comercial\models\TabContratoParcelasSearch();
+                        $parcela->cod_contrato_fk = $contrato->cod_contrato;
+                        $parcela->numero = $i + 1;
+                        $parcela->valor = number_format($valor, 2, ".", "");
+                        if (str_pad($dataArray[1] + $i, '2', '0', 0) > 12) {
+                            $dataArray[1] = 1;
+                            $dataArray[2] = $dataArray[2] + 1;
+                        }
+                        $parcela->dt_vencimento = $dataArray[0] . '/' . str_pad($dataArray[1] + $i, '2', '0', 0) . '/' . $dataArray[2];
+
+                        $parcela->save();
+
+                        $i++;
+
+                        $total += $parcela->valor;
+                    }
+
+                    $percelas[0]['valor'] = number_format($percelas[0]['valor'] - number_format($total - $post['TabContratoSearch']['valor_contrato'], 2, ".", ""), 2, ".", "");
                 }
 
-                $percelas[0]['valor'] = number_format($percelas[0]['valor'] - number_format($total - $post['TabContratoSearch']['valor_contrato'], 2, ".", ""), 2, ".", "");
-            }
-            $servicos = \app\modules\comercial\models\TabContratoTipoContrato::find()->where(['cod_contrato_fk' => $contrato->tipo_contrato_fk])->asArray()->all();
-            $sers = [];
-            if ($servicos) {
-                foreach ($servicos as $key => $ser) {
+                $servicos = \app\modules\comercial\models\TabContratoTipoContrato::find()->where(['cod_contrato_fk' => $contrato->tipo_contrato_fk])->asArray()->all();
+                $sers = [];
 
-                    $servico = new \app\modules\comercial\models\TabTipoContratoSearch();
-                    $servico->cod_tipo_contrato = 'N' . rand('100000000', '999999999');
-                    $servico->cod_usuario_fk = $post['TabTipoContratoSearch']['cod_usuario_fk'];
-                    $servico->cod_contrato_fk = $contrato->cod_contrato;
-                    $servico->tipo_produto_fk = $ser['cod_tipo_contrato_fk'];
+                if ($servicos) {
+                    foreach ($servicos as $key => $ser) {
 
-                    $sers[] = $servico->attributes;
+                        $servico = new \app\modules\comercial\models\TabTipoContratoSearch();
+
+                        $servico->cod_usuario_fk = $post['TabTipoContratoSearch']['cod_usuario_fk'];
+                        $servico->cod_contrato_fk = $contrato->cod_contrato;
+                        $servico->tipo_produto_fk = $ser['cod_tipo_contrato_fk'];
+                        $servico->save();
+
+                        $setor = new \app\models\TabSetoresSearch();
+                        $setor->cod_tipo_contrato_fk = $servico->cod_tipo_contrato;
+                        $setor->cod_usuario_responsavel_fk = $post['TabTipoContratoSearch']['cod_usuario_fk'];
+                        $setor->cod_tipo_setor_fk = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('setores', '1');
+                        $setor->save();
+
+                        $andam = new \app\models\TabAndamentoSearch();
+                        $andam->txt_notificacao = 'Inclusão de Contrato';
+                        $andam->cod_usuario_inclusao_fk = $this->user->identity->getId();
+                        $andam->cod_setor_fk = $setor->cod_setor;
+                        $andam->dt_retorno = date('d/m/Y', strtotime(date('Y-m-d').'+5 days'));
+                        $andam->save();
+                    }
                 }
-            }
 
-            array_unshift($contratoSessao, ['attributes' => $contrato->attributes, 'tipo_contratos' => $sers, 'parcelas' => $percelas]);
+                $transaction->commit();
+            } catch (\Exception $e) {
+                $transaction->rollBack();
+                throw $e;
+            }
         } else {
             $str = 'Alteração';
-            foreach ($contratoSessao as $key => $contrato) {
+            $contrato = \app\modules\comercial\models\TabContratoSearch::find()->where(['cod_contrato' => $post['TabContratoSearch']['cod_contrato']])->one();
 
-                if ($contrato['attributes']['cod_contrato'] == $post['TabContratoSearch']['cod_contrato']) {
-                    $contrato = new \app\modules\comercial\models\TabContratoSearch();
-                    $contrato->attributes = $post['TabContratoSearch'];
-                    $contratoSessao[$key]['TabContratoSearch'] = $contrato->attributes;
+            if ($contrato) {
+                unset($post['TabContratoSearch']['cod_contrato']);
+                                
+                $post['TabContratoSearch']['valor_contrato'] = (strpos($post['TabContratoSearch']['cod_contrato'], ',') === false) ? $post['TabContratoSearch']['valor_contrato'] :
+                \projeto\Util::decimalFormatForBank($post['TabContratoSearch']['valor_contrato']);
+                                
+                if (
+                        $post['TabContratoSearch']['valor_contrato'] == $contrato->valor_contrato ||
+                        $post['TabContratoSearch']['qnt_parcelas'] == $contrato->qnt_parcelas ||
+                        $post['TabContratoSearch']['dt_vencimento'] == $contrato->dt_vencimento
+                ) {
+                    \app\modules\comercial\models\TabContratoParcelasSearch::atualizarParcelas($contrato->cod_contrato, $post['TabContratoSearch']);
                 }
+                
+                $contrato->attributes = $post['TabContratoSearch'];
+                
+                $contrato->status = $post['TabContratoSearch']['status'];
+                              
+                $contrato->save();
             }
         }
-
-        \Yii::$app->session->set('contratos', $contratoSessao);
 
         if ($contrato && $contrato->getErrors()) {
             $dados = $contrato->getErrors();
@@ -1169,17 +1216,14 @@ class ClienteController extends \app\controllers\ClienteController {
             $msg['msg'] = $str . ' efetivada com sucesso.';
             $msg['icon'] = 'check';
         }
-        Yii::$app->controller->action->id = 'index';
+
 
         $form = \yii\widgets\ActiveForm::begin();
-
         $this->module->module->layout = null;
-        $dados = $this->render('@app/modules/comercial/views/contrato/_guia_contratos', compact('form', 'msg'));
-
-
-
+        $dados = $this->render('@app/modules/comercial/views/contrato/_lista_contratos', ['cod_cliente' => $post['TabClienteSearch']['cod_cliente'], 'form' => $form, 'msg' => $msg]);
 
         return \yii\helpers\Json::encode($dados);
     }
+
 
 }
