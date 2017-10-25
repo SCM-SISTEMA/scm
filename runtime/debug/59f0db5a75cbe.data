@@ -1,0 +1,1132 @@
+a:11:{s:6:"config";a:5:{s:10:"phpVersion";s:37:"5.6.31-4+ubuntu16.04.1+deb.sury.org+4";s:10:"yiiVersion";s:8:"2.0.11.2";s:11:"application";a:8:{s:3:"yii";s:8:"2.0.11.2";s:4:"name";s:14:"SCM Engenharia";s:7:"version";s:8:"2017.006";s:8:"language";s:5:"pt-BR";s:14:"sourceLanguage";s:5:"en-US";s:7:"charset";s:5:"UTF-8";s:3:"env";s:3:"dev";s:5:"debug";b:1;}s:3:"php";a:5:{s:7:"version";s:37:"5.6.31-4+ubuntu16.04.1+deb.sury.org+4";s:6:"xdebug";b:0;s:3:"apc";b:0;s:8:"memcache";b:0;s:9:"memcached";b:0;}s:10:"extensions";a:56:{s:18:"yiisoft/yii2-faker";a:3:{s:4:"name";s:18:"yiisoft/yii2-faker";s:7:"version";s:7:"2.0.3.0";s:5:"alias";a:1:{s:10:"@yii/faker";s:38:"/var/www/scm/vendor/yiisoft/yii2-faker";}}s:18:"cebe/yii2-gravatar";a:3:{s:4:"name";s:18:"cebe/yii2-gravatar";s:7:"version";s:7:"1.1.0.0";s:5:"alias";a:1:{s:14:"@cebe/gravatar";s:52:"/var/www/scm/vendor/cebe/yii2-gravatar/cebe/gravatar";}}s:25:"bupy7/yii2-widget-cropbox";a:3:{s:4:"name";s:25:"bupy7/yii2-widget-cropbox";s:7:"version";s:7:"4.0.0.0";s:5:"alias";a:1:{s:14:"@bupy7/cropbox";s:45:"/var/www/scm/vendor/bupy7/yii2-widget-cropbox";}}s:19:"newerton/yii2-jcrop";a:3:{s:4:"name";s:19:"newerton/yii2-jcrop";s:7:"version";s:11:"9999999-dev";s:5:"alias";a:1:{s:15:"@newerton/jcrop";s:39:"/var/www/scm/vendor/newerton/yii2-jcrop";}}s:20:"budyaga/yii2-cropper";a:3:{s:4:"name";s:20:"budyaga/yii2-cropper";s:7:"version";s:7:"2.0.0.0";s:5:"alias";a:1:{s:16:"@budyaga/cropper";s:40:"/var/www/scm/vendor/budyaga/yii2-cropper";}}s:27:"nterms/yii2-pagesize-widget";a:3:{s:4:"name";s:27:"nterms/yii2-pagesize-widget";s:7:"version";s:7:"2.0.1.0";s:5:"alias";a:1:{s:16:"@nterms/pagesize";s:47:"/var/www/scm/vendor/nterms/yii2-pagesize-widget";}}s:30:"kartik-v/yii2-widget-typeahead";a:3:{s:4:"name";s:30:"kartik-v/yii2-widget-typeahead";s:7:"version";s:7:"1.0.1.0";s:5:"alias";a:1:{s:17:"@kartik/typeahead";s:50:"/var/www/scm/vendor/kartik-v/yii2-widget-typeahead";}}s:30:"kartik-v/yii2-widget-touchspin";a:3:{s:4:"name";s:30:"kartik-v/yii2-widget-touchspin";s:7:"version";s:7:"1.2.1.0";s:5:"alias";a:1:{s:17:"@kartik/touchspin";s:50:"/var/www/scm/vendor/kartik-v/yii2-widget-touchspin";}}s:32:"kartik-v/yii2-widget-switchinput";a:3:{s:4:"name";s:32:"kartik-v/yii2-widget-switchinput";s:7:"version";s:7:"1.3.1.0";s:5:"alias";a:1:{s:19:"@kartik/switchinput";s:52:"/var/www/scm/vendor/kartik-v/yii2-widget-switchinput";}}s:28:"kartik-v/yii2-widget-spinner";a:3:{s:4:"name";s:28:"kartik-v/yii2-widget-spinner";s:7:"version";s:7:"1.0.0.0";s:5:"alias";a:1:{s:15:"@kartik/spinner";s:48:"/var/www/scm/vendor/kartik-v/yii2-widget-spinner";}}s:28:"kartik-v/yii2-widget-sidenav";a:3:{s:4:"name";s:28:"kartik-v/yii2-widget-sidenav";s:7:"version";s:7:"1.0.0.0";s:5:"alias";a:1:{s:15:"@kartik/sidenav";s:48:"/var/www/scm/vendor/kartik-v/yii2-widget-sidenav";}}s:31:"kartik-v/yii2-widget-rangeinput";a:3:{s:4:"name";s:31:"kartik-v/yii2-widget-rangeinput";s:7:"version";s:7:"1.0.1.0";s:5:"alias";a:1:{s:13:"@kartik/range";s:51:"/var/www/scm/vendor/kartik-v/yii2-widget-rangeinput";}}s:26:"kartik-v/yii2-widget-growl";a:3:{s:4:"name";s:26:"kartik-v/yii2-widget-growl";s:7:"version";s:7:"1.1.1.0";s:5:"alias";a:1:{s:13:"@kartik/growl";s:46:"/var/www/scm/vendor/kartik-v/yii2-widget-growl";}}s:28:"kartik-v/yii2-widget-depdrop";a:3:{s:4:"name";s:28:"kartik-v/yii2-widget-depdrop";s:7:"version";s:7:"1.0.4.0";s:5:"alias";a:1:{s:15:"@kartik/depdrop";s:48:"/var/www/scm/vendor/kartik-v/yii2-widget-depdrop";}}s:26:"kartik-v/yii2-widget-alert";a:3:{s:4:"name";s:26:"kartik-v/yii2-widget-alert";s:7:"version";s:7:"1.1.0.0";s:5:"alias";a:1:{s:13:"@kartik/alert";s:46:"/var/www/scm/vendor/kartik-v/yii2-widget-alert";}}s:26:"kartik-v/yii2-widget-affix";a:3:{s:4:"name";s:26:"kartik-v/yii2-widget-affix";s:7:"version";s:7:"1.0.0.0";s:5:"alias";a:1:{s:13:"@kartik/affix";s:46:"/var/www/scm/vendor/kartik-v/yii2-widget-affix";}}s:21:"kartik-v/yii2-widgets";a:3:{s:4:"name";s:21:"kartik-v/yii2-widgets";s:7:"version";s:11:"9999999-dev";s:5:"alias";a:1:{s:15:"@kartik/widgets";s:41:"/var/www/scm/vendor/kartik-v/yii2-widgets";}}s:31:"kartik-v/yii2-widget-colorinput";a:3:{s:4:"name";s:31:"kartik-v/yii2-widget-colorinput";s:7:"version";s:7:"1.0.3.0";s:5:"alias";a:1:{s:13:"@kartik/color";s:51:"/var/www/scm/vendor/kartik-v/yii2-widget-colorinput";}}s:22:"beastbytes/yii2-wizard";a:3:{s:4:"name";s:22:"beastbytes/yii2-wizard";s:7:"version";s:7:"1.0.0.0";s:5:"alias";a:1:{s:18:"@beastbytes/wizard";s:42:"/var/www/scm/vendor/beastbytes/yii2-wizard";}}s:27:"kartik-v/yii2-widget-rating";a:3:{s:4:"name";s:27:"kartik-v/yii2-widget-rating";s:7:"version";s:7:"1.0.2.0";s:5:"alias";a:1:{s:14:"@kartik/rating";s:47:"/var/www/scm/vendor/kartik-v/yii2-widget-rating";}}s:19:"kartik-v/yii2-money";a:3:{s:4:"name";s:19:"kartik-v/yii2-money";s:7:"version";s:7:"1.2.1.0";s:5:"alias";a:1:{s:13:"@kartik/money";s:39:"/var/www/scm/vendor/kartik-v/yii2-money";}}s:22:"yiisoft/yii2-bootstrap";a:3:{s:4:"name";s:22:"yiisoft/yii2-bootstrap";s:7:"version";s:7:"2.0.6.0";s:5:"alias";a:1:{s:14:"@yii/bootstrap";s:42:"/var/www/scm/vendor/yiisoft/yii2-bootstrap";}}s:24:"yiisoft/yii2-codeception";a:3:{s:4:"name";s:24:"yiisoft/yii2-codeception";s:7:"version";s:7:"2.0.5.0";s:5:"alias";a:1:{s:16:"@yii/codeception";s:44:"/var/www/scm/vendor/yiisoft/yii2-codeception";}}s:16:"yiisoft/yii2-gii";a:3:{s:4:"name";s:16:"yiisoft/yii2-gii";s:7:"version";s:7:"2.0.5.0";s:5:"alias";a:1:{s:8:"@yii/gii";s:36:"/var/www/scm/vendor/yiisoft/yii2-gii";}}s:23:"yiibr/yii2-br-validator";a:3:{s:4:"name";s:23:"yiibr/yii2-br-validator";s:7:"version";s:7:"1.0.1.0";s:5:"alias";a:1:{s:18:"@yiibr/brvalidator";s:43:"/var/www/scm/vendor/yiibr/yii2-br-validator";}}s:20:"mg-code/yii2-helpers";a:3:{s:4:"name";s:20:"mg-code/yii2-helpers";s:7:"version";s:7:"1.0.2.0";s:5:"alias";a:1:{s:15:"@mgcode/helpers";s:40:"/var/www/scm/vendor/mg-code/yii2-helpers";}}s:19:"mg-code/yii2-assets";a:3:{s:4:"name";s:19:"mg-code/yii2-assets";s:7:"version";s:7:"1.0.0.0";s:5:"alias";a:1:{s:14:"@mgcode/assets";s:39:"/var/www/scm/vendor/mg-code/yii2-assets";}}s:24:"yiisoft/yii2-swiftmailer";a:3:{s:4:"name";s:24:"yiisoft/yii2-swiftmailer";s:7:"version";s:7:"2.0.6.0";s:5:"alias";a:1:{s:16:"@yii/swiftmailer";s:44:"/var/www/scm/vendor/yiisoft/yii2-swiftmailer";}}s:31:"kartik-v/yii2-widget-activeform";a:3:{s:4:"name";s:31:"kartik-v/yii2-widget-activeform";s:7:"version";s:7:"1.4.8.0";s:5:"alias";a:1:{s:12:"@kartik/form";s:51:"/var/www/scm/vendor/kartik-v/yii2-widget-activeform";}}s:24:"kartik-v/yii2-date-range";a:3:{s:4:"name";s:24:"kartik-v/yii2-date-range";s:7:"version";s:7:"1.6.7.0";s:5:"alias";a:1:{s:17:"@kartik/daterange";s:44:"/var/www/scm/vendor/kartik-v/yii2-date-range";}}s:20:"kartik-v/yii2-tabs-x";a:3:{s:4:"name";s:20:"kartik-v/yii2-tabs-x";s:7:"version";s:7:"1.2.3.0";s:5:"alias";a:1:{s:12:"@kartik/tabs";s:40:"/var/www/scm/vendor/kartik-v/yii2-tabs-x";}}s:27:"2amigos/yii2-chartjs-widget";a:3:{s:4:"name";s:27:"2amigos/yii2-chartjs-widget";s:7:"version";s:7:"2.0.1.0";s:5:"alias";a:1:{s:18:"@dosamigos/chartjs";s:51:"/var/www/scm/vendor/2amigos/yii2-chartjs-widget/src";}}s:20:"kartik-v/yii2-dialog";a:3:{s:4:"name";s:20:"kartik-v/yii2-dialog";s:7:"version";s:7:"1.0.1.0";s:5:"alias";a:1:{s:14:"@kartik/dialog";s:40:"/var/www/scm/vendor/kartik-v/yii2-dialog";}}s:27:"2amigos/yii2-gallery-widget";a:3:{s:4:"name";s:27:"2amigos/yii2-gallery-widget";s:7:"version";s:7:"1.0.3.0";s:5:"alias";a:1:{s:18:"@dosamigos/gallery";s:51:"/var/www/scm/vendor/2amigos/yii2-gallery-widget/src";}}s:20:"yiisoft/yii2-imagine";a:3:{s:4:"name";s:20:"yiisoft/yii2-imagine";s:7:"version";s:7:"2.0.4.0";s:5:"alias";a:1:{s:12:"@yii/imagine";s:40:"/var/www/scm/vendor/yiisoft/yii2-imagine";}}s:28:"maksyutin/yii2-dual-list-box";a:3:{s:4:"name";s:28:"maksyutin/yii2-dual-list-box";s:7:"version";s:11:"9999999-dev";s:5:"alias";a:1:{s:22:"@maksyutin/duallistbox";s:48:"/var/www/scm/vendor/maksyutin/yii2-dual-list-box";}}s:28:"2amigos/yii2-ckeditor-widget";a:3:{s:4:"name";s:28:"2amigos/yii2-ckeditor-widget";s:7:"version";s:7:"2.0.0.0";s:5:"alias";a:1:{s:19:"@dosamigos/ckeditor";s:52:"/var/www/scm/vendor/2amigos/yii2-ckeditor-widget/src";}}s:25:"kartik-v/yii2-krajee-base";a:3:{s:4:"name";s:25:"kartik-v/yii2-krajee-base";s:7:"version";s:7:"1.8.8.0";s:5:"alias";a:1:{s:12:"@kartik/base";s:45:"/var/www/scm/vendor/kartik-v/yii2-krajee-base";}}s:28:"kartik-v/yii2-widget-select2";a:3:{s:4:"name";s:28:"kartik-v/yii2-widget-select2";s:7:"version";s:7:"2.0.9.0";s:5:"alias";a:1:{s:15:"@kartik/select2";s:48:"/var/www/scm/vendor/kartik-v/yii2-widget-select2";}}s:22:"kartik-v/yii2-sortable";a:3:{s:4:"name";s:22:"kartik-v/yii2-sortable";s:7:"version";s:7:"1.2.0.0";s:5:"alias";a:1:{s:16:"@kartik/sortable";s:42:"/var/www/scm/vendor/kartik-v/yii2-sortable";}}s:18:"kartik-v/yii2-grid";a:3:{s:4:"name";s:18:"kartik-v/yii2-grid";s:7:"version";s:7:"3.1.3.0";s:5:"alias";a:1:{s:12:"@kartik/grid";s:38:"/var/www/scm/vendor/kartik-v/yii2-grid";}}s:22:"kartik-v/yii2-dynagrid";a:3:{s:4:"name";s:22:"kartik-v/yii2-dynagrid";s:7:"version";s:7:"1.4.5.0";s:5:"alias";a:1:{s:16:"@kartik/dynagrid";s:42:"/var/www/scm/vendor/kartik-v/yii2-dynagrid";}}s:20:"kartik-v/yii2-export";a:3:{s:4:"name";s:20:"kartik-v/yii2-export";s:7:"version";s:11:"9999999-dev";s:5:"alias";a:1:{s:14:"@kartik/export";s:40:"/var/www/scm/vendor/kartik-v/yii2-export";}}s:31:"2amigos/yii2-file-upload-widget";a:3:{s:4:"name";s:31:"2amigos/yii2-file-upload-widget";s:7:"version";s:7:"1.0.6.0";s:5:"alias";a:1:{s:21:"@dosamigos/fileupload";s:55:"/var/www/scm/vendor/2amigos/yii2-file-upload-widget/src";}}s:30:"himiklab/yii2-recaptcha-widget";a:3:{s:4:"name";s:30:"himiklab/yii2-recaptcha-widget";s:7:"version";s:7:"1.0.6.0";s:5:"alias";a:1:{s:24:"@himiklab/yii2/recaptcha";s:50:"/var/www/scm/vendor/himiklab/yii2-recaptcha-widget";}}s:18:"yiisoft/yii2-debug";a:3:{s:4:"name";s:18:"yiisoft/yii2-debug";s:7:"version";s:7:"2.0.9.0";s:5:"alias";a:1:{s:10:"@yii/debug";s:38:"/var/www/scm/vendor/yiisoft/yii2-debug";}}s:35:"kartik-v/yii2-widget-datetimepicker";a:3:{s:4:"name";s:35:"kartik-v/yii2-widget-datetimepicker";s:7:"version";s:7:"1.4.3.0";s:5:"alias";a:1:{s:16:"@kartik/datetime";s:55:"/var/www/scm/vendor/kartik-v/yii2-widget-datetimepicker";}}s:31:"kartik-v/yii2-widget-timepicker";a:3:{s:4:"name";s:31:"kartik-v/yii2-widget-timepicker";s:7:"version";s:7:"1.0.3.0";s:5:"alias";a:1:{s:12:"@kartik/time";s:51:"/var/www/scm/vendor/kartik-v/yii2-widget-timepicker";}}s:24:"rmrevin/yii2-fontawesome";a:3:{s:4:"name";s:24:"rmrevin/yii2-fontawesome";s:7:"version";s:8:"2.17.1.0";s:5:"alias";a:1:{s:24:"@rmrevin/yii/fontawesome";s:44:"/var/www/scm/vendor/rmrevin/yii2-fontawesome";}}s:25:"dmstr/yii2-adminlte-asset";a:3:{s:4:"name";s:25:"dmstr/yii2-adminlte-asset";s:7:"version";s:7:"2.4.2.0";s:5:"alias";a:1:{s:6:"@dmstr";s:45:"/var/www/scm/vendor/dmstr/yii2-adminlte-asset";}}s:31:"2amigos/yii2-date-picker-widget";a:3:{s:4:"name";s:31:"2amigos/yii2-date-picker-widget";s:7:"version";s:7:"1.0.6.0";s:5:"alias";a:1:{s:21:"@dosamigos/datepicker";s:55:"/var/www/scm/vendor/2amigos/yii2-date-picker-widget/src";}}s:30:"cyneek/yii2-widget-upload-crop";a:3:{s:4:"name";s:30:"cyneek/yii2-widget-upload-crop";s:7:"version";s:11:"9999999-dev";s:5:"alias";a:1:{s:31:"@cyneek/yii2/widget/upload/crop";s:50:"/var/www/scm/vendor/cyneek/yii2-widget-upload-crop";}}s:36:"mg-code/yii2-session-timeout-warning";a:3:{s:4:"name";s:36:"mg-code/yii2-session-timeout-warning";s:7:"version";s:11:"9999999-dev";s:5:"alias";a:1:{s:22:"@mgcode/sessionWarning";s:56:"/var/www/scm/vendor/mg-code/yii2-session-timeout-warning";}}s:18:"kartik-v/yii2-mpdf";a:3:{s:4:"name";s:18:"kartik-v/yii2-mpdf";s:7:"version";s:11:"9999999-dev";s:5:"alias";a:1:{s:12:"@kartik/mpdf";s:38:"/var/www/scm/vendor/kartik-v/yii2-mpdf";}}s:31:"kartik-v/yii2-widget-datepicker";a:3:{s:4:"name";s:31:"kartik-v/yii2-widget-datepicker";s:7:"version";s:11:"9999999-dev";s:5:"alias";a:1:{s:12:"@kartik/date";s:51:"/var/www/scm/vendor/kartik-v/yii2-widget-datepicker";}}s:30:"kartik-v/yii2-widget-fileinput";a:3:{s:4:"name";s:30:"kartik-v/yii2-widget-fileinput";s:7:"version";s:11:"9999999-dev";s:5:"alias";a:1:{s:12:"@kartik/file";s:50:"/var/www/scm/vendor/kartik-v/yii2-widget-fileinput";}}}}s:7:"request";a:14:{s:7:"flashes";a:0:{}s:10:"statusCode";i:500;s:14:"requestHeaders";a:10:{s:4:"host";s:9:"localhost";s:10:"connection";s:10:"keep-alive";s:13:"cache-control";s:9:"max-age=0";s:10:"user-agent";s:104:"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.91 Safari/537.36";s:25:"upgrade-insecure-requests";s:1:"1";s:6:"accept";s:85:"text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8";s:7:"referer";s:53:"http://localhost/scm/web/comercial/cliente/admin?id=3";s:15:"accept-encoding";s:17:"gzip, deflate, br";s:15:"accept-language";s:35:"pt-BR,pt;q=0.8,en-US;q=0.6,en;q=0.4";s:6:"cookie";s:245:"_csrf=713c1579e5ed6fd1d5117cfc1f721454077883d64c92f6ed729ec5c5e27ab598a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22oJ0fIOz7annAbA5kgKxRs3_0frr4QuI5%22%3B%7D; projeto_dev=25cml2a2te37kgeguujk5m3202; __swuid=3777; __swto=1508964088";}s:15:"responseHeaders";a:4:{s:7:"Expires";s:29:"Thu, 19 Nov 1981 08:52:00 GMT";s:13:"Cache-Control";s:62:"no-store, no-cache, must-revalidate, post-check=0, pre-check=0";s:6:"Pragma";s:8:"no-cache";s:12:"Content-Type";s:24:"text/html; charset=UTF-8";}s:5:"route";s:22:"comercial/inicio/index";s:6:"action";s:65:"app\modules\comercial\controllers\InicioController::actionIndex()";s:12:"actionParams";a:0:{}s:11:"requestBody";a:0:{}s:6:"SERVER";a:35:{s:15:"REDIRECT_STATUS";s:3:"200";s:9:"HTTP_HOST";s:9:"localhost";s:15:"HTTP_CONNECTION";s:10:"keep-alive";s:18:"HTTP_CACHE_CONTROL";s:9:"max-age=0";s:15:"HTTP_USER_AGENT";s:104:"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.91 Safari/537.36";s:30:"HTTP_UPGRADE_INSECURE_REQUESTS";s:1:"1";s:11:"HTTP_ACCEPT";s:85:"text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8";s:12:"HTTP_REFERER";s:53:"http://localhost/scm/web/comercial/cliente/admin?id=3";s:20:"HTTP_ACCEPT_ENCODING";s:17:"gzip, deflate, br";s:20:"HTTP_ACCEPT_LANGUAGE";s:35:"pt-BR,pt;q=0.8,en-US;q=0.6,en;q=0.4";s:11:"HTTP_COOKIE";s:245:"_csrf=713c1579e5ed6fd1d5117cfc1f721454077883d64c92f6ed729ec5c5e27ab598a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22oJ0fIOz7annAbA5kgKxRs3_0frr4QuI5%22%3B%7D; projeto_dev=25cml2a2te37kgeguujk5m3202; __swuid=3777; __swto=1508964088";s:4:"PATH";s:60:"/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin";s:16:"SERVER_SIGNATURE";s:70:"<address>Apache/2.4.18 (Ubuntu) Server at localhost Port 80</address>
+";s:15:"SERVER_SOFTWARE";s:22:"Apache/2.4.18 (Ubuntu)";s:11:"SERVER_NAME";s:9:"localhost";s:11:"SERVER_ADDR";s:3:"::1";s:11:"SERVER_PORT";s:2:"80";s:11:"REMOTE_ADDR";s:3:"::1";s:13:"DOCUMENT_ROOT";s:8:"/var/www";s:14:"REQUEST_SCHEME";s:4:"http";s:14:"CONTEXT_PREFIX";s:0:"";s:21:"CONTEXT_DOCUMENT_ROOT";s:8:"/var/www";s:12:"SERVER_ADMIN";s:19:"webmaster@localhost";s:15:"SCRIPT_FILENAME";s:26:"/var/www/scm/web/index.php";s:11:"REMOTE_PORT";s:5:"36986";s:12:"REDIRECT_URL";s:18:"/scm/web/comercial";s:17:"GATEWAY_INTERFACE";s:7:"CGI/1.1";s:15:"SERVER_PROTOCOL";s:8:"HTTP/1.1";s:14:"REQUEST_METHOD";s:3:"GET";s:12:"QUERY_STRING";s:0:"";s:11:"REQUEST_URI";s:18:"/scm/web/comercial";s:11:"SCRIPT_NAME";s:18:"/scm/web/index.php";s:8:"PHP_SELF";s:18:"/scm/web/index.php";s:18:"REQUEST_TIME_FLOAT";d:1508957018.454;s:12:"REQUEST_TIME";i:1508957018;}s:3:"GET";a:0:{}s:4:"POST";a:0:{}s:6:"COOKIE";a:4:{s:5:"_csrf";s:130:"713c1579e5ed6fd1d5117cfc1f721454077883d64c92f6ed729ec5c5e27ab598a:2:{i:0;s:5:"_csrf";i:1;s:32:"oJ0fIOz7annAbA5kgKxRs3_0frr4QuI5";}";s:11:"projeto_dev";s:26:"25cml2a2te37kgeguujk5m3202";s:7:"__swuid";s:4:"3777";s:6:"__swto";s:10:"1508964088";}s:5:"FILES";a:0:{}s:7:"SESSION";a:7:{s:7:"__flash";a:0:{}s:15:"sessao-expirada";s:9:"/scm/web/";s:11:"__returnUrl";s:9:"/scm/web/";s:4:"__id";i:3777;s:8:"endereco";a:2:{i:4012;a:13:{s:12:"cod_endereco";i:4012;s:10:"logradouro";s:15:"Q 01 CONJ 01 LT";s:6:"numero";s:2:"12";s:11:"complemento";s:19:"LOJA 01 SETOR NORTE";s:3:"cep";s:10:"71.258-015";s:15:"correspondencia";N;s:16:"cod_municipio_fk";s:6:"530010";s:8:"chave_fk";i:3;s:12:"tipo_usuario";N;s:11:"dt_inclusao";s:10:"2017-05-31";s:5:"ativo";b:1;s:6:"bairro";s:17:"CIDADE ESTRUTURAL";s:14:"tipo_tabela_fk";s:11:"tab_cliente";}i:6397;a:13:{s:12:"cod_endereco";i:6397;s:10:"logradouro";s:5:"u88uu";s:6:"numero";s:4:"yyyy";s:11:"complemento";s:3:"yyy";s:3:"cep";s:10:"71.100-111";s:15:"correspondencia";b:0;s:16:"cod_municipio_fk";s:6:"270040";s:8:"chave_fk";i:3;s:12:"tipo_usuario";N;s:11:"dt_inclusao";N;s:5:"ativo";b:1;s:6:"bairro";N;s:14:"tipo_tabela_fk";s:11:"tab_cliente";}}s:7:"contato";a:1:{i:30240;a:8:{s:11:"cod_contato";i:30240;s:7:"contato";s:15:"(97) 89273-9842";s:5:"ramal";s:0:"";s:5:"ativo";b:1;s:11:"dt_inclusao";s:10:"2017-09-22";s:4:"tipo";i:464;s:8:"chave_fk";i:3;s:14:"tipo_tabela_fk";s:11:"tab_cliente";}}s:9:"contratos";a:5:{i:0;a:4:{s:10:"attributes";a:27:{s:12:"cod_contrato";i:14275;s:16:"tipo_contrato_fk";i:498;s:14:"valor_contrato";s:8:"10000.00";s:14:"dia_vencimento";N;s:12:"qnt_parcelas";i:4;s:8:"dt_prazo";s:10:"04/10/2017";s:11:"dt_inclusao";s:10:"25/10/2017";s:13:"dt_vencimento";s:10:"11/10/2017";s:8:"contador";N;s:14:"responsavel_fk";N;s:8:"operando";N;s:12:"qnt_clientes";N;s:4:"link";N;s:7:"zero800";N;s:9:"parceiria";N;s:15:"consultoria_scm";N;s:18:"engenheiro_tecnico";N;s:14:"cod_cliente_fk";i:3;s:5:"ativo";b:1;s:18:"txt_login_inclusao";s:1:"1";s:19:"txt_login_alteracao";s:1:"1";s:12:"dt_alteracao";s:10:"25/10/2017";s:6:"status";i:537;s:16:"nome_responsavel";N;s:8:"contrato";N;s:13:"dt_fechamento";N;s:21:"status_do_contrato_fk";N;}s:14:"tipo_contratos";a:1:{i:0;a:5:{s:17:"cod_tipo_contrato";i:12723;s:14:"cod_usuario_fk";i:1;s:15:"cod_contrato_fk";i:14275;s:15:"tipo_produto_fk";i:523;s:5:"ativo";b:1;}}s:8:"parcelas";a:4:{i:0;a:9:{s:21:"cod_contrato_parcelas";i:872;s:15:"cod_contrato_fk";i:14275;s:6:"numero";i:1;s:5:"valor";s:7:"2500.00";s:11:"dt_inclusao";s:10:"2017-10-25";s:13:"dt_vencimento";s:10:"2017-10-11";s:18:"txt_login_inclusao";s:1:"1";s:19:"txt_login_alteracao";s:1:"1";s:12:"dt_alteracao";s:10:"2017-10-25";}i:1;a:9:{s:21:"cod_contrato_parcelas";i:873;s:15:"cod_contrato_fk";i:14275;s:6:"numero";i:2;s:5:"valor";s:7:"2500.00";s:11:"dt_inclusao";s:10:"2017-10-25";s:13:"dt_vencimento";s:10:"2017-11-11";s:18:"txt_login_inclusao";s:1:"1";s:19:"txt_login_alteracao";s:1:"1";s:12:"dt_alteracao";s:10:"2017-10-25";}i:2;a:9:{s:21:"cod_contrato_parcelas";i:874;s:15:"cod_contrato_fk";i:14275;s:6:"numero";i:3;s:5:"valor";s:7:"2500.00";s:11:"dt_inclusao";s:10:"2017-10-25";s:13:"dt_vencimento";s:10:"2017-12-11";s:18:"txt_login_inclusao";s:1:"1";s:19:"txt_login_alteracao";s:1:"1";s:12:"dt_alteracao";s:10:"2017-10-25";}i:3;a:9:{s:21:"cod_contrato_parcelas";i:875;s:15:"cod_contrato_fk";i:14275;s:6:"numero";i:4;s:5:"valor";s:7:"2500.00";s:11:"dt_inclusao";s:10:"2017-10-25";s:13:"dt_vencimento";s:10:"2018-04-11";s:18:"txt_login_inclusao";s:1:"1";s:19:"txt_login_alteracao";s:1:"1";s:12:"dt_alteracao";s:10:"2017-10-25";}}s:10:"andamentos";N;}i:1;a:4:{s:10:"attributes";a:27:{s:12:"cod_contrato";i:14274;s:16:"tipo_contrato_fk";i:510;s:14:"valor_contrato";s:6:"100.00";s:14:"dia_vencimento";N;s:12:"qnt_parcelas";i:4;s:8:"dt_prazo";s:10:"25/10/2017";s:11:"dt_inclusao";s:10:"24/10/2017";s:13:"dt_vencimento";s:10:"16/10/2017";s:8:"contador";N;s:14:"responsavel_fk";N;s:8:"operando";N;s:12:"qnt_clientes";N;s:4:"link";N;s:7:"zero800";N;s:9:"parceiria";N;s:15:"consultoria_scm";N;s:18:"engenheiro_tecnico";N;s:14:"cod_cliente_fk";i:3;s:5:"ativo";b:1;s:18:"txt_login_inclusao";s:1:"1";s:19:"txt_login_alteracao";s:1:"1";s:12:"dt_alteracao";s:10:"24/10/2017";s:6:"status";i:543;s:16:"nome_responsavel";N;s:8:"contrato";N;s:13:"dt_fechamento";N;s:21:"status_do_contrato_fk";N;}s:14:"tipo_contratos";a:1:{i:0;a:5:{s:17:"cod_tipo_contrato";i:12722;s:14:"cod_usuario_fk";i:1;s:15:"cod_contrato_fk";i:14274;s:15:"tipo_produto_fk";i:523;s:5:"ativo";b:1;}}s:8:"parcelas";a:4:{i:0;a:9:{s:21:"cod_contrato_parcelas";i:868;s:15:"cod_contrato_fk";i:14274;s:6:"numero";i:1;s:5:"valor";s:5:"25.00";s:11:"dt_inclusao";s:10:"2017-10-24";s:13:"dt_vencimento";s:10:"2017-10-16";s:18:"txt_login_inclusao";s:1:"1";s:19:"txt_login_alteracao";s:1:"1";s:12:"dt_alteracao";s:10:"2017-10-24";}i:1;a:9:{s:21:"cod_contrato_parcelas";i:869;s:15:"cod_contrato_fk";i:14274;s:6:"numero";i:2;s:5:"valor";s:5:"25.00";s:11:"dt_inclusao";s:10:"2017-10-24";s:13:"dt_vencimento";s:10:"2017-11-16";s:18:"txt_login_inclusao";s:1:"1";s:19:"txt_login_alteracao";s:1:"1";s:12:"dt_alteracao";s:10:"2017-10-24";}i:2;a:9:{s:21:"cod_contrato_parcelas";i:870;s:15:"cod_contrato_fk";i:14274;s:6:"numero";i:3;s:5:"valor";s:5:"25.00";s:11:"dt_inclusao";s:10:"2017-10-24";s:13:"dt_vencimento";s:10:"2017-12-16";s:18:"txt_login_inclusao";s:1:"1";s:19:"txt_login_alteracao";s:1:"1";s:12:"dt_alteracao";s:10:"2017-10-24";}i:3;a:9:{s:21:"cod_contrato_parcelas";i:871;s:15:"cod_contrato_fk";i:14274;s:6:"numero";i:4;s:5:"valor";s:5:"25.00";s:11:"dt_inclusao";s:10:"2017-10-24";s:13:"dt_vencimento";s:10:"2018-04-16";s:18:"txt_login_inclusao";s:1:"1";s:19:"txt_login_alteracao";s:1:"1";s:12:"dt_alteracao";s:10:"2017-10-24";}}s:10:"andamentos";N;}i:2;a:4:{s:10:"attributes";a:27:{s:12:"cod_contrato";i:14139;s:16:"tipo_contrato_fk";i:498;s:14:"valor_contrato";s:6:"100.00";s:14:"dia_vencimento";N;s:12:"qnt_parcelas";i:1;s:8:"dt_prazo";s:10:"19/09/2017";s:11:"dt_inclusao";N;s:13:"dt_vencimento";s:10:"19/09/2017";s:8:"contador";N;s:14:"responsavel_fk";N;s:8:"operando";N;s:12:"qnt_clientes";N;s:4:"link";N;s:7:"zero800";N;s:9:"parceiria";N;s:15:"consultoria_scm";N;s:18:"engenheiro_tecnico";N;s:14:"cod_cliente_fk";i:3;s:5:"ativo";b:1;s:18:"txt_login_inclusao";s:1:"1";s:19:"txt_login_alteracao";s:1:"1";s:12:"dt_alteracao";s:10:"29/09/2017";s:6:"status";N;s:16:"nome_responsavel";N;s:8:"contrato";N;s:13:"dt_fechamento";N;s:21:"status_do_contrato_fk";N;}s:14:"tipo_contratos";a:1:{i:0;a:5:{s:17:"cod_tipo_contrato";i:12611;s:14:"cod_usuario_fk";i:5;s:15:"cod_contrato_fk";i:14139;s:15:"tipo_produto_fk";i:523;s:5:"ativo";b:1;}}s:8:"parcelas";a:1:{i:0;a:9:{s:21:"cod_contrato_parcelas";i:151;s:15:"cod_contrato_fk";i:14139;s:6:"numero";i:1;s:5:"valor";s:6:"100.00";s:11:"dt_inclusao";N;s:13:"dt_vencimento";s:10:"2017-09-29";s:18:"txt_login_inclusao";s:1:"1";s:19:"txt_login_alteracao";s:1:"1";s:12:"dt_alteracao";N;}}s:10:"andamentos";N;}i:3;a:4:{s:10:"attributes";a:27:{s:12:"cod_contrato";i:14095;s:16:"tipo_contrato_fk";i:512;s:14:"valor_contrato";s:7:"1000.00";s:14:"dia_vencimento";N;s:12:"qnt_parcelas";i:2;s:8:"dt_prazo";s:10:"06/09/2017";s:11:"dt_inclusao";N;s:13:"dt_vencimento";s:10:"12/09/2017";s:8:"contador";N;s:14:"responsavel_fk";N;s:8:"operando";N;s:12:"qnt_clientes";N;s:4:"link";N;s:7:"zero800";N;s:9:"parceiria";N;s:15:"consultoria_scm";N;s:18:"engenheiro_tecnico";N;s:14:"cod_cliente_fk";i:3;s:5:"ativo";b:1;s:18:"txt_login_inclusao";s:1:"1";s:19:"txt_login_alteracao";s:1:"1";s:12:"dt_alteracao";s:10:"26/09/2017";s:6:"status";i:536;s:16:"nome_responsavel";N;s:8:"contrato";N;s:13:"dt_fechamento";N;s:21:"status_do_contrato_fk";N;}s:14:"tipo_contratos";a:1:{i:0;a:5:{s:17:"cod_tipo_contrato";i:12567;s:14:"cod_usuario_fk";i:1;s:15:"cod_contrato_fk";i:14095;s:15:"tipo_produto_fk";i:523;s:5:"ativo";b:1;}}s:8:"parcelas";a:2:{i:0;a:9:{s:21:"cod_contrato_parcelas";i:102;s:15:"cod_contrato_fk";i:14095;s:6:"numero";i:1;s:5:"valor";s:6:"500.00";s:11:"dt_inclusao";N;s:13:"dt_vencimento";s:10:"2017-09-26";s:18:"txt_login_inclusao";s:1:"1";s:19:"txt_login_alteracao";s:1:"1";s:12:"dt_alteracao";N;}i:1;a:9:{s:21:"cod_contrato_parcelas";i:103;s:15:"cod_contrato_fk";i:14095;s:6:"numero";i:2;s:5:"valor";s:6:"500.00";s:11:"dt_inclusao";N;s:13:"dt_vencimento";s:10:"2017-09-26";s:18:"txt_login_inclusao";s:1:"1";s:19:"txt_login_alteracao";s:1:"1";s:12:"dt_alteracao";N;}}s:10:"andamentos";N;}i:4;a:4:{s:10:"attributes";a:27:{s:12:"cod_contrato";i:143;s:16:"tipo_contrato_fk";i:511;s:14:"valor_contrato";N;s:14:"dia_vencimento";N;s:12:"qnt_parcelas";N;s:8:"dt_prazo";N;s:11:"dt_inclusao";s:10:"01/06/2017";s:13:"dt_vencimento";N;s:8:"contador";N;s:14:"responsavel_fk";N;s:8:"operando";N;s:12:"qnt_clientes";N;s:4:"link";N;s:7:"zero800";N;s:9:"parceiria";N;s:15:"consultoria_scm";N;s:18:"engenheiro_tecnico";N;s:14:"cod_cliente_fk";i:3;s:5:"ativo";b:1;s:18:"txt_login_inclusao";N;s:19:"txt_login_alteracao";N;s:12:"dt_alteracao";N;s:6:"status";i:536;s:16:"nome_responsavel";N;s:8:"contrato";N;s:13:"dt_fechamento";N;s:21:"status_do_contrato_fk";N;}s:14:"tipo_contratos";a:8:{i:0;a:5:{s:17:"cod_tipo_contrato";i:12513;s:14:"cod_usuario_fk";i:1;s:15:"cod_contrato_fk";i:143;s:15:"tipo_produto_fk";i:521;s:5:"ativo";b:1;}i:1;a:5:{s:17:"cod_tipo_contrato";i:10406;s:14:"cod_usuario_fk";N;s:15:"cod_contrato_fk";i:143;s:15:"tipo_produto_fk";i:524;s:5:"ativo";b:1;}i:2;a:5:{s:17:"cod_tipo_contrato";i:10407;s:14:"cod_usuario_fk";N;s:15:"cod_contrato_fk";i:143;s:15:"tipo_produto_fk";i:528;s:5:"ativo";b:1;}i:3;a:5:{s:17:"cod_tipo_contrato";i:10408;s:14:"cod_usuario_fk";N;s:15:"cod_contrato_fk";i:143;s:15:"tipo_produto_fk";N;s:5:"ativo";b:1;}i:4;a:5:{s:17:"cod_tipo_contrato";i:10409;s:14:"cod_usuario_fk";N;s:15:"cod_contrato_fk";i:143;s:15:"tipo_produto_fk";i:526;s:5:"ativo";b:1;}i:5;a:5:{s:17:"cod_tipo_contrato";i:10410;s:14:"cod_usuario_fk";N;s:15:"cod_contrato_fk";i:143;s:15:"tipo_produto_fk";i:527;s:5:"ativo";b:1;}i:6;a:5:{s:17:"cod_tipo_contrato";i:12475;s:14:"cod_usuario_fk";i:5;s:15:"cod_contrato_fk";i:143;s:15:"tipo_produto_fk";i:522;s:5:"ativo";b:1;}i:7;a:5:{s:17:"cod_tipo_contrato";i:12476;s:14:"cod_usuario_fk";N;s:15:"cod_contrato_fk";i:143;s:15:"tipo_produto_fk";N;s:5:"ativo";b:1;}}s:8:"parcelas";a:3:{i:0;a:9:{s:21:"cod_contrato_parcelas";i:1;s:15:"cod_contrato_fk";i:143;s:6:"numero";i:1;s:5:"valor";s:6:"100.00";s:11:"dt_inclusao";s:10:"2017-07-02";s:13:"dt_vencimento";s:10:"2017-06-03";s:18:"txt_login_inclusao";N;s:19:"txt_login_alteracao";N;s:12:"dt_alteracao";N;}i:1;a:9:{s:21:"cod_contrato_parcelas";i:2;s:15:"cod_contrato_fk";i:143;s:6:"numero";i:2;s:5:"valor";s:6:"100.00";s:11:"dt_inclusao";s:10:"2017-07-02";s:13:"dt_vencimento";s:10:"2017-07-03";s:18:"txt_login_inclusao";N;s:19:"txt_login_alteracao";N;s:12:"dt_alteracao";N;}i:2;a:9:{s:21:"cod_contrato_parcelas";i:3;s:15:"cod_contrato_fk";i:143;s:6:"numero";i:3;s:5:"valor";s:6:"100.00";s:11:"dt_inclusao";s:10:"2017-07-02";s:13:"dt_vencimento";s:10:"2017-08-03";s:18:"txt_login_inclusao";N;s:19:"txt_login_alteracao";N;s:12:"dt_alteracao";N;}}s:10:"andamentos";N;}}}}s:3:"log";a:1:{s:8:"messages";a:47:{i:0;a:6:{i:0;s:84:"Bootstrap with mgcode\sessionWarning\components\SessionWarningBootstrap::bootstrap()";i:1;i:8;i:2;s:31:"yii\base\Application::bootstrap";i:3;d:1508957018.4758079;i:4;a:0:{}i:5;i:1315048;}i:1;a:6:{i:0;s:33:"Bootstrap with yii\log\Dispatcher";i:1;i:8;i:2;s:31:"yii\base\Application::bootstrap";i:3;d:1508957018.478267;i:4;a:0:{}i:5;i:1536392;}i:2;a:6:{i:0;s:21:"Loading module: debug";i:1;i:8;i:2;s:26:"yii\base\Module::getModule";i:3;d:1508957018.478405;i:4;a:0:{}i:5;i:1539224;}i:3;a:6:{i:0;s:44:"Bootstrap with yii\debug\Module::bootstrap()";i:1;i:8;i:2;s:31:"yii\base\Application::bootstrap";i:3;d:1508957018.482089;i:4;a:0:{}i:5;i:1794944;}i:4;a:6:{i:0;s:19:"Loading module: gii";i:1;i:8;i:2;s:26:"yii\base\Module::getModule";i:3;d:1508957018.4852009;i:4;a:0:{}i:5;i:1941264;}i:5;a:6:{i:0;s:42:"Bootstrap with yii\gii\Module::bootstrap()";i:1;i:8;i:2;s:31:"yii\base\Application::bootstrap";i:3;d:1508957018.4857399;i:4;a:0:{}i:5;i:1976120;}i:6;a:6:{i:0;s:61:"Opening DB connection: pgsql:host=localhost;dbname=sisscm_dev";i:1;i:4;i:2;s:23:"yii\db\Connection::open";i:3;d:1508957018.492789;i:4;a:1:{i:0;a:5:{s:4:"file";s:27:"/var/www/scm/config/web.php";s:4:"line";i:161;s:8:"function";s:5:"__get";s:5:"class";s:18:"yii\base\Component";s:4:"type";s:2:"->";}}i:5;i:2452544;}i:9;a:6:{i:0;s:108:"SELECT "data" FROM "acesso"."tab_sessao_php" WHERE "expire">1508957018 AND "id"='25cml2a2te37kgeguujk5m3202'";i:1;i:4;i:2;s:21:"yii\db\Command::query";i:3;d:1508957018.5389571;i:4;a:1:{i:0;a:5:{s:4:"file";s:27:"/var/www/scm/config/web.php";s:4:"line";i:161;s:8:"function";s:5:"__get";s:5:"class";s:18:"yii\base\Component";s:4:"type";s:2:"->";}}i:5;i:2454104;}i:12;a:6:{i:0;s:15:"Session started";i:1;i:4;i:2;s:21:"yii\web\Session::open";i:3;d:1508957018.554287;i:4;a:1:{i:0;a:5:{s:4:"file";s:27:"/var/www/scm/config/web.php";s:4:"line";i:161;s:8:"function";s:5:"__get";s:5:"class";s:18:"yii\base\Component";s:4:"type";s:2:"->";}}i:5;i:2530456;}i:13;a:6:{i:0;s:1958:"SELECT
+    d.nspname AS table_schema,
+    c.relname AS table_name,
+    a.attname AS column_name,
+    t.typname AS data_type,
+    a.attlen AS character_maximum_length,
+    pg_catalog.col_description(c.oid, a.attnum) AS column_comment,
+    a.atttypmod AS modifier,
+    a.attnotnull = false AS is_nullable,
+    CAST(pg_get_expr(ad.adbin, ad.adrelid) AS varchar) AS column_default,
+    coalesce(pg_get_expr(ad.adbin, ad.adrelid) ~ 'nextval',false) AS is_autoinc,
+    array_to_string((select array_agg(enumlabel) from pg_enum where enumtypid=a.atttypid)::varchar[],',') as enum_values,
+    CASE atttypid
+         WHEN 21 /*int2*/ THEN 16
+         WHEN 23 /*int4*/ THEN 32
+         WHEN 20 /*int8*/ THEN 64
+         WHEN 1700 /*numeric*/ THEN
+              CASE WHEN atttypmod = -1
+               THEN null
+               ELSE ((atttypmod - 4) >> 16) & 65535
+               END
+         WHEN 700 /*float4*/ THEN 24 /*FLT_MANT_DIG*/
+         WHEN 701 /*float8*/ THEN 53 /*DBL_MANT_DIG*/
+         ELSE null
+      END   AS numeric_precision,
+      CASE
+        WHEN atttypid IN (21, 23, 20) THEN 0
+        WHEN atttypid IN (1700) THEN
+        CASE
+            WHEN atttypmod = -1 THEN null
+            ELSE (atttypmod - 4) & 65535
+        END
+           ELSE null
+      END AS numeric_scale,
+    CAST(
+             information_schema._pg_char_max_length(information_schema._pg_truetypid(a, t), information_schema._pg_truetypmod(a, t))
+             AS numeric
+    ) AS size,
+    a.attnum = any (ct.conkey) as is_pkey
+FROM
+    pg_class c
+    LEFT JOIN pg_attribute a ON a.attrelid = c.oid
+    LEFT JOIN pg_attrdef ad ON a.attrelid = ad.adrelid AND a.attnum = ad.adnum
+    LEFT JOIN pg_type t ON a.atttypid = t.oid
+    LEFT JOIN pg_namespace d ON d.oid = c.relnamespace
+    LEFT join pg_constraint ct on ct.conrelid=c.oid and ct.contype='p'
+WHERE
+    a.attnum > 0 and t.typname != ''
+    and c.relname = 'tab_usuarios'
+    and d.nspname = 'acesso'
+ORDER BY
+    a.attnum;";i:1;i:4;i:2;s:21:"yii\db\Command::query";i:3;d:1508957018.5612581;i:4;a:2:{i:0;a:5:{s:4:"file";s:49:"/var/www/scm/modules/admin/models/MdlUsuarios.php";s:4:"line";i:73;s:8:"function";s:7:"findOne";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"::";}i:1;a:5:{s:4:"file";s:27:"/var/www/scm/config/web.php";s:4:"line";i:161;s:8:"function";s:5:"__get";s:5:"class";s:18:"yii\base\Component";s:4:"type";s:2:"->";}}i:5;i:3181992;}i:16;a:6:{i:0;s:880:"select
+    ct.conname as constraint_name,
+    a.attname as column_name,
+    fc.relname as foreign_table_name,
+    fns.nspname as foreign_table_schema,
+    fa.attname as foreign_column_name
+from
+    (SELECT ct.conname, ct.conrelid, ct.confrelid, ct.conkey, ct.contype, ct.confkey, generate_subscripts(ct.conkey, 1) AS s
+       FROM pg_constraint ct
+    ) AS ct
+    inner join pg_class c on c.oid=ct.conrelid
+    inner join pg_namespace ns on c.relnamespace=ns.oid
+    inner join pg_attribute a on a.attrelid=ct.conrelid and a.attnum = ct.conkey[ct.s]
+    left join pg_class fc on fc.oid=ct.confrelid
+    left join pg_namespace fns on fc.relnamespace=fns.oid
+    left join pg_attribute fa on fa.attrelid=ct.confrelid and fa.attnum = ct.confkey[ct.s]
+where
+    ct.contype='f'
+    and c.relname='tab_usuarios'
+    and ns.nspname='acesso'
+order by
+    fns.nspname, fc.relname, a.attnum";i:1;i:4;i:2;s:21:"yii\db\Command::query";i:3;d:1508957018.6144309;i:4;a:2:{i:0;a:5:{s:4:"file";s:49:"/var/www/scm/modules/admin/models/MdlUsuarios.php";s:4:"line";i:73;s:8:"function";s:7:"findOne";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"::";}i:1;a:5:{s:4:"file";s:27:"/var/www/scm/config/web.php";s:4:"line";i:161;s:8:"function";s:5:"__get";s:5:"class";s:18:"yii\base\Component";s:4:"type";s:2:"->";}}i:5;i:3237200;}i:19;a:6:{i:0;s:62:"SELECT * FROM "acesso"."tab_usuarios" WHERE "cod_usuario"=3777";i:1;i:4;i:2;s:21:"yii\db\Command::query";i:3;d:1508957018.6414261;i:4;a:3:{i:0;a:5:{s:4:"file";s:54:"/var/www/scm/modules/admin/models/TabUsuariosQuery.php";s:4:"line";i:33;s:8:"function";s:3:"one";s:5:"class";s:18:"yii\db\ActiveQuery";s:4:"type";s:2:"->";}i:1;a:5:{s:4:"file";s:49:"/var/www/scm/modules/admin/models/MdlUsuarios.php";s:4:"line";i:73;s:8:"function";s:7:"findOne";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"::";}i:2;a:5:{s:4:"file";s:27:"/var/www/scm/config/web.php";s:4:"line";i:161;s:8:"function";s:5:"__get";s:5:"class";s:18:"yii\base\Component";s:4:"type";s:2:"->";}}i:5;i:3247296;}i:22;a:6:{i:0;s:28:"SET application_name = '::1'";i:1;i:4;i:2;s:23:"yii\db\Command::execute";i:3;d:1508957018.649828;i:4;a:1:{i:0;a:5:{s:4:"file";s:27:"/var/www/scm/config/web.php";s:4:"line";i:167;s:8:"function";s:7:"execute";s:5:"class";s:14:"yii\db\Command";s:4:"type";s:2:"->";}}i:5;i:3414568;}i:25;a:6:{i:0;s:30:"SELECT * FROM "tab_parametros"";i:1;i:4;i:2;s:21:"yii\db\Command::query";i:3;d:1508957018.6536009;i:4;a:3:{i:0;a:5:{s:4:"file";s:42:"/var/www/scm/models/TabParametrosQuery.php";s:4:"line";i:24;s:8:"function";s:3:"all";s:5:"class";s:18:"yii\db\ActiveQuery";s:4:"type";s:2:"->";}i:1;a:5:{s:4:"file";s:27:"/var/www/scm/config/web.php";s:4:"line";i:174;s:8:"function";s:3:"all";s:5:"class";s:29:"app\models\TabParametrosQuery";s:4:"type";s:2:"->";}i:2;a:3:{s:4:"file";s:27:"/var/www/scm/config/web.php";s:4:"line";i:184;s:8:"function";s:9:"{closure}";}}i:5;i:3606920;}i:40;a:6:{i:0;s:28:"Route requested: 'comercial'";i:1;i:8;i:2;s:34:"yii\web\Application::handleRequest";i:3;d:1508957018.661114;i:4;a:0:{}i:5;i:3733248;}i:41;a:6:{i:0;s:25:"Loading module: comercial";i:1;i:8;i:2;s:26:"yii\base\Module::getModule";i:3;d:1508957018.6611991;i:4;a:0:{}i:5;i:3738664;}i:42;a:6:{i:0;s:62:"SELECT * FROM "acesso"."tab_usuarios" WHERE "cod_usuario"=3777";i:1;i:4;i:2;s:21:"yii\db\Command::query";i:3;d:1508957018.662992;i:4;a:3:{i:0;a:5:{s:4:"file";s:54:"/var/www/scm/modules/admin/models/TabUsuariosQuery.php";s:4:"line";i:33;s:8:"function";s:3:"one";s:5:"class";s:18:"yii\db\ActiveQuery";s:4:"type";s:2:"->";}i:1;a:5:{s:4:"file";s:36:"/var/www/scm/projeto/base/Module.php";s:4:"line";i:45;s:8:"function";s:7:"findOne";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"::";}i:2;a:5:{s:4:"file";s:36:"/var/www/scm/projeto/base/Module.php";s:4:"line";i:29;s:8:"function";s:30:"isModuloBloqueadoAcessoInterno";s:5:"class";s:19:"projeto\base\Module";s:4:"type";s:2:"::";}}i:5;i:3834224;}i:45;a:6:{i:0;s:59:"SELECT * FROM "acesso"."tab_modulos" WHERE "id"='comercial'";i:1;i:4;i:2;s:21:"yii\db\Command::query";i:3;d:1508957018.6692569;i:4;a:3:{i:0;a:5:{s:4:"file";s:53:"/var/www/scm/modules/admin/models/TabModulosQuery.php";s:4:"line";i:33;s:8:"function";s:3:"one";s:5:"class";s:18:"yii\db\ActiveQuery";s:4:"type";s:2:"->";}i:1;a:5:{s:4:"file";s:36:"/var/www/scm/projeto/base/Module.php";s:4:"line";i:48;s:8:"function";s:7:"findOne";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"::";}i:2;a:5:{s:4:"file";s:36:"/var/www/scm/projeto/base/Module.php";s:4:"line";i:29;s:8:"function";s:30:"isModuloBloqueadoAcessoInterno";s:5:"class";s:19:"projeto\base\Module";s:4:"type";s:2:"::";}}i:5;i:3969704;}i:48;a:6:{i:0;s:1957:"SELECT
+    d.nspname AS table_schema,
+    c.relname AS table_name,
+    a.attname AS column_name,
+    t.typname AS data_type,
+    a.attlen AS character_maximum_length,
+    pg_catalog.col_description(c.oid, a.attnum) AS column_comment,
+    a.atttypmod AS modifier,
+    a.attnotnull = false AS is_nullable,
+    CAST(pg_get_expr(ad.adbin, ad.adrelid) AS varchar) AS column_default,
+    coalesce(pg_get_expr(ad.adbin, ad.adrelid) ~ 'nextval',false) AS is_autoinc,
+    array_to_string((select array_agg(enumlabel) from pg_enum where enumtypid=a.atttypid)::varchar[],',') as enum_values,
+    CASE atttypid
+         WHEN 21 /*int2*/ THEN 16
+         WHEN 23 /*int4*/ THEN 32
+         WHEN 20 /*int8*/ THEN 64
+         WHEN 1700 /*numeric*/ THEN
+              CASE WHEN atttypmod = -1
+               THEN null
+               ELSE ((atttypmod - 4) >> 16) & 65535
+               END
+         WHEN 700 /*float4*/ THEN 24 /*FLT_MANT_DIG*/
+         WHEN 701 /*float8*/ THEN 53 /*DBL_MANT_DIG*/
+         ELSE null
+      END   AS numeric_precision,
+      CASE
+        WHEN atttypid IN (21, 23, 20) THEN 0
+        WHEN atttypid IN (1700) THEN
+        CASE
+            WHEN atttypmod = -1 THEN null
+            ELSE (atttypmod - 4) & 65535
+        END
+           ELSE null
+      END AS numeric_scale,
+    CAST(
+             information_schema._pg_char_max_length(information_schema._pg_truetypid(a, t), information_schema._pg_truetypmod(a, t))
+             AS numeric
+    ) AS size,
+    a.attnum = any (ct.conkey) as is_pkey
+FROM
+    pg_class c
+    LEFT JOIN pg_attribute a ON a.attrelid = c.oid
+    LEFT JOIN pg_attrdef ad ON a.attrelid = ad.adrelid AND a.attnum = ad.adnum
+    LEFT JOIN pg_type t ON a.atttypid = t.oid
+    LEFT JOIN pg_namespace d ON d.oid = c.relnamespace
+    LEFT join pg_constraint ct on ct.conrelid=c.oid and ct.contype='p'
+WHERE
+    a.attnum > 0 and t.typname != ''
+    and c.relname = 'tab_modulos'
+    and d.nspname = 'acesso'
+ORDER BY
+    a.attnum;";i:1;i:4;i:2;s:21:"yii\db\Command::query";i:3;d:1508957018.677156;i:4;a:3:{i:0;a:5:{s:4:"file";s:53:"/var/www/scm/modules/admin/models/TabModulosQuery.php";s:4:"line";i:33;s:8:"function";s:3:"one";s:5:"class";s:18:"yii\db\ActiveQuery";s:4:"type";s:2:"->";}i:1;a:5:{s:4:"file";s:36:"/var/www/scm/projeto/base/Module.php";s:4:"line";i:48;s:8:"function";s:7:"findOne";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"::";}i:2;a:5:{s:4:"file";s:36:"/var/www/scm/projeto/base/Module.php";s:4:"line";i:29;s:8:"function";s:30:"isModuloBloqueadoAcessoInterno";s:5:"class";s:19:"projeto\base\Module";s:4:"type";s:2:"::";}}i:5;i:4003304;}i:51;a:6:{i:0;s:879:"select
+    ct.conname as constraint_name,
+    a.attname as column_name,
+    fc.relname as foreign_table_name,
+    fns.nspname as foreign_table_schema,
+    fa.attname as foreign_column_name
+from
+    (SELECT ct.conname, ct.conrelid, ct.confrelid, ct.conkey, ct.contype, ct.confkey, generate_subscripts(ct.conkey, 1) AS s
+       FROM pg_constraint ct
+    ) AS ct
+    inner join pg_class c on c.oid=ct.conrelid
+    inner join pg_namespace ns on c.relnamespace=ns.oid
+    inner join pg_attribute a on a.attrelid=ct.conrelid and a.attnum = ct.conkey[ct.s]
+    left join pg_class fc on fc.oid=ct.confrelid
+    left join pg_namespace fns on fc.relnamespace=fns.oid
+    left join pg_attribute fa on fa.attrelid=ct.confrelid and fa.attnum = ct.confkey[ct.s]
+where
+    ct.contype='f'
+    and c.relname='tab_modulos'
+    and ns.nspname='acesso'
+order by
+    fns.nspname, fc.relname, a.attnum";i:1;i:4;i:2;s:21:"yii\db\Command::query";i:3;d:1508957018.7174981;i:4;a:3:{i:0;a:5:{s:4:"file";s:53:"/var/www/scm/modules/admin/models/TabModulosQuery.php";s:4:"line";i:33;s:8:"function";s:3:"one";s:5:"class";s:18:"yii\db\ActiveQuery";s:4:"type";s:2:"->";}i:1;a:5:{s:4:"file";s:36:"/var/www/scm/projeto/base/Module.php";s:4:"line";i:48;s:8:"function";s:7:"findOne";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"::";}i:2;a:5:{s:4:"file";s:36:"/var/www/scm/projeto/base/Module.php";s:4:"line";i:29;s:8:"function";s:30:"isModuloBloqueadoAcessoInterno";s:5:"class";s:19:"projeto\base\Module";s:4:"type";s:2:"::";}}i:5;i:4036344;}i:54;a:6:{i:0;s:72:"SELECT * FROM "acesso"."vis_usuarios_perfis" WHERE "cod_usuario_fk"=3777";i:1;i:4;i:2;s:21:"yii\db\Command::query";i:3;d:1508957018.7370751;i:4;a:3:{i:0;a:5:{s:4:"file";s:60:"/var/www/scm/modules/admin/models/VisUsuariosPerfisQuery.php";s:4:"line";i:24;s:8:"function";s:3:"all";s:5:"class";s:18:"yii\db\ActiveQuery";s:4:"type";s:2:"->";}i:1;a:5:{s:4:"file";s:40:"/var/www/scm/projeto/db/ActiveRecord.php";s:4:"line";i:33;s:8:"function";s:3:"all";s:5:"class";s:47:"app\modules\admin\models\VisUsuariosPerfisQuery";s:4:"type";s:2:"->";}i:2;a:5:{s:4:"file";s:61:"/var/www/scm/modules/admin/models/VisUsuariosPerfisSearch.php";s:4:"line";i:73;s:8:"function";s:14:"findAllAsArray";s:5:"class";s:23:"projeto\db\ActiveRecord";s:4:"type";s:2:"::";}}i:5;i:4222720;}i:57;a:6:{i:0;s:131:"SELECT * FROM "tab_parametros" WHERE ("num_ano_ref"=2015) AND ("sgl_parametro"='sistema-bloqueio-usr-interno') AND ("modulo_fk"=32)";i:1;i:4;i:2;s:21:"yii\db\Command::query";i:3;d:1508957018.7506881;i:4;a:3:{i:0;a:5:{s:4:"file";s:42:"/var/www/scm/models/TabParametrosQuery.php";s:4:"line";i:33;s:8:"function";s:3:"one";s:5:"class";s:18:"yii\db\ActiveQuery";s:4:"type";s:2:"->";}i:1;a:5:{s:4:"file";s:36:"/var/www/scm/projeto/base/Module.php";s:4:"line";i:62;s:8:"function";s:7:"findOne";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"::";}i:2;a:5:{s:4:"file";s:36:"/var/www/scm/projeto/base/Module.php";s:4:"line";i:29;s:8:"function";s:30:"isModuloBloqueadoAcessoInterno";s:5:"class";s:19:"projeto\base\Module";s:4:"type";s:2:"::";}}i:5;i:4241736;}i:60;a:6:{i:0;s:62:"SELECT * FROM "acesso"."tab_usuarios" WHERE "cod_usuario"=3777";i:1;i:4;i:2;s:21:"yii\db\Command::query";i:3;d:1508957018.7551489;i:4;a:3:{i:0;a:5:{s:4:"file";s:54:"/var/www/scm/modules/admin/models/TabUsuariosQuery.php";s:4:"line";i:33;s:8:"function";s:3:"one";s:5:"class";s:18:"yii\db\ActiveQuery";s:4:"type";s:2:"->";}i:1;a:5:{s:4:"file";s:36:"/var/www/scm/projeto/base/Module.php";s:4:"line";i:73;s:8:"function";s:7:"findOne";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"::";}i:2;a:5:{s:4:"file";s:36:"/var/www/scm/projeto/base/Module.php";s:4:"line";i:34;s:8:"function";s:30:"isModuloBloqueadoAcessoExterno";s:5:"class";s:19:"projeto\base\Module";s:4:"type";s:2:"::";}}i:5;i:4241136;}i:63;a:6:{i:0;s:36:"Route to run: comercial/inicio/index";i:1;i:8;i:2;s:30:"yii\base\Controller::runAction";i:3;d:1508957018.7632799;i:4;a:0:{}i:5;i:4378384;}i:64;a:6:{i:0;s:81:"Running action: app\modules\comercial\controllers\InicioController::actionIndex()";i:1;i:8;i:2;s:36:"yii\base\InlineAction::runWithParams";i:3;d:1508957018.7657421;i:4;a:0:{}i:5;i:4462384;}i:65;a:6:{i:0;s:96:"SELECT COUNT(*) FROM "comercial"."tab_contrato" WHERE to_char(dt_incllusao, 'MM/YYYY')='09/2017'";i:1;i:4;i:2;s:21:"yii\db\Command::query";i:3;d:1508957018.7683091;i:4;a:1:{i:0;a:5:{s:4:"file";s:63:"/var/www/scm/modules/comercial/controllers/InicioController.php";s:4:"line";i:23;s:8:"function";s:5:"count";s:5:"class";s:12:"yii\db\Query";s:4:"type";s:2:"->";}}i:5;i:4655400;}i:68;a:6:{i:0;s:4119:"exception 'PDOException' with message 'SQLSTATE[42703]: Undefined column: 7 ERROR:  column "dt_incllusao" does not exist
+LINE 1: ...(*) FROM "comercial"."tab_contrato" WHERE to_char(dt_incllus...
+                                                             ^
+HINT:  Perhaps you meant to reference the column "tab_contrato.dt_inclusao".' in /var/www/scm/vendor/yiisoft/yii2/db/Command.php:902
+Stack trace:
+#0 /var/www/scm/vendor/yiisoft/yii2/db/Command.php(902): PDOStatement->execute()
+#1 /var/www/scm/vendor/yiisoft/yii2/db/Command.php(388): yii\db\Command->queryInternal('<span class="st...', '<span class="nu...')
+#2 /var/www/scm/vendor/yiisoft/yii2/db/Query.php(431): yii\db\Command->queryScalar()
+#3 /var/www/scm/vendor/yiisoft/yii2/db/ActiveQuery.php(334): yii\db\Query->queryScalar('<span class="st...', '<span class="ke...')
+#4 /var/www/scm/vendor/yiisoft/yii2/db/Query.php(319): yii\db\ActiveQuery->queryScalar('<span class="st...', '<span class="ke...')
+#5 /var/www/scm/modules/comercial/controllers/InicioController.php(23): yii\db\Query->count()
+#6 [internal function]: app\modules\comercial\controllers\InicioController->actionIndex()
+#7 /var/www/scm/vendor/yiisoft/yii2/base/InlineAction.php(57): call_user_func_array('[<span class="t...', '[]')
+#8 /var/www/scm/vendor/yiisoft/yii2/base/Controller.php(156): yii\base\InlineAction->runWithParams('[]')
+#9 /var/www/scm/vendor/yiisoft/yii2/base/Module.php(523): yii\base\Controller->runAction('<span class="st...', '[]')
+#10 /var/www/scm/vendor/yiisoft/yii2/web/Application.php(102): yii\base\Module->runAction('<span class="st...', '[]')
+#11 /var/www/scm/vendor/yiisoft/yii2/base/Application.php(380): yii\web\Application->handleRequest(Object(yii\web\Request))
+#12 /var/www/scm/web/index.php(28): yii\base\Application->run()
+#13 {main}
+
+Next exception 'yii\db\Exception' with message 'SQLSTATE[42703]: Undefined column: 7 ERROR:  column "dt_incllusao" does not exist
+LINE 1: ...(*) FROM "comercial"."tab_contrato" WHERE to_char(dt_incllus...
+                                                             ^
+HINT:  Perhaps you meant to reference the column "tab_contrato.dt_inclusao".
+The SQL being executed was: SELECT COUNT(*) FROM "comercial"."tab_contrato" WHERE to_char(dt_incllusao, 'MM/YYYY')='09/2017'' in /var/www/scm/vendor/yiisoft/yii2/db/Schema.php:636
+Stack trace:
+#0 /var/www/scm/vendor/yiisoft/yii2/db/Command.php(917): yii\db\Schema->convertException(Object(PDOException), 'SELECT COUNT(*)...')
+#1 /var/www/scm/vendor/yiisoft/yii2/db/Command.php(388): yii\db\Command->queryInternal('<span class="st...', '<span class="nu...')
+#2 /var/www/scm/vendor/yiisoft/yii2/db/Query.php(431): yii\db\Command->queryScalar()
+#3 /var/www/scm/vendor/yiisoft/yii2/db/ActiveQuery.php(334): yii\db\Query->queryScalar('<span class="st...', '<span class="ke...')
+#4 /var/www/scm/vendor/yiisoft/yii2/db/Query.php(319): yii\db\ActiveQuery->queryScalar('<span class="st...', '<span class="ke...')
+#5 /var/www/scm/modules/comercial/controllers/InicioController.php(23): yii\db\Query->count()
+#6 [internal function]: app\modules\comercial\controllers\InicioController->actionIndex()
+#7 /var/www/scm/vendor/yiisoft/yii2/base/InlineAction.php(57): call_user_func_array('[<span class="t...', '[]')
+#8 /var/www/scm/vendor/yiisoft/yii2/base/Controller.php(156): yii\base\InlineAction->runWithParams('[]')
+#9 /var/www/scm/vendor/yiisoft/yii2/base/Module.php(523): yii\base\Controller->runAction('<span class="st...', '[]')
+#10 /var/www/scm/vendor/yiisoft/yii2/web/Application.php(102): yii\base\Module->runAction('<span class="st...', '[]')
+#11 /var/www/scm/vendor/yiisoft/yii2/base/Application.php(380): yii\web\Application->handleRequest(Object(yii\web\Request))
+#12 /var/www/scm/web/index.php(28): yii\base\Application->run()
+#13 {main}
+Additional Information:
+Array
+(
+    [0] => 42703
+    [1] => 7
+    [2] => ERROR:  column "dt_incllusao" does not exist
+LINE 1: ...(*) FROM "comercial"."tab_contrato" WHERE to_char(dt_incllus...
+                                                             ^
+HINT:  Perhaps you meant to reference the column "tab_contrato.dt_inclusao".
+)
+";i:1;i:1;i:2;s:16:"yii\db\Exception";i:3;d:1508957018.7726991;i:4;a:0:{}i:5;i:4703744;}i:69;a:6:{i:0;s:86:"Rendering view file: /var/www/scm/vendor/yiisoft/yii2/views/errorHandler/exception.php";i:1;i:8;i:2;s:25:"yii\base\View::renderFile";i:3;d:1508957018.7735081;i:4;a:0:{}i:5;i:4730136;}i:70;a:6:{i:0;s:94:"Rendering view file: /var/www/scm/vendor/yiisoft/yii2/views/errorHandler/previousException.php";i:1;i:8;i:2;s:25:"yii\base\View::renderFile";i:3;d:1508957018.774296;i:4;a:0:{}i:5;i:4774624;}i:71;a:6:{i:0;s:90:"Rendering view file: /var/www/scm/vendor/yiisoft/yii2/views/errorHandler/callStackItem.php";i:1;i:8;i:2;s:25:"yii\base\View::renderFile";i:3;d:1508957018.776058;i:4;a:0:{}i:5;i:4913328;}i:72;a:6:{i:0;s:90:"Rendering view file: /var/www/scm/vendor/yiisoft/yii2/views/errorHandler/callStackItem.php";i:1;i:8;i:2;s:25:"yii\base\View::renderFile";i:3;d:1508957018.7782431;i:4;a:0:{}i:5;i:4978720;}i:73;a:6:{i:0;s:90:"Rendering view file: /var/www/scm/vendor/yiisoft/yii2/views/errorHandler/callStackItem.php";i:1;i:8;i:2;s:25:"yii\base\View::renderFile";i:3;d:1508957018.7808859;i:4;a:0:{}i:5;i:4980648;}i:74;a:6:{i:0;s:90:"Rendering view file: /var/www/scm/vendor/yiisoft/yii2/views/errorHandler/callStackItem.php";i:1;i:8;i:2;s:25:"yii\base\View::renderFile";i:3;d:1508957018.7836339;i:4;a:0:{}i:5;i:5024416;}i:75;a:6:{i:0;s:90:"Rendering view file: /var/www/scm/vendor/yiisoft/yii2/views/errorHandler/callStackItem.php";i:1;i:8;i:2;s:25:"yii\base\View::renderFile";i:3;d:1508957018.7860019;i:4;a:0:{}i:5;i:4966976;}i:76;a:6:{i:0;s:90:"Rendering view file: /var/www/scm/vendor/yiisoft/yii2/views/errorHandler/callStackItem.php";i:1;i:8;i:2;s:25:"yii\base\View::renderFile";i:3;d:1508957018.7885411;i:4;a:0:{}i:5;i:5026696;}i:77;a:6:{i:0;s:90:"Rendering view file: /var/www/scm/vendor/yiisoft/yii2/views/errorHandler/callStackItem.php";i:1;i:8;i:2;s:25:"yii\base\View::renderFile";i:3;d:1508957018.790302;i:4;a:0:{}i:5;i:4813352;}i:78;a:6:{i:0;s:90:"Rendering view file: /var/www/scm/vendor/yiisoft/yii2/views/errorHandler/callStackItem.php";i:1;i:8;i:2;s:25:"yii\base\View::renderFile";i:3;d:1508957018.791177;i:4;a:0:{}i:5;i:4806472;}i:79;a:6:{i:0;s:90:"Rendering view file: /var/www/scm/vendor/yiisoft/yii2/views/errorHandler/callStackItem.php";i:1;i:8;i:2;s:25:"yii\base\View::renderFile";i:3;d:1508957018.791929;i:4;a:0:{}i:5;i:4819696;}i:80;a:6:{i:0;s:90:"Rendering view file: /var/www/scm/vendor/yiisoft/yii2/views/errorHandler/callStackItem.php";i:1;i:8;i:2;s:25:"yii\base\View::renderFile";i:3;d:1508957018.7932141;i:4;a:0:{}i:5;i:4919032;}i:81;a:6:{i:0;s:90:"Rendering view file: /var/www/scm/vendor/yiisoft/yii2/views/errorHandler/callStackItem.php";i:1;i:8;i:2;s:25:"yii\base\View::renderFile";i:3;d:1508957018.7951181;i:4;a:0:{}i:5;i:4957288;}i:82;a:6:{i:0;s:90:"Rendering view file: /var/www/scm/vendor/yiisoft/yii2/views/errorHandler/callStackItem.php";i:1;i:8;i:2;s:25:"yii\base\View::renderFile";i:3;d:1508957018.7968309;i:4;a:0:{}i:5;i:4867872;}i:83;a:6:{i:0;s:90:"Rendering view file: /var/www/scm/vendor/yiisoft/yii2/views/errorHandler/callStackItem.php";i:1;i:8;i:2;s:25:"yii\base\View::renderFile";i:3;d:1508957018.7983401;i:4;a:0:{}i:5;i:4967928;}i:84;a:6:{i:0;s:90:"Rendering view file: /var/www/scm/vendor/yiisoft/yii2/views/errorHandler/callStackItem.php";i:1;i:8;i:2;s:25:"yii\base\View::renderFile";i:3;d:1508957018.799648;i:4;a:0:{}i:5;i:4836152;}i:85;a:6:{i:0;s:82:"SELECT "id" FROM "acesso"."tab_sessao_php" WHERE "id"='25cml2a2te37kgeguujk5m3202'";i:1;i:4;i:2;s:21:"yii\db\Command::query";i:3;d:1508957018.8472829;i:4;a:0:{}i:5;i:4799312;}i:88;a:6:{i:0;s:1960:"SELECT
+    d.nspname AS table_schema,
+    c.relname AS table_name,
+    a.attname AS column_name,
+    t.typname AS data_type,
+    a.attlen AS character_maximum_length,
+    pg_catalog.col_description(c.oid, a.attnum) AS column_comment,
+    a.atttypmod AS modifier,
+    a.attnotnull = false AS is_nullable,
+    CAST(pg_get_expr(ad.adbin, ad.adrelid) AS varchar) AS column_default,
+    coalesce(pg_get_expr(ad.adbin, ad.adrelid) ~ 'nextval',false) AS is_autoinc,
+    array_to_string((select array_agg(enumlabel) from pg_enum where enumtypid=a.atttypid)::varchar[],',') as enum_values,
+    CASE atttypid
+         WHEN 21 /*int2*/ THEN 16
+         WHEN 23 /*int4*/ THEN 32
+         WHEN 20 /*int8*/ THEN 64
+         WHEN 1700 /*numeric*/ THEN
+              CASE WHEN atttypmod = -1
+               THEN null
+               ELSE ((atttypmod - 4) >> 16) & 65535
+               END
+         WHEN 700 /*float4*/ THEN 24 /*FLT_MANT_DIG*/
+         WHEN 701 /*float8*/ THEN 53 /*DBL_MANT_DIG*/
+         ELSE null
+      END   AS numeric_precision,
+      CASE
+        WHEN atttypid IN (21, 23, 20) THEN 0
+        WHEN atttypid IN (1700) THEN
+        CASE
+            WHEN atttypmod = -1 THEN null
+            ELSE (atttypmod - 4) & 65535
+        END
+           ELSE null
+      END AS numeric_scale,
+    CAST(
+             information_schema._pg_char_max_length(information_schema._pg_truetypid(a, t), information_schema._pg_truetypmod(a, t))
+             AS numeric
+    ) AS size,
+    a.attnum = any (ct.conkey) as is_pkey
+FROM
+    pg_class c
+    LEFT JOIN pg_attribute a ON a.attrelid = c.oid
+    LEFT JOIN pg_attrdef ad ON a.attrelid = ad.adrelid AND a.attnum = ad.adnum
+    LEFT JOIN pg_type t ON a.atttypid = t.oid
+    LEFT JOIN pg_namespace d ON d.oid = c.relnamespace
+    LEFT join pg_constraint ct on ct.conrelid=c.oid and ct.contype='p'
+WHERE
+    a.attnum > 0 and t.typname != ''
+    and c.relname = 'tab_sessao_php'
+    and d.nspname = 'acesso'
+ORDER BY
+    a.attnum;";i:1;i:4;i:2;s:21:"yii\db\Command::query";i:3;d:1508957018.8557551;i:4;a:0:{}i:5;i:4818184;}i:91;a:6:{i:0;s:882:"select
+    ct.conname as constraint_name,
+    a.attname as column_name,
+    fc.relname as foreign_table_name,
+    fns.nspname as foreign_table_schema,
+    fa.attname as foreign_column_name
+from
+    (SELECT ct.conname, ct.conrelid, ct.confrelid, ct.conkey, ct.contype, ct.confkey, generate_subscripts(ct.conkey, 1) AS s
+       FROM pg_constraint ct
+    ) AS ct
+    inner join pg_class c on c.oid=ct.conrelid
+    inner join pg_namespace ns on c.relnamespace=ns.oid
+    inner join pg_attribute a on a.attrelid=ct.conrelid and a.attnum = ct.conkey[ct.s]
+    left join pg_class fc on fc.oid=ct.confrelid
+    left join pg_namespace fns on fc.relnamespace=fns.oid
+    left join pg_attribute fa on fa.attrelid=ct.confrelid and fa.attnum = ct.confkey[ct.s]
+where
+    ct.contype='f'
+    and c.relname='tab_sessao_php'
+    and ns.nspname='acesso'
+order by
+    fns.nspname, fc.relname, a.attnum";i:1;i:4;i:2;s:21:"yii\db\Command::query";i:3;d:1508957018.8751919;i:4;a:0:{}i:5;i:4827096;}i:94;a:6:{i:0;s:10857:"UPDATE "acesso"."tab_sessao_php" SET "data"='__flash|a:0:{}sessao-expirada|s:9:"/scm/web/";__returnUrl|s:9:"/scm/web/";__id|i:3777;endereco|a:2:{i:4012;a:13:{s:12:"cod_endereco";i:4012;s:10:"logradouro";s:15:"Q 01 CONJ 01 LT";s:6:"numero";s:2:"12";s:11:"complemento";s:19:"LOJA 01 SETOR NORTE";s:3:"cep";s:10:"71.258-015";s:15:"correspondencia";N;s:16:"cod_municipio_fk";s:6:"530010";s:8:"chave_fk";i:3;s:12:"tipo_usuario";N;s:11:"dt_inclusao";s:10:"2017-05-31";s:5:"ativo";b:1;s:6:"bairro";s:17:"CIDADE ESTRUTURAL";s:14:"tipo_tabela_fk";s:11:"tab_cliente";}i:6397;a:13:{s:12:"cod_endereco";i:6397;s:10:"logradouro";s:5:"u88uu";s:6:"numero";s:4:"yyyy";s:11:"complemento";s:3:"yyy";s:3:"cep";s:10:"71.100-111";s:15:"correspondencia";b:0;s:16:"cod_municipio_fk";s:6:"270040";s:8:"chave_fk";i:3;s:12:"tipo_usuario";N;s:11:"dt_inclusao";N;s:5:"ativo";b:1;s:6:"bairro";N;s:14:"tipo_tabela_fk";s:11:"tab_cliente";}}contato|a:1:{i:30240;a:8:{s:11:"cod_contato";i:30240;s:7:"contato";s:15:"(97) 89273-9842";s:5:"ramal";s:0:"";s:5:"ativo";b:1;s:11:"dt_inclusao";s:10:"2017-09-22";s:4:"tipo";i:464;s:8:"chave_fk";i:3;s:14:"tipo_tabela_fk";s:11:"tab_cliente";}}contratos|a:5:{i:0;a:4:{s:10:"attributes";a:27:{s:12:"cod_contrato";i:14275;s:16:"tipo_contrato_fk";i:498;s:14:"valor_contrato";s:8:"10000.00";s:14:"dia_vencimento";N;s:12:"qnt_parcelas";i:4;s:8:"dt_prazo";s:10:"04/10/2017";s:11:"dt_inclusao";s:10:"25/10/2017";s:13:"dt_vencimento";s:10:"11/10/2017";s:8:"contador";N;s:14:"responsavel_fk";N;s:8:"operando";N;s:12:"qnt_clientes";N;s:4:"link";N;s:7:"zero800";N;s:9:"parceiria";N;s:15:"consultoria_scm";N;s:18:"engenheiro_tecnico";N;s:14:"cod_cliente_fk";i:3;s:5:"ativo";b:1;s:18:"txt_login_inclusao";s:1:"1";s:19:"txt_login_alteracao";s:1:"1";s:12:"dt_alteracao";s:10:"25/10/2017";s:6:"status";i:537;s:16:"nome_responsavel";N;s:8:"contrato";N;s:13:"dt_fechamento";N;s:21:"status_do_contrato_fk";N;}s:14:"tipo_contratos";a:1:{i:0;a:5:{s:17:"cod_tipo_contrato";i:12723;s:14:"cod_usuario_fk";i:1;s:15:"cod_contrato_fk";i:14275;s:15:"tipo_produto_fk";i:523;s:5:"ativo";b:1;}}s:8:"parcelas";a:4:{i:0;a:9:{s:21:"cod_contrato_parcelas";i:872;s:15:"cod_contrato_fk";i:14275;s:6:"numero";i:1;s:5:"valor";s:7:"2500.00";s:11:"dt_inclusao";s:10:"2017-10-25";s:13:"dt_vencimento";s:10:"2017-10-11";s:18:"txt_login_inclusao";s:1:"1";s:19:"txt_login_alteracao";s:1:"1";s:12:"dt_alteracao";s:10:"2017-10-25";}i:1;a:9:{s:21:"cod_contrato_parcelas";i:873;s:15:"cod_contrato_fk";i:14275;s:6:"numero";i:2;s:5:"valor";s:7:"2500.00";s:11:"dt_inclusao";s:10:"2017-10-25";s:13:"dt_vencimento";s:10:"2017-11-11";s:18:"txt_login_inclusao";s:1:"1";s:19:"txt_login_alteracao";s:1:"1";s:12:"dt_alteracao";s:10:"2017-10-25";}i:2;a:9:{s:21:"cod_contrato_parcelas";i:874;s:15:"cod_contrato_fk";i:14275;s:6:"numero";i:3;s:5:"valor";s:7:"2500.00";s:11:"dt_inclusao";s:10:"2017-10-25";s:13:"dt_vencimento";s:10:"2017-12-11";s:18:"txt_login_inclusao";s:1:"1";s:19:"txt_login_alteracao";s:1:"1";s:12:"dt_alteracao";s:10:"2017-10-25";}i:3;a:9:{s:21:"cod_contrato_parcelas";i:875;s:15:"cod_contrato_fk";i:14275;s:6:"numero";i:4;s:5:"valor";s:7:"2500.00";s:11:"dt_inclusao";s:10:"2017-10-25";s:13:"dt_vencimento";s:10:"2018-04-11";s:18:"txt_login_inclusao";s:1:"1";s:19:"txt_login_alteracao";s:1:"1";s:12:"dt_alteracao";s:10:"2017-10-25";}}s:10:"andamentos";N;}i:1;a:4:{s:10:"attributes";a:27:{s:12:"cod_contrato";i:14274;s:16:"tipo_contrato_fk";i:510;s:14:"valor_contrato";s:6:"100.00";s:14:"dia_vencimento";N;s:12:"qnt_parcelas";i:4;s:8:"dt_prazo";s:10:"25/10/2017";s:11:"dt_inclusao";s:10:"24/10/2017";s:13:"dt_vencimento";s:10:"16/10/2017";s:8:"contador";N;s:14:"responsavel_fk";N;s:8:"operando";N;s:12:"qnt_clientes";N;s:4:"link";N;s:7:"zero800";N;s:9:"parceiria";N;s:15:"consultoria_scm";N;s:18:"engenheiro_tecnico";N;s:14:"cod_cliente_fk";i:3;s:5:"ativo";b:1;s:18:"txt_login_inclusao";s:1:"1";s:19:"txt_login_alteracao";s:1:"1";s:12:"dt_alteracao";s:10:"24/10/2017";s:6:"status";i:543;s:16:"nome_responsavel";N;s:8:"contrato";N;s:13:"dt_fechamento";N;s:21:"status_do_contrato_fk";N;}s:14:"tipo_contratos";a:1:{i:0;a:5:{s:17:"cod_tipo_contrato";i:12722;s:14:"cod_usuario_fk";i:1;s:15:"cod_contrato_fk";i:14274;s:15:"tipo_produto_fk";i:523;s:5:"ativo";b:1;}}s:8:"parcelas";a:4:{i:0;a:9:{s:21:"cod_contrato_parcelas";i:868;s:15:"cod_contrato_fk";i:14274;s:6:"numero";i:1;s:5:"valor";s:5:"25.00";s:11:"dt_inclusao";s:10:"2017-10-24";s:13:"dt_vencimento";s:10:"2017-10-16";s:18:"txt_login_inclusao";s:1:"1";s:19:"txt_login_alteracao";s:1:"1";s:12:"dt_alteracao";s:10:"2017-10-24";}i:1;a:9:{s:21:"cod_contrato_parcelas";i:869;s:15:"cod_contrato_fk";i:14274;s:6:"numero";i:2;s:5:"valor";s:5:"25.00";s:11:"dt_inclusao";s:10:"2017-10-24";s:13:"dt_vencimento";s:10:"2017-11-16";s:18:"txt_login_inclusao";s:1:"1";s:19:"txt_login_alteracao";s:1:"1";s:12:"dt_alteracao";s:10:"2017-10-24";}i:2;a:9:{s:21:"cod_contrato_parcelas";i:870;s:15:"cod_contrato_fk";i:14274;s:6:"numero";i:3;s:5:"valor";s:5:"25.00";s:11:"dt_inclusao";s:10:"2017-10-24";s:13:"dt_vencimento";s:10:"2017-12-16";s:18:"txt_login_inclusao";s:1:"1";s:19:"txt_login_alteracao";s:1:"1";s:12:"dt_alteracao";s:10:"2017-10-24";}i:3;a:9:{s:21:"cod_contrato_parcelas";i:871;s:15:"cod_contrato_fk";i:14274;s:6:"numero";i:4;s:5:"valor";s:5:"25.00";s:11:"dt_inclusao";s:10:"2017-10-24";s:13:"dt_vencimento";s:10:"2018-04-16";s:18:"txt_login_inclusao";s:1:"1";s:19:"txt_login_alteracao";s:1:"1";s:12:"dt_alteracao";s:10:"2017-10-24";}}s:10:"andamentos";N;}i:2;a:4:{s:10:"attributes";a:27:{s:12:"cod_contrato";i:14139;s:16:"tipo_contrato_fk";i:498;s:14:"valor_contrato";s:6:"100.00";s:14:"dia_vencimento";N;s:12:"qnt_parcelas";i:1;s:8:"dt_prazo";s:10:"19/09/2017";s:11:"dt_inclusao";N;s:13:"dt_vencimento";s:10:"19/09/2017";s:8:"contador";N;s:14:"responsavel_fk";N;s:8:"operando";N;s:12:"qnt_clientes";N;s:4:"link";N;s:7:"zero800";N;s:9:"parceiria";N;s:15:"consultoria_scm";N;s:18:"engenheiro_tecnico";N;s:14:"cod_cliente_fk";i:3;s:5:"ativo";b:1;s:18:"txt_login_inclusao";s:1:"1";s:19:"txt_login_alteracao";s:1:"1";s:12:"dt_alteracao";s:10:"29/09/2017";s:6:"status";N;s:16:"nome_responsavel";N;s:8:"contrato";N;s:13:"dt_fechamento";N;s:21:"status_do_contrato_fk";N;}s:14:"tipo_contratos";a:1:{i:0;a:5:{s:17:"cod_tipo_contrato";i:12611;s:14:"cod_usuario_fk";i:5;s:15:"cod_contrato_fk";i:14139;s:15:"tipo_produto_fk";i:523;s:5:"ativo";b:1;}}s:8:"parcelas";a:1:{i:0;a:9:{s:21:"cod_contrato_parcelas";i:151;s:15:"cod_contrato_fk";i:14139;s:6:"numero";i:1;s:5:"valor";s:6:"100.00";s:11:"dt_inclusao";N;s:13:"dt_vencimento";s:10:"2017-09-29";s:18:"txt_login_inclusao";s:1:"1";s:19:"txt_login_alteracao";s:1:"1";s:12:"dt_alteracao";N;}}s:10:"andamentos";N;}i:3;a:4:{s:10:"attributes";a:27:{s:12:"cod_contrato";i:14095;s:16:"tipo_contrato_fk";i:512;s:14:"valor_contrato";s:7:"1000.00";s:14:"dia_vencimento";N;s:12:"qnt_parcelas";i:2;s:8:"dt_prazo";s:10:"06/09/2017";s:11:"dt_inclusao";N;s:13:"dt_vencimento";s:10:"12/09/2017";s:8:"contador";N;s:14:"responsavel_fk";N;s:8:"operando";N;s:12:"qnt_clientes";N;s:4:"link";N;s:7:"zero800";N;s:9:"parceiria";N;s:15:"consultoria_scm";N;s:18:"engenheiro_tecnico";N;s:14:"cod_cliente_fk";i:3;s:5:"ativo";b:1;s:18:"txt_login_inclusao";s:1:"1";s:19:"txt_login_alteracao";s:1:"1";s:12:"dt_alteracao";s:10:"26/09/2017";s:6:"status";i:536;s:16:"nome_responsavel";N;s:8:"contrato";N;s:13:"dt_fechamento";N;s:21:"status_do_contrato_fk";N;}s:14:"tipo_contratos";a:1:{i:0;a:5:{s:17:"cod_tipo_contrato";i:12567;s:14:"cod_usuario_fk";i:1;s:15:"cod_contrato_fk";i:14095;s:15:"tipo_produto_fk";i:523;s:5:"ativo";b:1;}}s:8:"parcelas";a:2:{i:0;a:9:{s:21:"cod_contrato_parcelas";i:102;s:15:"cod_contrato_fk";i:14095;s:6:"numero";i:1;s:5:"valor";s:6:"500.00";s:11:"dt_inclusao";N;s:13:"dt_vencimento";s:10:"2017-09-26";s:18:"txt_login_inclusao";s:1:"1";s:19:"txt_login_alteracao";s:1:"1";s:12:"dt_alteracao";N;}i:1;a:9:{s:21:"cod_contrato_parcelas";i:103;s:15:"cod_contrato_fk";i:14095;s:6:"numero";i:2;s:5:"valor";s:6:"500.00";s:11:"dt_inclusao";N;s:13:"dt_vencimento";s:10:"2017-09-26";s:18:"txt_login_inclusao";s:1:"1";s:19:"txt_login_alteracao";s:1:"1";s:12:"dt_alteracao";N;}}s:10:"andamentos";N;}i:4;a:4:{s:10:"attributes";a:27:{s:12:"cod_contrato";i:143;s:16:"tipo_contrato_fk";i:511;s:14:"valor_contrato";N;s:14:"dia_vencimento";N;s:12:"qnt_parcelas";N;s:8:"dt_prazo";N;s:11:"dt_inclusao";s:10:"01/06/2017";s:13:"dt_vencimento";N;s:8:"contador";N;s:14:"responsavel_fk";N;s:8:"operando";N;s:12:"qnt_clientes";N;s:4:"link";N;s:7:"zero800";N;s:9:"parceiria";N;s:15:"consultoria_scm";N;s:18:"engenheiro_tecnico";N;s:14:"cod_cliente_fk";i:3;s:5:"ativo";b:1;s:18:"txt_login_inclusao";N;s:19:"txt_login_alteracao";N;s:12:"dt_alteracao";N;s:6:"status";i:536;s:16:"nome_responsavel";N;s:8:"contrato";N;s:13:"dt_fechamento";N;s:21:"status_do_contrato_fk";N;}s:14:"tipo_contratos";a:8:{i:0;a:5:{s:17:"cod_tipo_contrato";i:12513;s:14:"cod_usuario_fk";i:1;s:15:"cod_contrato_fk";i:143;s:15:"tipo_produto_fk";i:521;s:5:"ativo";b:1;}i:1;a:5:{s:17:"cod_tipo_contrato";i:10406;s:14:"cod_usuario_fk";N;s:15:"cod_contrato_fk";i:143;s:15:"tipo_produto_fk";i:524;s:5:"ativo";b:1;}i:2;a:5:{s:17:"cod_tipo_contrato";i:10407;s:14:"cod_usuario_fk";N;s:15:"cod_contrato_fk";i:143;s:15:"tipo_produto_fk";i:528;s:5:"ativo";b:1;}i:3;a:5:{s:17:"cod_tipo_contrato";i:10408;s:14:"cod_usuario_fk";N;s:15:"cod_contrato_fk";i:143;s:15:"tipo_produto_fk";N;s:5:"ativo";b:1;}i:4;a:5:{s:17:"cod_tipo_contrato";i:10409;s:14:"cod_usuario_fk";N;s:15:"cod_contrato_fk";i:143;s:15:"tipo_produto_fk";i:526;s:5:"ativo";b:1;}i:5;a:5:{s:17:"cod_tipo_contrato";i:10410;s:14:"cod_usuario_fk";N;s:15:"cod_contrato_fk";i:143;s:15:"tipo_produto_fk";i:527;s:5:"ativo";b:1;}i:6;a:5:{s:17:"cod_tipo_contrato";i:12475;s:14:"cod_usuario_fk";i:5;s:15:"cod_contrato_fk";i:143;s:15:"tipo_produto_fk";i:522;s:5:"ativo";b:1;}i:7;a:5:{s:17:"cod_tipo_contrato";i:12476;s:14:"cod_usuario_fk";N;s:15:"cod_contrato_fk";i:143;s:15:"tipo_produto_fk";N;s:5:"ativo";b:1;}}s:8:"parcelas";a:3:{i:0;a:9:{s:21:"cod_contrato_parcelas";i:1;s:15:"cod_contrato_fk";i:143;s:6:"numero";i:1;s:5:"valor";s:6:"100.00";s:11:"dt_inclusao";s:10:"2017-07-02";s:13:"dt_vencimento";s:10:"2017-06-03";s:18:"txt_login_inclusao";N;s:19:"txt_login_alteracao";N;s:12:"dt_alteracao";N;}i:1;a:9:{s:21:"cod_contrato_parcelas";i:2;s:15:"cod_contrato_fk";i:143;s:6:"numero";i:2;s:5:"valor";s:6:"100.00";s:11:"dt_inclusao";s:10:"2017-07-02";s:13:"dt_vencimento";s:10:"2017-07-03";s:18:"txt_login_inclusao";N;s:19:"txt_login_alteracao";N;s:12:"dt_alteracao";N;}i:2;a:9:{s:21:"cod_contrato_parcelas";i:3;s:15:"cod_contrato_fk";i:143;s:6:"numero";i:3;s:5:"valor";s:6:"100.00";s:11:"dt_inclusao";s:10:"2017-07-02";s:13:"dt_vencimento";s:10:"2017-08-03";s:18:"txt_login_inclusao";N;s:19:"txt_login_alteracao";N;s:12:"dt_alteracao";N;}}s:10:"andamentos";N;}}', "user_id"=3777, "expire"=1508964118 WHERE "id"='25cml2a2te37kgeguujk5m3202'";i:1;i:4;i:2;s:23:"yii\db\Command::execute";i:3;d:1508957018.894002;i:4;a:0:{}i:5;i:4833936;}}}s:9:"profiling";a:3:{s:6:"memory";i:5596448;s:4:"time";d:0.4512031078338623;s:8:"messages";a:38:{i:7;a:6:{i:0;s:61:"Opening DB connection: pgsql:host=localhost;dbname=sisscm_dev";i:1;i:80;i:2;s:23:"yii\db\Connection::open";i:3;d:1508957018.4930761;i:4;a:1:{i:0;a:5:{s:4:"file";s:27:"/var/www/scm/config/web.php";s:4:"line";i:161;s:8:"function";s:5:"__get";s:5:"class";s:18:"yii\base\Component";s:4:"type";s:2:"->";}}i:5;i:2455032;}i:8;a:6:{i:0;s:61:"Opening DB connection: pgsql:host=localhost;dbname=sisscm_dev";i:1;i:96;i:2;s:23:"yii\db\Connection::open";i:3;d:1508957018.5384409;i:4;a:1:{i:0;a:5:{s:4:"file";s:27:"/var/www/scm/config/web.php";s:4:"line";i:161;s:8:"function";s:5:"__get";s:5:"class";s:18:"yii\base\Component";s:4:"type";s:2:"->";}}i:5;i:2459080;}i:10;a:6:{i:0;s:108:"SELECT "data" FROM "acesso"."tab_sessao_php" WHERE "expire">1508957018 AND "id"='25cml2a2te37kgeguujk5m3202'";i:1;i:80;i:2;s:21:"yii\db\Command::query";i:3;d:1508957018.539238;i:4;a:1:{i:0;a:5:{s:4:"file";s:27:"/var/www/scm/config/web.php";s:4:"line";i:161;s:8:"function";s:5:"__get";s:5:"class";s:18:"yii\base\Component";s:4:"type";s:2:"->";}}i:5;i:2458768;}i:11;a:6:{i:0;s:108:"SELECT "data" FROM "acesso"."tab_sessao_php" WHERE "expire">1508957018 AND "id"='25cml2a2te37kgeguujk5m3202'";i:1;i:96;i:2;s:21:"yii\db\Command::query";i:3;d:1508957018.5511031;i:4;a:1:{i:0;a:5:{s:4:"file";s:27:"/var/www/scm/config/web.php";s:4:"line";i:161;s:8:"function";s:5:"__get";s:5:"class";s:18:"yii\base\Component";s:4:"type";s:2:"->";}}i:5;i:2472744;}i:14;a:6:{i:0;s:1958:"SELECT
+    d.nspname AS table_schema,
+    c.relname AS table_name,
+    a.attname AS column_name,
+    t.typname AS data_type,
+    a.attlen AS character_maximum_length,
+    pg_catalog.col_description(c.oid, a.attnum) AS column_comment,
+    a.atttypmod AS modifier,
+    a.attnotnull = false AS is_nullable,
+    CAST(pg_get_expr(ad.adbin, ad.adrelid) AS varchar) AS column_default,
+    coalesce(pg_get_expr(ad.adbin, ad.adrelid) ~ 'nextval',false) AS is_autoinc,
+    array_to_string((select array_agg(enumlabel) from pg_enum where enumtypid=a.atttypid)::varchar[],',') as enum_values,
+    CASE atttypid
+         WHEN 21 /*int2*/ THEN 16
+         WHEN 23 /*int4*/ THEN 32
+         WHEN 20 /*int8*/ THEN 64
+         WHEN 1700 /*numeric*/ THEN
+              CASE WHEN atttypmod = -1
+               THEN null
+               ELSE ((atttypmod - 4) >> 16) & 65535
+               END
+         WHEN 700 /*float4*/ THEN 24 /*FLT_MANT_DIG*/
+         WHEN 701 /*float8*/ THEN 53 /*DBL_MANT_DIG*/
+         ELSE null
+      END   AS numeric_precision,
+      CASE
+        WHEN atttypid IN (21, 23, 20) THEN 0
+        WHEN atttypid IN (1700) THEN
+        CASE
+            WHEN atttypmod = -1 THEN null
+            ELSE (atttypmod - 4) & 65535
+        END
+           ELSE null
+      END AS numeric_scale,
+    CAST(
+             information_schema._pg_char_max_length(information_schema._pg_truetypid(a, t), information_schema._pg_truetypmod(a, t))
+             AS numeric
+    ) AS size,
+    a.attnum = any (ct.conkey) as is_pkey
+FROM
+    pg_class c
+    LEFT JOIN pg_attribute a ON a.attrelid = c.oid
+    LEFT JOIN pg_attrdef ad ON a.attrelid = ad.adrelid AND a.attnum = ad.adnum
+    LEFT JOIN pg_type t ON a.atttypid = t.oid
+    LEFT JOIN pg_namespace d ON d.oid = c.relnamespace
+    LEFT join pg_constraint ct on ct.conrelid=c.oid and ct.contype='p'
+WHERE
+    a.attnum > 0 and t.typname != ''
+    and c.relname = 'tab_usuarios'
+    and d.nspname = 'acesso'
+ORDER BY
+    a.attnum;";i:1;i:80;i:2;s:21:"yii\db\Command::query";i:3;d:1508957018.561662;i:4;a:2:{i:0;a:5:{s:4:"file";s:49:"/var/www/scm/modules/admin/models/MdlUsuarios.php";s:4:"line";i:73;s:8:"function";s:7:"findOne";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"::";}i:1;a:5:{s:4:"file";s:27:"/var/www/scm/config/web.php";s:4:"line";i:161;s:8:"function";s:5:"__get";s:5:"class";s:18:"yii\base\Component";s:4:"type";s:2:"->";}}i:5;i:3192248;}i:15;a:6:{i:0;s:1958:"SELECT
+    d.nspname AS table_schema,
+    c.relname AS table_name,
+    a.attname AS column_name,
+    t.typname AS data_type,
+    a.attlen AS character_maximum_length,
+    pg_catalog.col_description(c.oid, a.attnum) AS column_comment,
+    a.atttypmod AS modifier,
+    a.attnotnull = false AS is_nullable,
+    CAST(pg_get_expr(ad.adbin, ad.adrelid) AS varchar) AS column_default,
+    coalesce(pg_get_expr(ad.adbin, ad.adrelid) ~ 'nextval',false) AS is_autoinc,
+    array_to_string((select array_agg(enumlabel) from pg_enum where enumtypid=a.atttypid)::varchar[],',') as enum_values,
+    CASE atttypid
+         WHEN 21 /*int2*/ THEN 16
+         WHEN 23 /*int4*/ THEN 32
+         WHEN 20 /*int8*/ THEN 64
+         WHEN 1700 /*numeric*/ THEN
+              CASE WHEN atttypmod = -1
+               THEN null
+               ELSE ((atttypmod - 4) >> 16) & 65535
+               END
+         WHEN 700 /*float4*/ THEN 24 /*FLT_MANT_DIG*/
+         WHEN 701 /*float8*/ THEN 53 /*DBL_MANT_DIG*/
+         ELSE null
+      END   AS numeric_precision,
+      CASE
+        WHEN atttypid IN (21, 23, 20) THEN 0
+        WHEN atttypid IN (1700) THEN
+        CASE
+            WHEN atttypmod = -1 THEN null
+            ELSE (atttypmod - 4) & 65535
+        END
+           ELSE null
+      END AS numeric_scale,
+    CAST(
+             information_schema._pg_char_max_length(information_schema._pg_truetypid(a, t), information_schema._pg_truetypmod(a, t))
+             AS numeric
+    ) AS size,
+    a.attnum = any (ct.conkey) as is_pkey
+FROM
+    pg_class c
+    LEFT JOIN pg_attribute a ON a.attrelid = c.oid
+    LEFT JOIN pg_attrdef ad ON a.attrelid = ad.adrelid AND a.attnum = ad.adnum
+    LEFT JOIN pg_type t ON a.atttypid = t.oid
+    LEFT JOIN pg_namespace d ON d.oid = c.relnamespace
+    LEFT join pg_constraint ct on ct.conrelid=c.oid and ct.contype='p'
+WHERE
+    a.attnum > 0 and t.typname != ''
+    and c.relname = 'tab_usuarios'
+    and d.nspname = 'acesso'
+ORDER BY
+    a.attnum;";i:1;i:96;i:2;s:21:"yii\db\Command::query";i:3;d:1508957018.610585;i:4;a:2:{i:0;a:5:{s:4:"file";s:49:"/var/www/scm/modules/admin/models/MdlUsuarios.php";s:4:"line";i:73;s:8:"function";s:7:"findOne";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"::";}i:1;a:5:{s:4:"file";s:27:"/var/www/scm/config/web.php";s:4:"line";i:161;s:8:"function";s:5:"__get";s:5:"class";s:18:"yii\base\Component";s:4:"type";s:2:"->";}}i:5;i:3254416;}i:17;a:6:{i:0;s:880:"select
+    ct.conname as constraint_name,
+    a.attname as column_name,
+    fc.relname as foreign_table_name,
+    fns.nspname as foreign_table_schema,
+    fa.attname as foreign_column_name
+from
+    (SELECT ct.conname, ct.conrelid, ct.confrelid, ct.conkey, ct.contype, ct.confkey, generate_subscripts(ct.conkey, 1) AS s
+       FROM pg_constraint ct
+    ) AS ct
+    inner join pg_class c on c.oid=ct.conrelid
+    inner join pg_namespace ns on c.relnamespace=ns.oid
+    inner join pg_attribute a on a.attrelid=ct.conrelid and a.attnum = ct.conkey[ct.s]
+    left join pg_class fc on fc.oid=ct.confrelid
+    left join pg_namespace fns on fc.relnamespace=fns.oid
+    left join pg_attribute fa on fa.attrelid=ct.confrelid and fa.attnum = ct.confkey[ct.s]
+where
+    ct.contype='f'
+    and c.relname='tab_usuarios'
+    and ns.nspname='acesso'
+order by
+    fns.nspname, fc.relname, a.attnum";i:1;i:80;i:2;s:21:"yii\db\Command::query";i:3;d:1508957018.6147921;i:4;a:2:{i:0;a:5:{s:4:"file";s:49:"/var/www/scm/modules/admin/models/MdlUsuarios.php";s:4:"line";i:73;s:8:"function";s:7:"findOne";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"::";}i:1;a:5:{s:4:"file";s:27:"/var/www/scm/config/web.php";s:4:"line";i:161;s:8:"function";s:5:"__get";s:5:"class";s:18:"yii\base\Component";s:4:"type";s:2:"->";}}i:5;i:3244384;}i:18;a:6:{i:0;s:880:"select
+    ct.conname as constraint_name,
+    a.attname as column_name,
+    fc.relname as foreign_table_name,
+    fns.nspname as foreign_table_schema,
+    fa.attname as foreign_column_name
+from
+    (SELECT ct.conname, ct.conrelid, ct.confrelid, ct.conkey, ct.contype, ct.confkey, generate_subscripts(ct.conkey, 1) AS s
+       FROM pg_constraint ct
+    ) AS ct
+    inner join pg_class c on c.oid=ct.conrelid
+    inner join pg_namespace ns on c.relnamespace=ns.oid
+    inner join pg_attribute a on a.attrelid=ct.conrelid and a.attnum = ct.conkey[ct.s]
+    left join pg_class fc on fc.oid=ct.confrelid
+    left join pg_namespace fns on fc.relnamespace=fns.oid
+    left join pg_attribute fa on fa.attrelid=ct.confrelid and fa.attnum = ct.confkey[ct.s]
+where
+    ct.contype='f'
+    and c.relname='tab_usuarios'
+    and ns.nspname='acesso'
+order by
+    fns.nspname, fc.relname, a.attnum";i:1;i:96;i:2;s:21:"yii\db\Command::query";i:3;d:1508957018.6396401;i:4;a:2:{i:0;a:5:{s:4:"file";s:49:"/var/www/scm/modules/admin/models/MdlUsuarios.php";s:4:"line";i:73;s:8:"function";s:7:"findOne";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"::";}i:1;a:5:{s:4:"file";s:27:"/var/www/scm/config/web.php";s:4:"line";i:161;s:8:"function";s:5:"__get";s:5:"class";s:18:"yii\base\Component";s:4:"type";s:2:"->";}}i:5;i:3248592;}i:20;a:6:{i:0;s:62:"SELECT * FROM "acesso"."tab_usuarios" WHERE "cod_usuario"=3777";i:1;i:80;i:2;s:21:"yii\db\Command::query";i:3;d:1508957018.641721;i:4;a:3:{i:0;a:5:{s:4:"file";s:54:"/var/www/scm/modules/admin/models/TabUsuariosQuery.php";s:4:"line";i:33;s:8:"function";s:3:"one";s:5:"class";s:18:"yii\db\ActiveQuery";s:4:"type";s:2:"->";}i:1;a:5:{s:4:"file";s:49:"/var/www/scm/modules/admin/models/MdlUsuarios.php";s:4:"line";i:73;s:8:"function";s:7:"findOne";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"::";}i:2;a:5:{s:4:"file";s:27:"/var/www/scm/config/web.php";s:4:"line";i:161;s:8:"function";s:5:"__get";s:5:"class";s:18:"yii\base\Component";s:4:"type";s:2:"->";}}i:5;i:3253520;}i:21;a:6:{i:0;s:62:"SELECT * FROM "acesso"."tab_usuarios" WHERE "cod_usuario"=3777";i:1;i:96;i:2;s:21:"yii\db\Command::query";i:3;d:1508957018.6453381;i:4;a:3:{i:0;a:5:{s:4:"file";s:54:"/var/www/scm/modules/admin/models/TabUsuariosQuery.php";s:4:"line";i:33;s:8:"function";s:3:"one";s:5:"class";s:18:"yii\db\ActiveQuery";s:4:"type";s:2:"->";}i:1;a:5:{s:4:"file";s:49:"/var/www/scm/modules/admin/models/MdlUsuarios.php";s:4:"line";i:73;s:8:"function";s:7:"findOne";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"::";}i:2;a:5:{s:4:"file";s:27:"/var/www/scm/config/web.php";s:4:"line";i:161;s:8:"function";s:5:"__get";s:5:"class";s:18:"yii\base\Component";s:4:"type";s:2:"->";}}i:5;i:3264304;}i:23;a:6:{i:0;s:28:"SET application_name = '::1'";i:1;i:80;i:2;s:23:"yii\db\Command::execute";i:3;d:1508957018.6500199;i:4;a:1:{i:0;a:5:{s:4:"file";s:27:"/var/www/scm/config/web.php";s:4:"line";i:167;s:8:"function";s:7:"execute";s:5:"class";s:14:"yii\db\Command";s:4:"type";s:2:"->";}}i:5;i:3417792;}i:24;a:6:{i:0;s:28:"SET application_name = '::1'";i:1;i:96;i:2;s:23:"yii\db\Command::execute";i:3;d:1508957018.6512761;i:4;a:1:{i:0;a:5:{s:4:"file";s:27:"/var/www/scm/config/web.php";s:4:"line";i:167;s:8:"function";s:7:"execute";s:5:"class";s:14:"yii\db\Command";s:4:"type";s:2:"->";}}i:5;i:3420344;}i:26;a:6:{i:0;s:30:"SELECT * FROM "tab_parametros"";i:1;i:80;i:2;s:21:"yii\db\Command::query";i:3;d:1508957018.6538811;i:4;a:3:{i:0;a:5:{s:4:"file";s:42:"/var/www/scm/models/TabParametrosQuery.php";s:4:"line";i:24;s:8:"function";s:3:"all";s:5:"class";s:18:"yii\db\ActiveQuery";s:4:"type";s:2:"->";}i:1;a:5:{s:4:"file";s:27:"/var/www/scm/config/web.php";s:4:"line";i:174;s:8:"function";s:3:"all";s:5:"class";s:29:"app\models\TabParametrosQuery";s:4:"type";s:2:"->";}i:2;a:3:{s:4:"file";s:27:"/var/www/scm/config/web.php";s:4:"line";i:184;s:8:"function";s:9:"{closure}";}}i:5;i:3612232;}i:27;a:6:{i:0;s:30:"SELECT * FROM "tab_parametros"";i:1;i:96;i:2;s:21:"yii\db\Command::query";i:3;d:1508957018.6574271;i:4;a:3:{i:0;a:5:{s:4:"file";s:42:"/var/www/scm/models/TabParametrosQuery.php";s:4:"line";i:24;s:8:"function";s:3:"all";s:5:"class";s:18:"yii\db\ActiveQuery";s:4:"type";s:2:"->";}i:1;a:5:{s:4:"file";s:27:"/var/www/scm/config/web.php";s:4:"line";i:174;s:8:"function";s:3:"all";s:5:"class";s:29:"app\models\TabParametrosQuery";s:4:"type";s:2:"->";}i:2;a:3:{s:4:"file";s:27:"/var/www/scm/config/web.php";s:4:"line";i:184;s:8:"function";s:9:"{closure}";}}i:5;i:3643560;}i:43;a:6:{i:0;s:62:"SELECT * FROM "acesso"."tab_usuarios" WHERE "cod_usuario"=3777";i:1;i:80;i:2;s:21:"yii\db\Command::query";i:3;d:1508957018.663312;i:4;a:3:{i:0;a:5:{s:4:"file";s:54:"/var/www/scm/modules/admin/models/TabUsuariosQuery.php";s:4:"line";i:33;s:8:"function";s:3:"one";s:5:"class";s:18:"yii\db\ActiveQuery";s:4:"type";s:2:"->";}i:1;a:5:{s:4:"file";s:36:"/var/www/scm/projeto/base/Module.php";s:4:"line";i:45;s:8:"function";s:7:"findOne";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"::";}i:2;a:5:{s:4:"file";s:36:"/var/www/scm/projeto/base/Module.php";s:4:"line";i:29;s:8:"function";s:30:"isModuloBloqueadoAcessoInterno";s:5:"class";s:19:"projeto\base\Module";s:4:"type";s:2:"::";}}i:5;i:3840448;}i:44;a:6:{i:0;s:62:"SELECT * FROM "acesso"."tab_usuarios" WHERE "cod_usuario"=3777";i:1;i:96;i:2;s:21:"yii\db\Command::query";i:3;d:1508957018.665942;i:4;a:3:{i:0;a:5:{s:4:"file";s:54:"/var/www/scm/modules/admin/models/TabUsuariosQuery.php";s:4:"line";i:33;s:8:"function";s:3:"one";s:5:"class";s:18:"yii\db\ActiveQuery";s:4:"type";s:2:"->";}i:1;a:5:{s:4:"file";s:36:"/var/www/scm/projeto/base/Module.php";s:4:"line";i:45;s:8:"function";s:7:"findOne";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"::";}i:2;a:5:{s:4:"file";s:36:"/var/www/scm/projeto/base/Module.php";s:4:"line";i:29;s:8:"function";s:30:"isModuloBloqueadoAcessoInterno";s:5:"class";s:19:"projeto\base\Module";s:4:"type";s:2:"::";}}i:5;i:3851256;}i:46;a:6:{i:0;s:59:"SELECT * FROM "acesso"."tab_modulos" WHERE "id"='comercial'";i:1;i:80;i:2;s:21:"yii\db\Command::query";i:3;d:1508957018.6695809;i:4;a:3:{i:0;a:5:{s:4:"file";s:53:"/var/www/scm/modules/admin/models/TabModulosQuery.php";s:4:"line";i:33;s:8:"function";s:3:"one";s:5:"class";s:18:"yii\db\ActiveQuery";s:4:"type";s:2:"->";}i:1;a:5:{s:4:"file";s:36:"/var/www/scm/projeto/base/Module.php";s:4:"line";i:48;s:8:"function";s:7:"findOne";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"::";}i:2;a:5:{s:4:"file";s:36:"/var/www/scm/projeto/base/Module.php";s:4:"line";i:29;s:8:"function";s:30:"isModuloBloqueadoAcessoInterno";s:5:"class";s:19:"projeto\base\Module";s:4:"type";s:2:"::";}}i:5;i:3975920;}i:47;a:6:{i:0;s:59:"SELECT * FROM "acesso"."tab_modulos" WHERE "id"='comercial'";i:1;i:96;i:2;s:21:"yii\db\Command::query";i:3;d:1508957018.6748419;i:4;a:3:{i:0;a:5:{s:4:"file";s:53:"/var/www/scm/modules/admin/models/TabModulosQuery.php";s:4:"line";i:33;s:8:"function";s:3:"one";s:5:"class";s:18:"yii\db\ActiveQuery";s:4:"type";s:2:"->";}i:1;a:5:{s:4:"file";s:36:"/var/www/scm/projeto/base/Module.php";s:4:"line";i:48;s:8:"function";s:7:"findOne";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"::";}i:2;a:5:{s:4:"file";s:36:"/var/www/scm/projeto/base/Module.php";s:4:"line";i:29;s:8:"function";s:30:"isModuloBloqueadoAcessoInterno";s:5:"class";s:19:"projeto\base\Module";s:4:"type";s:2:"::";}}i:5;i:3985384;}i:49;a:6:{i:0;s:1957:"SELECT
+    d.nspname AS table_schema,
+    c.relname AS table_name,
+    a.attname AS column_name,
+    t.typname AS data_type,
+    a.attlen AS character_maximum_length,
+    pg_catalog.col_description(c.oid, a.attnum) AS column_comment,
+    a.atttypmod AS modifier,
+    a.attnotnull = false AS is_nullable,
+    CAST(pg_get_expr(ad.adbin, ad.adrelid) AS varchar) AS column_default,
+    coalesce(pg_get_expr(ad.adbin, ad.adrelid) ~ 'nextval',false) AS is_autoinc,
+    array_to_string((select array_agg(enumlabel) from pg_enum where enumtypid=a.atttypid)::varchar[],',') as enum_values,
+    CASE atttypid
+         WHEN 21 /*int2*/ THEN 16
+         WHEN 23 /*int4*/ THEN 32
+         WHEN 20 /*int8*/ THEN 64
+         WHEN 1700 /*numeric*/ THEN
+              CASE WHEN atttypmod = -1
+               THEN null
+               ELSE ((atttypmod - 4) >> 16) & 65535
+               END
+         WHEN 700 /*float4*/ THEN 24 /*FLT_MANT_DIG*/
+         WHEN 701 /*float8*/ THEN 53 /*DBL_MANT_DIG*/
+         ELSE null
+      END   AS numeric_precision,
+      CASE
+        WHEN atttypid IN (21, 23, 20) THEN 0
+        WHEN atttypid IN (1700) THEN
+        CASE
+            WHEN atttypmod = -1 THEN null
+            ELSE (atttypmod - 4) & 65535
+        END
+           ELSE null
+      END AS numeric_scale,
+    CAST(
+             information_schema._pg_char_max_length(information_schema._pg_truetypid(a, t), information_schema._pg_truetypmod(a, t))
+             AS numeric
+    ) AS size,
+    a.attnum = any (ct.conkey) as is_pkey
+FROM
+    pg_class c
+    LEFT JOIN pg_attribute a ON a.attrelid = c.oid
+    LEFT JOIN pg_attrdef ad ON a.attrelid = ad.adrelid AND a.attnum = ad.adnum
+    LEFT JOIN pg_type t ON a.atttypid = t.oid
+    LEFT JOIN pg_namespace d ON d.oid = c.relnamespace
+    LEFT join pg_constraint ct on ct.conrelid=c.oid and ct.contype='p'
+WHERE
+    a.attnum > 0 and t.typname != ''
+    and c.relname = 'tab_modulos'
+    and d.nspname = 'acesso'
+ORDER BY
+    a.attnum;";i:1;i:80;i:2;s:21:"yii\db\Command::query";i:3;d:1508957018.6775391;i:4;a:3:{i:0;a:5:{s:4:"file";s:53:"/var/www/scm/modules/admin/models/TabModulosQuery.php";s:4:"line";i:33;s:8:"function";s:3:"one";s:5:"class";s:18:"yii\db\ActiveQuery";s:4:"type";s:2:"->";}i:1;a:5:{s:4:"file";s:36:"/var/www/scm/projeto/base/Module.php";s:4:"line";i:48;s:8:"function";s:7:"findOne";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"::";}i:2;a:5:{s:4:"file";s:36:"/var/www/scm/projeto/base/Module.php";s:4:"line";i:29;s:8:"function";s:30:"isModuloBloqueadoAcessoInterno";s:5:"class";s:19:"projeto\base\Module";s:4:"type";s:2:"::";}}i:5;i:4014776;}i:50;a:6:{i:0;s:1957:"SELECT
+    d.nspname AS table_schema,
+    c.relname AS table_name,
+    a.attname AS column_name,
+    t.typname AS data_type,
+    a.attlen AS character_maximum_length,
+    pg_catalog.col_description(c.oid, a.attnum) AS column_comment,
+    a.atttypmod AS modifier,
+    a.attnotnull = false AS is_nullable,
+    CAST(pg_get_expr(ad.adbin, ad.adrelid) AS varchar) AS column_default,
+    coalesce(pg_get_expr(ad.adbin, ad.adrelid) ~ 'nextval',false) AS is_autoinc,
+    array_to_string((select array_agg(enumlabel) from pg_enum where enumtypid=a.atttypid)::varchar[],',') as enum_values,
+    CASE atttypid
+         WHEN 21 /*int2*/ THEN 16
+         WHEN 23 /*int4*/ THEN 32
+         WHEN 20 /*int8*/ THEN 64
+         WHEN 1700 /*numeric*/ THEN
+              CASE WHEN atttypmod = -1
+               THEN null
+               ELSE ((atttypmod - 4) >> 16) & 65535
+               END
+         WHEN 700 /*float4*/ THEN 24 /*FLT_MANT_DIG*/
+         WHEN 701 /*float8*/ THEN 53 /*DBL_MANT_DIG*/
+         ELSE null
+      END   AS numeric_precision,
+      CASE
+        WHEN atttypid IN (21, 23, 20) THEN 0
+        WHEN atttypid IN (1700) THEN
+        CASE
+            WHEN atttypmod = -1 THEN null
+            ELSE (atttypmod - 4) & 65535
+        END
+           ELSE null
+      END AS numeric_scale,
+    CAST(
+             information_schema._pg_char_max_length(information_schema._pg_truetypid(a, t), information_schema._pg_truetypmod(a, t))
+             AS numeric
+    ) AS size,
+    a.attnum = any (ct.conkey) as is_pkey
+FROM
+    pg_class c
+    LEFT JOIN pg_attribute a ON a.attrelid = c.oid
+    LEFT JOIN pg_attrdef ad ON a.attrelid = ad.adrelid AND a.attnum = ad.adnum
+    LEFT JOIN pg_type t ON a.atttypid = t.oid
+    LEFT JOIN pg_namespace d ON d.oid = c.relnamespace
+    LEFT join pg_constraint ct on ct.conrelid=c.oid and ct.contype='p'
+WHERE
+    a.attnum > 0 and t.typname != ''
+    and c.relname = 'tab_modulos'
+    and d.nspname = 'acesso'
+ORDER BY
+    a.attnum;";i:1;i:96;i:2;s:21:"yii\db\Command::query";i:3;d:1508957018.7093389;i:4;a:3:{i:0;a:5:{s:4:"file";s:53:"/var/www/scm/modules/admin/models/TabModulosQuery.php";s:4:"line";i:33;s:8:"function";s:3:"one";s:5:"class";s:18:"yii\db\ActiveQuery";s:4:"type";s:2:"->";}i:1;a:5:{s:4:"file";s:36:"/var/www/scm/projeto/base/Module.php";s:4:"line";i:48;s:8:"function";s:7:"findOne";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"::";}i:2;a:5:{s:4:"file";s:36:"/var/www/scm/projeto/base/Module.php";s:4:"line";i:29;s:8:"function";s:30:"isModuloBloqueadoAcessoInterno";s:5:"class";s:19:"projeto\base\Module";s:4:"type";s:2:"::";}}i:5;i:4066512;}i:52;a:6:{i:0;s:879:"select
+    ct.conname as constraint_name,
+    a.attname as column_name,
+    fc.relname as foreign_table_name,
+    fns.nspname as foreign_table_schema,
+    fa.attname as foreign_column_name
+from
+    (SELECT ct.conname, ct.conrelid, ct.confrelid, ct.conkey, ct.contype, ct.confkey, generate_subscripts(ct.conkey, 1) AS s
+       FROM pg_constraint ct
+    ) AS ct
+    inner join pg_class c on c.oid=ct.conrelid
+    inner join pg_namespace ns on c.relnamespace=ns.oid
+    inner join pg_attribute a on a.attrelid=ct.conrelid and a.attnum = ct.conkey[ct.s]
+    left join pg_class fc on fc.oid=ct.confrelid
+    left join pg_namespace fns on fc.relnamespace=fns.oid
+    left join pg_attribute fa on fa.attrelid=ct.confrelid and fa.attnum = ct.confkey[ct.s]
+where
+    ct.contype='f'
+    and c.relname='tab_modulos'
+    and ns.nspname='acesso'
+order by
+    fns.nspname, fc.relname, a.attnum";i:1;i:80;i:2;s:21:"yii\db\Command::query";i:3;d:1508957018.7179389;i:4;a:3:{i:0;a:5:{s:4:"file";s:53:"/var/www/scm/modules/admin/models/TabModulosQuery.php";s:4:"line";i:33;s:8:"function";s:3:"one";s:5:"class";s:18:"yii\db\ActiveQuery";s:4:"type";s:2:"->";}i:1;a:5:{s:4:"file";s:36:"/var/www/scm/projeto/base/Module.php";s:4:"line";i:48;s:8:"function";s:7:"findOne";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"::";}i:2;a:5:{s:4:"file";s:36:"/var/www/scm/projeto/base/Module.php";s:4:"line";i:29;s:8:"function";s:30:"isModuloBloqueadoAcessoInterno";s:5:"class";s:19:"projeto\base\Module";s:4:"type";s:2:"::";}}i:5;i:4044592;}i:53;a:6:{i:0;s:879:"select
+    ct.conname as constraint_name,
+    a.attname as column_name,
+    fc.relname as foreign_table_name,
+    fns.nspname as foreign_table_schema,
+    fa.attname as foreign_column_name
+from
+    (SELECT ct.conname, ct.conrelid, ct.confrelid, ct.conkey, ct.contype, ct.confkey, generate_subscripts(ct.conkey, 1) AS s
+       FROM pg_constraint ct
+    ) AS ct
+    inner join pg_class c on c.oid=ct.conrelid
+    inner join pg_namespace ns on c.relnamespace=ns.oid
+    inner join pg_attribute a on a.attrelid=ct.conrelid and a.attnum = ct.conkey[ct.s]
+    left join pg_class fc on fc.oid=ct.confrelid
+    left join pg_namespace fns on fc.relnamespace=fns.oid
+    left join pg_attribute fa on fa.attrelid=ct.confrelid and fa.attnum = ct.confkey[ct.s]
+where
+    ct.contype='f'
+    and c.relname='tab_modulos'
+    and ns.nspname='acesso'
+order by
+    fns.nspname, fc.relname, a.attnum";i:1;i:96;i:2;s:21:"yii\db\Command::query";i:3;d:1508957018.7331901;i:4;a:3:{i:0;a:5:{s:4:"file";s:53:"/var/www/scm/modules/admin/models/TabModulosQuery.php";s:4:"line";i:33;s:8:"function";s:3:"one";s:5:"class";s:18:"yii\db\ActiveQuery";s:4:"type";s:2:"->";}i:1;a:5:{s:4:"file";s:36:"/var/www/scm/projeto/base/Module.php";s:4:"line";i:48;s:8:"function";s:7:"findOne";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"::";}i:2;a:5:{s:4:"file";s:36:"/var/www/scm/projeto/base/Module.php";s:4:"line";i:29;s:8:"function";s:30:"isModuloBloqueadoAcessoInterno";s:5:"class";s:19:"projeto\base\Module";s:4:"type";s:2:"::";}}i:5;i:4050016;}i:55;a:6:{i:0;s:72:"SELECT * FROM "acesso"."vis_usuarios_perfis" WHERE "cod_usuario_fk"=3777";i:1;i:80;i:2;s:21:"yii\db\Command::query";i:3;d:1508957018.737422;i:4;a:3:{i:0;a:5:{s:4:"file";s:60:"/var/www/scm/modules/admin/models/VisUsuariosPerfisQuery.php";s:4:"line";i:24;s:8:"function";s:3:"all";s:5:"class";s:18:"yii\db\ActiveQuery";s:4:"type";s:2:"->";}i:1;a:5:{s:4:"file";s:40:"/var/www/scm/projeto/db/ActiveRecord.php";s:4:"line";i:33;s:8:"function";s:3:"all";s:5:"class";s:47:"app\modules\admin\models\VisUsuariosPerfisQuery";s:4:"type";s:2:"->";}i:2;a:5:{s:4:"file";s:61:"/var/www/scm/modules/admin/models/VisUsuariosPerfisSearch.php";s:4:"line";i:73;s:8:"function";s:14:"findAllAsArray";s:5:"class";s:23:"projeto\db\ActiveRecord";s:4:"type";s:2:"::";}}i:5;i:4229040;}i:56;a:6:{i:0;s:72:"SELECT * FROM "acesso"."vis_usuarios_perfis" WHERE "cod_usuario_fk"=3777";i:1;i:96;i:2;s:21:"yii\db\Command::query";i:3;d:1508957018.7487741;i:4;a:3:{i:0;a:5:{s:4:"file";s:60:"/var/www/scm/modules/admin/models/VisUsuariosPerfisQuery.php";s:4:"line";i:24;s:8:"function";s:3:"all";s:5:"class";s:18:"yii\db\ActiveQuery";s:4:"type";s:2:"->";}i:1;a:5:{s:4:"file";s:40:"/var/www/scm/projeto/db/ActiveRecord.php";s:4:"line";i:33;s:8:"function";s:3:"all";s:5:"class";s:47:"app\modules\admin\models\VisUsuariosPerfisQuery";s:4:"type";s:2:"->";}i:2;a:5:{s:4:"file";s:61:"/var/www/scm/modules/admin/models/VisUsuariosPerfisSearch.php";s:4:"line";i:73;s:8:"function";s:14:"findAllAsArray";s:5:"class";s:23:"projeto\db\ActiveRecord";s:4:"type";s:2:"::";}}i:5;i:4241432;}i:58;a:6:{i:0;s:131:"SELECT * FROM "tab_parametros" WHERE ("num_ano_ref"=2015) AND ("sgl_parametro"='sistema-bloqueio-usr-interno') AND ("modulo_fk"=32)";i:1;i:80;i:2;s:21:"yii\db\Command::query";i:3;d:1508957018.7510281;i:4;a:3:{i:0;a:5:{s:4:"file";s:42:"/var/www/scm/models/TabParametrosQuery.php";s:4:"line";i:33;s:8:"function";s:3:"one";s:5:"class";s:18:"yii\db\ActiveQuery";s:4:"type";s:2:"->";}i:1;a:5:{s:4:"file";s:36:"/var/www/scm/projeto/base/Module.php";s:4:"line";i:62;s:8:"function";s:7:"findOne";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"::";}i:2;a:5:{s:4:"file";s:36:"/var/www/scm/projeto/base/Module.php";s:4:"line";i:29;s:8:"function";s:30:"isModuloBloqueadoAcessoInterno";s:5:"class";s:19:"projeto\base\Module";s:4:"type";s:2:"::";}}i:5;i:4248136;}i:59;a:6:{i:0;s:131:"SELECT * FROM "tab_parametros" WHERE ("num_ano_ref"=2015) AND ("sgl_parametro"='sistema-bloqueio-usr-interno') AND ("modulo_fk"=32)";i:1;i:96;i:2;s:21:"yii\db\Command::query";i:3;d:1508957018.7534709;i:4;a:3:{i:0;a:5:{s:4:"file";s:42:"/var/www/scm/models/TabParametrosQuery.php";s:4:"line";i:33;s:8:"function";s:3:"one";s:5:"class";s:18:"yii\db\ActiveQuery";s:4:"type";s:2:"->";}i:1;a:5:{s:4:"file";s:36:"/var/www/scm/projeto/base/Module.php";s:4:"line";i:62;s:8:"function";s:7:"findOne";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"::";}i:2;a:5:{s:4:"file";s:36:"/var/www/scm/projeto/base/Module.php";s:4:"line";i:29;s:8:"function";s:30:"isModuloBloqueadoAcessoInterno";s:5:"class";s:19:"projeto\base\Module";s:4:"type";s:2:"::";}}i:5;i:4254224;}i:61;a:6:{i:0;s:62:"SELECT * FROM "acesso"."tab_usuarios" WHERE "cod_usuario"=3777";i:1;i:80;i:2;s:21:"yii\db\Command::query";i:3;d:1508957018.7555029;i:4;a:3:{i:0;a:5:{s:4:"file";s:54:"/var/www/scm/modules/admin/models/TabUsuariosQuery.php";s:4:"line";i:33;s:8:"function";s:3:"one";s:5:"class";s:18:"yii\db\ActiveQuery";s:4:"type";s:2:"->";}i:1;a:5:{s:4:"file";s:36:"/var/www/scm/projeto/base/Module.php";s:4:"line";i:73;s:8:"function";s:7:"findOne";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"::";}i:2;a:5:{s:4:"file";s:36:"/var/www/scm/projeto/base/Module.php";s:4:"line";i:34;s:8:"function";s:30:"isModuloBloqueadoAcessoExterno";s:5:"class";s:19:"projeto\base\Module";s:4:"type";s:2:"::";}}i:5;i:4247360;}i:62;a:6:{i:0;s:62:"SELECT * FROM "acesso"."tab_usuarios" WHERE "cod_usuario"=3777";i:1;i:96;i:2;s:21:"yii\db\Command::query";i:3;d:1508957018.7577269;i:4;a:3:{i:0;a:5:{s:4:"file";s:54:"/var/www/scm/modules/admin/models/TabUsuariosQuery.php";s:4:"line";i:33;s:8:"function";s:3:"one";s:5:"class";s:18:"yii\db\ActiveQuery";s:4:"type";s:2:"->";}i:1;a:5:{s:4:"file";s:36:"/var/www/scm/projeto/base/Module.php";s:4:"line";i:73;s:8:"function";s:7:"findOne";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"::";}i:2;a:5:{s:4:"file";s:36:"/var/www/scm/projeto/base/Module.php";s:4:"line";i:34;s:8:"function";s:30:"isModuloBloqueadoAcessoExterno";s:5:"class";s:19:"projeto\base\Module";s:4:"type";s:2:"::";}}i:5;i:4258160;}i:66;a:6:{i:0;s:96:"SELECT COUNT(*) FROM "comercial"."tab_contrato" WHERE to_char(dt_incllusao, 'MM/YYYY')='09/2017'";i:1;i:80;i:2;s:21:"yii\db\Command::query";i:3;d:1508957018.7686009;i:4;a:1:{i:0;a:5:{s:4:"file";s:63:"/var/www/scm/modules/comercial/controllers/InicioController.php";s:4:"line";i:23;s:8:"function";s:5:"count";s:5:"class";s:12:"yii\db\Query";s:4:"type";s:2:"->";}}i:5;i:4659296;}i:67;a:6:{i:0;s:96:"SELECT COUNT(*) FROM "comercial"."tab_contrato" WHERE to_char(dt_incllusao, 'MM/YYYY')='09/2017'";i:1;i:96;i:2;s:21:"yii\db\Command::query";i:3;d:1508957018.7716701;i:4;a:1:{i:0;a:5:{s:4:"file";s:63:"/var/www/scm/modules/comercial/controllers/InicioController.php";s:4:"line";i:23;s:8:"function";s:5:"count";s:5:"class";s:12:"yii\db\Query";s:4:"type";s:2:"->";}}i:5;i:4684856;}i:86;a:6:{i:0;s:82:"SELECT "id" FROM "acesso"."tab_sessao_php" WHERE "id"='25cml2a2te37kgeguujk5m3202'";i:1;i:80;i:2;s:21:"yii\db\Command::query";i:3;d:1508957018.8475659;i:4;a:0:{}i:5;i:4801968;}i:87;a:6:{i:0;s:82:"SELECT "id" FROM "acesso"."tab_sessao_php" WHERE "id"='25cml2a2te37kgeguujk5m3202'";i:1;i:96;i:2;s:21:"yii\db\Command::query";i:3;d:1508957018.8533919;i:4;a:0:{}i:5;i:4803464;}i:89;a:6:{i:0;s:1960:"SELECT
+    d.nspname AS table_schema,
+    c.relname AS table_name,
+    a.attname AS column_name,
+    t.typname AS data_type,
+    a.attlen AS character_maximum_length,
+    pg_catalog.col_description(c.oid, a.attnum) AS column_comment,
+    a.atttypmod AS modifier,
+    a.attnotnull = false AS is_nullable,
+    CAST(pg_get_expr(ad.adbin, ad.adrelid) AS varchar) AS column_default,
+    coalesce(pg_get_expr(ad.adbin, ad.adrelid) ~ 'nextval',false) AS is_autoinc,
+    array_to_string((select array_agg(enumlabel) from pg_enum where enumtypid=a.atttypid)::varchar[],',') as enum_values,
+    CASE atttypid
+         WHEN 21 /*int2*/ THEN 16
+         WHEN 23 /*int4*/ THEN 32
+         WHEN 20 /*int8*/ THEN 64
+         WHEN 1700 /*numeric*/ THEN
+              CASE WHEN atttypmod = -1
+               THEN null
+               ELSE ((atttypmod - 4) >> 16) & 65535
+               END
+         WHEN 700 /*float4*/ THEN 24 /*FLT_MANT_DIG*/
+         WHEN 701 /*float8*/ THEN 53 /*DBL_MANT_DIG*/
+         ELSE null
+      END   AS numeric_precision,
+      CASE
+        WHEN atttypid IN (21, 23, 20) THEN 0
+        WHEN atttypid IN (1700) THEN
+        CASE
+            WHEN atttypmod = -1 THEN null
+            ELSE (atttypmod - 4) & 65535
+        END
+           ELSE null
+      END AS numeric_scale,
+    CAST(
+             information_schema._pg_char_max_length(information_schema._pg_truetypid(a, t), information_schema._pg_truetypmod(a, t))
+             AS numeric
+    ) AS size,
+    a.attnum = any (ct.conkey) as is_pkey
+FROM
+    pg_class c
+    LEFT JOIN pg_attribute a ON a.attrelid = c.oid
+    LEFT JOIN pg_attrdef ad ON a.attrelid = ad.adrelid AND a.attnum = ad.adnum
+    LEFT JOIN pg_type t ON a.atttypid = t.oid
+    LEFT JOIN pg_namespace d ON d.oid = c.relnamespace
+    LEFT join pg_constraint ct on ct.conrelid=c.oid and ct.contype='p'
+WHERE
+    a.attnum > 0 and t.typname != ''
+    and c.relname = 'tab_sessao_php'
+    and d.nspname = 'acesso'
+ORDER BY
+    a.attnum;";i:1;i:80;i:2;s:21:"yii\db\Command::query";i:3;d:1508957018.8560591;i:4;a:0:{}i:5;i:4826040;}i:90;a:6:{i:0;s:1960:"SELECT
+    d.nspname AS table_schema,
+    c.relname AS table_name,
+    a.attname AS column_name,
+    t.typname AS data_type,
+    a.attlen AS character_maximum_length,
+    pg_catalog.col_description(c.oid, a.attnum) AS column_comment,
+    a.atttypmod AS modifier,
+    a.attnotnull = false AS is_nullable,
+    CAST(pg_get_expr(ad.adbin, ad.adrelid) AS varchar) AS column_default,
+    coalesce(pg_get_expr(ad.adbin, ad.adrelid) ~ 'nextval',false) AS is_autoinc,
+    array_to_string((select array_agg(enumlabel) from pg_enum where enumtypid=a.atttypid)::varchar[],',') as enum_values,
+    CASE atttypid
+         WHEN 21 /*int2*/ THEN 16
+         WHEN 23 /*int4*/ THEN 32
+         WHEN 20 /*int8*/ THEN 64
+         WHEN 1700 /*numeric*/ THEN
+              CASE WHEN atttypmod = -1
+               THEN null
+               ELSE ((atttypmod - 4) >> 16) & 65535
+               END
+         WHEN 700 /*float4*/ THEN 24 /*FLT_MANT_DIG*/
+         WHEN 701 /*float8*/ THEN 53 /*DBL_MANT_DIG*/
+         ELSE null
+      END   AS numeric_precision,
+      CASE
+        WHEN atttypid IN (21, 23, 20) THEN 0
+        WHEN atttypid IN (1700) THEN
+        CASE
+            WHEN atttypmod = -1 THEN null
+            ELSE (atttypmod - 4) & 65535
+        END
+           ELSE null
+      END AS numeric_scale,
+    CAST(
+             information_schema._pg_char_max_length(information_schema._pg_truetypid(a, t), information_schema._pg_truetypmod(a, t))
+             AS numeric
+    ) AS size,
+    a.attnum = any (ct.conkey) as is_pkey
+FROM
+    pg_class c
+    LEFT JOIN pg_attribute a ON a.attrelid = c.oid
+    LEFT JOIN pg_attrdef ad ON a.attrelid = ad.adrelid AND a.attnum = ad.adnum
+    LEFT JOIN pg_type t ON a.atttypid = t.oid
+    LEFT JOIN pg_namespace d ON d.oid = c.relnamespace
+    LEFT join pg_constraint ct on ct.conrelid=c.oid and ct.contype='p'
+WHERE
+    a.attnum > 0 and t.typname != ''
+    and c.relname = 'tab_sessao_php'
+    and d.nspname = 'acesso'
+ORDER BY
+    a.attnum;";i:1;i:96;i:2;s:21:"yii\db\Command::query";i:3;d:1508957018.8732331;i:4;a:0:{}i:5;i:4839840;}i:92;a:6:{i:0;s:882:"select
+    ct.conname as constraint_name,
+    a.attname as column_name,
+    fc.relname as foreign_table_name,
+    fns.nspname as foreign_table_schema,
+    fa.attname as foreign_column_name
+from
+    (SELECT ct.conname, ct.conrelid, ct.confrelid, ct.conkey, ct.contype, ct.confkey, generate_subscripts(ct.conkey, 1) AS s
+       FROM pg_constraint ct
+    ) AS ct
+    inner join pg_class c on c.oid=ct.conrelid
+    inner join pg_namespace ns on c.relnamespace=ns.oid
+    inner join pg_attribute a on a.attrelid=ct.conrelid and a.attnum = ct.conkey[ct.s]
+    left join pg_class fc on fc.oid=ct.confrelid
+    left join pg_namespace fns on fc.relnamespace=fns.oid
+    left join pg_attribute fa on fa.attrelid=ct.confrelid and fa.attnum = ct.confkey[ct.s]
+where
+    ct.contype='f'
+    and c.relname='tab_sessao_php'
+    and ns.nspname='acesso'
+order by
+    fns.nspname, fc.relname, a.attnum";i:1;i:80;i:2;s:21:"yii\db\Command::query";i:3;d:1508957018.8754599;i:4;a:0:{}i:5;i:4831688;}i:93;a:6:{i:0;s:882:"select
+    ct.conname as constraint_name,
+    a.attname as column_name,
+    fc.relname as foreign_table_name,
+    fns.nspname as foreign_table_schema,
+    fa.attname as foreign_column_name
+from
+    (SELECT ct.conname, ct.conrelid, ct.confrelid, ct.conkey, ct.contype, ct.confkey, generate_subscripts(ct.conkey, 1) AS s
+       FROM pg_constraint ct
+    ) AS ct
+    inner join pg_class c on c.oid=ct.conrelid
+    inner join pg_namespace ns on c.relnamespace=ns.oid
+    inner join pg_attribute a on a.attrelid=ct.conrelid and a.attnum = ct.conkey[ct.s]
+    left join pg_class fc on fc.oid=ct.confrelid
+    left join pg_namespace fns on fc.relnamespace=fns.oid
+    left join pg_attribute fa on fa.attrelid=ct.confrelid and fa.attnum = ct.confkey[ct.s]
+where
+    ct.contype='f'
+    and c.relname='tab_sessao_php'
+    and ns.nspname='acesso'
+order by
+    fns.nspname, fc.relname, a.attnum";i:1;i:96;i:2;s:21:"yii\db\Command::query";i:3;d:1508957018.892004;i:4;a:0:{}i:5;i:4833432;}i:95;a:6:{i:0;s:10857:"UPDATE "acesso"."tab_sessao_php" SET "data"='__flash|a:0:{}sessao-expirada|s:9:"/scm/web/";__returnUrl|s:9:"/scm/web/";__id|i:3777;endereco|a:2:{i:4012;a:13:{s:12:"cod_endereco";i:4012;s:10:"logradouro";s:15:"Q 01 CONJ 01 LT";s:6:"numero";s:2:"12";s:11:"complemento";s:19:"LOJA 01 SETOR NORTE";s:3:"cep";s:10:"71.258-015";s:15:"correspondencia";N;s:16:"cod_municipio_fk";s:6:"530010";s:8:"chave_fk";i:3;s:12:"tipo_usuario";N;s:11:"dt_inclusao";s:10:"2017-05-31";s:5:"ativo";b:1;s:6:"bairro";s:17:"CIDADE ESTRUTURAL";s:14:"tipo_tabela_fk";s:11:"tab_cliente";}i:6397;a:13:{s:12:"cod_endereco";i:6397;s:10:"logradouro";s:5:"u88uu";s:6:"numero";s:4:"yyyy";s:11:"complemento";s:3:"yyy";s:3:"cep";s:10:"71.100-111";s:15:"correspondencia";b:0;s:16:"cod_municipio_fk";s:6:"270040";s:8:"chave_fk";i:3;s:12:"tipo_usuario";N;s:11:"dt_inclusao";N;s:5:"ativo";b:1;s:6:"bairro";N;s:14:"tipo_tabela_fk";s:11:"tab_cliente";}}contato|a:1:{i:30240;a:8:{s:11:"cod_contato";i:30240;s:7:"contato";s:15:"(97) 89273-9842";s:5:"ramal";s:0:"";s:5:"ativo";b:1;s:11:"dt_inclusao";s:10:"2017-09-22";s:4:"tipo";i:464;s:8:"chave_fk";i:3;s:14:"tipo_tabela_fk";s:11:"tab_cliente";}}contratos|a:5:{i:0;a:4:{s:10:"attributes";a:27:{s:12:"cod_contrato";i:14275;s:16:"tipo_contrato_fk";i:498;s:14:"valor_contrato";s:8:"10000.00";s:14:"dia_vencimento";N;s:12:"qnt_parcelas";i:4;s:8:"dt_prazo";s:10:"04/10/2017";s:11:"dt_inclusao";s:10:"25/10/2017";s:13:"dt_vencimento";s:10:"11/10/2017";s:8:"contador";N;s:14:"responsavel_fk";N;s:8:"operando";N;s:12:"qnt_clientes";N;s:4:"link";N;s:7:"zero800";N;s:9:"parceiria";N;s:15:"consultoria_scm";N;s:18:"engenheiro_tecnico";N;s:14:"cod_cliente_fk";i:3;s:5:"ativo";b:1;s:18:"txt_login_inclusao";s:1:"1";s:19:"txt_login_alteracao";s:1:"1";s:12:"dt_alteracao";s:10:"25/10/2017";s:6:"status";i:537;s:16:"nome_responsavel";N;s:8:"contrato";N;s:13:"dt_fechamento";N;s:21:"status_do_contrato_fk";N;}s:14:"tipo_contratos";a:1:{i:0;a:5:{s:17:"cod_tipo_contrato";i:12723;s:14:"cod_usuario_fk";i:1;s:15:"cod_contrato_fk";i:14275;s:15:"tipo_produto_fk";i:523;s:5:"ativo";b:1;}}s:8:"parcelas";a:4:{i:0;a:9:{s:21:"cod_contrato_parcelas";i:872;s:15:"cod_contrato_fk";i:14275;s:6:"numero";i:1;s:5:"valor";s:7:"2500.00";s:11:"dt_inclusao";s:10:"2017-10-25";s:13:"dt_vencimento";s:10:"2017-10-11";s:18:"txt_login_inclusao";s:1:"1";s:19:"txt_login_alteracao";s:1:"1";s:12:"dt_alteracao";s:10:"2017-10-25";}i:1;a:9:{s:21:"cod_contrato_parcelas";i:873;s:15:"cod_contrato_fk";i:14275;s:6:"numero";i:2;s:5:"valor";s:7:"2500.00";s:11:"dt_inclusao";s:10:"2017-10-25";s:13:"dt_vencimento";s:10:"2017-11-11";s:18:"txt_login_inclusao";s:1:"1";s:19:"txt_login_alteracao";s:1:"1";s:12:"dt_alteracao";s:10:"2017-10-25";}i:2;a:9:{s:21:"cod_contrato_parcelas";i:874;s:15:"cod_contrato_fk";i:14275;s:6:"numero";i:3;s:5:"valor";s:7:"2500.00";s:11:"dt_inclusao";s:10:"2017-10-25";s:13:"dt_vencimento";s:10:"2017-12-11";s:18:"txt_login_inclusao";s:1:"1";s:19:"txt_login_alteracao";s:1:"1";s:12:"dt_alteracao";s:10:"2017-10-25";}i:3;a:9:{s:21:"cod_contrato_parcelas";i:875;s:15:"cod_contrato_fk";i:14275;s:6:"numero";i:4;s:5:"valor";s:7:"2500.00";s:11:"dt_inclusao";s:10:"2017-10-25";s:13:"dt_vencimento";s:10:"2018-04-11";s:18:"txt_login_inclusao";s:1:"1";s:19:"txt_login_alteracao";s:1:"1";s:12:"dt_alteracao";s:10:"2017-10-25";}}s:10:"andamentos";N;}i:1;a:4:{s:10:"attributes";a:27:{s:12:"cod_contrato";i:14274;s:16:"tipo_contrato_fk";i:510;s:14:"valor_contrato";s:6:"100.00";s:14:"dia_vencimento";N;s:12:"qnt_parcelas";i:4;s:8:"dt_prazo";s:10:"25/10/2017";s:11:"dt_inclusao";s:10:"24/10/2017";s:13:"dt_vencimento";s:10:"16/10/2017";s:8:"contador";N;s:14:"responsavel_fk";N;s:8:"operando";N;s:12:"qnt_clientes";N;s:4:"link";N;s:7:"zero800";N;s:9:"parceiria";N;s:15:"consultoria_scm";N;s:18:"engenheiro_tecnico";N;s:14:"cod_cliente_fk";i:3;s:5:"ativo";b:1;s:18:"txt_login_inclusao";s:1:"1";s:19:"txt_login_alteracao";s:1:"1";s:12:"dt_alteracao";s:10:"24/10/2017";s:6:"status";i:543;s:16:"nome_responsavel";N;s:8:"contrato";N;s:13:"dt_fechamento";N;s:21:"status_do_contrato_fk";N;}s:14:"tipo_contratos";a:1:{i:0;a:5:{s:17:"cod_tipo_contrato";i:12722;s:14:"cod_usuario_fk";i:1;s:15:"cod_contrato_fk";i:14274;s:15:"tipo_produto_fk";i:523;s:5:"ativo";b:1;}}s:8:"parcelas";a:4:{i:0;a:9:{s:21:"cod_contrato_parcelas";i:868;s:15:"cod_contrato_fk";i:14274;s:6:"numero";i:1;s:5:"valor";s:5:"25.00";s:11:"dt_inclusao";s:10:"2017-10-24";s:13:"dt_vencimento";s:10:"2017-10-16";s:18:"txt_login_inclusao";s:1:"1";s:19:"txt_login_alteracao";s:1:"1";s:12:"dt_alteracao";s:10:"2017-10-24";}i:1;a:9:{s:21:"cod_contrato_parcelas";i:869;s:15:"cod_contrato_fk";i:14274;s:6:"numero";i:2;s:5:"valor";s:5:"25.00";s:11:"dt_inclusao";s:10:"2017-10-24";s:13:"dt_vencimento";s:10:"2017-11-16";s:18:"txt_login_inclusao";s:1:"1";s:19:"txt_login_alteracao";s:1:"1";s:12:"dt_alteracao";s:10:"2017-10-24";}i:2;a:9:{s:21:"cod_contrato_parcelas";i:870;s:15:"cod_contrato_fk";i:14274;s:6:"numero";i:3;s:5:"valor";s:5:"25.00";s:11:"dt_inclusao";s:10:"2017-10-24";s:13:"dt_vencimento";s:10:"2017-12-16";s:18:"txt_login_inclusao";s:1:"1";s:19:"txt_login_alteracao";s:1:"1";s:12:"dt_alteracao";s:10:"2017-10-24";}i:3;a:9:{s:21:"cod_contrato_parcelas";i:871;s:15:"cod_contrato_fk";i:14274;s:6:"numero";i:4;s:5:"valor";s:5:"25.00";s:11:"dt_inclusao";s:10:"2017-10-24";s:13:"dt_vencimento";s:10:"2018-04-16";s:18:"txt_login_inclusao";s:1:"1";s:19:"txt_login_alteracao";s:1:"1";s:12:"dt_alteracao";s:10:"2017-10-24";}}s:10:"andamentos";N;}i:2;a:4:{s:10:"attributes";a:27:{s:12:"cod_contrato";i:14139;s:16:"tipo_contrato_fk";i:498;s:14:"valor_contrato";s:6:"100.00";s:14:"dia_vencimento";N;s:12:"qnt_parcelas";i:1;s:8:"dt_prazo";s:10:"19/09/2017";s:11:"dt_inclusao";N;s:13:"dt_vencimento";s:10:"19/09/2017";s:8:"contador";N;s:14:"responsavel_fk";N;s:8:"operando";N;s:12:"qnt_clientes";N;s:4:"link";N;s:7:"zero800";N;s:9:"parceiria";N;s:15:"consultoria_scm";N;s:18:"engenheiro_tecnico";N;s:14:"cod_cliente_fk";i:3;s:5:"ativo";b:1;s:18:"txt_login_inclusao";s:1:"1";s:19:"txt_login_alteracao";s:1:"1";s:12:"dt_alteracao";s:10:"29/09/2017";s:6:"status";N;s:16:"nome_responsavel";N;s:8:"contrato";N;s:13:"dt_fechamento";N;s:21:"status_do_contrato_fk";N;}s:14:"tipo_contratos";a:1:{i:0;a:5:{s:17:"cod_tipo_contrato";i:12611;s:14:"cod_usuario_fk";i:5;s:15:"cod_contrato_fk";i:14139;s:15:"tipo_produto_fk";i:523;s:5:"ativo";b:1;}}s:8:"parcelas";a:1:{i:0;a:9:{s:21:"cod_contrato_parcelas";i:151;s:15:"cod_contrato_fk";i:14139;s:6:"numero";i:1;s:5:"valor";s:6:"100.00";s:11:"dt_inclusao";N;s:13:"dt_vencimento";s:10:"2017-09-29";s:18:"txt_login_inclusao";s:1:"1";s:19:"txt_login_alteracao";s:1:"1";s:12:"dt_alteracao";N;}}s:10:"andamentos";N;}i:3;a:4:{s:10:"attributes";a:27:{s:12:"cod_contrato";i:14095;s:16:"tipo_contrato_fk";i:512;s:14:"valor_contrato";s:7:"1000.00";s:14:"dia_vencimento";N;s:12:"qnt_parcelas";i:2;s:8:"dt_prazo";s:10:"06/09/2017";s:11:"dt_inclusao";N;s:13:"dt_vencimento";s:10:"12/09/2017";s:8:"contador";N;s:14:"responsavel_fk";N;s:8:"operando";N;s:12:"qnt_clientes";N;s:4:"link";N;s:7:"zero800";N;s:9:"parceiria";N;s:15:"consultoria_scm";N;s:18:"engenheiro_tecnico";N;s:14:"cod_cliente_fk";i:3;s:5:"ativo";b:1;s:18:"txt_login_inclusao";s:1:"1";s:19:"txt_login_alteracao";s:1:"1";s:12:"dt_alteracao";s:10:"26/09/2017";s:6:"status";i:536;s:16:"nome_responsavel";N;s:8:"contrato";N;s:13:"dt_fechamento";N;s:21:"status_do_contrato_fk";N;}s:14:"tipo_contratos";a:1:{i:0;a:5:{s:17:"cod_tipo_contrato";i:12567;s:14:"cod_usuario_fk";i:1;s:15:"cod_contrato_fk";i:14095;s:15:"tipo_produto_fk";i:523;s:5:"ativo";b:1;}}s:8:"parcelas";a:2:{i:0;a:9:{s:21:"cod_contrato_parcelas";i:102;s:15:"cod_contrato_fk";i:14095;s:6:"numero";i:1;s:5:"valor";s:6:"500.00";s:11:"dt_inclusao";N;s:13:"dt_vencimento";s:10:"2017-09-26";s:18:"txt_login_inclusao";s:1:"1";s:19:"txt_login_alteracao";s:1:"1";s:12:"dt_alteracao";N;}i:1;a:9:{s:21:"cod_contrato_parcelas";i:103;s:15:"cod_contrato_fk";i:14095;s:6:"numero";i:2;s:5:"valor";s:6:"500.00";s:11:"dt_inclusao";N;s:13:"dt_vencimento";s:10:"2017-09-26";s:18:"txt_login_inclusao";s:1:"1";s:19:"txt_login_alteracao";s:1:"1";s:12:"dt_alteracao";N;}}s:10:"andamentos";N;}i:4;a:4:{s:10:"attributes";a:27:{s:12:"cod_contrato";i:143;s:16:"tipo_contrato_fk";i:511;s:14:"valor_contrato";N;s:14:"dia_vencimento";N;s:12:"qnt_parcelas";N;s:8:"dt_prazo";N;s:11:"dt_inclusao";s:10:"01/06/2017";s:13:"dt_vencimento";N;s:8:"contador";N;s:14:"responsavel_fk";N;s:8:"operando";N;s:12:"qnt_clientes";N;s:4:"link";N;s:7:"zero800";N;s:9:"parceiria";N;s:15:"consultoria_scm";N;s:18:"engenheiro_tecnico";N;s:14:"cod_cliente_fk";i:3;s:5:"ativo";b:1;s:18:"txt_login_inclusao";N;s:19:"txt_login_alteracao";N;s:12:"dt_alteracao";N;s:6:"status";i:536;s:16:"nome_responsavel";N;s:8:"contrato";N;s:13:"dt_fechamento";N;s:21:"status_do_contrato_fk";N;}s:14:"tipo_contratos";a:8:{i:0;a:5:{s:17:"cod_tipo_contrato";i:12513;s:14:"cod_usuario_fk";i:1;s:15:"cod_contrato_fk";i:143;s:15:"tipo_produto_fk";i:521;s:5:"ativo";b:1;}i:1;a:5:{s:17:"cod_tipo_contrato";i:10406;s:14:"cod_usuario_fk";N;s:15:"cod_contrato_fk";i:143;s:15:"tipo_produto_fk";i:524;s:5:"ativo";b:1;}i:2;a:5:{s:17:"cod_tipo_contrato";i:10407;s:14:"cod_usuario_fk";N;s:15:"cod_contrato_fk";i:143;s:15:"tipo_produto_fk";i:528;s:5:"ativo";b:1;}i:3;a:5:{s:17:"cod_tipo_contrato";i:10408;s:14:"cod_usuario_fk";N;s:15:"cod_contrato_fk";i:143;s:15:"tipo_produto_fk";N;s:5:"ativo";b:1;}i:4;a:5:{s:17:"cod_tipo_contrato";i:10409;s:14:"cod_usuario_fk";N;s:15:"cod_contrato_fk";i:143;s:15:"tipo_produto_fk";i:526;s:5:"ativo";b:1;}i:5;a:5:{s:17:"cod_tipo_contrato";i:10410;s:14:"cod_usuario_fk";N;s:15:"cod_contrato_fk";i:143;s:15:"tipo_produto_fk";i:527;s:5:"ativo";b:1;}i:6;a:5:{s:17:"cod_tipo_contrato";i:12475;s:14:"cod_usuario_fk";i:5;s:15:"cod_contrato_fk";i:143;s:15:"tipo_produto_fk";i:522;s:5:"ativo";b:1;}i:7;a:5:{s:17:"cod_tipo_contrato";i:12476;s:14:"cod_usuario_fk";N;s:15:"cod_contrato_fk";i:143;s:15:"tipo_produto_fk";N;s:5:"ativo";b:1;}}s:8:"parcelas";a:3:{i:0;a:9:{s:21:"cod_contrato_parcelas";i:1;s:15:"cod_contrato_fk";i:143;s:6:"numero";i:1;s:5:"valor";s:6:"100.00";s:11:"dt_inclusao";s:10:"2017-07-02";s:13:"dt_vencimento";s:10:"2017-06-03";s:18:"txt_login_inclusao";N;s:19:"txt_login_alteracao";N;s:12:"dt_alteracao";N;}i:1;a:9:{s:21:"cod_contrato_parcelas";i:2;s:15:"cod_contrato_fk";i:143;s:6:"numero";i:2;s:5:"valor";s:6:"100.00";s:11:"dt_inclusao";s:10:"2017-07-02";s:13:"dt_vencimento";s:10:"2017-07-03";s:18:"txt_login_inclusao";N;s:19:"txt_login_alteracao";N;s:12:"dt_alteracao";N;}i:2;a:9:{s:21:"cod_contrato_parcelas";i:3;s:15:"cod_contrato_fk";i:143;s:6:"numero";i:3;s:5:"valor";s:6:"100.00";s:11:"dt_inclusao";s:10:"2017-07-02";s:13:"dt_vencimento";s:10:"2017-08-03";s:18:"txt_login_inclusao";N;s:19:"txt_login_alteracao";N;s:12:"dt_alteracao";N;}}s:10:"andamentos";N;}}', "user_id"=3777, "expire"=1508964118 WHERE "id"='25cml2a2te37kgeguujk5m3202'";i:1;i:80;i:2;s:23:"yii\db\Command::execute";i:3;d:1508957018.894208;i:4;a:0:{}i:5;i:4847368;}i:96;a:6:{i:0;s:10857:"UPDATE "acesso"."tab_sessao_php" SET "data"='__flash|a:0:{}sessao-expirada|s:9:"/scm/web/";__returnUrl|s:9:"/scm/web/";__id|i:3777;endereco|a:2:{i:4012;a:13:{s:12:"cod_endereco";i:4012;s:10:"logradouro";s:15:"Q 01 CONJ 01 LT";s:6:"numero";s:2:"12";s:11:"complemento";s:19:"LOJA 01 SETOR NORTE";s:3:"cep";s:10:"71.258-015";s:15:"correspondencia";N;s:16:"cod_municipio_fk";s:6:"530010";s:8:"chave_fk";i:3;s:12:"tipo_usuario";N;s:11:"dt_inclusao";s:10:"2017-05-31";s:5:"ativo";b:1;s:6:"bairro";s:17:"CIDADE ESTRUTURAL";s:14:"tipo_tabela_fk";s:11:"tab_cliente";}i:6397;a:13:{s:12:"cod_endereco";i:6397;s:10:"logradouro";s:5:"u88uu";s:6:"numero";s:4:"yyyy";s:11:"complemento";s:3:"yyy";s:3:"cep";s:10:"71.100-111";s:15:"correspondencia";b:0;s:16:"cod_municipio_fk";s:6:"270040";s:8:"chave_fk";i:3;s:12:"tipo_usuario";N;s:11:"dt_inclusao";N;s:5:"ativo";b:1;s:6:"bairro";N;s:14:"tipo_tabela_fk";s:11:"tab_cliente";}}contato|a:1:{i:30240;a:8:{s:11:"cod_contato";i:30240;s:7:"contato";s:15:"(97) 89273-9842";s:5:"ramal";s:0:"";s:5:"ativo";b:1;s:11:"dt_inclusao";s:10:"2017-09-22";s:4:"tipo";i:464;s:8:"chave_fk";i:3;s:14:"tipo_tabela_fk";s:11:"tab_cliente";}}contratos|a:5:{i:0;a:4:{s:10:"attributes";a:27:{s:12:"cod_contrato";i:14275;s:16:"tipo_contrato_fk";i:498;s:14:"valor_contrato";s:8:"10000.00";s:14:"dia_vencimento";N;s:12:"qnt_parcelas";i:4;s:8:"dt_prazo";s:10:"04/10/2017";s:11:"dt_inclusao";s:10:"25/10/2017";s:13:"dt_vencimento";s:10:"11/10/2017";s:8:"contador";N;s:14:"responsavel_fk";N;s:8:"operando";N;s:12:"qnt_clientes";N;s:4:"link";N;s:7:"zero800";N;s:9:"parceiria";N;s:15:"consultoria_scm";N;s:18:"engenheiro_tecnico";N;s:14:"cod_cliente_fk";i:3;s:5:"ativo";b:1;s:18:"txt_login_inclusao";s:1:"1";s:19:"txt_login_alteracao";s:1:"1";s:12:"dt_alteracao";s:10:"25/10/2017";s:6:"status";i:537;s:16:"nome_responsavel";N;s:8:"contrato";N;s:13:"dt_fechamento";N;s:21:"status_do_contrato_fk";N;}s:14:"tipo_contratos";a:1:{i:0;a:5:{s:17:"cod_tipo_contrato";i:12723;s:14:"cod_usuario_fk";i:1;s:15:"cod_contrato_fk";i:14275;s:15:"tipo_produto_fk";i:523;s:5:"ativo";b:1;}}s:8:"parcelas";a:4:{i:0;a:9:{s:21:"cod_contrato_parcelas";i:872;s:15:"cod_contrato_fk";i:14275;s:6:"numero";i:1;s:5:"valor";s:7:"2500.00";s:11:"dt_inclusao";s:10:"2017-10-25";s:13:"dt_vencimento";s:10:"2017-10-11";s:18:"txt_login_inclusao";s:1:"1";s:19:"txt_login_alteracao";s:1:"1";s:12:"dt_alteracao";s:10:"2017-10-25";}i:1;a:9:{s:21:"cod_contrato_parcelas";i:873;s:15:"cod_contrato_fk";i:14275;s:6:"numero";i:2;s:5:"valor";s:7:"2500.00";s:11:"dt_inclusao";s:10:"2017-10-25";s:13:"dt_vencimento";s:10:"2017-11-11";s:18:"txt_login_inclusao";s:1:"1";s:19:"txt_login_alteracao";s:1:"1";s:12:"dt_alteracao";s:10:"2017-10-25";}i:2;a:9:{s:21:"cod_contrato_parcelas";i:874;s:15:"cod_contrato_fk";i:14275;s:6:"numero";i:3;s:5:"valor";s:7:"2500.00";s:11:"dt_inclusao";s:10:"2017-10-25";s:13:"dt_vencimento";s:10:"2017-12-11";s:18:"txt_login_inclusao";s:1:"1";s:19:"txt_login_alteracao";s:1:"1";s:12:"dt_alteracao";s:10:"2017-10-25";}i:3;a:9:{s:21:"cod_contrato_parcelas";i:875;s:15:"cod_contrato_fk";i:14275;s:6:"numero";i:4;s:5:"valor";s:7:"2500.00";s:11:"dt_inclusao";s:10:"2017-10-25";s:13:"dt_vencimento";s:10:"2018-04-11";s:18:"txt_login_inclusao";s:1:"1";s:19:"txt_login_alteracao";s:1:"1";s:12:"dt_alteracao";s:10:"2017-10-25";}}s:10:"andamentos";N;}i:1;a:4:{s:10:"attributes";a:27:{s:12:"cod_contrato";i:14274;s:16:"tipo_contrato_fk";i:510;s:14:"valor_contrato";s:6:"100.00";s:14:"dia_vencimento";N;s:12:"qnt_parcelas";i:4;s:8:"dt_prazo";s:10:"25/10/2017";s:11:"dt_inclusao";s:10:"24/10/2017";s:13:"dt_vencimento";s:10:"16/10/2017";s:8:"contador";N;s:14:"responsavel_fk";N;s:8:"operando";N;s:12:"qnt_clientes";N;s:4:"link";N;s:7:"zero800";N;s:9:"parceiria";N;s:15:"consultoria_scm";N;s:18:"engenheiro_tecnico";N;s:14:"cod_cliente_fk";i:3;s:5:"ativo";b:1;s:18:"txt_login_inclusao";s:1:"1";s:19:"txt_login_alteracao";s:1:"1";s:12:"dt_alteracao";s:10:"24/10/2017";s:6:"status";i:543;s:16:"nome_responsavel";N;s:8:"contrato";N;s:13:"dt_fechamento";N;s:21:"status_do_contrato_fk";N;}s:14:"tipo_contratos";a:1:{i:0;a:5:{s:17:"cod_tipo_contrato";i:12722;s:14:"cod_usuario_fk";i:1;s:15:"cod_contrato_fk";i:14274;s:15:"tipo_produto_fk";i:523;s:5:"ativo";b:1;}}s:8:"parcelas";a:4:{i:0;a:9:{s:21:"cod_contrato_parcelas";i:868;s:15:"cod_contrato_fk";i:14274;s:6:"numero";i:1;s:5:"valor";s:5:"25.00";s:11:"dt_inclusao";s:10:"2017-10-24";s:13:"dt_vencimento";s:10:"2017-10-16";s:18:"txt_login_inclusao";s:1:"1";s:19:"txt_login_alteracao";s:1:"1";s:12:"dt_alteracao";s:10:"2017-10-24";}i:1;a:9:{s:21:"cod_contrato_parcelas";i:869;s:15:"cod_contrato_fk";i:14274;s:6:"numero";i:2;s:5:"valor";s:5:"25.00";s:11:"dt_inclusao";s:10:"2017-10-24";s:13:"dt_vencimento";s:10:"2017-11-16";s:18:"txt_login_inclusao";s:1:"1";s:19:"txt_login_alteracao";s:1:"1";s:12:"dt_alteracao";s:10:"2017-10-24";}i:2;a:9:{s:21:"cod_contrato_parcelas";i:870;s:15:"cod_contrato_fk";i:14274;s:6:"numero";i:3;s:5:"valor";s:5:"25.00";s:11:"dt_inclusao";s:10:"2017-10-24";s:13:"dt_vencimento";s:10:"2017-12-16";s:18:"txt_login_inclusao";s:1:"1";s:19:"txt_login_alteracao";s:1:"1";s:12:"dt_alteracao";s:10:"2017-10-24";}i:3;a:9:{s:21:"cod_contrato_parcelas";i:871;s:15:"cod_contrato_fk";i:14274;s:6:"numero";i:4;s:5:"valor";s:5:"25.00";s:11:"dt_inclusao";s:10:"2017-10-24";s:13:"dt_vencimento";s:10:"2018-04-16";s:18:"txt_login_inclusao";s:1:"1";s:19:"txt_login_alteracao";s:1:"1";s:12:"dt_alteracao";s:10:"2017-10-24";}}s:10:"andamentos";N;}i:2;a:4:{s:10:"attributes";a:27:{s:12:"cod_contrato";i:14139;s:16:"tipo_contrato_fk";i:498;s:14:"valor_contrato";s:6:"100.00";s:14:"dia_vencimento";N;s:12:"qnt_parcelas";i:1;s:8:"dt_prazo";s:10:"19/09/2017";s:11:"dt_inclusao";N;s:13:"dt_vencimento";s:10:"19/09/2017";s:8:"contador";N;s:14:"responsavel_fk";N;s:8:"operando";N;s:12:"qnt_clientes";N;s:4:"link";N;s:7:"zero800";N;s:9:"parceiria";N;s:15:"consultoria_scm";N;s:18:"engenheiro_tecnico";N;s:14:"cod_cliente_fk";i:3;s:5:"ativo";b:1;s:18:"txt_login_inclusao";s:1:"1";s:19:"txt_login_alteracao";s:1:"1";s:12:"dt_alteracao";s:10:"29/09/2017";s:6:"status";N;s:16:"nome_responsavel";N;s:8:"contrato";N;s:13:"dt_fechamento";N;s:21:"status_do_contrato_fk";N;}s:14:"tipo_contratos";a:1:{i:0;a:5:{s:17:"cod_tipo_contrato";i:12611;s:14:"cod_usuario_fk";i:5;s:15:"cod_contrato_fk";i:14139;s:15:"tipo_produto_fk";i:523;s:5:"ativo";b:1;}}s:8:"parcelas";a:1:{i:0;a:9:{s:21:"cod_contrato_parcelas";i:151;s:15:"cod_contrato_fk";i:14139;s:6:"numero";i:1;s:5:"valor";s:6:"100.00";s:11:"dt_inclusao";N;s:13:"dt_vencimento";s:10:"2017-09-29";s:18:"txt_login_inclusao";s:1:"1";s:19:"txt_login_alteracao";s:1:"1";s:12:"dt_alteracao";N;}}s:10:"andamentos";N;}i:3;a:4:{s:10:"attributes";a:27:{s:12:"cod_contrato";i:14095;s:16:"tipo_contrato_fk";i:512;s:14:"valor_contrato";s:7:"1000.00";s:14:"dia_vencimento";N;s:12:"qnt_parcelas";i:2;s:8:"dt_prazo";s:10:"06/09/2017";s:11:"dt_inclusao";N;s:13:"dt_vencimento";s:10:"12/09/2017";s:8:"contador";N;s:14:"responsavel_fk";N;s:8:"operando";N;s:12:"qnt_clientes";N;s:4:"link";N;s:7:"zero800";N;s:9:"parceiria";N;s:15:"consultoria_scm";N;s:18:"engenheiro_tecnico";N;s:14:"cod_cliente_fk";i:3;s:5:"ativo";b:1;s:18:"txt_login_inclusao";s:1:"1";s:19:"txt_login_alteracao";s:1:"1";s:12:"dt_alteracao";s:10:"26/09/2017";s:6:"status";i:536;s:16:"nome_responsavel";N;s:8:"contrato";N;s:13:"dt_fechamento";N;s:21:"status_do_contrato_fk";N;}s:14:"tipo_contratos";a:1:{i:0;a:5:{s:17:"cod_tipo_contrato";i:12567;s:14:"cod_usuario_fk";i:1;s:15:"cod_contrato_fk";i:14095;s:15:"tipo_produto_fk";i:523;s:5:"ativo";b:1;}}s:8:"parcelas";a:2:{i:0;a:9:{s:21:"cod_contrato_parcelas";i:102;s:15:"cod_contrato_fk";i:14095;s:6:"numero";i:1;s:5:"valor";s:6:"500.00";s:11:"dt_inclusao";N;s:13:"dt_vencimento";s:10:"2017-09-26";s:18:"txt_login_inclusao";s:1:"1";s:19:"txt_login_alteracao";s:1:"1";s:12:"dt_alteracao";N;}i:1;a:9:{s:21:"cod_contrato_parcelas";i:103;s:15:"cod_contrato_fk";i:14095;s:6:"numero";i:2;s:5:"valor";s:6:"500.00";s:11:"dt_inclusao";N;s:13:"dt_vencimento";s:10:"2017-09-26";s:18:"txt_login_inclusao";s:1:"1";s:19:"txt_login_alteracao";s:1:"1";s:12:"dt_alteracao";N;}}s:10:"andamentos";N;}i:4;a:4:{s:10:"attributes";a:27:{s:12:"cod_contrato";i:143;s:16:"tipo_contrato_fk";i:511;s:14:"valor_contrato";N;s:14:"dia_vencimento";N;s:12:"qnt_parcelas";N;s:8:"dt_prazo";N;s:11:"dt_inclusao";s:10:"01/06/2017";s:13:"dt_vencimento";N;s:8:"contador";N;s:14:"responsavel_fk";N;s:8:"operando";N;s:12:"qnt_clientes";N;s:4:"link";N;s:7:"zero800";N;s:9:"parceiria";N;s:15:"consultoria_scm";N;s:18:"engenheiro_tecnico";N;s:14:"cod_cliente_fk";i:3;s:5:"ativo";b:1;s:18:"txt_login_inclusao";N;s:19:"txt_login_alteracao";N;s:12:"dt_alteracao";N;s:6:"status";i:536;s:16:"nome_responsavel";N;s:8:"contrato";N;s:13:"dt_fechamento";N;s:21:"status_do_contrato_fk";N;}s:14:"tipo_contratos";a:8:{i:0;a:5:{s:17:"cod_tipo_contrato";i:12513;s:14:"cod_usuario_fk";i:1;s:15:"cod_contrato_fk";i:143;s:15:"tipo_produto_fk";i:521;s:5:"ativo";b:1;}i:1;a:5:{s:17:"cod_tipo_contrato";i:10406;s:14:"cod_usuario_fk";N;s:15:"cod_contrato_fk";i:143;s:15:"tipo_produto_fk";i:524;s:5:"ativo";b:1;}i:2;a:5:{s:17:"cod_tipo_contrato";i:10407;s:14:"cod_usuario_fk";N;s:15:"cod_contrato_fk";i:143;s:15:"tipo_produto_fk";i:528;s:5:"ativo";b:1;}i:3;a:5:{s:17:"cod_tipo_contrato";i:10408;s:14:"cod_usuario_fk";N;s:15:"cod_contrato_fk";i:143;s:15:"tipo_produto_fk";N;s:5:"ativo";b:1;}i:4;a:5:{s:17:"cod_tipo_contrato";i:10409;s:14:"cod_usuario_fk";N;s:15:"cod_contrato_fk";i:143;s:15:"tipo_produto_fk";i:526;s:5:"ativo";b:1;}i:5;a:5:{s:17:"cod_tipo_contrato";i:10410;s:14:"cod_usuario_fk";N;s:15:"cod_contrato_fk";i:143;s:15:"tipo_produto_fk";i:527;s:5:"ativo";b:1;}i:6;a:5:{s:17:"cod_tipo_contrato";i:12475;s:14:"cod_usuario_fk";i:5;s:15:"cod_contrato_fk";i:143;s:15:"tipo_produto_fk";i:522;s:5:"ativo";b:1;}i:7;a:5:{s:17:"cod_tipo_contrato";i:12476;s:14:"cod_usuario_fk";N;s:15:"cod_contrato_fk";i:143;s:15:"tipo_produto_fk";N;s:5:"ativo";b:1;}}s:8:"parcelas";a:3:{i:0;a:9:{s:21:"cod_contrato_parcelas";i:1;s:15:"cod_contrato_fk";i:143;s:6:"numero";i:1;s:5:"valor";s:6:"100.00";s:11:"dt_inclusao";s:10:"2017-07-02";s:13:"dt_vencimento";s:10:"2017-06-03";s:18:"txt_login_inclusao";N;s:19:"txt_login_alteracao";N;s:12:"dt_alteracao";N;}i:1;a:9:{s:21:"cod_contrato_parcelas";i:2;s:15:"cod_contrato_fk";i:143;s:6:"numero";i:2;s:5:"valor";s:6:"100.00";s:11:"dt_inclusao";s:10:"2017-07-02";s:13:"dt_vencimento";s:10:"2017-07-03";s:18:"txt_login_inclusao";N;s:19:"txt_login_alteracao";N;s:12:"dt_alteracao";N;}i:2;a:9:{s:21:"cod_contrato_parcelas";i:3;s:15:"cod_contrato_fk";i:143;s:6:"numero";i:3;s:5:"valor";s:6:"100.00";s:11:"dt_inclusao";s:10:"2017-07-02";s:13:"dt_vencimento";s:10:"2017-08-03";s:18:"txt_login_inclusao";N;s:19:"txt_login_alteracao";N;s:12:"dt_alteracao";N;}}s:10:"andamentos";N;}}', "user_id"=3777, "expire"=1508964118 WHERE "id"='25cml2a2te37kgeguujk5m3202'";i:1;i:96;i:2;s:23:"yii\db\Command::execute";i:3;d:1508957018.9061129;i:4;a:0:{}i:5;i:4849056;}}}s:2:"db";a:1:{s:8:"messages";a:36:{i:10;a:6:{i:0;s:108:"SELECT "data" FROM "acesso"."tab_sessao_php" WHERE "expire">1508957018 AND "id"='25cml2a2te37kgeguujk5m3202'";i:1;i:80;i:2;s:21:"yii\db\Command::query";i:3;d:1508957018.539238;i:4;a:1:{i:0;a:5:{s:4:"file";s:27:"/var/www/scm/config/web.php";s:4:"line";i:161;s:8:"function";s:5:"__get";s:5:"class";s:18:"yii\base\Component";s:4:"type";s:2:"->";}}i:5;i:2458768;}i:11;a:6:{i:0;s:108:"SELECT "data" FROM "acesso"."tab_sessao_php" WHERE "expire">1508957018 AND "id"='25cml2a2te37kgeguujk5m3202'";i:1;i:96;i:2;s:21:"yii\db\Command::query";i:3;d:1508957018.5511031;i:4;a:1:{i:0;a:5:{s:4:"file";s:27:"/var/www/scm/config/web.php";s:4:"line";i:161;s:8:"function";s:5:"__get";s:5:"class";s:18:"yii\base\Component";s:4:"type";s:2:"->";}}i:5;i:2472744;}i:14;a:6:{i:0;s:1958:"SELECT
+    d.nspname AS table_schema,
+    c.relname AS table_name,
+    a.attname AS column_name,
+    t.typname AS data_type,
+    a.attlen AS character_maximum_length,
+    pg_catalog.col_description(c.oid, a.attnum) AS column_comment,
+    a.atttypmod AS modifier,
+    a.attnotnull = false AS is_nullable,
+    CAST(pg_get_expr(ad.adbin, ad.adrelid) AS varchar) AS column_default,
+    coalesce(pg_get_expr(ad.adbin, ad.adrelid) ~ 'nextval',false) AS is_autoinc,
+    array_to_string((select array_agg(enumlabel) from pg_enum where enumtypid=a.atttypid)::varchar[],',') as enum_values,
+    CASE atttypid
+         WHEN 21 /*int2*/ THEN 16
+         WHEN 23 /*int4*/ THEN 32
+         WHEN 20 /*int8*/ THEN 64
+         WHEN 1700 /*numeric*/ THEN
+              CASE WHEN atttypmod = -1
+               THEN null
+               ELSE ((atttypmod - 4) >> 16) & 65535
+               END
+         WHEN 700 /*float4*/ THEN 24 /*FLT_MANT_DIG*/
+         WHEN 701 /*float8*/ THEN 53 /*DBL_MANT_DIG*/
+         ELSE null
+      END   AS numeric_precision,
+      CASE
+        WHEN atttypid IN (21, 23, 20) THEN 0
+        WHEN atttypid IN (1700) THEN
+        CASE
+            WHEN atttypmod = -1 THEN null
+            ELSE (atttypmod - 4) & 65535
+        END
+           ELSE null
+      END AS numeric_scale,
+    CAST(
+             information_schema._pg_char_max_length(information_schema._pg_truetypid(a, t), information_schema._pg_truetypmod(a, t))
+             AS numeric
+    ) AS size,
+    a.attnum = any (ct.conkey) as is_pkey
+FROM
+    pg_class c
+    LEFT JOIN pg_attribute a ON a.attrelid = c.oid
+    LEFT JOIN pg_attrdef ad ON a.attrelid = ad.adrelid AND a.attnum = ad.adnum
+    LEFT JOIN pg_type t ON a.atttypid = t.oid
+    LEFT JOIN pg_namespace d ON d.oid = c.relnamespace
+    LEFT join pg_constraint ct on ct.conrelid=c.oid and ct.contype='p'
+WHERE
+    a.attnum > 0 and t.typname != ''
+    and c.relname = 'tab_usuarios'
+    and d.nspname = 'acesso'
+ORDER BY
+    a.attnum;";i:1;i:80;i:2;s:21:"yii\db\Command::query";i:3;d:1508957018.561662;i:4;a:2:{i:0;a:5:{s:4:"file";s:49:"/var/www/scm/modules/admin/models/MdlUsuarios.php";s:4:"line";i:73;s:8:"function";s:7:"findOne";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"::";}i:1;a:5:{s:4:"file";s:27:"/var/www/scm/config/web.php";s:4:"line";i:161;s:8:"function";s:5:"__get";s:5:"class";s:18:"yii\base\Component";s:4:"type";s:2:"->";}}i:5;i:3192248;}i:15;a:6:{i:0;s:1958:"SELECT
+    d.nspname AS table_schema,
+    c.relname AS table_name,
+    a.attname AS column_name,
+    t.typname AS data_type,
+    a.attlen AS character_maximum_length,
+    pg_catalog.col_description(c.oid, a.attnum) AS column_comment,
+    a.atttypmod AS modifier,
+    a.attnotnull = false AS is_nullable,
+    CAST(pg_get_expr(ad.adbin, ad.adrelid) AS varchar) AS column_default,
+    coalesce(pg_get_expr(ad.adbin, ad.adrelid) ~ 'nextval',false) AS is_autoinc,
+    array_to_string((select array_agg(enumlabel) from pg_enum where enumtypid=a.atttypid)::varchar[],',') as enum_values,
+    CASE atttypid
+         WHEN 21 /*int2*/ THEN 16
+         WHEN 23 /*int4*/ THEN 32
+         WHEN 20 /*int8*/ THEN 64
+         WHEN 1700 /*numeric*/ THEN
+              CASE WHEN atttypmod = -1
+               THEN null
+               ELSE ((atttypmod - 4) >> 16) & 65535
+               END
+         WHEN 700 /*float4*/ THEN 24 /*FLT_MANT_DIG*/
+         WHEN 701 /*float8*/ THEN 53 /*DBL_MANT_DIG*/
+         ELSE null
+      END   AS numeric_precision,
+      CASE
+        WHEN atttypid IN (21, 23, 20) THEN 0
+        WHEN atttypid IN (1700) THEN
+        CASE
+            WHEN atttypmod = -1 THEN null
+            ELSE (atttypmod - 4) & 65535
+        END
+           ELSE null
+      END AS numeric_scale,
+    CAST(
+             information_schema._pg_char_max_length(information_schema._pg_truetypid(a, t), information_schema._pg_truetypmod(a, t))
+             AS numeric
+    ) AS size,
+    a.attnum = any (ct.conkey) as is_pkey
+FROM
+    pg_class c
+    LEFT JOIN pg_attribute a ON a.attrelid = c.oid
+    LEFT JOIN pg_attrdef ad ON a.attrelid = ad.adrelid AND a.attnum = ad.adnum
+    LEFT JOIN pg_type t ON a.atttypid = t.oid
+    LEFT JOIN pg_namespace d ON d.oid = c.relnamespace
+    LEFT join pg_constraint ct on ct.conrelid=c.oid and ct.contype='p'
+WHERE
+    a.attnum > 0 and t.typname != ''
+    and c.relname = 'tab_usuarios'
+    and d.nspname = 'acesso'
+ORDER BY
+    a.attnum;";i:1;i:96;i:2;s:21:"yii\db\Command::query";i:3;d:1508957018.610585;i:4;a:2:{i:0;a:5:{s:4:"file";s:49:"/var/www/scm/modules/admin/models/MdlUsuarios.php";s:4:"line";i:73;s:8:"function";s:7:"findOne";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"::";}i:1;a:5:{s:4:"file";s:27:"/var/www/scm/config/web.php";s:4:"line";i:161;s:8:"function";s:5:"__get";s:5:"class";s:18:"yii\base\Component";s:4:"type";s:2:"->";}}i:5;i:3254416;}i:17;a:6:{i:0;s:880:"select
+    ct.conname as constraint_name,
+    a.attname as column_name,
+    fc.relname as foreign_table_name,
+    fns.nspname as foreign_table_schema,
+    fa.attname as foreign_column_name
+from
+    (SELECT ct.conname, ct.conrelid, ct.confrelid, ct.conkey, ct.contype, ct.confkey, generate_subscripts(ct.conkey, 1) AS s
+       FROM pg_constraint ct
+    ) AS ct
+    inner join pg_class c on c.oid=ct.conrelid
+    inner join pg_namespace ns on c.relnamespace=ns.oid
+    inner join pg_attribute a on a.attrelid=ct.conrelid and a.attnum = ct.conkey[ct.s]
+    left join pg_class fc on fc.oid=ct.confrelid
+    left join pg_namespace fns on fc.relnamespace=fns.oid
+    left join pg_attribute fa on fa.attrelid=ct.confrelid and fa.attnum = ct.confkey[ct.s]
+where
+    ct.contype='f'
+    and c.relname='tab_usuarios'
+    and ns.nspname='acesso'
+order by
+    fns.nspname, fc.relname, a.attnum";i:1;i:80;i:2;s:21:"yii\db\Command::query";i:3;d:1508957018.6147921;i:4;a:2:{i:0;a:5:{s:4:"file";s:49:"/var/www/scm/modules/admin/models/MdlUsuarios.php";s:4:"line";i:73;s:8:"function";s:7:"findOne";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"::";}i:1;a:5:{s:4:"file";s:27:"/var/www/scm/config/web.php";s:4:"line";i:161;s:8:"function";s:5:"__get";s:5:"class";s:18:"yii\base\Component";s:4:"type";s:2:"->";}}i:5;i:3244384;}i:18;a:6:{i:0;s:880:"select
+    ct.conname as constraint_name,
+    a.attname as column_name,
+    fc.relname as foreign_table_name,
+    fns.nspname as foreign_table_schema,
+    fa.attname as foreign_column_name
+from
+    (SELECT ct.conname, ct.conrelid, ct.confrelid, ct.conkey, ct.contype, ct.confkey, generate_subscripts(ct.conkey, 1) AS s
+       FROM pg_constraint ct
+    ) AS ct
+    inner join pg_class c on c.oid=ct.conrelid
+    inner join pg_namespace ns on c.relnamespace=ns.oid
+    inner join pg_attribute a on a.attrelid=ct.conrelid and a.attnum = ct.conkey[ct.s]
+    left join pg_class fc on fc.oid=ct.confrelid
+    left join pg_namespace fns on fc.relnamespace=fns.oid
+    left join pg_attribute fa on fa.attrelid=ct.confrelid and fa.attnum = ct.confkey[ct.s]
+where
+    ct.contype='f'
+    and c.relname='tab_usuarios'
+    and ns.nspname='acesso'
+order by
+    fns.nspname, fc.relname, a.attnum";i:1;i:96;i:2;s:21:"yii\db\Command::query";i:3;d:1508957018.6396401;i:4;a:2:{i:0;a:5:{s:4:"file";s:49:"/var/www/scm/modules/admin/models/MdlUsuarios.php";s:4:"line";i:73;s:8:"function";s:7:"findOne";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"::";}i:1;a:5:{s:4:"file";s:27:"/var/www/scm/config/web.php";s:4:"line";i:161;s:8:"function";s:5:"__get";s:5:"class";s:18:"yii\base\Component";s:4:"type";s:2:"->";}}i:5;i:3248592;}i:20;a:6:{i:0;s:62:"SELECT * FROM "acesso"."tab_usuarios" WHERE "cod_usuario"=3777";i:1;i:80;i:2;s:21:"yii\db\Command::query";i:3;d:1508957018.641721;i:4;a:3:{i:0;a:5:{s:4:"file";s:54:"/var/www/scm/modules/admin/models/TabUsuariosQuery.php";s:4:"line";i:33;s:8:"function";s:3:"one";s:5:"class";s:18:"yii\db\ActiveQuery";s:4:"type";s:2:"->";}i:1;a:5:{s:4:"file";s:49:"/var/www/scm/modules/admin/models/MdlUsuarios.php";s:4:"line";i:73;s:8:"function";s:7:"findOne";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"::";}i:2;a:5:{s:4:"file";s:27:"/var/www/scm/config/web.php";s:4:"line";i:161;s:8:"function";s:5:"__get";s:5:"class";s:18:"yii\base\Component";s:4:"type";s:2:"->";}}i:5;i:3253520;}i:21;a:6:{i:0;s:62:"SELECT * FROM "acesso"."tab_usuarios" WHERE "cod_usuario"=3777";i:1;i:96;i:2;s:21:"yii\db\Command::query";i:3;d:1508957018.6453381;i:4;a:3:{i:0;a:5:{s:4:"file";s:54:"/var/www/scm/modules/admin/models/TabUsuariosQuery.php";s:4:"line";i:33;s:8:"function";s:3:"one";s:5:"class";s:18:"yii\db\ActiveQuery";s:4:"type";s:2:"->";}i:1;a:5:{s:4:"file";s:49:"/var/www/scm/modules/admin/models/MdlUsuarios.php";s:4:"line";i:73;s:8:"function";s:7:"findOne";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"::";}i:2;a:5:{s:4:"file";s:27:"/var/www/scm/config/web.php";s:4:"line";i:161;s:8:"function";s:5:"__get";s:5:"class";s:18:"yii\base\Component";s:4:"type";s:2:"->";}}i:5;i:3264304;}i:23;a:6:{i:0;s:28:"SET application_name = '::1'";i:1;i:80;i:2;s:23:"yii\db\Command::execute";i:3;d:1508957018.6500199;i:4;a:1:{i:0;a:5:{s:4:"file";s:27:"/var/www/scm/config/web.php";s:4:"line";i:167;s:8:"function";s:7:"execute";s:5:"class";s:14:"yii\db\Command";s:4:"type";s:2:"->";}}i:5;i:3417792;}i:24;a:6:{i:0;s:28:"SET application_name = '::1'";i:1;i:96;i:2;s:23:"yii\db\Command::execute";i:3;d:1508957018.6512761;i:4;a:1:{i:0;a:5:{s:4:"file";s:27:"/var/www/scm/config/web.php";s:4:"line";i:167;s:8:"function";s:7:"execute";s:5:"class";s:14:"yii\db\Command";s:4:"type";s:2:"->";}}i:5;i:3420344;}i:26;a:6:{i:0;s:30:"SELECT * FROM "tab_parametros"";i:1;i:80;i:2;s:21:"yii\db\Command::query";i:3;d:1508957018.6538811;i:4;a:3:{i:0;a:5:{s:4:"file";s:42:"/var/www/scm/models/TabParametrosQuery.php";s:4:"line";i:24;s:8:"function";s:3:"all";s:5:"class";s:18:"yii\db\ActiveQuery";s:4:"type";s:2:"->";}i:1;a:5:{s:4:"file";s:27:"/var/www/scm/config/web.php";s:4:"line";i:174;s:8:"function";s:3:"all";s:5:"class";s:29:"app\models\TabParametrosQuery";s:4:"type";s:2:"->";}i:2;a:3:{s:4:"file";s:27:"/var/www/scm/config/web.php";s:4:"line";i:184;s:8:"function";s:9:"{closure}";}}i:5;i:3612232;}i:27;a:6:{i:0;s:30:"SELECT * FROM "tab_parametros"";i:1;i:96;i:2;s:21:"yii\db\Command::query";i:3;d:1508957018.6574271;i:4;a:3:{i:0;a:5:{s:4:"file";s:42:"/var/www/scm/models/TabParametrosQuery.php";s:4:"line";i:24;s:8:"function";s:3:"all";s:5:"class";s:18:"yii\db\ActiveQuery";s:4:"type";s:2:"->";}i:1;a:5:{s:4:"file";s:27:"/var/www/scm/config/web.php";s:4:"line";i:174;s:8:"function";s:3:"all";s:5:"class";s:29:"app\models\TabParametrosQuery";s:4:"type";s:2:"->";}i:2;a:3:{s:4:"file";s:27:"/var/www/scm/config/web.php";s:4:"line";i:184;s:8:"function";s:9:"{closure}";}}i:5;i:3643560;}i:43;a:6:{i:0;s:62:"SELECT * FROM "acesso"."tab_usuarios" WHERE "cod_usuario"=3777";i:1;i:80;i:2;s:21:"yii\db\Command::query";i:3;d:1508957018.663312;i:4;a:3:{i:0;a:5:{s:4:"file";s:54:"/var/www/scm/modules/admin/models/TabUsuariosQuery.php";s:4:"line";i:33;s:8:"function";s:3:"one";s:5:"class";s:18:"yii\db\ActiveQuery";s:4:"type";s:2:"->";}i:1;a:5:{s:4:"file";s:36:"/var/www/scm/projeto/base/Module.php";s:4:"line";i:45;s:8:"function";s:7:"findOne";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"::";}i:2;a:5:{s:4:"file";s:36:"/var/www/scm/projeto/base/Module.php";s:4:"line";i:29;s:8:"function";s:30:"isModuloBloqueadoAcessoInterno";s:5:"class";s:19:"projeto\base\Module";s:4:"type";s:2:"::";}}i:5;i:3840448;}i:44;a:6:{i:0;s:62:"SELECT * FROM "acesso"."tab_usuarios" WHERE "cod_usuario"=3777";i:1;i:96;i:2;s:21:"yii\db\Command::query";i:3;d:1508957018.665942;i:4;a:3:{i:0;a:5:{s:4:"file";s:54:"/var/www/scm/modules/admin/models/TabUsuariosQuery.php";s:4:"line";i:33;s:8:"function";s:3:"one";s:5:"class";s:18:"yii\db\ActiveQuery";s:4:"type";s:2:"->";}i:1;a:5:{s:4:"file";s:36:"/var/www/scm/projeto/base/Module.php";s:4:"line";i:45;s:8:"function";s:7:"findOne";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"::";}i:2;a:5:{s:4:"file";s:36:"/var/www/scm/projeto/base/Module.php";s:4:"line";i:29;s:8:"function";s:30:"isModuloBloqueadoAcessoInterno";s:5:"class";s:19:"projeto\base\Module";s:4:"type";s:2:"::";}}i:5;i:3851256;}i:46;a:6:{i:0;s:59:"SELECT * FROM "acesso"."tab_modulos" WHERE "id"='comercial'";i:1;i:80;i:2;s:21:"yii\db\Command::query";i:3;d:1508957018.6695809;i:4;a:3:{i:0;a:5:{s:4:"file";s:53:"/var/www/scm/modules/admin/models/TabModulosQuery.php";s:4:"line";i:33;s:8:"function";s:3:"one";s:5:"class";s:18:"yii\db\ActiveQuery";s:4:"type";s:2:"->";}i:1;a:5:{s:4:"file";s:36:"/var/www/scm/projeto/base/Module.php";s:4:"line";i:48;s:8:"function";s:7:"findOne";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"::";}i:2;a:5:{s:4:"file";s:36:"/var/www/scm/projeto/base/Module.php";s:4:"line";i:29;s:8:"function";s:30:"isModuloBloqueadoAcessoInterno";s:5:"class";s:19:"projeto\base\Module";s:4:"type";s:2:"::";}}i:5;i:3975920;}i:47;a:6:{i:0;s:59:"SELECT * FROM "acesso"."tab_modulos" WHERE "id"='comercial'";i:1;i:96;i:2;s:21:"yii\db\Command::query";i:3;d:1508957018.6748419;i:4;a:3:{i:0;a:5:{s:4:"file";s:53:"/var/www/scm/modules/admin/models/TabModulosQuery.php";s:4:"line";i:33;s:8:"function";s:3:"one";s:5:"class";s:18:"yii\db\ActiveQuery";s:4:"type";s:2:"->";}i:1;a:5:{s:4:"file";s:36:"/var/www/scm/projeto/base/Module.php";s:4:"line";i:48;s:8:"function";s:7:"findOne";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"::";}i:2;a:5:{s:4:"file";s:36:"/var/www/scm/projeto/base/Module.php";s:4:"line";i:29;s:8:"function";s:30:"isModuloBloqueadoAcessoInterno";s:5:"class";s:19:"projeto\base\Module";s:4:"type";s:2:"::";}}i:5;i:3985384;}i:49;a:6:{i:0;s:1957:"SELECT
+    d.nspname AS table_schema,
+    c.relname AS table_name,
+    a.attname AS column_name,
+    t.typname AS data_type,
+    a.attlen AS character_maximum_length,
+    pg_catalog.col_description(c.oid, a.attnum) AS column_comment,
+    a.atttypmod AS modifier,
+    a.attnotnull = false AS is_nullable,
+    CAST(pg_get_expr(ad.adbin, ad.adrelid) AS varchar) AS column_default,
+    coalesce(pg_get_expr(ad.adbin, ad.adrelid) ~ 'nextval',false) AS is_autoinc,
+    array_to_string((select array_agg(enumlabel) from pg_enum where enumtypid=a.atttypid)::varchar[],',') as enum_values,
+    CASE atttypid
+         WHEN 21 /*int2*/ THEN 16
+         WHEN 23 /*int4*/ THEN 32
+         WHEN 20 /*int8*/ THEN 64
+         WHEN 1700 /*numeric*/ THEN
+              CASE WHEN atttypmod = -1
+               THEN null
+               ELSE ((atttypmod - 4) >> 16) & 65535
+               END
+         WHEN 700 /*float4*/ THEN 24 /*FLT_MANT_DIG*/
+         WHEN 701 /*float8*/ THEN 53 /*DBL_MANT_DIG*/
+         ELSE null
+      END   AS numeric_precision,
+      CASE
+        WHEN atttypid IN (21, 23, 20) THEN 0
+        WHEN atttypid IN (1700) THEN
+        CASE
+            WHEN atttypmod = -1 THEN null
+            ELSE (atttypmod - 4) & 65535
+        END
+           ELSE null
+      END AS numeric_scale,
+    CAST(
+             information_schema._pg_char_max_length(information_schema._pg_truetypid(a, t), information_schema._pg_truetypmod(a, t))
+             AS numeric
+    ) AS size,
+    a.attnum = any (ct.conkey) as is_pkey
+FROM
+    pg_class c
+    LEFT JOIN pg_attribute a ON a.attrelid = c.oid
+    LEFT JOIN pg_attrdef ad ON a.attrelid = ad.adrelid AND a.attnum = ad.adnum
+    LEFT JOIN pg_type t ON a.atttypid = t.oid
+    LEFT JOIN pg_namespace d ON d.oid = c.relnamespace
+    LEFT join pg_constraint ct on ct.conrelid=c.oid and ct.contype='p'
+WHERE
+    a.attnum > 0 and t.typname != ''
+    and c.relname = 'tab_modulos'
+    and d.nspname = 'acesso'
+ORDER BY
+    a.attnum;";i:1;i:80;i:2;s:21:"yii\db\Command::query";i:3;d:1508957018.6775391;i:4;a:3:{i:0;a:5:{s:4:"file";s:53:"/var/www/scm/modules/admin/models/TabModulosQuery.php";s:4:"line";i:33;s:8:"function";s:3:"one";s:5:"class";s:18:"yii\db\ActiveQuery";s:4:"type";s:2:"->";}i:1;a:5:{s:4:"file";s:36:"/var/www/scm/projeto/base/Module.php";s:4:"line";i:48;s:8:"function";s:7:"findOne";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"::";}i:2;a:5:{s:4:"file";s:36:"/var/www/scm/projeto/base/Module.php";s:4:"line";i:29;s:8:"function";s:30:"isModuloBloqueadoAcessoInterno";s:5:"class";s:19:"projeto\base\Module";s:4:"type";s:2:"::";}}i:5;i:4014776;}i:50;a:6:{i:0;s:1957:"SELECT
+    d.nspname AS table_schema,
+    c.relname AS table_name,
+    a.attname AS column_name,
+    t.typname AS data_type,
+    a.attlen AS character_maximum_length,
+    pg_catalog.col_description(c.oid, a.attnum) AS column_comment,
+    a.atttypmod AS modifier,
+    a.attnotnull = false AS is_nullable,
+    CAST(pg_get_expr(ad.adbin, ad.adrelid) AS varchar) AS column_default,
+    coalesce(pg_get_expr(ad.adbin, ad.adrelid) ~ 'nextval',false) AS is_autoinc,
+    array_to_string((select array_agg(enumlabel) from pg_enum where enumtypid=a.atttypid)::varchar[],',') as enum_values,
+    CASE atttypid
+         WHEN 21 /*int2*/ THEN 16
+         WHEN 23 /*int4*/ THEN 32
+         WHEN 20 /*int8*/ THEN 64
+         WHEN 1700 /*numeric*/ THEN
+              CASE WHEN atttypmod = -1
+               THEN null
+               ELSE ((atttypmod - 4) >> 16) & 65535
+               END
+         WHEN 700 /*float4*/ THEN 24 /*FLT_MANT_DIG*/
+         WHEN 701 /*float8*/ THEN 53 /*DBL_MANT_DIG*/
+         ELSE null
+      END   AS numeric_precision,
+      CASE
+        WHEN atttypid IN (21, 23, 20) THEN 0
+        WHEN atttypid IN (1700) THEN
+        CASE
+            WHEN atttypmod = -1 THEN null
+            ELSE (atttypmod - 4) & 65535
+        END
+           ELSE null
+      END AS numeric_scale,
+    CAST(
+             information_schema._pg_char_max_length(information_schema._pg_truetypid(a, t), information_schema._pg_truetypmod(a, t))
+             AS numeric
+    ) AS size,
+    a.attnum = any (ct.conkey) as is_pkey
+FROM
+    pg_class c
+    LEFT JOIN pg_attribute a ON a.attrelid = c.oid
+    LEFT JOIN pg_attrdef ad ON a.attrelid = ad.adrelid AND a.attnum = ad.adnum
+    LEFT JOIN pg_type t ON a.atttypid = t.oid
+    LEFT JOIN pg_namespace d ON d.oid = c.relnamespace
+    LEFT join pg_constraint ct on ct.conrelid=c.oid and ct.contype='p'
+WHERE
+    a.attnum > 0 and t.typname != ''
+    and c.relname = 'tab_modulos'
+    and d.nspname = 'acesso'
+ORDER BY
+    a.attnum;";i:1;i:96;i:2;s:21:"yii\db\Command::query";i:3;d:1508957018.7093389;i:4;a:3:{i:0;a:5:{s:4:"file";s:53:"/var/www/scm/modules/admin/models/TabModulosQuery.php";s:4:"line";i:33;s:8:"function";s:3:"one";s:5:"class";s:18:"yii\db\ActiveQuery";s:4:"type";s:2:"->";}i:1;a:5:{s:4:"file";s:36:"/var/www/scm/projeto/base/Module.php";s:4:"line";i:48;s:8:"function";s:7:"findOne";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"::";}i:2;a:5:{s:4:"file";s:36:"/var/www/scm/projeto/base/Module.php";s:4:"line";i:29;s:8:"function";s:30:"isModuloBloqueadoAcessoInterno";s:5:"class";s:19:"projeto\base\Module";s:4:"type";s:2:"::";}}i:5;i:4066512;}i:52;a:6:{i:0;s:879:"select
+    ct.conname as constraint_name,
+    a.attname as column_name,
+    fc.relname as foreign_table_name,
+    fns.nspname as foreign_table_schema,
+    fa.attname as foreign_column_name
+from
+    (SELECT ct.conname, ct.conrelid, ct.confrelid, ct.conkey, ct.contype, ct.confkey, generate_subscripts(ct.conkey, 1) AS s
+       FROM pg_constraint ct
+    ) AS ct
+    inner join pg_class c on c.oid=ct.conrelid
+    inner join pg_namespace ns on c.relnamespace=ns.oid
+    inner join pg_attribute a on a.attrelid=ct.conrelid and a.attnum = ct.conkey[ct.s]
+    left join pg_class fc on fc.oid=ct.confrelid
+    left join pg_namespace fns on fc.relnamespace=fns.oid
+    left join pg_attribute fa on fa.attrelid=ct.confrelid and fa.attnum = ct.confkey[ct.s]
+where
+    ct.contype='f'
+    and c.relname='tab_modulos'
+    and ns.nspname='acesso'
+order by
+    fns.nspname, fc.relname, a.attnum";i:1;i:80;i:2;s:21:"yii\db\Command::query";i:3;d:1508957018.7179389;i:4;a:3:{i:0;a:5:{s:4:"file";s:53:"/var/www/scm/modules/admin/models/TabModulosQuery.php";s:4:"line";i:33;s:8:"function";s:3:"one";s:5:"class";s:18:"yii\db\ActiveQuery";s:4:"type";s:2:"->";}i:1;a:5:{s:4:"file";s:36:"/var/www/scm/projeto/base/Module.php";s:4:"line";i:48;s:8:"function";s:7:"findOne";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"::";}i:2;a:5:{s:4:"file";s:36:"/var/www/scm/projeto/base/Module.php";s:4:"line";i:29;s:8:"function";s:30:"isModuloBloqueadoAcessoInterno";s:5:"class";s:19:"projeto\base\Module";s:4:"type";s:2:"::";}}i:5;i:4044592;}i:53;a:6:{i:0;s:879:"select
+    ct.conname as constraint_name,
+    a.attname as column_name,
+    fc.relname as foreign_table_name,
+    fns.nspname as foreign_table_schema,
+    fa.attname as foreign_column_name
+from
+    (SELECT ct.conname, ct.conrelid, ct.confrelid, ct.conkey, ct.contype, ct.confkey, generate_subscripts(ct.conkey, 1) AS s
+       FROM pg_constraint ct
+    ) AS ct
+    inner join pg_class c on c.oid=ct.conrelid
+    inner join pg_namespace ns on c.relnamespace=ns.oid
+    inner join pg_attribute a on a.attrelid=ct.conrelid and a.attnum = ct.conkey[ct.s]
+    left join pg_class fc on fc.oid=ct.confrelid
+    left join pg_namespace fns on fc.relnamespace=fns.oid
+    left join pg_attribute fa on fa.attrelid=ct.confrelid and fa.attnum = ct.confkey[ct.s]
+where
+    ct.contype='f'
+    and c.relname='tab_modulos'
+    and ns.nspname='acesso'
+order by
+    fns.nspname, fc.relname, a.attnum";i:1;i:96;i:2;s:21:"yii\db\Command::query";i:3;d:1508957018.7331901;i:4;a:3:{i:0;a:5:{s:4:"file";s:53:"/var/www/scm/modules/admin/models/TabModulosQuery.php";s:4:"line";i:33;s:8:"function";s:3:"one";s:5:"class";s:18:"yii\db\ActiveQuery";s:4:"type";s:2:"->";}i:1;a:5:{s:4:"file";s:36:"/var/www/scm/projeto/base/Module.php";s:4:"line";i:48;s:8:"function";s:7:"findOne";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"::";}i:2;a:5:{s:4:"file";s:36:"/var/www/scm/projeto/base/Module.php";s:4:"line";i:29;s:8:"function";s:30:"isModuloBloqueadoAcessoInterno";s:5:"class";s:19:"projeto\base\Module";s:4:"type";s:2:"::";}}i:5;i:4050016;}i:55;a:6:{i:0;s:72:"SELECT * FROM "acesso"."vis_usuarios_perfis" WHERE "cod_usuario_fk"=3777";i:1;i:80;i:2;s:21:"yii\db\Command::query";i:3;d:1508957018.737422;i:4;a:3:{i:0;a:5:{s:4:"file";s:60:"/var/www/scm/modules/admin/models/VisUsuariosPerfisQuery.php";s:4:"line";i:24;s:8:"function";s:3:"all";s:5:"class";s:18:"yii\db\ActiveQuery";s:4:"type";s:2:"->";}i:1;a:5:{s:4:"file";s:40:"/var/www/scm/projeto/db/ActiveRecord.php";s:4:"line";i:33;s:8:"function";s:3:"all";s:5:"class";s:47:"app\modules\admin\models\VisUsuariosPerfisQuery";s:4:"type";s:2:"->";}i:2;a:5:{s:4:"file";s:61:"/var/www/scm/modules/admin/models/VisUsuariosPerfisSearch.php";s:4:"line";i:73;s:8:"function";s:14:"findAllAsArray";s:5:"class";s:23:"projeto\db\ActiveRecord";s:4:"type";s:2:"::";}}i:5;i:4229040;}i:56;a:6:{i:0;s:72:"SELECT * FROM "acesso"."vis_usuarios_perfis" WHERE "cod_usuario_fk"=3777";i:1;i:96;i:2;s:21:"yii\db\Command::query";i:3;d:1508957018.7487741;i:4;a:3:{i:0;a:5:{s:4:"file";s:60:"/var/www/scm/modules/admin/models/VisUsuariosPerfisQuery.php";s:4:"line";i:24;s:8:"function";s:3:"all";s:5:"class";s:18:"yii\db\ActiveQuery";s:4:"type";s:2:"->";}i:1;a:5:{s:4:"file";s:40:"/var/www/scm/projeto/db/ActiveRecord.php";s:4:"line";i:33;s:8:"function";s:3:"all";s:5:"class";s:47:"app\modules\admin\models\VisUsuariosPerfisQuery";s:4:"type";s:2:"->";}i:2;a:5:{s:4:"file";s:61:"/var/www/scm/modules/admin/models/VisUsuariosPerfisSearch.php";s:4:"line";i:73;s:8:"function";s:14:"findAllAsArray";s:5:"class";s:23:"projeto\db\ActiveRecord";s:4:"type";s:2:"::";}}i:5;i:4241432;}i:58;a:6:{i:0;s:131:"SELECT * FROM "tab_parametros" WHERE ("num_ano_ref"=2015) AND ("sgl_parametro"='sistema-bloqueio-usr-interno') AND ("modulo_fk"=32)";i:1;i:80;i:2;s:21:"yii\db\Command::query";i:3;d:1508957018.7510281;i:4;a:3:{i:0;a:5:{s:4:"file";s:42:"/var/www/scm/models/TabParametrosQuery.php";s:4:"line";i:33;s:8:"function";s:3:"one";s:5:"class";s:18:"yii\db\ActiveQuery";s:4:"type";s:2:"->";}i:1;a:5:{s:4:"file";s:36:"/var/www/scm/projeto/base/Module.php";s:4:"line";i:62;s:8:"function";s:7:"findOne";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"::";}i:2;a:5:{s:4:"file";s:36:"/var/www/scm/projeto/base/Module.php";s:4:"line";i:29;s:8:"function";s:30:"isModuloBloqueadoAcessoInterno";s:5:"class";s:19:"projeto\base\Module";s:4:"type";s:2:"::";}}i:5;i:4248136;}i:59;a:6:{i:0;s:131:"SELECT * FROM "tab_parametros" WHERE ("num_ano_ref"=2015) AND ("sgl_parametro"='sistema-bloqueio-usr-interno') AND ("modulo_fk"=32)";i:1;i:96;i:2;s:21:"yii\db\Command::query";i:3;d:1508957018.7534709;i:4;a:3:{i:0;a:5:{s:4:"file";s:42:"/var/www/scm/models/TabParametrosQuery.php";s:4:"line";i:33;s:8:"function";s:3:"one";s:5:"class";s:18:"yii\db\ActiveQuery";s:4:"type";s:2:"->";}i:1;a:5:{s:4:"file";s:36:"/var/www/scm/projeto/base/Module.php";s:4:"line";i:62;s:8:"function";s:7:"findOne";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"::";}i:2;a:5:{s:4:"file";s:36:"/var/www/scm/projeto/base/Module.php";s:4:"line";i:29;s:8:"function";s:30:"isModuloBloqueadoAcessoInterno";s:5:"class";s:19:"projeto\base\Module";s:4:"type";s:2:"::";}}i:5;i:4254224;}i:61;a:6:{i:0;s:62:"SELECT * FROM "acesso"."tab_usuarios" WHERE "cod_usuario"=3777";i:1;i:80;i:2;s:21:"yii\db\Command::query";i:3;d:1508957018.7555029;i:4;a:3:{i:0;a:5:{s:4:"file";s:54:"/var/www/scm/modules/admin/models/TabUsuariosQuery.php";s:4:"line";i:33;s:8:"function";s:3:"one";s:5:"class";s:18:"yii\db\ActiveQuery";s:4:"type";s:2:"->";}i:1;a:5:{s:4:"file";s:36:"/var/www/scm/projeto/base/Module.php";s:4:"line";i:73;s:8:"function";s:7:"findOne";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"::";}i:2;a:5:{s:4:"file";s:36:"/var/www/scm/projeto/base/Module.php";s:4:"line";i:34;s:8:"function";s:30:"isModuloBloqueadoAcessoExterno";s:5:"class";s:19:"projeto\base\Module";s:4:"type";s:2:"::";}}i:5;i:4247360;}i:62;a:6:{i:0;s:62:"SELECT * FROM "acesso"."tab_usuarios" WHERE "cod_usuario"=3777";i:1;i:96;i:2;s:21:"yii\db\Command::query";i:3;d:1508957018.7577269;i:4;a:3:{i:0;a:5:{s:4:"file";s:54:"/var/www/scm/modules/admin/models/TabUsuariosQuery.php";s:4:"line";i:33;s:8:"function";s:3:"one";s:5:"class";s:18:"yii\db\ActiveQuery";s:4:"type";s:2:"->";}i:1;a:5:{s:4:"file";s:36:"/var/www/scm/projeto/base/Module.php";s:4:"line";i:73;s:8:"function";s:7:"findOne";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"::";}i:2;a:5:{s:4:"file";s:36:"/var/www/scm/projeto/base/Module.php";s:4:"line";i:34;s:8:"function";s:30:"isModuloBloqueadoAcessoExterno";s:5:"class";s:19:"projeto\base\Module";s:4:"type";s:2:"::";}}i:5;i:4258160;}i:66;a:6:{i:0;s:96:"SELECT COUNT(*) FROM "comercial"."tab_contrato" WHERE to_char(dt_incllusao, 'MM/YYYY')='09/2017'";i:1;i:80;i:2;s:21:"yii\db\Command::query";i:3;d:1508957018.7686009;i:4;a:1:{i:0;a:5:{s:4:"file";s:63:"/var/www/scm/modules/comercial/controllers/InicioController.php";s:4:"line";i:23;s:8:"function";s:5:"count";s:5:"class";s:12:"yii\db\Query";s:4:"type";s:2:"->";}}i:5;i:4659296;}i:67;a:6:{i:0;s:96:"SELECT COUNT(*) FROM "comercial"."tab_contrato" WHERE to_char(dt_incllusao, 'MM/YYYY')='09/2017'";i:1;i:96;i:2;s:21:"yii\db\Command::query";i:3;d:1508957018.7716701;i:4;a:1:{i:0;a:5:{s:4:"file";s:63:"/var/www/scm/modules/comercial/controllers/InicioController.php";s:4:"line";i:23;s:8:"function";s:5:"count";s:5:"class";s:12:"yii\db\Query";s:4:"type";s:2:"->";}}i:5;i:4684856;}i:86;a:6:{i:0;s:82:"SELECT "id" FROM "acesso"."tab_sessao_php" WHERE "id"='25cml2a2te37kgeguujk5m3202'";i:1;i:80;i:2;s:21:"yii\db\Command::query";i:3;d:1508957018.8475659;i:4;a:0:{}i:5;i:4801968;}i:87;a:6:{i:0;s:82:"SELECT "id" FROM "acesso"."tab_sessao_php" WHERE "id"='25cml2a2te37kgeguujk5m3202'";i:1;i:96;i:2;s:21:"yii\db\Command::query";i:3;d:1508957018.8533919;i:4;a:0:{}i:5;i:4803464;}i:89;a:6:{i:0;s:1960:"SELECT
+    d.nspname AS table_schema,
+    c.relname AS table_name,
+    a.attname AS column_name,
+    t.typname AS data_type,
+    a.attlen AS character_maximum_length,
+    pg_catalog.col_description(c.oid, a.attnum) AS column_comment,
+    a.atttypmod AS modifier,
+    a.attnotnull = false AS is_nullable,
+    CAST(pg_get_expr(ad.adbin, ad.adrelid) AS varchar) AS column_default,
+    coalesce(pg_get_expr(ad.adbin, ad.adrelid) ~ 'nextval',false) AS is_autoinc,
+    array_to_string((select array_agg(enumlabel) from pg_enum where enumtypid=a.atttypid)::varchar[],',') as enum_values,
+    CASE atttypid
+         WHEN 21 /*int2*/ THEN 16
+         WHEN 23 /*int4*/ THEN 32
+         WHEN 20 /*int8*/ THEN 64
+         WHEN 1700 /*numeric*/ THEN
+              CASE WHEN atttypmod = -1
+               THEN null
+               ELSE ((atttypmod - 4) >> 16) & 65535
+               END
+         WHEN 700 /*float4*/ THEN 24 /*FLT_MANT_DIG*/
+         WHEN 701 /*float8*/ THEN 53 /*DBL_MANT_DIG*/
+         ELSE null
+      END   AS numeric_precision,
+      CASE
+        WHEN atttypid IN (21, 23, 20) THEN 0
+        WHEN atttypid IN (1700) THEN
+        CASE
+            WHEN atttypmod = -1 THEN null
+            ELSE (atttypmod - 4) & 65535
+        END
+           ELSE null
+      END AS numeric_scale,
+    CAST(
+             information_schema._pg_char_max_length(information_schema._pg_truetypid(a, t), information_schema._pg_truetypmod(a, t))
+             AS numeric
+    ) AS size,
+    a.attnum = any (ct.conkey) as is_pkey
+FROM
+    pg_class c
+    LEFT JOIN pg_attribute a ON a.attrelid = c.oid
+    LEFT JOIN pg_attrdef ad ON a.attrelid = ad.adrelid AND a.attnum = ad.adnum
+    LEFT JOIN pg_type t ON a.atttypid = t.oid
+    LEFT JOIN pg_namespace d ON d.oid = c.relnamespace
+    LEFT join pg_constraint ct on ct.conrelid=c.oid and ct.contype='p'
+WHERE
+    a.attnum > 0 and t.typname != ''
+    and c.relname = 'tab_sessao_php'
+    and d.nspname = 'acesso'
+ORDER BY
+    a.attnum;";i:1;i:80;i:2;s:21:"yii\db\Command::query";i:3;d:1508957018.8560591;i:4;a:0:{}i:5;i:4826040;}i:90;a:6:{i:0;s:1960:"SELECT
+    d.nspname AS table_schema,
+    c.relname AS table_name,
+    a.attname AS column_name,
+    t.typname AS data_type,
+    a.attlen AS character_maximum_length,
+    pg_catalog.col_description(c.oid, a.attnum) AS column_comment,
+    a.atttypmod AS modifier,
+    a.attnotnull = false AS is_nullable,
+    CAST(pg_get_expr(ad.adbin, ad.adrelid) AS varchar) AS column_default,
+    coalesce(pg_get_expr(ad.adbin, ad.adrelid) ~ 'nextval',false) AS is_autoinc,
+    array_to_string((select array_agg(enumlabel) from pg_enum where enumtypid=a.atttypid)::varchar[],',') as enum_values,
+    CASE atttypid
+         WHEN 21 /*int2*/ THEN 16
+         WHEN 23 /*int4*/ THEN 32
+         WHEN 20 /*int8*/ THEN 64
+         WHEN 1700 /*numeric*/ THEN
+              CASE WHEN atttypmod = -1
+               THEN null
+               ELSE ((atttypmod - 4) >> 16) & 65535
+               END
+         WHEN 700 /*float4*/ THEN 24 /*FLT_MANT_DIG*/
+         WHEN 701 /*float8*/ THEN 53 /*DBL_MANT_DIG*/
+         ELSE null
+      END   AS numeric_precision,
+      CASE
+        WHEN atttypid IN (21, 23, 20) THEN 0
+        WHEN atttypid IN (1700) THEN
+        CASE
+            WHEN atttypmod = -1 THEN null
+            ELSE (atttypmod - 4) & 65535
+        END
+           ELSE null
+      END AS numeric_scale,
+    CAST(
+             information_schema._pg_char_max_length(information_schema._pg_truetypid(a, t), information_schema._pg_truetypmod(a, t))
+             AS numeric
+    ) AS size,
+    a.attnum = any (ct.conkey) as is_pkey
+FROM
+    pg_class c
+    LEFT JOIN pg_attribute a ON a.attrelid = c.oid
+    LEFT JOIN pg_attrdef ad ON a.attrelid = ad.adrelid AND a.attnum = ad.adnum
+    LEFT JOIN pg_type t ON a.atttypid = t.oid
+    LEFT JOIN pg_namespace d ON d.oid = c.relnamespace
+    LEFT join pg_constraint ct on ct.conrelid=c.oid and ct.contype='p'
+WHERE
+    a.attnum > 0 and t.typname != ''
+    and c.relname = 'tab_sessao_php'
+    and d.nspname = 'acesso'
+ORDER BY
+    a.attnum;";i:1;i:96;i:2;s:21:"yii\db\Command::query";i:3;d:1508957018.8732331;i:4;a:0:{}i:5;i:4839840;}i:92;a:6:{i:0;s:882:"select
+    ct.conname as constraint_name,
+    a.attname as column_name,
+    fc.relname as foreign_table_name,
+    fns.nspname as foreign_table_schema,
+    fa.attname as foreign_column_name
+from
+    (SELECT ct.conname, ct.conrelid, ct.confrelid, ct.conkey, ct.contype, ct.confkey, generate_subscripts(ct.conkey, 1) AS s
+       FROM pg_constraint ct
+    ) AS ct
+    inner join pg_class c on c.oid=ct.conrelid
+    inner join pg_namespace ns on c.relnamespace=ns.oid
+    inner join pg_attribute a on a.attrelid=ct.conrelid and a.attnum = ct.conkey[ct.s]
+    left join pg_class fc on fc.oid=ct.confrelid
+    left join pg_namespace fns on fc.relnamespace=fns.oid
+    left join pg_attribute fa on fa.attrelid=ct.confrelid and fa.attnum = ct.confkey[ct.s]
+where
+    ct.contype='f'
+    and c.relname='tab_sessao_php'
+    and ns.nspname='acesso'
+order by
+    fns.nspname, fc.relname, a.attnum";i:1;i:80;i:2;s:21:"yii\db\Command::query";i:3;d:1508957018.8754599;i:4;a:0:{}i:5;i:4831688;}i:93;a:6:{i:0;s:882:"select
+    ct.conname as constraint_name,
+    a.attname as column_name,
+    fc.relname as foreign_table_name,
+    fns.nspname as foreign_table_schema,
+    fa.attname as foreign_column_name
+from
+    (SELECT ct.conname, ct.conrelid, ct.confrelid, ct.conkey, ct.contype, ct.confkey, generate_subscripts(ct.conkey, 1) AS s
+       FROM pg_constraint ct
+    ) AS ct
+    inner join pg_class c on c.oid=ct.conrelid
+    inner join pg_namespace ns on c.relnamespace=ns.oid
+    inner join pg_attribute a on a.attrelid=ct.conrelid and a.attnum = ct.conkey[ct.s]
+    left join pg_class fc on fc.oid=ct.confrelid
+    left join pg_namespace fns on fc.relnamespace=fns.oid
+    left join pg_attribute fa on fa.attrelid=ct.confrelid and fa.attnum = ct.confkey[ct.s]
+where
+    ct.contype='f'
+    and c.relname='tab_sessao_php'
+    and ns.nspname='acesso'
+order by
+    fns.nspname, fc.relname, a.attnum";i:1;i:96;i:2;s:21:"yii\db\Command::query";i:3;d:1508957018.892004;i:4;a:0:{}i:5;i:4833432;}i:95;a:6:{i:0;s:10857:"UPDATE "acesso"."tab_sessao_php" SET "data"='__flash|a:0:{}sessao-expirada|s:9:"/scm/web/";__returnUrl|s:9:"/scm/web/";__id|i:3777;endereco|a:2:{i:4012;a:13:{s:12:"cod_endereco";i:4012;s:10:"logradouro";s:15:"Q 01 CONJ 01 LT";s:6:"numero";s:2:"12";s:11:"complemento";s:19:"LOJA 01 SETOR NORTE";s:3:"cep";s:10:"71.258-015";s:15:"correspondencia";N;s:16:"cod_municipio_fk";s:6:"530010";s:8:"chave_fk";i:3;s:12:"tipo_usuario";N;s:11:"dt_inclusao";s:10:"2017-05-31";s:5:"ativo";b:1;s:6:"bairro";s:17:"CIDADE ESTRUTURAL";s:14:"tipo_tabela_fk";s:11:"tab_cliente";}i:6397;a:13:{s:12:"cod_endereco";i:6397;s:10:"logradouro";s:5:"u88uu";s:6:"numero";s:4:"yyyy";s:11:"complemento";s:3:"yyy";s:3:"cep";s:10:"71.100-111";s:15:"correspondencia";b:0;s:16:"cod_municipio_fk";s:6:"270040";s:8:"chave_fk";i:3;s:12:"tipo_usuario";N;s:11:"dt_inclusao";N;s:5:"ativo";b:1;s:6:"bairro";N;s:14:"tipo_tabela_fk";s:11:"tab_cliente";}}contato|a:1:{i:30240;a:8:{s:11:"cod_contato";i:30240;s:7:"contato";s:15:"(97) 89273-9842";s:5:"ramal";s:0:"";s:5:"ativo";b:1;s:11:"dt_inclusao";s:10:"2017-09-22";s:4:"tipo";i:464;s:8:"chave_fk";i:3;s:14:"tipo_tabela_fk";s:11:"tab_cliente";}}contratos|a:5:{i:0;a:4:{s:10:"attributes";a:27:{s:12:"cod_contrato";i:14275;s:16:"tipo_contrato_fk";i:498;s:14:"valor_contrato";s:8:"10000.00";s:14:"dia_vencimento";N;s:12:"qnt_parcelas";i:4;s:8:"dt_prazo";s:10:"04/10/2017";s:11:"dt_inclusao";s:10:"25/10/2017";s:13:"dt_vencimento";s:10:"11/10/2017";s:8:"contador";N;s:14:"responsavel_fk";N;s:8:"operando";N;s:12:"qnt_clientes";N;s:4:"link";N;s:7:"zero800";N;s:9:"parceiria";N;s:15:"consultoria_scm";N;s:18:"engenheiro_tecnico";N;s:14:"cod_cliente_fk";i:3;s:5:"ativo";b:1;s:18:"txt_login_inclusao";s:1:"1";s:19:"txt_login_alteracao";s:1:"1";s:12:"dt_alteracao";s:10:"25/10/2017";s:6:"status";i:537;s:16:"nome_responsavel";N;s:8:"contrato";N;s:13:"dt_fechamento";N;s:21:"status_do_contrato_fk";N;}s:14:"tipo_contratos";a:1:{i:0;a:5:{s:17:"cod_tipo_contrato";i:12723;s:14:"cod_usuario_fk";i:1;s:15:"cod_contrato_fk";i:14275;s:15:"tipo_produto_fk";i:523;s:5:"ativo";b:1;}}s:8:"parcelas";a:4:{i:0;a:9:{s:21:"cod_contrato_parcelas";i:872;s:15:"cod_contrato_fk";i:14275;s:6:"numero";i:1;s:5:"valor";s:7:"2500.00";s:11:"dt_inclusao";s:10:"2017-10-25";s:13:"dt_vencimento";s:10:"2017-10-11";s:18:"txt_login_inclusao";s:1:"1";s:19:"txt_login_alteracao";s:1:"1";s:12:"dt_alteracao";s:10:"2017-10-25";}i:1;a:9:{s:21:"cod_contrato_parcelas";i:873;s:15:"cod_contrato_fk";i:14275;s:6:"numero";i:2;s:5:"valor";s:7:"2500.00";s:11:"dt_inclusao";s:10:"2017-10-25";s:13:"dt_vencimento";s:10:"2017-11-11";s:18:"txt_login_inclusao";s:1:"1";s:19:"txt_login_alteracao";s:1:"1";s:12:"dt_alteracao";s:10:"2017-10-25";}i:2;a:9:{s:21:"cod_contrato_parcelas";i:874;s:15:"cod_contrato_fk";i:14275;s:6:"numero";i:3;s:5:"valor";s:7:"2500.00";s:11:"dt_inclusao";s:10:"2017-10-25";s:13:"dt_vencimento";s:10:"2017-12-11";s:18:"txt_login_inclusao";s:1:"1";s:19:"txt_login_alteracao";s:1:"1";s:12:"dt_alteracao";s:10:"2017-10-25";}i:3;a:9:{s:21:"cod_contrato_parcelas";i:875;s:15:"cod_contrato_fk";i:14275;s:6:"numero";i:4;s:5:"valor";s:7:"2500.00";s:11:"dt_inclusao";s:10:"2017-10-25";s:13:"dt_vencimento";s:10:"2018-04-11";s:18:"txt_login_inclusao";s:1:"1";s:19:"txt_login_alteracao";s:1:"1";s:12:"dt_alteracao";s:10:"2017-10-25";}}s:10:"andamentos";N;}i:1;a:4:{s:10:"attributes";a:27:{s:12:"cod_contrato";i:14274;s:16:"tipo_contrato_fk";i:510;s:14:"valor_contrato";s:6:"100.00";s:14:"dia_vencimento";N;s:12:"qnt_parcelas";i:4;s:8:"dt_prazo";s:10:"25/10/2017";s:11:"dt_inclusao";s:10:"24/10/2017";s:13:"dt_vencimento";s:10:"16/10/2017";s:8:"contador";N;s:14:"responsavel_fk";N;s:8:"operando";N;s:12:"qnt_clientes";N;s:4:"link";N;s:7:"zero800";N;s:9:"parceiria";N;s:15:"consultoria_scm";N;s:18:"engenheiro_tecnico";N;s:14:"cod_cliente_fk";i:3;s:5:"ativo";b:1;s:18:"txt_login_inclusao";s:1:"1";s:19:"txt_login_alteracao";s:1:"1";s:12:"dt_alteracao";s:10:"24/10/2017";s:6:"status";i:543;s:16:"nome_responsavel";N;s:8:"contrato";N;s:13:"dt_fechamento";N;s:21:"status_do_contrato_fk";N;}s:14:"tipo_contratos";a:1:{i:0;a:5:{s:17:"cod_tipo_contrato";i:12722;s:14:"cod_usuario_fk";i:1;s:15:"cod_contrato_fk";i:14274;s:15:"tipo_produto_fk";i:523;s:5:"ativo";b:1;}}s:8:"parcelas";a:4:{i:0;a:9:{s:21:"cod_contrato_parcelas";i:868;s:15:"cod_contrato_fk";i:14274;s:6:"numero";i:1;s:5:"valor";s:5:"25.00";s:11:"dt_inclusao";s:10:"2017-10-24";s:13:"dt_vencimento";s:10:"2017-10-16";s:18:"txt_login_inclusao";s:1:"1";s:19:"txt_login_alteracao";s:1:"1";s:12:"dt_alteracao";s:10:"2017-10-24";}i:1;a:9:{s:21:"cod_contrato_parcelas";i:869;s:15:"cod_contrato_fk";i:14274;s:6:"numero";i:2;s:5:"valor";s:5:"25.00";s:11:"dt_inclusao";s:10:"2017-10-24";s:13:"dt_vencimento";s:10:"2017-11-16";s:18:"txt_login_inclusao";s:1:"1";s:19:"txt_login_alteracao";s:1:"1";s:12:"dt_alteracao";s:10:"2017-10-24";}i:2;a:9:{s:21:"cod_contrato_parcelas";i:870;s:15:"cod_contrato_fk";i:14274;s:6:"numero";i:3;s:5:"valor";s:5:"25.00";s:11:"dt_inclusao";s:10:"2017-10-24";s:13:"dt_vencimento";s:10:"2017-12-16";s:18:"txt_login_inclusao";s:1:"1";s:19:"txt_login_alteracao";s:1:"1";s:12:"dt_alteracao";s:10:"2017-10-24";}i:3;a:9:{s:21:"cod_contrato_parcelas";i:871;s:15:"cod_contrato_fk";i:14274;s:6:"numero";i:4;s:5:"valor";s:5:"25.00";s:11:"dt_inclusao";s:10:"2017-10-24";s:13:"dt_vencimento";s:10:"2018-04-16";s:18:"txt_login_inclusao";s:1:"1";s:19:"txt_login_alteracao";s:1:"1";s:12:"dt_alteracao";s:10:"2017-10-24";}}s:10:"andamentos";N;}i:2;a:4:{s:10:"attributes";a:27:{s:12:"cod_contrato";i:14139;s:16:"tipo_contrato_fk";i:498;s:14:"valor_contrato";s:6:"100.00";s:14:"dia_vencimento";N;s:12:"qnt_parcelas";i:1;s:8:"dt_prazo";s:10:"19/09/2017";s:11:"dt_inclusao";N;s:13:"dt_vencimento";s:10:"19/09/2017";s:8:"contador";N;s:14:"responsavel_fk";N;s:8:"operando";N;s:12:"qnt_clientes";N;s:4:"link";N;s:7:"zero800";N;s:9:"parceiria";N;s:15:"consultoria_scm";N;s:18:"engenheiro_tecnico";N;s:14:"cod_cliente_fk";i:3;s:5:"ativo";b:1;s:18:"txt_login_inclusao";s:1:"1";s:19:"txt_login_alteracao";s:1:"1";s:12:"dt_alteracao";s:10:"29/09/2017";s:6:"status";N;s:16:"nome_responsavel";N;s:8:"contrato";N;s:13:"dt_fechamento";N;s:21:"status_do_contrato_fk";N;}s:14:"tipo_contratos";a:1:{i:0;a:5:{s:17:"cod_tipo_contrato";i:12611;s:14:"cod_usuario_fk";i:5;s:15:"cod_contrato_fk";i:14139;s:15:"tipo_produto_fk";i:523;s:5:"ativo";b:1;}}s:8:"parcelas";a:1:{i:0;a:9:{s:21:"cod_contrato_parcelas";i:151;s:15:"cod_contrato_fk";i:14139;s:6:"numero";i:1;s:5:"valor";s:6:"100.00";s:11:"dt_inclusao";N;s:13:"dt_vencimento";s:10:"2017-09-29";s:18:"txt_login_inclusao";s:1:"1";s:19:"txt_login_alteracao";s:1:"1";s:12:"dt_alteracao";N;}}s:10:"andamentos";N;}i:3;a:4:{s:10:"attributes";a:27:{s:12:"cod_contrato";i:14095;s:16:"tipo_contrato_fk";i:512;s:14:"valor_contrato";s:7:"1000.00";s:14:"dia_vencimento";N;s:12:"qnt_parcelas";i:2;s:8:"dt_prazo";s:10:"06/09/2017";s:11:"dt_inclusao";N;s:13:"dt_vencimento";s:10:"12/09/2017";s:8:"contador";N;s:14:"responsavel_fk";N;s:8:"operando";N;s:12:"qnt_clientes";N;s:4:"link";N;s:7:"zero800";N;s:9:"parceiria";N;s:15:"consultoria_scm";N;s:18:"engenheiro_tecnico";N;s:14:"cod_cliente_fk";i:3;s:5:"ativo";b:1;s:18:"txt_login_inclusao";s:1:"1";s:19:"txt_login_alteracao";s:1:"1";s:12:"dt_alteracao";s:10:"26/09/2017";s:6:"status";i:536;s:16:"nome_responsavel";N;s:8:"contrato";N;s:13:"dt_fechamento";N;s:21:"status_do_contrato_fk";N;}s:14:"tipo_contratos";a:1:{i:0;a:5:{s:17:"cod_tipo_contrato";i:12567;s:14:"cod_usuario_fk";i:1;s:15:"cod_contrato_fk";i:14095;s:15:"tipo_produto_fk";i:523;s:5:"ativo";b:1;}}s:8:"parcelas";a:2:{i:0;a:9:{s:21:"cod_contrato_parcelas";i:102;s:15:"cod_contrato_fk";i:14095;s:6:"numero";i:1;s:5:"valor";s:6:"500.00";s:11:"dt_inclusao";N;s:13:"dt_vencimento";s:10:"2017-09-26";s:18:"txt_login_inclusao";s:1:"1";s:19:"txt_login_alteracao";s:1:"1";s:12:"dt_alteracao";N;}i:1;a:9:{s:21:"cod_contrato_parcelas";i:103;s:15:"cod_contrato_fk";i:14095;s:6:"numero";i:2;s:5:"valor";s:6:"500.00";s:11:"dt_inclusao";N;s:13:"dt_vencimento";s:10:"2017-09-26";s:18:"txt_login_inclusao";s:1:"1";s:19:"txt_login_alteracao";s:1:"1";s:12:"dt_alteracao";N;}}s:10:"andamentos";N;}i:4;a:4:{s:10:"attributes";a:27:{s:12:"cod_contrato";i:143;s:16:"tipo_contrato_fk";i:511;s:14:"valor_contrato";N;s:14:"dia_vencimento";N;s:12:"qnt_parcelas";N;s:8:"dt_prazo";N;s:11:"dt_inclusao";s:10:"01/06/2017";s:13:"dt_vencimento";N;s:8:"contador";N;s:14:"responsavel_fk";N;s:8:"operando";N;s:12:"qnt_clientes";N;s:4:"link";N;s:7:"zero800";N;s:9:"parceiria";N;s:15:"consultoria_scm";N;s:18:"engenheiro_tecnico";N;s:14:"cod_cliente_fk";i:3;s:5:"ativo";b:1;s:18:"txt_login_inclusao";N;s:19:"txt_login_alteracao";N;s:12:"dt_alteracao";N;s:6:"status";i:536;s:16:"nome_responsavel";N;s:8:"contrato";N;s:13:"dt_fechamento";N;s:21:"status_do_contrato_fk";N;}s:14:"tipo_contratos";a:8:{i:0;a:5:{s:17:"cod_tipo_contrato";i:12513;s:14:"cod_usuario_fk";i:1;s:15:"cod_contrato_fk";i:143;s:15:"tipo_produto_fk";i:521;s:5:"ativo";b:1;}i:1;a:5:{s:17:"cod_tipo_contrato";i:10406;s:14:"cod_usuario_fk";N;s:15:"cod_contrato_fk";i:143;s:15:"tipo_produto_fk";i:524;s:5:"ativo";b:1;}i:2;a:5:{s:17:"cod_tipo_contrato";i:10407;s:14:"cod_usuario_fk";N;s:15:"cod_contrato_fk";i:143;s:15:"tipo_produto_fk";i:528;s:5:"ativo";b:1;}i:3;a:5:{s:17:"cod_tipo_contrato";i:10408;s:14:"cod_usuario_fk";N;s:15:"cod_contrato_fk";i:143;s:15:"tipo_produto_fk";N;s:5:"ativo";b:1;}i:4;a:5:{s:17:"cod_tipo_contrato";i:10409;s:14:"cod_usuario_fk";N;s:15:"cod_contrato_fk";i:143;s:15:"tipo_produto_fk";i:526;s:5:"ativo";b:1;}i:5;a:5:{s:17:"cod_tipo_contrato";i:10410;s:14:"cod_usuario_fk";N;s:15:"cod_contrato_fk";i:143;s:15:"tipo_produto_fk";i:527;s:5:"ativo";b:1;}i:6;a:5:{s:17:"cod_tipo_contrato";i:12475;s:14:"cod_usuario_fk";i:5;s:15:"cod_contrato_fk";i:143;s:15:"tipo_produto_fk";i:522;s:5:"ativo";b:1;}i:7;a:5:{s:17:"cod_tipo_contrato";i:12476;s:14:"cod_usuario_fk";N;s:15:"cod_contrato_fk";i:143;s:15:"tipo_produto_fk";N;s:5:"ativo";b:1;}}s:8:"parcelas";a:3:{i:0;a:9:{s:21:"cod_contrato_parcelas";i:1;s:15:"cod_contrato_fk";i:143;s:6:"numero";i:1;s:5:"valor";s:6:"100.00";s:11:"dt_inclusao";s:10:"2017-07-02";s:13:"dt_vencimento";s:10:"2017-06-03";s:18:"txt_login_inclusao";N;s:19:"txt_login_alteracao";N;s:12:"dt_alteracao";N;}i:1;a:9:{s:21:"cod_contrato_parcelas";i:2;s:15:"cod_contrato_fk";i:143;s:6:"numero";i:2;s:5:"valor";s:6:"100.00";s:11:"dt_inclusao";s:10:"2017-07-02";s:13:"dt_vencimento";s:10:"2017-07-03";s:18:"txt_login_inclusao";N;s:19:"txt_login_alteracao";N;s:12:"dt_alteracao";N;}i:2;a:9:{s:21:"cod_contrato_parcelas";i:3;s:15:"cod_contrato_fk";i:143;s:6:"numero";i:3;s:5:"valor";s:6:"100.00";s:11:"dt_inclusao";s:10:"2017-07-02";s:13:"dt_vencimento";s:10:"2017-08-03";s:18:"txt_login_inclusao";N;s:19:"txt_login_alteracao";N;s:12:"dt_alteracao";N;}}s:10:"andamentos";N;}}', "user_id"=3777, "expire"=1508964118 WHERE "id"='25cml2a2te37kgeguujk5m3202'";i:1;i:80;i:2;s:23:"yii\db\Command::execute";i:3;d:1508957018.894208;i:4;a:0:{}i:5;i:4847368;}i:96;a:6:{i:0;s:10857:"UPDATE "acesso"."tab_sessao_php" SET "data"='__flash|a:0:{}sessao-expirada|s:9:"/scm/web/";__returnUrl|s:9:"/scm/web/";__id|i:3777;endereco|a:2:{i:4012;a:13:{s:12:"cod_endereco";i:4012;s:10:"logradouro";s:15:"Q 01 CONJ 01 LT";s:6:"numero";s:2:"12";s:11:"complemento";s:19:"LOJA 01 SETOR NORTE";s:3:"cep";s:10:"71.258-015";s:15:"correspondencia";N;s:16:"cod_municipio_fk";s:6:"530010";s:8:"chave_fk";i:3;s:12:"tipo_usuario";N;s:11:"dt_inclusao";s:10:"2017-05-31";s:5:"ativo";b:1;s:6:"bairro";s:17:"CIDADE ESTRUTURAL";s:14:"tipo_tabela_fk";s:11:"tab_cliente";}i:6397;a:13:{s:12:"cod_endereco";i:6397;s:10:"logradouro";s:5:"u88uu";s:6:"numero";s:4:"yyyy";s:11:"complemento";s:3:"yyy";s:3:"cep";s:10:"71.100-111";s:15:"correspondencia";b:0;s:16:"cod_municipio_fk";s:6:"270040";s:8:"chave_fk";i:3;s:12:"tipo_usuario";N;s:11:"dt_inclusao";N;s:5:"ativo";b:1;s:6:"bairro";N;s:14:"tipo_tabela_fk";s:11:"tab_cliente";}}contato|a:1:{i:30240;a:8:{s:11:"cod_contato";i:30240;s:7:"contato";s:15:"(97) 89273-9842";s:5:"ramal";s:0:"";s:5:"ativo";b:1;s:11:"dt_inclusao";s:10:"2017-09-22";s:4:"tipo";i:464;s:8:"chave_fk";i:3;s:14:"tipo_tabela_fk";s:11:"tab_cliente";}}contratos|a:5:{i:0;a:4:{s:10:"attributes";a:27:{s:12:"cod_contrato";i:14275;s:16:"tipo_contrato_fk";i:498;s:14:"valor_contrato";s:8:"10000.00";s:14:"dia_vencimento";N;s:12:"qnt_parcelas";i:4;s:8:"dt_prazo";s:10:"04/10/2017";s:11:"dt_inclusao";s:10:"25/10/2017";s:13:"dt_vencimento";s:10:"11/10/2017";s:8:"contador";N;s:14:"responsavel_fk";N;s:8:"operando";N;s:12:"qnt_clientes";N;s:4:"link";N;s:7:"zero800";N;s:9:"parceiria";N;s:15:"consultoria_scm";N;s:18:"engenheiro_tecnico";N;s:14:"cod_cliente_fk";i:3;s:5:"ativo";b:1;s:18:"txt_login_inclusao";s:1:"1";s:19:"txt_login_alteracao";s:1:"1";s:12:"dt_alteracao";s:10:"25/10/2017";s:6:"status";i:537;s:16:"nome_responsavel";N;s:8:"contrato";N;s:13:"dt_fechamento";N;s:21:"status_do_contrato_fk";N;}s:14:"tipo_contratos";a:1:{i:0;a:5:{s:17:"cod_tipo_contrato";i:12723;s:14:"cod_usuario_fk";i:1;s:15:"cod_contrato_fk";i:14275;s:15:"tipo_produto_fk";i:523;s:5:"ativo";b:1;}}s:8:"parcelas";a:4:{i:0;a:9:{s:21:"cod_contrato_parcelas";i:872;s:15:"cod_contrato_fk";i:14275;s:6:"numero";i:1;s:5:"valor";s:7:"2500.00";s:11:"dt_inclusao";s:10:"2017-10-25";s:13:"dt_vencimento";s:10:"2017-10-11";s:18:"txt_login_inclusao";s:1:"1";s:19:"txt_login_alteracao";s:1:"1";s:12:"dt_alteracao";s:10:"2017-10-25";}i:1;a:9:{s:21:"cod_contrato_parcelas";i:873;s:15:"cod_contrato_fk";i:14275;s:6:"numero";i:2;s:5:"valor";s:7:"2500.00";s:11:"dt_inclusao";s:10:"2017-10-25";s:13:"dt_vencimento";s:10:"2017-11-11";s:18:"txt_login_inclusao";s:1:"1";s:19:"txt_login_alteracao";s:1:"1";s:12:"dt_alteracao";s:10:"2017-10-25";}i:2;a:9:{s:21:"cod_contrato_parcelas";i:874;s:15:"cod_contrato_fk";i:14275;s:6:"numero";i:3;s:5:"valor";s:7:"2500.00";s:11:"dt_inclusao";s:10:"2017-10-25";s:13:"dt_vencimento";s:10:"2017-12-11";s:18:"txt_login_inclusao";s:1:"1";s:19:"txt_login_alteracao";s:1:"1";s:12:"dt_alteracao";s:10:"2017-10-25";}i:3;a:9:{s:21:"cod_contrato_parcelas";i:875;s:15:"cod_contrato_fk";i:14275;s:6:"numero";i:4;s:5:"valor";s:7:"2500.00";s:11:"dt_inclusao";s:10:"2017-10-25";s:13:"dt_vencimento";s:10:"2018-04-11";s:18:"txt_login_inclusao";s:1:"1";s:19:"txt_login_alteracao";s:1:"1";s:12:"dt_alteracao";s:10:"2017-10-25";}}s:10:"andamentos";N;}i:1;a:4:{s:10:"attributes";a:27:{s:12:"cod_contrato";i:14274;s:16:"tipo_contrato_fk";i:510;s:14:"valor_contrato";s:6:"100.00";s:14:"dia_vencimento";N;s:12:"qnt_parcelas";i:4;s:8:"dt_prazo";s:10:"25/10/2017";s:11:"dt_inclusao";s:10:"24/10/2017";s:13:"dt_vencimento";s:10:"16/10/2017";s:8:"contador";N;s:14:"responsavel_fk";N;s:8:"operando";N;s:12:"qnt_clientes";N;s:4:"link";N;s:7:"zero800";N;s:9:"parceiria";N;s:15:"consultoria_scm";N;s:18:"engenheiro_tecnico";N;s:14:"cod_cliente_fk";i:3;s:5:"ativo";b:1;s:18:"txt_login_inclusao";s:1:"1";s:19:"txt_login_alteracao";s:1:"1";s:12:"dt_alteracao";s:10:"24/10/2017";s:6:"status";i:543;s:16:"nome_responsavel";N;s:8:"contrato";N;s:13:"dt_fechamento";N;s:21:"status_do_contrato_fk";N;}s:14:"tipo_contratos";a:1:{i:0;a:5:{s:17:"cod_tipo_contrato";i:12722;s:14:"cod_usuario_fk";i:1;s:15:"cod_contrato_fk";i:14274;s:15:"tipo_produto_fk";i:523;s:5:"ativo";b:1;}}s:8:"parcelas";a:4:{i:0;a:9:{s:21:"cod_contrato_parcelas";i:868;s:15:"cod_contrato_fk";i:14274;s:6:"numero";i:1;s:5:"valor";s:5:"25.00";s:11:"dt_inclusao";s:10:"2017-10-24";s:13:"dt_vencimento";s:10:"2017-10-16";s:18:"txt_login_inclusao";s:1:"1";s:19:"txt_login_alteracao";s:1:"1";s:12:"dt_alteracao";s:10:"2017-10-24";}i:1;a:9:{s:21:"cod_contrato_parcelas";i:869;s:15:"cod_contrato_fk";i:14274;s:6:"numero";i:2;s:5:"valor";s:5:"25.00";s:11:"dt_inclusao";s:10:"2017-10-24";s:13:"dt_vencimento";s:10:"2017-11-16";s:18:"txt_login_inclusao";s:1:"1";s:19:"txt_login_alteracao";s:1:"1";s:12:"dt_alteracao";s:10:"2017-10-24";}i:2;a:9:{s:21:"cod_contrato_parcelas";i:870;s:15:"cod_contrato_fk";i:14274;s:6:"numero";i:3;s:5:"valor";s:5:"25.00";s:11:"dt_inclusao";s:10:"2017-10-24";s:13:"dt_vencimento";s:10:"2017-12-16";s:18:"txt_login_inclusao";s:1:"1";s:19:"txt_login_alteracao";s:1:"1";s:12:"dt_alteracao";s:10:"2017-10-24";}i:3;a:9:{s:21:"cod_contrato_parcelas";i:871;s:15:"cod_contrato_fk";i:14274;s:6:"numero";i:4;s:5:"valor";s:5:"25.00";s:11:"dt_inclusao";s:10:"2017-10-24";s:13:"dt_vencimento";s:10:"2018-04-16";s:18:"txt_login_inclusao";s:1:"1";s:19:"txt_login_alteracao";s:1:"1";s:12:"dt_alteracao";s:10:"2017-10-24";}}s:10:"andamentos";N;}i:2;a:4:{s:10:"attributes";a:27:{s:12:"cod_contrato";i:14139;s:16:"tipo_contrato_fk";i:498;s:14:"valor_contrato";s:6:"100.00";s:14:"dia_vencimento";N;s:12:"qnt_parcelas";i:1;s:8:"dt_prazo";s:10:"19/09/2017";s:11:"dt_inclusao";N;s:13:"dt_vencimento";s:10:"19/09/2017";s:8:"contador";N;s:14:"responsavel_fk";N;s:8:"operando";N;s:12:"qnt_clientes";N;s:4:"link";N;s:7:"zero800";N;s:9:"parceiria";N;s:15:"consultoria_scm";N;s:18:"engenheiro_tecnico";N;s:14:"cod_cliente_fk";i:3;s:5:"ativo";b:1;s:18:"txt_login_inclusao";s:1:"1";s:19:"txt_login_alteracao";s:1:"1";s:12:"dt_alteracao";s:10:"29/09/2017";s:6:"status";N;s:16:"nome_responsavel";N;s:8:"contrato";N;s:13:"dt_fechamento";N;s:21:"status_do_contrato_fk";N;}s:14:"tipo_contratos";a:1:{i:0;a:5:{s:17:"cod_tipo_contrato";i:12611;s:14:"cod_usuario_fk";i:5;s:15:"cod_contrato_fk";i:14139;s:15:"tipo_produto_fk";i:523;s:5:"ativo";b:1;}}s:8:"parcelas";a:1:{i:0;a:9:{s:21:"cod_contrato_parcelas";i:151;s:15:"cod_contrato_fk";i:14139;s:6:"numero";i:1;s:5:"valor";s:6:"100.00";s:11:"dt_inclusao";N;s:13:"dt_vencimento";s:10:"2017-09-29";s:18:"txt_login_inclusao";s:1:"1";s:19:"txt_login_alteracao";s:1:"1";s:12:"dt_alteracao";N;}}s:10:"andamentos";N;}i:3;a:4:{s:10:"attributes";a:27:{s:12:"cod_contrato";i:14095;s:16:"tipo_contrato_fk";i:512;s:14:"valor_contrato";s:7:"1000.00";s:14:"dia_vencimento";N;s:12:"qnt_parcelas";i:2;s:8:"dt_prazo";s:10:"06/09/2017";s:11:"dt_inclusao";N;s:13:"dt_vencimento";s:10:"12/09/2017";s:8:"contador";N;s:14:"responsavel_fk";N;s:8:"operando";N;s:12:"qnt_clientes";N;s:4:"link";N;s:7:"zero800";N;s:9:"parceiria";N;s:15:"consultoria_scm";N;s:18:"engenheiro_tecnico";N;s:14:"cod_cliente_fk";i:3;s:5:"ativo";b:1;s:18:"txt_login_inclusao";s:1:"1";s:19:"txt_login_alteracao";s:1:"1";s:12:"dt_alteracao";s:10:"26/09/2017";s:6:"status";i:536;s:16:"nome_responsavel";N;s:8:"contrato";N;s:13:"dt_fechamento";N;s:21:"status_do_contrato_fk";N;}s:14:"tipo_contratos";a:1:{i:0;a:5:{s:17:"cod_tipo_contrato";i:12567;s:14:"cod_usuario_fk";i:1;s:15:"cod_contrato_fk";i:14095;s:15:"tipo_produto_fk";i:523;s:5:"ativo";b:1;}}s:8:"parcelas";a:2:{i:0;a:9:{s:21:"cod_contrato_parcelas";i:102;s:15:"cod_contrato_fk";i:14095;s:6:"numero";i:1;s:5:"valor";s:6:"500.00";s:11:"dt_inclusao";N;s:13:"dt_vencimento";s:10:"2017-09-26";s:18:"txt_login_inclusao";s:1:"1";s:19:"txt_login_alteracao";s:1:"1";s:12:"dt_alteracao";N;}i:1;a:9:{s:21:"cod_contrato_parcelas";i:103;s:15:"cod_contrato_fk";i:14095;s:6:"numero";i:2;s:5:"valor";s:6:"500.00";s:11:"dt_inclusao";N;s:13:"dt_vencimento";s:10:"2017-09-26";s:18:"txt_login_inclusao";s:1:"1";s:19:"txt_login_alteracao";s:1:"1";s:12:"dt_alteracao";N;}}s:10:"andamentos";N;}i:4;a:4:{s:10:"attributes";a:27:{s:12:"cod_contrato";i:143;s:16:"tipo_contrato_fk";i:511;s:14:"valor_contrato";N;s:14:"dia_vencimento";N;s:12:"qnt_parcelas";N;s:8:"dt_prazo";N;s:11:"dt_inclusao";s:10:"01/06/2017";s:13:"dt_vencimento";N;s:8:"contador";N;s:14:"responsavel_fk";N;s:8:"operando";N;s:12:"qnt_clientes";N;s:4:"link";N;s:7:"zero800";N;s:9:"parceiria";N;s:15:"consultoria_scm";N;s:18:"engenheiro_tecnico";N;s:14:"cod_cliente_fk";i:3;s:5:"ativo";b:1;s:18:"txt_login_inclusao";N;s:19:"txt_login_alteracao";N;s:12:"dt_alteracao";N;s:6:"status";i:536;s:16:"nome_responsavel";N;s:8:"contrato";N;s:13:"dt_fechamento";N;s:21:"status_do_contrato_fk";N;}s:14:"tipo_contratos";a:8:{i:0;a:5:{s:17:"cod_tipo_contrato";i:12513;s:14:"cod_usuario_fk";i:1;s:15:"cod_contrato_fk";i:143;s:15:"tipo_produto_fk";i:521;s:5:"ativo";b:1;}i:1;a:5:{s:17:"cod_tipo_contrato";i:10406;s:14:"cod_usuario_fk";N;s:15:"cod_contrato_fk";i:143;s:15:"tipo_produto_fk";i:524;s:5:"ativo";b:1;}i:2;a:5:{s:17:"cod_tipo_contrato";i:10407;s:14:"cod_usuario_fk";N;s:15:"cod_contrato_fk";i:143;s:15:"tipo_produto_fk";i:528;s:5:"ativo";b:1;}i:3;a:5:{s:17:"cod_tipo_contrato";i:10408;s:14:"cod_usuario_fk";N;s:15:"cod_contrato_fk";i:143;s:15:"tipo_produto_fk";N;s:5:"ativo";b:1;}i:4;a:5:{s:17:"cod_tipo_contrato";i:10409;s:14:"cod_usuario_fk";N;s:15:"cod_contrato_fk";i:143;s:15:"tipo_produto_fk";i:526;s:5:"ativo";b:1;}i:5;a:5:{s:17:"cod_tipo_contrato";i:10410;s:14:"cod_usuario_fk";N;s:15:"cod_contrato_fk";i:143;s:15:"tipo_produto_fk";i:527;s:5:"ativo";b:1;}i:6;a:5:{s:17:"cod_tipo_contrato";i:12475;s:14:"cod_usuario_fk";i:5;s:15:"cod_contrato_fk";i:143;s:15:"tipo_produto_fk";i:522;s:5:"ativo";b:1;}i:7;a:5:{s:17:"cod_tipo_contrato";i:12476;s:14:"cod_usuario_fk";N;s:15:"cod_contrato_fk";i:143;s:15:"tipo_produto_fk";N;s:5:"ativo";b:1;}}s:8:"parcelas";a:3:{i:0;a:9:{s:21:"cod_contrato_parcelas";i:1;s:15:"cod_contrato_fk";i:143;s:6:"numero";i:1;s:5:"valor";s:6:"100.00";s:11:"dt_inclusao";s:10:"2017-07-02";s:13:"dt_vencimento";s:10:"2017-06-03";s:18:"txt_login_inclusao";N;s:19:"txt_login_alteracao";N;s:12:"dt_alteracao";N;}i:1;a:9:{s:21:"cod_contrato_parcelas";i:2;s:15:"cod_contrato_fk";i:143;s:6:"numero";i:2;s:5:"valor";s:6:"100.00";s:11:"dt_inclusao";s:10:"2017-07-02";s:13:"dt_vencimento";s:10:"2017-07-03";s:18:"txt_login_inclusao";N;s:19:"txt_login_alteracao";N;s:12:"dt_alteracao";N;}i:2;a:9:{s:21:"cod_contrato_parcelas";i:3;s:15:"cod_contrato_fk";i:143;s:6:"numero";i:3;s:5:"valor";s:6:"100.00";s:11:"dt_inclusao";s:10:"2017-07-02";s:13:"dt_vencimento";s:10:"2017-08-03";s:18:"txt_login_inclusao";N;s:19:"txt_login_alteracao";N;s:12:"dt_alteracao";N;}}s:10:"andamentos";N;}}', "user_id"=3777, "expire"=1508964118 WHERE "id"='25cml2a2te37kgeguujk5m3202'";i:1;i:96;i:2;s:23:"yii\db\Command::execute";i:3;d:1508957018.9061129;i:4;a:0:{}i:5;i:4849056;}}}s:6:"assets";a:0:{}s:4:"mail";a:0:{}s:8:"timeline";a:3:{s:5:"start";d:1508957018.4584069;s:3:"end";d:1508957018.9099469;s:6:"memory";i:5596448;}s:4:"user";a:4:{s:8:"identity";a:20:{s:11:"cod_usuario";i:3777;s:8:"txt_nome";s:15:"teste comercial";s:9:"txt_email";s:21:"limajrbruno@gmail.com";s:9:"txt_senha";s:60:"$2y$13$9UZ63B5fuNG6qgok50elYuBe9ruVReAN.FjhCDAXCdbSUNEviriEi";s:8:"num_fone";s:15:"(99) 89898-9898";s:10:"qtd_acesso";i:2;s:16:"txt_trocar_senha";s:1:"0";s:9:"txt_ativo";s:1:"S";s:14:"txt_tipo_login";s:1:"1";s:18:"txt_login_inclusao";s:1:"1";s:12:"dte_inclusao";s:26:"2017-10-25 15:53:13.585981";s:12:"dt_alteracao";s:19:"2017-10-25 00:00:00";s:12:"dte_exclusao";N;s:16:"cod_prestador_fk";N;s:10:"txt_imagem";s:29:"@web/img/usuarios/default.jpg";s:9:"txt_login";s:15:"teste.comercial";s:7:"num_cpf";s:14:"234.716.154-74";s:6:"num_ip";s:3:"::1";s:10:"dte_sessao";s:19:"2017-10-25 15:59:23";s:19:"txt_login_alteracao";s:4:"3777";}s:10:"attributes";a:20:{i:0;s:11:"cod_usuario";i:1;s:8:"txt_nome";i:2;s:9:"txt_email";i:3;s:9:"txt_senha";i:4;s:8:"num_fone";i:5;s:10:"qtd_acesso";i:6;s:16:"txt_trocar_senha";i:7;s:9:"txt_ativo";i:8;s:14:"txt_tipo_login";i:9;s:18:"txt_login_inclusao";i:10;s:12:"dte_inclusao";i:11;s:12:"dt_alteracao";i:12;s:12:"dte_exclusao";i:13;s:16:"cod_prestador_fk";i:14;s:10:"txt_imagem";i:15;s:9:"txt_login";i:16;s:7:"num_cpf";i:17;s:6:"num_ip";i:18;s:10:"dte_sessao";i:19;s:19:"txt_login_alteracao";}s:13:"rolesProvider";N;s:19:"permissionsProvider";N;}s:6:"router";a:1:{s:8:"messages";a:12:{i:28;a:6:{i:0;a:3:{s:4:"rule";s:3:"gii";s:5:"match";b:0;s:6:"parent";N;}i:1;i:8;i:2;s:32:"yii\web\UrlManager::parseRequest";i:3;d:1508957018.6599071;i:4;a:0:{}i:5;i:3714584;}i:29;a:6:{i:0;a:3:{s:4:"rule";s:12:"gii/<id:\w+>";s:5:"match";b:0;s:6:"parent";N;}i:1;i:8;i:2;s:32:"yii\web\UrlManager::parseRequest";i:3;d:1508957018.660049;i:4;a:0:{}i:5;i:3716400;}i:30;a:6:{i:0;a:3:{s:4:"rule";s:41:"gii/<controller:[\w\-]+>/<action:[\w\-]+>";s:5:"match";b:0;s:6:"parent";N;}i:1;i:8;i:2;s:32:"yii\web\UrlManager::parseRequest";i:3;d:1508957018.660151;i:4;a:0:{}i:5;i:3718248;}i:31;a:6:{i:0;a:3:{s:4:"rule";s:5:"debug";s:5:"match";b:0;s:6:"parent";N;}i:1;i:8;i:2;s:32:"yii\web\UrlManager::parseRequest";i:3;d:1508957018.6602459;i:4;a:0:{}i:5;i:3720064;}i:32;a:6:{i:0;a:3:{s:4:"rule";s:43:"debug/<controller:[\w\-]+>/<action:[\w\-]+>";s:5:"match";b:0;s:6:"parent";N;}i:1;i:8;i:2;s:32:"yii\web\UrlManager::parseRequest";i:3;d:1508957018.6603529;i:4;a:0:{}i:5;i:3721912;}i:33;a:6:{i:0;a:3:{s:4:"rule";s:5:"sobre";s:5:"match";b:0;s:6:"parent";N;}i:1;i:8;i:2;s:32:"yii\web\UrlManager::parseRequest";i:3;d:1508957018.660459;i:4;a:0:{}i:5;i:3723984;}i:34;a:6:{i:0;a:3:{s:4:"rule";s:4:"home";s:5:"match";b:0;s:6:"parent";N;}i:1;i:8;i:2;s:32:"yii\web\UrlManager::parseRequest";i:3;d:1508957018.660553;i:4;a:0:{}i:5;i:3725800;}i:35;a:6:{i:0;a:3:{s:4:"rule";s:6:"entrar";s:5:"match";b:0;s:6:"parent";N;}i:1;i:8;i:2;s:32:"yii\web\UrlManager::parseRequest";i:3;d:1508957018.66066;i:4;a:0:{}i:5;i:3727616;}i:36;a:6:{i:0;a:3:{s:4:"rule";s:4:"sair";s:5:"match";b:0;s:6:"parent";N;}i:1;i:8;i:2;s:32:"yii\web\UrlManager::parseRequest";i:3;d:1508957018.660754;i:4;a:0:{}i:5;i:3729432;}i:37;a:6:{i:0;a:3:{s:4:"rule";s:8:"register";s:5:"match";b:0;s:6:"parent";N;}i:1;i:8;i:2;s:32:"yii\web\UrlManager::parseRequest";i:3;d:1508957018.6608479;i:4;a:0:{}i:5;i:3731248;}i:38;a:6:{i:0;a:3:{s:4:"rule";s:15:"recuperar-senha";s:5:"match";b:0;s:6:"parent";N;}i:1;i:8;i:2;s:32:"yii\web\UrlManager::parseRequest";i:3;d:1508957018.660954;i:4;a:0:{}i:5;i:3733064;}i:39;a:6:{i:0;s:55:"No matching URL rules. Using default URL parsing logic.";i:1;i:8;i:2;s:32:"yii\web\UrlManager::parseRequest";i:3;d:1508957018.661021;i:4;a:0:{}i:5;i:3734272;}}}s:7:"summary";a:9:{s:3:"tag";s:13:"59f0db5a75cbe";s:3:"url";s:34:"http://localhost/scm/web/comercial";s:4:"ajax";i:0;s:6:"method";s:3:"GET";s:2:"ip";s:3:"::1";s:4:"time";d:1508957018.454;s:10:"statusCode";i:500;s:8:"sqlCount";i:18;s:9:"mailCount";i:0;}}

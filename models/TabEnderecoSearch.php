@@ -138,6 +138,8 @@ class TabEnderecoSearch extends TabEndereco {
     }
 
     public static function salvarEnderecos($endereco, $model) {
+        
+        
         foreach ($endereco as $key => $value) {
 
             if (strpos($value['cod_endereco'], 'novo') !== false) {
@@ -152,18 +154,19 @@ class TabEnderecoSearch extends TabEndereco {
             } else {
                 
                 $modelEnd = \app\models\TabEnderecoSearch::find()->where(['cod_endereco' => $value['cod_endereco']])->one();
-                
+
+                unset($value['dt_inclusao']);
                 $modelEnd->attributes = $value;
                 $modelEnd->save();
-
+                        
                 $naoExcluir[] = $modelEnd->cod_endereco;
             }
-
             if ($naoExcluir) {
                 
-                TabEnderecoSearch::deleteAll("chave_fk = {$model->cod_cliente} and tipo_tabela_fk = '{$model->tableName()}' and cod_endereco not in (" . implode(',', $naoExcluir).")");
+                ;//TabEnderecoSearch::deleteAll("chave_fk = {$model->cod_cliente} and tipo_tabela_fk = '{$model->tableName()}' and cod_endereco not in (" . implode(',', $naoExcluir).")");
             }
         }
+
     }
 
 }

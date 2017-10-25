@@ -119,20 +119,18 @@ class ClienteController extends \app\controllers\ClienteController {
 
                 $endereco = \Yii::$app->session->get('endereco');
                 $contato = \Yii::$app->session->get('contato');
-                $contratos = \Yii::$app->session->get('contratos');
+                
                 if ($model->save()) {
 
                     if ($endereco) {
                         \app\models\TabEnderecoSearch::salvarEnderecos($endereco, $model);
+                        
                     }
                     if ($contato) {
 
                         \app\models\TabContatoSearch::salvarContatos($contato, $model);
                     }
-                    if ($contratos) {
-
-                        \app\modules\comercial\models\TabContratoSearch::salvarContratos($contratos, $model);
-                    }
+                
 
                     $transaction->commit();
                     $this->session->setFlashProjeto('success', $acao);
@@ -1166,7 +1164,7 @@ class ClienteController extends \app\controllers\ClienteController {
                         $setor->save();
 
                         $andam = new \app\models\TabAndamentoSearch();
-                        $andam->txt_notificacao = 'Inclusão de Contrato';
+                        $andam->txt_notificacao = 'Fechamento de Contrato';
                         $andam->cod_usuario_inclusao_fk = $this->user->identity->getId();
                         $andam->cod_setor_fk = $setor->cod_setor;
                         $andam->dt_retorno = date('d/m/Y', strtotime(date('Y-m-d').'+5 days'));

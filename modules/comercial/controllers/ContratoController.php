@@ -12,24 +12,22 @@ use yii\filters\VerbFilter;
 /**
  * ContratoController implements the CRUD actions for TabContrato model.
  */
-class ContratoController extends Controller
-{
+class ContratoController extends Controller {
 
     /**
      * Lists all TabContrato models.
      * @return mixed
      */
-    public function actionIndex()
-    {
+    public function actionIndex() {
         $searchModel = new TabContratoSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-		
-		$this->titulo = 'Gerenciar Contrato';
-		$this->subTitulo = '';
-		
+
+        $this->titulo = 'Gerenciar Contrato';
+        $this->subTitulo = '';
+
         return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+                    'searchModel' => $searchModel,
+                    'dataProvider' => $dataProvider,
         ]);
     }
 
@@ -38,77 +36,66 @@ class ContratoController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionView($id)
-    {
-		$this->titulo = 'Detalhar Contrato';
-		$this->subTitulo = '';
-			
+    public function actionView($id) {
+        $this->titulo = 'Detalhar Contrato';
+        $this->subTitulo = '';
+
         return $this->render('view', [
-            'model' => $this->findModel($id),
+                    'model' => $this->findModel($id),
         ]);
     }
 
-	
-	
-	/**
-	 * Creates e Updates a new TabContrato  model.
-	 * If creation is successful, the browser will be redirected to the 'view' page.
-	 * @return mixed
-	 */
-	public function actionAdmin( $id = null )
-	{
+    /**
+     * Creates e Updates a new TabContrato  model.
+     * If creation is successful, the browser will be redirected to the 'view' page.
+     * @return mixed
+     */
+    public function actionAdmin($id = null) {
 
-		if ($id)
-		{
-		
-			$model = $this->findModel($id);
-			$acao = 'update';
-			$this->titulo = 'Alterar Contrato';
-			$this->subTitulo = '';
-		}
-		else
-		{
-		
-			$acao = 'create';
-			$model = new TabContrato();
-			$this->titulo = 'Incluir Contrato';
-			$this->subTitulo = '';
-		}
+        if ($id) {
 
-		if ($model->load( Yii::$app->request->post() ) && $model->save())
-		{
+            $model = $this->findModel($id);
+            $acao = 'update';
+            $this->titulo = 'Alterar Contrato';
+            $this->subTitulo = '';
+        } else {
 
-			$this->session->setFlashProjeto( 'success', $acao );
-			return $this->redirect( ['view', 'id' => $model->cod_contrato ]);
-		}
+            $acao = 'create';
+            $model = new TabContrato();
+            $this->titulo = 'Incluir Contrato';
+            $this->subTitulo = '';
+        }
 
-		return $this->render( 'admin', [
-				'model' => $model,
-			] );
-	}
-	
-	
-	
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+
+            $this->session->setFlashProjeto('success', $acao);
+            return $this->redirect(['view', 'id' => $model->cod_contrato]);
+        }
+
+        return $this->render('admin', [
+                    'model' => $model,
+        ]);
+    }
+
     /**
      * Creates a new TabContrato model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
-    {
+    public function actionCreate() {
         $model = new TabContrato();
 
-		$this->titulo = 'Incluir Contrato';
-		$this->subTitulo = '';
-		
+        $this->titulo = 'Incluir Contrato';
+        $this->subTitulo = '';
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-			
-			$this->session->setFlashProjeto( 'success', 'update' );
-			
+
+            $this->session->setFlashProjeto('success', 'update');
+
             return $this->redirect(['view', 'id' => $model->cod_contrato]);
         } else {
             return $this->render('create', [
-                'model' => $model,
+                        'model' => $model,
             ]);
         }
     }
@@ -119,21 +106,20 @@ class ContratoController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionUpdate($id)
-    {
+    public function actionUpdate($id) {
         $model = $this->findModel($id);
-	
-		$this->titulo = 'Alterar Contrato';
-		$this->subTitulo = '';
-		
+
+        $this->titulo = 'Alterar Contrato';
+        $this->subTitulo = '';
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-		
-			$this->session->setFlashProjeto( 'success', 'update' );
-            
-			return $this->redirect(['view', 'id' => $model->cod_contrato]);
+
+            $this->session->setFlashProjeto('success', 'update');
+
+            return $this->redirect(['view', 'id' => $model->cod_contrato]);
         } else {
             return $this->render('update', [
-                'model' => $model,
+                        'model' => $model,
             ]);
         }
     }
@@ -144,22 +130,18 @@ class ContratoController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionDelete($id)
-    {
-		
-		$model = $this->findModel($id);
-		$model->dt_exclusao = 'NOW()';
-		
-		if ($model->save())
-		{
-			
-			$this->session->setFlashProjeto( 'success', 'delete' );
-		}
-		else
-		{
-			
-			$this->session->setFlashProjeto( 'danger', 'delete' );
-		}
+    public function actionDelete($id) {
+
+        $model = $this->findModel($id);
+        $model->dt_exclusao = 'NOW()';
+
+        if ($model->save()) {
+
+            $this->session->setFlashProjeto('success', 'delete');
+        } else {
+
+            $this->session->setFlashProjeto('danger', 'delete');
+        }
 
         return $this->redirect(['index']);
     }
@@ -171,47 +153,44 @@ class ContratoController extends Controller
      * @return TabContrato the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
-    {
+    protected function findModel($id) {
         if (($model = TabContrato::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
-    
+
     public function actionCarregarContrato() {
 
         $this->module->module->layout = null;
         $contrato = \app\modules\comercial\models\ViewContratosSearch::find()->where(['cod_contrato' => Yii::$app->request->post()['cod']])->asArray()->all();
-        
+
         return \yii\helpers\Json::encode($contrato);
     }
-    
+
     public function actionCarregarGridContrato() {
         $post = Yii::$app->request->post();
-        
+
         $form = \yii\widgets\ActiveForm::begin();
         $this->module->module->layout = null;
         $dados = $this->render('@app/modules/comercial/views/contrato/_lista_contratos', ['cod_cliente' => $post['id'], 'form' => $form, 'msg' => $msg]);
 
         return \yii\helpers\Json::encode($dados);
-        
     }
-    
-    
+
     public function actionExcluirContrato() {
         $post = Yii::$app->request->post();
-    
-        $contrato = \app\modules\comercial\models\TabContratoSearch::find()->where(['cod_contrato'=>$post['id']])->one();
 
-        if($contrato){
+        $contrato = \app\modules\comercial\models\TabContratoSearch::find()->where(['cod_contrato' => $post['id']])->one();
+
+        if ($contrato) {
             $contrato->ativo = false;
             $contrato->save();
         }
 
         $str = 'Exclusão efetuada com sucesso';
-        
+
         $msg['tipo'] = 'success';
         $msg['msg'] = $str;
         $msg['icon'] = 'check';
@@ -222,4 +201,65 @@ class ContratoController extends Controller
 
         return \yii\helpers\Json::encode($dados);
     }
+
+    public function actionMudarStatus() {
+        $post = Yii::$app->request->post();
+
+        $contrato = \app\modules\comercial\models\TabContratoSearch::find()->where(['cod_contrato' => $post['id']])->one();
+
+        if ($contrato) {
+            $contrato->status = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('status-contrato', $post['status']);
+
+            if ($contrato->save()) {
+                if ($post['status'] == 4) {
+                    $msg = 'Contranto fechado, encaminhado para o financeiro';
+                    
+                    
+                    $andam = new \app\models\TabAndamentoSearch();
+                    $andam->txt_notificacao = $msg;
+                    $andam->cod_usuario_inclusao_fk = $this->user->identity->getId();
+                    $andam->cod_setor_fk = $post['cod_setor'];
+                    $andam->dt_retorno = date('d/m/Y', strtotime(date('Y-m-d') . '+5 days'));
+                    $andam->save();
+                    
+                    $setor = new \app\models\TabSetoresSearch();
+                    $setor->cod_tipo_contrato_fk = $post['tipo_contrato'];
+                    $setor->cod_tipo_setor_fk = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('setores', '2');
+                    $setor->save();
+                    
+                    $andam = new \app\models\TabAndamentoSearch();
+                    $andam->txt_notificacao = 'Contrato fechado, aguardando validação';
+                    $andam->cod_usuario_inclusao_fk = $this->user->identity->getId();
+                    $andam->cod_setor_fk = $setor->cod_setor;
+                    $andam->dt_retorno = date('d/m/Y', strtotime(date('Y-m-d') . '+5 days'));
+                    $andam->save();
+                    
+                } elseif ($post['status'] == 2) {
+                    $msg = 'Contranto recusado';
+                    
+                    $andam = new \app\models\TabAndamentoSearch();
+                    $andam->txt_notificacao = $msg;
+                    $andam->cod_usuario_inclusao_fk = $this->user->identity->getId();
+                    $andam->cod_setor_fk = $post['cod_setor'];
+                    $andam->dt_retorno = date('d/m/Y', strtotime(date('Y-m-d') . '+5 days'));
+                    $andam->save();
+                    
+                    
+                }
+            }
+        }
+
+        $msg = $msg.' com sucesso';
+
+        $msgs['tipo'] = 'success';
+        $msgs['msg'] = $msg;
+        $msgs['icon'] = 'check';
+
+        $form = \yii\widgets\ActiveForm::begin();
+        $this->module->module->layout = null;
+        $dados = $this->render('@app/modules/comercial/views/contrato/_lista_contratos', ['cod_cliente' => $contrato->cod_cliente_fk, 'form' => $form, 'msg' => $msgs]);
+
+        return \yii\helpers\Json::encode($dados);
+    }
+
 }

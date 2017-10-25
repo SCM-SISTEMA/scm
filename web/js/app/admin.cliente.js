@@ -292,12 +292,12 @@ Projeto.prototype.cliente = new (Projeto.extend({
         $('#modal' + valor).modal('show').find('#modalContent').load( );
     },
     openModalTipoContrato: function (valor, cod_contrato) {
-       $('#tabcontratosearch-tipo_contrato_fk').removeAttr('disabled');
+        $('#tabcontratosearch-tipo_contrato_fk').removeAttr('disabled');
         setTimeout(function () {
             if (valor == 'TipoContrato') {
                 $('#tabtipocontratosearchservico-cod_contrato_fk').val(cod_contrato);
                 $('#tabtipocontratosearchservico-cod_usuario_fk').focus();
-                
+
             } else {
                 $('#tabtipocontratosearch-cod_contrato_fk').focus();
                 $('#div-status').hide();
@@ -476,11 +476,11 @@ Projeto.prototype.cliente = new (Projeto.extend({
     },
 
     preencheFormContrato: function (dados) {
-        
-        
+
+
         $('#tabcontratosearch-cod_contrato').val(dados[0]['cod_contrato']);
         $('#tabcontratosearch-tipo_contrato_fk').val(dados[0]['tipo_contrato_fk']);
-        
+
         $('#tabcontratosearch-valor_contrato-disp').val(Projeto.prototype.util.colocaFormatoMoeda(dados[0]['valor_contrato']));
         $('#tabcontratosearch-dt_prazo').val(dados[0]['dt_prazo']);
         $('#tabcontratosearch-qnt_parcelas').val(dados[0]['qnt_parcelas']);
@@ -527,7 +527,7 @@ function adicionarContrato(contrato) {
 
     Projeto.prototype.cliente.openModalTipoContrato('Contrato', contrato);
     Projeto.prototype.cliente.limpaFormTipoContrato('Contrato');
-    
+
 
     return false;
 }
@@ -544,7 +544,7 @@ function editarContrato(result) {
 
         Projeto.prototype.cliente.openModalTipoContrato('Contrato', result);
         $('#div-status').show();
-        
+
         $('#tabcontratosearch-tipo_contrato_fk').attr('disabled', 'disabled');
         Projeto.prototype.cliente.limpaFormTipoContrato('Contrato');
         Projeto.prototype.cliente.preencheFormContrato(dados);
@@ -565,6 +565,42 @@ function excluirContrato(result) {
 
 
     projeto.confirm('<div align="center"><h2>Deseja excluir contrato?</h2></div>', function () {
+        projeto.ajax.defaultBlockUI();
+        projeto.ajax.post(urlInclusao, post, function (response) {
+
+            var dados = $.parseJSON(response);
+
+
+            $('#divGuiaContrato').html(dados);
+
+        });
+        return false;
+    }, function () {
+        return false;
+    })
+
+
+//    Projeto.prototype.cliente.openModal();
+
+
+    return false;
+}
+
+
+
+function mudarStatus(result, status, setor, tipo_contrato) {
+
+    var post = {'id': result, 'status': status, 'setor': setor, 'tipo_contrato': tipo_contrato}
+    var urlInclusao = $('base').attr('href') + 'comercial/contrato/mudar-status';
+
+    var msg = null;
+    if (status == '4') {
+        msg = 'Deseja realmente fechar o contrato e enviar para financeiro?';
+    } else {
+        msg = 'Deseja realmente recusar contrato?';
+
+    }
+    projeto.confirm('<div align="center"><h2>'+msg+'</h2></div>', function () {
         projeto.ajax.defaultBlockUI();
         projeto.ajax.post(urlInclusao, post, function (response) {
 

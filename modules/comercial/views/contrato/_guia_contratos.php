@@ -1,4 +1,4 @@
-    <div class='row'>
+  <div class='row'>
     <?php if (isset($msg)) { ?>
         <div class="col-md-12">
             <div class="alert-<?= $msg['tipo'] ?> alert fade in">

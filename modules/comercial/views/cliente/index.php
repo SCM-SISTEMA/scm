@@ -26,8 +26,8 @@ use app\components\MenuLateralModuloWidget;
             'dataProvider' => $dataProvider,
             'filterModel' => $searchModel,
             'columns' => [
-                'cod_cliente',
                 'cnpj',
+                'razao_social',
                 'responsavel',
                 'dsc_tipo_contrato',
                 [
@@ -71,15 +71,16 @@ use app\components\MenuLateralModuloWidget;
                             ]);
                         },
                         'delete' => function ($action, $model, $key) {
-
-                            return Html::a('<span class="fa fa-trash"></span>', Url::to(['delete', 'id' => $model->cod_cliente]), [
-                                        'title' => 'Excluir',
-                                        'aria-label' => 'Excluir',
-                                        'data-confirm' => 'Confirma a exclusão do cliente?',
-                                        'data-method' => 'post',
-                                        'data-toggle' => 'tooltip',
-                                        'data-pjax' => '0',
-                            ]);
+                            
+                                return Html::a('<span class="fa fa-trash"></span>', Url::to(['delete', 'id' => $model->cod_cliente]), [
+                                            'title' => 'Excluir',
+                                            'aria-label' => 'Excluir',
+                                            'data-confirm' => 'Confirma a exclusão do cliente?',
+                                            'data-method' => 'post',
+                                            'data-toggle' => 'tooltip',
+                                            'data-pjax' => '0',
+                                ]);
+                            
                         },
                     ],
                 ],
