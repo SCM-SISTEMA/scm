@@ -7,7 +7,7 @@ use yii\grid\GridView;
 
 $dados = new \yii\data\ArrayDataProvider([
     'id' => 'lista-parcelas',
-    'allModels' => $contrato['parcelas'],
+    'allModels' => $parcelas,
     'sort' => false,
     'pagination' => ['pageSize' => false],
         ]);
@@ -16,7 +16,7 @@ $dados = new \yii\data\ArrayDataProvider([
 
     <div class='col-lg-12'  style="text-align:right">
         <?=
-        \projeto\helpers\Html::button('<i class="glyphicon glyphicon-trash"></i> Excluir Todos', [
+        \projeto\helpers\Html::button('<i class="glyphicon glyphicon-trash"></i> Alterar', [
             'class' => 'btn btn-danger btn-sm',
             'onclick' => "excluirContratoParcelas('{$contrato['attributes']['cod_contrato']}')",
         ])

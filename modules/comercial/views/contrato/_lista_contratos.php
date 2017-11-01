@@ -3,7 +3,7 @@ $context = $this->context->module->getInfo();
 
 use projeto\helpers\Html;
 
-$conts = \app\modules\comercial\models\ViewContratosSearch::find()->where(['cod_cliente_fk' => $cod_cliente, 'atributos_setor'=>\app\models\TabAtributosValoresSearch::getAtributoValorAtributo('setores', '1')])->asArray()->orderBy('cod_contrato desc');
+$conts = \app\modules\comercial\models\ViewContratosSearch::find()->where(['cod_cliente_fk' => $cod_cliente, 'atributos_setor' => \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('setores', '1')])->asArray()->orderBy('cod_contrato desc');
 
 $provider = new \yii\data\ActiveDataProvider([
     'query' => $conts,
@@ -18,15 +18,15 @@ $provider = new \yii\data\ActiveDataProvider([
 
 
 <div class='row'>
-<?php if (isset($msg)) { ?>
+    <?php if (isset($msg)) { ?>
         <div class="col-md-12">
             <div class="alert-<?= $msg['tipo'] ?> alert fade in">
                 <button class="close" aria-hidden="true" data-dismiss="alert" type="button">×</button>
                 <i class="icon fa fa-<?= $msg['icon'] ?>"></i>
-    <?= $msg['msg'] ?>
+                <?= $msg['msg'] ?>
             </div>
         </div>
-<?php } ?>
+    <?php } ?>
 </div>
 <div class='row'>
     <div class='col-md-12'>
@@ -121,7 +121,7 @@ $provider = new \yii\data\ActiveDataProvider([
 //                    },
 //                ),
                     ['class' => 'projeto\grid\ActionColumn',
-                        'template' => '{view} {update} {restringir} {vincular} {fechar} {recusar}',
+                        'template' => '{view}  {update}  {cancelar}  {andamento}  {formaPagamento}  {fechar}  {recusar}  {imprimir}',
                         'buttons' => [
                             'view' => function ($action, $model, $key) {
 
@@ -143,16 +143,16 @@ $provider = new \yii\data\ActiveDataProvider([
                                     ]);
                                 }
                             },
-                            'restringir' => function ($action, $model, $key) {
-                               if ($model['sgl_status'] == '1' || strpos($this->context->module->getInfo()['usuario-perfil']['txt_login'], 'administrador') !== false) {
+                            'cancelar' => function ($action, $model, $key) {
+                                if ($model['sgl_status'] == '1' || strpos($this->context->module->getInfo()['usuario-perfil']['txt_login'], 'administrador') !== false) {
                                     return Html::a('<span class="fa fa-trash"></span>', '#', [
-                                                'title' => 'Excluir',
+                                                'title' => 'Cancelar',
                                                 'data-toggle' => 'tooltip',
                                                 'onclick' => "return excluirContrato('" . $model['cod_contrato'] . "')",
                                     ]);
                                 }
                             },
-                            'vincular' => function ($action, $model, $key) {
+                            'andamento' => function ($action, $model, $key) {
                                 if ($model['sgl_status'] == '1' || strpos($this->context->module->getInfo()['usuario-perfil']['txt_login'], 'administrador') !== false) {
                                     return Html::a('<span class="fa  fa-commenting-o"></span>', '#', [
                                                 'arialabel' => 'Andamento',
@@ -162,9 +162,19 @@ $provider = new \yii\data\ActiveDataProvider([
                                     ]);
                                 }
                             },
+                            'formaPagamento' => function ($action, $model, $key) {
+                                if ($model['sgl_status'] == '1' || strpos($this->context->module->getInfo()['usuario-perfil']['txt_login'], 'administrador') !== false) {
+                                    return Html::a('<span class="fa fa-dollar"></span>', '#', [
+                                                'arialabel' => 'Forma de pagamento',
+                                                'data-toggle' => 'tooltip',
+                                                'title' => 'Recusar Contrato',
+                                                'onclick' => "return adicionarFormaPagamentoContrato('" . $model['cod_contrato'] . "', '".$model['valor_contrato']."')",
+                                    ]);
+                                }
+                            },
                             'fechar' => function ($action, $model, $key) {
                                 if ($model['sgl_status'] == '1' || strpos($this->context->module->getInfo()['usuario-perfil']['txt_login'], 'administrador') !== false) {
-                                    return Html::a('<span class="fa fa-check"></span>', '#', [
+                                    return Html::a('<span class="fa fa-thumbs-o-up"></span>', '#', [
                                                 'arialabel' => 'Fechar Contrato',
                                                 'data-toggle' => 'tooltip',
                                                 'title' => 'Fechar Contrato',
@@ -174,11 +184,21 @@ $provider = new \yii\data\ActiveDataProvider([
                             },
                             'recusar' => function ($action, $model, $key) {
                                 if ($model['sgl_status'] == '1' || strpos($this->context->module->getInfo()['usuario-perfil']['txt_login'], 'administrador') !== false) {
-                                    return Html::a('<span class="fa fa-ban"></span>', '#', [
+                                    return Html::a('<span class="fa fa-thumbs-o-down"></span>', '#', [
                                                 'arialabel' => 'Recusar Contrato',
                                                 'data-toggle' => 'tooltip',
                                                 'title' => 'Recusar Contrato',
                                                 'onclick' => "return mudarStatus('" . $model['cod_contrato'] . "', '2', '" . $model['cod_setor'] . "',  '" . $model['cod_tipo_contrato'] . "')",
+                                    ]);
+                                }
+                            },
+                            'imprimir' => function ($action, $model, $key) {
+                                if ($model['sgl_status'] == '1' || strpos($this->context->module->getInfo()['usuario-perfil']['txt_login'], 'administrador') !== false) {
+                                    return Html::a('<span class="fa fa-print"></span>', '#', [
+                                                'arialabel' => 'Imprimir Contrato',
+                                                'data-toggle' => 'tooltip',
+                                                'title' => 'Recusar Contrato',
+                                                'onclick' => "return imprimir('" . $model['cod_contrato'] . "', '2', '" . $model['cod_setor'] . "',  '" . $model['cod_tipo_contrato'] . "')",
                                     ]);
                                 }
                             },

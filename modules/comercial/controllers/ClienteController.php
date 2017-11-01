@@ -19,7 +19,14 @@ class ClienteController extends \app\controllers\ClienteController {
     public function actionIndex() {
 
         $searchModel = new \app\modules\comercial\models\ViewClienteContratoSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        if(!Yii::$app->request->queryParams){
+            
+            $query['ViewClienteContratoSearch']['txt_login'] = $this->user->identity->txt_login;
+        }else{
+            $query = Yii::$app->request->queryParams;
+        }
+        //$this->dd($query);
+        $dataProvider = $searchModel->search($query);
 
         $this->titulo = 'Gerenciar Cliente';
         $this->subTitulo = '';
@@ -1117,32 +1124,6 @@ class ClienteController extends \app\controllers\ClienteController {
                 $contrato->cod_cliente_fk = $post['TabClienteSearch']['cod_cliente'];
                 $contrato->save();
 
-                if ($post['TabContratoSearch']['valor_contrato']) {
-                    $i = 0;
-                    $nparcela = ($post['TabContratoSearch']['qnt_parcelas']) ? $post['TabContratoSearch']['qnt_parcelas'] : 1;
-                    $valor = (float) $post['TabContratoSearch']['valor_contrato'] / (int) $nparcela;
-                    $dataArray = explode('/', $post['TabContratoSearch']['dt_vencimento']);
-
-                    while ($i < $nparcela) {
-                        $parcela = new \app\modules\comercial\models\TabContratoParcelasSearch();
-                        $parcela->cod_contrato_fk = $contrato->cod_contrato;
-                        $parcela->numero = $i + 1;
-                        $parcela->valor = number_format($valor, 2, ".", "");
-                        if (str_pad($dataArray[1] + $i, '2', '0', 0) > 12) {
-                            $dataArray[1] = 1;
-                            $dataArray[2] = $dataArray[2] + 1;
-                        }
-                        $parcela->dt_vencimento = $dataArray[0] . '/' . str_pad($dataArray[1] + $i, '2', '0', 0) . '/' . $dataArray[2];
-
-                        $parcela->save();
-
-                        $i++;
-
-                        $total += $parcela->valor;
-                    }
-
-                    $percelas[0]['valor'] = number_format($percelas[0]['valor'] - number_format($total - $post['TabContratoSearch']['valor_contrato'], 2, ".", ""), 2, ".", "");
-                }
 
                 $servicos = \app\modules\comercial\models\TabContratoTipoContrato::find()->where(['cod_contrato_fk' => $contrato->tipo_contrato_fk])->asArray()->all();
                 $sers = [];

@@ -10,41 +10,39 @@ use app\models\TabAndamento;
 /**
  * TabAndamentoSearch represents the model behind the search form about `app\models\TabAndamento`.
  */
-class TabAndamentoSearch extends TabAndamento
-{
+class TabAndamentoSearch extends TabAndamento {
+
     public $cod_contrato;
-    /**
-     * @inheritdoc
-     */ 
-    public function rules()
-    {
 
-		$rules =  [
-             [['cod_contrato'], 'safe'],
-        ];
-		
-		return array_merge($rules, parent::rules());
-    }
-	
-	/**
-    * @inheritdoc
-    */
-	public function attributeLabels()
-    {
-
-		$labels = parent::attributeLabels();
-		$labels['txt_notificacao'] = 'Andamento';
-                $labels['dt_retorno'] = 'Dt. retorno';
-                
-                
-		return $labels;
-    }
-	
     /**
      * @inheritdoc
      */
-    public function scenarios()
-    {
+    public function rules() {
+        
+        $rules = [
+            [['cod_contrato'], 'safe'],
+        ];
+
+        return array_merge($rules, parent::rules());
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels() {
+
+        $labels = parent::attributeLabels();
+        $labels['txt_notificacao'] = 'Andamento';
+        $labels['dt_retorno'] = 'Dt. retorno';
+
+
+        return $labels;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function scenarios() {
         // bypass scenarios() implementation in the parent class
         return Model::scenarios();
     }
@@ -56,8 +54,7 @@ class TabAndamentoSearch extends TabAndamento
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
-    {
+    public function search($params) {
         $query = TabAndamentoSearch::find();
 
         $dataProvider = new ActiveDataProvider([
@@ -77,8 +74,9 @@ class TabAndamentoSearch extends TabAndamento
 
         $query->andFilterWhere(['ilike', $this->tableName() . '.txt_notificacao', $this->txt_notificacao]);
 
-		$query->andWhere($this->tableName().'.dt_exclusao IS NULL');
-		
+        $query->andWhere($this->tableName() . '.dt_exclusao IS NULL');
+
         return $dataProvider;
     }
+
 }

@@ -47,6 +47,7 @@ class ViewClienteContratoSearch extends ViewClienteContrato {
         return Model::scenarios();
     }
   public function search($params) {
+      
         $query = ViewClienteContratoSearch::find();
 
         $dataProvider = new ActiveDataProvider([
@@ -57,11 +58,16 @@ class ViewClienteContratoSearch extends ViewClienteContrato {
 
         $query->andFilterWhere([
             $this->tableName() . '.cod_contrato' => $this->cod_contrato,
-            $this->tableName() . '.cod_cliente_fk' => $this->cod_cliente_fk,
+            $this->tableName() . '.atributos_status' => $this->dsc_status,
             
         ]);
 
-        $query->andFilterWhere(['ilike', $this->tableName() . '.txt_notificacao', $this->txt_notificacao]);
+        $query->andFilterWhere(['ilike', $this->tableName() . '.razao_social', $this->razao_social]);
+        $query->andFilterWhere(['ilike', $this->tableName() . '.responsavel', $this->responsavel]);
+        $query->andFilterWhere(['ilike', $this->tableName() . '.dsc_tipo_contrato', $this->dsc_tipo_contrato]);
+        $query->andFilterWhere(['ilike', $this->tableName() . '.txt_login', $this->txt_login]);
+        $query->andFilterWhere(['ilike', $this->tableName() . '.dt_retorno', $this->dt_retorno]);
+        $query->andFilterWhere(['ilike', $this->tableName() . '.cnpj', $this->cnpj]);
 
         //$query->andWhere($this->tableName() . '.dt_exclusao IS NULL');
 

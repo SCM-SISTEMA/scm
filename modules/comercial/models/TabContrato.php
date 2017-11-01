@@ -33,6 +33,7 @@ use Yii;
  * @property string $nome_responsavel
  * @property integer $contrato
  * @property string $dt_fechamento
+ * @property integer $status_do_contrato_fk
  *
  * @property TabUsuarios $tabUsuarios
  * @property TabCliente $tabCliente
@@ -55,7 +56,7 @@ class TabContrato extends \projeto\db\ActiveRecord
     public function rules()
     {
         return [
-            [['tipo_contrato_fk', 'dia_vencimento', 'qnt_parcelas', 'responsavel_fk', 'qnt_clientes', 'cod_cliente_fk', 'status', 'contrato'], 'integer'],
+            [['tipo_contrato_fk', 'dia_vencimento', 'qnt_parcelas', 'responsavel_fk', 'qnt_clientes', 'cod_cliente_fk', 'status', 'contrato', 'status_do_contrato_fk'], 'integer'],
             [['valor_contrato'], 'number'],
             [['dt_prazo', 'dt_inclusao', 'dt_vencimento', 'dt_alteracao', 'dt_fechamento'], 'safe'],
             [['operando', 'link', 'zero800', 'parceiria', 'consultoria_scm', 'engenheiro_tecnico', 'ativo'], 'boolean'],
@@ -96,6 +97,7 @@ class TabContrato extends \projeto\db\ActiveRecord
             'nome_responsavel' => 'Nome Responsavel',
             'contrato' => 'attributo valor',
             'dt_fechamento' => 'Dt Fechamento',
+            'status_do_contrato_fk' => 'atributos status do contrato',
         ];
     }
 

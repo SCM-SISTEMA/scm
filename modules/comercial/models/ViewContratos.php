@@ -35,6 +35,7 @@ use Yii;
  * @property integer $cod_usuario_responsavel_fk
  * @property string $dt_vencimento
  * @property integer $cod_tipo_setor_fk
+ * @property integer $cod_tipo_contrato
  */
 class ViewContratos extends \projeto\db\ActiveRecord
 {
@@ -53,7 +54,7 @@ class ViewContratos extends \projeto\db\ActiveRecord
     {
         return [
             [['txt_notificacao', 'dt_retorno', 'txt_notificacao_res', 'dt_inclusao_andamento', 'sgl_status', 'dt_prazo', 'dt_inclusao_contrato', 'dt_vencimento'], 'string'],
-            [['status_andamento_retorno', 'atributos_tipo_produto', 'atributos_tipo_contrato', 'atributos_status', 'atributos_setor', 'cod_contrato', 'tipo_contrato_fk', 'qnt_parcelas', 'cod_cliente_fk', 'cod_setor', 'cod_usuario_responsavel_fk', 'cod_tipo_setor_fk'], 'integer'],
+            [['status_andamento_retorno', 'atributos_tipo_produto', 'atributos_tipo_contrato', 'atributos_status', 'atributos_setor', 'cod_contrato', 'tipo_contrato_fk', 'qnt_parcelas', 'cod_cliente_fk', 'cod_setor', 'cod_usuario_responsavel_fk', 'cod_tipo_setor_fk', 'cod_tipo_contrato'], 'integer'],
             [['valor_contrato'], 'number'],
             [['ativo_contrato'], 'boolean'],
             [['txt_login', 'txt_login_andamento'], 'string', 'max' => 100],
@@ -95,6 +96,7 @@ class ViewContratos extends \projeto\db\ActiveRecord
             'cod_usuario_responsavel_fk' => 'Cod Usuario Responsavel Fk',
             'dt_vencimento' => 'Dt Vencimento',
             'cod_tipo_setor_fk' => 'Cod Tipo Setor Fk',
+            'cod_tipo_contrato' => 'Cod Tipo Contrato',
         ];
     }
 

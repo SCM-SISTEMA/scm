@@ -9,6 +9,7 @@ use Yii;
  *
  * @property integer $cod_cliente
  * @property string $cnpj
+ * @property string $razao_social
  * @property string $responsavel
  * @property string $txt_notificacao
  * @property string $dt_retorno
@@ -60,9 +61,9 @@ class ViewClienteContrato extends \projeto\db\ActiveRecord
             [['valor_contrato'], 'number'],
             [['ativo_contrato'], 'boolean'],
             [['cnpj'], 'string', 'max' => 18],
+            [['razao_social', 'dsc_tipo_produto', 'dsc_tipo_contrato', 'dsc_status', 'dsc_setor'], 'string', 'max' => 200],
             [['responsavel'], 'string', 'max' => 300],
-            [['txt_login', 'txt_login_andamento'], 'string', 'max' => 100],
-            [['dsc_tipo_produto', 'dsc_tipo_contrato', 'dsc_status', 'dsc_setor'], 'string', 'max' => 200]
+            [['txt_login', 'txt_login_andamento'], 'string', 'max' => 100]
         ];
     }
 
@@ -74,6 +75,7 @@ class ViewClienteContrato extends \projeto\db\ActiveRecord
         return [
             'cod_cliente' => 'Cod Cliente',
             'cnpj' => 'Cnpj',
+            'razao_social' => 'Razao Social',
             'responsavel' => 'Responsavel',
             'txt_notificacao' => 'Txt Notificacao',
             'dt_retorno' => 'Dt Retorno',

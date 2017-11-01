@@ -30,17 +30,22 @@
             <file>file:/var/www/scm/modules/comercial/views/contrato/_lista_contratos.php</file>
             <file>file:/var/www/scm/models/TabAndamentoSearch.php</file>
             <file>file:/var/www/scm/views/andamento/_lista_andamento.php</file>
+            <file>file:/var/www/scm/modules/comercial/views/contrato/_form_contrato_parcela_add.php</file>
             <file>file:/var/www/scm/projeto/grid/ActionColumn.php</file>
             <file>file:/var/www/scm/modules/posoutorga/views/sici/index.php</file>
             <file>file:/var/www/scm/web/js/app/posoutorga.distribuicao.js</file>
+            <file>file:/var/www/scm/modules/comercial/views/contrato-parcelas/_form_parcela_add.php</file>
             <file>file:/var/www/scm/modules/comercial/views/cliente/admin.php</file>
             <file>file:/var/www/scm/models/TabClienteSearch.php</file>
+            <file>file:/var/www/scm/modules/comercial/views/contrato/_form_contrato_add.php</file>
             <file>file:/var/www/scm/modules/comercial/models/TabContratoParcelasSearch.php</file>
+            <file>file:/var/www/scm/modules/comercial/views/contrato-parcelas/_form.php</file>
             <file>file:/var/www/scm/views/andamento/index.php</file>
             <file>file:/var/www/scm/modules/comercial/views/cliente/_form.php</file>
             <file>file:/var/www/scm/modules/admin/models/TabFuncionalidadesSearch.php</file>
             <file>file:/var/www/scm/models/TabAndamento.php</file>
             <file>file:/var/www/scm/web/js/app/admin.cliente.js</file>
+            <file>file:/var/www/scm/modules/comercial/views/cliente/index.php</file>
             <file>file:/var/www/scm/modules/comercial/controllers/ContratoController.php</file>
             <file>file:/var/www/scm/modules/comercial/views/contrato/admin.php</file>
         </group>

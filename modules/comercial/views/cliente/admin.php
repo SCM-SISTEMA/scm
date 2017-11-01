@@ -78,6 +78,8 @@ $this->registerJsFile("@web/js/app/comercial.andamento.js?{$this->app->version}"
         </div>
         <?php echo $this->render('@app/modules/comercial/views/tipo-contrato/_form_tipo_contrato_add', ['form' => $form]); ?> 
         <?php echo $this->render('@app/modules/comercial/views/contrato/_form_contrato_add', ['form' => $form]); ?> 
+        <?php echo $this->render('@app/modules/comercial/views/contrato/_form_contrato_parcela_add', ['form' => $form]); ?> 
+        <?php echo $this->render('@app/modules/comercial/views/contrato-parcelas/_form_parcela_add', ['form' => $form]); ?> 
         <?php echo $this->render('@app/views/andamento/_form_andamento_add', ['form' => $form]); ?> 
 
         <?php ActiveForm::end(); ?>

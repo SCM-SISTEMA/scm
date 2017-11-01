@@ -14,6 +14,7 @@ use Yii;
  * @property string $txt_login_alteracao
  * @property string $dt_inclusao
  * @property string $dt_alteracao
+ * @property string $modelo
  *
  * @property TabAtributosValores $tabAtributosValores
  * @property TabAtributosValores $tabAtributosValores0
@@ -36,6 +37,7 @@ class TabContratoTipoContrato extends \projeto\db\ActiveRecord
         return [
             [['cod_contrato_fk', 'cod_tipo_contrato_fk'], 'integer'],
             [['dt_inclusao', 'dt_alteracao'], 'safe'],
+            [['modelo'], 'string'],
             [['txt_login_inclusao', 'txt_login_alteracao'], 'string', 'max' => 150]
         ];
     }
@@ -53,6 +55,7 @@ class TabContratoTipoContrato extends \projeto\db\ActiveRecord
             'txt_login_alteracao' => 'Usuário da Alteração',
             'dt_inclusao' => 'Dt Inclusao',
             'dt_alteracao' => 'Dt Alteracao',
+            'modelo' => 'Modelo',
         ];
     }
 

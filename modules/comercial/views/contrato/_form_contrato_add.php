@@ -14,7 +14,7 @@ Modal::begin([
     'header' => '<h3><div id="tituloTipoContrato">Incluir Contrato</div></h3>',
     'id' => 'modalContrato',
     'closeButton' => false,
-    'size' => 'modal-md',
+    'size' => 'modal-sm',
     'footer' =>
     Html::a('Fechar', '#', ['class' => 'btn btn-default', 'id' => 'botaoFechar', 'data-dismiss' => 'modal'])
     . PHP_EOL .
@@ -37,7 +37,7 @@ $tipo_contrato = new \app\modules\comercial\models\TabTipoContratoSearch();
 
 <div id="formContrato">
     <div class='row'>
-        <div class='col-lg-4'>
+        <div class='col-lg-12'>
             <?=
             $form->field($contrato, 'tipo_contrato_fk')->dropDownList(
                     yii\helpers\ArrayHelper::map(
@@ -48,54 +48,9 @@ $tipo_contrato = new \app\modules\comercial\models\TabTipoContratoSearch();
             ]);
             ?>
         </div>
-        <div class='col-lg-4'>
-            <?=
-            $form->field($contrato, 'valor_contrato')->textInput(
-            )->widget(\kartik\money\MaskMoney::className(), [
-                'pluginOptions' => [
-                    'thousands' => '.',
-                    'decimal' => ',',
-                    'precision' => 2,
-                    'allowZero' => false,],
-                'options' => [
-                    'class' => 'form-control',
-                ],
-            ]);
-            ?>
-        </div>
-        <div class='col-lg-4'>
-            <?=
-            $form->field($contrato, 'dt_prazo')->textInput()->widget(
-                    \dosamigos\datepicker\DatePicker::className(), [
-                'language' => 'pt-BR',
-                'clientOptions' => [
-                    'autoclose' => true,
-                    'format' => 'dd/mm/yyyy'
-                ]
-            ]);
-            ?>
-        </div>
     </div>
     <div class='row'>
-        <div class='col-lg-4'>
-            <?=
-            $form->field($contrato, 'qnt_parcelas')->textInput(['class' => 'form-control somenteNumero']);
-            ?>
-        </div>
-        <div class='col-lg-4'>
-
-            <?=
-            $form->field($contrato, 'dt_vencimento')->textInput()->widget(
-                    \dosamigos\datepicker\DatePicker::className(), [
-                'language' => 'pt-BR',
-                'clientOptions' => [
-                    'autoclose' => true,
-                    'format' => 'dd/mm/yyyy'
-                ]
-            ]);
-            ?>
-
-        </div>
+        
         <div class='col-lg-4'>
             <div id="div-status">
                 <?=
