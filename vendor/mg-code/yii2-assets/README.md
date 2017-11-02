@@ -16,6 +16,17 @@ Assets:
 * [JavaScript Cookie](#javascript-cookie)
 * [Sly](#sly)
 * [Sticky](#sticky)
+* [Owl Carousel](#owl-carousel)
+* [Are You Sure?](#are-you-sure)
+* [Bootstrap Tabdrop](#bootstrap-tabdrop)
+* [Autobahn JS](#autobahn-js)
+* [Seiyria Bootstrap Slider](#seiyria-bootstrap-slider)
+* [Highcharts](#highcharts)
+* [messageformat.js](#messageformatjs)
+* [Fancybox](#fancybox)
+* [Enhanced Events](#enhanced-events)
+* [ReactJS](#reactjs)
+* [Single Page Nav](#single-page-nav)
 
 ### Install
 
@@ -162,4 +173,98 @@ mgcode\assets\StickyAsset
 Dependencies: 
 ```
 "bower-asset/sticky": "*"
+```
+### Owl Carousel
+Asset for JS && CSS files:
+```
+mgcode\assets\OwlCarouselAsset
+```
+Asset for JS file:
+```
+mgcode\assets\OwlCarouselScriptAsset
+```
+Dependencies: 
+```
+"bower-asset/owl.carousel": "*"
+```
+### Are You Sure?
+Asset:
+```
+mgcode\assets\AreYouSureAsset
+```
+Dependencies: 
+```
+"bower-asset/jquery.are-you-sure": "*"
+```
+### Bootstrap Tabdrop
+Asset:
+```
+mgcode\assets\BootstrapTabdropAsset
+```
+### Autobahn JS
+0.8.2 is the last version of Autobahn|JS that supports version 1 of WAMP.
+
+Please read documentation here: [http://autobahn.ws/js/reference_wampv1.html](http://autobahn.ws/js/reference_wampv1.html)
+
+Asset:
+```
+mgcode\assets\AutobahnJsAsset
+```
+### Seiyria Bootstrap Slider
+Asset:
+```
+mgcode\assets\SeiyriaBootstrapSliderAsset
+```
+Dependencies: 
+```
+"bower-asset/seiyria-bootstrap-slider": "9.*"
+```
+### Highcharts
+Asset:
+```
+mgcode\assets\HighchartsAsset
+```
+Dependencies: 
+```
+"bower-asset/highcharts-release": "*"
+```
+### messageformat.js
+Asset:
+```
+mgcode\assets\MessageFormatAsset
+```
+Dependencies: 
+```
+"bower-asset/messageformat": "*"
+```
+### Fancybox
+Asset:
+```
+mgcode\assets\FancyboxAsset
+```
+Dependencies: 
+```
+"bower-asset/fancybox": "*"
+```
+### Enhanced Events
+Adds document scrollEnd event.
+Asset:
+```
+mgcode\assets\EnhancedEventsAsset
+```
+### ReactJS
+Asset:
+```
+mgcode\assets\ReactAsset
+mgcode\assets\ReactDomAsset
+```
+Dependencies: 
+```
+"bower-asset/react": "*"
+```
+### Single Page Nav
+Version 1.2.1 supported.
+Asset:
+```
+mgcode\assets\SinglePageNavAsset
 ```

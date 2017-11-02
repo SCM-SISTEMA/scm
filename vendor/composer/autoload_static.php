@@ -10,6 +10,8 @@ class ComposerStaticInit56e6e849cff54d81deecf3642bdd19b2
         '2cffec82183ee1cea088009cef9a6fc3' => __DIR__ . '/..' . '/ezyang/htmlpurifier/library/HTMLPurifier.composer.php',
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
         'ad155f8f1cf0d418fe49e248db8c661b' => __DIR__ . '/..' . '/react/promise/src/functions_include.php',
+        '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
+        '5255c38a0faeba867671b61dfda6d864' => __DIR__ . '/..' . '/paragonie/random_compat/lib/random.php',
         '2c102faa651ef8ea5874edb585946bce' => __DIR__ . '/..' . '/swiftmailer/swiftmailer/lib/swift_required.php',
         '180092cfc969a12e06f2132a203a3184' => __DIR__ . '/..' . '/codeception/verify/src/Codeception/function.php',
     );
@@ -27,6 +29,7 @@ class ComposerStaticInit56e6e849cff54d81deecf3642bdd19b2
             'yii\\codeception\\' => 16,
             'yii\\bootstrap\\' => 14,
             'yii\\' => 4,
+            'yii2tech\\html2pdf\\' => 18,
         ),
         'r' => 
         array (
@@ -124,6 +127,10 @@ class ComposerStaticInit56e6e849cff54d81deecf3642bdd19b2
         array (
             'Psr\\Log\\' => 8,
         ),
+        'M' => 
+        array (
+            'Mpdf\\' => 5,
+        ),
         'G' => 
         array (
             'GuzzleHttp\\Stream\\' => 18,
@@ -182,6 +189,10 @@ class ComposerStaticInit56e6e849cff54d81deecf3642bdd19b2
         'yii\\' => 
         array (
             0 => __DIR__ . '/..' . '/yiisoft/yii2',
+        ),
+        'yii2tech\\html2pdf\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/yii2tech/html2pdf',
         ),
         'rmrevin\\yii\\fontawesome\\' => 
         array (
@@ -425,6 +436,10 @@ class ComposerStaticInit56e6e849cff54d81deecf3642bdd19b2
         array (
             0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
         ),
+        'Mpdf\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/mpdf/mpdf/src',
+        ),
         'GuzzleHttp\\Stream\\' => 
         array (
             0 => __DIR__ . '/..' . '/guzzlehttp/streams/src',
@@ -545,12 +560,6 @@ class ComposerStaticInit56e6e849cff54d81deecf3642bdd19b2
         'BuildListener' => __DIR__ . '/..' . '/phing/phing/classes/phing/BuildListener.php',
         'BuildLogger' => __DIR__ . '/..' . '/phing/phing/classes/phing/BuildLogger.php',
         'BuildTimeoutException' => __DIR__ . '/..' . '/phing/phing/classes/phing/BuildTimeoutException.php',
-        'CGIF' => __DIR__ . '/..' . '/mpdf/mpdf/classes/gif.php',
-        'CGIFCOLORTABLE' => __DIR__ . '/..' . '/mpdf/mpdf/classes/gif.php',
-        'CGIFFILEHEADER' => __DIR__ . '/..' . '/mpdf/mpdf/classes/gif.php',
-        'CGIFIMAGE' => __DIR__ . '/..' . '/mpdf/mpdf/classes/gif.php',
-        'CGIFIMAGEHEADER' => __DIR__ . '/..' . '/mpdf/mpdf/classes/gif.php',
-        'CGIFLZW' => __DIR__ . '/..' . '/mpdf/mpdf/classes/gif.php',
         'Capsule' => __DIR__ . '/..' . '/phing/phing/classes/phing/lib/Capsule.php',
         'CapsuleTask' => __DIR__ . '/..' . '/phing/phing/classes/phing/tasks/ext/CapsuleTask.php',
         'CaseTask' => __DIR__ . '/..' . '/phing/phing/classes/phing/tasks/system/SwitchTask.php',
@@ -733,7 +742,6 @@ class ComposerStaticInit56e6e849cff54d81deecf3642bdd19b2
         'HttpTask' => __DIR__ . '/..' . '/phing/phing/classes/phing/tasks/ext/HttpTask.php',
         'IMEEngineActivationFailedException' => __DIR__ . '/..' . '/facebook/webdriver/lib/WebDriverExceptions.php',
         'IMENotAvailableException' => __DIR__ . '/..' . '/facebook/webdriver/lib/WebDriverExceptions.php',
-        'INDIC' => __DIR__ . '/..' . '/mpdf/mpdf/classes/indic.php',
         'IOException' => __DIR__ . '/..' . '/phing/phing/classes/phing/system/io/IOException.php',
         'IconvFilter' => __DIR__ . '/..' . '/phing/phing/classes/phing/filters/IconvFilter.php',
         'IdentityMapper' => __DIR__ . '/..' . '/phing/phing/classes/phing/mappers/IdentityMapper.php',
@@ -788,7 +796,6 @@ class ComposerStaticInit56e6e849cff54d81deecf3642bdd19b2
         'LocalFileDetector' => __DIR__ . '/..' . '/facebook/webdriver/lib/remote/LocalFileDetector.php',
         'Location' => __DIR__ . '/..' . '/phing/phing/classes/phing/parser/Location.php',
         'LogWriter' => __DIR__ . '/..' . '/phing/phing/classes/phing/util/LogWriter.php',
-        'MYANMAR' => __DIR__ . '/..' . '/mpdf/mpdf/classes/myanmar.php',
         'MailLogger' => __DIR__ . '/..' . '/phing/phing/classes/phing/listener/MailLogger.php',
         'MailTask' => __DIR__ . '/..' . '/phing/phing/classes/phing/tasks/ext/MailTask.php',
         'MajoritySelector' => __DIR__ . '/..' . '/phing/phing/classes/phing/types/selectors/MajoritySelector.php',
@@ -821,13 +828,11 @@ class ComposerStaticInit56e6e849cff54d81deecf3642bdd19b2
         'NotSelector' => __DIR__ . '/..' . '/phing/phing/classes/phing/types/selectors/NotSelector.php',
         'NotifySendTask' => __DIR__ . '/..' . '/phing/phing/classes/phing/tasks/ext/NotifySendTask.php',
         'NullPointerException' => __DIR__ . '/..' . '/phing/phing/classes/phing/system/lang/NullPointerException.php',
-        'OTLdump' => __DIR__ . '/..' . '/mpdf/mpdf/classes/otl_dump.php',
         'OrCondition' => __DIR__ . '/..' . '/phing/phing/classes/phing/tasks/system/condition/OrCondition.php',
         'OrSelector' => __DIR__ . '/..' . '/phing/phing/classes/phing/types/selectors/OrSelector.php',
         'OsCondition' => __DIR__ . '/..' . '/phing/phing/classes/phing/tasks/system/condition/OsCondition.php',
         'OutputStream' => __DIR__ . '/..' . '/phing/phing/classes/phing/system/io/OutputStream.php',
         'OutputStreamWriter' => __DIR__ . '/..' . '/phing/phing/classes/phing/system/io/OutputStreamWriter.php',
-        'PDFBarcode' => __DIR__ . '/..' . '/mpdf/mpdf/classes/barcode.php',
         'PDOQuerySplitter' => __DIR__ . '/..' . '/phing/phing/classes/phing/tasks/ext/pdo/PDOQuerySplitter.php',
         'PDOResultFormatter' => __DIR__ . '/..' . '/phing/phing/classes/phing/tasks/ext/pdo/PDOResultFormatter.php',
         'PDOSQLExecFormatterElement' => __DIR__ . '/..' . '/phing/phing/classes/phing/tasks/ext/pdo/PDOSQLExecFormatterElement.php',
@@ -1350,9 +1355,7 @@ class ComposerStaticInit56e6e849cff54d81deecf3642bdd19b2
         'RuntimeConfigurable' => __DIR__ . '/..' . '/phing/phing/classes/phing/RuntimeConfigurable.php',
         'S3GetTask' => __DIR__ . '/..' . '/phing/phing/classes/phing/tasks/ext/Service/Amazon/S3/S3GetTask.php',
         'S3PutTask' => __DIR__ . '/..' . '/phing/phing/classes/phing/tasks/ext/Service/Amazon/S3/S3PutTask.php',
-        'SEA' => __DIR__ . '/..' . '/mpdf/mpdf/classes/sea.php',
         'SQLExecTransaction' => __DIR__ . '/..' . '/phing/phing/classes/phing/tasks/ext/creole/CreoleSQLExecTask.php',
-        'SVG' => __DIR__ . '/..' . '/mpdf/mpdf/classes/svg.php',
         'SassTask' => __DIR__ . '/..' . '/phing/phing/classes/phing/tasks/ext/SassTask.php',
         'ScpTask' => __DIR__ . '/..' . '/phing/phing/classes/phing/tasks/ext/ssh/ScpTask.php',
         'ScriptTimeoutException' => __DIR__ . '/..' . '/facebook/webdriver/lib/WebDriverExceptions.php',
@@ -1444,8 +1447,6 @@ class ComposerStaticInit56e6e849cff54d81deecf3642bdd19b2
         'SwitchTask' => __DIR__ . '/..' . '/phing/phing/classes/phing/tasks/system/SwitchTask.php',
         'SymfonyConsoleTask' => __DIR__ . '/..' . '/phing/phing/classes/phing/tasks/ext/SymfonyConsole/SymfonyConsoleTask.php',
         'SymlinkTask' => __DIR__ . '/..' . '/phing/phing/classes/phing/tasks/ext/SymlinkTask.php',
-        'TTFontFile' => __DIR__ . '/..' . '/mpdf/mpdf/classes/ttfontsuni.php',
-        'TTFontFile_Analysis' => __DIR__ . '/..' . '/mpdf/mpdf/classes/ttfontsuni_analysis.php',
         'TabToSpaces' => __DIR__ . '/..' . '/phing/phing/classes/phing/filters/TabToSpaces.php',
         'TailFilter' => __DIR__ . '/..' . '/phing/phing/classes/phing/filters/TailFilter.php',
         'TarFileSet' => __DIR__ . '/..' . '/phing/phing/classes/phing/tasks/ext/TarTask.php',
@@ -1474,7 +1475,6 @@ class ComposerStaticInit56e6e849cff54d81deecf3642bdd19b2
         'TstampTask' => __DIR__ . '/..' . '/phing/phing/classes/phing/tasks/system/TstampTask.php',
         'TypeSelector' => __DIR__ . '/..' . '/phing/phing/classes/phing/types/selectors/TypeSelector.php',
         'TypedefTask' => __DIR__ . '/..' . '/phing/phing/classes/phing/tasks/system/TypedefTask.php',
-        'UCDN' => __DIR__ . '/..' . '/mpdf/mpdf/classes/ucdn.php',
         'URLChecker' => __DIR__ . '/..' . '/facebook/webdriver/lib/net/URLChecker.php',
         'UnableToSetCookieException' => __DIR__ . '/..' . '/facebook/webdriver/lib/WebDriverExceptions.php',
         'UnexpectedAlertOpenException' => __DIR__ . '/..' . '/facebook/webdriver/lib/WebDriverExceptions.php',
@@ -1579,19 +1579,9 @@ class ComposerStaticInit56e6e849cff54d81deecf3642bdd19b2
         'ZendGuardLicenseTask' => __DIR__ . '/..' . '/phing/phing/classes/phing/tasks/ext/zendguard/ZendGuardLicenseTask.php',
         'ZipFileSet' => __DIR__ . '/..' . '/phing/phing/classes/phing/tasks/ext/ZipTask.php',
         'ZipTask' => __DIR__ . '/..' . '/phing/phing/classes/phing/tasks/ext/ZipTask.php',
-        'bmp' => __DIR__ . '/..' . '/mpdf/mpdf/classes/bmp.php',
-        'cssmgr' => __DIR__ . '/..' . '/mpdf/mpdf/classes/cssmgr.php',
-        'directw' => __DIR__ . '/..' . '/mpdf/mpdf/classes/directw.php',
         'fpdi_pdf_parser' => __DIR__ . '/..' . '/setasign/fpdi/fpdi_pdf_parser.php',
-        'grad' => __DIR__ . '/..' . '/mpdf/mpdf/classes/grad.php',
-        'mPDF' => __DIR__ . '/..' . '/mpdf/mpdf/mpdf.php',
-        'meter' => __DIR__ . '/..' . '/mpdf/mpdf/classes/meter.php',
-        'mpdfform' => __DIR__ . '/..' . '/mpdf/mpdf/classes/mpdfform.php',
-        'otl' => __DIR__ . '/..' . '/mpdf/mpdf/classes/otl.php',
         'pdf_context' => __DIR__ . '/..' . '/setasign/fpdi/pdf_context.php',
         'rSTTask' => __DIR__ . '/..' . '/phing/phing/classes/phing/tasks/ext/rSTTask.php',
-        'tocontents' => __DIR__ . '/..' . '/mpdf/mpdf/classes/tocontents.php',
-        'wmf' => __DIR__ . '/..' . '/mpdf/mpdf/classes/wmf.php',
         'zsdtBaseTask' => __DIR__ . '/..' . '/phing/phing/classes/phing/tasks/ext/zendserverdeploymenttool/zsdtBaseTask.php',
         'zsdtPackTask' => __DIR__ . '/..' . '/phing/phing/classes/phing/tasks/ext/zendserverdeploymenttool/zsdtPackTask.php',
         'zsdtValidateTask' => __DIR__ . '/..' . '/phing/phing/classes/phing/tasks/ext/zendserverdeploymenttool/zsdtValidateTask.php',

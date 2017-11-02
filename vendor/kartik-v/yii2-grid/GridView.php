@@ -3,8 +3,8 @@
 /**
  * @package   yii2-grid
  * @author    Kartik Visweswaran <kartikv2@gmail.com>
- * @copyright Copyright &copy; Kartik Visweswaran, Krajee.com, 2014 - 2016
- * @version   3.1.3
+ * @copyright Copyright &copy; Kartik Visweswaran, Krajee.com, 2014 - 2017
+ * @version   3.1.6
  */
 
 namespace kartik\grid;
@@ -264,6 +264,15 @@ class GridView extends YiiGridView
      * Set download target for grid export to a new window that auto closes after download
      */
     const TARGET_BLANK = '_blank';
+
+    /**
+     * @var string the module identifier if this widget is part of a module. If not set, the module identifier will
+     * be auto derived based on the \yii\base\Module::getInstance method. This can be useful, if you are setting
+     * multiple module identifiers for the same module in your Yii configuration file. To specify children or grand
+     * children modules you can specify the module identifiers relative to the parent module (e.g. `admin/content`).
+     */
+    public $moduleId;
+
     /**
      * @var array configuration settings for the Krajee dialog widget that will be used to render alerts and
      * confirmation dialog prompts
@@ -292,6 +301,18 @@ class GridView extends YiiGridView
      *
      */
     public $layout = "{summary}\n{items}\n{pager}";
+
+    /**
+     * @var string the default label shown for each record in the grid (singular). This label will replace the singular
+     * word `item` within the grid summary text as well as ActionColumn default delete confirmation message.
+     */
+    public $itemLabelSingle;
+
+    /**
+     * @var string the default label shown for each record in the grid (plural). This label will replace the plural word
+     * `items` within the grid summary text as well as ActionColumn default delete confirmation message.
+     */
+    public $itemLabelPlural;
 
     /**
      * @var string the template for rendering the grid within a bootstrap styled panel.
@@ -909,7 +930,7 @@ HTML;
     /**
      * Sets a default css class within `options` if not set
      *
-     * @param array $options the HTML options
+     * @param array  $options the HTML options
      * @param string $css the CSS class to test and append
      */
     protected static function initCss(&$options, $css)
@@ -924,7 +945,7 @@ HTML;
      */
     public function init()
     {
-        $this->_module = Config::initModule(Module::className());
+        $this->initModule();
         if (empty($this->options['id'])) {
             $this->options['id'] = $this->getId();
         }
@@ -939,6 +960,12 @@ HTML;
             $this->dataProvider->pagination = false;
         }
         $this->_toggleButtonId = $this->options['id'] . '-togdata-' . ($this->_isShowAll ? 'all' : 'page');
+        if (!isset($this->itemLabelSingle)) {
+            $this->itemLabelSingle = Yii::t('kvgrid', 'item');
+        }
+        if (!isset($this->itemLabelPlural)) {
+            $this->itemLabelPlural = Yii::t('kvgrid', 'items');
+        }
         parent::init();
     }
 
@@ -954,7 +981,7 @@ HTML;
             Config::checkDependency(
                 'mpdf\Pdf',
                 'yii2-mpdf',
-                "for PDF export functionality. To include PDF export, follow the install steps below. If you do not " .
+                'for PDF export functionality. To include PDF export, follow the install steps below. If you do not ' .
                 "need PDF export functionality, do not include 'PDF' as a format in the 'export' property. You can " .
                 "otherwise set 'export' to 'false' to disable all export functionality"
             );
@@ -1043,38 +1070,50 @@ HTML;
         $menuOptions = $this->export['menuOptions'];
         $iconPrefix = $this->export['fontAwesome'] ? 'fa fa-' : 'glyphicon glyphicon-';
         $title = ($icon == '') ? $title : "<i class='{$iconPrefix}{$icon}'></i> {$title}";
-        $action = $this->_module->downloadAction;
+        if (!isset($this->_module->downloadAction)) {
+            $action = ["/{$this->moduleId}/export/download"];
+        } else {
+            $action = (array) $this->_module->downloadAction;
+        }
         $encoding = ArrayHelper::getValue($this->export, 'encoding', 'utf-8');
         $bom = ArrayHelper::getValue($this->export, 'bom', true);
         $target = ArrayHelper::getValue($this->export, 'target', self::TARGET_POPUP);
-        $form = Html::beginForm(
-                is_array($action) ? $action : [$action],
-                'post',
-                [
-                   'class' => 'kv-export-form',
-                   'style' => 'display:none',
-                   'target' => ($target == self::TARGET_POPUP) ? 'kvDownloadDialog' : $target,
-                ]
-            ) . "\n" .
+        $formOptions = [
+            'class' => 'kv-export-form',
+            'style' => 'display:none',
+            'target' => ($target == self::TARGET_POPUP) ? 'kvDownloadDialog' : $target,
+        ];
+        $form = Html::beginForm($action, 'post', $formOptions) . "\n" .
+            Html::hiddenInput('module_id', $this->moduleId) . "\n" .
+            Html::hiddenInput('export_hash') . "\n" .
             Html::hiddenInput('export_filetype') . "\n" .
             Html::hiddenInput('export_filename') . "\n" .
             Html::hiddenInput('export_mime') . "\n" .
             Html::hiddenInput('export_config') . "\n" .
             Html::hiddenInput('export_encoding', $encoding) . "\n" .
             Html::hiddenInput('export_bom', $bom) . "\n" .
-            Html::textarea('export_content') . "\n</form>";
+            Html::textarea('export_content') . "\n" .
+            Html::endForm();
         $items = empty($this->export['header']) ? [] : [$this->export['header']];
         foreach ($this->exportConfig as $format => $setting) {
             $iconOptions = ArrayHelper::getValue($setting, 'iconOptions', []);
             Html::addCssClass($iconOptions, $iconPrefix . $setting['icon']);
             $label = (empty($setting['icon']) || $setting['icon'] == '') ? $setting['label'] :
                 Html::tag('i', '', $iconOptions) . ' ' . $setting['label'];
+            $mime = ArrayHelper::getValue($setting, 'mime', 'text/plain');
+            $config = ArrayHelper::getValue($setting, 'config', []);
+            if ($format === self::JSON) {
+                unset($config['jsonReplacer']);
+            }
+            $dataToHash = $this->moduleId . $setting['filename'] . $mime . $encoding . $bom . Json::encode($config);
+            $hash = Yii::$app->security->hashData($dataToHash, $this->_module->exportEncryptSalt);
             $items[] = [
                 'label' => $label,
                 'url' => '#',
                 'linkOptions' => [
                     'class' => 'export-' . $format,
-                    'data-format' => ArrayHelper::getValue($setting, 'mime', 'text/plain'),
+                    'data-mime' => $mime,
+                    'data-hash' => $hash,
                 ],
                 'options' => $setting['options'],
             ];
@@ -1113,10 +1152,10 @@ HTML;
             $content .= $this->renderFilters();
         }
         return "<thead>\n" .
-        $this->generateRows($this->beforeHeader) . "\n" .
-        $content . "\n" .
-        $this->generateRows($this->afterHeader) . "\n" .
-        "</thead>";
+            $this->generateRows($this->beforeHeader) . "\n" .
+            $content . "\n" .
+            $this->generateRows($this->afterHeader) . "\n" .
+            '</thead>';
     }
 
     /**
@@ -1162,6 +1201,81 @@ HTML;
         } else {
             return false;
         }
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function renderSummary()
+    {
+        $count = $this->dataProvider->getCount();
+        if ($count <= 0) {
+            return '';
+        }
+        $summaryOptions = $this->summaryOptions;
+        $tag = ArrayHelper::remove($summaryOptions, 'tag', 'div');
+        if (($pagination = $this->dataProvider->getPagination()) !== false) {
+            $totalCount = $this->dataProvider->getTotalCount();
+            $begin = $pagination->getPage() * $pagination->pageSize + 1;
+            $end = $begin + $count - 1;
+            if ($begin > $end) {
+                $begin = $end;
+            }
+            $page = $pagination->getPage() + 1;
+            $pageCount = $pagination->pageCount;
+            if (($summaryContent = $this->summary) === null) {
+                return Html::tag($tag, Yii::t('kvgrid', 'Showing <b>{begin, number}-{end, number}</b> of <b>{totalCount, number}</b> {totalCount, plural, one{{item}} other{{items}}}.', [
+                    'begin' => $begin,
+                    'end' => $end,
+                    'count' => $count,
+                    'totalCount' => $totalCount,
+                    'page' => $page,
+                    'pageCount' => $pageCount,
+                    'item' => $this->itemLabelSingle,
+                    'items' => $this->itemLabelPlural,
+                ]), $summaryOptions);
+            }
+        } else {
+            $begin = $page = $pageCount = 1;
+            $end = $totalCount = $count;
+            if (($summaryContent = $this->summary) === null) {
+                return Html::tag($tag, Yii::t('kvgrid', 'Total <b>{count, number}</b> {count, plural, one{{item}} other{{items}}}.', [
+                    'begin' => $begin,
+                    'end' => $end,
+                    'count' => $count,
+                    'totalCount' => $totalCount,
+                    'page' => $page,
+                    'pageCount' => $pageCount,
+                    'item' => $this->itemLabelSingle,
+                    'items' => $this->itemLabelPlural,
+                ]), $summaryOptions);
+            }
+        }
+
+        return Yii::$app->getI18n()->format($summaryContent, [
+            'begin' => $begin,
+            'end' => $end,
+            'count' => $count,
+            'totalCount' => $totalCount,
+            'page' => $page,
+            'pageCount' => $pageCount,
+        ], Yii::$app->language);
+    }
+
+    /**
+     * Initialize the module based on module identifier
+     */
+    protected function initModule()
+    {
+        if (!isset($this->moduleId)) {
+            $this->_module = Module::getInstance();
+            if (isset($this->_module)) {
+                $this->moduleId = $this->_module->id;
+                return;
+            }
+            $this->moduleId = Module::MODULE;
+        }
+        $this->_module = Config::getModule($this->moduleId, Module::className());
     }
 
     /**
@@ -1225,14 +1339,14 @@ HTML;
                 'color' => '#333333',
             ],
             'R' => [
-                'content' => Yii::t('kvgrid', 'Generated') . ': ' . date("D, d-M-Y g:i a T"),
+                'content' => Yii::t('kvgrid', 'Generated') . ': ' . date('D, d-M-Y g:i a T'),
                 'font-size' => 8,
                 'color' => '#333333',
             ],
         ];
         $pdfFooter = [
             'L' => [
-                'content' => Yii::t('kvgrid', "© Krajee Yii2 Extensions"),
+                'content' => Yii::t('kvgrid', '© Krajee Yii2 Extensions'),
                 'font-size' => 8,
                 'font-style' => 'B',
                 'color' => '#999999',
@@ -1276,7 +1390,7 @@ HTML;
                 'options' => ['title' => Yii::t('kvgrid', 'Comma Separated Values')],
                 'mime' => 'application/csv',
                 'config' => [
-                    'colDelimiter' => ",",
+                    'colDelimiter' => ',',
                     'rowDelimiter' => "\r\n",
                 ],
             ],
@@ -1379,6 +1493,12 @@ HTML;
                 ],
             ],
         ];
+
+        // Remove PDF if dependency is not loaded.
+        if (!class_exists('\\kartik\\mpdf\\Pdf')) {
+            unset($defaultExportConfig[self::PDF]);
+        }
+
         $this->exportConfig = self::parseExportConfig($this->exportConfig, $defaultExportConfig);
     }
 
@@ -1424,7 +1544,7 @@ HTML;
         if (!isset($this->toggleDataOptions[$tag]['title'])) {
             $this->toggleDataOptions[$tag]['title'] = $defaultOptions[$tag]['title'];
         }
-        $this->toggleDataOptions[$tag]['data-pjax'] = $this->pjax ? "true" : false;
+        $this->toggleDataOptions[$tag]['data-pjax'] = $this->pjax ? 'true' : false;
     }
 
     /**
@@ -1731,9 +1851,10 @@ HTML;
         }
         Dialog::widget($this->krajeeDialogSettings);
         $gridId = $this->options['id'];
+        $NS = '.' . str_replace('-', '_', $gridId);
         if ($this->export !== false && is_array($this->export) && !empty($this->export)) {
             GridExportAsset::register($view);
-            $target = ArrayHelper::getValue($this->export, 'target', self::TARGET_POPUP);
+            $target = ArrayHelper::getValue($this->export, 'target', self::TARGET_BLANK);
             $gridOpts = Json::encode(
                 [
                     'gridId' => $gridId,
@@ -1771,6 +1892,7 @@ HTML;
                 $script .= "{$id}.gridexport({$expOptsVar});";
             }
         }
+        $container = '$("#' . $this->containerOptions['id'] . '")';
         if ($this->resizableColumns) {
             $rcDefaults = [];
             if ($this->persistResize) {
@@ -1779,11 +1901,9 @@ HTML;
                 $rcDefaults = ['store' => null];
             }
             $rcOptions = Json::encode(array_replace_recursive($rcDefaults, $this->resizableColumnsOptions));
-            $contId = $this->containerOptions['id'];
             GridResizeColumnsAsset::register($view);
-            $script .= "$('#{$contId}').resizableColumns('destroy').resizableColumns({$rcOptions});";
+            $script .= "{$container}.resizableColumns('destroy').resizableColumns({$rcOptions});";
         }
-        $container = "\$('#{$this->containerOptions['id']}')";
         if ($this->floatHeader) {
             GridFloatHeadAsset::register($view);
             // fix floating header for IE browser when using group grid functionality
@@ -1800,10 +1920,16 @@ HTML;
             $this->floatHeaderOptions = array_replace_recursive($opts, $this->floatHeaderOptions);
             $opts = Json::encode($this->floatHeaderOptions);
             $script .= "$('#{$gridId} .kv-grid-table:first').floatThead({$opts});";
+            // integrate resizeableColumns with floatThead
+            if ($this->resizableColumns) {
+                $script .= "{$container}.off('{$NS}').on('column:resize{$NS}', function(e){" .
+                    '$("#{$gridId} .kv-grid-table:nth-child(2)").floatThead("reflow");' .
+                    '});';
+            }
         }
         if ($this->perfectScrollbar) {
             GridPerfectScrollbarAsset::register($view);
-            $script .= "{$container}.perfectScrollbar(" . Json::encode($this->perfectScrollbarOptions) . ");";
+            $script .= $container . '.perfectScrollbar(' . Json::encode($this->perfectScrollbarOptions) . ');';
         }
         $this->genToggleDataScript();
         $script .= $this->_toggleScript;

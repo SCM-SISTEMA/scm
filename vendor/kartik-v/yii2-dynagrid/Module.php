@@ -4,7 +4,7 @@
  * @package   yii2-dynagrid
  * @author    Kartik Visweswaran <kartikv2@gmail.com>
  * @copyright Copyright &copy; Kartik Visweswaran, Krajee.com, 2015 - 2017
- * @version   1.4.5
+ * @version   1.4.7
  */
 
 namespace kartik\dynagrid;
@@ -88,10 +88,11 @@ class Module extends \kartik\base\Module
     public $settingsView = 'settings';
 
     /**
-     * @var mixed the action URL for displaying the dynagrid detail configuration settings
-     * on the dynagrid detail settings form
+     * @var mixed the action URL for displaying the dynagrid detail configuration settings on the dynagrid detail
+     * settings form. If this is not set it will default to `<moduleId>/settings/get-config`, where `<moduleId>` is
+     * the module identifier for the dynagrid module.
      */
-    public $settingsConfigAction = '/dynagrid/settings/get-config';
+    public $settingsConfigAction;
 
     /**
      * @var array the theme configuration for the gridview
@@ -142,40 +143,22 @@ class Module extends \kartik\base\Module
     public $maxPageSize = 50;
 
     /**
-     * @var mixed the action (url) used for creating a filter or sort setting
+     * @var string a random salt that will be used to generate a hash signature for tree configuration.
      */
-    public $createAction = '/dynagrid/settings/create';
+    public $configEncryptSalt = 'SET_A_SALT_FOR_YII2_DYNAGRID';
 
     /**
-     * @var mixed the action (url) used for creating a filter or sort setting
+     * @inheritdoc
      */
-    public $updateAction = '/dynagrid/settings/update';
-
-    /**
-     * @var mixed the action (url) used for deleting a filter or sort setting
-     */
-    public $deleteAction = '/dynagrid/settings/delete';
+    protected $_msgCat = 'kvdynagrid';
 
     /**
      * @inheritdoc
      */
     public function init()
     {
-        $this->_msgCat = 'kvdynagrid';
         parent::init();
         $this->initSettings();
-    }
-
-    /**
-     * Gets the module instance
-     *
-     * @param string $module the module name
-     *
-     * @return Module
-     */
-    public static function fetchModule($module = self::MODULE)
-    {
-        return Config::getModule($module);
     }
 
     /**
@@ -184,6 +167,7 @@ class Module extends \kartik\base\Module
     public function initSettings()
     {
         $this->dbSettings += [
+            'connection' => 'db',
             'tableName' => 'tbl_dynagrid',
             'idAttr' => 'id',
             'filterAttr' => 'filter_id',
@@ -191,6 +175,7 @@ class Module extends \kartik\base\Module
             'dataAttr' => 'data'
         ];
         $this->dbSettingsDtl += [
+            'connection' => 'db',
             'tableName' => 'tbl_dynagrid_dtl',
             'idAttr' => 'id',
             'categoryAttr' => 'category',
@@ -216,6 +201,5 @@ class Module extends \kartik\base\Module
             'deleteConfirmation' => Yii::t('kvdynagrid', 'Are you sure you want to delete the setting?'),
             'messageOptions' => [],
         ], $this->dynaGridOptions);
-
     }
 }

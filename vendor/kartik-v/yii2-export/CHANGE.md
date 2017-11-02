@@ -1,16 +1,6 @@
 Change Log: `yii2-export`
 =========================
 
-## version 1.2.8
-
-**Date:** 25-Apr-2017
-
-- (enh #185): Add Vietnamese Translations.
-- (enh #188): Better validation of empty data using `isset`.
-- Code documentation enhancements.
-- (enh #196): More correct `styleOptions` parsing for `contentBefore` and `contentAfter`. 
-- (enh #197): Add public method `getExportType` to access through `onRender` callbacks. 
-
 ## version 1.2.7
 
 **Date:** 13-Mar-2017

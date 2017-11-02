@@ -12,7 +12,7 @@
  * http://stackoverflow.com/q/4998908
  */
 
-/*global window, atob, Blob, ArrayBuffer, Uint8Array, define, module */
+/* global atob, Blob, define */
 
 ;(function (window) {
   'use strict'
@@ -87,15 +87,21 @@
   if (window.HTMLCanvasElement && !CanvasPrototype.toBlob) {
     if (CanvasPrototype.mozGetAsFile) {
       CanvasPrototype.toBlob = function (callback, type, quality) {
-        if (quality && CanvasPrototype.toDataURL && dataURLtoBlob) {
-          callback(dataURLtoBlob(this.toDataURL(type, quality)))
-        } else {
-          callback(this.mozGetAsFile('blob', type))
-        }
+        var self = this
+        setTimeout(function () {
+          if (quality && CanvasPrototype.toDataURL && dataURLtoBlob) {
+            callback(dataURLtoBlob(self.toDataURL(type, quality)))
+          } else {
+            callback(self.mozGetAsFile('blob', type))
+          }
+        })
       }
     } else if (CanvasPrototype.toDataURL && dataURLtoBlob) {
       CanvasPrototype.toBlob = function (callback, type, quality) {
-        callback(dataURLtoBlob(this.toDataURL(type, quality)))
+        var self = this
+        setTimeout(function () {
+          callback(dataURLtoBlob(self.toDataURL(type, quality)))
+        })
       }
     }
   }

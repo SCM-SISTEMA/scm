@@ -4,7 +4,7 @@
  * @package   yii2-dynagrid
  * @author    Kartik Visweswaran <kartikv2@gmail.com>
  * @copyright Copyright &copy; Kartik Visweswaran, Krajee.com, 2015 - 2017
- * @version   1.4.5
+ * @version   1.4.7
  */
 
 namespace kartik\dynagrid\models;
@@ -22,6 +22,13 @@ use kartik\dynagrid\Module;
  */
 class DynaGridConfig extends Model
 {
+    /**
+     * @var string the module identifier if this object is part of a module. If not set, the module identifier will
+     * be auto derived based on the \yii\base\Module::getInstance method. This can be useful, if you are setting
+     * multiple module identifiers for the same module in your Yii configuration file. To specify children or grand
+     * children modules you can specify the module identifiers relative to the parent module (e.g. `admin/content`).
+     */
+    public $moduleId;
     /**
      * @var string the dynagrid widget identifier
      */
@@ -53,7 +60,7 @@ class DynaGridConfig extends Model
     /**
      * @var integer the grid page size
      */
-    public $pageSize;
+    public $pageSize = null;
     /**
      * @var string the filter identifier
      */
@@ -69,7 +76,7 @@ class DynaGridConfig extends Model
     /**
      * @var string the currently selected grid theme
      */
-    public $theme;
+    public $theme = null;
 
     /**
      * @inheritdoc
@@ -79,10 +86,10 @@ class DynaGridConfig extends Model
         /**
          * @var Module $module
          */
-        $module = Config::initModule(Module::classname());
+        $module = Config::getModule($this->moduleId, Module::classname());
         return [
             [['id', 'hiddenColumns', 'visibleColumns', 'pageSize', 'filterId', 'sortId', 'theme'], 'safe'],
-            [['pageSize', 'theme'], 'required'],
+            ['theme', 'required'],
             ['pageSize', 'integer', 'min' => $module->minPageSize, 'max' => $module->maxPageSize],
             ['pageSize', 'default', 'value' => $module->defaultPageSize],
             ['theme', 'default', 'value' => $module->defaultTheme],

@@ -3,8 +3,8 @@
 /**
  * @package   yii2-grid
  * @author    Kartik Visweswaran <kartikv2@gmail.com>
- * @copyright Copyright &copy; Kartik Visweswaran, Krajee.com, 2014 - 2016
- * @version   3.1.3
+ * @copyright Copyright &copy; Kartik Visweswaran, Krajee.com, 2014 - 2017
+ * @version   3.1.6
  */
 
 namespace kartik\grid;
@@ -25,7 +25,7 @@ use Yii;
  * ```
  *
  * @author Kartik Visweswaran <kartikv2@gmail.com>
- * @since 1.0
+ * @since  1.0
  */
 class Module extends \kartik\base\Module
 {
@@ -35,27 +35,17 @@ class Module extends \kartik\base\Module
     const MODULE = "gridview";
 
     /**
+     * @var string a random salt that will be used to generate a hash string for export configuration.
+     */
+    public $exportEncryptSalt = 'SET_A_SALT_FOR_YII2_GRID';
+
+    /**
      * @var string|array the action (url) used for downloading exported file
      */
-    public $downloadAction = '/gridview/export/download';
+    public $downloadAction;
 
     /**
      * @inheritdoc
      */
-    public function init()
-    {
-        $this->_msgCat = 'kvgrid';
-        parent::init();
-        if (isset($dummyDemoTranslations)) {
-            /** @noinspection PhpUnusedLocalVariableInspection */
-            $dummyMessages = Yii::t('kvgrid', 'Add Book') .
-                Yii::t('kvgrid', 'Book Listing') .
-                Yii::t('kvgrid', 'Download Selected') .
-                Yii::t('kvgrid', 'Library') .
-                Yii::t('kvgrid', 'Reset Grid') .
-                Yii::t('kvgrid', 'The page summary displays SUM for first 3 amount columns and AVG for the last.') .
-                Yii::t('kvgrid', 'The table header sticks to the top in this demo as you scroll') .
-                Yii::t('kvgrid', 'Resize table columns just like a spreadsheet by dragging the column edges.');
-        }
-    }
+    protected $_msgCat = 'kvgrid';
 }

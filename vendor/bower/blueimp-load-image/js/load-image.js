@@ -27,23 +27,29 @@
       return loadImage.onload(img, event, file, callback, options)
     }
     if (typeof file === 'string') {
-      loadImage.fetchBlob(file, function (blob) {
-        if (blob) {
-          file = blob
-          url = loadImage.createObjectURL(file)
-        } else {
-          url = file
-          if (options && options.crossOrigin) {
-            img.crossOrigin = options.crossOrigin
+      loadImage.fetchBlob(
+        file,
+        function (blob) {
+          if (blob) {
+            file = blob
+            url = loadImage.createObjectURL(file)
+          } else {
+            url = file
+            if (options && options.crossOrigin) {
+              img.crossOrigin = options.crossOrigin
+            }
           }
-        }
-        img.src = url
-      }, options)
+          img.src = url
+        },
+        options
+      )
       return img
-    } else if (loadImage.isInstanceOf('Blob', file) ||
-        // Files are also Blob instances, but some browsers
-        // (Firefox 3.6) support the File API but not Blobs:
-        loadImage.isInstanceOf('File', file)) {
+    } else if (
+      loadImage.isInstanceOf('Blob', file) ||
+      // Files are also Blob instances, but some browsers
+      // (Firefox 3.6) support the File API but not Blobs:
+      loadImage.isInstanceOf('File', file)
+    ) {
       url = img._objectURL = loadImage.createObjectURL(file)
       if (url) {
         img.src = url
@@ -61,9 +67,10 @@
   }
   // The check for URL.revokeObjectURL fixes an issue with Opera 12,
   // which provides URL.createObjectURL but doesn't properly implement it:
-  var urlAPI = (window.createObjectURL && window) ||
-                (window.URL && URL.revokeObjectURL && URL) ||
-                (window.webkitURL && webkitURL)
+  var urlAPI =
+    ($.createObjectURL && $) ||
+    ($.URL && URL.revokeObjectURL && URL) ||
+    ($.webkitURL && webkitURL)
 
   function revokeHelper (img, options) {
     if (img._objectURL && !(options && options.noRevoke)) {
@@ -114,7 +121,7 @@
   // invokes the callback with the event object (load or error).
   // The result can be read via event.target.result:
   loadImage.readFile = function (file, callback, method) {
-    if (window.FileReader) {
+    if ($.FileReader) {
       var fileReader = new FileReader()
       fileReader.onload = fileReader.onerror = callback
       method = method || 'readAsDataURL'
@@ -135,4 +142,4 @@
   } else {
     $.loadImage = loadImage
   }
-}(window))
+})((typeof window !== 'undefined' && window) || this)
