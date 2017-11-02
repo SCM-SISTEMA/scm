@@ -29,7 +29,6 @@ class ComposerStaticInit56e6e849cff54d81deecf3642bdd19b2
             'yii\\codeception\\' => 16,
             'yii\\bootstrap\\' => 14,
             'yii\\' => 4,
-            'yii2tech\\html2pdf\\' => 18,
         ),
         'r' => 
         array (
@@ -189,10 +188,6 @@ class ComposerStaticInit56e6e849cff54d81deecf3642bdd19b2
         'yii\\' => 
         array (
             0 => __DIR__ . '/..' . '/yiisoft/yii2',
-        ),
-        'yii2tech\\html2pdf\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/yii2tech/html2pdf',
         ),
         'rmrevin\\yii\\fontawesome\\' => 
         array (

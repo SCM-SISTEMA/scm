@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "9d4eec6a44254b27230fcad18e3f2896",
+    "content-hash": "c83dbbec5635448ab5e55ebcecd35665",
     "packages": [
         {
             "name": "2amigos/yii2-chartjs-widget",
@@ -5625,56 +5625,6 @@
                 "validate"
             ],
             "time": "2016-11-23T20:04:58+00:00"
-        },
-        {
-            "name": "yii2tech/html2pdf",
-            "version": "1.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/yii2tech/html2pdf.git",
-                "reference": "bde7d02170966b5d52b8c2c708f0da952bb1ff31"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/yii2tech/html2pdf/zipball/bde7d02170966b5d52b8c2c708f0da952bb1ff31",
-                "reference": "bde7d02170966b5d52b8c2c708f0da952bb1ff31",
-                "shasum": ""
-            },
-            "require": {
-                "yiisoft/yii2": "*"
-            },
-            "type": "yii2-extension",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "yii2tech\\html2pdf\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Paul Klimov",
-                    "email": "klimov.paul@gmail.com"
-                }
-            ],
-            "description": "Provides support for HTML to PDF and PHP to PDF conversion",
-            "keywords": [
-                "conversion",
-                "convert",
-                "html2pdf",
-                "pdf",
-                "php2pdf",
-                "template",
-                "yii2"
-            ],
-            "time": "2016-05-19T13:37:46+00:00"
         },
         {
             "name": "yiibr/yii2-br-validator",

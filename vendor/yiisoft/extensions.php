@@ -480,15 +480,6 @@ return array (
       '@kartik/tabs' => $vendorDir . '/kartik-v/yii2-tabs-x',
     ),
   ),
-  'yii2tech/html2pdf' => 
-  array (
-    'name' => 'yii2tech/html2pdf',
-    'version' => '1.0.0.0',
-    'alias' => 
-    array (
-      '@yii2tech/html2pdf' => $vendorDir . '/yii2tech/html2pdf',
-    ),
-  ),
   'kartik-v/yii2-mpdf' => 
   array (
     'name' => 'kartik-v/yii2-mpdf',
