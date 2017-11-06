@@ -198,7 +198,7 @@ $provider = new \yii\data\ActiveDataProvider([
                                                 'arialabel' => 'Imprimir Contrato',
                                                 'data-toggle' => 'tooltip',
                                                 'title' => 'Recusar Contrato',
-                                                'onclick' => "return imprimir('" . $model['cod_contrato'] . "', '2', '" . $model['cod_setor'] . "',  '" . $model['cod_tipo_contrato'] . "')",
+                                                'onclick' => "return imprimirContrato('" . $model['cod_contrato'] . "')",
                                     ]);
                                 }
                             },

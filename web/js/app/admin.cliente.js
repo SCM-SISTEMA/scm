@@ -703,6 +703,15 @@ function formaPagamento(result) {
     return false;
 }
 
+function imprimirContrato(contrato) {
+
+    
+    var url = $('base').attr('href') + 'comercial/contrato/imprimir-contrato?id='+contrato;
+    window.open(url);
+
+    return false;
+}
+
 
 function adicionarFormaPagamentoContrato(contrato, valor) {
     if (valor) {
