@@ -21,6 +21,11 @@ use yii\helpers\ArrayHelper;
                 'active' => true,
             ],
             [
+                'label' => "<b style=\"color:#337ab7\">Dados Técnicos</b>",
+                'content' => $this->render('_dados_tecnicos', compact('model', 'form')),
+                'active' => false,
+            ],
+            [
                 'label' => "<b style=\"color:#337ab7\">Contato</b>",
                 'content' => $this->render('@app/views/contato/create', compact('form')),
                 'active' => false,

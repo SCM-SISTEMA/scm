@@ -21,7 +21,7 @@ class TabClienteSearch extends TabCliente {
 
     public function rules() {
         return [
-            [['dt_inclusao', 'responsavel', 'ie', 'fistel', 'dt_exclusao'], 'safe'],
+            [['dt_inclusao', 'qnt_clientes', 'responsavel', 'ie', 'fistel', 'dt_exclusao', 'situacao', 'operando', 'parceria', 'link_dedicado', 'zero800', 'consultoria_mensal', 'engenheiro_tecnico'], 'safe'],
             [['cnpj'], 'string', 'max' => 18],
             [['cnpj'], 'unique'],
             // [['responsavel'], 'required'],
@@ -90,9 +90,43 @@ class TabClienteSearch extends TabCliente {
 
     public function beforeSave($insert) {
 
-        $this->situacao = ($this->situacao == 'S') ? true : false;
+        
+        $sim = TabAtributosValoresSearch::find()->where(['fk_atributos_valores_atributos_id' =>
+                    TabAtributosSearch::find()->where(['sgl_chave' => 'opt-sim-nao'])->one()->cod_atributos
+                        , 'sgl_valor'=>'S'])->one()->cod_atributos_valores;
+        
+        $this->situacao = ($this->situacao == $sim) ? true : false;
+        $this->link_dedicado = ($this->link_dedicado == $sim) ? true : false;
+        $this->zero800 = ($this->zero800 == $sim) ? true : false;
+        $this->consultoria_mensal = ($this->consultoria_mensal == $sim) ? true : false;
+        $this->engenheiro_tecnico = ($this->engenheiro_tecnico == $sim) ? true : false;
+        $this->parceria = ($this->parceria == $sim) ? true : false;
+        $this->operando = ($this->operando == $sim) ? true : false;
 
         return parent::beforeSave($insert);
+    }
+    
+    public function afterFind() {
+        
+        parent::afterFind();
+        
+        $sim = TabAtributosValoresSearch::find()->where(['fk_atributos_valores_atributos_id' =>
+                    TabAtributosSearch::find()->where(['sgl_chave' => 'opt-sim-nao'])->one()->cod_atributos
+                        , 'sgl_valor'=>'S'])->one()->cod_atributos_valores;
+        $nao = TabAtributosValoresSearch::find()->where(['fk_atributos_valores_atributos_id' =>
+                  TabAtributosSearch::find()->where(['sgl_chave' => 'opt-sim-nao'])->one()->cod_atributos
+                        , 'sgl_valor'=>'N'])->one()->cod_atributos_valores;
+        
+        $this->situacao = ($this->situacao == true) ? $sim : $nao;
+        $this->link_dedicado = ($this->link_dedicado == true) ? $sim : $nao;
+        $this->zero800 = ($this->zero800 == true) ? $sim : $nao;
+        $this->consultoria_mensal = ($this->consultoria_mensal == true) ? $sim : $nao;
+        $this->engenheiro_tecnico = ($this->engenheiro_tecnico == true) ? $sim : $nao;
+        $this->parceria = ($this->parceria == true) ? $sim : $nao;
+        $this->operando = ($this->operando == true) ? $sim : $nao;
+        
+        return true;
+
     }
 
     public function buscaCliente() {
