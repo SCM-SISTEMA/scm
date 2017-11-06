@@ -192,7 +192,7 @@ class ContratoController extends Controller {
         $contrato = \app\modules\comercial\models\ViewClienteContratoSearch::find()->where(['cod_contrato'=>$contrato])->one();
         
         $nome = \projeto\Util::retiraAcento(str_replace(' ', '_', $contrato->razao_social)).'-'.$contrato->cod_contrato.'-'.date('dmYs').'.pdf';
-        
+        $nome = $contrato->cod_contrato.'.pdf';
         $pdf = new Pdf([
             // set to use core fonts only
             'mode' => Pdf::MODE_UTF8,
