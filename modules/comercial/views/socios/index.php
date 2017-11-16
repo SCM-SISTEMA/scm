@@ -36,6 +36,11 @@ use app\components\MenuLateralModuloWidget;
             'cpf',
             'cod_cliente_fk',
             'qual',
+            // 'txt_login_alteracao',
+            // 'dt_inclusao',
+            // 'dt_alteracao',
+            // 'representante_comercial:boolean',
+            // 'nacimento',
             ['class' => 'projeto\grid\ActionColumn'],
         ],
     ]); ?>

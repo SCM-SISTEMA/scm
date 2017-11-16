@@ -30,3 +30,7 @@ ALTER TABLE public.tab_cliente ALTER COLUMN engenheiro_tecnico SET DEFAULT false
 
 update public.tab_cliente set operando=false, parceria=false, link_dedicado=false, consultoria_mensal=false, zero800=false, engenheiro_tecnico=false
 
+INSERT INTO public.tab_atributos_valores(
+             fk_atributos_valores_atributos_id, sgl_valor, 
+            dsc_descricao)
+    VALUES (80, 'S', 'Skype');

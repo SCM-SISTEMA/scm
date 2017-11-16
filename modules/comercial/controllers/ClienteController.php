@@ -98,7 +98,15 @@ class ClienteController extends \app\controllers\ClienteController {
             $contrato = \app\modules\comercial\models\TabContratoSearch::find()->where(['cod_cliente_fk' => $model->cod_cliente, 'ativo' => true])->all();
             $contato = \app\models\TabContatoSearch::find()->where(['chave_fk' => $model->cod_cliente, 'tipo_tabela_fk' => $model->tableName()])->indexBy('cod_contato')->asArray()->all();
             $endereco = \app\models\TabEnderecoSearch::find()->where(['chave_fk' => $model->cod_cliente, 'tipo_tabela_fk' => $model->tableName()])->indexBy('cod_endereco')->asArray()->all();
-
+            $soc = \app\modules\comercial\models\TabSociosSearch::find()->where(['cod_cliente_fk' => $model->cod_cliente])->all();
+            
+            foreach($soc as $key => $socio){
+                $socios[$socio->cod_socio] = $socio->attributes;
+                $socios[$socio->cod_socio]['email'] = $socio->email;
+                $socios[$socio->cod_socio]['telefone'] = $socio->telefone;
+                $socios[$socio->cod_socio]['skype'] = $socio->skype;
+            }
+            
             $contratos = $this->montaArrayContratos($contrato);
 
             $acao = 'update';
@@ -126,6 +134,7 @@ class ClienteController extends \app\controllers\ClienteController {
 
                 $endereco = \Yii::$app->session->get('endereco');
                 $contato = \Yii::$app->session->get('contato');
+                $socios = \Yii::$app->session->get('socios');
                 
                 if ($model->save()) {
 
@@ -136,6 +145,10 @@ class ClienteController extends \app\controllers\ClienteController {
                     if ($contato) {
 
                         \app\models\TabContatoSearch::salvarContatos($contato, $model);
+                    }
+                    if ($socios) {
+
+                        \app\modules\comercial\models\TabSociosSearch::salvarSocios($socios, $model->cod_cliente);
                     }
                 
 
@@ -152,12 +165,16 @@ class ClienteController extends \app\controllers\ClienteController {
             \Yii::$app->session->set('endereco', []);
             \Yii::$app->session->set('contato', []);
             \Yii::$app->session->set('contratos', []);
+            \Yii::$app->session->set('socios', []);
+            
         }
 
         \Yii::$app->session->set('endereco', $endereco);
         \Yii::$app->session->set('contato', $contato);
         \Yii::$app->session->set('contratos', $contratos);
+        \Yii::$app->session->set('socios', $socios);
 
+        
         return $this->render('admin', [
                     'model' => $model, 'contratos' => $contratos
         ]);
@@ -1203,6 +1220,8 @@ class ClienteController extends \app\controllers\ClienteController {
 
         return \yii\helpers\Json::encode($dados);
     }
+
+    
 
 
 }

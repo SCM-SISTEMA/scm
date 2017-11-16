@@ -81,6 +81,52 @@ use yii\helpers\ArrayHelper;
     <?= $form->field($model, 'qual')->textInput(['maxlength' => true]) ?>
     </div>
 </div>
+    <div class='row'>
+<div class='col-lg-6'>
+    <?= $form->field($model, 'txt_login_alteracao')->textInput(['maxlength' => true]) ?>
+    </div>
+</div>
+    <div class='row'>
+<div class='col-lg-6'>
+    <?= $form->field($model, 'dt_inclusao')->widget(
+						\dosamigos\datepicker\DatePicker::className(), [
+						'language' => 'pt-BR',
+						'clientOptions' => [
+						'autoclose' => true,
+						'format' => 'dd/mm/yyyy'
+					]
+				]); ?>
+    </div>
+</div>
+    <div class='row'>
+<div class='col-lg-6'>
+    <?= $form->field($model, 'dt_alteracao')->widget(
+						\dosamigos\datepicker\DatePicker::className(), [
+						'language' => 'pt-BR',
+						'clientOptions' => [
+						'autoclose' => true,
+						'format' => 'dd/mm/yyyy'
+					]
+				]); ?>
+    </div>
+</div>
+    <div class='row'>
+<div class='col-lg-6'>
+    <?= $form->field($model, 'representante_comercial')->checkbox() ?>
+    </div>
+</div>
+    <div class='row'>
+<div class='col-lg-6'>
+    <?= $form->field($model, 'nacimento')->widget(
+						\dosamigos\datepicker\DatePicker::className(), [
+						'language' => 'pt-BR',
+						'clientOptions' => [
+						'autoclose' => true,
+						'format' => 'dd/mm/yyyy'
+					]
+				]); ?>
+    </div>
+</div>
     </div>
 
 	<div class="box-footer">

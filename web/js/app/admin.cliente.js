@@ -5,7 +5,9 @@ Projeto.prototype.cliente = new (Projeto.extend({
         this.salvarEndereco();
         this.salvarParcelas();
         this.salvarContato();
+        this.salvarSocios();
         this.incluirNovo('Endereco');
+        this.incluirSocios();
         this.incluirNovo('Contato');
         this.salvarTipoContrato();
         this.salvarContrato();
@@ -23,24 +25,6 @@ Projeto.prototype.cliente = new (Projeto.extend({
 
             projeto.ajax.post(urlInclusao, selecao, function (response) {
                 var ds = $.parseJSON(response);
-                console.log(ds);
-//                if (ds.cliente.razao_social) {
-//
-//                    $('#tabclientesearch-razao_social').val(ds.cliente.razao_social);
-//                    if (!$('#tabclientesearch-fistel').val()) {
-//                        $('#tabclientesearch-fistel').val(ds.cliente.fistel);
-//                    }
-//                    $('#tabclientesearch-fantasia').val(ds.cliente.fantasia);
-//                    $('#divGridEndereco').html(ds.gridEnd.grid);
-//                    $('#divGridContato').html(ds.gridCont.grid);
-//                } else {ds/;/                    $('#tabclientesearch-razao_social').val('');
-//
-//                    $('#tabclientesearch-fistel').val('');
-//
-//                    $('#tabclientesearch-fantasia').val('');
-//                    $('#divGridEndereco').html('');
-//                    $('#divGridContato').html('');
-//                }
             });
 
 
@@ -105,9 +89,15 @@ Projeto.prototype.cliente = new (Projeto.extend({
 
     incluirNovo: function (valor) {
         $('#incluir' + valor).click(function () {
-
             Projeto.prototype.cliente.openModal(valor);
             Projeto.prototype.cliente.limpaForm(valor);
+        });
+    },
+    incluirSocios: function () {
+        $('#incluirSocios').click(function () {
+
+            Projeto.prototype.cliente.openModalSocios();
+            Projeto.prototype.cliente.limpaFormSocios();
         });
     },
     incluirTipoContrato: function (valor) {
@@ -352,6 +342,12 @@ Projeto.prototype.cliente = new (Projeto.extend({
 
         $('#modal' + valor).modal('show').find('#modalContent').load( );
     },
+
+    openModalSocios: function () {
+
+        $('#modalSocios').modal('show').find('#modalContent').load( );
+    },
+
     openRefazerFormaPagamento: function (valor) {
 
         $('#botaoRefazerFormaPagamento').click(function ( ) {
@@ -361,7 +357,7 @@ Projeto.prototype.cliente = new (Projeto.extend({
             $('#modalFormaPagamento').modal('hide');
 
             setTimeout(function () {
-                adicionarFormaPagamentoContrato($('#tabcontratopsearch-cod_contrato').val());   
+                adicionarFormaPagamentoContrato($('#tabcontratopsearch-cod_contrato').val());
 
             }, 750);
 
@@ -416,6 +412,24 @@ Projeto.prototype.cliente = new (Projeto.extend({
         $('#tabcontratopsearch-valor_contrato').val('');
         $('#tabcontratopsearch-valor_contrato-disp').val('');
         $('#tabcontratopsearch-dt_vencimento').val('');
+
+    },
+    limpaFormSocios: function () {
+        $('#tabsociossearch-nome').val('');
+        $('#tabsociossearch-nacionalidade').val('');
+        $('#tabsociossearch-estado_civil_fk').val('');
+        $('#tabsociossearch-profissao').val('');
+        $('#tabsociossearch-rg').val('');
+        $('#tabsociossearch-orgao_uf').val('');
+        $('#tabsociossearch-cpf').val('');
+        $('#tabsociossearch-nacimento').val('');
+        $('#tabsociossearch-telefone').val('');
+        $('#tabsociossearch-skype').val('');
+        $('#tabsociossearch-email').val('');
+        $('#tabsociossearch-representante_comercial').val('');
+        $('#tabsociossearch-cod_socio').val('');
+        $('#tabsociossearch-representante_comercial').val('');
+        
 
     },
     limpaFormTipoContrato: function (valor) {
@@ -581,6 +595,26 @@ Projeto.prototype.cliente = new (Projeto.extend({
 
     },
 
+    preencheFormSocios: function (dados) {
+        
+        $('#tabsociossearch-nome').val(dados['nome']);
+        $('#tabsociossearch-nacionalidade').val(dados['nacionalidade']);
+        $('#tabsociossearch-estado_civil_fk').val(dados['estado_civil_fk']);
+        $('#tabsociossearch-profissao').val(dados['profissao']);
+        $('#tabsociossearch-rg').val(dados['rg']);
+        $('#tabsociossearch-orgao_uf').val(dados['orgao_uf']);
+        $('#tabsociossearch-cpf').val(dados['cpf']);
+        $('#tabsociossearch-nacimento').val(dados['nacimento']);
+        $('#tabsociossearch-telefone').val(dados['telefone']);
+        $('#tabsociossearch-skype').val(dados['skype']);
+        $('#tabsociossearch-email').val(dados['email']);
+        $('#tabsociossearch-representante_comercial').val(dados['representante_comercial']);
+        $('#tabsociossearch-cod_socio').val(dados['cod_socio']);
+        $('#tabsociossearch-cod_cliente_fk').val(dados['cod_cliente_fk']);
+
+
+    },
+
     mudarInputContato: function () {
         if ($('#tabcontatosearch-tipo').find('option:selected').text() == 'E-mail') {
             $('#divContatoEmail').show();
@@ -600,8 +634,46 @@ Projeto.prototype.cliente = new (Projeto.extend({
             $('#tabcontatosearch-contato_email').val('');
             $('#tabcontatosearch-ramail').val('');
         }
-    }
+    },
 
+    salvarSocios: function () {
+        $('#botaoSalvarSocios').click(function ( ) {
+
+            var form = $('#formCliente');
+            var formAuxiliar = $('#formSocios');
+            if (formAuxiliar.find('.has-error').length) {
+                return false;
+            }
+
+            var urlInclusao = $('base').attr('href') + 'comercial/socios/incluir-socios';
+
+            projeto.ajax.post(urlInclusao, form.serialize( ), function (response) {
+                var dados = $.parseJSON(response);
+
+                if (!dados.grid)
+                {
+                    $.each(dados, function (index, value) {
+                        var obj = form.find('.field-tabsociossearch-' + index);
+                        obj.removeClass('has-success');
+                        obj.addClass('has-error');
+                        var msgBlock = obj.find('.help-block');
+                        msgBlock.html(value);
+                    });
+                } else {
+
+                    $('#divGridSocios').html(dados.grid);
+                    $('#errorAuxiliares').hide();
+                    $('#modalSocios').modal('hide');
+
+                }
+            });
+
+
+
+            return false;
+        });
+
+    },
 }));
 
 function adicionarTipoContrato(contrato) {
@@ -677,6 +749,34 @@ function excluirContrato(result) {
     return false;
 }
 
+function excluirSocios(result) {
+
+    var post = {'id': result}
+    var urlInclusao = $('base').attr('href') + 'comercial/contrato/excluir-contrato';
+
+
+    projeto.confirm('<div align="center"><h2>Deseja excluir contrato?</h2></div>', function () {
+        projeto.ajax.defaultBlockUI();
+        projeto.ajax.post(urlInclusao, post, function (response) {
+
+            var dados = $.parseJSON(response);
+
+
+            $('#divGuiaContrato').html(dados);
+
+        });
+        return false;
+    }, function () {
+        return false;
+    })
+
+
+//    Projeto.prototype.cliente.openModal();
+
+
+    return false;
+}
+
 
 
 function formaPagamento(result) {
@@ -705,8 +805,8 @@ function formaPagamento(result) {
 
 function imprimirContrato(contrato) {
 
-    
-    var url = $('base').attr('href') + 'comercial/contrato/imprimir-contrato?id='+contrato;
+
+    var url = $('base').attr('href') + 'comercial/contrato/imprimir-contrato?id=' + contrato;
     window.open(url);
 
     return false;

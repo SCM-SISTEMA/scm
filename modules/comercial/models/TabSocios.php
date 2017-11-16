@@ -21,6 +21,8 @@ use Yii;
  * @property string $txt_login_alteracao
  * @property string $dt_inclusao
  * @property string $dt_alteracao
+ * @property boolean $representante_comercial
+ * @property string $nacimento
  *
  * @property TabCliente $tabCliente
  */
@@ -41,7 +43,8 @@ class TabSocios extends \projeto\db\ActiveRecord
     {
         return [
             [['estado_civil_fk', 'cod_cliente_fk'], 'integer'],
-            [['dt_inclusao', 'dt_alteracao'], 'safe'],
+            [['dt_inclusao', 'dt_alteracao', 'nacimento'], 'safe'],
+            [['representante_comercial'], 'boolean'],
             [['nome'], 'string', 'max' => 200],
             [['nacionalidade'], 'string', 'max' => 50],
             [['profissao'], 'string', 'max' => 100],
@@ -62,17 +65,19 @@ class TabSocios extends \projeto\db\ActiveRecord
             'cod_socio' => 'Cod Socio',
             'nome' => 'Nome',
             'nacionalidade' => 'Nacionalidade',
-            'estado_civil_fk' => 'atributo valor - >  estado-civil',
-            'profissao' => 'Profissao',
-            'rg' => 'Rg',
-            'orgao_uf' => 'Orgao Uf',
-            'cpf' => 'Cpf',
+            'estado_civil_fk' => 'Estado Civil',
+            'profissao' => 'Profissão',
+            'rg' => 'RG',
+            'orgao_uf' => 'SSP',
+            'cpf' => 'CPF',
             'cod_cliente_fk' => 'Cod Cliente Fk',
             'qual' => 'Qual',
             'txt_login_inclusao' => 'Usuário da Inclusão',
             'txt_login_alteracao' => 'Usuário da Alteração',
             'dt_inclusao' => 'Dt Inclusao',
             'dt_alteracao' => 'Dt Alteracao',
+            'representante_comercial' => 'Responsável pela assinatura do contrato',
+            'nacimento' => 'Nascimento',
         ];
     }
 

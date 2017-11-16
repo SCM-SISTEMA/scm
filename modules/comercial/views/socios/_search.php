@@ -40,6 +40,18 @@ use yii\widgets\ActiveForm;
 
     <?php // echo $form->field($model, 'qual') ?>
 
+    <?php // echo $form->field($model, 'txt_login_inclusao') ?>
+
+    <?php // echo $form->field($model, 'txt_login_alteracao') ?>
+
+    <?php // echo $form->field($model, 'dt_inclusao') ?>
+
+    <?php // echo $form->field($model, 'dt_alteracao') ?>
+
+    <?php // echo $form->field($model, 'representante_comercial')->checkbox() ?>
+
+    <?php // echo $form->field($model, 'nacimento') ?>
+
 
     <?php ActiveForm::end(); ?>
 

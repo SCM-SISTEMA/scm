@@ -178,21 +178,21 @@ class ContratoController extends Controller {
 
         return \yii\helpers\Json::encode($dados);
     }
+
     public function actionImprimirContrato($id) {
-        
+
         $dados = $this->printContrato($id);
         return $dados;
     }
 
-    
     public function printContrato($contrato) {
 
         $content = \app\modules\comercial\models\TabContratoTipoContrato::find()->one();
-        
-        $contrato = \app\modules\comercial\models\ViewClienteContratoSearch::find()->where(['cod_contrato'=>$contrato])->one();
-        
-        $nome = \projeto\Util::retiraAcento(str_replace(' ', '_', $contrato->razao_social)).'-'.$contrato->cod_contrato.'-'.date('dmYs').'.pdf';
-        $nome = $contrato->cod_contrato.'.pdf';
+        $this->
+        $contrato = \app\modules\comercial\models\ViewClienteContratoSearch::find()->where(['cod_contrato' => $contrato])->one();
+
+        $nome = \projeto\Util::retiraAcento(str_replace(' ', '_', $contrato->razao_social)) . '-' . $contrato->cod_contrato . '-' . date('dmYs') . '.pdf';
+        $nome = $contrato->cod_contrato . '.pdf';
         $pdf = new Pdf([
             // set to use core fonts only
             'mode' => Pdf::MODE_UTF8,
@@ -203,7 +203,7 @@ class ContratoController extends Controller {
             // stream to browser inline
             'destination' => Pdf::DEST_DOWNLOAD,
             // your html content input
-            'filename'=> $nome,
+            'filename' => $nome,
             'content' => $content->modelo,
             // format content from your own css file if needed or use the
             // enhanced bootstrap css built by Krajee for mPDF formatting 
@@ -224,7 +224,38 @@ class ContratoController extends Controller {
         };
         return $pdf->render();
     }
-    
+
+    public function montarContrato($cod_contrato) {
+        
+
+        $contrato = \app\modules\comercial\models\ViewClienteContratoSearch::find()->where(['cod_contrato' => $cod_contrato])->one();
+        
+        $modelo = \app\modules\comercial\models\TabModeloContrato::find()->where(['cod_contrato_tipo_contrato_fk'=>$contrato->tipo_contrato_fk])->asArray()->one();
+        
+        
+        
+        
+        
+        
+//        razao_social
+//        logradouro
+//        numero
+//        bairro
+//        municipio
+//        estado
+//        cep
+//        cnpj
+//        representante_comercial
+//        mas_fem
+//        profissao
+//        cpf
+//        telefone
+//        email
+//        valor_isencao
+//        
+        
+   }
+
     public function actionExcluirContrato() {
         $post = Yii::$app->request->post();
 
@@ -259,43 +290,40 @@ class ContratoController extends Controller {
             if ($contrato->save()) {
                 if ($post['status'] == 4) {
                     $msg = 'Contranto fechado, encaminhado para o financeiro';
-                    
-                    
+
+
                     $andam = new \app\models\TabAndamentoSearch();
                     $andam->txt_notificacao = $msg;
                     $andam->cod_usuario_inclusao_fk = $this->user->identity->getId();
                     $andam->cod_setor_fk = $post['cod_setor'];
                     $andam->dt_retorno = date('d/m/Y', strtotime(date('Y-m-d') . '+5 days'));
                     $andam->save();
-                    
+
                     $setor = new \app\models\TabSetoresSearch();
                     $setor->cod_tipo_contrato_fk = $post['tipo_contrato'];
                     $setor->cod_tipo_setor_fk = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('setores', '2');
                     $setor->save();
-                    
+
                     $andam = new \app\models\TabAndamentoSearch();
                     $andam->txt_notificacao = 'Contrato fechado, aguardando validação';
                     $andam->cod_usuario_inclusao_fk = $this->user->identity->getId();
                     $andam->cod_setor_fk = $setor->cod_setor;
                     $andam->dt_retorno = date('d/m/Y', strtotime(date('Y-m-d') . '+5 days'));
                     $andam->save();
-                    
                 } elseif ($post['status'] == 2) {
                     $msg = 'Contranto recusado';
-                    
+
                     $andam = new \app\models\TabAndamentoSearch();
                     $andam->txt_notificacao = $msg;
                     $andam->cod_usuario_inclusao_fk = $this->user->identity->getId();
                     $andam->cod_setor_fk = $post['cod_setor'];
                     $andam->dt_retorno = date('d/m/Y', strtotime(date('Y-m-d') . '+5 days'));
                     $andam->save();
-                    
-                    
                 }
             }
         }
 
-        $msg = $msg.' com sucesso';
+        $msg = $msg . ' com sucesso';
 
         $msgs['tipo'] = 'success';
         $msgs['msg'] = $msg;
