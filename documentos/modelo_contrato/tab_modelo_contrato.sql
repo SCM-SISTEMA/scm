@@ -151,3 +151,8 @@ INSERT INTO comercial.tab_modelo_contrato(
 
 ALTER TABLE comercial.tab_socios ADD COLUMN representante_comercial boolean;
 COMMENT ON COLUMN comercial.tab_socios.representante_comercial IS 'Responsável pela assinatura do contrato';
+
+INSERT INTO public.tab_atributos_valores(
+            fk_atributos_valores_atributos_id, sgl_valor, dsc_descricao
+            )
+    VALUES (80, 'S', 'Skype');
