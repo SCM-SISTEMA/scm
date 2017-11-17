@@ -47,7 +47,8 @@
         "yiibr/yii2-br-validator": "*",
         "mg-code/yii2-session-timeout-warning": "@dev",
         "phpoffice/phpexcel": "~1.8"	,
-	"yii2tech/html2pdf": "*"		
+	"yii2tech/html2pdf": "*",
+        "2amigos/yii2-tinymce-widget": "~1.1"		
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

@@ -6,6 +6,7 @@ use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 
 $this->registerJsFile("@web/js/app/comercial.andamento.js?{$this->app->version}", ['position' => $this::POS_END, 'depends' => [\app\assets\ProjetoAsset::className()]]);
+$this->registerJsFile('@web/js/app/comercial.modelo.js', ['position' => $this::POS_END, 'depends' => [\app\assets\ProjetoAsset::className()]]);
 /* @var $this yii\web\View */
 /* @var $model app\models\Cliente */
 ?>
@@ -80,6 +81,7 @@ $this->registerJsFile("@web/js/app/comercial.andamento.js?{$this->app->version}"
         <?php echo $this->render('@app/modules/comercial/views/contrato/_form_contrato_add', ['form' => $form]); ?> 
         <?php echo $this->render('@app/modules/comercial/views/contrato/_form_contrato_parcela_add', ['form' => $form]); ?> 
         <?php echo $this->render('@app/modules/comercial/views/contrato-parcelas/_form_parcela_add', ['form' => $form]); ?> 
+        <?php echo $this->render('@app/modules/comercial/views/contrato/_form_modelo', ['form' => $form]); ?> 
         <?php echo $this->render('@app/views/andamento/_form_andamento_add', ['form' => $form]); ?> 
 
         <?php ActiveForm::end(); ?>

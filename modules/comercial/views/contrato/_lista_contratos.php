@@ -197,8 +197,8 @@ $provider = new \yii\data\ActiveDataProvider([
                                     return Html::a('<span class="fa fa-print"></span>', '#', [
                                                 'arialabel' => 'Imprimir Contrato',
                                                 'data-toggle' => 'tooltip',
-                                                'title' => 'Recusar Contrato',
-                                                'onclick' => "return imprimirContrato('" . $model['cod_contrato'] . "')",
+                                                'title' => 'Imprimir Contrato',
+                                                'onclick' => "return abrirImpressao('" . $model['cod_contrato'] . "')",
                                     ]);
                                 }
                             },

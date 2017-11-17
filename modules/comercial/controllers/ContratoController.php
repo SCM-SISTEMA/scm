@@ -179,17 +179,20 @@ class ContratoController extends Controller {
         return \yii\helpers\Json::encode($dados);
     }
 
-    public function actionImprimirContrato($id) {
+    public function actionImprimirContrato() {
+        $post = Yii::$app->request->post();
 
-        $dados = $this->printContrato($id);
-        return $dados;
+//$dados = $this->printContrato($id);
+
+        $dados = $this->montarContrato($post['cod_contrato']);
+        return \yii\helpers\Json::encode($dados);
     }
 
     public function printContrato($contrato) {
 
         $content = \app\modules\comercial\models\TabContratoTipoContrato::find()->one();
         $this->
-        $contrato = \app\modules\comercial\models\ViewClienteContratoSearch::find()->where(['cod_contrato' => $contrato])->one();
+                $contrato = \app\modules\comercial\models\ViewClienteContratoSearch::find()->where(['cod_contrato' => $contrato])->one();
 
         $nome = \projeto\Util::retiraAcento(str_replace(' ', '_', $contrato->razao_social)) . '-' . $contrato->cod_contrato . '-' . date('dmYs') . '.pdf';
         $nome = $contrato->cod_contrato . '.pdf';
@@ -226,17 +229,17 @@ class ContratoController extends Controller {
     }
 
     public function montarContrato($cod_contrato) {
-        
 
-        $contrato = \app\modules\comercial\models\ViewClienteContratoSearch::find()->where(['cod_contrato' => $cod_contrato])->one();
-        
-        $modelo = \app\modules\comercial\models\TabModeloContrato::find()->where(['cod_contrato_tipo_contrato_fk'=>$contrato->tipo_contrato_fk])->asArray()->one();
-        
-        
-        
-        
-        
-        
+
+        $contrato = \app\modules\comercial\models\TabContratoSearch::find()->where(['cod_contrato' => $cod_contrato])->one();
+
+        $modelo = \app\modules\comercial\models\TabModeloContrato::find()->where(['cod_contrato_tipo_contrato_fk' => $contrato->tipo_contrato_fk])->asArray()->one();
+
+        return $modelo['txt_modelo'];
+    
+
+
+
 //        razao_social
 //        logradouro
 //        numero
@@ -253,8 +256,7 @@ class ContratoController extends Controller {
 //        email
 //        valor_isencao
 //        
-        
-   }
+    }
 
     public function actionExcluirContrato() {
         $post = Yii::$app->request->post();
