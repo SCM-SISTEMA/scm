@@ -13,21 +13,19 @@ use Yii;
  *
  * @property TabAtributosValores $tabAtributosValores
  */
-class TabModeloContrato extends \projeto\db\ActiveRecord
-{
+class TabModeloContrato extends \projeto\db\ActiveRecord {
+
     /**
      * @inheritdoc
      */
-    public static function tableName()
-    {
+    public static function tableName() {
         return 'comercial.tab_modelo_contrato';
     }
 
     /**
      * @inheritdoc
      */
-    public function rules()
-    {
+    public function rules() {
         return [
             [['cod_contrato_tipo_contrato_fk'], 'integer'],
             [['txt_modelo'], 'string']
@@ -37,8 +35,7 @@ class TabModeloContrato extends \projeto\db\ActiveRecord
     /**
      * @inheritdoc
      */
-    public function attributeLabels()
-    {
+    public function attributeLabels() {
         return [
             'cod_modelo_contrato' => 'Cod Modelo Contrato',
             'cod_contrato_tipo_contrato_fk' => 'tabela atributo valor',
@@ -49,8 +46,7 @@ class TabModeloContrato extends \projeto\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getTabAtributosValores()
-    {
+    public function getTabAtributosValores() {
         return $this->hasOne(TabAtributosValores::className(), ['cod_atributos_valores' => 'cod_contrato_tipo_contrato_fk']);
     }
 
@@ -58,8 +54,9 @@ class TabModeloContrato extends \projeto\db\ActiveRecord
      * @inheritdoc
      * @return TabModeloContratoQuery the active query used by this AR class.
      */
-    public static function find()
-    {
+    public static function find() {
         return new TabModeloContratoQuery(get_called_class());
     }
+
+
 }

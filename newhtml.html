@@ -6,7 +6,7 @@
         PARA CREDENCIMENTO E GESTÃO DE OBRIGAÇÕES SCM PERANTE A ANATEL
     </strong>
 </p>
-<p align="center">
+<p align="center" style='text-transform: uppercase'>
     <u><strong>{tipo_contrato}</strong></u>
 </p>
 <p align="justify">
@@ -22,7 +22,7 @@
     <strong>{razao_social}</strong>
     , empresa sediada na(o) {logradouro}, nº {numero}, Bairro {bairro}, no
     Município de {municipio}, no Estado {estado}, CEP: {cep}, inscrita no CNPJ
-    sob o nº {cnpj}, neste ato representada por <strong>{representate_comercial}</strong>, Solteir{mas_fem}, {profissao},
+    sob o nº {cnpj}, neste ato representada por <strong>{representate_comercial}</strong>, Solteiro(a), {profissao},
     inscrita no CPF sob o nº {cpf}, telefone {telefone}, e-mail: {email},
     doravante denominada CONTRATANTE, declaram que, nesta data, ajustam entre
     si, de comum acordo e na melhor forma de direito, o presente Contrato de
@@ -78,7 +78,7 @@
     </strong>
 </p>
 <p align="justify">
-    O contrato perdurará pelo prazo inicial de {meses} meses, renovando-se
+    O contrato perdurará pelo prazo inicial de {qnt_parcelas} meses, renovando-se
     automaticamente por igual período subsequente, exceto se houver prévia
     comunicação, por escrito, no prazo de 30 (trinta) dias, do desejo de pôr
     termo ao contrato ao término de sua vigência.
@@ -347,7 +347,7 @@
 <p align="justify">
     O pagamento referente ao instrumento ora firmado perfazerá a importância
     total de <strong>R$ {valor_total_contrato}</strong>, eis que a
-    CONTRATANTE aderiu ao <u><strong>{tipo_contrato}</strong></u>, pelo período
+    CONTRATANTE aderiu ao <u style='text-transform: uppercase'><strong>{tipo_contrato}</strong></u>, pelo período
     estipulado na cláusula segunda desta avença, o qual, por mera liberalidade
     da CONTRATADA, será adimplido mediante {num_parcelas}    <strong> prestações de R$ {prestacao}</strong> cada uma,
     vencendo a primeira parcela no dia    <u><strong>{dia_primeira_parcela}</strong></u> e as demais no mesmo dia dos
@@ -421,10 +421,10 @@
 </p>
 <p align="justify">
     VII.II – Conforme avençado alhures, uma vez que a CONTRATADA rescinda o
-    presente pacto antes de transcorrido integralmente o prazo de 36 (trinta e
-    seis) meses, também deverá ressarcir a CONTRATANTE na exata quantia da
+    presente pacto antes de transcorrido integralmente o prazo de {qnt_parcelas} meses,
+    também deverá ressarcir a CONTRATANTE na exata quantia da
     isenção que obteve em função da contratação nesta modalidade, qual seja, de
-    R$2.500,00 (dois mil e quinhentos reais), nos moldes do previsto no
+    R$ {valor_isencao}, nos moldes do previsto no
     parágrafo segundo da cláusula segunda desta avença.
 </p>
 <p align="justify">
@@ -503,9 +503,8 @@
     efeitos legais a partir da presente data.
 </p>
 <p align="justify">
-    <a name="_GoBack"></a>
     Brasília, {data}.
-</p>
+</p><br><br>
 <p align="center">
     <strong>_______________________________________________________</strong>
 </p>
@@ -514,7 +513,7 @@
 </p>
 <p align="center">
     <strong>CONTRATANTE</strong>
-</p>
+</p><br><br>
 <p align="center">
     <strong>_______________________________________________________</strong>
 </p>
@@ -523,12 +522,12 @@
 </p>
 <p align="center">
     <strong>CONTRATADA</strong>
-</p>
+</p><br><br>
 <p align="justify">
     <strong>1</strong>
     <sup><u><strong>a</strong></u></sup>
     <strong> Testemunha</strong>
-</p>
+</p><br><br>
 <p align="justify">
     <strong>2</strong>
     <sup><u><strong>a</strong></u></sup>

@@ -179,23 +179,22 @@ class ContratoController extends Controller {
         return \yii\helpers\Json::encode($dados);
     }
 
-    public function actionImprimirContrato() {
+    public function actionAbrirImpressao() {
         $post = Yii::$app->request->post();
 
 //$dados = $this->printContrato($id);
 
         $dados = $this->montarContrato($post['cod_contrato']);
+        
         return \yii\helpers\Json::encode($dados);
     }
+    public function actionImpressao($cod_contrato) {
+        
+        $post = \Yii::$app->session->get('pdfContrato'); 
 
-    public function printContrato($contrato) {
-
-        $content = \app\modules\comercial\models\TabContratoTipoContrato::find()->one();
-        $this->
-                $contrato = \app\modules\comercial\models\ViewClienteContratoSearch::find()->where(['cod_contrato' => $contrato])->one();
-
-        $nome = \projeto\Util::retiraAcento(str_replace(' ', '_', $contrato->razao_social)) . '-' . $contrato->cod_contrato . '-' . date('dmYs') . '.pdf';
-        $nome = $contrato->cod_contrato . '.pdf';
+        //$contrato = \app\modules\comercial\models\ViewClienteContratoSearch::find()->where(['cod_contrato' => $post['cod_contrato']])->one();
+        //$nome = \projeto\Util::retiraAcento(str_replace(' ', '_', $contrato->razao_social)) . '-' . $contrato->cod_contrato . '-' . date('dmYs') . '.pdf';
+        $nome = $cod_contrato.'_'.date('YmdHis').'.pdf';
         $pdf = new Pdf([
             // set to use core fonts only
             'mode' => Pdf::MODE_UTF8,
@@ -207,7 +206,7 @@ class ContratoController extends Controller {
             'destination' => Pdf::DEST_DOWNLOAD,
             // your html content input
             'filename' => $nome,
-            'content' => $content->modelo,
+            'content' => $post,
             // format content from your own css file if needed or use the
             // enhanced bootstrap css built by Krajee for mPDF formatting 
             'cssFile' => '@vendor/kartik-v/yii2-mpdf/assets/kv-mpdf-bootstrap.min.css',
@@ -225,37 +224,39 @@ class ContratoController extends Controller {
         if (!is_dir(Yii::getAlias("@runtime/tmp/"))) {
             mkdir(Yii::getAlias("@runtime/tmp/"), 0755);
         };
-        return $pdf->render();
+        
+        $dados = $pdf->render();
+        
+        return $dados;
     }
 
+    
+    public function actionImprimirContrato() {
+
+        $post = Yii::$app->request->post();
+        
+        \Yii::$app->session->set('pdfContrato', ''); 
+        
+                 \Yii::$app->session->set('pdfContrato', $post['html_contrato']); 
+        
+       
+        
+        return true;
+    }
+
+    
     public function montarContrato($cod_contrato) {
 
 
-        $contrato = \app\modules\comercial\models\TabContratoSearch::find()->where(['cod_contrato' => $cod_contrato])->one();
+        $contrato = \app\modules\comercial\models\ViewClienteContratoSearch::find()->where(['cod_contrato' => $cod_contrato])->one();
 
-        $modelo = \app\modules\comercial\models\TabModeloContrato::find()->where(['cod_contrato_tipo_contrato_fk' => $contrato->tipo_contrato_fk])->asArray()->one();
+        $modelo = \app\modules\comercial\models\TabModeloContratoSearch::find()->where(['cod_contrato_tipo_contrato_fk' => $contrato->tipo_contrato_fk])->one();
 
+        $modelo->substituiVariaveis($contrato);
+        
         return $modelo['txt_modelo'];
     
-
-
-
-//        razao_social
-//        logradouro
-//        numero
-//        bairro
-//        municipio
-//        estado
-//        cep
-//        cnpj
-//        representante_comercial
-//        mas_fem
-//        profissao
-//        cpf
-//        telefone
-//        email
-//        valor_isencao
-//        
+  
     }
 
     public function actionExcluirContrato() {

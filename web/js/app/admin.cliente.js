@@ -686,6 +686,8 @@ function adicionarTipoContrato(contrato) {
 }
 
 
+
+
 function adicionarContrato(contrato) {
 
     Projeto.prototype.cliente.openModalTipoContrato('Contrato', contrato);
@@ -800,6 +802,52 @@ function formaPagamento(result) {
 //    Projeto.prototype.cliente.openModal();
 
 
+    return false;
+}
+function mudarStatus(result, status, setor, tipo_contrato) {
+
+    var post = {'id': result, 'status': status, 'setor': setor, 'tipo_contrato': tipo_contrato}
+    var urlInclusao = $('base').attr('href') + 'comercial/contrato/mudar-status';
+
+    var msg = null;
+    if (status == '4') {
+        msg = 'Deseja realmente fechar o contrato e enviar para financeiro?';
+    } else {
+        msg = 'Deseja realmente recusar contrato?';
+
+    }
+    projeto.confirm('<div align="center"><h2>' + msg + '</h2></div>', function () {
+        projeto.ajax.defaultBlockUI();
+        projeto.ajax.post(urlInclusao, post, function (response) {
+
+            var dados = $.parseJSON(response);
+
+
+            $('#divGuiaContrato').html(dados);
+
+        });
+        return false;
+    }, function () {
+        return false;
+    })
+
+
+//    Projeto.prototype.cliente.openModal();
+
+
+    return false;
+}
+
+function adicionarFormaPagamentoContrato(contrato, valor) {
+    if (valor) {
+        $('#tabcontratopsearch-cod_contrato').val(contrato);
+        Projeto.prototype.cliente.openModalFormaPagamento(contrato);
+    } else {
+
+        Projeto.prototype.cliente.limpaFormFormaPagamentoContrato(contrato);
+        Projeto.prototype.cliente.openModalFormaPagamentoContrato(contrato);
+        $('#tabcontratopsearch-cod_contrato').val(contrato);
+    }
     return false;
 }
 

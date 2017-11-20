@@ -27,6 +27,7 @@ class ComposerStaticInit56e6e849cff54d81deecf3642bdd19b2
             'yii\\codeception\\' => 16,
             'yii\\bootstrap\\' => 14,
             'yii\\' => 4,
+            'yii2tech\\html2pdf\\' => 18,
         ),
         'r' => 
         array (
@@ -88,6 +89,7 @@ class ComposerStaticInit56e6e849cff54d81deecf3642bdd19b2
         ),
         'd' => 
         array (
+            'dosamigos\\tinymce\\' => 18,
             'dosamigos\\gallery\\' => 18,
             'dosamigos\\fileupload\\' => 21,
             'dosamigos\\datepicker\\' => 21,
@@ -182,6 +184,10 @@ class ComposerStaticInit56e6e849cff54d81deecf3642bdd19b2
         'yii\\' => 
         array (
             0 => __DIR__ . '/..' . '/yiisoft/yii2',
+        ),
+        'yii2tech\\html2pdf\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/yii2tech/html2pdf',
         ),
         'rmrevin\\yii\\fontawesome\\' => 
         array (
@@ -344,6 +350,10 @@ class ComposerStaticInit56e6e849cff54d81deecf3642bdd19b2
         'himiklab\\yii2\\recaptcha\\' => 
         array (
             0 => __DIR__ . '/..' . '/himiklab/yii2-recaptcha-widget',
+        ),
+        'dosamigos\\tinymce\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/2amigos/yii2-tinymce-widget/src',
         ),
         'dosamigos\\gallery\\' => 
         array (

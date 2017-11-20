@@ -167,7 +167,7 @@ $provider = new \yii\data\ActiveDataProvider([
                                     return Html::a('<span class="fa fa-dollar"></span>', '#', [
                                                 'arialabel' => 'Forma de pagamento',
                                                 'data-toggle' => 'tooltip',
-                                                'title' => 'Recusar Contrato',
+                                                'title' => 'Forma de pagamento',
                                                 'onclick' => "return adicionarFormaPagamentoContrato('" . $model['cod_contrato'] . "', '".$model['valor_contrato']."')",
                                     ]);
                                 }

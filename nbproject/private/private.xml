@@ -19,11 +19,13 @@
             <file>file:/var/www/scm/modules/comercial/models/TabSociosSearch.php</file>
             <file>file:/var/www/scm/modules/comercial/views/contrato/_form_modelo.php</file>
             <file>file:/var/www/scm/modules/comercial/controllers/ClienteController.php</file>
+            <file>file:/var/www/scm/projeto/Util.php</file>
             <file>file:/var/www/scm/modules/comercial/views/cliente/admin.php</file>
             <file>file:/var/www/scm/models/TabEnderecoSearch.php</file>
             <file>file:/var/www/scm/modules/comercial/models/TabSocios.php</file>
             <file>file:/var/www/scm/modules/comercial/views/contrato/_guia_contratos.php</file>
             <file>file:/var/www/scm/newhtml.html</file>
+            <file>file:/var/www/scm/modules/comercial/models/TabModeloContrato.php</file>
             <file>file:/var/www/scm/modules/comercial/views/cliente/_form.php</file>
             <file>file:/var/www/scm/modules/comercial/controllers/SociosController.php</file>
             <file>file:/var/www/scm/web/js/app/admin.cliente.js</file>

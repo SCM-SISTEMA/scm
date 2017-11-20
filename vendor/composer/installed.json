@@ -4128,68 +4128,6 @@
         ]
     },
     {
-        "name": "kartik-v/yii2-export",
-        "version": "dev-master",
-        "version_normalized": "9999999-dev",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/kartik-v/yii2-export.git",
-            "reference": "e0563601f2a3b9d428df1c289f3a2813423deef5"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/kartik-v/yii2-export/zipball/e0563601f2a3b9d428df1c289f3a2813423deef5",
-            "reference": "e0563601f2a3b9d428df1c289f3a2813423deef5",
-            "shasum": ""
-        },
-        "require": {
-            "kartik-v/yii2-dialog": "~1.0.0",
-            "kartik-v/yii2-dynagrid": ">=1.4.5",
-            "phpoffice/phpexcel": "~1.8.0"
-        },
-        "time": "2017-04-25T09:31:09+00:00",
-        "type": "yii2-extension",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "1.2.x-dev"
-            }
-        },
-        "installation-source": "source",
-        "autoload": {
-            "psr-4": {
-                "kartik\\export\\": ""
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "BSD-3-Clause"
-        ],
-        "authors": [
-            {
-                "name": "Kartik Visweswaran",
-                "email": "kartikv2@gmail.com",
-                "homepage": "http://www.krajee.com/"
-            }
-        ],
-        "description": "A library to export server/db data in various formats (e.g. excel, html, pdf, csv etc.)",
-        "homepage": "https://github.com/kartik-v/yii2-export",
-        "keywords": [
-            "OpenXML",
-            "csv",
-            "export",
-            "extension",
-            "html",
-            "json",
-            "pdf",
-            "spreadsheet",
-            "text",
-            "widget",
-            "xls",
-            "xlsx",
-            "yii2"
-        ]
-    },
-    {
         "name": "bower-asset/blueimp-canvas-to-blob",
         "version": "v3.7.0",
         "version_normalized": "3.7.0.0",
@@ -6369,7 +6307,7 @@
             "shasum": ""
         },
         "require": {
-            "mpdf/mpdf": "~7.0"
+            "mpdf/mpdf": "<7.0"
         },
         "time": "2017-01-14T11:51:12+00:00",
         "type": "yii2-extension",
@@ -6479,7 +6417,7 @@
             "shasum": ""
         },
         "require": {
-            "kartik-v/bootstrap-fileinput": "~4.4",
+            "kartik-v/bootstrap-fileinput": "~4.2",
             "kartik-v/yii2-krajee-base": "~1.7"
         },
         "time": "2017-04-15T05:25:51+00:00",
@@ -6521,18 +6459,80 @@
         ]
     },
     {
-        "name": "swiftmailer/swiftmailer",
-        "version": "v5.4.8",
-        "version_normalized": "5.4.8.0",
+        "name": "kartik-v/yii2-export",
+        "version": "v1.2.7",
+        "version_normalized": "1.2.7.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/swiftmailer/swiftmailer.git",
-            "reference": "9a06dc570a0367850280eefd3f1dc2da45aef517"
+            "url": "https://github.com/kartik-v/yii2-export.git",
+            "reference": "4862c52f9190e2e199d4490ee8a6b24d3c7947f5"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/9a06dc570a0367850280eefd3f1dc2da45aef517",
-            "reference": "9a06dc570a0367850280eefd3f1dc2da45aef517",
+            "url": "https://api.github.com/repos/kartik-v/yii2-export/zipball/4862c52f9190e2e199d4490ee8a6b24d3c7947f5",
+            "reference": "4862c52f9190e2e199d4490ee8a6b24d3c7947f5",
+            "shasum": ""
+        },
+        "require": {
+            "kartik-v/yii2-dialog": "~1.0.0",
+            "kartik-v/yii2-dynagrid": ">=1.4.5",
+            "phpoffice/phpexcel": "~1.8.0"
+        },
+        "time": "2017-03-13T06:21:23+00:00",
+        "type": "yii2-extension",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.2.x-dev"
+            }
+        },
+        "installation-source": "source",
+        "autoload": {
+            "psr-4": {
+                "kartik\\export\\": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-3-Clause"
+        ],
+        "authors": [
+            {
+                "name": "Kartik Visweswaran",
+                "email": "kartikv2@gmail.com",
+                "homepage": "http://www.krajee.com/"
+            }
+        ],
+        "description": "A library to export server/db data in various formats (e.g. excel, html, pdf, csv etc.)",
+        "homepage": "https://github.com/kartik-v/yii2-export",
+        "keywords": [
+            "OpenXML",
+            "csv",
+            "export",
+            "extension",
+            "html",
+            "json",
+            "pdf",
+            "spreadsheet",
+            "text",
+            "widget",
+            "xls",
+            "xlsx",
+            "yii2"
+        ]
+    },
+    {
+        "name": "swiftmailer/swiftmailer",
+        "version": "v5.4.7",
+        "version_normalized": "5.4.7.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/swiftmailer/swiftmailer.git",
+            "reference": "56db4ed32a6d5c9824c3ecc1d2e538f663f47eb4"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/56db4ed32a6d5c9824c3ecc1d2e538f663f47eb4",
+            "reference": "56db4ed32a6d5c9824c3ecc1d2e538f663f47eb4",
             "shasum": ""
         },
         "require": {
@@ -6542,7 +6542,7 @@
             "mockery/mockery": "~0.9.1",
             "symfony/phpunit-bridge": "~3.2"
         },
-        "time": "2017-05-01T15:54:03+00:00",
+        "time": "2017-04-20T17:32:18+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -6574,6 +6574,168 @@
             "email",
             "mail",
             "mailer"
+        ]
+    },
+    {
+        "name": "yii2tech/html2pdf",
+        "version": "1.0.0",
+        "version_normalized": "1.0.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/yii2tech/html2pdf.git",
+            "reference": "bde7d02170966b5d52b8c2c708f0da952bb1ff31"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/yii2tech/html2pdf/zipball/bde7d02170966b5d52b8c2c708f0da952bb1ff31",
+            "reference": "bde7d02170966b5d52b8c2c708f0da952bb1ff31",
+            "shasum": ""
+        },
+        "require": {
+            "yiisoft/yii2": "*"
+        },
+        "time": "2016-05-19T13:37:46+00:00",
+        "type": "yii2-extension",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.0.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "yii2tech\\html2pdf\\": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-3-Clause"
+        ],
+        "authors": [
+            {
+                "name": "Paul Klimov",
+                "email": "klimov.paul@gmail.com"
+            }
+        ],
+        "description": "Provides support for HTML to PDF and PHP to PDF conversion",
+        "keywords": [
+            "conversion",
+            "convert",
+            "html2pdf",
+            "pdf",
+            "php2pdf",
+            "template",
+            "yii2"
+        ]
+    },
+    {
+        "name": "tinymce/tinymce",
+        "version": "4.7.2",
+        "version_normalized": "4.7.2.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/tinymce/tinymce-dist.git",
+            "reference": "2639396a6d5eb8db7457ed4f6de6f5d15303ef52"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/tinymce/tinymce-dist/zipball/2639396a6d5eb8db7457ed4f6de6f5d15303ef52",
+            "reference": "2639396a6d5eb8db7457ed4f6de6f5d15303ef52",
+            "shasum": ""
+        },
+        "time": "2017-11-07T12:44:31+00:00",
+        "type": "component",
+        "extra": {
+            "component": {
+                "scripts": [
+                    "tinymce.js",
+                    "plugins/*/plugin.js",
+                    "themes/*/theme.js"
+                ],
+                "files": [
+                    "tinymce.min.js",
+                    "plugins/*/plugin.min.js",
+                    "themes/*/theme.min.js",
+                    "skins/**"
+                ]
+            }
+        },
+        "installation-source": "dist",
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "LGPL-2.1"
+        ],
+        "description": "Web based JavaScript HTML WYSIWYG editor control.",
+        "homepage": "http://www.tinymce.com",
+        "keywords": [
+            "editor",
+            "html",
+            "javascript",
+            "richtext",
+            "tinymce",
+            "wysiwyg"
+        ]
+    },
+    {
+        "name": "2amigos/yii2-tinymce-widget",
+        "version": "1.1.2",
+        "version_normalized": "1.1.2.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/2amigos/yii2-tinymce-widget.git",
+            "reference": "4f519e37774ef231e4b4d6046854d5638548c8e0"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/2amigos/yii2-tinymce-widget/zipball/4f519e37774ef231e4b4d6046854d5638548c8e0",
+            "reference": "4f519e37774ef231e4b4d6046854d5638548c8e0",
+            "shasum": ""
+        },
+        "require": {
+            "tinymce/tinymce": ">=4",
+            "yiisoft/yii2": "~2.0.0"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "4.*"
+        },
+        "time": "2017-06-09T14:12:14+00:00",
+        "type": "yii2-extension",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.0-dev"
+            },
+            "asset-installer-paths": {
+                "bower-asset-library": "vendor/bower"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "dosamigos\\tinymce\\": "src"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-3-Clause"
+        ],
+        "authors": [
+            {
+                "name": "2amigOS! Consulting Group",
+                "email": "hola@2amigos.us",
+                "homepage": "http://2amigos.us",
+                "role": "Developer"
+            }
+        ],
+        "description": "TinyMCE widget for Yii2.",
+        "homepage": "http://yiiwheels.com/extension/tinymce-widget",
+        "keywords": [
+            "2amigos",
+            "extension",
+            "tinymce",
+            "widget",
+            "yii",
+            "yii 2",
+            "yii2"
         ]
     }
 ]
