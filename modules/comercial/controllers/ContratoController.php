@@ -248,10 +248,11 @@ class ContratoController extends Controller {
     public function montarContrato($cod_contrato) {
 
 
-        $contrato = \app\modules\comercial\models\ViewClienteContratoSearch::find()->where(['cod_contrato' => $cod_contrato])->one();
 
+        $contrato = \app\modules\comercial\models\ViewClienteContratoAll::find()->where(['cod_contrato' => $cod_contrato])->one();
+        
         $modelo = \app\modules\comercial\models\TabModeloContratoSearch::find()->where(['cod_contrato_tipo_contrato_fk' => $contrato->tipo_contrato_fk])->one();
-
+        
         $modelo->substituiVariaveis($contrato);
         
         return $modelo['txt_modelo'];
