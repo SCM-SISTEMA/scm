@@ -134,7 +134,7 @@ class TabContatoSearch extends TabContato {
                 $naoExcluir[] = $modelCon->cod_contato;
             } else {
                 $modelCon = \app\models\TabContatoSearch::find()->where(['cod_contato' => (int) $value['cod_contato']])->one();
-                unset($value['cod_contato']); 
+                unset($value['cod_contato']);
 
                 if ($modelCon) {
 
@@ -143,30 +143,26 @@ class TabContatoSearch extends TabContato {
                 }
                 $naoExcluir[] = $value['cod_contato'];
             }
-
-
-            if ($naoExcluir[0]) {
-
-                TabContatoSearch::deleteAll("chave_fk = {$model->cod_cliente} and tipo_tabela_fk = '{$model->tableName()}' and cod_contato not in (" . implode(',', $naoExcluir) . ")");
-            }
         }
-        
+        if ($naoExcluir[0]) {
+
+            TabContatoSearch::deleteAll("chave_fk = {$model->cod_cliente} and tipo_tabela_fk = '{$model->tableName()}' and cod_contato not in (" . implode(',', $naoExcluir) . ")");
+        }
     }
-    
-    public static function salvarContatoSocios($contato, $cod_socios, $tipo, $tipo_tabela){
-        $cont = \app\models\TabContatoSearch::find()->where(['chave_fk' => $cod_socios, 'tipo_tabela_fk' => $tipo_tabela, 'tipo'=>$tipo])->one();
-        
-        if($cont){
+
+    public static function salvarContatoSocios($contato, $cod_socios, $tipo, $tipo_tabela) {
+        $cont = \app\models\TabContatoSearch::find()->where(['chave_fk' => $cod_socios, 'tipo_tabela_fk' => $tipo_tabela, 'tipo' => $tipo])->one();
+
+        if ($cont) {
             $cont->contato = $contato;
             $cont->save();
-        }else{
+        } else {
             $cont = new \app\models\TabContatoSearch();
             $cont->contato = $contato;
             $cont->chave_fk = $cod_socios;
             $cont->tipo_tabela_fk = $tipo_tabela;
-            $cont->tipo=$tipo;
+            $cont->tipo = $tipo;
             $cont->save();
-            
         }
         return $cont;
     }

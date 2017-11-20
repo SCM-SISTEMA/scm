@@ -161,12 +161,11 @@ class TabEnderecoSearch extends TabEndereco {
                         
                 $naoExcluir[] = $modelEnd->cod_endereco;
             }
-            if ($naoExcluir) {
-                
-                ;//TabEnderecoSearch::deleteAll("chave_fk = {$model->cod_cliente} and tipo_tabela_fk = '{$model->tableName()}' and cod_endereco not in (" . implode(',', $naoExcluir).")");
-            }
         }
+        if ($naoExcluir) {
 
+            TabEnderecoSearch::deleteAll("chave_fk = {$model->cod_cliente} and tipo_tabela_fk = '{$model->tableName()}' and cod_endereco not in (" . implode(',', $naoExcluir).")");
+        }
     }
 
 }
