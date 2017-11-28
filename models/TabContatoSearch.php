@@ -40,7 +40,7 @@ class TabContatoSearch extends TabContato {
     public function attributeLabels() {
 
         $labels = parent::attributeLabels();
-        $labels['contato'] = 'Número';
+        $labels['contato'] = 'Número Contato';
         $labels['contato_email'] = 'Email';
         $labels['ramal'] = 'Ramal';
         $labels['ativo'] = 'Ativo';

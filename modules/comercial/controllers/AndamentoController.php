@@ -17,17 +17,21 @@ class AndamentoController extends \app\controllers\AndamentoController {
 
         $post = Yii::$app->request->post();
         $msg = $new = null;
-
-
         $model = new \app\models\TabAndamentoSearch();
-
 
         $model->attributes = $post['TabAndamentoSearch'];
         $model->cod_usuario_inclusao_fk = $this->user->identity->getId();
         $str = 'Andamento';
         $model->save();
 
-
+        if ($post['TabClienteSearch']['cod_cliente']) {
+            $cod_cliente = $post['TabClienteSearch']['cod_cliente'];
+        } else {
+            $cod_cliente = \app\modules\comercial\models\TabContratoSearch::find()->where(['cod_contrato'=>$post['TabAndamentoSearch']['cod_contrato']])->asArray()->one();
+            $cod_cliente = $cod_cliente['cod_cliente_fk'];
+        }
+   
+        
         if ($model && $model->getErrors()) {
             $dados = $model->getErrors();
         } else {
@@ -37,7 +41,8 @@ class AndamentoController extends \app\controllers\AndamentoController {
 
             $form = \yii\widgets\ActiveForm::begin();
             $this->module->module->layout = null;
-            $dados = $this->render('@app/modules/comercial/views/contrato/_lista_contratos', ['cod_cliente' => $post['TabClienteSearch']['cod_cliente'], 'form' => $form, 'msg' => $msg]);
+            $lista = ($post['TabAndamentoSearch']['tipo_andamento']==1) ? '_lista_proposta' : '_lista_contratos';
+            $dados = $this->render('@app/modules/comercial/views/contrato/'.$lista, ['cod_cliente' => $cod_cliente, 'form' => $form, 'msg' => $msg]);
         }
 
 
@@ -47,7 +52,7 @@ class AndamentoController extends \app\controllers\AndamentoController {
     public function actionExcluirAndamentos() {
         $post = Yii::$app->request->post();
         $andamento = TabAndamentoSearch::find()->where(['cod_andamento' => $post['id']])->orderBy('cod_andamento desc')->one();
-        
+
 
         $setor = $andamento->cod_setor_fk;
         if ($andamento->delete()) {

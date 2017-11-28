@@ -13,6 +13,7 @@ use app\models\TabAndamento;
 class TabAndamentoSearch extends TabAndamento {
 
     public $cod_contrato;
+    public $tipo_andamento;
 
     /**
      * @inheritdoc
@@ -20,7 +21,7 @@ class TabAndamentoSearch extends TabAndamento {
     public function rules() {
         
         $rules = [
-            [['cod_contrato'], 'safe'],
+            [['cod_contrato', 'tipo_andamento'], 'safe'],
         ];
 
         return array_merge($rules, parent::rules());

@@ -12,6 +12,10 @@ use app\modules\comercial\models\ViewClienteContrato;
  */
 class ViewClienteContratoSearch extends ViewClienteContrato {
 
+    public $contato;
+    public $tipo_contato;
+
+    
     /**
      * @inheritdoc
      */
@@ -28,8 +32,10 @@ class ViewClienteContratoSearch extends ViewClienteContrato {
         $labels['dsc_tipo_contrato'] = 'Contrato';
         $labels['valor_contrato'] = 'Valor';                
         $labels['qnt parcelas'] = 'Nº de Parcelas';                
-        $labels['txt_login'] = 'Responsável';                
-        $labels['dsc_status'] = 'Status';                
+        $labels['txt_login'] = 'Responsável';    
+        $labels['responsavel'] = 'Cliente'; 
+        $labels['dsc_status'] = 'Status';
+        $labels['dsc_tipo_produto'] = 'Serviço';
         $labels['txt_notificacao_res'] = 'Ult. Andamento';                
         $labels['dt_inclusao_contrato'] = 'Inclusão';                
         $labels['txt_login_andamento'] = 'Usuário And.'; 
@@ -39,6 +45,18 @@ class ViewClienteContratoSearch extends ViewClienteContrato {
         ;
     }
 
+    public function afterFind() {
+        parent::afterFind();
+
+        $this->contato = \app\models\TabContatoSearch::find()->where(['chave_fk' => $this->cod_cliente, 'tipo_tabela_fk' => \app\models\TabCliente::tableName()])->asArray()->one();
+                
+        $tp = \app\models\TabAtributosValoresSearch::find()->where(['cod_atributos_valores' => $this->contato['tipo']])->asArray()->one();
+        
+        $this->contato = $this->contato['contato'];
+        $this->tipo_contato = $tp['dsc_descricao'];
+
+        return true;
+    }
     /**
      * @inheritdoc
      */

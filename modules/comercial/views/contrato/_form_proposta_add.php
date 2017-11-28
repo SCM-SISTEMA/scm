@@ -13,15 +13,15 @@ Modal::begin([
     'headerOptions' => [
         'id' => 'modalHeader'
     ],
-    'header' => '<h3><div id="tituloTipoContrato">Fechar contrato</div></h3>',
-    'id' => 'modalContrato',
+    'header' => '<h3><div id="tituloContratoProposta">Fechar Proposta</div></h3>',
+    'id' => 'modalContratoProposta',
     'closeButton' => false,
     'size' => 'modal-sm',
     'footer' =>
     Html::a('Fechar', '#', ['class' => 'btn btn-default', 'id' => 'botaoFechar', 'data-dismiss' => 'modal'])
     . PHP_EOL .
-    Html::button('Incluir Contrato', [
-        'id' => 'botaoSalvarContrato',
+    Html::button('Gerar Contrato', [
+        'id' => 'botaoSalvarContratoProposta',
         'class' => 'btn btn-primary',
     ]),
     'clientOptions' => [
@@ -32,16 +32,15 @@ Modal::begin([
 
 
 
-$contrato = new \app\modules\comercial\models\TabContratoSearch();
+$contrato = new \app\modules\comercial\models\ViewClienteContratoSearch();
 
-$tipo_contrato = new \app\modules\comercial\models\TabTipoContratoSearch();
 ?>
 
-<div id="formDivContrato">
+<div id="formContratoProposta">
     <div class='row'>
         <div class='col-lg-12'>
             <?=
-            $form->field($contrato, 'tipo_contrato_fk')->dropDownList(
+            $form->field($contrato, 'cod_tipo_contrato')->dropDownList(
                     yii\helpers\ArrayHelper::map(
                             app\models\TabAtributosValoresSearch::find()->where(['fk_atributos_valores_atributos_id' =>
                                 app\models\TabAtributosSearch::find()->where(['sgl_chave' => 'tipo-contrato'])->one()['cod_atributos']
@@ -51,8 +50,10 @@ $tipo_contrato = new \app\modules\comercial\models\TabTipoContratoSearch();
             ?>
         </div>
     </div>
-
+   
     <?= $form->field($contrato, 'cod_contrato')->hiddenInput()->label(false); ?>
+    <?= $form->field($contrato, 'cod_setor')->hiddenInput()->label(false); ?>
+
 </div>
 
 <?php Modal::end(); ?>

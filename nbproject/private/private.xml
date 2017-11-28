@@ -16,29 +16,30 @@
             <file>file:/C:/wamp64/www/esqueleto/modules/admin/views/atributos-valores/create.php</file>
         </group>
         <group>
-            <file>file:/var/www/scm/modules/comercial/models/TabSociosSearch.php</file>
-            <file>file:/var/www/scm/modules/comercial/views/contrato/_form_modelo.php</file>
             <file>file:/var/www/scm/modules/comercial/controllers/ClienteController.php</file>
-            <file>file:/var/www/scm/projeto/Util.php</file>
+            <file>file:/var/www/scm/web/js/app/comercial.andamento.js</file>
+            <file>file:/var/www/scm/models/TabMunicipios.php</file>
             <file>file:/var/www/scm/modules/comercial/views/cliente/admin.php</file>
+            <file>file:/var/www/scm/models/TabClienteSearch.php</file>
+            <file>file:/var/www/scm/modules/comercial/views/contrato/_lista_proposta.php</file>
             <file>file:/var/www/scm/models/TabEnderecoSearch.php</file>
-            <file>file:/var/www/scm/modules/comercial/models/TabSocios.php</file>
-            <file>file:/var/www/scm/modules/comercial/views/contrato/_guia_contratos.php</file>
-            <file>file:/var/www/scm/newhtml.html</file>
-            <file>file:/var/www/scm/modules/comercial/models/TabModeloContrato.php</file>
-            <file>file:/var/www/scm/modules/comercial/views/cliente/_form.php</file>
-            <file>file:/var/www/scm/modules/comercial/controllers/SociosController.php</file>
+            <file>file:/var/www/scm/modules/comercial/views/contrato/_form_contrato_add.php</file>
+            <file>file:/var/www/scm/views/andamento/_form_andamento_add.php</file>
+            <file>file:/var/www/scm/modules/comercial/views/contrato/_form_pre_contrato_add.php</file>
+            <file>file:/var/www/scm/modules/comercial/views/contrato/_form_proposta_add.php</file>
+            <file>file:/var/www/scm/modules/comercial/views/contrato/_form_pre_contrato_proposta_add.php</file>
+            <file>file:/var/www/scm/modules/posoutorga/controllers/SiciController.php</file>
+            <file>file:/var/www/scm/modules/comercial/models/ViewClienteContratoSearch.php</file>
+            <file>file:/var/www/scm/modules/comercial/models/TabContratoSearch.php</file>
+            <file>file:/var/www/scm/modules/comercial/controllers/AndamentoController.php</file>
+            <file>file:/var/www/scm/web/js/app/comercial.contrato.js</file>
+            <file>file:/var/www/scm/modules/comercial/views/contrato/_form_importacao_add.php</file>
+            <file>file:/var/www/scm/modules/comercial/views/cliente/index.php</file>
             <file>file:/var/www/scm/web/js/app/admin.cliente.js</file>
-            <file>file:/var/www/scm/web/js/app/comercial.modelo.js</file>
-            <file>file:/var/www/scm/modules/comercial/views/socios/_grid_socios.php</file>
-            <file>file:/var/www/scm/models/TabContatoSearch.php</file>
-            <file>file:/var/www/scm/modules/comercial/views/contrato/_form_contrato.php</file>
+            <file>file:/var/www/scm/controllers/EnderecoController.php</file>
             <file>file:/var/www/scm/modules/comercial/views/contrato/_lista_contratos.php</file>
             <file>file:/var/www/scm/modules/comercial/controllers/ContratoController.php</file>
-            <file>file:/var/www/scm/modules/comercial/views/contrato/_form_contrato_parcela_add.php</file>
-            <file>file:/var/www/scm/modules/comercial/views/socios/create.php</file>
-            <file>file:/var/www/scm/views/modelo-docs/_form.php</file>
-            <file>file:/var/www/scm/composer.json</file>
+            <file>file:/var/www/scm/models/TabAndamentoSearch.php</file>
         </group>
     </open-files>
 </project-private>

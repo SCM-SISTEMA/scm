@@ -6,7 +6,11 @@
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\GridView;
-use app\components\MenuLateralModuloWidget;
+use yii\widgets\ActiveForm;
+
+$this->registerJsFile("@web/js/app/comercial.andamento.js?{$this->app->version}", ['position' => $this::POS_END, 'depends' => [\app\assets\ProjetoAsset::className()]]);
+$this->registerJsFile('@web/js/app/admin.cliente.js', ['position' => $this::POS_END, 'depends' => [\app\assets\ProjetoAsset::className()]]);
+$this->registerJsFile('@web/js/app/comercial.contrato.js', ['position' => $this::POS_END, 'depends' => [\app\assets\ProjetoAsset::className()]]);
 ?>
 
 <div class="cliente-index box box-default">
@@ -14,12 +18,17 @@ use app\components\MenuLateralModuloWidget;
     <div class="box-header with-border">
         <h3 class="box-title">Consulta</h3>
         <div class="box-tools pull-right">
-            <?= Html::a('<i class="glyphicon glyphicon-plus"></i> Incluir novo registro', ['admin'], ['class' => 'btn btn-success btn-sm']) ?>
+            <?=
+            Html::button('Incluir Cliente', [
+                'id' => 'botaoOpenCliente',
+                'class' => 'btn btn-success btn-sm',
+            ]);
+            ?>
         </div>
     </div>
 
     <div class="box-body with-border">
-        <?php // echo $this->render('_search', ['model' => $searchModel]);  ?>
+        <?php // echo $this->render('_search', ['model' => $searchModel]);   ?>
 
         <?=
         GridView::widget([
@@ -29,7 +38,8 @@ use app\components\MenuLateralModuloWidget;
                 'cnpj',
                 'razao_social',
                 'responsavel',
-                'dsc_tipo_contrato',
+                'contato',
+                'dsc_tipo_produto',
                 [
                     'attribute' => 'dsc_status',
                     'content' => function($data) {
@@ -49,6 +59,7 @@ use app\components\MenuLateralModuloWidget;
                     },
                     'filter' => app\models\TabAtributosValoresSearch::getAtributoValor(\app\models\TabAtributosSearch::findOne(['sgl_chave' => 'status-contrato'])->cod_atributos, true, true),
                 ],
+                'txt_notificacao_res',
                 'txt_login',
                 [
                     'attribute' => 'dt_retorno',
@@ -60,17 +71,8 @@ use app\components\MenuLateralModuloWidget;
                     }
                 ],
                 ['class' => 'projeto\grid\ActionColumn',
-                    'template' => '{view} {admin} {delete}',
+                    'template' => '{admin} {andamento} {fechar} {recusar}',
                     'buttons' => [
-                        'view' => function ($action, $model, $key) {
-
-                            return Html::a('<span class="fa fa-search-plus"></span>', Url::to(['cliente/view', 'id' => $model->cod_cliente]), [
-                                        'title' => 'Exibir',
-                                        'data-toggle' => 'tooltip',
-                                        'aria-label' => Yii::t('yii', 'View'),
-                                        'data-pjax' => '0',
-                            ]);
-                        },
                         'admin' => function ($action, $model, $key) {
 
                             return Html::a('<span class="fa fa-edit"></span>', Url::to(['cliente/admin', 'id' => $model->cod_cliente]), [
@@ -80,16 +82,37 @@ use app\components\MenuLateralModuloWidget;
                                         'data-pjax' => '0',
                             ]);
                         },
-                        'delete' => function ($action, $model, $key) {
+                        'andamento' => function ($action, $model, $key) {
 
-                            return Html::a('<span class="fa fa-trash"></span>', Url::to(['delete', 'id' => $model->cod_cliente]), [
-                                        'title' => 'Excluir',
-                                        'aria-label' => 'Excluir',
-                                        'data-confirm' => 'Confirma a exclusão do cliente?',
-                                        'data-method' => 'post',
-                                        'data-toggle' => 'tooltip',
-                                        'data-pjax' => '0',
-                            ]);
+                            if ($model['sgl_status'] == '1') {
+                                return Html::a('<span class="fa  fa-commenting-o"></span>', '#', [
+                                            'arialabel' => 'Andamento',
+                                            'data-toggle' => 'tooltip',
+                                            'title' => 'Andamento',
+                                            'onclick' => "return adicionarAndamentoContrato('" . $model->cod_setor . "', '" . $model->cod_contrato . "', 1)",
+                                ]);
+                            }
+                        },
+                        'fechar' => function ($action, $model, $key) {
+
+                            if ($model['sgl_status'] == '1') {
+                                return Html::a('<span class="fa fa-check"></span>', '#', [
+                                            'arialabel' => 'Fechar Contrato',
+                                            'data-toggle' => 'tooltip',
+                                            'title' => 'Fechar Contrato',
+                                            'onclick' => "return openGerarContrato('" . $model->cod_contrato . "', '3', '" . $model->cod_setor . "',  '" . $model->cod_tipo_contrato . "')",
+                                ]);
+                            }
+                        },
+                        'recusar' => function ($action, $model, $key) {
+                            if ($model['sgl_status'] == '1') {
+                                return Html::a('<span class="fa fa-close"></span>', '#', [
+                                            'arialabel' => 'Recusar Proposta',
+                                            'data-toggle' => 'tooltip',
+                                            'title' => 'Recusar Proposta',
+                                            'onclick' => "return mudarStatus('" . $model->cod_contrato . "', '2', '" . $model->cod_setor . "',  '" . $model->cod_tipo_contrato . "')",
+                                ]);
+                            }
                         },
                     ],
                 ],
@@ -101,9 +124,14 @@ use app\components\MenuLateralModuloWidget;
     <div class="box-footer">
         <h3 class="box-title"></h3>
         <div class="box-tools pull-right">
-<?= Html::a('<i class="glyphicon glyphicon-plus"></i> Incluir novo registro', ['admin'], ['class' => 'btn btn-success btn-sm']) ?>
+            <?= Html::a('<i class="glyphicon glyphicon-plus"></i> Incluir novo registro', ['admin'], ['class' => 'btn btn-success btn-sm']) ?>
         </div>
     </div>
 </div>
 
+<?php $form = ActiveForm::begin(['id'=>'formCliente']); ?>
+<?php echo $this->render('@app/modules/comercial/views/contrato/_form_proposta_add', ['form' => $form]); ?> 
+<?php echo $this->render('@app/modules/comercial/views/contrato/_form_pre_contrato_add', ['form' => $form]); ?> 
+<?php echo $this->render('@app/views/andamento/_form_andamento_add', ['form' => $form]); ?> 
 
+<?php ActiveForm::end(); ?>

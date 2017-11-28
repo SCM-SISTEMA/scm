@@ -19,10 +19,10 @@ class ClienteController extends \app\controllers\ClienteController {
     public function actionIndex() {
 
         $searchModel = new \app\modules\comercial\models\ViewClienteContratoSearch();
-        if(!Yii::$app->request->queryParams){
-            
+        if (!Yii::$app->request->queryParams) {
+
             $query['ViewClienteContratoSearch']['txt_login'] = $this->user->identity->txt_login;
-        }else{
+        } else {
             $query = Yii::$app->request->queryParams;
         }
         //$this->dd($query);
@@ -91,22 +91,33 @@ class ClienteController extends \app\controllers\ClienteController {
      * @return mixed
      */
     public function actionAdmin($id = null, $migrar = null) {
-         
+
         if ($id) {
 
             $model = $this->findModel($id);
             $contrato = \app\modules\comercial\models\TabContratoSearch::find()->where(['cod_cliente_fk' => $model->cod_cliente, 'ativo' => true])->all();
             $contato = \app\models\TabContatoSearch::find()->where(['chave_fk' => $model->cod_cliente, 'tipo_tabela_fk' => $model->tableName()])->indexBy('cod_contato')->asArray()->all();
-            $endereco = \app\models\TabEnderecoSearch::find()->where(['chave_fk' => $model->cod_cliente, 'tipo_tabela_fk' => $model->tableName()])->indexBy('cod_endereco')->asArray()->all();
-            $soc = \app\modules\comercial\models\TabSociosSearch::find()->where(['cod_cliente_fk' => $model->cod_cliente])->all();
-            
-            foreach($soc as $key => $socio){
-                $socios[$socio->cod_socio] = $socio->attributes;
-                $socios[$socio->cod_socio]['email'] = $socio->email;
-                $socios[$socio->cod_socio]['telefone'] = $socio->telefone;
-                $socios[$socio->cod_socio]['skype'] = $socio->skype;
+            $end = \app\models\TabEnderecoSearch::find()->where(['chave_fk' => $model->cod_cliente, 'tipo_tabela_fk' => $model->tableName()])->indexBy('cod_endereco')->all();
+
+            if ($end) {
+                foreach ($end as $key => $val) {
+                    $endereco[$val->cod_endereco] = $val->attributes;
+                    $endereco[$val->cod_endereco]['uf'] = $val->uf;
+                    $endereco[$val->cod_endereco]['municipio'] = $val->municipio;
+                }
             }
-            
+
+
+            $soc = \app\modules\comercial\models\TabSociosSearch::find()->where(['cod_cliente_fk' => $model->cod_cliente])->all();
+            if ($soc) {
+                foreach ($soc as $key => $socio) {
+                    $socios[$socio->cod_socio] = $socio->attributes;
+                    $socios[$socio->cod_socio]['email'] = $socio->email;
+                    $socios[$socio->cod_socio]['telefone'] = $socio->telefone;
+                    $socios[$socio->cod_socio]['skype'] = $socio->skype;
+                }
+            }
+
             $contratos = $this->montaArrayContratos($contrato);
 
             $acao = 'update';
@@ -120,7 +131,7 @@ class ClienteController extends \app\controllers\ClienteController {
             $tipo_contratos = new \app\modules\comercial\models\TabTipoContratoSearch();
             $cont->cod_contrato = 'N_' . rand(100000000, 999999999);
             $contratos = [];
-
+            $model->situacao = true;
             $this->titulo = 'Incluir Cliente';
             $this->subTitulo = '';
         }
@@ -135,12 +146,11 @@ class ClienteController extends \app\controllers\ClienteController {
                 $endereco = \Yii::$app->session->get('endereco');
                 $contato = \Yii::$app->session->get('contato');
                 $socios = \Yii::$app->session->get('socios');
-                
+
                 if ($model->save()) {
 
                     if ($endereco) {
                         \app\models\TabEnderecoSearch::salvarEnderecos($endereco, $model);
-                        
                     }
                     if ($contato) {
 
@@ -150,7 +160,16 @@ class ClienteController extends \app\controllers\ClienteController {
 
                         \app\modules\comercial\models\TabSociosSearch::salvarSocios($socios, $model->cod_cliente);
                     }
-                
+
+                    if ($_FILES) {
+                        print_r($_FILES); exit;
+                        $cont = new \app\modules\comercial\models\TabContratoSearch();
+                        $cont->attributes = $post['TabImportacaoSearch'];
+                        print_r($cont->file); exit;
+                        $dados = \yii\web\UploadedFile::getInstance($cont, 'file');
+                        print_r($dados); exit;
+                        
+                    }
 
                     $transaction->commit();
                     $this->session->setFlashProjeto('success', $acao);
@@ -166,7 +185,6 @@ class ClienteController extends \app\controllers\ClienteController {
             \Yii::$app->session->set('contato', []);
             \Yii::$app->session->set('contratos', []);
             \Yii::$app->session->set('socios', []);
-            
         }
 
         \Yii::$app->session->set('endereco', $endereco);
@@ -174,7 +192,7 @@ class ClienteController extends \app\controllers\ClienteController {
         \Yii::$app->session->set('contratos', $contratos);
         \Yii::$app->session->set('socios', $socios);
 
-        
+
         return $this->render('admin', [
                     'model' => $model, 'contratos' => $contratos
         ]);
@@ -1165,7 +1183,7 @@ class ClienteController extends \app\controllers\ClienteController {
                         $andam->txt_notificacao = 'Fechamento de Contrato';
                         $andam->cod_usuario_inclusao_fk = $this->user->identity->getId();
                         $andam->cod_setor_fk = $setor->cod_setor;
-                        $andam->dt_retorno = date('d/m/Y', strtotime(date('Y-m-d').'+5 days'));
+                        $andam->dt_retorno = date('d/m/Y', strtotime(date('Y-m-d') . '+5 days'));
                         $andam->save();
                     }
                 }
@@ -1181,10 +1199,10 @@ class ClienteController extends \app\controllers\ClienteController {
 
             if ($contrato) {
                 unset($post['TabContratoSearch']['cod_contrato']);
-                                
+
                 $post['TabContratoSearch']['valor_contrato'] = (strpos($post['TabContratoSearch']['cod_contrato'], ',') === false) ? $post['TabContratoSearch']['valor_contrato'] :
-                \projeto\Util::decimalFormatForBank($post['TabContratoSearch']['valor_contrato']);
-                                
+                        \projeto\Util::decimalFormatForBank($post['TabContratoSearch']['valor_contrato']);
+
                 if (
                         $post['TabContratoSearch']['valor_contrato'] == $contrato->valor_contrato ||
                         $post['TabContratoSearch']['qnt_parcelas'] == $contrato->qnt_parcelas ||
@@ -1192,11 +1210,11 @@ class ClienteController extends \app\controllers\ClienteController {
                 ) {
                     \app\modules\comercial\models\TabContratoParcelasSearch::atualizarParcelas($contrato->cod_contrato, $post['TabContratoSearch']);
                 }
-                
+
                 $contrato->attributes = $post['TabContratoSearch'];
-                
+
                 $contrato->status = $post['TabContratoSearch']['status'];
-                              
+
                 $contrato->save();
             }
         }
@@ -1221,7 +1239,59 @@ class ClienteController extends \app\controllers\ClienteController {
         return \yii\helpers\Json::encode($dados);
     }
 
-    
+    public function actionIncluirCliente() {
+        $post = Yii::$app->request->post();
+        $transaction = Yii::$app->db->beginTransaction();
 
+        try {
+            $cliente = new TabClienteSearch();
+            $cliente->load($post);
+            $cliente->situacao = true;
+            $cliente->save();
+            $contato = new \app\models\TabContatoSearch;
+            $contato->load($post);
+            if ($contato->contato_email)
+                $contato->contato = $contato->contato_email;
+
+            $contato->ativo = 1;
+            $contato->chave_fk = $cliente->cod_cliente;
+            $contato->tipo_tabela_fk = $cliente->tableName();
+            $contato->save();
+
+            $contrato = new \app\modules\comercial\models\TabContratoSearch();
+            $contrato->attributes = $post['TabContratoSearch'];
+            $contrato->status = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('status-contrato', '1');
+            $contrato->tipo_contrato_fk = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-contrato', 'proposta');
+            $contrato->cod_cliente_fk = $cliente->cod_cliente;
+            $contrato->save();
+
+            $servico = new \app\modules\comercial\models\TabTipoContratoSearch();
+            $servico->cod_usuario_fk = $post['TabTipoClienteSearch']['cod_usuario_fk'];
+            $servico->cod_contrato_fk = $contrato->cod_contrato;
+            $servico->tipo_produto_fk = $post['TabTipoContratoSearch']['tipo_produto_fk'];
+            $servico->save();
+
+            $setor = new \app\models\TabSetoresSearch();
+            $setor->cod_tipo_contrato_fk = $servico->cod_tipo_contrato;
+            $setor->cod_usuario_responsavel_fk = $post['TabTipoClienteSearch']['cod_usuario_fk'];
+            $setor->cod_tipo_setor_fk = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('setores', '1');
+            $setor->save();
+
+
+            $andam = new \app\models\TabAndamentoSearch();
+            $andam->txt_notificacao = 'Inclusão de cliente';
+            $andam->cod_usuario_inclusao_fk = $this->user->identity->getId();
+            $andam->cod_setor_fk = $setor->cod_setor;
+            $andam->dt_retorno = date('d/m/Y', strtotime(date('Y-m-d') . '+5 days'));
+            $andam->save();
+
+
+            $transaction->commit();
+            return true;
+        } catch (\Exception $e) {
+            $transaction->rollBack();
+            throw $e;
+        }
+    }
 
 }

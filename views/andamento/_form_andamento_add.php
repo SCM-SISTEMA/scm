@@ -6,6 +6,8 @@ use yii\bootstrap\Modal;
 /* @var $this yii\web\View */
 /* @var $model app\models\TabContato */
 /* @var $form yii\widgets\ActiveForm */
+use yii\widgets\ActiveForm;
+use yii\helpers\ArrayHelper;
 
 Modal::begin([
     'headerOptions' => [
@@ -31,6 +33,7 @@ Modal::begin([
 
 
 $model = new \app\models\TabAndamentoSearch();
+
 ?>
 
 <div id="formAndamento">
@@ -59,10 +62,13 @@ $model = new \app\models\TabAndamentoSearch();
 
     <?= $form->field($model, 'cod_setor_fk')->hiddenInput()->label(false); ?>
     <?= $form->field($model, 'cod_contrato')->hiddenInput()->label(false); ?>
+    <?= $form->field($model, 'tipo_andamento')->hiddenInput()->label(false); ?>
+
 
     <div id="gridModalAndamento">
 
     </div>
 
 </div>
+
 <?php Modal::end(); ?>

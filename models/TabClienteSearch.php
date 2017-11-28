@@ -40,7 +40,7 @@ class TabClienteSearch extends TabCliente {
         $labels['ie'] = 'Inscrição Estadual';
         $labels['fantasia'] = 'Fantasia';
         $labels['razao_social'] = 'Razão Social';
-        $labels['responsavel'] = 'Responsável';
+        $labels['responsavel'] = 'Nome do cliente';
         $labels['situacao'] = 'Ativo?';
 
         return $labels;

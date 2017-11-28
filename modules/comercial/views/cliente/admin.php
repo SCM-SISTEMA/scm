@@ -7,13 +7,17 @@ use yii\helpers\ArrayHelper;
 
 $this->registerJsFile("@web/js/app/comercial.andamento.js?{$this->app->version}", ['position' => $this::POS_END, 'depends' => [\app\assets\ProjetoAsset::className()]]);
 $this->registerJsFile('@web/js/app/comercial.modelo.js', ['position' => $this::POS_END, 'depends' => [\app\assets\ProjetoAsset::className()]]);
+$this->registerJsFile('@web/js/app/comercial.contrato.js', ['position' => $this::POS_END, 'depends' => [\app\assets\ProjetoAsset::className()]]);
 /* @var $this yii\web\View */
 /* @var $model app\models\Cliente */
 ?>
 
 <div class="cliente-admin">
     <div class="tab-cliente-form box box-default">
-        <?php $form = ActiveForm::begin(['id' => 'formCliente']); ?>
+        <?php $form = ActiveForm::begin([
+            'id' => 'formCliente',
+             'options' => ['enctype' => 'multipart/form-data']
+            ]); ?>
 
         <div class="box-header with-border">
             <h3 class="box-title"></h3>
@@ -42,13 +46,26 @@ $this->registerJsFile('@web/js/app/comercial.modelo.js', ['position' => $this::P
             ]);
             ?>
 
-
-
-
-
-
-
             <?php
+            if (!$model->isNewRecord) {
+                echo yii\bootstrap\Collapse::widget([
+                    'id' => 'box-propostas',
+                    'items' => [
+                        [
+                            'label' => "<i class='fa fa-book'></i> Proposta",
+                            'content' => ['<div id="divGuiaProposta">' .
+                                $this->render('@app/modules/comercial/views/contrato/_lista_proposta', ['form'=>$form, 'cod_cliente'=>$model->cod_cliente]) .
+                                '</div>'],
+                            'encode' => false,
+                            'contentOptions' => ['class' => 'in'],
+                        // open its content by default
+                        ],
+                    ]
+                ]);
+            }
+            ?>
+
+             <?php
             if (!$model->isNewRecord) {
                 echo yii\bootstrap\Collapse::widget([
                     'id' => 'box-contratos',
@@ -68,7 +85,6 @@ $this->registerJsFile('@web/js/app/comercial.modelo.js', ['position' => $this::P
             ?>
 
 
-
         </div>
         <div class="box-footer">
             <h3 class="box-title"></h3>
@@ -79,6 +95,9 @@ $this->registerJsFile('@web/js/app/comercial.modelo.js', ['position' => $this::P
         </div>
         <?php echo $this->render('@app/modules/comercial/views/tipo-contrato/_form_tipo_contrato_add', ['form' => $form]); ?> 
         <?php echo $this->render('@app/modules/comercial/views/contrato/_form_contrato_add', ['form' => $form]); ?> 
+        <?php echo $this->render('@app/modules/comercial/views/contrato/_form_importacao_add', ['form' => $form]); ?> 
+        <?php echo $this->render('@app/modules/comercial/views/contrato/_form_proposta_add', ['form' => $form, 'cod_cliente'=>$model->cod_cliente]); ?> 
+        <?php echo $this->render('@app/modules/comercial/views/contrato/_form_pre_contrato_proposta_add', ['form' => $form, 'cod_cliente'=>$model->cod_cliente]); ?> 
         <?php echo $this->render('@app/modules/comercial/views/contrato/_form_contrato_parcela_add', ['form' => $form]); ?> 
         <?php echo $this->render('@app/modules/comercial/views/contrato-parcelas/_form_parcela_add', ['form' => $form]); ?> 
         <?php echo $this->render('@app/modules/comercial/views/contrato/_form_modelo', ['form' => $form]); ?> 

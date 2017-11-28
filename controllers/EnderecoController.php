@@ -198,12 +198,13 @@ class EnderecoController extends Controller {
     public function actionVerificaCep() {
 
         $post = Yii::$app->request->post();
-
-        $endereco = \app\models\TabEnderecoSearch::buscaCep($post['dados']);
+        $endereco = \app\models\TabEnderecoSearch();
+        $endereco->cep = $post['dados'];
+        $endereco->buscaCep();
         
         $this->module->module->layout = null;
         
-        return \yii\helpers\Json::encode($endereco);
+        return \yii\helpers\Json::encode($endereco->dadosCep);
     }
 
 }

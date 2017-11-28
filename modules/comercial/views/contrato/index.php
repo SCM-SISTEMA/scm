@@ -7,7 +7,7 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\GridView;
 use app\components\MenuLateralModuloWidget;
-
+use yii\widgets\ActiveForm;
 
 ?>
 
