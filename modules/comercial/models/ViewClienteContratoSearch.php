@@ -30,6 +30,7 @@ class ViewClienteContratoSearch extends ViewClienteContrato {
         $labels = parent::attributeLabels();
         $labels['cod_contrato'] = 'Número';
         $labels['dsc_tipo_contrato'] = 'Contrato';
+        $labels['cod_tipo_contrato'] = 'Contrato';
         $labels['valor_contrato'] = 'Valor';                
         $labels['qnt parcelas'] = 'Nº de Parcelas';                
         $labels['txt_login'] = 'Responsável';    

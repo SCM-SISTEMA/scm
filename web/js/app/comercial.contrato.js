@@ -475,11 +475,11 @@ function mudarStatus(result, status, setor, tipo_contrato) {
 function adicionarFormaPagamentoContrato(contrato, valor) {
     if (valor) {
         $('#tabcontratopsearch-cod_contrato').val(contrato);
-        Projeto.prototype.comercial.openModalFormaPagamento(contrato);
+        Projeto.prototype.contrato.openModalFormaPagamento(contrato);
     } else {
 
-        Projeto.prototype.comercial.limpaFormFormaPagamentoContrato(contrato);
-        Projeto.prototype.comercial.openModalFormaPagamentoContrato(contrato);
+        Projeto.prototype.contrato.limpaFormFormaPagamentoContrato(contrato);
+        Projeto.prototype.contrato.openModalFormaPagamentoContrato(contrato);
         $('#tabcontratopsearch-cod_contrato').val(contrato);
     }
     return false;

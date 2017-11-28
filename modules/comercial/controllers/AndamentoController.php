@@ -16,6 +16,7 @@ class AndamentoController extends \app\controllers\AndamentoController {
     public function actionIncluirAndamento() {
 
         $post = Yii::$app->request->post();
+     
         $msg = $new = null;
         $model = new \app\models\TabAndamentoSearch();
 
@@ -30,7 +31,7 @@ class AndamentoController extends \app\controllers\AndamentoController {
             $cod_cliente = \app\modules\comercial\models\TabContratoSearch::find()->where(['cod_contrato'=>$post['TabAndamentoSearch']['cod_contrato']])->asArray()->one();
             $cod_cliente = $cod_cliente['cod_cliente_fk'];
         }
-   
+
         
         if ($model && $model->getErrors()) {
             $dados = $model->getErrors();

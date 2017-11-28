@@ -44,7 +44,7 @@ Projeto.prototype.andamento = new (Projeto.extend({
     salvarAndamento: function () {
         $('#botaoSalvarAndamento').click(function ( ) {
 
-            var form = $('#formAndamento');
+            var form = $('#formCliente');
 
 
             var urlInclusao = $('base').attr('href') + 'comercial/andamento/incluir-andamento';

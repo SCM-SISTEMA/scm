@@ -25,6 +25,7 @@ class TabTipoContratoSearch extends TabTipoContrato {
     public function attributeLabels() {
         $labels = parent::attributeLabels();
         $labels['cod_usuario_fk'] = 'Usuário Responsável';
+        $labels['tipo_produto_fk'] = 'Serviço';
 
 
         return $labels
