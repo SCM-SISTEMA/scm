@@ -160,8 +160,7 @@ class ClienteController extends \app\controllers\ClienteController {
 
                         \app\modules\comercial\models\TabSociosSearch::salvarSocios($socios, $model->cod_cliente);
                     }
-
-                    if ($_FILES) {
+                    if ($_FILES['TabImportacaoSearch']['tmp_name']['file']) {
                         print_r($_FILES); exit;
                         $cont = new \app\modules\comercial\models\TabContratoSearch();
                         $cont->attributes = $post['TabImportacaoSearch'];

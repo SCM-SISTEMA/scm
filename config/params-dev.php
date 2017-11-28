@@ -14,5 +14,5 @@ return [
 	// Nome do sistema
 	'nome-sistema' => 'SCM',
 	// Descrição do sistema
-	'descr-sistema' => 'Sistema Nacional de Informações sobre Saneamento',
+	'descr-sistema' => 'SCM Engenharia',
 ];
