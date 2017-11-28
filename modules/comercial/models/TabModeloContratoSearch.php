@@ -121,8 +121,10 @@ class TabModeloContratoSearch extends TabModeloContrato
         $qnt_parcelas_txt = \projeto\Util::converteNumeroEmLetras($contrato->qnt_parcelas);
         $meses = $contrato->qnt_parcelas . ' (' . $qnt_parcelas_txt . ')';
         $this->txt_modelo = str_replace('{num_parcelas}', $meses, $this->txt_modelo);
-
-        $parcela = $contrato->valor_contrato / $contrato->qnt_parcelas;
+        
+        if($contrato->valor_contrato && $contrato->qnt_parcelas){
+            $parcela = $contrato->valor_contrato / $contrato->qnt_parcelas;
+        }
         $valor_parcela = \projeto\Util::decimalFormatToBank($parcela);
         $parcela_txt = \projeto\Util::converteNumeroEmLetras($parcela);
         $this->txt_modelo = str_replace('{prestacao}', $valor_parcela . ' (' . $parcela_txt . ')', $this->txt_modelo);
