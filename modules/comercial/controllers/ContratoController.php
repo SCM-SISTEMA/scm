@@ -249,10 +249,10 @@ class ContratoController extends Controller {
         $contrato = \app\modules\comercial\models\ViewClienteContratoAll::find()->where(['cod_contrato' => $cod_contrato])->one();
 
         $modelo = \app\modules\comercial\models\TabModeloContratoSearch::find()->where(['cod_contrato_tipo_contrato_fk' => $contrato->tipo_contrato_fk])->one();
-        
-        if($modelo){
+
+        if ($modelo) {
             $modelo->substituiVariaveis($contrato);
-            
+
             return $modelo['txt_modelo'];
         }
 
@@ -284,32 +284,28 @@ class ContratoController extends Controller {
 
     public function actionMudarStatus() {
         $post = Yii::$app->request->post();
-
         $contrato = \app\modules\comercial\models\TabContratoSearch::find()->where(['cod_contrato' => $post['id']])->one();
 
         if ($contrato) {
             $contrato->status = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('status-contrato', $post['status']);
-            $contrato->tipo_contrato_fk = ($post['status'] == 2) ? $contrato->tipo_contrato_fk : $post['tipo_contrato'];
+            $contrato->tipo_contrato_fk = ($post['status'] == 1 || $post['status'] == 2) ? $contrato->tipo_contrato_fk : $post['tipo_contrato'];
+            
             if ($contrato->save()) {
+
                 if ($post['status'] == 3) {
                     $msg = 'Contranto fechado';
-
-                    $andam = new \app\models\TabAndamentoSearch();
-                    $andam->txt_notificacao = 'Contrato fechado';
-                    $andam->cod_usuario_inclusao_fk = $this->user->identity->getId();
-                    $andam->cod_setor_fk = $post['setor'];
-                    $andam->dt_retorno = date('d/m/Y', strtotime(date('Y-m-d') . '+5 days'));
-                    $andam->save();
-                } else{
+                } elseif ($post['status'] == 1) {
+                    $msg = 'Contranto ativado';
+                } else {
                     $msg = 'Contranto recusado';
-            
-                    $andam = new \app\models\TabAndamentoSearch();
-                    $andam->txt_notificacao = $msg;
-                    $andam->cod_usuario_inclusao_fk = $this->user->identity->getId();
-                    $andam->cod_setor_fk = $post['setor'];
-                    $andam->dt_retorno = date('d/m/Y', strtotime(date('Y-m-d') . '+5 days'));
-                    $andam->save();
                 }
+      
+                $andam = new \app\models\TabAndamentoSearch();
+                $andam->txt_notificacao = $msg;
+                $andam->cod_usuario_inclusao_fk = $this->user->identity->getId();
+                $andam->cod_setor_fk = $post['setor'];
+                $andam->dt_retorno = date('d/m/Y', strtotime(date('Y-m-d') . '+5 days'));
+                $andam->save();
             }
         }
 
@@ -336,7 +332,7 @@ class ContratoController extends Controller {
             $contrato = new \app\modules\comercial\models\TabContratoSearch();
             $contrato->status = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('status-contrato', '1');
             $contrato->tipo_contrato_fk = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-contrato', 'proposta');
-            $contrato->cod_cliente_fk =  $post['TabClienteSearch']['cod_cliente'];
+            $contrato->cod_cliente_fk = $post['TabClienteSearch']['cod_cliente'];
             $contrato->save();
             $servico = new \app\modules\comercial\models\TabTipoContratoSearch();
             $servico->cod_usuario_fk = $post['TabPropostaSearch']['cod_usuario_fk'];
@@ -381,18 +377,19 @@ class ContratoController extends Controller {
     public function actionIncluirImportacao() {
         $post = Yii::$app->request->post();
         $transaction = Yii::$app->db->beginTransaction();
-            
+
         try {
 
             $contrato = new \app\modules\comercial\models\TabContratoSearch();
             $contrato->status = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('status-contrato', '1');
             $contrato->tipo_contrato_fk = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-contrato', 'proposta');
-            $contrato->cod_cliente_fk =  $post['TabClienteSearch']['cod_cliente'];
+            $contrato->cod_cliente_fk = $post['TabClienteSearch']['cod_cliente'];
             $contrato->file = $post['TabImportacaoSearch']['file'];
-        
-             print_r($_FILES);
-             
-print_r($dados); exit;
+
+            print_r($_FILES);
+
+            print_r($dados);
+            exit;
             $contrato->save();
             $servico = new \app\modules\comercial\models\TabTipoContratoSearch();
             $servico->cod_usuario_fk = $post['TabPropostaSearch']['cod_usuario_fk'];
@@ -434,14 +431,12 @@ print_r($dados); exit;
         }
     }
 
-    
-    
-    
-      public function importWord($inputFiles, $post) {
+    public function importWord($inputFiles, $post) {
         ini_set('memory_limit', '512M');
 
         $xml = simplexml_load_file($inputFiles);
-        print_r($xml); exit;
+        print_r($xml);
+        exit;
         $sici = new TabSiciSearch();
 
         $dom = new \DOMDocument();
@@ -685,4 +680,5 @@ print_r($dados); exit;
 
         return compact('sici', 'cliente', 'contatoC', 'contatoT', 'planof', 'planof_mn', 'planoj', 'planoj_mn', 'empresas', 'anual', 'indicadores');
     }
+
 }

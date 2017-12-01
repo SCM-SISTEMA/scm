@@ -92,6 +92,11 @@ class TabModeloContratoSearch extends TabModeloContrato
         $this->txt_modelo = str_replace('{municipio}', $endereco->tabMunicipios->txt_nome, $this->txt_modelo);
         $this->txt_modelo = str_replace('{estado}', $endereco->tabMunicipios->sgl_estado_fk, $this->txt_modelo);
         $this->txt_modelo = str_replace('{cep}', $endereco->cep, $this->txt_modelo);
+        $this->txt_modelo = str_replace('{estado_civil}', $contrato->estado_civil, $this->txt_modelo);
+        $this->txt_modelo = str_replace('{nacionalidade}', $contrato->nacionalidade, $this->txt_modelo);
+        $this->txt_modelo = str_replace('{rg}', $contrato->rg, $this->txt_modelo);
+        $this->txt_modelo = str_replace('{nacionalidade}', $contrato->nacionalidade, $this->txt_modelo);
+        $this->txt_modelo = str_replace('{nacionalidade}', $contrato->nacionalidade, $this->txt_modelo);
         $this->txt_modelo = str_replace('{cnpj}', $contrato->cnpj, $this->txt_modelo);
 
         $this->txt_modelo = str_replace('{representate_comercial}', $socio->nome, $this->txt_modelo);

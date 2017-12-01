@@ -430,6 +430,8 @@ function mudarStatus(result, status, setor, tipo_contrato) {
     var msg = null;
     if (status == '3') {
         msg = 'Deseja realmente fechar a proposta?';
+    } else if(status == '1'){
+         msg = 'Deseja realmente ativar proposta?';
     } else {
         msg = 'Deseja realmente recusar a proposta?';
 

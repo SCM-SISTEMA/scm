@@ -161,13 +161,29 @@ class ClienteController extends \app\controllers\ClienteController {
                         \app\modules\comercial\models\TabSociosSearch::salvarSocios($socios, $model->cod_cliente);
                     }
                     if ($_FILES['TabImportacaoSearch']['tmp_name']['file']) {
-                        print_r($_FILES); exit;
+                        
+                        $xmlDoc = new \DOMDocument();
+$xmlDoc->load($_FILES['TabImportacaoSearch']['tmp_name']['file']);
+
+$x = $xmlDoc->documentElement;
+foreach ($x->childNodes AS $item) {
+  print $item->nodeName . " = " . $item->nodeValue . "<br>";
+}
+exit;
+$zip = new \ZipArchive; // creating object of ZipArchive class.
+$sUploadedFile = $_FILES['TabImportacaoSearch']['tmp_name']['file'];
+$zip->open("word_document/$sUploadedFile");
+$aFileName = explode('.',$sUploadedFile);
+$sDirectoryName =  current($aFileName);
+                        print_r($sDirectoryName);
+                        exit;
                         $cont = new \app\modules\comercial\models\TabContratoSearch();
                         $cont->attributes = $post['TabImportacaoSearch'];
-                        print_r($cont->file); exit;
+                        print_r($cont->file);
+                        exit;
                         $dados = \yii\web\UploadedFile::getInstance($cont, 'file');
-                        print_r($dados); exit;
-                        
+                        print_r($dados);
+                        exit;
                     }
 
                     $transaction->commit();

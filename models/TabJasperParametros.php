@@ -5,7 +5,7 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "public.tab_jasper_parametros".
+ * This is the model class for table "tab_jasper_parametros".
  *
  * @property integer $id
  * @property string $sgl_relid
@@ -18,7 +18,7 @@ class TabJasperParametros extends \projeto\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'public.tab_jasper_parametros';
+        return 'tab_jasper_parametros';
     }
 
     /**

@@ -12,7 +12,7 @@ use app\modules\comercial\models\ViewClienteContrato;
  */
 class ViewClienteContratoSearch extends ViewClienteContrato {
 
-    public $contato;
+    
     public $tipo_contato;
 
     
@@ -20,7 +20,11 @@ class ViewClienteContratoSearch extends ViewClienteContrato {
      * @inheritdoc
      */
     public function rules() {
-        return parent::rules();
+        $rules = parent::rules();
+        
+        //$rules[] =  [['contato'], 'safe'];
+        return $rules;
+        
     }
 
     /**
@@ -46,18 +50,18 @@ class ViewClienteContratoSearch extends ViewClienteContrato {
         ;
     }
 
-    public function afterFind() {
-        parent::afterFind();
-
-        $this->contato = \app\models\TabContatoSearch::find()->where(['chave_fk' => $this->cod_cliente, 'tipo_tabela_fk' => \app\models\TabCliente::tableName()])->asArray()->one();
-                
-        $tp = \app\models\TabAtributosValoresSearch::find()->where(['cod_atributos_valores' => $this->contato['tipo']])->asArray()->one();
-        
-        $this->contato = $this->contato['contato'];
-        $this->tipo_contato = $tp['dsc_descricao'];
-
-        return true;
-    }
+//    public function afterFind() {
+//        parent::afterFind();
+//
+//        $this->contato = \app\models\TabContatoSearch::find()->where(['chave_fk' => $this->cod_cliente, 'tipo_tabela_fk' => \app\models\TabCliente::tableName()])->asArray()->one();
+//                
+//        $tp = \app\models\TabAtributosValoresSearch::find()->where(['cod_atributos_valores' => $this->contato['tipo']])->asArray()->one();
+//        
+//        $this->contato = $this->contato['contato'];
+//        $this->tipo_contato = $tp['dsc_descricao'];
+//
+//        return true;
+//    }
     /**
      * @inheritdoc
      */
@@ -78,6 +82,8 @@ class ViewClienteContratoSearch extends ViewClienteContrato {
         $query->andFilterWhere([
             $this->tableName() . '.cod_contrato' => $this->cod_contrato,
             $this->tableName() . '.atributos_status' => $this->dsc_status,
+            $this->tableName() . '.atributos_tipo_produto' => $this->dsc_tipo_produto,
+            
             
         ]);
 
@@ -87,7 +93,21 @@ class ViewClienteContratoSearch extends ViewClienteContrato {
         $query->andFilterWhere(['ilike', $this->tableName() . '.txt_login', $this->txt_login]);
         $query->andFilterWhere(['ilike', $this->tableName() . '.dt_retorno', $this->dt_retorno]);
         $query->andFilterWhere(['ilike', $this->tableName() . '.cnpj', $this->cnpj]);
-
+        $query->andFilterWhere(['ilike', $this->tableName() . '.contato', $this->contato]);
+        
+//        echo '<pre>';
+//        print_r(['LEFT OUTER JOIN', \app\models\TabContatoSearch::tableName() ,
+//                
+//                "chave_fk = ". $this->tableName().".cod_cliente AND tipo_tabela_fk = '".\app\models\TabClienteSearch::tableName()."'"
+//                ]); 
+//         echo '</pre>';       exit;
+//        if($this->contato){
+//        $query->join('LEFT OUTER JOIN', \app\models\TabContatoSearch::tableName() ,
+//                "chave_fk = ". $this->tableName().".cod_cliente AND tipo_tabela_fk = '".\app\models\TabClienteSearch::tableName()."'"
+//              );
+//       //$query->andFilterWhere(['ilike', \app\models\TabContatoSearch::tableName() . '.contato', $this->contato]);
+//        }
+  
         //$query->andWhere($this->tableName() . '.dt_exclusao IS NULL');
 
         return $dataProvider;

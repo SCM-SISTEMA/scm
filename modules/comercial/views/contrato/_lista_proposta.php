@@ -119,14 +119,14 @@ $provider = new \yii\data\ActiveDataProvider([
 //                    },
 //                ),
                     ['class' => 'projeto\grid\ActionColumn',
-                        'template' => '{andamento} {fechar} {recusar}',
+                        'template' => '{andamento} {fechar} {recusar} {ativar}',
                         'buttons' => [
                             'andamento' => function ($action, $model, $key) {
 
 
                                 return Html::a('<span class="fa  fa-commenting-o"></span>', '#', [
                                             'arialabel' => 'Andamento',
-                                            'data-toggle' => 'tooltip',
+                                            //'data-toggle' => 'tooltip',
                                             'title' => 'Andamento',
                                             'onclick' => "return adicionarAndamentoContrato('" . $model['cod_setor'] . "', '" . $model['cod_contrato'] . "', 1)",
                                 ]);
@@ -136,7 +136,7 @@ $provider = new \yii\data\ActiveDataProvider([
                                 if ($model['sgl_status'] == '1') {
                                     return Html::a('<span class="fa fa-check"></span>', '#', [
                                                 'arialabel' => 'Fechar Contrato',
-                                                'data-toggle' => 'tooltip',
+                                                //'data-toggle' => 'tooltip',
                                                 'title' => 'Fechar Contrato',
                                                 'onclick' => "return openGerarContrato('" . $model['cod_contrato'] . "', '3', '" . $model['cod_setor'] . "',  '" . $model['cod_tipo_contrato'] . "')",
                                     ]);
@@ -146,9 +146,19 @@ $provider = new \yii\data\ActiveDataProvider([
                                 if ($model['sgl_status'] == '1') {
                                     return Html::a('<span class="fa fa-close"></span>', '#', [
                                                 'arialabel' => 'Recusar Proposta',
-                                                'data-toggle' => 'tooltip',
+                                                //}'data-toggle' => 'tooltip',
                                                 'title' => 'Recusar Proposta',
                                                 'onclick' => "return mudarStatus('" . $model['cod_contrato'] . "', '2', '" . $model['cod_setor'] . "',  '" . $model['cod_tipo_contrato'] . "')",
+                                    ]);
+                                }
+                            },
+                            'ativar' => function ($action, $model, $key) {
+                                if ($model['sgl_status'] == '2') {
+                                    return Html::a('<span class="fa fa-share-square"></span>', '#', [
+                                                'arialabel' => 'Ativar Proposta',
+                                                //'data-toggle' => 'tooltip',
+                                                'title' => 'Ativar Proposta',
+                                                'onclick' => "return mudarStatus('" . $model['cod_contrato'] . "', '1', '" . $model['cod_setor'] . "',  '" . $model['cod_tipo_contrato'] . "')",
                                     ]);
                                 }
                             },

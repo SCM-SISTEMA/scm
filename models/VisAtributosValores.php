@@ -5,7 +5,7 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "public.vis_atributos_valores".
+ * This is the model class for table "vis_atributos_valores".
  *
  * @property integer $cod_atributos
  * @property integer $cod_atributos_valores
@@ -21,7 +21,7 @@ class VisAtributosValores extends \projeto\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'public.vis_atributos_valores';
+        return 'vis_atributos_valores';
     }
 
     /**

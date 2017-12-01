@@ -3,9 +3,9 @@
 namespace app\models;
 
 /**
- * This is the ActiveQuery class for [[TabSetores]].
+ * This is the ActiveQuery class for [[TabAndamento]].
  *
- * @see TabSetores
+ * @see TabAndamento
  */
 class TabAndamentoQuery extends \projeto\db\ActiveQuery
 {
@@ -17,7 +17,7 @@ class TabAndamentoQuery extends \projeto\db\ActiveQuery
 
     /**
      * @inheritdoc
-     * @return TabSetores[]|array
+     * @return TabAndamento[]|array
      */
     public function all($db = null)
     {
@@ -26,7 +26,7 @@ class TabAndamentoQuery extends \projeto\db\ActiveQuery
 
     /**
      * @inheritdoc
-     * @return TabSetores|array|null
+     * @return TabAndamento|array|null
      */
     public function one($db = null)
     {

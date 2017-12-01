@@ -23,7 +23,7 @@ class TabContratoSearch extends TabContrato {
             [['cod_contrato', 'dt_prazo', 'dt_inclusao', 'dt_vencimento', 'tipo_contrato_fk', 'dia_vencimento', 'qnt_parcelas', 'responsavel_fk', 'qnt_clientes', 'cod_cliente_fk', 'file'], 'safe'],
             [['operando', 'link', 'zero800', 'parceiria', 'consultoria_scm', 'engenheiro_tecnico'], 'boolean'],
             [['contador'], 'string', 'max' => 150],
-            [['file'], 'file', 'skipOnEmpty' => true, 'extensions' => 'sql'],
+            [['file'], 'file', 'skipOnEmpty' => true],
         ];
     }
 

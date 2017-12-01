@@ -18,6 +18,8 @@ use Yii;
  * @property integer $tipo_usuario
  * @property string $dt_inclusao
  * @property boolean $ativo
+ * @property string $bairro
+ * @property string $tipo_tabela_fk
  *
  * @property TabMunicipios $tabMunicipios
  */
@@ -45,7 +47,9 @@ class TabEndereco extends \projeto\db\ActiveRecord
             [['numero'], 'string', 'max' => 20],
             [['complemento'], 'string', 'max' => 100],
             [['cep'], 'string', 'max' => 10],
-            [['cod_municipio_fk'], 'string', 'max' => 6]
+            [['cod_municipio_fk'], 'string', 'max' => 6],
+            [['bairro'], 'string', 'max' => 150],
+            [['tipo_tabela_fk'], 'string', 'max' => 60]
         ];
     }
 
@@ -67,6 +71,9 @@ class TabEndereco extends \projeto\db\ActiveRecord
 2 - usuario',
             'dt_inclusao' => 'Dt Inclusao',
             'ativo' => 'Ativo',
+            'bairro' => 'Bairro',
+            'tipo_tabela_fk' => 'tipo de usuario do contato
+',
         ];
     }
 

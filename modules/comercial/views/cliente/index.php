@@ -39,7 +39,12 @@ $this->registerJsFile('@web/js/app/comercial.contrato.js', ['position' => $this:
                 'razao_social',
                 'responsavel',
                 'contato',
-                'dsc_tipo_produto',
+               
+                 [
+                    'attribute' => 'dsc_tipo_produto',
+                    
+                    'filter' => app\models\TabAtributosValoresSearch::getAtributoValor(\app\models\TabAtributosSearch::findOne(['sgl_chave' => 'tipo-produto'])->cod_atributos, true, true),
+                ],
                 [
                     'attribute' => 'dsc_status',
                     'content' => function($data) {
@@ -71,31 +76,29 @@ $this->registerJsFile('@web/js/app/comercial.contrato.js', ['position' => $this:
                     }
                 ],
                 ['class' => 'projeto\grid\ActionColumn',
-                    'template' => '{admin} {andamento} {fechar} {recusar}',
+                    'template' => '{admin} {andamento} {fechar} {recusar} {ativar}',
                     'buttons' => [
                         'admin' => function ($action, $model, $key) {
 
                             return Html::a('<span class="fa fa-edit"></span>', Url::to(['cliente/admin', 'id' => $model->cod_cliente]), [
                                         'title' => 'Alterar',
                                         'aria-label' => 'Alterar',
-                                        'data-toggle' => 'tooltip',
+                                        // 'data-toggle' => 'tooltip',
                                         'data-pjax' => '0',
                             ]);
                         },
                         'andamento' => function ($action, $model, $key) {
 
-                            if ($model['sgl_status'] == '1') {
-                                return Html::a('<span class="fa  fa-commenting-o"></span>', '#', [
-                                            'arialabel' => 'Andamento',
-                                            'data-toggle' => 'tooltip',
-                                            'title' => 'Andamento',
-                                            'onclick' => "return adicionarAndamentoContrato('" . $model->cod_setor . "', '" . $model->cod_contrato . "', 1)",
-                                ]);
-                            }
+                            return Html::a('<span class="fa  fa-commenting-o"></span>', '#', [
+                                        'arialabel' => 'Andamento',
+                                        //'data-toggle' => 'tooltip',
+                                        'title' => 'Andamento',
+                                        'onclick' => "return adicionarAndamentoContrato('" . $model->cod_setor . "', '" . $model->cod_contrato . "', 1)",
+                            ]);
                         },
                         'fechar' => function ($action, $model, $key) {
+                            if ($model->sgl_status == '1') {
 
-                            if ($model['sgl_status'] == '1') {
                                 return Html::a('<span class="fa fa-check"></span>', '#', [
                                             'arialabel' => 'Fechar Contrato',
                                             'data-toggle' => 'tooltip',
@@ -105,12 +108,22 @@ $this->registerJsFile('@web/js/app/comercial.contrato.js', ['position' => $this:
                             }
                         },
                         'recusar' => function ($action, $model, $key) {
-                            if ($model['sgl_status'] == '1') {
+                            if ($model->sgl_status == '1') {
                                 return Html::a('<span class="fa fa-close"></span>', '#', [
                                             'arialabel' => 'Recusar Proposta',
-                                            'data-toggle' => 'tooltip',
+                                            //'data-toggle' => 'tooltip',
                                             'title' => 'Recusar Proposta',
                                             'onclick' => "return mudarStatus('" . $model->cod_contrato . "', '2', '" . $model->cod_setor . "',  '" . $model->cod_tipo_contrato . "')",
+                                ]);
+                            }
+                        },
+                        'ativar' => function ($action, $model, $key) {
+                            if ($model->sgl_status == '2') {
+                                return Html::a('<span class="fa fa-share-square"></span>', '#', [
+                                            'arialabel' => 'Ativar Proposta',
+                                            //'data-toggle' => 'tooltip',
+                                            'title' => 'Ativar Proposta',
+                                            'onclick' => "return mudarStatus('" . $model->cod_contrato . "', '1', '" . $model->cod_setor . "',  '" . $model->cod_tipo_contrato . "')",
                                 ]);
                             }
                         },
@@ -124,12 +137,17 @@ $this->registerJsFile('@web/js/app/comercial.contrato.js', ['position' => $this:
     <div class="box-footer">
         <h3 class="box-title"></h3>
         <div class="box-tools pull-right">
-            <?= Html::a('<i class="glyphicon glyphicon-plus"></i> Incluir novo registro', ['admin'], ['class' => 'btn btn-success btn-sm']) ?>
+            <?=
+            Html::button('Incluir Cliente', [
+                'id' => 'botaoOpenCliente',
+                'class' => 'btn btn-success btn-sm',
+            ]);
+            ?>
         </div>
     </div>
 </div>
 
-<?php $form = ActiveForm::begin(['id'=>'formCliente']); ?>
+<?php $form = ActiveForm::begin(['id' => 'formCliente']); ?>
 <?php echo $this->render('@app/modules/comercial/views/contrato/_form_proposta_add', ['form' => $form]); ?> 
 <?php echo $this->render('@app/modules/comercial/views/contrato/_form_pre_contrato_add', ['form' => $form]); ?> 
 <?php echo $this->render('@app/views/andamento/_form_andamento_add', ['form' => $form]); ?> 

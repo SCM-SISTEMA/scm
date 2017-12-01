@@ -14,6 +14,7 @@ use Yii;
  * @property string $dt_inclusao
  * @property integer $tipo
  * @property integer $chave_fk
+ * @property string $tipo_tabela_fk
  *
  * @property TabAtributosValores $tabAtributosValores
  */
@@ -37,7 +38,8 @@ class TabContato extends \projeto\db\ActiveRecord
             [['dt_inclusao'], 'safe'],
             [['tipo', 'chave_fk'], 'integer'],
             [['contato'], 'string', 'max' => 200],
-            [['ramal'], 'string', 'max' => 5]
+            [['ramal'], 'string', 'max' => 5],
+            [['tipo_tabela_fk'], 'string', 'max' => 60]
         ];
     }
 
@@ -54,6 +56,8 @@ class TabContato extends \projeto\db\ActiveRecord
             'dt_inclusao' => 'Dt Inclusao',
             'tipo' => 'atributo valor -> tipo-contato',
             'chave_fk' => 'Chave Fk',
+            'tipo_tabela_fk' => 'tipo de usuario do contato
+',
         ];
     }
 

@@ -11,7 +11,14 @@ use Yii;
  * @property integer $fk_atributos_valores_atributos_id
  * @property string $sgl_valor
  * @property string $dsc_descricao
+ * @property string $txt_login_inclusao
+ * @property string $txt_login_alteracao
+ * @property string $txt_login_exclusao
+ * @property string $dt_alteracao
  *
+ * @property TabContratoTipoContrato[] $tabContratoTipoContrato
+ * @property TabContratoTipoContrato[] $tabContratoTipoContrato0
+ * @property TabModeloContrato[] $tabModeloContrato
  * @property TabAtributos $tabAtributos
  * @property TabContato[] $tabContato
  * @property TabModeloDocs[] $tabModeloDocs
@@ -38,7 +45,9 @@ class TabAtributosValores extends \projeto\db\ActiveRecord
         return [
             [['fk_atributos_valores_atributos_id'], 'integer'],
             [['sgl_valor'], 'string'],
-            [['dsc_descricao'], 'string', 'max' => 200]
+            [['dt_alteracao'], 'safe'],
+            [['dsc_descricao'], 'string', 'max' => 200],
+            [['txt_login_inclusao', 'txt_login_alteracao', 'txt_login_exclusao'], 'string', 'max' => 150]
         ];
     }
 
@@ -52,7 +61,35 @@ class TabAtributosValores extends \projeto\db\ActiveRecord
             'fk_atributos_valores_atributos_id' => 'Fk Atributos Valores Atributos ID',
             'sgl_valor' => 'Sgl Valor',
             'dsc_descricao' => 'Dsc Descricao',
+            'txt_login_inclusao' => 'Txt Login Inclusao',
+            'txt_login_alteracao' => 'Txt Login Alteracao',
+            'txt_login_exclusao' => 'Txt Login Exclusao',
+            'dt_alteracao' => 'Dt Alteracao',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTabContratoTipoContrato()
+    {
+        return $this->hasMany(TabContratoTipoContrato::className(), ['cod_contrato_fk' => 'cod_atributos_valores']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTabContratoTipoContrato0()
+    {
+        return $this->hasMany(TabContratoTipoContrato::className(), ['cod_tipo_contrato_fk' => 'cod_atributos_valores']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTabModeloContrato()
+    {
+        return $this->hasMany(TabModeloContrato::className(), ['cod_contrato_tipo_contrato_fk' => 'cod_atributos_valores']);
     }
 
     /**

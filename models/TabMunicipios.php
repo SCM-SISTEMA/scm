@@ -19,8 +19,10 @@ use Yii;
  * @property string $longitude
  * @property integer $regiao_hidrografica_fk
  * @property boolean $bln_critico
+ * @property string $txt_nome_sem_acento
  *
- * @property TabEndereco $tabEndereco
+ * @property TabEmpresaMunicipio[] $tabEmpresaMunicipio
+ * @property TabEndereco[] $tabEndereco
  * @property TabAtributosValores $tabAtributosValores
  * @property TabEstados $tabEstados
  * @property TabMicrorregioes $tabMicrorregioes
@@ -47,7 +49,7 @@ class TabMunicipios extends \projeto\db\ActiveRecord
             [['cod_microrregiao_fk', 'cod_ibge', 'cod_regiao_metropolitana_fk', 'regiao_hidrografica_fk'], 'integer'],
             [['area_km2'], 'number'],
             [['cod_municipio'], 'string', 'max' => 6],
-            [['txt_nome'], 'string', 'max' => 50],
+            [['txt_nome', 'txt_nome_sem_acento'], 'string', 'max' => 50],
             [['sgl_estado_fk'], 'string', 'max' => 2],
             [['latitude', 'longitude'], 'string', 'max' => 30]
         ];
@@ -71,7 +73,16 @@ class TabMunicipios extends \projeto\db\ActiveRecord
             'longitude' => 'Longitude',
             'regiao_hidrografica_fk' => 'Regiao Hidrografica Fk',
             'bln_critico' => 'Bln Critico',
+            'txt_nome_sem_acento' => 'Nome do município',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTabEmpresaMunicipio()
+    {
+        return $this->hasMany(TabEmpresaMunicipio::className(), ['cod_municipio_fk' => 'cod_municipio']);
     }
 
     /**
@@ -79,7 +90,7 @@ class TabMunicipios extends \projeto\db\ActiveRecord
      */
     public function getTabEndereco()
     {
-        return $this->hasOne(TabEndereco::className(), ['cod_municipio_fk' => 'cod_municipio']);
+        return $this->hasMany(TabEndereco::className(), ['cod_municipio_fk' => 'cod_municipio']);
     }
 
     /**

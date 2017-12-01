@@ -9,6 +9,7 @@ use Yii;
  *
  * @property integer $cod_cliente
  * @property string $cnpj
+ * @property string $contato
  * @property string $razao_social
  * @property string $responsavel
  * @property string $txt_notificacao
@@ -39,6 +40,7 @@ use Yii;
  * @property integer $cod_usuario_responsavel_fk
  * @property string $dt_vencimento
  * @property integer $cod_tipo_setor_fk
+ * @property integer $cod_tipo_contrato
  */
 class ViewClienteContrato extends \projeto\db\ActiveRecord
 {
@@ -56,8 +58,8 @@ class ViewClienteContrato extends \projeto\db\ActiveRecord
     public function rules()
     {
         return [
-            [['cod_cliente', 'status_andamento_retorno', 'atributos_tipo_produto', 'atributos_tipo_contrato', 'atributos_status', 'atributos_setor', 'cod_contrato', 'tipo_contrato_fk', 'qnt_parcelas', 'cod_cliente_fk', 'cod_setor', 'cod_usuario_responsavel_fk', 'cod_tipo_setor_fk'], 'integer'],
-            [['txt_notificacao', 'dt_retorno', 'txt_notificacao_res', 'dt_inclusao_andamento', 'sgl_status', 'dt_prazo', 'dt_inclusao_contrato', 'dt_vencimento'], 'string'],
+            [['cod_cliente', 'status_andamento_retorno', 'atributos_tipo_produto', 'atributos_tipo_contrato', 'atributos_status', 'atributos_setor', 'cod_contrato', 'tipo_contrato_fk', 'qnt_parcelas', 'cod_cliente_fk', 'cod_setor', 'cod_usuario_responsavel_fk', 'cod_tipo_setor_fk', 'cod_tipo_contrato'], 'integer'],
+            [['contato', 'txt_notificacao', 'dt_retorno', 'txt_notificacao_res', 'dt_inclusao_andamento', 'sgl_status', 'dt_prazo', 'dt_inclusao_contrato', 'dt_vencimento'], 'string'],
             [['valor_contrato'], 'number'],
             [['ativo_contrato'], 'boolean'],
             [['cnpj'], 'string', 'max' => 18],
@@ -75,6 +77,7 @@ class ViewClienteContrato extends \projeto\db\ActiveRecord
         return [
             'cod_cliente' => 'Cod Cliente',
             'cnpj' => 'Cnpj',
+            'contato' => 'Contato',
             'razao_social' => 'Razao Social',
             'responsavel' => 'Responsavel',
             'txt_notificacao' => 'Txt Notificacao',
@@ -105,6 +108,7 @@ class ViewClienteContrato extends \projeto\db\ActiveRecord
             'cod_usuario_responsavel_fk' => 'Cod Usuario Responsavel Fk',
             'dt_vencimento' => 'Dt Vencimento',
             'cod_tipo_setor_fk' => 'Cod Tipo Setor Fk',
+            'cod_tipo_contrato' => 'Cod Tipo Contrato',
         ];
     }
 
