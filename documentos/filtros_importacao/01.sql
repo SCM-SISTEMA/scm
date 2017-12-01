@@ -17,9 +17,23 @@ UPDATE public.tab_atributos_valores
    SET dsc_descricao='Cancelado'
  WHERE sgl_valor=4 and dsc_descricao = 'Financeiro';
 
-
+-- View: comercial.view_cliente_contrato
 
 DROP VIEW comercial.view_cliente_contrato;
+
+CREATE OR REPLACE VIEW public.view_contato AS 
+ SELECT contatos.chave_fk,
+    contatos.tipo_tabela_fk,
+    contatos.contato
+   FROM ( SELECT tab_contato.chave_fk,
+            tab_contato.tipo_tabela_fk,
+            replace(replace(replace(array_agg(tab_contato.contato)::character varying::text, '}'::text, ''::text), '{'::text, ''::text), '"'::text, ''::text) AS contato
+           FROM tab_contato
+          GROUP BY tab_contato.chave_fk, tab_contato.tipo_tabela_fk) contatos;
+
+ALTER TABLE public.view_contato
+  OWNER TO postgres;
+
 
 CREATE OR REPLACE VIEW comercial.view_cliente_contrato AS 
  SELECT cl.cod_cliente,
@@ -73,7 +87,7 @@ CREATE OR REPLACE VIEW comercial.view_cliente_contrato AS
            FROM tab_andamento
           WHERE tab_andamento.cod_setor_fk = s.cod_setor))
      LEFT JOIN acesso.tab_usuarios u1 ON u1.cod_usuario = a.cod_usuario_inclusao_fk
-     LEFT JOIN public.view_contato vc on vc.chave_fk=cl.cod_cliente and tipo_tabela_fk='tab_cliente'
+     LEFT JOIN view_contato vc ON vc.chave_fk = cl.cod_cliente AND vc.tipo_tabela_fk::text = 'tab_cliente'::text
   WHERE cl.situacao IS TRUE
   ORDER BY c.cod_contrato DESC, a3.sgl_valor, c.dt_inclusao DESC;
 
