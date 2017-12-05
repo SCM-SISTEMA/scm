@@ -370,13 +370,13 @@ function editarContrato(result) {
 }
 
 
-function excluirContrato(result) {
+function excluirContrato(result, setor) {
 
-    var post = {'id': result}
+    var post = {'id': result, 'setor': setor}
     var urlInclusao = $('base').attr('href') + 'comercial/contrato/excluir-contrato';
 
 
-    projeto.confirm('<div align="center"><h2>Deseja excluir contrato?</h2></div>', function () {
+    projeto.confirm('<div align="center"><h2>Deseja cancelar contrato?</h2></div>', function () {
         projeto.ajax.defaultBlockUI();
         projeto.ajax.post(urlInclusao, post, function (response) {
 

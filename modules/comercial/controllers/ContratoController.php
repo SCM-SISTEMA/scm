@@ -265,11 +265,20 @@ class ContratoController extends Controller {
         $contrato = \app\modules\comercial\models\TabContratoSearch::find()->where(['cod_contrato' => $post['id']])->one();
 
         if ($contrato) {
-            $contrato->ativo = false;
+            
+            $contrato->status = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('status-contrato', '4');
             $contrato->save();
+
+            $str = 'Contranto cancelado';
+
+            $andam = new \app\models\TabAndamentoSearch();
+            $andam->txt_notificacao = $str;
+            $andam->cod_usuario_inclusao_fk = $this->user->identity->getId();
+            $andam->cod_setor_fk = $post['setor'];
+            $andam->save();
         }
 
-        $str = 'Exclusão efetuada com sucesso';
+        $str = $str.' com sucesso';
 
         $msg['tipo'] = 'success';
         $msg['msg'] = $str;
@@ -289,7 +298,7 @@ class ContratoController extends Controller {
         if ($contrato) {
             $contrato->status = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('status-contrato', $post['status']);
             $contrato->tipo_contrato_fk = ($post['status'] == 1 || $post['status'] == 2) ? $contrato->tipo_contrato_fk : $post['tipo_contrato'];
-            
+
             if ($contrato->save()) {
 
                 if ($post['status'] == 3) {
@@ -299,7 +308,7 @@ class ContratoController extends Controller {
                 } else {
                     $msg = 'Contranto recusado';
                 }
-      
+
                 $andam = new \app\models\TabAndamentoSearch();
                 $andam->txt_notificacao = $msg;
                 $andam->cod_usuario_inclusao_fk = $this->user->identity->getId();

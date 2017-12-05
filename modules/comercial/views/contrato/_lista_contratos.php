@@ -138,10 +138,10 @@ $provider = new \yii\data\ActiveDataProvider([
                             },
                             'cancelar' => function ($action, $model, $key) {
 
-                                return Html::a('<span class="fa fa-trash"></span>', '#', [
+                                return Html::a('<span class="fa fa-close"></span>', '#', [
                                             'title' => 'Cancelar',
                                             'data-toggle' => 'tooltip',
-                                            'onclick' => "return excluirContrato('" . $model['cod_contrato'] . "')",
+                                            'onclick' => "return excluirContrato('" . $model['cod_contrato'] . "', '" . $model['cod_setor'] . "')",
                                 ]);
                             },
                             'andamento' => function ($action, $model, $key) {

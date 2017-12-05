@@ -29,7 +29,6 @@
         "kartik-v/yii2-date-range": "*",
         "kartik-v/yii2-tabs-x": "*",
         "kartik-v/yii2-mpdf": "dev-master",
-        "phing/phing": "^2.13",
 	"cyneek/yii2-widget-upload-crop": "dev-master",
          "2amigos/yii2-date-picker-widget" : "~1.0",
 	"2amigos/yii2-chartjs-widget" : "~2.0",
@@ -47,6 +46,7 @@
         "yiibr/yii2-br-validator": "*",
         "mg-code/yii2-session-timeout-warning": "@dev",
         "phpoffice/phpexcel": "~1.8"	,
+	"phpoffice/phpword": "v0.13.*",
 	"yii2tech/html2pdf": "*",
         "2amigos/yii2-tinymce-widget": "~1.1"		
     },
