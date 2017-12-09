@@ -125,7 +125,7 @@ Projeto.prototype.contrato = new (Projeto.extend({
                 return false;
             }
 
-            var urlInclusao = $('base').attr('href') + 'comercial/cliente/incluir-contrato';
+            var urlInclusao = $('base').attr('href') + 'comercial/cliente/editar-contrato';
 
             projeto.ajax.post(urlInclusao, form.serialize( ), function (response) {
                 var dados = $.parseJSON(response);
@@ -186,7 +186,7 @@ Projeto.prototype.contrato = new (Projeto.extend({
     salvarImportacao: function () {
         $('#botaoSalvarImportacao').click(function ( ) {
 
-          $(this).submit();
+            $(this).submit();
 
 
 
@@ -285,9 +285,10 @@ Projeto.prototype.contrato = new (Projeto.extend({
             $('#tabtipocontratosearchservico-tipo_produto_fk').val('');
 
         } else {
+            $('#tabcontratosearch-cod_contrato').val('');
             $('#tabcontratosearch-tipo_contrato_fk').val('');
-            $('#tabtipo-contratosearch-cod_usuario_fk').val('');
-            $('#tabtipo-contratosearch-tipo_produto_fk').val('');
+            $('#tabtipocontratosearch-cod_usuario_fk').val('');
+            $('#tabtipocontratosearch-cod_tipo_contrato').val('');
         }
 
     },
@@ -296,8 +297,8 @@ Projeto.prototype.contrato = new (Projeto.extend({
 
         $('#tabcontratosearch-cod_contrato').val(dados[0]['cod_contrato']);
         $('#tabcontratosearch-tipo_contrato_fk').val(dados[0]['tipo_contrato_fk']);
-        $('#tabcontratosearch-status').val(dados[0]['atributos_status']);
-        $('#tabtipo-contratosearch-cod_usuario_fk').val(dados[0]['cod_usuario_responsavel_fk']);
+        $('#tabtipocontratosearch-cod_usuario_fk').val(dados[0]['cod_usuario_responsavel_fk']);
+        $('#tabtipocontratosearch-cod_tipo_contrato').val(dados[0]['cod_tipo_contrato']);
 
     },
 
@@ -347,19 +348,17 @@ function adicionarContrato(contrato) {
 
 function editarContrato(result) {
 
-    var post = {'cod': result}
+    var post = {'cod': result};
     var urlInclusao = $('base').attr('href') + 'comercial/contrato/carregar-contrato';
 
     projeto.ajax.post(urlInclusao, post, function (response) {
 
         var dados = $.parseJSON(response);
 
-        Projeto.prototype.comercial.openModalTipoContrato('Contrato', result);
-        $('#div-status').show();
+        $('#modalContrato').modal('show').find('#modalContent').load( );
 
-        $('#tabcontratosearch-tipo_contrato_fk').attr('disabled', 'disabled');
-        Projeto.prototype.comercial.limpaFormTipoContrato('Contrato');
-        Projeto.prototype.comercial.preencheFormContrato(dados);
+        Projeto.prototype.contrato.limpaFormTipoContrato('Contrato');
+        Projeto.prototype.contrato.preencheFormContrato(dados);
 
     });
 
@@ -430,8 +429,8 @@ function mudarStatus(result, status, setor, tipo_contrato) {
     var msg = null;
     if (status == '3') {
         msg = 'Deseja realmente fechar a proposta?';
-    } else if(status == '1'){
-         msg = 'Deseja realmente ativar proposta?';
+    } else if (status == '1') {
+        msg = 'Deseja realmente ativar proposta?';
     } else {
         msg = 'Deseja realmente recusar a proposta?';
 

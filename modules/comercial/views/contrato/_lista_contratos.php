@@ -23,9 +23,9 @@ $provider = new \yii\data\ActiveDataProvider([
 <!--<div class='row'>
 <?php //if (isset($msg)) { ?>
         <div class="col-md-12">
-            <div class="alert-<?php //= $msg['tipo']   ?> alert fade in">
+            <div class="alert-<?php //= $msg['tipo']    ?> alert fade in">
                 <button class="close" aria-hidden="true" data-dismiss="alert" type="button">×</button>
-                <i class="icon fa fa-<?php //=$msg['icon']   ?>"></i>
+                <i class="icon fa fa-<?php //=$msg['icon']    ?>"></i>
 <?php //=['msg'] ?>
             </div>
         </div>
@@ -127,58 +127,64 @@ $provider = new \yii\data\ActiveDataProvider([
                         'template' => '{update}  {cancelar}  {andamento}  {formaPagamento} {upload} {imprimir}',
                         'buttons' => [
                             'update' => function ($action, $model, $key) {
+                                if ($model['sgl_status'] != '4') {
 
-
-                                return Html::a('<span class="fa fa-edit"></span>', '#', [
-                                            'title' => 'Alterar',
-                                            'aria-label' => 'Alterar',
-                                            'data-toggle' => 'tooltip',
-                                            'onclick' => "return editarContrato('" . $model['cod_contrato'] . "')",
-                                ]);
+                                    return Html::a('<span class="fa fa-edit"></span>', '#', [
+                                                'title' => 'Alterar',
+                                                'aria-label' => 'Alterar',
+                                                'data-toggle' => 'tooltip',
+                                                'onclick' => "return editarContrato('" . $model['cod_contrato'] . "')",
+                                    ]);
+                                }
                             },
                             'cancelar' => function ($action, $model, $key) {
-
-                                return Html::a('<span class="fa fa-close"></span>', '#', [
-                                            'title' => 'Cancelar',
-                                            'data-toggle' => 'tooltip',
-                                            'onclick' => "return excluirContrato('" . $model['cod_contrato'] . "', '" . $model['cod_setor'] . "')",
-                                ]);
+                                if ($model['sgl_status'] != '4') {
+                                    return Html::a('<span class="fa fa-close"></span>', '#', [
+                                                'title' => 'Cancelar',
+                                                'data-toggle' => 'tooltip',
+                                                'onclick' => "return excluirContrato('" . $model['cod_contrato'] . "', '" . $model['cod_setor'] . "')",
+                                    ]);
+                                }
                             },
                             'andamento' => function ($action, $model, $key) {
-
-                                return Html::a('<span class="fa  fa-commenting-o"></span>', '#', [
-                                            'arialabel' => 'Andamento',
-                                            'data-toggle' => 'tooltip',
-                                            'title' => 'Andamento',
-                                            'onclick' => "return adicionarAndamentoContrato('" . $model['cod_setor'] . "', '" . $model['cod_contrato'] . "', 2)",
-                                ]);
+                                if ($model['sgl_status'] != '4') {
+                                    return Html::a('<span class="fa  fa-commenting-o"></span>', '#', [
+                                                'arialabel' => 'Andamento',
+                                                'data-toggle' => 'tooltip',
+                                                'title' => 'Andamento',
+                                                'onclick' => "return adicionarAndamentoContrato('" . $model['cod_setor'] . "', '" . $model['cod_contrato'] . "', 2)",
+                                    ]);
+                                }
                             },
                             'formaPagamento' => function ($action, $model, $key) {
-
-                                return Html::a('<span class="fa fa-dollar"></span>', '#', [
-                                            'arialabel' => 'Forma de pagamento',
-                                            'data-toggle' => 'tooltip',
-                                            'title' => 'Forma de pagamento',
-                                            'onclick' => "return adicionarFormaPagamentoContrato('" . $model['cod_contrato'] . "', '" . $model['valor_contrato'] . "')",
-                                ]);
+                                if ($model['sgl_status'] != '4') {
+                                    return Html::a('<span class="fa fa-dollar"></span>', '#', [
+                                                'arialabel' => 'Forma de pagamento',
+                                                'data-toggle' => 'tooltip',
+                                                'title' => 'Forma de pagamento',
+                                                'onclick' => "return adicionarFormaPagamentoContrato('" . $model['cod_contrato'] . "', '" . $model['valor_contrato'] . "')",
+                                    ]);
+                                }
                             },
                             'upload' => function ($action, $model, $key) {
-
-                                return Html::a('<span class="fa fa-download"></span>', '#', [
-                                            'arialabel' => 'Importar Contrato',
-                                            'data-toggle' => 'tooltip',
-                                            'title' => 'importar Contrato',
-                                            'onclick' => "return abrirImportacao('" . $model['cod_contrato'] . "')",
-                                ]);
+                                if ($model['sgl_status'] != '4') {
+                                    return Html::a('<span class="fa fa-download"></span>', '#', [
+                                                'arialabel' => 'Importar Contrato',
+                                                'data-toggle' => 'tooltip',
+                                                'title' => 'importar Contrato',
+                                                'onclick' => "return abrirImportacao('" . $model['cod_contrato'] . "')",
+                                    ]);
+                                }
                             },
                             'imprimir' => function ($action, $model, $key) {
-
-                                return Html::a('<span class="fa fa-print"></span>', '#', [
-                                            'arialabel' => 'Imprimir Contrato',
-                                            'data-toggle' => 'tooltip',
-                                            'title' => 'Imprimir Contrato',
-                                            'onclick' => "return abrirImpressao('" . $model['cod_contrato'] . "')",
-                                ]);
+                                if ($model['sgl_status'] != '4') {
+                                    return Html::a('<span class="fa fa-print"></span>', '#', [
+                                                'arialabel' => 'Imprimir Contrato',
+                                                'data-toggle' => 'tooltip',
+                                                'title' => 'Imprimir Contrato',
+                                                'onclick' => "return abrirImpressao('" . $model['cod_contrato'] . "')",
+                                    ]);
+                                }
                             },
                         ]
                     ],
@@ -188,4 +194,4 @@ $provider = new \yii\data\ActiveDataProvider([
         </div>
     </div> 
 
-        <?php endif; ?>
+<?php endif; ?>

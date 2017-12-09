@@ -29,6 +29,7 @@ Modal::begin([
 ]);
 
 $model = new app\modules\comercial\models\TabSociosSearch();
+$end = new \app\models\TabEnderecoSearch();
 ?>
 
 <div id="formSocios">
@@ -50,7 +51,7 @@ $model = new app\modules\comercial\models\TabSociosSearch();
             $form->field($model, 'estado_civil_fk')->dropDownList(
                     yii\helpers\ArrayHelper::map(
                             \app\models\TabAtributosValoresSearch::find()->where(['fk_atributos_valores_atributos_id' =>
-                                app\models\TabAtributosSearch::find()->where(['sgl_chave' => 'tipos-generos'])->one()['cod_atributos']
+                                app\models\TabAtributosSearch::find()->where(['sgl_chave' => 'estado-civil'])->one()['cod_atributos']
                             ])->orderBy('dsc_descricao')->all(), 'cod_atributos_valores', 'dsc_descricao'
                     ), ['prompt' => $this->app->params['txt-prompt-select']
             ]);
@@ -140,7 +141,7 @@ $model = new app\modules\comercial\models\TabSociosSearch();
         </div>
         
     </div>
-
+   <?php echo $this->render('@app/views/endereco/_form', ['form' => $form, 'model'=>$end]); ?> 
 
 </div>
 

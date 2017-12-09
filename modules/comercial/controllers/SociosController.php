@@ -174,12 +174,17 @@ class SociosController extends Controller {
             $model = new \app\modules\comercial\models\TabSociosSearch();
             $model->load($post);
             $str = 'Alteração';
+            
+            $end = \app\models\TabEnderecoSearch::salvarEnderecos([$post['TabEnderecoSociosSearch']], $model, false);
         } else {
 
             $model = new \app\modules\comercial\models\TabSociosSearch();
             $model->load($post);
             $model->cod_socio = 'novo-' . rand('100000000', '999999999');
             $str = 'Inclusão';
+            $post['TabEnderecoSociosSearch']['cod_endereco'] = 'novo-' . rand('100000000', '999999999');
+            $end = \app\models\TabEnderecoSearch::salvarEnderecos([$post['TabEnderecoSociosSearch']], $model, false);
+            
         }
 
         $model->validate();
@@ -191,6 +196,7 @@ class SociosController extends Controller {
             $itens[$model->cod_socio]['email'] = $model->email;
             $itens[$model->cod_socio]['skype'] = $model->skype;
             $itens[$model->cod_socio]['telefone'] = $model->telefone;
+            $itens[$model->cod_socio]['endereco'] = $end;
             \Yii::$app->session->set('socios', $itens);
 
 

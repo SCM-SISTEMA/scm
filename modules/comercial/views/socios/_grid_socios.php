@@ -41,6 +41,7 @@ use yii\helpers\Url;
                         'update' => function ($urls, $key, $class) {
 
                             $dados = \yii\helpers\Json::encode($key);
+
                             return Html::a(
                                             '<span class="glyphicon glyphicon-pencil"> </span>', '#', [
                                         'data-toggle' => 'tooltip',
@@ -49,6 +50,7 @@ use yii\helpers\Url;
                                         'onclick' => " 
                                             
 							var dados = {$dados};
+                                                            
                                                         Projeto.prototype.cliente.limpaFormSocios();
 							Projeto.prototype.cliente.openModalSocios();
                                                         Projeto.prototype.cliente.preencheFormSocios(dados);

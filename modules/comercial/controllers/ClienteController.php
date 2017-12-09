@@ -115,6 +115,12 @@ class ClienteController extends \app\controllers\ClienteController {
                     $socios[$socio->cod_socio]['email'] = $socio->email;
                     $socios[$socio->cod_socio]['telefone'] = $socio->telefone;
                     $socios[$socio->cod_socio]['skype'] = $socio->skype;
+
+                    $end = \app\models\TabEnderecoSearch::find()->where("chave_fk = {$socio->getPrimaryKey()} and tipo_tabela_fk = '{$socio->tableName()}'")->one();
+                    if ($end) {
+                        $socios[$socio->cod_socio]['endereco'] = $end->attributes;
+                        $socios[$socio->cod_socio]['endereco']['uf'] = $end->uf;
+                    }
                 }
             }
 
@@ -1391,6 +1397,54 @@ class ClienteController extends \app\controllers\ClienteController {
 
             $transaction->commit();
             return true;
+        } catch (\Exception $e) {
+            $transaction->rollBack();
+            throw $e;
+        }
+    }
+
+    public function actionEditarContrato() {
+        $post = Yii::$app->request->post();
+        $transaction = Yii::$app->db->beginTransaction();
+
+        try {
+
+
+            $contrato = \app\modules\comercial\models\TabContratoSearch::find()->where(['cod_contrato' => $post['TabContratoSearch']['cod_contrato']])->one();
+            $contrato->tipo_contrato_fk = $post['TabContratoSearch']['tipo_contrato_fk'];
+            $contrato->save();
+
+            $setor = \app\models\TabSetoresSearch::find()->where([
+                        'cod_tipo_contrato_fk' => $post['TabTipoContratoSearch']['cod_tipo_contrato'],
+                        'cod_tipo_setor_fk' => \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('setores', '1'),
+                    ])->one();
+
+            $setor->cod_usuario_responsavel_fk = $post['TabTipoContratoSearch']['cod_usuario_fk'];
+            $setor->save();
+
+            
+            $servico =  \app\modules\comercial\models\TabTipoContratoSearch::find()->where(
+                    ['cod_contrato_fk'=>$post['TabContratoSearch']['cod_contrato']]
+                    )->one();
+            
+            $servico->cod_usuario_fk = $post['TabTipoContratoSearch']['cod_usuario_fk'];
+            $servico->save();
+/*  
+            $andam = new \app\models\TabAndamentoSearch();
+            $andam->txt_notificacao = 'Alteracao no dados do contrato';
+            $andam->cod_usuario_inclusao_fk = $this->user->identity->getId();
+            $andam->cod_setor_fk = $setor->cod_setor;
+            $andam->dt_retorno = date('d/m/Y', strtotime(date('Y-m-d') . '+5 days'));
+            $andam->save();
+*/
+
+            $transaction->commit();
+            $msg = 'Contrato alterado com sucesso';
+            $form = \yii\widgets\ActiveForm::begin();
+            $this->module->module->layout = null;
+            $dados = $this->render('@app/modules/comercial/views/contrato/_lista_contratos', ['cod_cliente' => $post['TabClienteSearch']['cod_cliente'], 'form' => $form, 'msg' => $msg]);
+
+            return \yii\helpers\Json::encode($dados);
         } catch (\Exception $e) {
             $transaction->rollBack();
             throw $e;

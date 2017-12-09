@@ -13,7 +13,7 @@ Modal::begin([
     'headerOptions' => [
         'id' => 'modalHeader'
     ],
-    'header' => '<h3><div id="tituloTipoContrato">Fechar contrato</div></h3>',
+    'header' => '<h3><div id="tituloTipoContrato">Contrato</div></h3>',
     'id' => 'modalContrato',
     'closeButton' => false,
     'size' => 'modal-sm',
@@ -51,8 +51,20 @@ $tipo_contrato = new \app\modules\comercial\models\TabTipoContratoSearch();
             ?>
         </div>
     </div>
+    <div class='row'>
+        <div class='col-lg-12'>
+                 <?=
+            $form->field($tipo_contrato, 'cod_usuario_fk')->dropDownList(
+                    yii\helpers\ArrayHelper::map(
+                            app\modules\admin\models\VisUsuariosPerfisSearch::find()->where(['modulo_id' => 'comercial'])->all(), 'cod_usuario_fk', 'txt_login'
+                    ), ['prompt' => $this->app->params['txt-prompt-select'],
+            ]);
+            ?>
+        </div>
+    </div>
 
     <?= $form->field($contrato, 'cod_contrato')->hiddenInput()->label(false); ?>
+    <?= $form->field($tipo_contrato, 'cod_tipo_contrato')->hiddenInput()->label(false); ?>
 </div>
 
 <?php Modal::end(); ?>

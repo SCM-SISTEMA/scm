@@ -10,41 +10,38 @@ use app\modules\comercial\models\TabModeloContrato;
 /**
  * TabModeloContratoSearch represents the model behind the search form about `app\modules\comercial\models\TabModeloContrato`.
  */
-class TabModeloContratoSearch extends TabModeloContrato
-{
-    
+class TabModeloContratoSearch extends TabModeloContrato {
+
     public $cod_contrato_fk;
-    /**
-     * @inheritdoc
-     */ 
-    public function rules()
-    {
 
-		$rules =  [
-             //exemplo [['txt_nome', 'cod_modulo_fk'], 'required'],
-        ];
-		
-		return array_merge($rules, parent::rules());
-    }
-	
-	/**
-    * @inheritdoc
-    */
-	public function attributeLabels()
-    {
-
-		$labels = [
-            //exemplo 'campo' => 'label',         
-        ];
-		
-		return array_merge( parent::attributeLabels(), $labels);
-    }
-	
     /**
      * @inheritdoc
      */
-    public function scenarios()
-    {
+    public function rules() {
+
+        $rules = [
+                //exemplo [['txt_nome', 'cod_modulo_fk'], 'required'],
+        ];
+
+        return array_merge($rules, parent::rules());
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels() {
+
+        $labels = [
+                //exemplo 'campo' => 'label',         
+        ];
+
+        return array_merge(parent::attributeLabels(), $labels);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function scenarios() {
         // bypass scenarios() implementation in the parent class
         return Model::scenarios();
     }
@@ -56,8 +53,7 @@ class TabModeloContratoSearch extends TabModeloContrato
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
-    {
+    public function search($params) {
         $query = TabModeloContratoSearch::find();
 
         $dataProvider = new ActiveDataProvider([
@@ -73,13 +69,12 @@ class TabModeloContratoSearch extends TabModeloContrato
 
         $query->andFilterWhere(['ilike', $this->tableName() . '.txt_modelo', $this->txt_modelo]);
 
-		$query->andWhere($this->tableName().'.dt_exclusao IS NULL');
-		
+        $query->andWhere($this->tableName() . '.dt_exclusao IS NULL');
+
         return $dataProvider;
     }
-    
-        
-      public function substituiVariaveis($contrato) {
+
+    public function substituiVariaveis($contrato) {
         $endereco = \app\models\TabEnderecoSearch::find()->where(['chave_fk' => $contrato->cod_cliente, 'tipo_tabela_fk' => \app\models\TabClienteSearch::tableName()])->one();
         $socio = TabSociosSearch::find()->where(['cod_cliente_fk' => $contrato->cod_cliente, 'representante_comercial' => true])->one();
         $dt_parcelas = TabContratoParcelasSearch::find()->where(['numero' => '1', 'cod_contrato_fk' => $contrato->cod_contrato])->one();
@@ -92,20 +87,31 @@ class TabModeloContratoSearch extends TabModeloContrato
         $this->txt_modelo = str_replace('{municipio}', $endereco->tabMunicipios->txt_nome, $this->txt_modelo);
         $this->txt_modelo = str_replace('{estado}', $endereco->tabMunicipios->sgl_estado_fk, $this->txt_modelo);
         $this->txt_modelo = str_replace('{cep}', $endereco->cep, $this->txt_modelo);
+        $this->txt_modelo = str_replace('{cnpj}', $contrato->cnpj, $this->txt_modelo);
+
+        $this->txt_modelo = str_replace('{representate_comercial}', $socio->nome, $this->txt_modelo);
+        $this->txt_modelo = str_replace('{ssp}', $socio->ssp, $this->txt_modelo);
         $this->txt_modelo = str_replace('{estado_civil}', $contrato->estado_civil, $this->txt_modelo);
         $this->txt_modelo = str_replace('{nacionalidade}', $contrato->nacionalidade, $this->txt_modelo);
         $this->txt_modelo = str_replace('{rg}', $contrato->rg, $this->txt_modelo);
         $this->txt_modelo = str_replace('{nacionalidade}', $contrato->nacionalidade, $this->txt_modelo);
-        $this->txt_modelo = str_replace('{nacionalidade}', $contrato->nacionalidade, $this->txt_modelo);
-        $this->txt_modelo = str_replace('{cnpj}', $contrato->cnpj, $this->txt_modelo);
-
-        $this->txt_modelo = str_replace('{representate_comercial}', $socio->nome, $this->txt_modelo);
-        //$this->txt_modelo = str_replace('{mas_fem}', 'a', $this->txt_modelo);
         $this->txt_modelo = str_replace('{profissao}', $socio->profissao, $this->txt_modelo);
         $this->txt_modelo = str_replace('{cpf}', $socio->cpf, $this->txt_modelo);
         $this->txt_modelo = str_replace('{telefone}', $socio->telefone, $this->txt_modelo);
         $this->txt_modelo = str_replace('{email}', $socio->email, $this->txt_modelo);
         $this->txt_modelo = str_replace('{tipo_contrato}', $contrato->dsc_tipo_contrato, $this->txt_modelo);
+
+        $endereco_r = \app\models\TabEnderecoSearch::find()->where(['chave_fk' => $socio->cod_socio, 'tipo_tabela_fk' => TabSociosSearch::tableName()])->one();
+
+        if ($endereco_r) {
+            $this->txt_modelo = str_replace('{logradouro_r}', $endereco_r->logradouro_f, $this->txt_modelo);
+            $this->txt_modelo = str_replace('{numero_r}', $endereco_r->numero_r, $this->txt_modelo);
+            $this->txt_modelo = str_replace('{bairro_r}', $endereco_r->bairro_r, $this->txt_modelo);
+            $this->txt_modelo = str_replace('{municipio_r}', $endereco_r->tabMunicipios->txt_nome, $this->txt_modelo);
+            $this->txt_modelo = str_replace('{estado_r}', $endereco_r->tabMunicipios->sgl_estado_fk, $this->txt_modelo);
+            $this->txt_modelo = str_replace('{cep_r}', $endereco_r->cep, $this->txt_modelo);
+        }
+        
 
         $qnt_parcelas_txt = \projeto\Util::converteNumeroEmLetras($contrato->qnt_parcelas, false);
         $meses = $contrato->qnt_parcelas . ' (' . $qnt_parcelas_txt . ')';
@@ -126,8 +132,8 @@ class TabModeloContratoSearch extends TabModeloContrato
         $qnt_parcelas_txt = \projeto\Util::converteNumeroEmLetras($contrato->qnt_parcelas);
         $meses = $contrato->qnt_parcelas . ' (' . $qnt_parcelas_txt . ')';
         $this->txt_modelo = str_replace('{num_parcelas}', $meses, $this->txt_modelo);
-        
-        if($contrato->valor_contrato && $contrato->qnt_parcelas){
+
+        if ($contrato->valor_contrato && $contrato->qnt_parcelas) {
             $parcela = $contrato->valor_contrato / $contrato->qnt_parcelas;
         }
         $valor_parcela = \projeto\Util::decimalFormatToBank($parcela);

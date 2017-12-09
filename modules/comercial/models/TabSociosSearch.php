@@ -189,7 +189,6 @@ class TabSociosSearch extends TabSocios {
     }
 
     public static function salvarSocios($socios, $cod_cliente) {
-
         foreach ($socios as $key => $value) {
             if (strpos($value['cod_socio'], 'novo') !== false) {
 
@@ -202,11 +201,15 @@ class TabSociosSearch extends TabSocios {
                 $modelSoc->cod_cliente_fk = $cod_cliente;
                 $modelSoc->save();
 
+
+                if ($value['endereco']) {
+                    \app\models\TabEnderecoSearch::salvarEnderecos([$value['endereco']], $modelSoc);
+                }
+
                 $naoExcluir[] = $modelSoc->cod_socio;
             } else {
 
                 $modelSoc = TabSociosSearch::find()->where(['cod_socio' => $value['cod_socio']])->one();
-
                 unset($value['cod_socio']);
                 unset($value['dt_inclusao']);
 
@@ -216,6 +219,11 @@ class TabSociosSearch extends TabSocios {
                     $modelSoc->skype = $value['skype'];
                     $modelSoc->email = $value['email'];
                     $modelSoc->save();
+
+                    if ($value['endereco']) {
+                        \app\models\TabEnderecoSearch::salvarEnderecos([$value['endereco']], $modelSoc);
+                    }
+
                     $naoExcluir[] = $modelSoc->cod_socio;
                 }
             }

@@ -1,7 +1,7 @@
 Projeto.prototype.cliente = new (Projeto.extend({
     init: function () {
-       // this.abrirFormaPagamentoParcelas();
-    //    this.openRefazerFormaPagamento();
+        // this.abrirFormaPagamentoParcelas();
+        //    this.openRefazerFormaPagamento();
         this.salvarCliente();
         this.salvarEndereco();
         //this.salvarParcelas();
@@ -10,8 +10,8 @@ Projeto.prototype.cliente = new (Projeto.extend({
         this.incluirNovo('Endereco');
         this.incluirSocios();
         this.incluirNovo('Contato');
-      //  this.salvarTipoContrato();
-     //   this.salvarContrato();
+        //  this.salvarTipoContrato();
+        //   this.salvarContrato();
         this.carregaMunicipio();
         this.alterarContato();
         this.verificaCnpj();
@@ -256,12 +256,12 @@ Projeto.prototype.cliente = new (Projeto.extend({
             $('#modalCliente').modal('hide');
             projeto.ajax.post(urlInclusao, form.serialize( ), function (response) {
                 var dados = $.parseJSON(response);
-               
+
                 setTimeout(function () {
-                     projeto.ajax.defaultBlockUI();
-                   
+                    projeto.ajax.defaultBlockUI();
+
                 }, 300);
-                 location.reload();
+                location.reload();
 
             });
 
@@ -466,7 +466,17 @@ Projeto.prototype.cliente = new (Projeto.extend({
         $('#tabsociossearch-email').val('');
         $('#tabsociossearch-representante_comercial').val('');
         $('#tabsociossearch-cod_socio').val('');
-        $('#tabsociossearch-representante_comercial').val('');
+
+
+        $('#tabenderecosocios-cod_endereco').val('');
+        $('#tabenderecosocios-logradouro').val('');
+        $('#tabenderecosocios-numero').val('');
+        $('#tabenderecosocios-complemento').val('');
+        $('#tabenderecosocios-cep').val('');
+        $('#tabenderecosocios-correspondencia').val('');
+        $('#tabenderecosocios-cod_municipio_fk').val('');
+        $('#tabenderecosocios-uf').val('');
+        $('#tabenderecosocios-bairro').val('');
 
 
     },
@@ -602,18 +612,24 @@ Projeto.prototype.cliente = new (Projeto.extend({
     carregaMunicipio: function () {
         $('#tabenderecosearch-uf').change(function ( ) {
 
-            Projeto.prototype.cliente.buscaMunicipio($(this).val());
+            Projeto.prototype.cliente.buscaMunicipio($(this).val(), '#tabenderecosearch-cod_municipio_fk');
+
+
+        });
+        $('#tabenderecosocios-uf').change(function ( ) {
+
+            Projeto.prototype.cliente.buscaMunicipio($(this).val(), '#tabenderecosocios-cod_municipio_fk');
 
 
         });
     },
-    buscaMunicipio: function (ufs) {
+    buscaMunicipio: function (ufs, id) {
         var urlInclusao = $('base').attr('href') + 'municipios/lista';
 
         var selecao = {uf: ufs};
 
         projeto.ajax.post(urlInclusao, selecao, function (response) {
-            $('#tabenderecosearch-cod_municipio_fk').html(response);
+            $(id).html(response);
         });
     },
     alterarContato: function () {
@@ -649,7 +665,18 @@ Projeto.prototype.cliente = new (Projeto.extend({
         $('#tabsociossearch-representante_comercial').val(dados['representante_comercial']);
         $('#tabsociossearch-cod_socio').val(dados['cod_socio']);
         $('#tabsociossearch-cod_cliente_fk').val(dados['cod_cliente_fk']);
-
+        
+        $('#tabenderecosocios-cod_endereco').val(dados['endereco']['cod_endereco']);
+        $('#tabenderecosocios-logradouro').val(dados['endereco']['logradouro']);
+        $('#tabenderecosocios-numero').val(dados['endereco']['numero']);
+        $('#tabenderecosocios-complemento').val(dados['endereco']['complemento']);
+        $('#tabenderecosocios-cep').val(dados['endereco']['cep']);
+        $('#tabenderecosocios-correspondencia').val(dados['endereco']['correspondencia']);
+        $('#tabenderecosocios-bairro').val(dados['endereco']['bairro']);
+        $('#tabenderecosocios-uf').val(dados['endereco']['uf']).change();
+ setTimeout(function () {
+        $('#tabenderecosocios-cod_municipio_fk').val(dados['endereco']['cod_municipio_fk']);
+                    }, 300);
 
     },
 
