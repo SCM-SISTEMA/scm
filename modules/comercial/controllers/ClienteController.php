@@ -120,6 +120,10 @@ class ClienteController extends \app\controllers\ClienteController {
                     if ($end) {
                         $socios[$socio->cod_socio]['endereco'] = $end->attributes;
                         $socios[$socio->cod_socio]['endereco']['uf'] = $end->uf;
+                    } else {
+                        $end = new \app\models\TabEnderecoSearch();
+                        $socios[$socio->cod_socio]['endereco'] = $end->attributes;
+                        $socios[$socio->cod_socio]['endereco']['uf'] = $end->uf;
                     }
                 }
             }
@@ -166,44 +170,7 @@ class ClienteController extends \app\controllers\ClienteController {
 
                         \app\modules\comercial\models\TabSociosSearch::salvarSocios($socios, $model->cod_cliente);
                     }
-                    if ($_FILES['TabImportacaoSearch']['tmp_name']['file']) {
-
-                        $reader = \PhpOffice\PhpWord\IOFactory::createReader('Word2007');
-
-                        $userDoc = $_FILES['TabImportacaoSearch']['tmp_name']['file'];
-
-                        $teste = $this->parseWord($_FILES['TabImportacaoSearch']['tmp_name']['file']);
-
-
-
-                        $ch = curl_init();
-
-                        curl_setopt($ch, CURLOPT_URL, "https://word2cleanhtml.com/cleanit");
-
-                        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-                        curl_setopt($ch, CURLOPT_POSTFIELDS, "source=" . 'asdfasdfadsf');
-                        curl_setopt($ch, CURLOPT_HEADER, 1);
-
-//Envia o cabeçalho do seu browser para o site
-
-                        curl_setopt($ch, CURLOPT_USERAGENT, $_SERVER['HTTP_USER_AGENT']);
-
-                        $pagina = curl_exec($ch);
-                        print_r($pagina);
-                        exit;
-
-
-
-                        exit;
-                        $cont = new \app\modules\comercial\models\TabContratoSearch();
-                        $cont->attributes = $post['TabImportacaoSearch'];
-                        print_r($cont->file);
-                        exit;
-                        $dados = \yii\web\UploadedFile::getInstance($cont, 'file');
-                        print_r($dados);
-                        exit;
-                    }
-
+                 
                     $transaction->commit();
                     $this->session->setFlashProjeto('success', $acao);
                     return $this->redirect(['admin', 'id' => $model->cod_cliente]);
@@ -1422,21 +1389,21 @@ class ClienteController extends \app\controllers\ClienteController {
             $setor->cod_usuario_responsavel_fk = $post['TabTipoContratoSearch']['cod_usuario_fk'];
             $setor->save();
 
-            
-            $servico =  \app\modules\comercial\models\TabTipoContratoSearch::find()->where(
-                    ['cod_contrato_fk'=>$post['TabContratoSearch']['cod_contrato']]
+
+            $servico = \app\modules\comercial\models\TabTipoContratoSearch::find()->where(
+                            ['cod_contrato_fk' => $post['TabContratoSearch']['cod_contrato']]
                     )->one();
-            
+
             $servico->cod_usuario_fk = $post['TabTipoContratoSearch']['cod_usuario_fk'];
             $servico->save();
-/*  
-            $andam = new \app\models\TabAndamentoSearch();
-            $andam->txt_notificacao = 'Alteracao no dados do contrato';
-            $andam->cod_usuario_inclusao_fk = $this->user->identity->getId();
-            $andam->cod_setor_fk = $setor->cod_setor;
-            $andam->dt_retorno = date('d/m/Y', strtotime(date('Y-m-d') . '+5 days'));
-            $andam->save();
-*/
+            /*
+              $andam = new \app\models\TabAndamentoSearch();
+              $andam->txt_notificacao = 'Alteracao no dados do contrato';
+              $andam->cod_usuario_inclusao_fk = $this->user->identity->getId();
+              $andam->cod_setor_fk = $setor->cod_setor;
+              $andam->dt_retorno = date('d/m/Y', strtotime(date('Y-m-d') . '+5 days'));
+              $andam->save();
+             */
 
             $transaction->commit();
             $msg = 'Contrato alterado com sucesso';

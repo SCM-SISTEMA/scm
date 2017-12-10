@@ -26,7 +26,7 @@ class TabEnderecoSearch extends TabEndereco {
             [['cod_municipio_fk', 'cep', 'logradouro', 'numero'], 'required', 'on' => 'criar'],
             //[['cod_municipio_fk', 'cep', 'logradouro'], 'required'],
             [['chave_fk', 'tipo_usuario'], 'integer'],
-            [['dt_inclusao', 'cod_endereco', 'bairro','tipo_tabela_fk', 'cod_municipio_fk'], 'safe'],
+            [['dt_inclusao', 'cod_endereco', 'bairro', 'tipo_tabela_fk', 'cod_municipio_fk'], 'safe'],
             [['logradouro'], 'string', 'max' => 200],
             [['numero'], 'string', 'max' => 20],
             [['complemento'], 'string', 'max' => 100],
@@ -151,11 +151,10 @@ class TabEnderecoSearch extends TabEndereco {
 
         foreach ($endereco as $key => $value) {
 
-            if (strpos($value['cod_endereco'], 'novo') !== false) {
+            if (strpos($value['cod_endereco'], 'novo') !== false || !$value['cod_endereco']) {
                 unset($value['cod_endereco']);
 
                 $modelEnd = new \app\models\TabEnderecoSearch();
-
                 $modelEnd->attributes = $value;
                 $modelEnd->tipo_tabela_fk = $model->tableName();
                 if (!$save) {
@@ -180,6 +179,8 @@ class TabEnderecoSearch extends TabEndereco {
                 $naoExcluir[] = $modelEnd->cod_endereco;
             }
         }
+
+
         if ($naoExcluir) {
 
             TabEnderecoSearch::deleteAll("chave_fk = {$model->getPrimaryKey()} and tipo_tabela_fk = '{$model->tableName()}' and cod_endereco not in (" . implode(',', $naoExcluir) . ")");

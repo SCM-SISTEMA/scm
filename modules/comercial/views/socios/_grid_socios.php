@@ -50,7 +50,7 @@ use yii\helpers\Url;
                                         'onclick' => " 
                                             
 							var dados = {$dados};
-                                                            
+                                                        
                                                         Projeto.prototype.cliente.limpaFormSocios();
 							Projeto.prototype.cliente.openModalSocios();
                                                         Projeto.prototype.cliente.preencheFormSocios(dados);

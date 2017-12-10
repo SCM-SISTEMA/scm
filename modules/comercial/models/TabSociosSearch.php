@@ -189,6 +189,7 @@ class TabSociosSearch extends TabSocios {
     }
 
     public static function salvarSocios($socios, $cod_cliente) {
+
         foreach ($socios as $key => $value) {
             if (strpos($value['cod_socio'], 'novo') !== false) {
 
@@ -202,7 +203,7 @@ class TabSociosSearch extends TabSocios {
                 $modelSoc->save();
 
 
-                if ($value['endereco']) {
+                if ($value['endereco']['cod_endereco']) {
                     \app\models\TabEnderecoSearch::salvarEnderecos([$value['endereco']], $modelSoc);
                 }
 
@@ -220,7 +221,7 @@ class TabSociosSearch extends TabSocios {
                     $modelSoc->email = $value['email'];
                     $modelSoc->save();
 
-                    if ($value['endereco']) {
+                   if ($value['endereco']['cod_endereco']) {
                         \app\models\TabEnderecoSearch::salvarEnderecos([$value['endereco']], $modelSoc);
                     }
 
@@ -228,6 +229,7 @@ class TabSociosSearch extends TabSocios {
                 }
             }
         }
+       
         if ($naoExcluir) {
 
             TabSociosSearch::deleteAll("cod_cliente_fk={$cod_cliente} and cod_socio not in (" . implode(',', $naoExcluir) . ")");

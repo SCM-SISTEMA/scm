@@ -171,7 +171,7 @@ class SociosController extends Controller {
 
         if ($post['TabSociosSearch']['cod_socio'] != null) {
 
-            $model = new \app\modules\comercial\models\TabSociosSearch();
+            $model = \app\modules\comercial\models\TabSociosSearch::find()->where(['cod_socio'=>$post['TabSociosSearch']['cod_socio']])->one();
             $model->load($post);
             $str = 'Alteração';
             

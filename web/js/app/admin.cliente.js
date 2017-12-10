@@ -665,7 +665,7 @@ Projeto.prototype.cliente = new (Projeto.extend({
         $('#tabsociossearch-representante_comercial').val(dados['representante_comercial']);
         $('#tabsociossearch-cod_socio').val(dados['cod_socio']);
         $('#tabsociossearch-cod_cliente_fk').val(dados['cod_cliente_fk']);
-        
+
         $('#tabenderecosocios-cod_endereco').val(dados['endereco']['cod_endereco']);
         $('#tabenderecosocios-logradouro').val(dados['endereco']['logradouro']);
         $('#tabenderecosocios-numero').val(dados['endereco']['numero']);
@@ -674,9 +674,9 @@ Projeto.prototype.cliente = new (Projeto.extend({
         $('#tabenderecosocios-correspondencia').val(dados['endereco']['correspondencia']);
         $('#tabenderecosocios-bairro').val(dados['endereco']['bairro']);
         $('#tabenderecosocios-uf').val(dados['endereco']['uf']).change();
- setTimeout(function () {
-        $('#tabenderecosocios-cod_municipio_fk').val(dados['endereco']['cod_municipio_fk']);
-                    }, 300);
+        setTimeout(function () {
+            $('#tabenderecosocios-cod_municipio_fk').val(dados['endereco']['cod_municipio_fk']);
+        }, 300);
 
     },
 
