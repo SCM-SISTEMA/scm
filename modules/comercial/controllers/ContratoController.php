@@ -191,7 +191,7 @@ class ContratoController extends Controller {
 
     public function actionImpressao($cod_contrato) {
 
-        $post = \Yii::$app->session->get('pdfContrato');
+        $contrato = TabContratoSearch::find()->where(['cod_contrato' => $cod_contrato])->one();
 
         //$contrato = \app\modules\comercial\models\ViewClienteContratoSearch::find()->where(['cod_contrato' => $post['cod_contrato']])->one();
         //$nome = \projeto\Util::retiraAcento(str_replace(' ', '_', $contrato->razao_social)) . '-' . $contrato->cod_contrato . '-' . date('dmYs') . '.pdf';
@@ -207,7 +207,7 @@ class ContratoController extends Controller {
             'destination' => Pdf::DEST_DOWNLOAD,
             // your html content input
             'filename' => $nome,
-            'content' => $post,
+            'content' => $contrato->contrato_html,
             // format content from your own css file if needed or use the
             // enhanced bootstrap css built by Krajee for mPDF formatting 
             'cssFile' => '@vendor/kartik-v/yii2-mpdf/assets/kv-mpdf-bootstrap.min.css',
@@ -235,25 +235,29 @@ class ContratoController extends Controller {
 
         $post = Yii::$app->request->post();
 
-        \Yii::$app->session->set('pdfContrato', '');
-
-        \Yii::$app->session->set('pdfContrato', $post['html_contrato']);
-
-
-
+        $contrato = TabContratoSearch::find()->where(['cod_contrato' => $post['cod_contrato']])->one();
+        $contrato->contrato_html = $post['html_contrato'];
+        $contrato->save();
         return true;
     }
 
-    public function montarContrato($cod_contrato) {
+    public function montarContrato($cod_contrato, $limpar = false) {
 
-        $contrato = \app\modules\comercial\models\ViewClienteContratoAll::find()->where(['cod_contrato' => $cod_contrato])->one();
+        $contrato = \app\modules\comercial\models\ViewClienteContratoSearch::find()->where(['cod_contrato' => $cod_contrato])->one();
 
-        $modelo = \app\modules\comercial\models\TabModeloContratoSearch::find()->where(['cod_contrato_tipo_contrato_fk' => $contrato->tipo_contrato_fk])->one();
+        if (!$contrato->contrato_html || $limpar) {
+            
+            $modelo = \app\modules\comercial\models\TabModeloContratoSearch::find()->where(['cod_contrato_tipo_contrato_fk' => $contrato->tipo_contrato_fk])->one();
+            
+            if ($modelo) {
+                $modelo->substituiVariaveis($contrato);
 
-        if ($modelo) {
-            $modelo->substituiVariaveis($contrato);
+                return $modelo['txt_modelo'];
+            }
+            
+        } else {
 
-            return $modelo['txt_modelo'];
+            return $contrato->contrato_html;
         }
 
         return null;
@@ -265,7 +269,7 @@ class ContratoController extends Controller {
         $contrato = \app\modules\comercial\models\TabContratoSearch::find()->where(['cod_contrato' => $post['id']])->one();
 
         if ($contrato) {
-            
+
             $contrato->status = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('status-contrato', '4');
             $contrato->save();
 
@@ -278,7 +282,7 @@ class ContratoController extends Controller {
             $andam->save();
         }
 
-        $str = $str.' com sucesso';
+        $str = $str . ' com sucesso';
 
         $msg['tipo'] = 'success';
         $msg['msg'] = $str;
@@ -438,256 +442,6 @@ class ContratoController extends Controller {
             $transaction->rollBack();
             throw $e;
         }
-    }
-
-    public function importWord($inputFiles, $post) {
-        ini_set('memory_limit', '512M');
-
-        $xml = simplexml_load_file($inputFiles);
-        print_r($xml);
-        exit;
-        $sici = new TabSiciSearch();
-
-        $dom = new \DOMDocument();
-        $dom->load($inputFiles);
-
-        if ($dom->getElementsByTagName('UploadSICI')->item(0)->getAttribute('mes') == 1) {
-            $anual = true;
-            $sici->tipo_sici_fk = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-sici', 'A');
-        } elseif ($dom->getElementsByTagName('UploadSICI')->item(0)->getAttribute('mes') == '7') {
-            $indicadores = true;
-            $sici->tipo_sici_fk = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-sici', 'S');
-        } else {
-
-            $sici->tipo_sici_fk = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-sici', 'M');
-        }
-        $sici->mes_ano_referencia = $dom->getElementsByTagName('UploadSICI')->item(0)->getAttribute('mes') . '/' . $dom->getElementsByTagName('UploadSICI')->item(0)->getAttribute('ano');
-        $outorga = $dom->getElementsByTagName('Outorga')->item(0);
-        $fistel = $outorga->getAttribute('fistel');
-
-        $cliente = \app\models\TabClienteSearch::findOne(['fistel' => $fistel]);
-        $contrato = \app\modules\comercial\models\TabContratoSearch::findOne(['cod_cliente_fk' => $cliente->cod_cliente]);
-        $tipo_contrato = \app\modules\comercial\models\TabTipoContratoSearch::findOne(['cod_contrato_fk' => $contrato->cod_contrato]);
-
-        $sici->cod_tipo_contrato_fk = $tipo_contrato->cod_tipo_contrato;
-        if (!$cliente) {
-            $cliente = new \app\models\TabClienteSearch;
-            $cliente->fistel = $fistel;
-        }
-
-        $planof = new \app\modules\posoutorga\models\TabPlanosSearch();
-        $planoj = new \app\modules\posoutorga\models\TabPlanosSearch();
-
-        $planof_mn = new \app\modules\posoutorga\models\TabPlanosMenorMaiorSearch();
-        $planoj_mn = new \app\modules\posoutorga\models\TabPlanosMenorMaiorSearch();
-
-        foreach ($outorga->getElementsByTagName('Indicador') as $indicador) {
-            switch ($indicador->getAttribute('Sigla')) {
-                case 'IEM4' : $sici->qtd_funcionarios_fichados = $indicador->getElementsByTagName('Conteudo')->item(0)->getAttribute('valor');
-                    break;
-                case 'IEM5' : $sici->qtd_funcionarios_terceirizados = $indicador->getElementsByTagName('Conteudo')->item(0)->getAttribute('valor');
-                    break;
-                case 'IEM9' : $planof->setIEM9($indicador, 'F');
-                    $planoj->setIEM9($indicador, 'J');
-                    break;
-                case 'IEM10' : $planof_mn->setIEM10($indicador, 'F');
-                    $planoj_mn->setIEM10($indicador, 'J');
-                    break;
-                case 'QAIPL4SM' :
-
-                    foreach ($outorga->getElementsByTagName('Municipio') as $mun) {
-                        if (!$mun->getAttribute('codmunicipio')) {
-                            continue;
-                        }
-                        if ($mun->getElementsByTagName('Tecnologia')) {
-                            foreach ($mun->getElementsByTagName('Tecnologia') as $tec) {
-
-
-                                $empresa = new \app\modules\posoutorga\models\TabEmpresaMunicipioSearch();
-                                $empresa->tecnologia_fk = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tecnologia', $tec->getAttribute('item'));
-
-                                $municipio = \app\models\TabMunicipiosSearch::find()->where("cod_municipio='" . substr(trim($mun->getAttribute('codmunicipio')), 0, 6) . "' OR cod_ibge='" . trim($mun->getAttribute('codmunicipio')) . "'")->asArray()->one();
-
-                                $empresa->uf = $municipio['sgl_estado_fk'];
-                                $empresa->cod_municipio_fk = $municipio['cod_municipio'];
-
-                                $empresa->setQAIPL4SM($tec);
-
-                                $empresa->cod_empresa_municipio = 'N_' . rand(100000000, 999999999);
-
-                                if ((int) $empresa->total > 0) {
-                                    $planos = new \app\modules\posoutorga\models\TabPlanosSearch();
-
-                                    $empresasSessao[$empresa->cod_empresa_municipio] = [$empresa->attributes, $planos->attributes, $planos->attributes];
-                                }
-                            }
-                        }
-                    }
-                    break;
-
-                case 'IPL6IM' :
-
-
-                    foreach ($indicador->getElementsByTagName('Conteudo') as $mun) {
-                        $capacidades[$mun->getAttribute('codmunicipio')] = $mun->getAttribute('valor');
-                    }
-                    break;
-
-                case 'IPL3' :
-
-                    foreach ($indicador->getElementsByTagName('Municipio') as $mun) {
-                        foreach ($mun->getElementsByTagName('Pessoa') as $pes) {
-                            $ipl3[$mun->getAttribute('codmunicipio')][$pes->getAttribute('item')] = $pes->getElementsByTagName('Conteudo')->item(0)->getAttribute('valor');
-                        }
-                    }
-                    break;
-
-
-                case 'IAU1' :
-                    $sici->num_central_atendimento = $indicador->getElementsByTagName('Conteudo')->item(0)->getAttribute('valor');
-                    break;
-
-
-                case 'IPL1' :
-
-                    $sici->setIPL1($indicador);
-                    break;
-                case 'IPL2' :
-
-                    $sici->setIPL2($indicador);
-                    break;
-                case 'IEM1' :
-
-                    $sici->setIEM1($indicador);
-                    break;
-                case 'IEM2' :
-
-                    $sici->setIEM2($indicador);
-                    break;
-                case 'IEM3' :
-                    $sici->valor_consolidado = \projeto\Util::decimalFormatForBank($indicador->getElementsByTagName('Conteudo')->item(0)->getAttribute('valor'));
-
-                    break;
-                case 'IEM6' :
-
-                    $sici->receita_bruta = \projeto\Util::decimalFormatForBank($indicador->getElementsByTagName('Conteudo')->item(0)->getAttribute('valor'));
-
-                    break;
-                case 'IEM7' :
-
-                    $sici->receita_liquida = \projeto\Util::decimalFormatToBank($indicador->getElementsByTagName('Conteudo')->item(0)->getAttribute('valor'));
-                    break;
-                case 'IEM8' :
-                    $sici->setIEM8($indicador);
-                    break;
-            }
-        }
-
-
-        foreach ($empresasSessao as $key => $emp) {
-            $empresa = new \app\modules\posoutorga\models\TabEmpresaMunicipioSearch();
-            $empresa->attributes = $emp[0];
-            $empresa->cod_empresa_municipio = $emp[0]['cod_empresa_municipio'];
-
-            foreach ($capacidades as $ckey => $cap) {
-
-
-                if (substr($ckey, 0, 6) == $empresa->cod_municipio_fk) {
-                    $empresa->capacidade_municipio = $cap;
-                }
-            }
-
-            foreach ($ipl3 as $ikey => $ip) {
-
-                if (substr($ikey, 0, 6) == $empresa->cod_municipio_fk) {
-                    $empresa->total_fisica = $ip['F'];
-                    $empresa->total_juridica = $ip['J'];
-                }
-            }
-
-            $empresas[] = $empresa;
-            $planos = new \app\modules\posoutorga\models\TabPlanosSearch();
-            $planos->tipo_plano_fk = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-pessoa-plano', 'F');
-            $arrayF = $planos->attributes;
-            $arrayF['tipo_pessoa'] = 'Física';
-
-            $planos->tipo_plano_fk = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-pessoa-plano', 'J');
-
-            $arrayJ = $planos->attributes;
-            $arrayJ['tipo_pessoa'] = 'Juridica';
-
-            $totais = $empresa->calculaTotais($planos, $planos, false);
-            $totais['tipo_pessoa'] = 'Totais';
-            $totais['total'] = $empresa->total_fisica + $empresa->total_juridica;
-
-            $arrayF['total'] = $empresa->total_fisica;
-            $arrayJ['total'] = $empresa->total_juridica;
-
-            $empresa->gridMunicipios[] = $arrayF;
-            $empresa->gridMunicipios[] = $arrayJ;
-            $empresa->gridMunicipios[] = $totais;
-
-
-            $empresa->gridMunicipios = new \yii\data\ArrayDataProvider([
-                'id' => 'grid_lista_acesso-' . $key,
-                'allModels' => $empresa->gridMunicipios,
-                'sort' => false,
-                'pagination' => ['pageSize' => 10],
-            ]);
-
-
-
-            $empresasSessao[$empresa->cod_empresa_municipio] = [$empresa->attributes, $arrayF, $arrayJ];
-        }
-
-        $contatoC = \app\models\TabContatoSearch::find()
-                ->where(['ativo' => true, 'tipo_tabela_fk' => $cliente->tableName(), 'chave_fk' => $cliente->cod_cliente, 'tipo' => \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-contato', 'C')])
-                ->orderBy('cod_contato desc')
-                ->one();
-
-        if (!$contatoC)
-            $contatoC = new \app\models\TabContatoSearch();
-
-
-        $contatoT = \app\models\TabContatoSearch::find()
-                ->where(['ativo' => true, 'tipo_tabela_fk' => $cliente->tableName(), 'chave_fk' => $cliente->cod_cliente, 'tipo' => \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-contato', 'C')])
-                ->orderBy('cod_contato desc')
-                ->one();
-
-        if (!$contatoT)
-            $contatoT = new \app\models\TabContatoSearch();
-        \Yii::$app->session->set('empresasSessao', $empresasSessao);
-
-        $cliente->validate();
-        $sici->tipo_entrada_fk = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-entrada', 'X');
-        $sici->validate();
-        $erro = [];
-        if ($sici->errors) {
-            foreach ($sici->errors as $value) {
-
-                foreach ($value as $val) {
-                    if (array_search($val, $erro) === false) {
-                        $erro[] = $val;
-                    }
-                }
-            }
-        }
-
-        if ($cliente->errors) {
-            foreach ($cliente->errors as $value) {
-
-                foreach ($value as $val) {
-                    if (array_search($val, $erro) === false) {
-                        $erro[] = $val;
-                    }
-                }
-            }
-        }
-        if ($erro) {
-            $this->session->setFlash('danger', 'Erro encontrados: <br/>' . implode('<br/>', $erro));
-        }
-
-        return compact('sici', 'cliente', 'contatoC', 'contatoT', 'planof', 'planof_mn', 'planoj', 'planoj_mn', 'empresas', 'anual', 'indicadores');
     }
 
 }

@@ -13,6 +13,7 @@ use app\modules\comercial\models\TabModeloContrato;
 class TabModeloContratoSearch extends TabModeloContrato {
 
     public $cod_contrato_fk;
+    public $assinatura;
 
     /**
      * @inheritdoc
@@ -76,7 +77,7 @@ class TabModeloContratoSearch extends TabModeloContrato {
 
     public function substituiVariaveis($contrato) {
         $endereco = \app\models\TabEnderecoSearch::find()->where(['chave_fk' => $contrato->cod_cliente, 'tipo_tabela_fk' => \app\models\TabClienteSearch::tableName()])->one();
-        $socio = TabSociosSearch::find()->where(['cod_cliente_fk' => $contrato->cod_cliente, 'representante_comercial' => true])->one();
+        $socio = TabSociosSearch::find()->where(['cod_cliente_fk' => $contrato->cod_cliente, 'representante_comercial' => true])->all();
         $dt_parcelas = TabContratoParcelasSearch::find()->where(['numero' => '1', 'cod_contrato_fk' => $contrato->cod_contrato])->one();
 
         //print_r($endereco->attributes); exit;
@@ -89,29 +90,11 @@ class TabModeloContratoSearch extends TabModeloContrato {
         $this->txt_modelo = str_replace('{cep}', $endereco->cep, $this->txt_modelo);
         $this->txt_modelo = str_replace('{cnpj}', $contrato->cnpj, $this->txt_modelo);
 
-        $this->txt_modelo = str_replace('{representate_comercial}', $socio->nome, $this->txt_modelo);
-        $this->txt_modelo = str_replace('{ssp}', $socio->ssp, $this->txt_modelo);
-        $this->txt_modelo = str_replace('{estado_civil}', $contrato->estado_civil, $this->txt_modelo);
-        $this->txt_modelo = str_replace('{nacionalidade}', $contrato->nacionalidade, $this->txt_modelo);
-        $this->txt_modelo = str_replace('{rg}', $contrato->rg, $this->txt_modelo);
-        $this->txt_modelo = str_replace('{nacionalidade}', $contrato->nacionalidade, $this->txt_modelo);
-        $this->txt_modelo = str_replace('{profissao}', $socio->profissao, $this->txt_modelo);
-        $this->txt_modelo = str_replace('{cpf}', $socio->cpf, $this->txt_modelo);
-        $this->txt_modelo = str_replace('{telefone}', $socio->telefone, $this->txt_modelo);
-        $this->txt_modelo = str_replace('{email}', $socio->email, $this->txt_modelo);
         $this->txt_modelo = str_replace('{tipo_contrato}', $contrato->dsc_tipo_contrato, $this->txt_modelo);
 
-        $endereco_r = \app\models\TabEnderecoSearch::find()->where(['chave_fk' => $socio->cod_socio, 'tipo_tabela_fk' => TabSociosSearch::tableName()])->one();
+        $this->txt_modelo = str_replace('{socios}', $this->geraHtmlSocios($socio), $this->txt_modelo);
+        $this->txt_modelo = str_replace('{assinatura}', $this->geraHtmlAssinatura($socio, $contrato->razao_social), $this->txt_modelo);
 
-        if ($endereco_r) {
-            $this->txt_modelo = str_replace('{logradouro_r}', $endereco_r->logradouro_f, $this->txt_modelo);
-            $this->txt_modelo = str_replace('{numero_r}', $endereco_r->numero_r, $this->txt_modelo);
-            $this->txt_modelo = str_replace('{bairro_r}', $endereco_r->bairro_r, $this->txt_modelo);
-            $this->txt_modelo = str_replace('{municipio_r}', $endereco_r->tabMunicipios->txt_nome, $this->txt_modelo);
-            $this->txt_modelo = str_replace('{estado_r}', $endereco_r->tabMunicipios->sgl_estado_fk, $this->txt_modelo);
-            $this->txt_modelo = str_replace('{cep_r}', $endereco_r->cep, $this->txt_modelo);
-        }
-        
 
         $qnt_parcelas_txt = \projeto\Util::converteNumeroEmLetras($contrato->qnt_parcelas, false);
         $meses = $contrato->qnt_parcelas . ' (' . $qnt_parcelas_txt . ')';
@@ -140,8 +123,14 @@ class TabModeloContratoSearch extends TabModeloContrato {
         $parcela_txt = \projeto\Util::converteNumeroEmLetras($parcela);
         $this->txt_modelo = str_replace('{prestacao}', $valor_parcela . ' (' . $parcela_txt . ')', $this->txt_modelo);
 
+        $parcelas = TabContratoParcelasSearch::find()->where(['cod_contrato_fk' => $contrato->cod_contrato])->asArray()->all();
+
         setlocale(LC_ALL, "pt_BR", "pt_BR.iso-8859-1", "pt_BR.utf-8", "portuguese");
         date_default_timezone_set('America/Sao_Paulo');
+        if ($parcelas) {
+            $this->txt_modelo = str_replace('{tabela_parcelas}', $this->geraHtml($parcelas), $this->txt_modelo);
+        }
+
 
         $date = date('Y-m-d');
         $date = strftime("%d de %B de %Y", strtotime($date));
@@ -171,6 +160,145 @@ class TabModeloContratoSearch extends TabModeloContrato {
 //        email
 //        valor_isencao
 //      
+    }
+
+    public static function geraHtml($parcelas) {
+
+
+        foreach ($parcelas as $key => $value) {
+            $date = strftime("%d de %B de %Y", strtotime($value['dt_vencimento']));
+
+            $htmlParcelas .= '<tr valign="top">
+                    <td width="25">
+                        <p align="justify">
+                            ' . $value['numero'] . '
+                        </p>
+                    </td>
+                    <td width="75">
+                        <p align="justify">
+                        R$ ' . \projeto\Util::decimalFormatToBank($value['valor']) . '
+                        </p>
+                    </td>
+                    <td width="200">
+                        <p align="justify">
+                            ' . \projeto\Util::converteNumeroEmLetras($value['valor']) . '
+                        </p>
+                    </td>
+                    <td width="171">
+                        <p align="left">
+                            ' . $date . '
+                        </p>
+                    </td>
+                </tr>';
+        }
+
+        return ' <dl>
+    <dd>
+        <table width="527" cellpadding="7" border="1" cellspacing="0">
+            <colgroup>
+                <col width="25"/>
+                <col width="75"/>
+                <col width="200"/>
+                <col width="171"/>
+            </colgroup>
+            <tbody>
+                <tr valign="top">
+                    <td width="25">
+                        <p align="justify">
+                            Nº
+                        </p>
+                    </td>
+                    <td width="75">
+                        <p align="justify">
+                            Valor
+                        </p>
+                    </td>
+                    <td width="200">
+                        <p align="justify">
+                            Descrição
+                        </p>
+                    </td>
+                    <td width="171">
+                        <p align="justify">
+                            Data de Vencimento
+                        </p>
+                    </td>
+                </tr>
+                ' . $htmlParcelas . '
+                
+            </tbody>
+        </table>
+    </dd>
+</dl>';
+    }
+
+    public static function geraHtmlSocios($socios) {
+
+        $html = "<strong>{representate_comercial}</strong>, {nacionalidade}, {estado_civil},
+    {profissao}, RG nº {rg} SSP/{ssp} CPF nº{cpf} Residente e Domiciliado na(o) {logradouro_r}
+    nº{numero_r}, Bairro: {bairro_r} Cidade: {municipio_r}/{estado_r}, CEP:
+{cep_r}, Fone: {telefone} e EMAIL  {email}";
+        foreach ($socios as $key => $socio) {
+
+            $txt_modelo = $html;
+
+            if ($key > 0) {
+                $txt_modelo = ' e por ' . $txt_modelo;
+            }
+            $txt_modelo = str_replace('{representate_comercial}', $socio->nome, $txt_modelo);
+            $txt_modelo = str_replace('{ssp}', $socio->orgao_uf, $txt_modelo);
+
+            $estado = \app\models\TabAtributosValoresSearch::find()->where(['cod_atributos_valores' => $socio->estado_civil_fk])->asArray()->one();
+            $txt_modelo = str_replace('{estado_civil}', $estado['dsc_descricao'], $txt_modelo);
+
+            $txt_modelo = str_replace('{nacionalidade}', $socio->nacionalidade, $txt_modelo);
+            $txt_modelo = str_replace('{rg}', $socio->rg, $txt_modelo);
+            $txt_modelo = str_replace('{nacionalidade}', $socio->nacionalidade, $txt_modelo);
+            $txt_modelo = str_replace('{profissao}', $socio->profissao, $txt_modelo);
+            $txt_modelo = str_replace('{cpf}', $socio->cpf, $txt_modelo);
+            $txt_modelo = str_replace('{telefone}', $socio->telefone, $txt_modelo);
+            $txt_modelo = str_replace('{email}', $socio->email, $txt_modelo);
+
+            $endereco_r = \app\models\TabEnderecoSearch::find()->where(['chave_fk' => $socio->cod_socio, 'tipo_tabela_fk' => TabSociosSearch::tableName()])->one();
+
+            if ($endereco_r) {
+                $txt_modelo = str_replace('{logradouro_r}', $endereco_r->logradouro, $txt_modelo);
+                $txt_modelo = str_replace('{numero_r}', $endereco_r->numero, $txt_modelo);
+                $txt_modelo = str_replace('{bairro_r}', $endereco_r->bairro, $txt_modelo);
+                $txt_modelo = str_replace('{municipio_r}', $endereco_r->tabMunicipios->txt_nome, $txt_modelo);
+                $txt_modelo = str_replace('{estado_r}', $endereco_r->tabMunicipios->sgl_estado_fk, $txt_modelo);
+                $txt_modelo = str_replace('{cep_r}', $endereco_r->cep, $txt_modelo);
+            }
+            $htmlModelo .= $txt_modelo;
+        }
+
+        return $htmlModelo;
+    }
+
+    public static function geraHtmlAssinatura($socios, $razao_social = null) {
+
+        $html = '<p align="center">
+    <strong>_______________________________________________</strong>
+</p>
+<p align="center">
+    <strong>{razao_social}</strong>
+</p><br/><br/>';
+
+        if (count($socios)>1) {
+            foreach ($socios as $key => $socio) {
+
+                $txt_modelo = $html;
+
+                $txt_modelo = str_replace('{razao_social}', $socio->nome, $txt_modelo);
+
+                $htmlModelo .= $txt_modelo;
+            }
+        }else{
+               $txt_modelo = str_replace('{razao_social}', $razao_social, $txt_modelo);
+               $htmlModelo .= $txt_modelo;
+            
+        } 
+        return $htmlModelo;
     }
 
 }

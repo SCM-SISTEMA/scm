@@ -11,14 +11,11 @@ Projeto.prototype.modelo = new (Projeto.extend({
             var urlInclusao = $('base').attr('href') + 'comercial/contrato/imprimir-contrato';
             projeto.ajax.post(urlInclusao, selecao, function (response) {
 
-               
-                $('#modalModelo').modal('hide');
-
             });
             
              var urlInclusao = $('base').attr('href') + 'comercial/contrato/impressao?cod_contrato='+$('#tabmodelocontratosearch-cod_contrato_fk').val();
                 
-                window.open(urlInclusao);
+            window.open(urlInclusao);
 
 
             return false;

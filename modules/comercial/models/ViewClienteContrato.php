@@ -41,6 +41,7 @@ use Yii;
  * @property string $dt_vencimento
  * @property integer $cod_tipo_setor_fk
  * @property integer $cod_tipo_contrato
+ * @property string $contrato_html
  */
 class ViewClienteContrato extends \projeto\db\ActiveRecord
 {
@@ -59,7 +60,7 @@ class ViewClienteContrato extends \projeto\db\ActiveRecord
     {
         return [
             [['cod_cliente', 'status_andamento_retorno', 'atributos_tipo_produto', 'atributos_tipo_contrato', 'atributos_status', 'atributos_setor', 'cod_contrato', 'tipo_contrato_fk', 'qnt_parcelas', 'cod_cliente_fk', 'cod_setor', 'cod_usuario_responsavel_fk', 'cod_tipo_setor_fk', 'cod_tipo_contrato'], 'integer'],
-            [['contato', 'txt_notificacao', 'dt_retorno', 'txt_notificacao_res', 'dt_inclusao_andamento', 'sgl_status', 'dt_prazo', 'dt_inclusao_contrato', 'dt_vencimento'], 'string'],
+            [['contato', 'txt_notificacao', 'dt_retorno', 'txt_notificacao_res', 'dt_inclusao_andamento', 'sgl_status', 'dt_prazo', 'dt_inclusao_contrato', 'dt_vencimento', 'contrato_html'], 'string'],
             [['valor_contrato'], 'number'],
             [['ativo_contrato'], 'boolean'],
             [['cnpj'], 'string', 'max' => 18],
@@ -109,6 +110,7 @@ class ViewClienteContrato extends \projeto\db\ActiveRecord
             'dt_vencimento' => 'Dt Vencimento',
             'cod_tipo_setor_fk' => 'Cod Tipo Setor Fk',
             'cod_tipo_contrato' => 'Cod Tipo Contrato',
+            'contrato_html' => 'Contrato Html',
         ];
     }
 

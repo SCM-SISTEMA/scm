@@ -34,6 +34,7 @@ use Yii;
  * @property integer $contrato
  * @property string $dt_fechamento
  * @property integer $status_do_contrato_fk
+ * @property string $contrato_html
  *
  * @property TabUsuarios $tabUsuarios
  * @property TabCliente $tabCliente
@@ -60,6 +61,7 @@ class TabContrato extends \projeto\db\ActiveRecord
             [['valor_contrato'], 'number'],
             [['dt_prazo', 'dt_inclusao', 'dt_vencimento', 'dt_alteracao', 'dt_fechamento'], 'safe'],
             [['operando', 'link', 'zero800', 'parceiria', 'consultoria_scm', 'engenheiro_tecnico', 'ativo'], 'boolean'],
+            [['contrato_html'], 'string'],
             [['contador', 'txt_login_inclusao', 'txt_login_alteracao'], 'string', 'max' => 150],
             [['nome_responsavel'], 'string', 'max' => 200]
         ];
@@ -98,6 +100,7 @@ class TabContrato extends \projeto\db\ActiveRecord
             'contrato' => 'attributo valor',
             'dt_fechamento' => 'Dt Fechamento',
             'status_do_contrato_fk' => 'atributos status do contrato',
+            'contrato_html' => 'Contrato',
         ];
     }
 
