@@ -184,7 +184,7 @@ class ContratoController extends Controller {
 
 //$dados = $this->printContrato($id);
 
-        $dados = $this->montarContrato($post['cod_contrato']);
+        $dados = $this->montarContrato($post['cod_contrato'], $post['padrao']);
 
         return \yii\helpers\Json::encode($dados);
     }

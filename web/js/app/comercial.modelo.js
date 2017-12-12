@@ -12,14 +12,34 @@ Projeto.prototype.modelo = new (Projeto.extend({
             projeto.ajax.post(urlInclusao, selecao, function (response) {
 
             });
-            
-             var urlInclusao = $('base').attr('href') + 'comercial/contrato/impressao?cod_contrato='+$('#tabmodelocontratosearch-cod_contrato_fk').val();
-                
+
+            var urlInclusao = $('base').attr('href') + 'comercial/contrato/impressao?cod_contrato=' + $('#tabmodelocontratosearch-cod_contrato_fk').val();
+
             window.open(urlInclusao);
 
 
             return false;
         });
+
+        $('#botaoRestaurarModelo').click(function ( ) {
+            var urlInclusao = $('base').attr('href') + 'comercial/contrato/abrir-impressao';
+            var cod_contrato = $('#tabmodelocontratosearch-cod_contrato_fk').val();
+            
+            var selecao = {cod_contrato: cod_contrato, padrao:1};
+            projeto.ajax.post(urlInclusao, selecao, function (response) {
+//          
+                var dados = $.parseJSON(response);
+
+                tinymce.activeEditor.setContent(dados);
+                $('#tabmodelocontratosearch-cod_contrato_fk').val(cod_contrato);
+                $('#modalModelo').modal('show').find('#modalContent').load( );
+
+            });
+
+            return false;
+        });
+
+
 
     },
 
@@ -46,7 +66,7 @@ function abrirImpressao(cod_contrato) {
         var dados = $.parseJSON(response);
 
         tinymce.activeEditor.setContent(dados);
-       $('#tabmodelocontratosearch-cod_contrato_fk').val(cod_contrato);
+        $('#tabmodelocontratosearch-cod_contrato_fk').val(cod_contrato);
         $('#modalModelo').modal('show').find('#modalContent').load( );
 
     });

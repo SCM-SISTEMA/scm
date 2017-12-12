@@ -19,6 +19,10 @@ Modal::begin([
     'footer' =>
     Html::a('Fechar', '#', ['class' => 'btn btn-default', 'id' => 'botaoFechar', 'data-dismiss' => 'modal'])
     . PHP_EOL .
+    Html::button('Modelo Padrão', [
+        'id' => 'botaoRestaurarModelo',
+        'class' => 'btn btn',
+    ]). PHP_EOL .
     Html::button('Gerar PDF', [
         'id' => 'botaoSalvarModelo',
         'class' => 'btn btn-primary',
