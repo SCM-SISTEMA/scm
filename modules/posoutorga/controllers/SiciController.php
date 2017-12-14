@@ -2557,27 +2557,7 @@ class SiciController extends Controller {
         return \yii\helpers\Json::encode($dados);
     }
 
-    public function retornaImportacao($rowData, $nome, $pos = false) {
-        $i = 0;
-        foreach ($rowData as $key => $value) {
 
-            if ($pos) {
-                if (strpos(strtoupper(trim(\projeto\Util::tirarAcentos($value[0][4]))), $nome) !== false ||
-                        strpos(strtoupper(trim(\projeto\Util::tirarAcentos($value[0][1]))), $nome) !== false) {
-
-                    $output = array_slice($rowData, $i);
-
-                    return $output;
-                }
-            } else {
-                if (strtoupper(trim(\projeto\Util::tirarAcentos($value[0][1]))) == $nome) {
-                    $output = array_slice($rowData, $i);
-                    return $output;
-                }
-            }
-            $i++;
-        }
-    }
 
     public function actionVerificaCnpj() {
 

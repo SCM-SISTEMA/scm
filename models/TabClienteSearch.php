@@ -90,11 +90,11 @@ class TabClienteSearch extends TabCliente {
 
     public function beforeSave($insert) {
 
-        
+
         $sim = TabAtributosValoresSearch::find()->where(['fk_atributos_valores_atributos_id' =>
                     TabAtributosSearch::find()->where(['sgl_chave' => 'opt-sim-nao'])->one()->cod_atributos
-                        , 'sgl_valor'=>'S'])->one()->cod_atributos_valores;
-        
+                    , 'sgl_valor' => 'S'])->one()->cod_atributos_valores;
+
         $this->situacao = ($this->situacao == $sim) ? true : false;
         $this->link_dedicado = ($this->link_dedicado == $sim) ? true : false;
         $this->zero800 = ($this->zero800 == $sim) ? true : false;
@@ -102,21 +102,22 @@ class TabClienteSearch extends TabCliente {
         $this->engenheiro_tecnico = ($this->engenheiro_tecnico == $sim) ? true : false;
         $this->parceria = ($this->parceria == $sim) ? true : false;
         $this->operando = ($this->operando == $sim) ? true : false;
+        $this->notificacao_anatel = ($this->notificacao_anatel == $sim) ? true : false;
 
         return parent::beforeSave($insert);
     }
-    
+
     public function afterFind() {
-        
+
         parent::afterFind();
-        
+
         $sim = TabAtributosValoresSearch::find()->where(['fk_atributos_valores_atributos_id' =>
                     TabAtributosSearch::find()->where(['sgl_chave' => 'opt-sim-nao'])->one()->cod_atributos
-                        , 'sgl_valor'=>'S'])->one()->cod_atributos_valores;
+                    , 'sgl_valor' => 'S'])->one()->cod_atributos_valores;
         $nao = TabAtributosValoresSearch::find()->where(['fk_atributos_valores_atributos_id' =>
-                  TabAtributosSearch::find()->where(['sgl_chave' => 'opt-sim-nao'])->one()->cod_atributos
-                        , 'sgl_valor'=>'N'])->one()->cod_atributos_valores;
-        
+                    TabAtributosSearch::find()->where(['sgl_chave' => 'opt-sim-nao'])->one()->cod_atributos
+                    , 'sgl_valor' => 'N'])->one()->cod_atributos_valores;
+
         $this->situacao = ($this->situacao == true) ? $sim : $nao;
         $this->link_dedicado = ($this->link_dedicado == true) ? $sim : $nao;
         $this->zero800 = ($this->zero800 == true) ? $sim : $nao;
@@ -124,9 +125,9 @@ class TabClienteSearch extends TabCliente {
         $this->engenheiro_tecnico = ($this->engenheiro_tecnico == true) ? $sim : $nao;
         $this->parceria = ($this->parceria == true) ? $sim : $nao;
         $this->operando = ($this->operando == true) ? $sim : $nao;
-        
-        return true;
+        $this->notificacao_anatel = ($this->notificacao_anatel == true) ? $sim : $nao;
 
+        return true;
     }
 
     public function buscaCliente() {
@@ -144,7 +145,7 @@ class TabClienteSearch extends TabCliente {
 
 
         if ($response = curl_exec($ch)) {
-;
+            ;
             curl_close($ch);
         }
 
@@ -155,6 +156,17 @@ class TabClienteSearch extends TabCliente {
             $this->fantasia = $dados->fantasia;
             $this->dadosReceita = $dados;
         }
+    }
+
+    public function formataCnpj() {
+        $cliente = trim(\projeto\Util::retiraCaracter($this->cnpj));
+        
+         $this->cnpj = $cliente[0] . $cliente[1] . '.' .
+                $cliente[2] . $cliente[3] . $cliente[4] . '.' .
+                $cliente[5] . $cliente[6] . $cliente[7] . '/' .
+                $cliente[8] . $cliente[9] . $cliente[10] .
+                $cliente[11] . '-' . $cliente[12] . $cliente[13];
+        
     }
 
 }

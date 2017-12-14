@@ -51,13 +51,12 @@ class ActiveRecord extends \yii\db\ActiveRecord {
 
         if ($this->getTableSchema()->columns) {
             foreach ($this->getTableSchema()->columns as $key => $value) {
-                
+
                 if ($this->isNewRecord && $value->name == 'txt_login_inclusao' && !\Yii::$app->user->isGuest) {
-                    
+
                     $this->$key = $this->user->identity->getId();
                     $this->txt_login_alteracao = $this->user->identity->getId();
-                    
-                }elseif(!$this->isNewRecord && $value->name == 'txt_login_alteracao'){
+                } elseif (!$this->isNewRecord && $value->name == 'txt_login_alteracao') {
                     $this->$key = $this->user->identity->getId();
                     $this->dt_alteracao = date('d/m/Y');
                 }
@@ -132,17 +131,17 @@ class ActiveRecord extends \yii\db\ActiveRecord {
     }
 
     public function verificarChecks($checado = true) {
-        
+
         $checar = function ($vals, $checado) {
-            
+
             foreach ($vals as $key => $val) {
-                
+
                 if (strpos($key, '_check') !== false) {
-                    
-                    if(!$checado){
+
+                    if (!$checado) {
                         $this->$key = true;
                     }
-                    
+
                     if ($this->$key == false) {
                         return false;
                     }
@@ -151,8 +150,20 @@ class ActiveRecord extends \yii\db\ActiveRecord {
 
             return true;
         };
-        
+
         return $checar($this->attributes, $checado);
+    }
+
+    public function getErrosString() {
+
+        foreach ($this->errors as $name => $es) {
+            foreach ($es as $n => $e) {
+                if (!empty($e)) {
+                    $errors .= $e . '<br/>';
+                }
+            }
+        }
+        return $errors;
     }
 
 }

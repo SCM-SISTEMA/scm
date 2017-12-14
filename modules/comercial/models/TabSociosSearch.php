@@ -236,4 +236,15 @@ class TabSociosSearch extends TabSocios {
         }
     }
 
+    
+    
+    public function formataCpf() {
+        $cliente = trim(\projeto\Util::retiraCaracter($this->cpf));
+        
+         $this->cpf = $cliente[0] . $cliente[1] . $cliente[2] . '.' .
+                $cliente[3] . $cliente[4] . $cliente[5] . '.' .
+                $cliente[6] . $cliente[7] . $cliente[8] . '-' .
+                $cliente[9] . $cliente[10];
+        
+    }
 }
