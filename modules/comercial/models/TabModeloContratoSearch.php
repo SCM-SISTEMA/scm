@@ -80,8 +80,15 @@ class TabModeloContratoSearch extends TabModeloContrato {
         $socio = TabSociosSearch::find()->where(['cod_cliente_fk' => $contrato->cod_cliente, 'representante_comercial' => true])->all();
         $dt_parcelas = TabContratoParcelasSearch::find()->where(['numero' => '1', 'cod_contrato_fk' => $contrato->cod_contrato])->one();
 
-        //print_r($endereco->attributes); exit;
-        $this->txt_modelo = str_replace('{razao_social}', $contrato->razao_social, $this->txt_modelo);
+        $mode = TabModeloContratoSearch::find()->all();
+
+//        foreach ($mode as $key => $value) {
+//            $value->txt_modelo = str_replace('{razao social}', '{razao_social}', $value->txt_modelo);
+//            $value->save();
+//        }
+
+        //print_r($contrato->razao_social); exit;
+        $this->txt_modelo = str_replace('{razao_social}', strtoupper($contrato->razao_social), $this->txt_modelo);
         $this->txt_modelo = str_replace('{logradouro}', $endereco->logradouro, $this->txt_modelo);
         $this->txt_modelo = str_replace('{numero}', $endereco->numero, $this->txt_modelo);
         $this->txt_modelo = str_replace('{bairro}', $endereco->bairro, $this->txt_modelo);
@@ -277,14 +284,14 @@ class TabModeloContratoSearch extends TabModeloContrato {
 
     public static function geraHtmlAssinatura($socios, $razao_social = null) {
 
-        $html = '<p align="center">
+        $html = '<br /><br /><p align="center">
     <strong>_______________________________________________</strong>
 </p>
 <p align="center">
     <strong>{razao_social}</strong>
 </p><br/><br/>';
 
-        if (count($socios)>1) {
+        if (count($socios) > 1) {
             foreach ($socios as $key => $socio) {
 
                 $txt_modelo = $html;
@@ -293,11 +300,11 @@ class TabModeloContratoSearch extends TabModeloContrato {
 
                 $htmlModelo .= $txt_modelo;
             }
-        }else{
-               $txt_modelo = str_replace('{razao_social}', $razao_social, $txt_modelo);
-               $htmlModelo .= $txt_modelo;
-            
-        } 
+        } else {
+            $txt_modelo = str_replace('{razao_social}', $razao_social, $html);
+            $htmlModelo .= $txt_modelo;
+        }
+       
         return $htmlModelo;
     }
 

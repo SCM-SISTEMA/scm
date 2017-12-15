@@ -35,3 +35,17 @@ COMMENT ON COLUMN public.tab_cliente.notificacao_anatel IS 'Já recebeu notifica
 ALTER TABLE comercial.tab_contrato ADD COLUMN obs text;
 COMMENT ON COLUMN comercial.tab_contrato.obs IS 'Observação';
 
+
+
+
+INSERT INTO public.tab_atributos_valores(
+             fk_atributos_valores_atributos_id, sgl_valor, 
+            dsc_descricao)
+    VALUES ( (select cod_atributos from public.tab_atributos where sgl_chave='status-contrato'), '5', 'Fechado, financeiro');
+
+
+ INSERT INTO public.tab_atributos_valores(
+             fk_atributos_valores_atributos_id, sgl_valor, 
+            dsc_descricao)
+    VALUES ( (select cod_atributos from public.tab_atributos where sgl_chave='status-contrato'), '6', 'Fechado e Aprovado');
+

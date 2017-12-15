@@ -23,9 +23,9 @@ $provider = new \yii\data\ActiveDataProvider([
 <!--<div class='row'>
 <?php //if (isset($msg)) { ?>
         <div class="col-md-12">
-            <div class="alert-<?php //= $msg['tipo']    ?> alert fade in">
+            <div class="alert-<?php //= $msg['tipo']     ?> alert fade in">
                 <button class="close" aria-hidden="true" data-dismiss="alert" type="button">×</button>
-                <i class="icon fa fa-<?php //=$msg['icon']    ?>"></i>
+                <i class="icon fa fa-<?php //=$msg['icon']     ?>"></i>
 <?php //=['msg'] ?>
             </div>
         </div>
@@ -124,7 +124,7 @@ $provider = new \yii\data\ActiveDataProvider([
 //                    },
 //                ),
                     ['class' => 'projeto\grid\ActionColumn',
-                        'template' => '{update}  {cancelar}  {andamento}  {formaPagamento} {upload} {imprimir}',
+                        'template' => '{update}  {cancelar}  {andamento}  {formaPagamento} {upload} {imprimir} {financeiro} {aprovar}',
                         'buttons' => [
                             'update' => function ($action, $model, $key) {
                                 if ($model['sgl_status'] != '4') {
@@ -167,7 +167,7 @@ $provider = new \yii\data\ActiveDataProvider([
                                 }
                             },
                             'upload' => function ($action, $model, $key) {
-                                if ($model['sgl_status'] != '4') {
+                                if ($model['sgl_status'] != '4' || $model['sgl_status'] != '6' || $model['sgl_status'] != '5') {
                                     return Html::a('<span class="fa fa-download"></span>', '#', [
                                                 'arialabel' => 'Importar Contrato',
                                                 'data-toggle' => 'tooltip',
@@ -183,6 +183,26 @@ $provider = new \yii\data\ActiveDataProvider([
                                                 'data-toggle' => 'tooltip',
                                                 'title' => 'Imprimir Contrato',
                                                 'onclick' => "return abrirImpressao('" . $model['cod_contrato'] . "')",
+                                    ]);
+                                }
+                            },
+                            'financeiro' => function ($action, $model, $key) {
+                                if ($model['sgl_status'] == '3') {
+                                    return Html::a('<span class="fa fa-sign-in"></span>', '#', [
+                                                'arialabel' => 'Enviar para o financeiro',
+                                                'data-toggle' => 'tooltip',
+                                                'title' => 'Enviar para o financeiro',
+                                                'onclick' => "return mudarStatus('" . $model['cod_contrato'] . "', '5', '" . $model['cod_setor'] . "',  '" . $model['cod_tipo_contrato'] . "')",
+                                    ]);
+                                }
+                            },
+                            'aprovar' => function ($action, $model, $key) {
+                                if ($model['sgl_status'] == '5') {
+                                    return Html::a('<span class="fa fa-check"></span>', '#', [
+                                                'arialabel' => 'Aprovar Contrato',
+                                                'data-toggle' => 'tooltip',
+                                                'title' => 'Aprovar Contrato',
+                                                'onclick' => "return mudarStatus('" . $model['cod_contrato'] . "', '6', '" . $model['cod_setor'] . "',  '" . $model['cod_tipo_contrato'] . "')",
                                     ]);
                                 }
                             },

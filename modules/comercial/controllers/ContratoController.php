@@ -246,15 +246,14 @@ class ContratoController extends Controller {
         $contrato = \app\modules\comercial\models\ViewClienteContratoSearch::find()->where(['cod_contrato' => $cod_contrato])->one();
 
         if (!$contrato->contrato_html || $limpar) {
-            
+
             $modelo = \app\modules\comercial\models\TabModeloContratoSearch::find()->where(['cod_contrato_tipo_contrato_fk' => $contrato->tipo_contrato_fk])->one();
-            
+
             if ($modelo) {
                 $modelo->substituiVariaveis($contrato);
 
                 return $modelo['txt_modelo'];
             }
-            
         } else {
 
             return $contrato->contrato_html;
@@ -301,7 +300,7 @@ class ContratoController extends Controller {
 
         if ($contrato) {
             $contrato->status = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('status-contrato', $post['status']);
-            $contrato->tipo_contrato_fk = ($post['status'] == 1 || $post['status'] == 2) ? $contrato->tipo_contrato_fk : $post['tipo_contrato'];
+            $contrato->tipo_contrato_fk = ($post['status'] == 5 || $post['status'] == 1 || $post['status'] == 2) ? $contrato->tipo_contrato_fk : $post['tipo_contrato'];
 
             if ($contrato->save()) {
 
@@ -309,6 +308,40 @@ class ContratoController extends Controller {
                     $msg = 'Contranto fechado';
                 } elseif ($post['status'] == 1) {
                     $msg = 'Contranto ativado';
+                } elseif ($post['status'] == 6) {
+                    $msg = 'Contranto aprovado';
+
+                    $setor = \app\models\TabSetoresSearch::find()->where([
+                                'cod_tipo_contrato_fk' => $post['tipo_contrato'],
+                                'cod_tipo_setor_fk' => \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('setores', '1')
+                            ])->one();
+
+                    $andam = new \app\models\TabAndamentoSearch();
+                    $andam->txt_notificacao = 'Aprovado';
+                    $andam->cod_usuario_inclusao_fk = $this->user->identity->getId();
+                    $andam->cod_setor_fk = $setor->cod_setor;
+                    $andam->dt_retorno = date('d/m/Y');
+                    $andam->save();
+                } elseif ($post['status'] == 5) {
+                    $msg = 'Contranto enviado para o financeiro';
+
+                    $perfil = \app\modules\admin\models\VisUsuariosPerfisSearch::find()->where("
+                        modulo_id='financeiro' and
+                        nome_perfil ilike 'administrador%'
+                        ")->asArray()->one();
+
+                    $setor = new \app\models\TabSetoresSearch();
+                    $setor->cod_tipo_contrato_fk = $post['tipo_contrato'];
+                    $setor->cod_usuario_responsavel_fk = $perfil['cod_usuario_fk'];
+                    $setor->cod_tipo_setor_fk = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('setores', '2');
+                    $setor->save();
+
+                    $andam = new \app\models\TabAndamentoSearch();
+                    $andam->txt_notificacao = 'Aguardando Aprovação';
+                    $andam->cod_usuario_inclusao_fk = $this->user->identity->getId();
+                    $andam->cod_setor_fk = $setor->cod_setor;
+                    $andam->dt_retorno = date('d/m/Y', strtotime(date('Y-m-d') . '+5 days'));
+                    $andam->save();
                 } else {
                     $msg = 'Contranto recusado';
                 }

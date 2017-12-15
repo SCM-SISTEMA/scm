@@ -82,11 +82,18 @@ class ViewClienteContratoSearch extends ViewClienteContrato {
         $query->andFilterWhere([
             $this->tableName() . '.cod_contrato' => $this->cod_contrato,
             $this->tableName() . '.atributos_status' => $this->dsc_status,
+            
             $this->tableName() . '.atributos_tipo_produto' => $this->dsc_tipo_produto,
             
             
         ]);
-
+        if($this->dsc_status){
+            if(!is_array($this->dsc_status)){
+               $this->dsc_status = [$this->dsc_status];
+            }
+         $query->andWhere(['in', $this->tableName() . '.atributos_status', $this->dsc_status]);
+        }
+        $query->andFilterWhere(['ilike', $this->tableName() . '.razao_social', $this->razao_social]);
         $query->andFilterWhere(['ilike', $this->tableName() . '.razao_social', $this->razao_social]);
         $query->andFilterWhere(['ilike', $this->tableName() . '.responsavel', $this->responsavel]);
         $query->andFilterWhere(['ilike', $this->tableName() . '.dsc_tipo_contrato', $this->dsc_tipo_contrato]);

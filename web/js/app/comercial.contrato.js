@@ -431,7 +431,12 @@ function mudarStatus(result, status, setor, tipo_contrato) {
         msg = 'Deseja realmente fechar a proposta?';
     } else if (status == '1') {
         msg = 'Deseja realmente ativar proposta?';
-    } else {
+    } else if (status == '5') {
+        msg = 'Deseja realmente enviar para o financeiro?';
+    } else if (status == '6') {
+        msg = 'Deseja realmente aprovar o contrato?';
+    }
+    else {
         msg = 'Deseja realmente recusar a proposta?';
 
     }

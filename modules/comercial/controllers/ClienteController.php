@@ -79,7 +79,7 @@ class ClienteController extends \app\controllers\ClienteController {
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionAdmin($id = null, $migrar = null) {
+    public function actionAdmin($id = null, $migrar = null, $return = false) {
 
         if ($id) {
 
@@ -161,11 +161,11 @@ class ClienteController extends \app\controllers\ClienteController {
                     }
                     $transaction->commit();
 
-                    if ($_FILES['TabImportacaoSearch']) {
+                    if ($_FILES['TabImportacaoSearch']['tmp_name']['file']) {
 
                         $this->importExcel($_FILES['TabImportacaoSearch']['tmp_name']['file'], $post['TabImportacaoSearch']['cod_contrato']);
                     }
-                 
+
                     $this->session->setFlashProjeto('success', $acao);
                     return $this->redirect(['admin', 'id' => $model->cod_cliente]);
                 }
@@ -186,7 +186,11 @@ class ClienteController extends \app\controllers\ClienteController {
         \Yii::$app->session->set('contratos', $contratos);
         \Yii::$app->session->set('socios', $socios);
 
-
+        if ($return) {
+            return  [
+            'model' => $model, 'contratos' => $contratos
+            ];
+        };
         return $this->render('admin', [
                     'model' => $model, 'contratos' => $contratos
         ]);
@@ -1002,39 +1006,36 @@ class ClienteController extends \app\controllers\ClienteController {
 
             $rowData = $this->retornaImportacao($rowData, 'Valores do Contrato', true);
             $key = 10;
-            
+
             $contrato->qnt_parcelas = $p['qnt_parcelas'] = $rowData[$key][0][7];
-            $p['dt_vencimento'] = str_pad($rowData[$key][0][12], 2, '0', 0).'/'.date('m/Y');
+            $p['dt_vencimento'] = str_pad($rowData[$key][0][12], 2, '0', 0) . '/' . date('m/Y');
             $key += 5;
-            
+
             $contrato->valor_contrato = $p['valor_contrato'] = $rowData[$key][0][2];
-          
+
             \app\modules\comercial\models\TabContratoParcelasSearch::atualizarParcelas($contrato->cod_contrato, $p);
-          
-             $key += 5;
-             
+
+            $key += 5;
+
             $contrato->obs = rowData[$key][0][2];
-            
-            if(! $contrato->save()){
+
+            if (!$contrato->save()) {
                 $transaction->rollBack();
-                $this->session->setFlash('danger', 'Erro na importação'.$contrato->getErrosString());
+                $this->session->setFlash('danger', 'Erro na importação' . $contrato->getErrosString());
                 return false;
             }
-             
-            if(! $cliente->save()){
+
+            if (!$cliente->save()) {
                 $transaction->rollBack();
-                $this->session->setFlash('danger', 'Erro na importação - '.$cliente->getErrosString());
+                $this->session->setFlash('danger', 'Erro na importação - ' . $cliente->getErrosString());
                 return false;
             }
-            
+
             $transaction->commit();
-         
         } catch (Exception $e) {
             $transaction->rollBack();
             $this->session->setFlash('danger', 'Erro na importação - ' . $e->getMessage());
         }
-
-       
     }
 
     public function actionVerificaCnpj() {
