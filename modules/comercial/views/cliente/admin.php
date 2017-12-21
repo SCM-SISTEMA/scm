@@ -94,6 +94,7 @@ $this->registerJsFile('@web/js/app/comercial.contrato.js', ['position' => $this:
             </div>
         </div>
         <?php echo $this->render('@app/modules/comercial/views/tipo-contrato/_form_tipo_contrato_add', ['form' => $form]); ?> 
+        <?php echo $this->render('@app/modules/comercial/views/contrato/_form_upload_add', ['form' => $form]); ?> 
         <?php echo $this->render('@app/modules/comercial/views/contrato/_form_contrato_add', ['form' => $form]); ?> 
         <?php echo $this->render('@app/modules/comercial/views/contrato/_form_importacao_add', ['form' => $form]); ?> 
         <?php echo $this->render('@app/modules/comercial/views/contrato/_form_proposta_add', ['form' => $form, 'cod_cliente'=>$model->cod_cliente]); ?> 

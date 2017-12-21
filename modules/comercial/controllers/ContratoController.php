@@ -476,5 +476,8 @@ class ContratoController extends Controller {
             throw $e;
         }
     }
+    
+
+
 
 }

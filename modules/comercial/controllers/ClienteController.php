@@ -166,6 +166,11 @@ class ClienteController extends \app\controllers\ClienteController {
                         $this->importExcel($_FILES['TabImportacaoSearch']['tmp_name']['file'], $post['TabImportacaoSearch']['cod_contrato']);
                     }
 
+                    if ($_FILES['TabAnexoSearch']['tmp_name']['file']) {
+
+                        $this->salvaAnexo($_FILES['TabAnexoSearch']);
+                    }
+
                     $this->session->setFlashProjeto('success', $acao);
                     return $this->redirect(['admin', 'id' => $model->cod_cliente]);
                 }
@@ -187,8 +192,8 @@ class ClienteController extends \app\controllers\ClienteController {
         \Yii::$app->session->set('socios', $socios);
 
         if ($return) {
-            return  [
-            'model' => $model, 'contratos' => $contratos
+            return [
+                'model' => $model, 'contratos' => $contratos
             ];
         };
         return $this->render('admin', [
@@ -1413,6 +1418,25 @@ class ClienteController extends \app\controllers\ClienteController {
             $transaction->rollBack();
             throw $e;
         }
+    }
+
+    public function salvaAnexo($dados) {
+        $post = Yii::$app->request->post();
+        $anexo = new \app\modules\comercial\models\TabContratoAnexoSearch();
+        $anexo->nome = $dados['name']['file'];
+
+        $url = \Yii::getAlias('@webroot') . '/arquivos/' . $post['TabAnexoSearch']['cod_contrato'];
+        $urlArquivo = $url . '/' . $anexo->nome;
+
+        if (!is_dir($url)) {
+             mkdir($url);
+        }
+        move_uploaded_file($dados['tmp_name']['file'], $urlArquivo);
+
+        $anexo->url = \Yii::getAlias('@web') . '/arquivos/' . $post['TabAnexoSearch']['cod_contrato']. '/' . $anexo->nome;
+        $anexo->cod_contrato_fk = $post['TabAnexoSearch']['cod_contrato'];
+        $anexo->save();
+        
     }
 
 }

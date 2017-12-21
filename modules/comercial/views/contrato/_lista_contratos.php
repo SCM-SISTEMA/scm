@@ -23,9 +23,9 @@ $provider = new \yii\data\ActiveDataProvider([
 <!--<div class='row'>
 <?php //if (isset($msg)) { ?>
         <div class="col-md-12">
-            <div class="alert-<?php //= $msg['tipo']     ?> alert fade in">
+            <div class="alert-<?php //= $msg['tipo']       ?> alert fade in">
                 <button class="close" aria-hidden="true" data-dismiss="alert" type="button">×</button>
-                <i class="icon fa fa-<?php //=$msg['icon']     ?>"></i>
+                <i class="icon fa fa-<?php //=$msg['icon']       ?>"></i>
 <?php //=['msg'] ?>
             </div>
         </div>
@@ -124,7 +124,7 @@ $provider = new \yii\data\ActiveDataProvider([
 //                    },
 //                ),
                     ['class' => 'projeto\grid\ActionColumn',
-                        'template' => '{update}  {cancelar}  {andamento}  {formaPagamento} {upload} {imprimir} {financeiro} {aprovar}',
+                        'template' => '{update}  {cancelar} {anexar} {andamento}  {formaPagamento} {upload} {imprimir} {financeiro} {aprovar}',
                         'buttons' => [
                             'update' => function ($action, $model, $key) {
                                 if ($model['sgl_status'] != '4') {
@@ -205,6 +205,14 @@ $provider = new \yii\data\ActiveDataProvider([
                                                 'onclick' => "return mudarStatus('" . $model['cod_contrato'] . "', '6', '" . $model['cod_setor'] . "',  '" . $model['cod_tipo_contrato'] . "')",
                                     ]);
                                 }
+                            },
+                            'anexar' => function ($action, $model, $key) {
+                                return Html::a('<span class="fa fa-paperclip"></span>', '#', [
+                                            'arialabel' => 'Anexar Arquivo',
+                                            'data-toggle' => 'tooltip',
+                                            'title' => 'Anexar Contrato',
+                                            'onclick' => "return openAnexo('" . $model['cod_contrato'] . "')",
+                                ]);
                             },
                         ]
                     ],

@@ -119,7 +119,7 @@ $provider = new \yii\data\ActiveDataProvider([
 //                    },
 //                ),
                     ['class' => 'projeto\grid\ActionColumn',
-                        'template' => '{andamento} {fechar} {recusar} {ativar}',
+                        'template' => '{andamento} {anexar} {fechar} {recusar} {ativar}',
                         'buttons' => [
                             'andamento' => function ($action, $model, $key) {
 
@@ -161,6 +161,14 @@ $provider = new \yii\data\ActiveDataProvider([
                                                 'onclick' => "return mudarStatus('" . $model['cod_contrato'] . "', '1', '" . $model['cod_setor'] . "',  '" . $model['cod_tipo_contrato'] . "')",
                                     ]);
                                 }
+                            },
+                                      'anexar' => function ($action, $model, $key) {
+                                return Html::a('<span class="fa fa-paperclip"></span>', '#', [
+                                            'arialabel' => 'Anexar Arquivo',
+                                            'data-toggle' => 'tooltip',
+                                            'title' => 'Anexar Contrato',
+                                            'onclick' => "return openAnexo('" . $model['cod_contrato'] . "')",
+                                ]);
                             },
                         ]
                     ],

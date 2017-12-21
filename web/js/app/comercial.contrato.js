@@ -192,6 +192,14 @@ Projeto.prototype.contrato = new (Projeto.extend({
 
             return false;
         });
+         $('#botaoSalvarAnexo').click(function ( ) {
+
+            $(this).submit();
+
+
+
+            return false;
+        });
 
     },
 
@@ -336,6 +344,31 @@ function openGerarContrato(result, status, setor, tipo_contrato) {
 
 
 
+function openAnexo(result) {
+    $('#tabanexosearch-cod_contrato').val(result);
+var post = {cod_contrato: result};
+    var urlInclusao = $('base').attr('href') + 'comercial/contrato-anexo/carregar-anexo';
+
+    projeto.ajax.post(urlInclusao, post, function (response) {
+
+        var dados = $.parseJSON(response);
+
+
+        $('#listaAnexo').html(dados);
+
+        return false;
+    }, function () {
+        return false;
+    })
+
+
+    $('#modalAnexo').modal('show').find('#modalContent').load( );
+    return false;
+}
+
+
+
+
 function adicionarContrato(contrato) {
 
     Projeto.prototype.comercial.openModalTipoContrato('Contrato', contrato);
@@ -435,8 +468,7 @@ function mudarStatus(result, status, setor, tipo_contrato) {
         msg = 'Deseja realmente enviar para o financeiro?';
     } else if (status == '6') {
         msg = 'Deseja realmente aprovar o contrato?';
-    }
-    else {
+    } else {
         msg = 'Deseja realmente recusar a proposta?';
 
     }
