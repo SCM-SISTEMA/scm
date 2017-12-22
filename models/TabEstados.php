@@ -17,6 +17,7 @@ use Yii;
  *
  * @property TabRegioesGeograficas $tabRegioesGeograficas
  * @property TabMunicipios[] $tabMunicipios
+ * @property TabRegiao[] $tabRegiao
  */
 class TabEstados extends \projeto\db\ActiveRecord
 {
@@ -73,6 +74,14 @@ class TabEstados extends \projeto\db\ActiveRecord
     public function getTabMunicipios()
     {
         return $this->hasMany(TabMunicipios::className(), ['sgl_estado_fk' => 'sgl_estado']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTabRegiao()
+    {
+        return $this->hasMany(TabRegiao::className(), ['uf_fk' => 'sgl_estado']);
     }
 
     /**

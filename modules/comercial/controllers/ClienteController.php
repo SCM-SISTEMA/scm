@@ -694,6 +694,10 @@ class ClienteController extends \app\controllers\ClienteController {
         try {
 
             $rowsData = $rowData;
+
+            $licenca = ($this->retornaImportacao($rowData, 'FORMULARIO LICENCA', true)) ? true : false;
+
+
             $rowData = $this->retornaImportacao($rowData, 'Dados do contratante', true);
 
 
@@ -886,8 +890,11 @@ class ClienteController extends \app\controllers\ClienteController {
 
 
             $rowData = $this->retornaImportacao($rowData, 'Dados Titular', true);
-            $key = 7;
-
+            if ($licenca) {
+                $key = 5;
+            } else {
+                $key = 7;
+            }
 
             $modelSoc = new \app\modules\comercial\models\TabSociosSearch();
             $modelSoc->nome = $rowData[$key][0][2];
@@ -896,7 +903,10 @@ class ClienteController extends \app\controllers\ClienteController {
             $key += 5;
             $skype = $rowData[$key][0][2];
             $email = $rowData[$key][0][9];
-
+            if ($licenca) {
+                $key += 5;
+                $endereco = $rowData[$key][0][2];
+            }
             $modelSoc->cod_cliente_fk = $cliente->cod_cliente;
             $modelSoc->save();
 
@@ -929,48 +939,48 @@ class ClienteController extends \app\controllers\ClienteController {
 
 
 
+            if (!$licenca) {
+                $key += 9;
 
-            $key += 9;
+                $modelSoc = new \app\modules\comercial\models\TabSociosSearch();
+                $modelSoc->nome = $rowData[$key][0][2];
+                $cel = $rowData[$key][0][9];
 
-            $modelSoc = new \app\modules\comercial\models\TabSociosSearch();
-            $modelSoc->nome = $rowData[$key][0][2];
-            $cel = $rowData[$key][0][9];
+                $key += 5;
+                $skype = $rowData[$key][0][2];
+                $email = $rowData[$key][0][9];
 
-            $key += 5;
-            $skype = $rowData[$key][0][2];
-            $email = $rowData[$key][0][9];
-
-            $modelSoc->cod_cliente_fk = $cliente->cod_cliente;
-            $modelSoc->save();
+                $modelSoc->cod_cliente_fk = $cliente->cod_cliente;
+                $modelSoc->save();
 
 
-            if ($cel) {
-                $contatoT = new \app\models\TabContatoSearch();
-                $contatoT->tipo = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-contato', 'C');
-                $contatoT->tipo_tabela_fk = $modelSoc->tableName();
-                $contatoT->contato = (string) $cel;
-                $contatoT->chave_fk = $modelSoc->cod_socio;
-                $contatoT->save();
+                if ($cel) {
+                    $contatoT = new \app\models\TabContatoSearch();
+                    $contatoT->tipo = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-contato', 'C');
+                    $contatoT->tipo_tabela_fk = $modelSoc->tableName();
+                    $contatoT->contato = (string) $cel;
+                    $contatoT->chave_fk = $modelSoc->cod_socio;
+                    $contatoT->save();
+                }
+
+                if ($email) {
+                    $contatoT = new \app\models\TabContatoSearch();
+                    $contatoT->tipo = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-contato', 'E');
+                    $contatoT->tipo_tabela_fk = $modelSoc->tableName();
+                    $contatoT->contato = (string) $email;
+                    $contatoT->chave_fk = $modelSoc->cod_socio;
+                    $contatoT->save();
+                }
+
+                if ($skype) {
+                    $contatoT = new \app\models\TabContatoSearch();
+                    $contatoT->tipo = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-contato', 'S');
+                    $contatoT->tipo_tabela_fk = $modelSoc->tableName();
+                    $contatoT->contato = (string) $skype;
+                    $contatoT->chave_fk = $modelSoc->cod_socio;
+                    $contatoT->save();
+                }
             }
-
-            if ($email) {
-                $contatoT = new \app\models\TabContatoSearch();
-                $contatoT->tipo = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-contato', 'E');
-                $contatoT->tipo_tabela_fk = $modelSoc->tableName();
-                $contatoT->contato = (string) $email;
-                $contatoT->chave_fk = $modelSoc->cod_socio;
-                $contatoT->save();
-            }
-
-            if ($skype) {
-                $contatoT = new \app\models\TabContatoSearch();
-                $contatoT->tipo = \app\models\TabAtributosValoresSearch::getAtributoValorAtributo('tipo-contato', 'S');
-                $contatoT->tipo_tabela_fk = $modelSoc->tableName();
-                $contatoT->contato = (string) $skype;
-                $contatoT->chave_fk = $modelSoc->cod_socio;
-                $contatoT->save();
-            }
-
 
             $rowData = $this->retornaImportacao($rowData, 'Endereco', true);
             $key = 5;
@@ -1007,10 +1017,27 @@ class ClienteController extends \app\controllers\ClienteController {
                 $endereco->correspondencia = true;
 
                 $endereco->save();
+
+                if ($licenca) {
+                    $end = new \app\models\TabEnderecoSearch();
+                    $end->logradouro = $endereco;
+                    $end->bairro = $endereco->bairro;
+                    $end->cep = $endereco->cep;
+                    $end->tipo_tabela_fk = $modelSoc->tableName();
+                    $end->chave_fk = $modelSoc->cod_socio;
+                    $end->correspondencia = false;
+                    $end->save();
+                }
             }
 
+
             $rowData = $this->retornaImportacao($rowData, 'Valores do Contrato', true);
-            $key = 10;
+
+            if ($licenca) {
+                $key = 5;
+            } else {
+                $key = 10;
+            }
 
             $contrato->qnt_parcelas = $p['qnt_parcelas'] = $rowData[$key][0][7];
             $p['dt_vencimento'] = str_pad($rowData[$key][0][12], 2, '0', 0) . '/' . date('m/Y');
@@ -1429,14 +1456,13 @@ class ClienteController extends \app\controllers\ClienteController {
         $urlArquivo = $url . '/' . $anexo->nome;
 
         if (!is_dir($url)) {
-             mkdir($url);
+            mkdir($url);
         }
         move_uploaded_file($dados['tmp_name']['file'], $urlArquivo);
 
-        $anexo->url = \Yii::getAlias('@web') . '/arquivos/' . $post['TabAnexoSearch']['cod_contrato']. '/' . $anexo->nome;
+        $anexo->url = \Yii::getAlias('@web') . '/arquivos/' . $post['TabAnexoSearch']['cod_contrato'] . '/' . $anexo->nome;
         $anexo->cod_contrato_fk = $post['TabAnexoSearch']['cod_contrato'];
         $anexo->save();
-        
     }
 
 }

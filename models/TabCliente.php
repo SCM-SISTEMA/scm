@@ -26,6 +26,15 @@ use Yii;
  * @property boolean $zero800
  * @property boolean $consultoria_mensal
  * @property boolean $engenheiro_tecnico
+ * @property string $nome_contador
+ * @property string $telefone_contador
+ * @property string $num0800
+ * @property string $velocidade
+ * @property string $nome_engenheiro_tecnico
+ * @property string $telefone_engenheiro_tecnico
+ * @property string $qnt_torres
+ * @property string $qnt_repetidora
+ * @property boolean $notificacao_anatel
  *
  * @property TabContrato[] $tabContrato
  * @property TabRepresentanteComercial[] $tabRepresentanteComercial
@@ -50,12 +59,16 @@ class TabCliente extends \projeto\db\ActiveRecord
         return [
             [['ie', 'qnt_clientes'], 'integer'],
             [['dt_inclusao', 'dt_exclusao'], 'safe'],
-            [['situacao', 'operando', 'parceria', 'link_dedicado', 'zero800', 'consultoria_mensal', 'engenheiro_tecnico'], 'boolean'],
+            [['situacao', 'operando', 'parceria', 'link_dedicado', 'zero800', 'consultoria_mensal', 'engenheiro_tecnico', 'notificacao_anatel'], 'boolean'],
             [['obs'], 'string'],
             [['cnpj'], 'string', 'max' => 18],
             [['fantasia', 'razao_social'], 'string', 'max' => 200],
-            [['fistel'], 'string', 'max' => 15],
-            [['responsavel', 'natureza_juridica'], 'string', 'max' => 300]
+            [['fistel', 'num0800'], 'string', 'max' => 15],
+            [['responsavel', 'natureza_juridica'], 'string', 'max' => 300],
+            [['nome_contador', 'nome_engenheiro_tecnico'], 'string', 'max' => 100],
+            [['telefone_contador', 'telefone_engenheiro_tecnico'], 'string', 'max' => 30],
+            [['velocidade'], 'string', 'max' => 10],
+            [['qnt_torres', 'qnt_repetidora'], 'string', 'max' => 3]
         ];
     }
 
@@ -85,6 +98,16 @@ false - inativo',
             'zero800' => 'Possui 0800?',
             'consultoria_mensal' => 'Paga consultoria SCM mensal?',
             'engenheiro_tecnico' => 'Possui engenheiro ou técnico responsável?',
+            'nome_contador' => 'Nome Contador',
+            'telefone_contador' => 'Telefone Contador',
+            'num0800' => '0800',
+            'velocidade' => 'Caso sim, qual a 
+Velocidade?',
+            'nome_engenheiro_tecnico' => 'Nome Engenheiro Tecnico',
+            'telefone_engenheiro_tecnico' => 'Telefone Engenheiro Tecnico',
+            'qnt_torres' => 'Possui quantas torres cadastradas?',
+            'qnt_repetidora' => 'Possui Repetidoras? Quantas?',
+            'notificacao_anatel' => 'Já recebeu notificação da ANATEL?',
         ];
     }
 

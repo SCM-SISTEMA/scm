@@ -1,17 +1,12 @@
 Projeto.prototype.cliente = new (Projeto.extend({
     init: function () {
-        // this.abrirFormaPagamentoParcelas();
-        //    this.openRefazerFormaPagamento();
         this.salvarCliente();
         this.salvarEndereco();
-        //this.salvarParcelas();
         this.salvarContato();
         this.salvarSocios();
         this.incluirNovo('Endereco');
         this.incluirSocios();
         this.incluirNovo('Contato');
-        //  this.salvarTipoContrato();
-        //   this.salvarContrato();
         this.carregaMunicipio();
         this.alterarContato();
         this.verificaCnpj();
@@ -404,54 +399,6 @@ Projeto.prototype.cliente = new (Projeto.extend({
 
     },
 
-//    openModalTipoContrato: function (valor, cod_contrato) {
-//        $('#tabcontratosearch-tipo_contrato_fk').removeAttr('disabled');
-//        setTimeout(function () {
-//            if (valor == 'TipoContrato') {
-//                $('#tabtipocontratosearchservico-cod_contrato_fk').val(cod_contrato);
-//                $('#tabtipocontratosearchservico-cod_usuario_fk').focus();
-//
-//            } else {
-//                $('#tabtipocontratosearch-cod_contrato_fk').focus();
-//                $('#div-status').hide();
-//            }
-//
-//        }, 750);
-//
-//
-//        $('#modal' + valor).modal('show').find('#modalContent').load( );
-//    },
-//    openModalFormaPagamentoContrato: function (cod_contrato) {
-//
-//        $('#modalFormaPagamento').modal('hide');
-//        $('#modalFormaPagamentoContrato').modal('hide');
-//        $('#modalFormaPagamentoContrato').modal('show').find('#modalContent').load( );
-//    },
-//    openModalFormaPagamento: function (cod_contrato) {
-//
-//        var urlInclusao = $('base').attr('href') + 'comercial/contrato-parcelas/carregar-parcelas';
-//        var selecao = {cod_contrato: cod_contrato};
-//        projeto.ajax.post(urlInclusao, selecao, function (response) {
-//            var dados = $.parseJSON(response);
-//
-//            $('#divFormaPagamento').html(dados);
-//            $('#modalFormaPagamentoContrato').modal('hide');
-//            $('#modalFormaPagamento').modal('show').find('#modalContent').load( );
-//
-//        });
-//
-//        return false;
-//
-//    },
-//
-//    limpaFormFormaPagamentoContrato: function () {
-//        $('#tabcontratopsearch-cod_contrato').val('');
-//        $('#tabcontratopsearch-qnt_parcelas').val('');
-//        $('#tabcontratopsearch-valor_contrato').val('');
-//        $('#tabcontratopsearch-valor_contrato-disp').val('');
-//        $('#tabcontratopsearch-dt_vencimento').val('');
-//
-//    },
     limpaFormSocios: function () {
         $('#tabsociossearch-nome').val('');
         $('#tabsociossearch-nacionalidade').val('');
@@ -480,18 +427,7 @@ Projeto.prototype.cliente = new (Projeto.extend({
 
 
     },
-//    limpaFormTipoContrato: function (valor) {
-//        if (valor == 'TipoContrato') {
-//            $('#tabtipocontratosearchservico-cod_usuario_fk').val('');
-//            $('#tabtipocontratosearchservico-tipo_produto_fk').val('');
-//
-//        } else {
-//            $('#tabcontratosearch-tipo_contrato_fk').val('');
-//            $('#tabtipo-contratosearch-cod_usuario_fk').val('');
-//            $('#tabtipo-contratosearch-tipo_produto_fk').val('');
-//        }
-//
-//    },
+
     bloqueaForm: function (valor) {
         $('input[id^=\"itensmovimentacaosearch\"]').attr('disabled', valor);
         $('select[id^=\"itensmovimentacaosearch\"]').attr('disabled', valor);
@@ -535,8 +471,9 @@ Projeto.prototype.cliente = new (Projeto.extend({
             $('#tabenderecosearch-cep').val(dados.cep);
             $('#tabenderecosearch-correspondencia').val(dados.correspondencia);
             $('#tabenderecosearch-bairro').val(dados.bairro);
-            Projeto.prototype.cliente.buscaMunicipio(dados.uf);
-
+            setTimeout(function () {
+                Projeto.prototype.cliente.buscaMunicipio(dados.uf);
+            }, 300);
             setTimeout(function () {
                 $('#tabenderecosearch-cod_municipio_fk').val(dados.cod_municipio_fk);
 
@@ -740,81 +677,7 @@ Projeto.prototype.cliente = new (Projeto.extend({
 
     },
 }));
-//
-//function adicionarTipoContrato(contrato) {
-//
-//    Projeto.prototype.cliente.openModalTipoContrato('TipoContrato', contrato);
-//    Projeto.prototype.cliente.limpaFormTipoContrato('TipoContrato');
-//
-//
-//    return false;
-//}
-//
-//
-//
-//
-//function adicionarContrato(contrato) {
-//
-//    Projeto.prototype.cliente.openModalTipoContrato('Contrato', contrato);
-//    Projeto.prototype.cliente.limpaFormTipoContrato('Contrato');
-//
-//
-//    return false;
-//}
-//
-//
-//function editarContrato(result) {
-//
-//    var post = {'cod': result}
-//    var urlInclusao = $('base').attr('href') + 'comercial/contrato/carregar-contrato';
-//
-//    projeto.ajax.post(urlInclusao, post, function (response) {
-//
-//        var dados = $.parseJSON(response);
-//
-//        Projeto.prototype.cliente.openModalTipoContrato('Contrato', result);
-//        $('#div-status').show();
-//
-//        $('#tabcontratosearch-tipo_contrato_fk').attr('disabled', 'disabled');
-//        Projeto.prototype.cliente.limpaFormTipoContrato('Contrato');
-//        Projeto.prototype.cliente.preencheFormContrato(dados);
-//
-//    });
-//
-////    Projeto.prototype.cliente.openModal();
-//
-//
-//    return false;
-//}
-//
-//
-//function excluirContrato(result) {
-//
-//    var post = {'id': result}
-//    var urlInclusao = $('base').attr('href') + 'comercial/contrato/excluir-contrato';
-//
-//
-//    projeto.confirm('<div align="center"><h2>Deseja excluir contrato?</h2></div>', function () {
-//        projeto.ajax.defaultBlockUI();
-//        projeto.ajax.post(urlInclusao, post, function (response) {
-//
-//            var dados = $.parseJSON(response);
-//
-//
-//            $('#divGuiaContrato').html(dados);
-//
-//        });
-//        return false;
-//    }, function () {
-//        return false;
-//    })
-//
-//
-////    Projeto.prototype.cliente.openModal();
-//
-//
-//    return false;
-//}
+
 
 function excluirSocios(result) {
 
@@ -844,79 +707,4 @@ function excluirSocios(result) {
     return false;
 }
 
-
-//
-//function formaPagamento(result) {
-//
-//    var post = {'id': result}
-//    var urlInclusao = $('base').attr('href') + 'comercial/contrato/forma-pagamento';
-//
-//    projeto.ajax.post(urlInclusao, post, function (response) {
-//
-//        var dados = $.parseJSON(response);
-//
-//
-//        $('#divGuiaContrato').html(dados);
-//
-//        return false;
-//    }, function () {
-//        return false;
-//    })
-//
-//
-////    Projeto.prototype.cliente.openModal();
-//
-//
-//    return false;
-//}
-//function mudarStatus(result, status, setor, tipo_contrato) {
-//
-//    var post = {'id': result, 'status': status, 'setor': setor, 'tipo_contrato': tipo_contrato}
-//    var urlInclusao = $('base').attr('href') + 'comercial/contrato/mudar-status';
-//
-//    var msg = null;
-//    if (status == '3') {
-//        msg = 'Deseja realmente fechar a proposta?';
-//    } else {
-//        msg = 'Deseja realmente recusar a proposta?';
-//
-//    }
-//    projeto.confirm('<div align="center"><h2>' + msg + '</h2></div>', function () {
-//        projeto.ajax.defaultBlockUI();
-//        projeto.ajax.post(urlInclusao, post, function (response) {
-//
-//            var dados = $.parseJSON(response);
-//
-//
-//             setTimeout(function () {
-//                     projeto.ajax.defaultBlockUI();
-//                   
-//                }, 300);
-//                 location.reload();
-//
-//        });
-//        return false;
-//    }, function () {
-//        return false;
-//    })
-//
-//
-////    Projeto.prototype.cliente.openModal();
-//
-//
-//    return false;
-//}
-//
-//function adicionarFormaPagamentoContrato(contrato, valor) {
-//    if (valor) {
-//        $('#tabcontratopsearch-cod_contrato').val(contrato);
-//        Projeto.prototype.cliente.openModalFormaPagamento(contrato);
-//    } else {
-//
-//        Projeto.prototype.cliente.limpaFormFormaPagamentoContrato(contrato);
-//        Projeto.prototype.cliente.openModalFormaPagamentoContrato(contrato);
-//        $('#tabcontratopsearch-cod_contrato').val(contrato);
-//    }
-//    return false;
-//}
 

@@ -26,6 +26,7 @@ use Yii;
  * @property TabModeloDocs[] $tabModeloDocs1
  * @property TabModeloDocs[] $tabModeloDocs2
  * @property TabMunicipios[] $tabMunicipios
+ * @property TabRegiao[] $tabRegiao
  */
 class TabAtributosValores extends \projeto\db\ActiveRecord
 {
@@ -146,6 +147,14 @@ class TabAtributosValores extends \projeto\db\ActiveRecord
     public function getTabMunicipios()
     {
         return $this->hasMany(TabMunicipios::className(), ['regiao_hidrografica_fk' => 'cod_atributos_valores']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTabRegiao()
+    {
+        return $this->hasMany(TabRegiao::className(), ['cod_atributo_regiao' => 'cod_atributos_valores']);
     }
 
     /**
